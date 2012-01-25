@@ -9,6 +9,7 @@
   <body>
 <?php
   require_once('php/table.php');
+  require_once('php/read_table.php');
 
   $id = 3;
 
@@ -91,68 +92,8 @@
     }
   }
   
-  $order = implode(', ', $rowvars);
-  if (sizeof($colvars)) $order = $order . ', ' . implode(', ', $colvars);
-  if (sizeof($order)) $order = ' ORDER BY ' . $order;
-
-  $query = "SELECT * FROM {$table['name']}" . $where . $order;
-  echo "<p>" . $query . "</p>";
-  $dta = $pdo->query($query);
-
-  /*$i = 1;
-  $previous = array();
-  for ($j = 0; $j < sizeof($rowvars); $j++) $previous[] = '';
-  echo "<table>\n";
-  while ($row = $dta->fetch(PDO::FETCH_ASSOC)) {
-    $same = true;
-    for ($j = 0; $j < sizeof($rowvars); $j++) {
-      if ($row[$rowvars[$j]] != $previous[$j]) {
-        $same = false;
-        break;
-      }
-    }
-    
-    if (!$same) {
-      if ($i > 1) echo "</tr>\n";
-      echo "<tr>\n";
-      for ($j = 0; $j < sizeof($rowvars); $j++) {
-        echo "<td>" . $row[$rowvars[$j]] . "</td>\n";
-        $previous[$j] = $row[$rowvars[$j]];
-      }
-    }
-
-    echo "<td>" . $row['value'] . "</td>\n";
-
-    $i++;
-  }
-  echo "</tr>\n";
-  echo "</table>\n";*/
-
-  $previous = array_fill(0, sizeof($rowvars), '');
-  $tablerow = array();
-  $table = new Table();
-  while ($row = $dta->fetch(PDO::FETCH_ASSOC)) {
-    $same = true;
-    for ($j = 0; $j < sizeof($rowvars); $j++) {
-      if ($row[$rowvars[$j]] != $previous[$j]) {
-        $same = false;
-        break;
-      }
-    }
-    
-    if (!$same) {
-      if (sizeof($tablerow)) $table->add_row($tablerow);
-      $tablerow = array();
-      for ($j = 0; $j < sizeof($rowvars); $j++) {
-        $tablerow[]   = $row[$rowvars[$j]];
-        $previous[$j] = $row[$rowvars[$j]];
-      }
-    }
-    $tablerow[] = $row['value'];
-    $i++;
-  }
-
-  print_table($table);
+  $outputtable = read_table($pdo, $table['name'], $rowvars, $colvars, $where);
+  print_table($outputtable);
 ?>
 
   </article>
