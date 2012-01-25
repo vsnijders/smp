@@ -20,14 +20,34 @@ class Table {
     return sizeof($this->table);
   }
 
+  public function add_header($header) {
+    if (!is_array($header)) 
+      throw new Exception('$header is not an array.');
+    //TODO check length
+    $this->header = $header;
+  }
+
+  public function get_header() {
+    return $this->header;
+  }
+  
+
 
   // Private members
   private $table = array();
+  private $header = array();
 }
 
 
 function print_table(Table $table) {
-  echo "<table>\n<tbody>\n";
+  echo "<table>\n";
+  echo "<thead>\n";
+  $header = $table->get_header();
+  foreach($header as $cell) {
+    echo "<th>" . $cell . "</th>";
+  }
+  echo "</thead>\n";
+  echo "<tbody>\n";
   for ($i = 0; $i < $table->nrows(); $i++) {
     $row = $table->get_row($i);
     echo "<tr>";
