@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title>SMP - tables</title>
     <link rel="stylesheet" href="css/smp.css" type="text/css"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="img/favicon2.png" type="image/png" />
   </head>
 
   <body>
