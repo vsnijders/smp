@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>SMP - tables</title>
-    <link rel="stylesheet" href="ccs/smp.css" type="text/css"/>
+    <link rel="stylesheet" href="css/smp.css" type="text/css"/>
   </head>
 
   <body>
