@@ -7,7 +7,7 @@
 
     <!-- jQuery includes -->
     <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
-    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 
     <script type="text/javascript">
@@ -20,13 +20,8 @@
         };
 
       function redraw_graph() {
-        var text = "";
-        text = text + "graph:" + graphtype + "\n";
-        text = text + "x:" + selection.x + "\n";
-        text = text + "y:" + selection.y + "\n";
-        text = text + "rows:" + selection.rows + "\n";
-        text = text + "columns:" + selection.columns + "\n";
-        $(".graph").html("<pre>" + text + "</pre>");
+        $("#graphtype").html("<b>" + graphtype + "</b>");
+        $("#graphdata").load("ui_fetch.php", selection);
       }
 
       $(function() {
@@ -126,7 +121,7 @@
     <ul id="variables" class="connectedSortable">
       <li class="ui-state-default" id="jaar">Jaar</li>
       <li class="ui-state-default" id="sbi">SBI</li>
-      <li class="ui-state-default" id="grootteklasse">Grooteklasse</li>
+      <li class="ui-state-default" id="grootteklasse">Grootteklasse</li>
       <li class="ui-state-default" id="effect">Effect</li>
       <li class="ui-state-default" id="variable">Variable</li>
     </ul>
@@ -134,6 +129,10 @@
   </div>
 
   <div class="graph">
+    <div id="graphtype">
+    </div>
+    <div id="graphdata">
+    </div>
   </div>
 
   </body>
