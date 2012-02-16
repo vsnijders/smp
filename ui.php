@@ -21,34 +21,25 @@
           rows : [],
           columns : []
         };
-
-        var data = [];
-        data.push({"var":"afsplitsing", "val":5404});
-        data.push({"var":"fusie", "val":-741});
-        data.push({"var":"geboorte", "val":168216});
-        data.push({"var":"overname", "val":-5190});
-        data.push({"var":"sterfte", "val":-111074});
-        data.push({"var":"uiteenvallen", "val":388});
+      var data = [];
 
       function redraw_graph() {
         $("#graphtype").html("<b>" + graphtype + "</b>");
         $("#graphdata").load("ui_fetch.php", selection);
-        foo(data);
+        jQuery.getJSON("ui_fetch.php", selection, function(data) {
+          foo(data);
+        })
       }
 
       firsttime = true;
       function foo(data) {
         var h = 15*data.length
         if (firsttime) {
-          var body = d3.select("body");
-        alert(h);
           d3.select("body").append("svg")
             .attr("class", "chart")
-            .attr("width", 640)
-            .attr("height", h);
           firsttime = false;
         }
-        alert("foo");
+        d3.select(".chart *").remove();
         var chart = d3.select(".chart")
           .attr("width", 640)
           .attr("height", h);
