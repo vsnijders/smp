@@ -35,22 +35,27 @@
   foreach($selectedvars as $var) {
     $where[] = $var . "!= 'TOTAL'";
   }
-  $sql = "SELECT * FROM {$meta['name']}";
+  $vars = $selectedvars;
+  $vars[] = 'value';
+  $sql = "SELECT " . implode(", ", $vars) . " FROM {$meta['name']}";
   if (sizeof($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
   }
   if (sizeof($selectedvars)) {
     $sql .= " ORDER BY " . implode(", ", $selectedvars);
   }
+  //echo($sql);
 
   // run query
   $data = array();
   $result = $pdo->query($sql);
-  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+  $data = $result->fetchAll(PDO::FETCH_ASSOC);
+  /*while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $row;
     if ($yvar) {
       $data[] = array('var' => $row[$yvar[0]], 'val'=> $row['value']);
     }
-  }
+  }*/
   //print_r(json_encode($data));
   asJSON($data);
 
