@@ -82,6 +82,11 @@ TBODY TD {
   border-top : solid 1px rgb(200,200,200);
   border-bottom : solid 1px rgb(200,200,200);
 }
+
+TD.num{
+  text-align : right;
+}
+
 TR.odd {
 }
 TR.ten {
