@@ -8,10 +8,36 @@ function foo(data) {
     firsttime = false;
   }
   d3.select(".chart *").remove();
-  var chart = d3.select(".chart")
-    .attr("width", 640)
-    .attr("height", h);
-  bar_plot(chart, data, 0, 0, 640, h);
+  if (selection.x.length) {
+    var chart = d3.select(".chart");
+    bar_plot_0(chart, data, selection);
+  } else {
+    var chart = d3.select(".chart")
+      .attr("width", 640)
+      .attr("height", h);
+    bar_plot(chart, data, 0, 0, 640, h);
+  }
+}
+
+function bar_plot_0(chart, data, selection) {
+  // determine maximum and minimum values for scale
+  var ymin = d3.min(data, function(d) { return d.value;});
+  var ymax = d3.max(data, function(d) { return d.value;});
+  // nest data
+  var data_nested = d3.nest()
+    .key(function(d) { return d[selection.x[0]]; })
+    .entries(data)
+  // determine number of x and y elements
+  var nx = data_nested.length;
+  var ny = data_nested[0].values.length;
+  // set chart height
+  chart.attr("width", 640, "height", nx*ny*15);
+  // create barplots
+  var y = 0;
+  for (var i = 0; i < nx; i++) {
+    bar_plot(chart, data_nested[i].values, 0, y, 640, ny*15, true);
+    y = y + ny*15;
+  }
 }
 
 function bar_plot(chart0, data, x, y, width, height, tickmarks) {
@@ -66,3 +92,4 @@ function bar_plot(chart0, data, x, y, width, height, tickmarks) {
     .attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", height-yoffset)
     .style("stroke", "#000000");
 }
+
