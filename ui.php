@@ -160,6 +160,10 @@
         font-size : 10px;
         font-family : sans-serif;
       }
+
+      .draggable {
+        cursor: move;
+      }
     </style>	
 
   </head>
@@ -200,11 +204,11 @@
 
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
-      <li class="ui-state-default" id="jaar">Jaar</li>
-      <li class="ui-state-default" id="sbi">SBI</li>
-      <li class="ui-state-default" id="grootteklasse">Grootteklasse</li>
-      <li class="ui-state-default" id="effect">Effect</li>
-      <li class="ui-state-default" id="variable">Variable</li>
+      <li class="ui-state-default draggable" id="jaar">Jaar</li>
+      <li class="ui-state-default draggable" id="sbi">SBI</li>
+      <li class="ui-state-default draggable" id="grootteklasse">Grootteklasse</li>
+      <li class="ui-state-default draggable" id="effect">Effect</li>
+      <li class="ui-state-default draggable" id="variable">Variable</li>
     </ul>
 
   </div>
