@@ -1,0 +1,85 @@
+
+* {
+  font-family : sans-serif;
+  font-size : 10pt;
+  font-weight : normal;
+  /*color : black;*/
+  /*background : inherit;*/
+  margin : 0pt;
+  padding : 0pt;
+  /*border : 0pt;*/
+}
+A {
+  font-size : inherit;
+  color : rgb(0,0,255);
+  text-decoration : none;
+}
+
+HEADER, ARTICLE{
+  margin-left : 10px;
+  width : 800px;
+}
+HEADER H1 {
+  font-size : 200%;
+}
+HEADER H2 {
+  font-size : 150%;
+  font-weight : normal;
+  text-align : right;
+}
+HEADER P {
+  text-align : right;
+}
+
+ARTICLE {
+  margin-top : 50px;
+  margin-bottom : 50px;
+}
+ARTICLE H1 {
+  margin-bottom : 20px;
+  font-size : 120%;
+}
+H2 {
+  font-weight : bold;
+  margin-top : 5px;
+  margin-bottom : 5px;
+}
+P {
+  margin-top : 5px;
+  margin-bottom : 5px;
+}
+P.tableoptions {
+  text-align : right;
+}
+
+TABLE {
+  border-collapse : collapse;
+  font-size : 80%;
+  /*border-top : 2px solid black;
+  border-bottom : 2px solid black;*/
+}
+TH { 
+  font-weight : bold;
+  color : rgb(100,100,100);
+  font-variant : small-caps;
+  text-align : left;
+}
+TD, TH {
+  padding-left : 5px;
+  padding-right : 5px;
+  padding-top : 1px;
+  padding-bottom : 1px;
+}
+THEAD {
+  /*border-bottom : 1px solid black;*/
+}
+TBODY TD {
+  border-top : solid 1px rgb(200,200,200);
+  border-bottom : solid 1px rgb(200,200,200);
+}
+TR.odd {
+}
+TR.ten {
+  /*border-bottom : 1px solid black;*/
+}
+
