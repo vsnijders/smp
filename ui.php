@@ -13,6 +13,9 @@
     <!-- D3 includes -->
     <script type="text/javascript" src="js/d3/d3.js"></script>
 
+    <!-- Plotting includes -->
+    <script type="text/javascript" src="js/barplot.js"></script>
+
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
@@ -22,88 +25,12 @@
           columns : []
         };
 
-        var data = [];
-        data.push({"var":"afsplitsing", "val":5404});
-        data.push({"var":"fusie", "val":-741});
-        data.push({"var":"geboorte", "val":168216});
-        data.push({"var":"overname", "val":-5190});
-        data.push({"var":"sterfte", "val":-111074});
-        data.push({"var":"uiteenvallen", "val":388});
-
       function redraw_graph() {
         $("#graphtype").html("<b>" + graphtype + "</b>");
         $("#graphdata").load("ui_fetch.php", selection);
-        foo(data);
-      }
-
-      firsttime = true;
-      function foo(data) {
-        var h = 15*data.length
-        if (firsttime) {
-          var body = d3.select("body");
-        alert(h);
-          d3.select("body").append("svg")
-            .attr("class", "chart")
-            .attr("width", 640)
-            .attr("height", h);
-          firsttime = false;
-        }
-        alert("foo");
-        var chart = d3.select(".chart")
-          .attr("width", 640)
-          .attr("height", h);
-        bar_plot(chart, data, 0, 0, 640, h);
-      }
-
-      function bar_plot(chart0, data, x, y, width, height, tickmarks) {
-        if (tickmarks === undefined) tickmarks = true;
-        var yoffset = tickmarks ? 15 : 0;
-        // create drawing area
-        var chart = chart0.append("g")
-          .attr("transform", "translate(" + String(x+110) + "," + String(y+yoffset) + ")");
-        // determine minumum, maximum 
-        var variables = [];
-        var xmin = 0, xmax = 0;
-        for (var i = 0; i < data.length; i++) {
-          variables.push(data[i].var);
-          if (data[i].val > xmax) xmax = data[i].val;
-          if (data[i].val < xmin) xmin = data[i].val;
-        }
-        // create scales
-        var x = d3.scale.linear().domain([xmin, xmax]).range([0, width - 110]);
-        var y = d3.scale.ordinal().domain(variables).rangeBands([0, height-yoffset]);
-        // add grid lines
-        chart.selectAll("line").data(x.ticks(5))
-          .enter().append("line")
-            .attr("x1", x).attr("x2", x).attr("y1", 0).attr("y2", height-yoffset)
-            .style("stroke", "#ccc");
-        // add bars
-        chart.selectAll("rect").data(data)
-          .enter().append("rect")
-            .attr("x", function(d) { return Math.min(x(0), x(d.val));})
-            .attr("y", function(d) { return y(d.var);})
-            .attr("width", function(d) { return Math.abs(x(0) - x(d.val));})
-            .attr("height", y.rangeBand());
-        // add legend
-        chart.selectAll("text").data(data)
-          .enter().append("text")
-            .attr("x", -100)
-            .attr("y", function(d) { return y(d.var) + y.rangeBand()/2;})
-            .attr("dy", ".35em")
-            .attr("text-anchor", "begin")
-            .text(function(d) { return d.var;});
-        // add tickmarks
-        if (tickmarks) {
-          chart.selectAll(".rule").data(x.ticks(5))
-            .enter().append("text")
-              .attr("class", "rule")
-              .attr("x", x).attr("y", 0).attr("dy", -3)
-              .attr("text-anchor", "middle").text(String);
-        }
-        // add 0-line
-        chart.append("line")
-          .attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", height-yoffset)
-          .style("stroke", "#000000");
+        jQuery.getJSON("ui_fetch.php", selection, function(data) {
+          foo(data);
+        })
       }
 
       $(function() {
@@ -169,7 +96,6 @@
         font-size : 10px;
         font-family : sans-serif;
       }
-      
       .draggable {
         cursor: move;
       }

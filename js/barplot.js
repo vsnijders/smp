@@ -1,0 +1,68 @@
+
+var firsttime = true;
+function foo(data) {
+  var h = 15*data.length
+  if (firsttime) {
+    d3.select("body").append("svg")
+      .attr("class", "chart")
+    firsttime = false;
+  }
+  d3.select(".chart *").remove();
+  var chart = d3.select(".chart")
+    .attr("width", 640)
+    .attr("height", h);
+  bar_plot(chart, data, 0, 0, 640, h);
+}
+
+function bar_plot(chart0, data, x, y, width, height, tickmarks) {
+  if (tickmarks === undefined) tickmarks = true;
+  var yoffset = tickmarks ? 15 : 0;
+  // create drawing area
+  var chart = chart0.append("g")
+    .attr("transform", "translate(" + String(x+110) + "," + String(y+yoffset) + ")");
+  // determine y-variable
+  var yvar = d3.keys(data[0])[0];
+  // determine minumum, maximum 
+  var variables = [];
+  var xmin = 0, xmax = 0;
+  for (var i = 0; i < data.length; i++) {
+    variables.push(data[i][yvar]);
+    if (data[i].value > xmax) xmax = data[i].value;
+    if (data[i].value < xmin) xmin = data[i].value;
+  }
+  // create scales
+  var x = d3.scale.linear().domain([xmin, xmax]).range([0, width - 110]);
+  var y = d3.scale.ordinal().domain(variables).rangeBands([0, height-yoffset]);
+  // add grid lines
+  chart.selectAll("line").data(x.ticks(5))
+    .enter().append("line")
+      .attr("x1", x).attr("x2", x).attr("y1", 0).attr("y2", height-yoffset)
+      .style("stroke", "#ccc");
+  // add bars
+  chart.selectAll("rect").data(data)
+    .enter().append("rect")
+      .attr("x", function(d) { return Math.min(x(0), x(d.value));})
+      .attr("y", function(d) { return y(d[yvar]);})
+      .attr("width", function(d) { return Math.abs(x(0) - x(d.value));})
+      .attr("height", y.rangeBand());
+  // add legend
+  chart.selectAll("text").data(data)
+    .enter().append("text")
+      .attr("x", -100)
+      .attr("y", function(d) { return y(d[yvar]) + y.rangeBand()/2;})
+      .attr("dy", ".35em")
+      .attr("text-anchor", "begin")
+      .text(function(d) { return d[yvar];});
+  // add tickmarks
+  if (tickmarks) {
+    chart.selectAll(".rule").data(x.ticks(5))
+      .enter().append("text")
+        .attr("class", "rule")
+        .attr("x", x).attr("y", 0).attr("dy", -3)
+        .attr("text-anchor", "middle").text(String);
+  }
+  // add 0-line
+  chart.append("line")
+    .attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", height-yoffset)
+    .style("stroke", "#000000");
+}
