@@ -1,1343 +1,4762 @@
-
-
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <title>d3.min.js at master from mbostock/d3 - GitHub</title>
-    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
-    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
-
-    
-    
-
-    <meta content="authenticity_token" name="csrf-param" />
-<meta content="dFkfAQdZywjGpa8utYPKbRSYckg16hg0RMRoZvE/4WI=" name="csrf-token" />
-
-    <link href="https://a248.e.akamai.net/assets.github.com/stylesheets/bundles/github-4a66179db6f6804b8f0d60c4bb581271fadd27cb.css" media="screen" rel="stylesheet" type="text/css" />
-    
-
-    <script src="https://a248.e.akamai.net/assets.github.com/javascripts/bundles/jquery-e46225f266eba00902b2e5b66fe6fe6a484fb242.js" type="text/javascript"></script>
-    <script src="https://a248.e.akamai.net/assets.github.com/javascripts/bundles/github-a6e5ad89d200a038912bb6e9cb13215234fa1498.js" type="text/javascript"></script>
-    
-
-      <link rel='permalink' href='/mbostock/d3/blob/f67e89597db87f017c3d4706448ebe3ff8528853/d3.min.js'>
-
-    <meta name="description" content="d3 - A JavaScript visualization library for HTML and SVG." />
-  <link href="https://github.com/mbostock/d3/commits/master.atom" rel="alternate" title="Recent Commits to d3:master" type="application/atom+xml" />
-
-  </head>
-
-
-  <body class="logged_in page-blob windows vis-public env-production ">
-    
-
-
-    
-
-      <div id="header" class="true clearfix">
-        <div class="container clearfix">
-          <a class="site-logo" href="https://github.com/">
-            <!--[if IE]>
-            <img alt="GitHub" class="github-logo" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7.png?1323882736" />
-            <img alt="GitHub" class="github-logo-hover" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7-hover.png?1324325373" />
-            <![endif]-->
-            <img alt="GitHub" class="github-logo-4x" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1323882736" />
-            <img alt="GitHub" class="github-logo-4x-hover" height="30" src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1324325373" />
-          </a>
-
-              
-    <div class="topsearch ">
-<form action="/search" id="top_search_form" method="get">        <a href="/search" class="advanced-search tooltipped downwards" title="Advanced Search">Advanced Search</a>
-        <div class="search placeholder-field js-placeholder-field">
-          <label class="placeholder" for="global-search-field">Search…</label>
-          <input type="text" class="search my_repos_autocompleter" id="global-search-field" name="q" results="5" /> <input type="submit" value="Search" class="button" />
-        </div>
-        <input type="hidden" name="type" value="Everything" />
-        <input type="hidden" name="repo" value="" />
-        <input type="hidden" name="langOverride" value="" />
-        <input type="hidden" name="start_value" value="1" />
-</form>      <ul class="top-nav">
-          <li class="explore"><a href="https://github.com/explore">Explore</a></li>
-          <li><a href="https://gist.github.com">Gist</a></li>
-          <li><a href="/blog">Blog</a></li>
-        <li><a href="http://help.github.com">Help</a></li>
-      </ul>
-    </div>
-
-
-            
-
-
-  <div id="userbox">
-    <div id="user">
-      <a href="https://github.com/edwindj"><img height="20" src="https://secure.gravatar.com/avatar/0d073168988cf547aded3ac1ca2c0d3a?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="20" /></a>
-      <a href="https://github.com/edwindj" class="name">edwindj</a>
-    </div>
-    <ul id="user-links">
-      <li>
-        <a href="/inbox/notifications" id="notifications" class="tooltipped downwards" title="Notifications">
-          <span class="icon">Notifications</span>
-          <span class="unread_count">4</span>
-        </a>
-      </li>
-      <li><a href="/account" id="settings" class="tooltipped downwards" title="Account Settings"><span class="icon">Account Settings</span></a></li>
-      <li><a href="/logout" id="logout" class="tooltipped downwards" title="Log Out"><span class="icon">Log Out</span></a></li>
-    </ul>
-  </div>
-
-
-
-          
-        </div>
-      </div>
-
-      
-
-            <div class="site">
-      <div class="container">
-        <div class="pagehead repohead instapaper_ignore readability-menu">
-
-
-        <div class="title-actions-bar">
-          <h1>
-            <a href="/mbostock">mbostock</a> /
-            <strong><a href="/mbostock/d3" class="js-current-repository">d3</a></strong>
-          </h1>
-          
-
-
-
-              <ul class="pagehead-actions">
-
-
-          <li class="js-toggler-container watch-button-container on">
-            <a href="/mbostock/d3/toggle_watch" class="minibutton btn-watch watch-button js-toggler-target" data-method="post" data-remote="true" rel="nofollow"><span><span class="icon"></span>Watch</span></a>
-            <a href="/mbostock/d3/toggle_watch" class="minibutton btn-watch unwatch-button js-toggler-target" data-method="post" data-remote="true" rel="nofollow"><span><span class="icon"></span>Unwatch</span></a>
-          </li>
-
-              <li><a href="/edwindj/d3" class="minibutton btn-fork "><span><span class="icon"></span>Your Fork</span></a></li>
-
-
-
-      <li class="repostats">
-        <ul class="repo-stats">
-          <li class="watchers watching">
-            <a href="/mbostock/d3/watchers" title="Watchers — You're Watching" class="tooltipped downwards">
-              3,266
-            </a>
-          </li>
-          <li class="forks">
-            <a href="/mbostock/d3/network" title="Forks - You have a fork" class="tooltipped downwards">
-              366
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-        </div>
-
-          
-
-  <ul class="tabs">
-    <li><a href="/mbostock/d3" class="selected" highlight="repo_sourcerepo_downloadsrepo_commitsrepo_tagsrepo_branches">Code</a></li>
-    <li><a href="/mbostock/d3/network" highlight="repo_networkrepo_fork_queue">Network</a>
-    <li><a href="/mbostock/d3/pulls" highlight="repo_pulls">Pull Requests <span class='counter'>15</span></a></li>
-
-      <li><a href="/mbostock/d3/issues" highlight="repo_issues">Issues <span class='counter'>60</span></a></li>
-
-      <li><a href="/mbostock/d3/wiki" highlight="repo_wiki">Wiki <span class='counter'>46</span></a></li>
-
-    <li><a href="/mbostock/d3/graphs" highlight="repo_graphsrepo_contributors">Stats &amp; Graphs</a></li>
-
-  </ul>
-
-  
-<div class="frame frame-center tree-finder" style="display:none"
-      data-tree-list-url="/mbostock/d3/tree-list/f67e89597db87f017c3d4706448ebe3ff8528853"
-      data-blob-url-prefix="/mbostock/d3/blob/f67e89597db87f017c3d4706448ebe3ff8528853"
-    >
-
-  <div class="breadcrumb">
-    <b><a href="/mbostock/d3">d3</a></b> /
-    <input class="tree-finder-input js-navigation-enable" type="text" name="query" autocomplete="off" spellcheck="false">
-  </div>
-
-    <div class="octotip">
-      <p>
-        <a href="/mbostock/d3/dismiss-tree-finder-help" class="dismiss js-dismiss-tree-list-help" title="Hide this notice forever" rel="nofollow">Dismiss</a>
-        <strong>Octotip:</strong> You've activated the <em>file finder</em>
-        by pressing <span class="kbd">t</span> Start typing to filter the
-        file list. Use <span class="kbd badmono">↑</span> and
-        <span class="kbd badmono">↓</span> to navigate,
-        <span class="kbd">enter</span> to view files.
-      </p>
-    </div>
-
-  <table class="tree-browser" cellpadding="0" cellspacing="0">
-    <tr class="js-header"><th>&nbsp;</th><th>name</th></tr>
-    <tr class="js-no-results no-results" style="display: none">
-      <th colspan="2">No matching files</th>
-    </tr>
-    <tbody class="js-results-list js-navigation-container" data-navigation-enable-mouse>
-    </tbody>
-  </table>
-</div>
-
-<div id="jump-to-line" style="display:none">
-  <h2>Jump to Line</h2>
-  <form>
-    <input class="textfield" type="text">
-    <div class="full-button">
-      <button type="submit" class="classy">
-        <span>Go</span>
-      </button>
-    </div>
-  </form>
-</div>
-
-
-<div class="subnav-bar">
-
-  <ul class="actions">
-    
-      <li class="switcher">
-
-        <div class="context-menu-container js-menu-container">
-          <span class="text">Current branch:</span>
-          <a href="#"
-             class="minibutton bigger switcher context-menu-button js-menu-target js-commitish-button btn-branch repo-tree"
-             data-master-branch="master"
-             data-ref="master">
-            <span><span class="icon"></span>master</span>
-          </a>
-
-          <div class="context-pane commitish-context js-menu-content">
-            <a href="javascript:;" class="close js-menu-close"></a>
-            <div class="context-title">Switch Branches/Tags</div>
-            <div class="context-body pane-selector commitish-selector js-filterable-commitishes">
-              <div class="filterbar">
-                <div class="placeholder-field js-placeholder-field">
-                  <label class="placeholder" for="context-commitish-filter-field" data-placeholder-mode="sticky">Filter branches/tags</label>
-                  <input type="text" id="context-commitish-filter-field" class="commitish-filter" />
-                </div>
-
-                <ul class="tabs">
-                  <li><a href="#" data-filter="branches" class="selected">Branches</a></li>
-                  <li><a href="#" data-filter="tags">Tags</a></li>
-                </ul>
-              </div>
-
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/adopt/d3.min.js" data-name="adopt" rel="nofollow">adopt</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/force-tick/d3.min.js" data-name="force-tick" rel="nofollow">force-tick</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/gh-pages/d3.min.js" data-name="gh-pages" rel="nofollow">gh-pages</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/impact/d3.min.js" data-name="impact" rel="nofollow">impact</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/map/d3.min.js" data-name="map" rel="nofollow">map</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/master/d3.min.js" data-name="master" rel="nofollow">master</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/mekko/d3.min.js" data-name="mekko" rel="nofollow">mekko</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/qq/d3.min.js" data-name="qq" rel="nofollow">qq</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/radar/d3.min.js" data-name="radar" rel="nofollow">radar</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/scatter/d3.min.js" data-name="scatter" rel="nofollow">scatter</a>
-                  </h4>
-                </div>
-                <div class="commitish-item branch-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/stagger/d3.min.js" data-name="stagger" rel="nofollow">stagger</a>
-                  </h4>
-                </div>
-
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.7.3/d3.min.js" data-name="v2.7.3" rel="nofollow">v2.7.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.7.2/d3.min.js" data-name="v2.7.2" rel="nofollow">v2.7.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.7.1/d3.min.js" data-name="v2.7.1" rel="nofollow">v2.7.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.7.0/d3.min.js" data-name="v2.7.0" rel="nofollow">v2.7.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.6.1/d3.min.js" data-name="v2.6.1" rel="nofollow">v2.6.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.6.0/d3.min.js" data-name="v2.6.0" rel="nofollow">v2.6.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.5.2/d3.min.js" data-name="v2.5.2" rel="nofollow">v2.5.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.5.1/d3.min.js" data-name="v2.5.1" rel="nofollow">v2.5.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.5.0/d3.min.js" data-name="v2.5.0" rel="nofollow">v2.5.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.6/d3.min.js" data-name="v2.4.6" rel="nofollow">v2.4.6</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.5/d3.min.js" data-name="v2.4.5" rel="nofollow">v2.4.5</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.4/d3.min.js" data-name="v2.4.4" rel="nofollow">v2.4.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.3/d3.min.js" data-name="v2.4.3" rel="nofollow">v2.4.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.2/d3.min.js" data-name="v2.4.2" rel="nofollow">v2.4.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.1/d3.min.js" data-name="v2.4.1" rel="nofollow">v2.4.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.4.0/d3.min.js" data-name="v2.4.0" rel="nofollow">v2.4.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.3.4/d3.min.js" data-name="v2.3.4" rel="nofollow">v2.3.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.3.3/d3.min.js" data-name="v2.3.3" rel="nofollow">v2.3.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.3.2/d3.min.js" data-name="v2.3.2" rel="nofollow">v2.3.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.3.1/d3.min.js" data-name="v2.3.1" rel="nofollow">v2.3.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.3.0/d3.min.js" data-name="v2.3.0" rel="nofollow">v2.3.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.2.1/d3.min.js" data-name="v2.2.1" rel="nofollow">v2.2.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.2.0/d3.min.js" data-name="v2.2.0" rel="nofollow">v2.2.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.1.3/d3.min.js" data-name="v2.1.3" rel="nofollow">v2.1.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.1.2/d3.min.js" data-name="v2.1.2" rel="nofollow">v2.1.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.1.1/d3.min.js" data-name="v2.1.1" rel="nofollow">v2.1.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.1.0/d3.min.js" data-name="v2.1.0" rel="nofollow">v2.1.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.0.4/d3.min.js" data-name="v2.0.4" rel="nofollow">v2.0.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.0.3/d3.min.js" data-name="v2.0.3" rel="nofollow">v2.0.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.0.2/d3.min.js" data-name="v2.0.2" rel="nofollow">v2.0.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.0.1/d3.min.js" data-name="v2.0.1" rel="nofollow">v2.0.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v2.0.0/d3.min.js" data-name="v2.0.0" rel="nofollow">v2.0.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.7/d3.min.js" data-name="v1.29.7" rel="nofollow">v1.29.7</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.6/d3.min.js" data-name="v1.29.6" rel="nofollow">v1.29.6</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.5/d3.min.js" data-name="v1.29.5" rel="nofollow">v1.29.5</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.4/d3.min.js" data-name="v1.29.4" rel="nofollow">v1.29.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.3/d3.min.js" data-name="v1.29.3" rel="nofollow">v1.29.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.2/d3.min.js" data-name="v1.29.2" rel="nofollow">v1.29.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.1/d3.min.js" data-name="v1.29.1" rel="nofollow">v1.29.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.29.0/d3.min.js" data-name="v1.29.0" rel="nofollow">v1.29.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.28.1/d3.min.js" data-name="v1.28.1" rel="nofollow">v1.28.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.28.0/d3.min.js" data-name="v1.28.0" rel="nofollow">v1.28.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.27.2/d3.min.js" data-name="v1.27.2" rel="nofollow">v1.27.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.27.1/d3.min.js" data-name="v1.27.1" rel="nofollow">v1.27.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.27.0/d3.min.js" data-name="v1.27.0" rel="nofollow">v1.27.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.26.0/d3.min.js" data-name="v1.26.0" rel="nofollow">v1.26.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.25.0/d3.min.js" data-name="v1.25.0" rel="nofollow">v1.25.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.24.1/d3.min.js" data-name="v1.24.1" rel="nofollow">v1.24.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.24.0/d3.min.js" data-name="v1.24.0" rel="nofollow">v1.24.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.23.0/d3.min.js" data-name="v1.23.0" rel="nofollow">v1.23.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.22.1/d3.min.js" data-name="v1.22.1" rel="nofollow">v1.22.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.22.0/d3.min.js" data-name="v1.22.0" rel="nofollow">v1.22.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.21.0/d3.min.js" data-name="v1.21.0" rel="nofollow">v1.21.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.20.3/d3.min.js" data-name="v1.20.3" rel="nofollow">v1.20.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.20.2/d3.min.js" data-name="v1.20.2" rel="nofollow">v1.20.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.20.1/d3.min.js" data-name="v1.20.1" rel="nofollow">v1.20.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.20.0/d3.min.js" data-name="v1.20.0" rel="nofollow">v1.20.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.19.1/d3.min.js" data-name="v1.19.1" rel="nofollow">v1.19.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.19.0/d3.min.js" data-name="v1.19.0" rel="nofollow">v1.19.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.18.0/d3.min.js" data-name="v1.18.0" rel="nofollow">v1.18.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.17.1/d3.min.js" data-name="v1.17.1" rel="nofollow">v1.17.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.17.0/d3.min.js" data-name="v1.17.0" rel="nofollow">v1.17.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.16.0/d3.min.js" data-name="v1.16.0" rel="nofollow">v1.16.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.15.1/d3.min.js" data-name="v1.15.1" rel="nofollow">v1.15.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.15.0/d3.min.js" data-name="v1.15.0" rel="nofollow">v1.15.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.14.2/d3.min.js" data-name="v1.14.2" rel="nofollow">v1.14.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.14.1/d3.min.js" data-name="v1.14.1" rel="nofollow">v1.14.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.14.0/d3.min.js" data-name="v1.14.0" rel="nofollow">v1.14.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.13.4/d3.min.js" data-name="v1.13.4" rel="nofollow">v1.13.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.13.3/d3.min.js" data-name="v1.13.3" rel="nofollow">v1.13.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.13.2/d3.min.js" data-name="v1.13.2" rel="nofollow">v1.13.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.13.1/d3.min.js" data-name="v1.13.1" rel="nofollow">v1.13.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.13.0/d3.min.js" data-name="v1.13.0" rel="nofollow">v1.13.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.12.0/d3.min.js" data-name="v1.12.0" rel="nofollow">v1.12.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.11.1/d3.min.js" data-name="v1.11.1" rel="nofollow">v1.11.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.11.0/d3.min.js" data-name="v1.11.0" rel="nofollow">v1.11.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.10.1/d3.min.js" data-name="v1.10.1" rel="nofollow">v1.10.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.10.0/d3.min.js" data-name="v1.10.0" rel="nofollow">v1.10.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.9.1/d3.min.js" data-name="v1.9.1" rel="nofollow">v1.9.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.9.0/d3.min.js" data-name="v1.9.0" rel="nofollow">v1.9.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.5/d3.min.js" data-name="v1.8.5" rel="nofollow">v1.8.5</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.4/d3.min.js" data-name="v1.8.4" rel="nofollow">v1.8.4</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.3/d3.min.js" data-name="v1.8.3" rel="nofollow">v1.8.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.2/d3.min.js" data-name="v1.8.2" rel="nofollow">v1.8.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.1/d3.min.js" data-name="v1.8.1" rel="nofollow">v1.8.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.8.0/d3.min.js" data-name="v1.8.0" rel="nofollow">v1.8.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.7.0/d3.min.js" data-name="v1.7.0" rel="nofollow">v1.7.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.6.1/d3.min.js" data-name="v1.6.1" rel="nofollow">v1.6.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.6.0/d3.min.js" data-name="v1.6.0" rel="nofollow">v1.6.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.5.3/d3.min.js" data-name="v1.5.3" rel="nofollow">v1.5.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.5.2/d3.min.js" data-name="v1.5.2" rel="nofollow">v1.5.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.5.1/d3.min.js" data-name="v1.5.1" rel="nofollow">v1.5.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.5.0/d3.min.js" data-name="v1.5.0" rel="nofollow">v1.5.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.4.0/d3.min.js" data-name="v1.4.0" rel="nofollow">v1.4.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.3.0/d3.min.js" data-name="v1.3.0" rel="nofollow">v1.3.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.2.1/d3.min.js" data-name="v1.2.1" rel="nofollow">v1.2.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.2.0/d3.min.js" data-name="v1.2.0" rel="nofollow">v1.2.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.1.0/d3.min.js" data-name="v1.1.0" rel="nofollow">v1.1.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.0.3/d3.min.js" data-name="v1.0.3" rel="nofollow">v1.0.3</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.0.2/d3.min.js" data-name="v1.0.2" rel="nofollow">v1.0.2</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.0.1/d3.min.js" data-name="v1.0.1" rel="nofollow">v1.0.1</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/v1.0.0/d3.min.js" data-name="v1.0.0" rel="nofollow">v1.0.0</a>
-                  </h4>
-                </div>
-                <div class="commitish-item tag-commitish selector-item">
-                  <h4>
-                      <a href="/mbostock/d3/blob/semver/d3.min.js" data-name="semver" rel="nofollow">semver</a>
-                  </h4>
-                </div>
-
-              <div class="no-results" style="display:none">Nothing to show</div>
-            </div>
-          </div><!-- /.commitish-context-context -->
-        </div>
-
-      </li>
-  </ul>
-
-  <ul class="subnav">
-    <li><a href="/mbostock/d3" class="selected" highlight="repo_source">Files</a></li>
-    <li><a href="/mbostock/d3/commits/master" highlight="repo_commits">Commits</a></li>
-    <li><a href="/mbostock/d3/branches" class="" highlight="repo_branches" rel="nofollow">Branches <span class="counter">11</span></a></li>
-    <li><a href="/mbostock/d3/tags" class="" highlight="repo_tags">Tags <span class="counter">103</span></a></li>
-    <li><a href="/mbostock/d3/downloads" class="blank" highlight="repo_downloads">Downloads <span class="counter">0</span></a></li>
-  </ul>
-
-</div>
-
-  
-  
-  
-
-
-          
-
-        </div><!-- /.repohead -->
-
-        
-
-
-
-
-  
-  <p class="last-commit">Latest commit to the <strong>master</strong> branch</p>
-
-<div class="commit commit-tease js-details-container">
-  <p class="commit-title ">
-      <a href="/mbostock/d3/commit/f67e89597db87f017c3d4706448ebe3ff8528853" class="message">Expand the default custom build.</a>
-      
-  </p>
-  <div class="commit-meta">
-    <a href="/mbostock/d3/commit/f67e89597db87f017c3d4706448ebe3ff8528853" class="sha-block">commit <span class="sha">f67e89597d</span></a>
-
-    <div class="authorship">
-      <img class="gravatar" height="20" src="https://secure.gravatar.com/avatar/005a27e09fe946ebef64bf4d134efc0a?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" width="20" />
-      <span class="author-name"><a href="/mbostock">mbostock</a></span>
-      authored <time class="js-relative-date" datetime="2012-01-26T11:58:40-08:00" title="2012-01-26 11:58:40">January 26, 2012</time>
-
-    </div>
-  </div>
-</div>
-
-
-<!-- block_view_fragment_key: views4/v8/blob:v15:943149:mbostock/d3:43fa0700420ce7670f40b08bb31e7b95e680044c:45687330391497a71c8ae73351c45b02 -->
-  <div id="slider">
-
-    <div class="breadcrumb" data-path="d3.min.js/">
-      <b><a href="/mbostock/d3/tree/f67e89597db87f017c3d4706448ebe3ff8528853" class="js-rewrite-sha">d3</a></b> / d3.min.js       <span style="display:none" id="clippy_4246" class="clippy-text">d3.min.js</span>
-      
-      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-              width="110"
-              height="14"
-              class="clippy"
-              id="clippy" >
-      <param name="movie" value="https://a248.e.akamai.net/assets.github.com/flash/clippy.swf?1261951368?v5"/>
-      <param name="allowScriptAccess" value="always" />
-      <param name="quality" value="high" />
-      <param name="scale" value="noscale" />
-      <param NAME="FlashVars" value="id=clippy_4246&amp;copied=copied!&amp;copyto=copy to clipboard">
-      <param name="bgcolor" value="#FFFFFF">
-      <param name="wmode" value="opaque">
-      <embed src="https://a248.e.akamai.net/assets.github.com/flash/clippy.swf?1261951368?v5"
-             width="110"
-             height="14"
-             name="clippy"
-             quality="high"
-             allowScriptAccess="always"
-             type="application/x-shockwave-flash"
-             pluginspage="http://www.macromedia.com/go/getflashplayer"
-             FlashVars="id=clippy_4246&amp;copied=copied!&amp;copyto=copy to clipboard"
-             bgcolor="#FFFFFF"
-             wmode="opaque"
-      />
-      </object>
-      
-
-    </div>
-
-    <div class="frames">
-      <div class="frame frame-center" data-path="d3.min.js/" data-permalink-url="/mbostock/d3/blob/f67e89597db87f017c3d4706448ebe3ff8528853/d3.min.js" data-title="d3.min.js at master from mbostock/d3 - GitHub" data-type="blob">
-          <ul class="big-actions">
-            <li><a class="file-edit-link minibutton js-rewrite-sha" href="/mbostock/d3/edit/f67e89597db87f017c3d4706448ebe3ff8528853/d3.min.js" data-method="post" rel="nofollow"><span>Edit this file</span></a></li>
-          </ul>
-
-        <div id="files" class="bubble">
-          <div class="file">
-            <div class="meta">
-              <div class="info">
-                <span class="icon"><img alt="Txt" height="16" src="https://a248.e.akamai.net/assets.github.com/images/icons/txt.png?1252203928" width="16" /></span>
-                <span class="mode" title="File Mode">100644</span>
-                  <span>2 lines (2 sloc)</span>
-                <span>58.874 kb</span>
-              </div>
-              <ul class="actions">
-                <li><a href="/mbostock/d3/raw/master/d3.min.js" id="raw-url">raw</a></li>
-                  <li><a href="/mbostock/d3/blame/master/d3.min.js">blame</a></li>
-                <li><a href="/mbostock/d3/commits/master/d3.min.js" rel="nofollow">history</a></li>
-              </ul>
-            </div>
-              <div class="data type-javascript">
-      <table cellpadding="0" cellspacing="0" class="lines">
-        <tr>
-          <td>
-            <pre class="line_numbers"><span id="L1" rel="#L1">1</span>
-<span id="L2" rel="#L2">2</span>
-</pre>
-          </td>
-          <td width="100%">
-                <div class="highlight"><pre><div class='line' id='LC1'>(function(){function e(a){var b=-1,c=a.length,d=[];while(++b&lt;c)d.push(a[b]);return d}function f(a){return Array.prototype.slice.call(a)}function i(){return this}function j(a,b,c){return function(){var d=c.apply(b,arguments);return arguments.length?a:d}}function k(a){return a!=null&amp;&amp;!isNaN(a)}function l(a){return a.length}function m(a){return a==null}function n(a){return a.replace(/(^\s+)|(\s+$)/g,&quot;&quot;).replace(/\s+/g,&quot; &quot;)}function q(){}function r(){function c(){var b=a,c=-1,d=b.length,e;while(++c&lt;d)(e=b[c].on)&amp;&amp;e.apply(this,arguments)}var a=[],b={};return c.on=function(d,e){var f,g;if(arguments.length&lt;2)return(f=b[d])&amp;&amp;f.on;if(f=b[d])f.on=null,a=a.slice(0,g=a.indexOf(f)).concat(a.slice(g+1)),delete b[d];return e&amp;&amp;a.push(b[d]={on:e}),c},c}function u(a,b){return b-(a?1+Math.floor(Math.log(a+Math.pow(10,1+Math.floor(Math.log(a)/Math.LN10)-b))/Math.LN10):1)}function v(a){return a+&quot;&quot;}function w(a){var b=a.lastIndexOf(&quot;.&quot;),c=b&gt;=0?a.substring(b):(b=a.length,&quot;&quot;),d=[];while(b&gt;0)d.push(a.substring(b-=3,b+3));return d.reverse().join(&quot;,&quot;)+c}function y(a,b){return{scale:Math.pow(10,(8-b)*3),symbol:a}}function D(a){return function(b){return b&lt;=0?0:b&gt;=1?1:a(b)}}function E(a){return function(b){return 1-a(1-b)}}function F(a){return function(b){return.5*(b&lt;.5?a(2*b):2-a(2-2*b))}}function G(a){return a}function H(a){return function(b){return Math.pow(b,a)}}function I(a){return 1-Math.cos(a*Math.PI/2)}function J(a){return Math.pow(2,10*(a-1))}function K(a){return 1-Math.sqrt(1-a*a)}function L(a,b){var c;return arguments.length&lt;2&amp;&amp;(b=.45),arguments.length&lt;1?(a=1,c=b/4):c=b/(2*Math.PI)*Math.asin(1/a),function(d){return 1+a*Math.pow(2,10*-d)*Math.sin((d-c)*2*Math.PI/b)}}function M(a){return a||(a=1.70158),function(b){return b*b*((a+1)*b-a)}}function N(a){return a&lt;1/2.75?7.5625*a*a:a&lt;2/2.75?7.5625*(a-=1.5/2.75)*a+.75:a&lt;2.5/2.75?7.5625*(a-=2.25/2.75)*a+.9375:7.5625*(a-=2.625/2.75)*a+.984375}function O(){d3.event.stopPropagation(),d3.event.preventDefault()}function Q(a){return a==&quot;transform&quot;?d3.interpolateTransform:d3.interpolate}function R(a,b){return b=b-(a=+a)?1/(b-a):0,function(c){return(c-a)*b}}function S(a,b){return b=b-(a=+a)?1/(b-a):0,function(c){return Math.max(0,Math.min(1,(c-a)*b))}}function T(a,b,c){return new U(a,b,c)}function U(a,b,c){this.r=a,this.g=b,this.b=c}function V(a){return a&lt;16?&quot;0&quot;+Math.max(0,a).toString(16):Math.min(255,a).toString(16)}function W(a,b,c){var d=0,e=0,f=0,g,h,i;g=/([a-z]+)\((.*)\)/i.exec(a);if(g){h=g[2].split(&quot;,&quot;);switch(g[1]){case&quot;hsl&quot;:return c(parseFloat(h[0]),parseFloat(h[1])/100,parseFloat(h[2])/100);case&quot;rgb&quot;:return b(Y(h[0]),Y(h[1]),Y(h[2]))}}return(i=Z[a])?b(i.r,i.g,i.b):(a!=null&amp;&amp;a.charAt(0)===&quot;#&quot;&amp;&amp;(a.length===4?(d=a.charAt(1),d+=d,e=a.charAt(2),e+=e,f=a.charAt(3),f+=f):a.length===7&amp;&amp;(d=a.substring(1,3),e=a.substring(3,5),f=a.substring(5,7)),d=parseInt(d,16),e=parseInt(e,16),f=parseInt(f,16)),b(d,e,f))}function X(a,b,c){var d=Math.min(a/=255,b/=255,c/=255),e=Math.max(a,b,c),f=e-d,g,h,i=(e+d)/2;return f?(h=i&lt;.5?f/(e+d):f/(2-e-d),a==e?g=(b-c)/f+(b&lt;c?6:0):b==e?g=(c-a)/f+2:g=(a-b)/f+4,g*=60):h=g=0,_(g,h,i)}function Y(a){var b=parseFloat(a);return a.charAt(a.length-1)===&quot;%&quot;?Math.round(b*2.55):b}function _(a,b,c){return new ba(a,b,c)}function ba(a,b,c){this.h=a,this.s=b,this.l=c}function bb(a,b,c){function f(a){return a&gt;360?a-=360:a&lt;0&amp;&amp;(a+=360),a&lt;60?d+(e-d)*a/60:a&lt;180?e:a&lt;240?d+(e-d)*(240-a)/60:d}function g(a){return Math.round(f(a)*255)}var d,e;return a%=360,a&lt;0&amp;&amp;(a+=360),b=b&lt;0?0:b&gt;1?1:b,c=c&lt;0?0:c&gt;1?1:c,e=c&lt;=.5?c*(1+b):c+b-c*b,d=2*c-e,T(g(a+120),g(a),g(a-120))}function bc(a){return h(a,bi),a}function bj(a){return function(){return bd(a,this)}}function bk(a){return function(){return be(a,this)}}function bm(a,b){function f(){if(b=this.classList)return b.add(a);var b=this.className,d=b.baseVal!=null,e=d?b.baseVal:b;c.lastIndex=0,c.test(e)||(e=n(e+&quot; &quot;+a),d?b.baseVal=e:this.className=e)}function g(){if(b=this.classList)return b.remove(a);var b=this.className,d=b.baseVal!=null,e=d?b.baseVal:b;e=n(e.replace(c,&quot; &quot;)),d?b.baseVal=e:this.className=e}function h(){(b.apply(this,arguments)?f:g).call(this)}var c=new RegExp(&quot;(^|\\s+)&quot;+d3.requote(a)+&quot;(\\s+|$)&quot;,&quot;g&quot;);if(arguments.length&lt;2){var d=this.node();if(e=d.classList)return e.contains(a);var e=d.className;return c.lastIndex=0,c.test(e.baseVal!=null?e.baseVal:e)}return this.each(typeof b==&quot;function&quot;?h:b?f:g)}function bn(a){return{__data__:a}}function bo(a){return function(){return bh(this,a)}}function bp(a){return arguments.length||(a=d3.ascending),function(b,c){return a(b&amp;&amp;b.__data__,c&amp;&amp;c.__data__)}}function br(a){return h(a,bs),a}function bt(a,b,c){h(a,bx);var d={},e=d3.dispatch(&quot;start&quot;,&quot;end&quot;),f=bA;return a.id=b,a.time=c,a.tween=function(b,c){return arguments.length&lt;2?d[b]:(c==null?delete d[b]:d[b]=c,a)},a.ease=function(b){return arguments.length?(f=typeof b==&quot;function&quot;?b:d3.ease.apply(d3,arguments),a):f},a.each=function(b,c){return arguments.length&lt;2?bB.call(a,b):(e.on(b,c),a)},d3.timer(function(g){return a.each(function(h,i,j){function p(a){if(o.active&gt;b)return r();o.active=b;for(var f in d)(f=d[f].call(l,h,i))&amp;&amp;k.push(f);return e.start.call(l,h,i),q(a)||d3.timer(q,0,c),1}function q(a){if(o.active!==b)return r();var c=(a-m)/n,d=f(c),g=k.length;while(g&gt;0)k[--g].call(l,d);if(c&gt;=1)return r(),bz=b,e.end.call(l,h,i),bz=0,1}function r(){return--o.count||delete l.__transition__,1}var k=[],l=this,m=a[j][i].delay,n=a[j][i].duration,o=l.__transition__||(l.__transition__={active:0,count:0});++o.count,m&lt;=g?p(g):d3.timer(p,m,c)}),1},0,c),a}function bv(a,b,c){return c!=&quot;&quot;&amp;&amp;bu}function bw(a,b){function d(a,d,e){var f=b.call(this,a,d);return f==null?e!=&quot;&quot;&amp;&amp;bu:e!=f&amp;&amp;c(e,f)}function e(a,d,e){return e!=b&amp;&amp;c(e,b)}var c=Q(a);return typeof b==&quot;function&quot;?d:b==null?bv:(b+=&quot;&quot;,e)}function bB(a){for(var b=0,c=this.length;b&lt;c;b++)for(var d=this[b],e=0,f=d.length;e&lt;f;e++){var g=d[e];g&amp;&amp;a.call(g=g.node,g.__data__,e,b)}return this}function bF(){var a,b=Date.now(),c=bC;while(c)a=b-c.then,a&gt;=c.delay&amp;&amp;(c.flush=c.callback(a)),c=c.next;var d=bG()-b;d&gt;24?(isFinite(d)&amp;&amp;(clearTimeout(bE),bE=setTimeout(bF,d)),bD=0):(bD=1,bH(bF))}function bG(){var a=null,b=bC,c=Infinity;while(b)b.flush?b=a?a.next=b.next:bC=b.next:(c=Math.min(c,b.then+b.delay),b=(a=b).next);return c}function bI(a){var b=[a.a,a.b],c=[a.c,a.d],d=bK(b),e=bJ(b,c),f=bK(bL(c,b,-e))||0;b[0]*c[1]&lt;c[0]*b[1]&amp;&amp;(b[0]*=-1,b[1]*=-1,d*=-1,e*=-1),this.rotate=(d?Math.atan2(b[1],b[0]):Math.atan2(-c[0],c[1]))*bM,this.translate=[a.e,a.f],this.scale=[d,f],this.skew=f?Math.atan2(e,f)*bM:0}function bJ(a,b){return a[0]*b[0]+a[1]*b[1]}function bK(a){var b=Math.sqrt(bJ(a,a));return b&amp;&amp;(a[0]/=b,a[1]/=b),b}function bL(a,b,c){return a[0]+=c*b[0],a[1]+=c*b[1],a}function bN(){}function bO(a){var b=a[0],c=a[a.length-1];return b&lt;c?[b,c]:[c,b]}function bP(a){return a.rangeExtent?a.rangeExtent():bO(a.range())}function bQ(a,b){var c=0,d=a.length-1,e=a[c],f=a[d],g;f&lt;e&amp;&amp;(g=c,c=d,d=g,g=e,e=f,f=g);if(g=f-e)b=b(g),a[c]=b.floor(e),a[d]=b.ceil(f);return a}function bR(){return Math}function bS(a,b,c,d){function g(){var g=a.length==2?bY:bZ,i=d?S:R;return e=g(a,b,i,c),f=g(b,a,i,d3.interpolate),h}function h(a){return e(a)}var e,f;return h.invert=function(a){return f(a)},h.domain=function(b){return arguments.length?(a=b.map(Number),g()):a},h.range=function(a){return arguments.length?(b=a,g()):b},h.rangeRound=function(a){return h.range(a).interpolate(d3.interpolateRound)},h.clamp=function(a){return arguments.length?(d=a,g()):d},h.interpolate=function(a){return arguments.length?(c=a,g()):c},h.ticks=function(b){return bW(a,b)},h.tickFormat=function(b){return bX(a,b)},h.nice=function(){return bQ(a,bU),g()},h.copy=function(){return bS(a,b,c,d)},g()}function bT(a,b){return d3.rebind(a,b,&quot;range&quot;,&quot;rangeRound&quot;,&quot;interpolate&quot;,&quot;clamp&quot;)}function bU(a){return a=Math.pow(10,Math.round(Math.log(a)/Math.LN10)-1),{floor:function(b){return Math.floor(b/a)*a},ceil:function(b){return Math.ceil(b/a)*a}}}function bV(a,b){var c=bO(a),d=c[1]-c[0],e=Math.pow(10,Math.floor(Math.log(d/b)/Math.LN10)),f=b/d*e;return f&lt;=.15?e*=10:f&lt;=.35?e*=5:f&lt;=.75&amp;&amp;(e*=2),c[0]=Math.ceil(c[0]/e)*e,c[1]=Math.floor(c[1]/e)*e+e*.5,c[2]=e,c}function bW(a,b){return d3.range.apply(d3,bV(a,b))}function bX(a,b){return d3.format(&quot;,.&quot;+Math.max(0,-Math.floor(Math.log(bV(a,b)[2])/Math.LN10+.01))+&quot;f&quot;)}function bY(a,b,c,d){var e=c(a[0],a[1]),f=d(b[0],b[1]);return function(a){return f(e(a))}}function bZ(a,b,c,d){var e=[],f=[],g=0,h=a.length-1;a[h]&lt;a[0]&amp;&amp;(a=a.slice().reverse(),b=b.slice().reverse());while(++g&lt;=h)e.push(c(a[g-1],a[g])),f.push(d(b[g-1],b[g]));return function(b){var c=d3.bisect(a,b,1,h)-1;return f[c](e[c](b))}}function b$(a,b){function d(c){return a(b(c))}var c=b.pow;return d.invert=function(b){return c(a.invert(b))},d.domain=function(e){return arguments.length?(b=e[0]&lt;0?cb:ca,c=b.pow,a.domain(e.map(b)),d):a.domain().map(c)},d.nice=function(){return a.domain(bQ(a.domain(),bR)),d},d.ticks=function(){var d=bO(a.domain()),e=[];if(d.every(isFinite)){var f=Math.floor(d[0]),g=Math.ceil(d[1]),h=c(d[0]),i=c(d[1]);if(b===cb){e.push(c(f));for(;f++&lt;g;)for(var j=9;j&gt;0;j--)e.push(c(f)*j)}else{for(;f&lt;g;f++)for(var j=1;j&lt;10;j++)e.push(c(f)*j);e.push(c(f))}for(f=0;e[f]&lt;h;f++);for(g=e.length;e[g-1]&gt;i;g--);e=e.slice(f,g)}return e},d.tickFormat=function(a,e){arguments.length&lt;2&amp;&amp;(e=b_);if(arguments.length&lt;1)return e;var f=a/d.ticks().length,g=b===cb?(h=-1e-12,Math.floor):(h=1e-12,Math.ceil),h;return function(a){return a/c(g(b(a)+h))&lt;f?e(a):&quot;&quot;}},d.copy=function(){return b$(a.copy(),b)},bT(d,a)}function ca(a){return Math.log(a&lt;0?0:a)/Math.LN10}function cb(a){return-Math.log(a&gt;0?0:-a)/Math.LN10}function cc(a,b){function e(b){return a(c(b))}var c=cd(b),d=cd(1/b);return e.invert=function(b){return d(a.invert(b))},e.domain=function(b){return arguments.length?(a.domain(b.map(c)),e):a.domain().map(d)},e.ticks=function(a){return bW(e.domain(),a)},e.tickFormat=function(a){return bX(e.domain(),a)},e.nice=function(){return e.domain(bQ(e.domain(),bU))},e.exponent=function(a){if(!arguments.length)return b;var f=e.domain();return c=cd(b=a),d=cd(1/b),e.domain(f)},e.copy=function(){return cc(a.copy(),b)},bT(e,a)}function cd(a){return function(b){return b&lt;0?-Math.pow(-b,a):Math.pow(b,a)}}function ce(a,b){function f(b){return d[((c[b]||(c[b]=a.push(b)))-1)%d.length]}function g(b,c){return d3.range(a.length).map(function(a){return b+c*a})}var c,d,e;return f.domain=function(d){if(!arguments.length)return a;a=[],c={};var e=-1,g=d.length,h;while(++e&lt;g)c[h=d[e]]||(c[h]=a.push(h));return f[b.t](b.x,b.p)},f.range=function(a){return arguments.length?(d=a,e=0,b={t:&quot;range&quot;,x:a},f):d},f.rangePoints=function(c,h){arguments.length&lt;2&amp;&amp;(h=0);var i=c[0],j=c[1],k=(j-i)/(a.length-1+h);return d=g(a.length&lt;2?(i+j)/2:i+k*h/2,k),e=0,b={t:&quot;rangePoints&quot;,x:c,p:h},f},f.rangeBands=function(c,h){arguments.length&lt;2&amp;&amp;(h=0);var i=c[0],j=c[1],k=(j-i)/(a.length+h);return d=g(i+k*h,k),e=k*(1-h),b={t:&quot;rangeBands&quot;,x:c,p:h},f},f.rangeRoundBands=function(c,h){arguments.length&lt;2&amp;&amp;(h=0);var i=c[0],j=c[1],k=Math.floor((j-i)/(a.length+h));return d=g(i+Math.round((j-i-(a.length-h)*k)/2),k),e=Math.round(k*(1-h)),b={t:&quot;rangeRoundBands&quot;,x:c,p:h},f},f.rangeBand=function(){return e},f.rangeExtent=function(){return b.t===&quot;range&quot;?bO(b.x):b.x},f.copy=function(){return ce(a,b)},f.domain(a)}function cj(a,b){function d(){var d=0,f=a.length,g=b.length;c=[];while(++d&lt;g)c[d-1]=d3.quantile(a,d/g);return e}function e(a){return isNaN(a=+a)?NaN:b[d3.bisect(c,a)]}var c;return e.domain=function(b){return arguments.length?(a=b.filter(function(a){return!isNaN(a)}).sort(d3.ascending),d()):a},e.range=function(a){return arguments.length?(b=a,d()):b},e.quantiles=function(){return c},e.copy=function(){return cj(a,b)},d()}function ck(a,b,c){function f(b){return c[Math.max(0,Math.min(e,Math.floor(d*(b-a))))]}function g(){return d=c.length/(b-a),e=c.length-1,f}var d,e;return f.domain=function(c){return arguments.length?(a=+c[0],b=+c[c.length-1],g()):[a,b]},f.range=function(a){return arguments.length?(c=a,g()):c},f.copy=function(){return ck(a,b,c)},g()}function cn(a){return a.innerRadius}function co(a){return a.outerRadius}function cp(a){return a.startAngle}function cq(a){return a.endAngle}function cr(a){function g(d){return d.length&lt;1?null:&quot;M&quot;+e(a(cs(this,d,b,c)),f)}var b=ct,c=cu,d=&quot;linear&quot;,e=cv[d],f=.7;return g.x=function(a){return arguments.length?(b=a,g):b},g.y=function(a){return arguments.length?(c=a,g):c},g.interpolate=function(a){return arguments.length?(e=cv[d=a],g):d},g.tension=function(a){return arguments.length?(f=a,g):f},g}function cs(a,b,c,d){var e=[],f=-1,g=b.length,h=typeof c==&quot;function&quot;,i=typeof d==&quot;function&quot;,j;if(h&amp;&amp;i)while(++f&lt;g)e.push([c.call(a,j=b[f],f),d.call(a,j,f)]);else if(h)while(++f&lt;g)e.push([c.call(a,b[f],f),d]);else if(i)while(++f&lt;g)e.push([c,d.call(a,b[f],f)]);else while(++f&lt;g)e.push([c,d]);return e}function ct(a){return a[0]}function cu(a){return a[1]}function cw(a){var b=0,c=a.length,d=a[0],e=[d[0],&quot;,&quot;,d[1]];while(++b&lt;c)e.push(&quot;L&quot;,(d=a[b])[0],&quot;,&quot;,d[1]);return e.join(&quot;&quot;)}function cx(a){var b=0,c=a.length,d=a[0],e=[d[0],&quot;,&quot;,d[1]];while(++b&lt;c)e.push(&quot;V&quot;,(d=a[b])[1],&quot;H&quot;,d[0]);return e.join(&quot;&quot;)}function cy(a){var b=0,c=a.length,d=a[0],e=[d[0],&quot;,&quot;,d[1]];while(++b&lt;c)e.push(&quot;H&quot;,(d=a[b])[0],&quot;V&quot;,d[1]);return e.join(&quot;&quot;)}function cz(a,b){return a.length&lt;4?cw(a):a[1]+cC(a.slice(1,a.length-1),cD(a,b))}function cA(a,b){return a.length&lt;3?cw(a):a[0]+cC((a.push(a[0]),a),cD([a[a.length-2]].concat(a,[a[1]]),b))}function cB(a,b,c){return a.length&lt;3?cw(a):a[0]+cC(a,cD(a,b))}function cC(a,b){if(b.length&lt;1||a.length!=b.length&amp;&amp;a.length!=b.length+2)return cw(a);var c=a.length!=b.length,d=&quot;&quot;,e=a[0],f=a[1],g=b[0],h=g,i=1;c&amp;&amp;(d+=&quot;Q&quot;+(f[0]-g[0]*2/3)+&quot;,&quot;+(f[1]-g[1]*2/3)+&quot;,&quot;+f[0]+&quot;,&quot;+f[1],e=a[1],i=2);if(b.length&gt;1){h=b[1],f=a[i],i++,d+=&quot;C&quot;+(e[0]+g[0])+&quot;,&quot;+(e[1]+g[1])+&quot;,&quot;+(f[0]-h[0])+&quot;,&quot;+(f[1]-h[1])+&quot;,&quot;+f[0]+&quot;,&quot;+f[1];for(var j=2;j&lt;b.length;j++,i++)f=a[i],h=b[j],d+=&quot;S&quot;+(f[0]-h[0])+&quot;,&quot;+(f[1]-h[1])+&quot;,&quot;+f[0]+&quot;,&quot;+f[1]}if(c){var k=a[i];d+=&quot;Q&quot;+(f[0]+h[0]*2/3)+&quot;,&quot;+(f[1]+h[1]*2/3)+&quot;,&quot;+k[0]+&quot;,&quot;+k[1]}return d}function cD(a,b){var c=[],d=(1-b)/2,e,f=a[0],g=a[1],h=1,i=a.length;while(++h&lt;i)e=f,f=g,g=a[h],c.push([d*(g[0]-e[0]),d*(g[1]-e[1])]);return c}function cE(a){if(a.length&lt;3)return cw(a);var b=1,c=a.length,d=a[0],e=d[0],f=d[1],g=[e,e,e,(d=a[1])[0]],h=[f,f,f,d[1]],i=[e,&quot;,&quot;,f];cM(i,g,h);while(++b&lt;c)d=a[b],g.shift(),g.push(d[0]),h.shift(),h.push(d[1]),cM(i,g,h);b=-1;while(++b&lt;2)g.shift(),g.push(d[0]),h.shift(),h.push(d[1]),cM(i,g,h);return i.join(&quot;&quot;)}function cF(a){if(a.length&lt;4)return cw(a);var b=[],c=-1,d=a.length,e,f=[0],g=[0];while(++c&lt;3)e=a[c],f.push(e[0]),g.push(e[1]);b.push(cI(cL,f)+&quot;,&quot;+cI(cL,g)),--c;while(++c&lt;d)e=a[c],f.shift(),f.push(e[0]),g.shift(),g.push(e[1]),cM(b,f,g);return b.join(&quot;&quot;)}function cG(a){var b,c=-1,d=a.length,e=d+4,f,g=[],h=[];while(++c&lt;4)f=a[c%d],g.push(f[0]),h.push(f[1]);b=[cI(cL,g),&quot;,&quot;,cI(cL,h)],--c;while(++c&lt;e)f=a[c%d],g.shift(),g.push(f[0]),h.shift(),h.push(f[1]),cM(b,g,h);return b.join(&quot;&quot;)}function cH(a,b){var c=a.length-1,d=a[0][0],e=a[0][1],f=a[c][0]-d,g=a[c][1]-e,h=-1,i,j;while(++h&lt;=c)i=a[h],j=h/c,i[0]=b*i[0]+(1-b)*(d+j*f),i[1]=b*i[1]+(1-b)*(e+j*g);return cE(a)}function cI(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3]}function cM(a,b,c){a.push(&quot;C&quot;,cI(cJ,b),&quot;,&quot;,cI(cJ,c),&quot;,&quot;,cI(cK,b),&quot;,&quot;,cI(cK,c),&quot;,&quot;,cI(cL,b),&quot;,&quot;,cI(cL,c))}function cN(a,b){return(b[1]-a[1])/(b[0]-a[0])}function cO(a){var b=0,c=a.length-1,d=[],e=a[0],f=a[1],g=d[0]=cN(e,f);while(++b&lt;c)d[b]=g+(g=cN(e=f,f=a[b+1]));return d[b]=g,d}function cP(a){var b=[],c,d,e,f,g=cO(a),h=-1,i=a.length-1;while(++h&lt;i)c=cN(a[h],a[h+1]),Math.abs(c)&lt;1e-6?g[h]=g[h+1]=0:(d=g[h]/c,e=g[h+1]/c,f=d*d+e*e,f&gt;9&amp;&amp;(f=c*3/Math.sqrt(f),g[h]=f*d,g[h+1]=f*e));h=-1;while(++h&lt;=i)f=(a[Math.min(i,h+1)][0]-a[Math.max(0,h-1)][0])/(6*(1+g[h]*g[h])),b.push([f||0,g[h]*f||0]);return b}function cQ(a){return a.length&lt;3?cw(a):a[0]+cC(a,cP(a))}function cR(a){var b,c=-1,d=a.length,e,f;while(++c&lt;d)b=a[c],e=b[0],f=b[1]+cl,b[0]=e*Math.cos(f),b[1]=e*Math.sin(f);return a}function cS(a){function j(f){if(f.length&lt;1)return null;var j=cs(this,f,b,d),k=cs(this,f,b===c?cT(j):c,d===e?cU(j):e);return&quot;M&quot;+g(a(k),i)+&quot;L&quot;+h(a(j.reverse()),i)+&quot;Z&quot;}var b=ct,c=ct,d=0,e=cu,f,g,h,i=.7;return j.x=function(a){return arguments.length?(b=c=a,j):c},j.x0=function(a){return arguments.length?(b=a,j):b},j.x1=function(a){return arguments.length?(c=a,j):c},j.y=function(a){return arguments.length?(d=e=a,j):e},j.y0=function(a){return arguments.length?(d=a,j):d},j.y1=function(a){return arguments.length?(e=a,j):e},j.interpolate=function(a){return arguments.length?(g=cv[f=a],h=g.reverse||g,j):f},j.tension=function(a){return arguments.length?(i=a,j):i},j.interpolate(&quot;linear&quot;)}function cT(a){return function(b,c){return a[c][0]}}function cU(a){return function(b,c){return a[c][1]}}function cV(a){return a.source}function cW(a){return a.target}function cX(a){return a.radius}function cY(a){return a.startAngle}function cZ(a){return a.endAngle}function c$(a){return[a.x,a.y]}function c_(a){return function(){var b=a.apply(this,arguments),c=b[0],d=b[1]+cl;return[c*Math.cos(d),c*Math.sin(d)]}}function db(a,b){var c=(a.ownerSVGElement||a).createSVGPoint();if(da&lt;0&amp;&amp;(window.scrollX||window.scrollY)){var d=d3.select(document.body).append(&quot;svg&quot;).style(&quot;position&quot;,&quot;absolute&quot;).style(&quot;top&quot;,0).style(&quot;left&quot;,0),e=d[0][0].getScreenCTM();da=!e.f&amp;&amp;!e.e,d.remove()}return da?(c.x=b.pageX,c.y=b.pageY):(c.x=b.clientX,c.y=b.clientY),c=c.matrixTransform(a.getScreenCTM().inverse()),[c.x,c.y]}function dc(){return 64}function dd(){return&quot;circle&quot;}function dh(a,b){a.attr(&quot;transform&quot;,function(a){return&quot;translate(&quot;+b(a)+&quot;,0)&quot;})}function di(a,b){a.attr(&quot;transform&quot;,function(a){return&quot;translate(0,&quot;+b(a)+&quot;)&quot;})}function dj(a,b,c){e=[];if(c&amp;&amp;b.length&gt;1){var d=bO(a.domain()),e,f=-1,g=b.length,h=(b[1]-b[0])/++c,i,j;while(++f&lt;g)for(i=c;--i&gt;0;)(j=+b[f]-i*h)&gt;=d[0]&amp;&amp;e.push(j);for(--f,i=0;++i&lt;c&amp;&amp;(j=+b[f]+i*h)&lt;d[1];)e.push(j)}return e}function dv(a,b){a.select(&quot;.extent&quot;).attr(&quot;x&quot;,b[0][0]),a.selectAll(&quot;.n,.s,.w,.nw,.sw&quot;).attr(&quot;x&quot;,b[0][0]-2),a.selectAll(&quot;.e,.ne,.se&quot;).attr(&quot;x&quot;,b[1][0]-3),a.selectAll(&quot;.extent,.n,.s&quot;).attr(&quot;width&quot;,b[1][0]-b[0][0])}function dw(a,b){a.select(&quot;.extent&quot;).attr(&quot;y&quot;,b[0][1]),a.selectAll(&quot;.n,.e,.w,.nw,.ne&quot;).attr(&quot;y&quot;,b[0][1]-3),a.selectAll(&quot;.s,.se,.sw&quot;).attr(&quot;y&quot;,b[1][1]-4),a.selectAll(&quot;.extent,.e,.w&quot;).attr(&quot;height&quot;,b[1][1]-b[0][1])}function dx(){d3.event.keyCode==32&amp;&amp;dm&amp;&amp;!dr&amp;&amp;(dt=null,du[0]-=dq[1][0],du[1]-=dq[1][1],dr=2,O())}function dy(){d3.event.keyCode==32&amp;&amp;dr==2&amp;&amp;(du[0]+=dq[1][0],du[1]+=dq[1][1],dr=0,O())}function dz(){if(du){var a=d3.svg.mouse(dm),b=d3.select(dm);dr||(d3.event.altKey?(dt||(dt=[(dq[0][0]+dq[1][0])/2,(dq[0][1]+dq[1][1])/2]),du[0]=dq[+(a[0]&lt;dt[0])][0],du[1]=dq[+(a[1]&lt;dt[1])][1]):dt=null),dn&amp;&amp;(dA(a,dn,0),dv(b,dq)),dp&amp;&amp;(dA(a,dp,1),dw(b,dq)),dl(&quot;brush&quot;)}}function dA(a,b,c){var d=bP(b),e=d[0],f=d[1],g=du[c],h=dq[1][c]-dq[0][c],i,j;dr&amp;&amp;(e-=g,f-=h+g),i=Math.max(e,Math.min(f,a[c])),dr?j=(i+=g)+h:(dt&amp;&amp;(g=Math.max(e,Math.min(f,2*dt[c]-i))),g&lt;i?(j=i,i=g):j=g),dq[0][c]=i,dq[1][c]=j}function dB(){du&amp;&amp;(dz(),d3.select(dm).selectAll(&quot;.resize&quot;).style(&quot;pointer-events&quot;,dk.empty()?&quot;none&quot;:&quot;all&quot;),dl(&quot;brushend&quot;),dk=dl=dm=dn=dp=dq=dr=ds=dt=du=null,O())}function dK(a){var b=dL(),c=d3.event,d=d3.event={type:a};b&amp;&amp;(d.x=b[0]+dH[0],d.y=b[1]+dH[1],d.dx=b[0]-dI[0],d.dy=b[1]-dI[1],dJ|=d.dx|d.dy,dI=b);try{dD[a].apply(dF,dG)}finally{d3.event=c}c.stopPropagation(),c.preventDefault()}function dL(){var a=dF.parentNode,b=d3.event.changedTouches;return a&amp;&amp;(b?d3.svg.touches(a,b)[0]:d3.svg.mouse(a))}function dM(){if(!dF)return;var a=dF.parentNode;if(!a)return dN();dK(&quot;drag&quot;),O()}function dN(){if(!dF)return;dK(&quot;dragend&quot;),dJ&amp;&amp;(O(),dJ=d3.event.target===dE),dD=dE=dF=dG=dH=dI=null}function dO(){dJ&amp;&amp;(O(),dJ=0)}function d_(a){return[a[0]-dU[0],a[1]-dU[1],dU[2]]}function ea(){dP||(dP=d3.select(&quot;body&quot;).append(&quot;div&quot;).style(&quot;visibility&quot;,&quot;hidden&quot;).style(&quot;top&quot;,0).style(&quot;height&quot;,0).style(&quot;width&quot;,0).style(&quot;overflow-y&quot;,&quot;scroll&quot;).append(&quot;div&quot;).style(&quot;height&quot;,&quot;2000px&quot;).node().parentNode);var a=d3.event,b;try{dP.scrollTop=1e3,dP.dispatchEvent(a),b=1e3-dP.scrollTop}catch(c){b=a.wheelDelta||-a.detail*5}return b*.005}function eb(){var a=d3.svg.touches(dY),b=-1,c=a.length,d;while(++b&lt;c)dS[(d=a[b]).identifier]=d_(d);return a}function ec(){var a=d3.svg.touches(dY);switch(a.length){case 1:var b=a[0];eg(dU[2],b,dS[b.identifier]);break;case 2:var c=a[0],d=a[1],e=[(c[0]+d[0])/2,(c[1]+d[1])/2],f=dS[c.identifier],g=dS[d.identifier],h=[(f[0]+g[0])/2,(f[1]+g[1])/2,f[2]];eg(Math.log(d3.event.scale)/Math.LN2+f[2],e,h)}}function ed(){dR=null,dQ&amp;&amp;(d$=1,eg(dU[2],d3.svg.mouse(dY),dQ))}function ee(){dQ&amp;&amp;(d$&amp;&amp;(O(),d$=dX===d3.event.target),dU=dV=dW=dX=dY=dZ=dQ=null)}function ef(){d$&amp;&amp;(O(),d$=0)}function eg(a,b,c){function l(a,b,c){a.domain(a.range().map(function(f){return a.invert((f-c)*d/e+b)}))}a=ei(a,2);var d=Math.pow(2,dU[2]),e=Math.pow(2,a),f=Math.pow(2,(dU[2]=a)-c[2]),g=dU[0],h=dU[1],i=dU[0]=ei(b[0]-c[0]*f,0,e),j=dU[1]=ei(b[1]-c[1]*f,1,e),k=d3.event;d3.event={scale:e,translate:[i,j],transform:function(a,b){a&amp;&amp;l(a,g,i),b&amp;&amp;l(b,h,j)}};try{dW.apply(dY,dZ)}finally{d3.event=k}k.preventDefault()}function ei(a,b,c){var d=dV[b],e=d[0],f=d[1];return arguments.length===3?Math.max(f*(f===Infinity?-Infinity:1/c-1),Math.min(e===-Infinity?Infinity:e,a/c))*c:Math.max(e,Math.min(f,a))}Date.now||(Date.now=function(){return+(new Date)});try{document.createElement(&quot;div&quot;).style.setProperty(&quot;opacity&quot;,0,&quot;&quot;)}catch(a){var b=CSSStyleDeclaration.prototype,c=b.setProperty;b.setProperty=function(a,b,d){c.call(this,a,b+&quot;&quot;,d)}}d3={version:&quot;2.7.3&quot;};var d=f;try{d(document.documentElement.childNodes)[0].nodeType}catch(g){d=e}var h=[].__proto__?function(a,b){a.__proto__=b}:function(a,b){for(var c in b)a[c]=b[c]};d3.functor=function(a){return typeof a==&quot;function&quot;?a:function(){return a}},d3.rebind=function(a,b){var c=1,d=arguments.length,e;while(++c&lt;d)a[e=arguments[c]]=j(a,b,b[e]);return a},d3.ascending=function(a,b){return a&lt;b?-1:a&gt;b?1:a&gt;=b?0:NaN},d3.descending=function(a,b){return b&lt;a?-1:b&gt;a?1:b&gt;=a?0:NaN},d3.mean=function(a,b){var c=a.length,d,e=0,f=-1,g=0;if(arguments.length===1)while(++f&lt;c)k(d=a[f])&amp;&amp;(e+=(d-e)/++g);else while(++f&lt;c)k(d=b.call(a,a[f],f))&amp;&amp;(e+=(d-e)/++g);return g?e:undefined},d3.median=function(a,b){return arguments.length&gt;1&amp;&amp;(a=a.map(b)),a=a.filter(k),a.length?d3.quantile(a.sort(d3.ascending),.5):undefined},d3.min=function(a,b){var c=-1,d=a.length,e,f;if(arguments.length===1){while(++c&lt;d&amp;&amp;((e=a[c])==null||e!=e))e=undefined;while(++c&lt;d)(f=a[c])!=null&amp;&amp;e&gt;f&amp;&amp;(e=f)}else{while(++c&lt;d&amp;&amp;((e=b.call(a,a[c],c))==null||e!=e))e=undefined;while(++c&lt;d)(f=b.call(a,a[c],c))!=null&amp;&amp;e&gt;f&amp;&amp;(e=f)}return e},d3.max=function(a,b){var c=-1,d=a.length,e,f;if(arguments.length===1){while(++c&lt;d&amp;&amp;((e=a[c])==null||e!=e))e=undefined;while(++c&lt;d)(f=a[c])!=null&amp;&amp;f&gt;e&amp;&amp;(e=f)}else{while(++c&lt;d&amp;&amp;((e=b.call(a,a[c],c))==null||e!=e))e=undefined;while(++c&lt;d)(f=b.call(a,a[c],c))!=null&amp;&amp;f&gt;e&amp;&amp;(e=f)}return e},d3.extent=function(a,b){var c=-1,d=a.length,e,f,g;if(arguments.length===1){while(++c&lt;d&amp;&amp;((e=g=a[c])==null||e!=e))e=g=undefined;while(++c&lt;d)(f=a[c])!=null&amp;&amp;(e&gt;f&amp;&amp;(e=f),g&lt;f&amp;&amp;(g=f))}else{while(++c&lt;d&amp;&amp;((e=g=b.call(a,a[c],c))==null||e!=e))e=undefined;while(++c&lt;d)(f=b.call(a,a[c],c))!=null&amp;&amp;(e&gt;f&amp;&amp;(e=f),g&lt;f&amp;&amp;(g=f))}return[e,g]},d3.random={normal:function(a,b){return arguments.length&lt;2&amp;&amp;(b=1),arguments.length&lt;1&amp;&amp;(a=0),function(){var c,d,e;do c=Math.random()*2-1,d=Math.random()*2-1,e=c*c+d*d;while(!e||e&gt;1);return a+b*c*Math.sqrt(-2*Math.log(e)/e)}}},d3.sum=function(a,b){var c=0,d=a.length,e,f=-1;if(arguments.length===1)while(++f&lt;d)isNaN(e=+a[f])||(c+=e);else while(++f&lt;d)isNaN(e=+b.call(a,a[f],f))||(c+=e);return c},d3.quantile=function(a,b){var c=(a.length-1)*b+1,d=Math.floor(c),e=a[d-1],f=c-d;return f?e+f*(a[d]-e):e},d3.transpose=function(a){return d3.zip.apply(d3,a)},d3.zip=function(){if(!(e=arguments.length))return[];for(var a=-1,b=d3.min(arguments,l),c=new Array(b);++a&lt;b;)for(var d=-1,e,f=c[a]=new Array(e);++d&lt;e;)f[d]=arguments[d][a];return c},d3.bisectLeft=function(a,b,c,d){arguments.length&lt;3&amp;&amp;(c=0),arguments.length&lt;4&amp;&amp;(d=a.length);while(c&lt;d){var e=c+d&gt;&gt;1;a[e]&lt;b?c=e+1:d=e}return c},d3.bisect=d3.bisectRight=function(a,b,c,d){arguments.length&lt;3&amp;&amp;(c=0),arguments.length&lt;4&amp;&amp;(d=a.length);while(c&lt;d){var e=c+d&gt;&gt;1;b&lt;a[e]?d=e:c=e+1}return c},d3.first=function(a,b){var c=0,d=a.length,e=a[0],f;arguments.length===1&amp;&amp;(b=d3.ascending);while(++c&lt;d)b.call(a,e,f=a[c])&gt;0&amp;&amp;(e=f);return e},d3.last=function(a,b){var c=0,d=a.length,e=a[0],f;arguments.length===1&amp;&amp;(b=d3.ascending);while(++c&lt;d)b.call(a,e,f=a[c])&lt;=0&amp;&amp;(e=f);return e},d3.nest=function(){function f(c,g){if(g&gt;=b.length)return e?e.call(a,c):d?c.sort(d):c;var h=-1,i=c.length,j=b[g++],k,l,m={};while(++h&lt;i)(k=j(l=c[h]))in m?m[k].push(l):m[k]=[l];for(k in m)m[k]=f(m[k],g);return m}function g(a,d){if(d&gt;=b.length)return a;var e=[],f=c[d++],h;for(h in a)e.push({key:h,values:g(a[h],d)});return f&amp;&amp;e.sort(function(a,b){return f(a.key,b.key)}),e}var a={},b=[],c=[],d,e;return a.map=function(a){return f(a,0)},a.entries=function(a){return g(f(a,0),0)},a.key=function(c){return b.push(c),a},a.sortKeys=function(d){return c[b.length-1]=d,a},a.sortValues=function(b){return d=b,a},a.rollup=function(b){return e=b,a},a},d3.keys=function(a){var b=[];for(var c in a)b.push(c);return b},d3.values=function(a){var b=[];for(var c in a)b.push(a[c]);return b},d3.entries=function(a){var b=[];for(var c in a)b.push({key:c,value:a[c]});return b},d3.permute=function(a,b){var c=[],d=-1,e=b.length;while(++d&lt;e)c[d]=a[b[d]];return c},d3.merge=function(a){return Array.prototype.concat.apply([],a)},d3.split=function(a,b){var c=[],d=[],e,f=-1,g=a.length;arguments.length&lt;2&amp;&amp;(b=m);while(++f&lt;g)b.call(d,e=a[f],f)?d=[]:(d.length||c.push(d),d.push(e));return c},d3.range=function(a,b,c){arguments.length&lt;3&amp;&amp;(c=1,arguments.length&lt;2&amp;&amp;(b=a,a=0));if((b-a)/c==Infinity)throw new Error(&quot;infinite range&quot;);var d=[],e=-1,f;if(c&lt;0)while((f=a+c*++e)&gt;b)d.push(f);else while((f=a+c*++e)&lt;b)d.push(f);return d},d3.requote=function(a){return a.replace(o,&quot;\\$&amp;&quot;)};var o=/[\\\^\$\*\+\?\|\[\]\(\)\.\{\}]/g;d3.round=function(a,b){return b?Math.round(a*(b=Math.pow(10,b)))/b:Math.round(a)},d3.xhr=function(a,b,c){var d=new XMLHttpRequest;arguments.length&lt;3?(c=b,b=null):b&amp;&amp;d.overrideMimeType&amp;&amp;d.overrideMimeType(b),d.open(&quot;GET&quot;,a,!0),b&amp;&amp;d.setRequestHeader(&quot;Accept&quot;,b),d.onreadystatechange=function(){d.readyState===4&amp;&amp;c(d.status&lt;300?d:null)},d.send(null)},d3.text=function(a,b,c){function d(a){c(a&amp;&amp;a.responseText)}arguments.length&lt;3&amp;&amp;(c=b,b=null),d3.xhr(a,b,d)},d3.json=function(a,b){d3.text(a,&quot;application/json&quot;,function(a){b(a?JSON.parse(a):null)})},d3.html=function(a,b){d3.text(a,&quot;text/html&quot;,function(a){if(a!=null){var c=document.createRange();c.selectNode(document.body),a=c.createContextualFragment(a)}b(a)})},d3.xml=function(a,b,c){function d(a){c(a&amp;&amp;a.responseXML)}arguments.length&lt;3&amp;&amp;(c=b,b=null),d3.xhr(a,b,d)};var p={svg:&quot;http://www.w3.org/2000/svg&quot;,xhtml:&quot;http://www.w3.org/1999/xhtml&quot;,xlink:&quot;http://www.w3.org/1999/xlink&quot;,xml:&quot;http://www.w3.org/XML/1998/namespace&quot;,xmlns:&quot;http://www.w3.org/2000/xmlns/&quot;};d3.ns={prefix:p,qualify:function(a){var b=a.indexOf(&quot;:&quot;);return b&lt;0?a in p?{space:p[a],local:a}:a:{space:p[a.substring(0,b)],local:a.substring(b+1)}}},d3.dispatch=function(){var a=new q,b=-1,c=arguments.length;while(++b&lt;c)a[arguments[b]]=r();return a},q.prototype.on=function(a,b){var c=a.indexOf(&quot;.&quot;),d=&quot;&quot;;return c&gt;0&amp;&amp;(d=a.substring(c+1),a=a.substring(0,c)),arguments.length&lt;2?this[a].on(d):(this[a].on(d,b),this)},d3.format=function(a){var b=s.exec(a),c=b[1]||&quot; &quot;,d=b[3]||&quot;&quot;,e=b[5],f=+b[6],g=b[7],h=b[8],i=b[9],j=1,k=&quot;&quot;,l=!1;h&amp;&amp;(h=+h.substring(1)),e&amp;&amp;(c=&quot;0&quot;,g&amp;&amp;(f-=Math.floor((f-1)/4)));switch(i){case&quot;n&quot;:g=!0,i=&quot;g&quot;;break;case&quot;%&quot;:j=100,k=&quot;%&quot;,i=&quot;f&quot;;break;case&quot;p&quot;:j=100,k=&quot;%&quot;,i=&quot;r&quot;;break;case&quot;d&quot;:l=!0,h=0;break;case&quot;s&quot;:j=-1,i=&quot;r&quot;}return i==&quot;r&quot;&amp;&amp;!h&amp;&amp;(i=&quot;g&quot;),i=t[i]||v,function(a){if(l&amp;&amp;a%1)return&quot;&quot;;var b=a&lt;0&amp;&amp;(a=-a)?&quot;−&quot;:d;if(j&lt;0){var m=d3.formatPrefix(a,h);a*=m.scale,k=m.symbol}else a*=j;a=i(a,h);if(e){var n=a.length+b.length;n&lt;f&amp;&amp;(a=(new Array(f-n+1)).join(c)+a),g&amp;&amp;(a=w(a)),a=b+a}else{g&amp;&amp;(a=w(a)),a=b+a;var n=a.length;n&lt;f&amp;&amp;(a=(new Array(f-n+1)).join(c)+a)}return a+k}};var s=/(?:([^{])?([&lt;&gt;=^]))?([+\- ])?(#)?(0)?([0-9]+)?(,)?(\.[0-9]+)?([a-zA-Z%])?/,t={g:function(a,b){return a.toPrecision(b)},e:function(a,b){return a.toExponential(b)},f:function(a,b){return a.toFixed(b)},r:function(a,b){return d3.round(a,b=u(a,b)).toFixed(Math.max(0,Math.min(20,b)))}},x=[&quot;y&quot;,&quot;z&quot;,&quot;a&quot;,&quot;f&quot;,&quot;p&quot;,&quot;n&quot;,&quot;μ&quot;,&quot;m&quot;,&quot;&quot;,&quot;k&quot;,&quot;M&quot;,&quot;G&quot;,&quot;T&quot;,&quot;P&quot;,&quot;E&quot;,&quot;Z&quot;,&quot;Y&quot;].map(y);d3.formatPrefix=function(a,b){var c=0;return a&amp;&amp;(a&lt;0&amp;&amp;(a*=-1),b&amp;&amp;(a=d3.round(a,u(a,b))),c=1+Math.floor(1e-12+Math.log(a)/Math.LN10),c=Math.max(-24,Math.min(24,Math.floor((c&lt;=0?c+1:c-1)/3)*3))),x[8+c/3]};var z=H(2),A=H(3),B={linear:function(){return G},poly:H,quad:function(){return z},cubic:function(){return A},sin:function(){return I},exp:function(){return J},circle:function(){return K},elastic:L,back:M,bounce:function(){return N}},C={&quot;in&quot;:function(a){return a},out:E,&quot;in-out&quot;:F,&quot;out-in&quot;:function(a){return F(E(a))}};d3.ease=function(a){var b=a.indexOf(&quot;-&quot;),c=b&gt;=0?a.substring(0,b):a,d=b&gt;=0?a.substring(b+1):&quot;in&quot;;return D(C[d](B[c].apply(null,Array.prototype.slice.call(arguments,1))))},d3.event=null,d3.interpolate=function(a,b){var c=d3.interpolators.length,d;while(--c&gt;=0&amp;&amp;!(d=d3.interpolators[c](a,b)));return d},d3.interpolateNumber=function(a,b){return b-=a,function(c){return a+b*c}},d3.interpolateRound=function(a,b){return b-=a,function(c){return Math.round(a+b*c)}},d3.interpolateString=function(a,b){var c,d,e,f=0,g=0,h=[],i=[],j,k;P.lastIndex=0;for(d=0;c=P.exec(b);++d)c.index&amp;&amp;h.push(b.substring(f,g=c.index)),i.push({i:h.length,x:c[0]}),h.push(null),f=P.lastIndex;f&lt;b.length&amp;&amp;h.push(b.substring(f));for(d=0,j=i.length;(c=P.exec(a))&amp;&amp;d&lt;j;++d){k=i[d];if(k.x==c[0]){if(k.i)if(h[k.i+1]==null){h[k.i-1]+=k.x,h.splice(k.i,1);for(e=d+1;e&lt;j;++e)i[e].i--}else{h[k.i-1]+=k.x+h[k.i+1],h.splice(k.i,2);for(e=d+1;e&lt;j;++e)i[e].i-=2}else if(h[k.i+1]==null)h[k.i]=k.x;else{h[k.i]=k.x+h[k.i+1],h.splice(k.i+1,1);for(e=d+1;e&lt;j;++e)i[e].i--}i.splice(d,1),j--,d--}else k.x=d3.interpolateNumber(parseFloat(c[0]),parseFloat(k.x))}while(d&lt;j)k=i.pop(),h[k.i+1]==null?h[k.i]=k.x:(h[k.i]=k.x+h[k.i+1],h.splice(k.i+1,1)),j--;return h.length===1?h[0]==null?i[0].x:function(){return b}:function(a){for(d=0;d&lt;j;++d)h[(k=i[d]).i]=k.x(a);return h.join(&quot;&quot;)}},d3.interpolateTransform=function(a,b){return d3.interpolateString(d3.transform(a)+&quot;&quot;,d3.transform(b)+&quot;&quot;)},d3.interpolateRgb=function(a,b){a=d3.rgb(a),b=d3.rgb(b);var c=a.r,d=a.g,e=a.b,f=b.r-c,g=b.g-d,h=b.b-e;return function(a){return&quot;#&quot;+V(Math.round(c+f*a))+V(Math.round(d+g*a))+V(Math.round(e+h*a))}},d3.interpolateHsl=function(a,b){a=d3.hsl(a),b=d3.hsl(b);var c=a.h,d=a.s,e=a.l,f=b.h-c,g=b.s-d,h=b.l-e;return function(a){return bb(c+f*a,d+g*a,e+h*a).toString()}},d3.interpolateArray=function(a,b){var c=[],d=[],e=a.length,f=b.length,g=Math.min(a.length,b.length),h;for(h=0;h&lt;g;++h)c.push(d3.interpolate(a[h],b[h]));for(;h&lt;e;++h)d[h]=a[h];for(;h&lt;f;++h)d[h]=b[h];return function(a){for(h=0;h&lt;g;++h)d[h]=c[h](a);return d}},d3.interpolateObject=function(a,b){var c={},d={},e;for(e in a)e in b?c[e]=Q(e)(a[e],b[e]):d[e]=a[e];for(e in b)e in a||(d[e]=b[e]);return function(a){for(e in c)d[e]=c[e](a);return d}};var P=/[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?/g;d3.interpolators=[d3.interpolateObject,function(a,b){return b instanceof Array&amp;&amp;d3.interpolateArray(a,b)},function(a,b){return(typeof a==&quot;string&quot;||typeof b==&quot;string&quot;)&amp;&amp;d3.interpolateString(a+&quot;&quot;,b+&quot;&quot;)},function(a,b){return(typeof b==&quot;string&quot;?b in Z||/^(#|rgb\(|hsl\()/.test(b):b instanceof U||b instanceof ba)&amp;&amp;d3.interpolateRgb(a,b)},function(a,b){return!isNaN(a=+a)&amp;&amp;!isNaN(b=+b)&amp;&amp;d3.interpolateNumber(a,b)}],d3.rgb=function(a,b,c){return arguments.length===1?a instanceof U?T(a.r,a.g,a.b):W(&quot;&quot;+a,T,bb):T(~~a,~~b,~~c)},U.prototype.brighter=function(a){a=Math.pow(.7,arguments.length?a:1);var b=this.r,c=this.g,d=this.b,e=30;return!b&amp;&amp;!c&amp;&amp;!d?T(e,e,e):(b&amp;&amp;b&lt;e&amp;&amp;(b=e),c&amp;&amp;c&lt;e&amp;&amp;(c=e),d&amp;&amp;d&lt;e&amp;&amp;(d=e),T(Math.min(255,Math.floor(b/a)),Math.min(255,Math.floor(c/a)),Math.min(255,Math.floor(d/a))))},U.prototype.darker=function(a){return a=Math.pow(.7,arguments.length?a:1),T(Math.floor(a*this.r),Math.floor(a*this.g),Math.floor(a*this.b))},U.prototype.hsl=function(){return X(this.r,this.g,this.b)},U.prototype.toString=function(){return&quot;#&quot;+V(this.r)+V(this.g)+V(this.b)};var Z={aliceblue:&quot;#f0f8ff&quot;,antiquewhite:&quot;#faebd7&quot;,aqua:&quot;#00ffff&quot;,aquamarine:&quot;#7fffd4&quot;,azure:&quot;#f0ffff&quot;,beige:&quot;#f5f5dc&quot;,bisque:&quot;#ffe4c4&quot;,black:&quot;#000000&quot;,blanchedalmond:&quot;#ffebcd&quot;,blue:&quot;#0000ff&quot;,blueviolet:&quot;#8a2be2&quot;,brown:&quot;#a52a2a&quot;,burlywood:&quot;#deb887&quot;,cadetblue:&quot;#5f9ea0&quot;,chartreuse:&quot;#7fff00&quot;,chocolate:&quot;#d2691e&quot;,coral:&quot;#ff7f50&quot;,cornflowerblue:&quot;#6495ed&quot;,cornsilk:&quot;#fff8dc&quot;,crimson:&quot;#dc143c&quot;,cyan:&quot;#00ffff&quot;,darkblue:&quot;#00008b&quot;,darkcyan:&quot;#008b8b&quot;,darkgoldenrod:&quot;#b8860b&quot;,darkgray:&quot;#a9a9a9&quot;,darkgreen:&quot;#006400&quot;,darkgrey:&quot;#a9a9a9&quot;,darkkhaki:&quot;#bdb76b&quot;,darkmagenta:&quot;#8b008b&quot;,darkolivegreen</div><div class='line' id='LC2'>:&quot;#556b2f&quot;,darkorange:&quot;#ff8c00&quot;,darkorchid:&quot;#9932cc&quot;,darkred:&quot;#8b0000&quot;,darksalmon:&quot;#e9967a&quot;,darkseagreen:&quot;#8fbc8f&quot;,darkslateblue:&quot;#483d8b&quot;,darkslategray:&quot;#2f4f4f&quot;,darkslategrey:&quot;#2f4f4f&quot;,darkturquoise:&quot;#00ced1&quot;,darkviolet:&quot;#9400d3&quot;,deeppink:&quot;#ff1493&quot;,deepskyblue:&quot;#00bfff&quot;,dimgray:&quot;#696969&quot;,dimgrey:&quot;#696969&quot;,dodgerblue:&quot;#1e90ff&quot;,firebrick:&quot;#b22222&quot;,floralwhite:&quot;#fffaf0&quot;,forestgreen:&quot;#228b22&quot;,fuchsia:&quot;#ff00ff&quot;,gainsboro:&quot;#dcdcdc&quot;,ghostwhite:&quot;#f8f8ff&quot;,gold:&quot;#ffd700&quot;,goldenrod:&quot;#daa520&quot;,gray:&quot;#808080&quot;,green:&quot;#008000&quot;,greenyellow:&quot;#adff2f&quot;,grey:&quot;#808080&quot;,honeydew:&quot;#f0fff0&quot;,hotpink:&quot;#ff69b4&quot;,indianred:&quot;#cd5c5c&quot;,indigo:&quot;#4b0082&quot;,ivory:&quot;#fffff0&quot;,khaki:&quot;#f0e68c&quot;,lavender:&quot;#e6e6fa&quot;,lavenderblush:&quot;#fff0f5&quot;,lawngreen:&quot;#7cfc00&quot;,lemonchiffon:&quot;#fffacd&quot;,lightblue:&quot;#add8e6&quot;,lightcoral:&quot;#f08080&quot;,lightcyan:&quot;#e0ffff&quot;,lightgoldenrodyellow:&quot;#fafad2&quot;,lightgray:&quot;#d3d3d3&quot;,lightgreen:&quot;#90ee90&quot;,lightgrey:&quot;#d3d3d3&quot;,lightpink:&quot;#ffb6c1&quot;,lightsalmon:&quot;#ffa07a&quot;,lightseagreen:&quot;#20b2aa&quot;,lightskyblue:&quot;#87cefa&quot;,lightslategray:&quot;#778899&quot;,lightslategrey:&quot;#778899&quot;,lightsteelblue:&quot;#b0c4de&quot;,lightyellow:&quot;#ffffe0&quot;,lime:&quot;#00ff00&quot;,limegreen:&quot;#32cd32&quot;,linen:&quot;#faf0e6&quot;,magenta:&quot;#ff00ff&quot;,maroon:&quot;#800000&quot;,mediumaquamarine:&quot;#66cdaa&quot;,mediumblue:&quot;#0000cd&quot;,mediumorchid:&quot;#ba55d3&quot;,mediumpurple:&quot;#9370db&quot;,mediumseagreen:&quot;#3cb371&quot;,mediumslateblue:&quot;#7b68ee&quot;,mediumspringgreen:&quot;#00fa9a&quot;,mediumturquoise:&quot;#48d1cc&quot;,mediumvioletred:&quot;#c71585&quot;,midnightblue:&quot;#191970&quot;,mintcream:&quot;#f5fffa&quot;,mistyrose:&quot;#ffe4e1&quot;,moccasin:&quot;#ffe4b5&quot;,navajowhite:&quot;#ffdead&quot;,navy:&quot;#000080&quot;,oldlace:&quot;#fdf5e6&quot;,olive:&quot;#808000&quot;,olivedrab:&quot;#6b8e23&quot;,orange:&quot;#ffa500&quot;,orangered:&quot;#ff4500&quot;,orchid:&quot;#da70d6&quot;,palegoldenrod:&quot;#eee8aa&quot;,palegreen:&quot;#98fb98&quot;,paleturquoise:&quot;#afeeee&quot;,palevioletred:&quot;#db7093&quot;,papayawhip:&quot;#ffefd5&quot;,peachpuff:&quot;#ffdab9&quot;,peru:&quot;#cd853f&quot;,pink:&quot;#ffc0cb&quot;,plum:&quot;#dda0dd&quot;,powderblue:&quot;#b0e0e6&quot;,purple:&quot;#800080&quot;,red:&quot;#ff0000&quot;,rosybrown:&quot;#bc8f8f&quot;,royalblue:&quot;#4169e1&quot;,saddlebrown:&quot;#8b4513&quot;,salmon:&quot;#fa8072&quot;,sandybrown:&quot;#f4a460&quot;,seagreen:&quot;#2e8b57&quot;,seashell:&quot;#fff5ee&quot;,sienna:&quot;#a0522d&quot;,silver:&quot;#c0c0c0&quot;,skyblue:&quot;#87ceeb&quot;,slateblue:&quot;#6a5acd&quot;,slategray:&quot;#708090&quot;,slategrey:&quot;#708090&quot;,snow:&quot;#fffafa&quot;,springgreen:&quot;#00ff7f&quot;,steelblue:&quot;#4682b4&quot;,tan:&quot;#d2b48c&quot;,teal:&quot;#008080&quot;,thistle:&quot;#d8bfd8&quot;,tomato:&quot;#ff6347&quot;,turquoise:&quot;#40e0d0&quot;,violet:&quot;#ee82ee&quot;,wheat:&quot;#f5deb3&quot;,white:&quot;#ffffff&quot;,whitesmoke:&quot;#f5f5f5&quot;,yellow:&quot;#ffff00&quot;,yellowgreen:&quot;#9acd32&quot;};for(var $ in Z)Z[$]=W(Z[$],T,bb);d3.hsl=function(a,b,c){return arguments.length===1?a instanceof ba?_(a.h,a.s,a.l):W(&quot;&quot;+a,X,_):_(+a,+b,+c)},ba.prototype.brighter=function(a){return a=Math.pow(.7,arguments.length?a:1),_(this.h,this.s,this.l/a)},ba.prototype.darker=function(a){return a=Math.pow(.7,arguments.length?a:1),_(this.h,this.s,a*this.l)},ba.prototype.rgb=function(){return bb(this.h,this.s,this.l)},ba.prototype.toString=function(){return this.rgb().toString()};var bd=function(a,b){return b.querySelector(a)},be=function(a,b){return b.querySelectorAll(a)},bf=document.documentElement,bg=bf.matchesSelector||bf.webkitMatchesSelector||bf.mozMatchesSelector||bf.msMatchesSelector||bf.oMatchesSelector,bh=function(a,b){return bg.call(a,b)};typeof Sizzle==&quot;function&quot;&amp;&amp;(bd=function(a,b){return Sizzle(a,b)[0]},be=function(a,b){return Sizzle.uniqueSort(Sizzle(a,b))},bh=Sizzle.matchesSelector);var bi=[];d3.selection=function(){return bq},d3.selection.prototype=bi,bi.select=function(a){var b=[],c,d,e,f;typeof a!=&quot;function&quot;&amp;&amp;(a=bj(a));for(var g=-1,h=this.length;++g&lt;h;){b.push(c=[]),c.parentNode=(e=this[g]).parentNode;for(var i=-1,j=e.length;++i&lt;j;)(f=e[i])?(c.push(d=a.call(f,f.__data__,i)),d&amp;&amp;&quot;__data__&quot;in f&amp;&amp;(d.__data__=f.__data__)):c.push(null)}return bc(b)},bi.selectAll=function(a){var b=[],c,e;typeof a!=&quot;function&quot;&amp;&amp;(a=bk(a));for(var f=-1,g=this.length;++f&lt;g;)for(var h=this[f],i=-1,j=h.length;++i&lt;j;)if(e=h[i])b.push(c=d(a.call(e,e.__data__,i))),c.parentNode=e;return bc(b)},bi.attr=function(a,b){function d(){this.removeAttribute(a)}function e(){this.removeAttributeNS(a.space,a.local)}function f(){this.setAttribute(a,b)}function g(){this.setAttributeNS(a.space,a.local,b)}function h(){var c=b.apply(this,arguments);c==null?this.removeAttribute(a):this.setAttribute(a,c)}function i(){var c=b.apply(this,arguments);c==null?this.removeAttributeNS(a.space,a.local):this.setAttributeNS(a.space,a.local,c)}a=d3.ns.qualify(a);if(arguments.length&lt;2){var c=this.node();return a.local?c.getAttributeNS(a.space,a.local):c.getAttribute(a)}return this.each(b==null?a.local?e:d:typeof b==&quot;function&quot;?a.local?i:h:a.local?g:f)},bi.classed=function(a,b){var c=a.split(bl),d=c.length,e=-1;if(arguments.length&gt;1){while(++e&lt;d)bm.call(this,c[e],b);return this}while(++e&lt;d)if(!bm.call(this,c[e]))return!1;return!0};var bl=/\s+/g;bi.style=function(a,b,c){function d(){this.style.removeProperty(a)}function e(){this.style.setProperty(a,b,c)}function f(){var d=b.apply(this,arguments);d==null?this.style.removeProperty(a):this.style.setProperty(a,d,c)}return arguments.length&lt;3&amp;&amp;(c=&quot;&quot;),arguments.length&lt;2?window.getComputedStyle(this.node(),null).getPropertyValue(a):this.each(b==null?d:typeof b==&quot;function&quot;?f:e)},bi.property=function(a,b){function c(){delete this[a]}function d(){this[a]=b}function e(){var c=b.apply(this,arguments);c==null?delete this[a]:this[a]=c}return arguments.length&lt;2?this.node()[a]:this.each(b==null?c:typeof b==&quot;function&quot;?e:d)},bi.text=function(a){return arguments.length&lt;1?this.node().textContent:this.each(typeof a==&quot;function&quot;?function(){var b=a.apply(this,arguments);this.textContent=b==null?&quot;&quot;:b}:a==null?function(){this.textContent=&quot;&quot;}:function(){this.textContent=a})},bi.html=function(a){return arguments.length&lt;1?this.node().innerHTML:this.each(typeof a==&quot;function&quot;?function(){var b=a.apply(this,arguments);this.innerHTML=b==null?&quot;&quot;:b}:a==null?function(){this.innerHTML=&quot;&quot;}:function(){this.innerHTML=a})},bi.append=function(a){function b(){return this.appendChild(document.createElementNS(this.namespaceURI,a))}function c(){return this.appendChild(document.createElementNS(a.space,a.local))}return a=d3.ns.qualify(a),this.select(a.local?c:b)},bi.insert=function(a,b){function c(){return this.insertBefore(document.createElementNS(this.namespaceURI,a),bd(b,this))}function d(){return this.insertBefore(document.createElementNS(a.space,a.local),bd(b,this))}return a=d3.ns.qualify(a),this.select(a.local?d:c)},bi.remove=function(){return this.each(function(){var a=this.parentNode;a&amp;&amp;a.removeChild(this)})},bi.data=function(a,b){function f(a,f){var g,h=a.length,i=f.length,j=Math.min(h,i),k=Math.max(h,i),l=[],m=[],n=[],o,p;if(b){var q={},r=[],s,t=f.length;for(g=-1;++g&lt;h;)s=b.call(o=a[g],o.__data__,g),s in q?n[t++]=o:q[s]=o,r.push(s);for(g=-1;++g&lt;i;)o=q[s=b.call(f,p=f[g],g)],o?(o.__data__=p,l[g]=o,m[g]=n[g]=null):(m[g]=bn(p),l[g]=n[g]=null),delete q[s];for(g=-1;++g&lt;h;)r[g]in q&amp;&amp;(n[g]=a[g])}else{for(g=-1;++g&lt;j;)o=a[g],p=f[g],o?(o.__data__=p,l[g]=o,m[g]=n[g]=null):(m[g]=bn(p),l[g]=n[g]=null);for(;g&lt;i;++g)m[g]=bn(f[g]),l[g]=n[g]=null;for(;g&lt;k;++g)n[g]=a[g],m[g]=l[g]=null}m.update=l,m.parentNode=l.parentNode=n.parentNode=a.parentNode,c.push(m),d.push(l),e.push(n)}var c=[],d=[],e=[],g=-1,h=this.length,i;if(typeof a==&quot;function&quot;)while(++g&lt;h)f(i=this[g],a.call(i,i.parentNode.__data__,g));else while(++g&lt;h)f(i=this[g],a);var j=bc(d);return j.enter=function(){return br(c)},j.exit=function(){return bc(e)},j},bi.filter=function(a){var b=[],c,d,e;typeof a!=&quot;function&quot;&amp;&amp;(a=bo(a));for(var f=0,g=this.length;f&lt;g;f++){b.push(c=[]),c.parentNode=(d=this[f]).parentNode;for(var h=0,i=d.length;h&lt;i;h++)(e=d[h])&amp;&amp;a.call(e,e.__data__,h)&amp;&amp;c.push(e)}return bc(b)},bi.map=function(a){return this.each(function(){this.__data__=a.apply(this,arguments)})},bi.order=function(){for(var a=-1,b=this.length;++a&lt;b;)for(var c=this[a],d=c.length-1,e=c[d],f;--d&gt;=0;)if(f=c[d])e&amp;&amp;e!==f.nextSibling&amp;&amp;e.parentNode.insertBefore(f,e),e=f;return this},bi.sort=function(a){a=bp.apply(this,arguments);for(var b=-1,c=this.length;++b&lt;c;)this[b].sort(a);return this.order()},bi.on=function(a,b,c){arguments.length&lt;3&amp;&amp;(c=!1);var d=&quot;__on&quot;+a,e=a.indexOf(&quot;.&quot;);return e&gt;0&amp;&amp;(a=a.substring(0,e)),arguments.length&lt;2?(e=this.node()[d])&amp;&amp;e._:this.each(function(e,f){function h(a){var c=d3.event;d3.event=a;try{b.call(g,g.__data__,f)}finally{d3.event=c}}var g=this;g[d]&amp;&amp;g.removeEventListener(a,g[d],c),b&amp;&amp;g.addEventListener(a,g[d]=h,c),h._=b})},bi.each=function(a){for(var b=-1,c=this.length;++b&lt;c;)for(var d=this[b],e=-1,f=d.length;++e&lt;f;){var g=d[e];g&amp;&amp;a.call(g,g.__data__,e,b)}return this},bi.call=function(a){return a.apply(this,(arguments[0]=this,arguments)),this},bi.empty=function(){return!this.node()},bi.node=function(a){for(var b=0,c=this.length;b&lt;c;b++)for(var d=this[b],e=0,f=d.length;e&lt;f;e++){var g=d[e];if(g)return g}return null},bi.transition=function(){var a=[],b,c;for(var d=-1,e=this.length;++d&lt;e;){a.push(b=[]);for(var f=this[d],g=-1,h=f.length;++g&lt;h;)b.push((c=f[g])?{node:c,delay:0,duration:250}:null)}return bt(a,bz||++by,Date.now())};var bq=bc([[document]]);bq[0].parentNode=bf,d3.select=function(a){return typeof a==&quot;string&quot;?bq.select(a):bc([[a]])},d3.selectAll=function(a){return typeof a==&quot;string&quot;?bq.selectAll(a):bc([d(a)])};var bs=[];bs.append=bi.append,bs.insert=bi.insert,bs.empty=bi.empty,bs.node=bi.node,bs.select=function(a){var b=[],c,d,e,f,g;for(var h=-1,i=this.length;++h&lt;i;){e=(f=this[h]).update,b.push(c=[]),c.parentNode=f.parentNode;for(var j=-1,k=f.length;++j&lt;k;)(g=f[j])?(c.push(e[j]=d=a.call(f.parentNode,g.__data__,j)),d.__data__=g.__data__):c.push(null)}return bc(b)};var bu={},bx=[],by=0,bz=0,bA=d3.ease(&quot;cubic-in-out&quot;);bx.call=bi.call,d3.transition=function(){return bq.transition()},d3.transition.prototype=bx,bx.select=function(a){var b=[],c,d,e;typeof a!=&quot;function&quot;&amp;&amp;(a=bj(a));for(var f=-1,g=this.length;++f&lt;g;){b.push(c=[]);for(var h=this[f],i=-1,j=h.length;++i&lt;j;)(e=h[i])&amp;&amp;(d=a.call(e.node,e.node.__data__,i))?(&quot;__data__&quot;in e.node&amp;&amp;(d.__data__=e.node.__data__),c.push({node:d,delay:e.delay,duration:e.duration})):c.push(null)}return bt(b,this.id,this.time).ease(this.ease())},bx.selectAll=function(a){var b=[],c,d,e;typeof a!=&quot;function&quot;&amp;&amp;(a=bk(a));for(var f=-1,g=this.length;++f&lt;g;)for(var h=this[f],i=-1,j=h.length;++i&lt;j;)if(e=h[i]){d=a.call(e.node,e.node.__data__,i),b.push(c=[]);for(var k=-1,l=d.length;++k&lt;l;)c.push({node:d[k],delay:e.delay,duration:e.duration})}return bt(b,this.id,this.time).ease(this.ease())},bx.attr=function(a,b){return this.attrTween(a,bw(a,b))},bx.attrTween=function(a,b){function d(a,d){var e=b.call(this,a,d,this.getAttribute(c));return e===bu?(this.removeAttribute(c),null):e&amp;&amp;function(a){this.setAttribute(c,e(a))}}function e(a,d){var e=b.call(this,a,d,this.getAttributeNS(c.space,c.local));return e===bu?(this.removeAttributeNS(c.space,c.local),null):e&amp;&amp;function(a){this.setAttributeNS(c.space,c.local,e(a))}}var c=d3.ns.qualify(a);return this.tween(&quot;attr.&quot;+a,c.local?e:d)},bx.style=function(a,b,c){return arguments.length&lt;3&amp;&amp;(c=&quot;&quot;),this.styleTween(a,bw(a,b),c)},bx.styleTween=function(a,b,c){return arguments.length&lt;3&amp;&amp;(c=&quot;&quot;),this.tween(&quot;style.&quot;+a,function(d,e){var f=b.call(this,d,e,window.getComputedStyle(this,null).getPropertyValue(a));return f===bu?(this.style.removeProperty(a),null):f&amp;&amp;function(b){this.style.setProperty(a,f(b),c)}})},bx.text=function(a){return this.tween(&quot;text&quot;,function(b,c){this.textContent=typeof a==&quot;function&quot;?a.call(this,b,c):a})},bx.remove=function(){return this.each(&quot;end.transition&quot;,function(){var a;!this.__transition__&amp;&amp;(a=this.parentNode)&amp;&amp;a.removeChild(this)})},bx.delay=function(a){var b=this;return b.each(typeof a==&quot;function&quot;?function(c,d,e){b[e][d].delay=+a.apply(this,arguments)}:(a=+a,function(c,d,e){b[e][d].delay=a}))},bx.duration=function(a){var b=this;return b.each(typeof a==&quot;function&quot;?function(c,d,e){b[e][d].duration=+a.apply(this,arguments)}:(a=+a,function(c,d,e){b[e][d].duration=a}))},bx.transition=function(){return this.select(i)};var bC=null,bD,bE;d3.timer=function(a,b,c){var d=!1,e,f=bC;if(arguments.length&lt;3){if(arguments.length&lt;2)b=0;else if(!isFinite(b))return;c=Date.now()}while(f){if(f.callback===a){f.then=c,f.delay=b,d=!0;break}e=f,f=f.next}d||(bC={callback:a,then:c,delay:b,next:bC}),bD||(bE=clearTimeout(bE),bD=1,bH(bF))},d3.timer.flush=function(){var a,b=Date.now(),c=bC;while(c)a=b-c.then,c.delay||(c.flush=c.callback(a)),c=c.next;bG()};var bH=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){setTimeout(a,17)};d3.transform=function(a){var b=document.createElementNS(d3.ns.prefix.svg,&quot;g&quot;),c={a:1,b:0,c:0,d:1,e:0,f:0};return(d3.transform=function(a){b.setAttribute(&quot;transform&quot;,a);var d=b.transform.baseVal.consolidate();return new bI(d?d.matrix:c)})(a)},bI.prototype.toString=function(){return&quot;translate(&quot;+this.translate+&quot;)rotate(&quot;+this.rotate+&quot;)skewX(&quot;+this.skew+&quot;)scale(&quot;+this.scale+&quot;)&quot;};var bM=180/Math.PI;d3.scale={},d3.scale.linear=function(){return bS([0,1],[0,1],d3.interpolate,!1)},d3.scale.log=function(){return b$(d3.scale.linear(),ca)};var b_=d3.format(&quot;.0e&quot;);ca.pow=function(a){return Math.pow(10,a)},cb.pow=function(a){return-Math.pow(10,-a)},d3.scale.pow=function(){return cc(d3.scale.linear(),1)},d3.scale.sqrt=function(){return d3.scale.pow().exponent(.5)},d3.scale.ordinal=function(){return ce([],{t:&quot;range&quot;,x:[]})},d3.scale.category10=function(){return d3.scale.ordinal().range(cf)},d3.scale.category20=function(){return d3.scale.ordinal().range(cg)},d3.scale.category20b=function(){return d3.scale.ordinal().range(ch)},d3.scale.category20c=function(){return d3.scale.ordinal().range(ci)};var cf=[&quot;#1f77b4&quot;,&quot;#ff7f0e&quot;,&quot;#2ca02c&quot;,&quot;#d62728&quot;,&quot;#9467bd&quot;,&quot;#8c564b&quot;,&quot;#e377c2&quot;,&quot;#7f7f7f&quot;,&quot;#bcbd22&quot;,&quot;#17becf&quot;],cg=[&quot;#1f77b4&quot;,&quot;#aec7e8&quot;,&quot;#ff7f0e&quot;,&quot;#ffbb78&quot;,&quot;#2ca02c&quot;,&quot;#98df8a&quot;,&quot;#d62728&quot;,&quot;#ff9896&quot;,&quot;#9467bd&quot;,&quot;#c5b0d5&quot;,&quot;#8c564b&quot;,&quot;#c49c94&quot;,&quot;#e377c2&quot;,&quot;#f7b6d2&quot;,&quot;#7f7f7f&quot;,&quot;#c7c7c7&quot;,&quot;#bcbd22&quot;,&quot;#dbdb8d&quot;,&quot;#17becf&quot;,&quot;#9edae5&quot;],ch=[&quot;#393b79&quot;,&quot;#5254a3&quot;,&quot;#6b6ecf&quot;,&quot;#9c9ede&quot;,&quot;#637939&quot;,&quot;#8ca252&quot;,&quot;#b5cf6b&quot;,&quot;#cedb9c&quot;,&quot;#8c6d31&quot;,&quot;#bd9e39&quot;,&quot;#e7ba52&quot;,&quot;#e7cb94&quot;,&quot;#843c39&quot;,&quot;#ad494a&quot;,&quot;#d6616b&quot;,&quot;#e7969c&quot;,&quot;#7b4173&quot;,&quot;#a55194&quot;,&quot;#ce6dbd&quot;,&quot;#de9ed6&quot;],ci=[&quot;#3182bd&quot;,&quot;#6baed6&quot;,&quot;#9ecae1&quot;,&quot;#c6dbef&quot;,&quot;#e6550d&quot;,&quot;#fd8d3c&quot;,&quot;#fdae6b&quot;,&quot;#fdd0a2&quot;,&quot;#31a354&quot;,&quot;#74c476&quot;,&quot;#a1d99b&quot;,&quot;#c7e9c0&quot;,&quot;#756bb1&quot;,&quot;#9e9ac8&quot;,&quot;#bcbddc&quot;,&quot;#dadaeb&quot;,&quot;#636363&quot;,&quot;#969696&quot;,&quot;#bdbdbd&quot;,&quot;#d9d9d9&quot;];d3.scale.quantile=function(){return cj([],[])},d3.scale.quantize=function(){return ck(0,1,[0,1])},d3.svg={},d3.svg.arc=function(){function e(){var e=a.apply(this,arguments),f=b.apply(this,arguments),g=c.apply(this,arguments)+cl,h=d.apply(this,arguments)+cl,i=(h&lt;g&amp;&amp;(i=g,g=h,h=i),h-g),j=i&lt;Math.PI?&quot;0&quot;:&quot;1&quot;,k=Math.cos(g),l=Math.sin(g),m=Math.cos(h),n=Math.sin(h);return i&gt;=cm?e?&quot;M0,&quot;+f+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 1,1 0,&quot;+ -f+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 1,1 0,&quot;+f+&quot;M0,&quot;+e+&quot;A&quot;+e+&quot;,&quot;+e+&quot; 0 1,0 0,&quot;+ -e+&quot;A&quot;+e+&quot;,&quot;+e+&quot; 0 1,0 0,&quot;+e+&quot;Z&quot;:&quot;M0,&quot;+f+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 1,1 0,&quot;+ -f+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 1,1 0,&quot;+f+&quot;Z&quot;:e?&quot;M&quot;+f*k+&quot;,&quot;+f*l+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 &quot;+j+&quot;,1 &quot;+f*m+&quot;,&quot;+f*n+&quot;L&quot;+e*m+&quot;,&quot;+e*n+&quot;A&quot;+e+&quot;,&quot;+e+&quot; 0 &quot;+j+&quot;,0 &quot;+e*k+&quot;,&quot;+e*l+&quot;Z&quot;:&quot;M&quot;+f*k+&quot;,&quot;+f*l+&quot;A&quot;+f+&quot;,&quot;+f+&quot; 0 &quot;+j+&quot;,1 &quot;+f*m+&quot;,&quot;+f*n+&quot;L0,0&quot;+&quot;Z&quot;}var a=cn,b=co,c=cp,d=cq;return e.innerRadius=function(b){return arguments.length?(a=d3.functor(b),e):a},e.outerRadius=function(a){return arguments.length?(b=d3.functor(a),e):b},e.startAngle=function(a){return arguments.length?(c=d3.functor(a),e):c},e.endAngle=function(a){return arguments.length?(d=d3.functor(a),e):d},e.centroid=function(){var e=(a.apply(this,arguments)+b.apply(this,arguments))/2,f=(c.apply(this,arguments)+d.apply(this,arguments))/2+cl;return[Math.cos(f)*e,Math.sin(f)*e]},e};var cl=-Math.PI/2,cm=2*Math.PI-1e-6;d3.svg.line=function(){return cr(Object)};var cv={linear:cw,&quot;step-before&quot;:cx,&quot;step-after&quot;:cy,basis:cE,&quot;basis-open&quot;:cF,&quot;basis-closed&quot;:cG,bundle:cH,cardinal:cB,&quot;cardinal-open&quot;:cz,&quot;cardinal-closed&quot;:cA,monotone:cQ},cJ=[0,2/3,1/3,0],cK=[0,1/3,2/3,0],cL=[0,1/6,2/3,1/6];d3.svg.line.radial=function(){var a=cr(cR);return a.radius=a.x,delete a.x,a.angle=a.y,delete a.y,a},cx.reverse=cy,cy.reverse=cx,d3.svg.area=function(){return cS(Object)},d3.svg.area.radial=function(){var a=cS(cR);return a.radius=a.x,delete a.x,a.innerRadius=a.x0,delete a.x0,a.outerRadius=a.x1,delete a.x1,a.angle=a.y,delete a.y,a.startAngle=a.y0,delete a.y0,a.endAngle=a.y1,delete a.y1,a},d3.svg.chord=function(){function f(c,d){var e=g(this,a,c,d),f=g(this,b,c,d);return&quot;M&quot;+e.p0+i(e.r,e.p1,e.a1-e.a0)+(h(e,f)?j(e.r,e.p1,e.r,e.p0):j(e.r,e.p1,f.r,f.p0)+i(f.r,f.p1,f.a1-f.a0)+j(f.r,f.p1,e.r,e.p0))+&quot;Z&quot;}function g(a,b,f,g){var h=b.call(a,f,g),i=c.call(a,h,g),j=d.call(a,h,g)+cl,k=e.call(a,h,g)+cl;return{r:i,a0:j,a1:k,p0:[i*Math.cos(j),i*Math.sin(j)],p1:[i*Math.cos(k),i*Math.sin(k)]}}function h(a,b){return a.a0==b.a0&amp;&amp;a.a1==b.a1}function i(a,b,c){return&quot;A&quot;+a+&quot;,&quot;+a+&quot; 0 &quot;+ +(c&gt;Math.PI)+&quot;,1 &quot;+b}function j(a,b,c,d){return&quot;Q 0,0 &quot;+d}var a=cV,b=cW,c=cX,d=cp,e=cq;return f.radius=function(a){return arguments.length?(c=d3.functor(a),f):c},f.source=function(b){return arguments.length?(a=d3.functor(b),f):a},f.target=function(a){return arguments.length?(b=d3.functor(a),f):b},f.startAngle=function(a){return arguments.length?(d=d3.functor(a),f):d},f.endAngle=function(a){return arguments.length?(e=d3.functor(a),f):e},f},d3.svg.diagonal=function(){function d(d,e){var f=a.call(this,d,e),g=b.call(this,d,e),h=(f.y+g.y)/2,i=[f,{x:f.x,y:h},{x:g.x,y:h},g];return i=i.map(c),&quot;M&quot;+i[0]+&quot;C&quot;+i[1]+&quot; &quot;+i[2]+&quot; &quot;+i[3]}var a=cV,b=cW,c=c$;return d.source=function(b){return arguments.length?(a=d3.functor(b),d):a},d.target=function(a){return arguments.length?(b=d3.functor(a),d):b},d.projection=function(a){return arguments.length?(c=a,d):c},d},d3.svg.diagonal.radial=function(){var a=d3.svg.diagonal(),b=c$,c=a.projection;return a.projection=function(a){return arguments.length?c(c_(b=a)):b},a},d3.svg.mouse=function(a){return db(a,d3.event)};var da=/WebKit/.test(navigator.userAgent)?-1:0;d3.svg.touches=function(a,b){return arguments.length&lt;2&amp;&amp;(b=d3.event.touches),b?d(b).map(function(b){var c=db(a,b);return c.identifier=b.identifier,c}):[]},d3.svg.symbol=function(){function c(c,d){return(de[a.call(this,c,d)]||de.circle)(b.call(this,c,d))}var a=dd,b=dc;return c.type=function(b){return arguments.length?(a=d3.functor(b),c):a},c.size=function(a){return arguments.length?(b=d3.functor(a),c):b},c};var de={circle:function(a){var b=Math.sqrt(a/Math.PI);return&quot;M0,&quot;+b+&quot;A&quot;+b+&quot;,&quot;+b+&quot; 0 1,1 0,&quot;+ -b+&quot;A&quot;+b+&quot;,&quot;+b+&quot; 0 1,1 0,&quot;+b+&quot;Z&quot;},cross:function(a){var b=Math.sqrt(a/5)/2;return&quot;M&quot;+ -3*b+&quot;,&quot;+ -b+&quot;H&quot;+ -b+&quot;V&quot;+ -3*b+&quot;H&quot;+b+&quot;V&quot;+ -b+&quot;H&quot;+3*b+&quot;V&quot;+b+&quot;H&quot;+b+&quot;V&quot;+3*b+&quot;H&quot;+ -b+&quot;V&quot;+b+&quot;H&quot;+ -3*b+&quot;Z&quot;},diamond:function(a){var b=Math.sqrt(a/(2*dg)),c=b*dg;return&quot;M0,&quot;+ -b+&quot;L&quot;+c+&quot;,0&quot;+&quot; 0,&quot;+b+&quot; &quot;+ -c+&quot;,0&quot;+&quot;Z&quot;},square:function(a){var b=Math.sqrt(a)/2;return&quot;M&quot;+ -b+&quot;,&quot;+ -b+&quot;L&quot;+b+&quot;,&quot;+ -b+&quot; &quot;+b+&quot;,&quot;+b+&quot; &quot;+ -b+&quot;,&quot;+b+&quot;Z&quot;},&quot;triangle-down&quot;:function(a){var b=Math.sqrt(a/df),c=b*df/2;return&quot;M0,&quot;+c+&quot;L&quot;+b+&quot;,&quot;+ -c+&quot; &quot;+ -b+&quot;,&quot;+ -c+&quot;Z&quot;},&quot;triangle-up&quot;:function(a){var b=Math.sqrt(a/df),c=b*df/2;return&quot;M0,&quot;+ -c+&quot;L&quot;+b+&quot;,&quot;+c+&quot; &quot;+ -b+&quot;,&quot;+c+&quot;Z&quot;}};d3.svg.symbolTypes=d3.keys(de);var df=Math.sqrt(3),dg=Math.tan(30*Math.PI/180);d3.svg.axis=function(){function j(j){j.each(function(k,l,m){var n=d3.select(this),o=j.delay?function(a){var b=bz;try{return bz=j.id,a.transition().delay(j[m][l].delay).duration(j[m][l].duration).ease(j.ease())}finally{bz=b}}:Object,p=a.ticks?a.ticks.apply(a,g):a.domain(),q=h==null?a.tickFormat?a.tickFormat.apply(a,g):String:h,r=dj(a,p,i),s=n.selectAll(&quot;.minor&quot;).data(r,String),t=s.enter().insert(&quot;line&quot;,&quot;g&quot;).attr(&quot;class&quot;,&quot;tick minor&quot;).style(&quot;opacity&quot;,1e-6),u=o(s.exit()).style(&quot;opacity&quot;,1e-6).remove(),v=o(s).style(&quot;opacity&quot;,1),w=n.selectAll(&quot;g&quot;).data(p,String),x=w.enter().insert(&quot;g&quot;,&quot;path&quot;).style(&quot;opacity&quot;,1e-6),y=o(w.exit()).style(&quot;opacity&quot;,1e-6).remove(),z=o(w).style(&quot;opacity&quot;,1),A,B=bP(a),C=n.selectAll(&quot;.domain&quot;).data([0]),D=C.enter().append(&quot;path&quot;).attr(&quot;class&quot;,&quot;domain&quot;),E=o(C),F=a.copy(),G=this.__chart__||F;this.__chart__=F,x.append(&quot;line&quot;).attr(&quot;class&quot;,&quot;tick&quot;),x.append(&quot;text&quot;),z.select(&quot;text&quot;).text(q);switch(b){case&quot;bottom&quot;:A=dh,t.attr(&quot;y2&quot;,d),v.attr(&quot;x2&quot;,0).attr(&quot;y2&quot;,d),x.select(&quot;line&quot;).attr(&quot;y2&quot;,c),x.select(&quot;text&quot;).attr(&quot;y&quot;,Math.max(c,0)+f),z.select(&quot;line&quot;).attr(&quot;x2&quot;,0).attr(&quot;y2&quot;,c),z.select(&quot;text&quot;).attr(&quot;x&quot;,0).attr(&quot;y&quot;,Math.max(c,0)+f).attr(&quot;dy&quot;,&quot;.71em&quot;).attr(&quot;text-anchor&quot;,&quot;middle&quot;),E.attr(&quot;d&quot;,&quot;M&quot;+B[0]+&quot;,&quot;+e+&quot;V0H&quot;+B[1]+&quot;V&quot;+e);break;case&quot;top&quot;:A=dh,t.attr(&quot;y2&quot;,-d),v.attr(&quot;x2&quot;,0).attr(&quot;y2&quot;,-d),x.select(&quot;line&quot;).attr(&quot;y2&quot;,-c),x.select(&quot;text&quot;).attr(&quot;y&quot;,-(Math.max(c,0)+f)),z.select(&quot;line&quot;).attr(&quot;x2&quot;,0).attr(&quot;y2&quot;,-c),z.select(&quot;text&quot;).attr(&quot;x&quot;,0).attr(&quot;y&quot;,-(Math.max(c,0)+f)).attr(&quot;dy&quot;,&quot;0em&quot;).attr(&quot;text-anchor&quot;,&quot;middle&quot;),E.attr(&quot;d&quot;,&quot;M&quot;+B[0]+&quot;,&quot;+ -e+&quot;V0H&quot;+B[1]+&quot;V&quot;+ -e);break;case&quot;left&quot;:A=di,t.attr(&quot;x2&quot;,-d),v.attr(&quot;x2&quot;,-d).attr(&quot;y2&quot;,0),x.select(&quot;line&quot;).attr(&quot;x2&quot;,-c),x.select(&quot;text&quot;).attr(&quot;x&quot;,-(Math.max(c,0)+f)),z.select(&quot;line&quot;).attr(&quot;x2&quot;,-c).attr(&quot;y2&quot;,0),z.select(&quot;text&quot;).attr(&quot;x&quot;,-(Math.max(c,0)+f)).attr(&quot;y&quot;,0).attr(&quot;dy&quot;,&quot;.32em&quot;).attr(&quot;text-anchor&quot;,&quot;end&quot;),E.attr(&quot;d&quot;,&quot;M&quot;+ -e+&quot;,&quot;+B[0]+&quot;H0V&quot;+B[1]+&quot;H&quot;+ -e);break;case&quot;right&quot;:A=di,t.attr(&quot;x2&quot;,d),v.attr(&quot;x2&quot;,d).attr(&quot;y2&quot;,0),x.select(&quot;line&quot;).attr(&quot;x2&quot;,c),x.select(&quot;text&quot;).attr(&quot;x&quot;,Math.max(c,0)+f),z.select(&quot;line&quot;).attr(&quot;x2&quot;,c).attr(&quot;y2&quot;,0),z.select(&quot;text&quot;).attr(&quot;x&quot;,Math.max(c,0)+f).attr(&quot;y&quot;,0).attr(&quot;dy&quot;,&quot;.32em&quot;).attr(&quot;text-anchor&quot;,&quot;start&quot;),E.attr(&quot;d&quot;,&quot;M&quot;+e+&quot;,&quot;+B[0]+&quot;H0V&quot;+B[1]+&quot;H&quot;+e)}if(a.ticks)x.call(A,G),z.call(A,F),y.call(A,F),t.call(A,G),v.call(A,F),u.call(A,F);else{var H=F.rangeBand()/2,I=function(a){return F(a)+H};x.call(A,I),z.call(A,I)}})}var a=d3.scale.linear(),b=&quot;bottom&quot;,c=6,d=6,e=6,f=3,g=[10],h,i=0;return j.scale=function(b){return arguments.length?(a=b,j):a},j.orient=function(a){return arguments.length?(b=a,j):b},j.ticks=function(){return arguments.length?(g=arguments,j):g},j.tickFormat=function(a){return arguments.length?(h=a,j):h},j.tickSize=function(a,b,f){if(!arguments.length)return c;var g=arguments.length-1;return c=+a,d=g&gt;1?+b:c,e=g&gt;0?+arguments[g]:c,j},j.tickPadding=function(a){return arguments.length?(f=+a,j):f},j.tickSubdivide=function(a){return arguments.length?(i=+a,j):i},j},d3.svg.brush=function(){function e(a){var g=b&amp;&amp;c?[&quot;n&quot;,&quot;e&quot;,&quot;s&quot;,&quot;w&quot;,&quot;nw&quot;,&quot;ne&quot;,&quot;se&quot;,&quot;sw&quot;]:b?[&quot;e&quot;,&quot;w&quot;]:c?[&quot;n&quot;,&quot;s&quot;]:[];a.each(function(){var a=d3.select(this).on(&quot;mousedown.brush&quot;,f),h=a.selectAll(&quot;.background&quot;).data([0]),i=a.selectAll(&quot;.extent&quot;).data([0]),j=a.selectAll(&quot;.resize&quot;).data(g,String),k;h.enter().append(&quot;rect&quot;).attr(&quot;class&quot;,&quot;background&quot;).style(&quot;visibility&quot;,&quot;hidden&quot;).style(&quot;pointer-events&quot;,&quot;all&quot;).style(&quot;cursor&quot;,&quot;crosshair&quot;),i.enter().append(&quot;rect&quot;).attr(&quot;class&quot;,&quot;extent&quot;).style(&quot;cursor&quot;,&quot;move&quot;),j.enter().append(&quot;rect&quot;).attr(&quot;class&quot;,function(a){return&quot;resize &quot;+a}).attr(&quot;width&quot;,6).attr(&quot;height&quot;,6).style(&quot;visibility&quot;,&quot;hidden&quot;).style(&quot;cursor&quot;,function(a){return dC[a]}),j.style(&quot;pointer-events&quot;,e.empty()?&quot;none&quot;:&quot;all&quot;),j.exit().remove(),b&amp;&amp;(k=bP(b),h.attr(&quot;x&quot;,k[0]).attr(&quot;width&quot;,k[1]-k[0]),dv(a,d)),c&amp;&amp;(k=bP(c),h.attr(&quot;y&quot;,k[0]).attr(&quot;height&quot;,k[1]-k[0]),dw(a,d))})}function f(){var a=d3.select(d3.event.target);dk=e,dm=this,dq=d,du=d3.svg.mouse(dm),(dr=a.classed(&quot;extent&quot;))?(du[0]=d[0][0]-du[0],du[1]=d[0][1]-du[1]):a.classed(&quot;resize&quot;)?(ds=d3.event.target.__data__,du[0]=d[+/w$/.test(ds)][0],du[1]=d[+/^n/.test(ds)][1]):d3.event.altKey&amp;&amp;(dt=du.slice()),dn=!/^(n|s)$/.test(ds)&amp;&amp;b,dp=!/^(e|w)$/.test(ds)&amp;&amp;c,dl=g(this,arguments),dl(&quot;brushstart&quot;),dz(),O()}function g(b,c){return function(d){var f=d3.event;try{d3.event={type:d,target:e},a[d].apply(b,c)}finally{d3.event=f}}}var a=d3.dispatch(&quot;brushstart&quot;,&quot;brush&quot;,&quot;brushend&quot;),b,c,d=[[0,0],[0,0]];return e.x=function(a){return arguments.length?(b=a,e):b},e.y=function(a){return arguments.length?(c=a,e):c},e.extent=function(a){var f,g,h,i,j;return arguments.length?(b&amp;&amp;(f=a[0],g=a[1],c&amp;&amp;(f=f[0],g=g[0]),b.invert&amp;&amp;(f=b(f),g=b(g)),g&lt;f&amp;&amp;(j=f,f=g,g=j),d[0][0]=f,d[1][0]=g),c&amp;&amp;(h=a[0],i=a[1],b&amp;&amp;(h=h[1],i=i[1]),c.invert&amp;&amp;(h=c(h),i=c(i)),i&lt;h&amp;&amp;(j=h,h=i,i=j),d[0][1]=h,d[1][1]=i),e):(b&amp;&amp;(f=d[0][0],g=d[1][0],b.invert&amp;&amp;(f=b.invert(f),g=b.invert(g)),g&lt;f&amp;&amp;(j=f,f=g,g=j)),c&amp;&amp;(h=d[0][1],i=d[1][1],c.invert&amp;&amp;(h=c.invert(h),i=c.invert(i)),i&lt;h&amp;&amp;(j=h,h=i,i=j)),b&amp;&amp;c?[[f,h],[g,i]]:b?[f,g]:c&amp;&amp;[h,i])},e.clear=function(){return d[0][0]=d[0][1]=d[1][0]=d[1][1]=0,e},e.empty=function(){return b&amp;&amp;d[0][0]===d[1][0]||c&amp;&amp;d[0][1]===d[1][1]},d3.select(window).on(&quot;mousemove.brush&quot;,dz).on(&quot;mouseup.brush&quot;,dB).on(&quot;keydown.brush&quot;,dx).on(&quot;keyup.brush&quot;,dy),d3.rebind(e,a,&quot;on&quot;)};var dk,dl,dm,dn,dp,dq,dr,ds,dt,du,dC={n:&quot;ns-resize&quot;,e:&quot;ew-resize&quot;,s:&quot;ns-resize&quot;,w:&quot;ew-resize&quot;,nw:&quot;nwse-resize&quot;,ne:&quot;nesw-resize&quot;,se:&quot;nwse-resize&quot;,sw:&quot;nesw-resize&quot;};d3.behavior={},d3.behavior.drag=function(){function c(){this.on(&quot;mousedown.drag&quot;,e).on(&quot;touchstart.drag&quot;,e),d3.select(window).on(&quot;mousemove.drag&quot;,dM).on(&quot;touchmove.drag&quot;,dM).on(&quot;mouseup.drag&quot;,dN,!0).on(&quot;touchend.drag&quot;,dN,!0).on(&quot;click.drag&quot;,dO,!0)}function d(){dD=a,dE=d3.event.target,dF=this,dG=arguments,dI=dL(),b?(dH=b.apply(dF,dG),dH=[dH.x-dI[0],dH.y-dI[1]]):dH=[0,0],dJ=0}function e(){d.apply(this,arguments),dK(&quot;dragstart&quot;)}var a=d3.dispatch(&quot;drag&quot;,&quot;dragstart&quot;,&quot;dragend&quot;),b=null;return c.origin=function(a){return arguments.length?(b=a,c):b},d3.rebind(c,a,&quot;on&quot;)};var dD,dE,dF,dG,dH,dI,dJ;d3.behavior.zoom=function(){function d(){this.on(&quot;mousedown.zoom&quot;,f).on(&quot;mousewheel.zoom&quot;,g).on(&quot;DOMMouseScroll.zoom&quot;,g).on(&quot;dblclick.zoom&quot;,h).on(&quot;touchstart.zoom&quot;,i),d3.select(window).on(&quot;mousemove.zoom&quot;,ed).on(&quot;mouseup.zoom&quot;,ee).on(&quot;touchmove.zoom&quot;,ec).on(&quot;touchend.zoom&quot;,eb).on(&quot;click.zoom&quot;,ef,!0)}function e(){dU=a,dV=c,dW=b.zoom,dX=d3.event.target,dY=this,dZ=arguments}function f(){e.apply(this,arguments),dQ=d_(d3.svg.mouse(dY)),d$=0,d3.event.preventDefault(),window.focus()}function g(){e.apply(this,arguments),dR||(dR=d_(d3.svg.mouse(dY))),eg(ea()+a[2],d3.svg.mouse(dY),dR)}function h(){e.apply(this,arguments);var b=d3.svg.mouse(dY);eg(d3.event.shiftKey?Math.ceil(a[2]-1):Math.floor(a[2]+1),b,d_(b))}function i(){e.apply(this,arguments);var b=eb(),c,d=Date.now();b.length===1&amp;&amp;d-dT&lt;300&amp;&amp;eg(1+Math.floor(a[2]),c=b[0],dS[c.identifier]),dT=d}var a=[0,0,0],b=d3.dispatch(&quot;zoom&quot;),c=eh;return d.extent=function(a){return arguments.length?(c=a==null?eh:a,d):c},d3.rebind(d,b,&quot;on&quot;)};var dP,dQ,dR,dS={},dT=0,dU,dV,dW,dX,dY,dZ,d$,eh=[[-Infinity,Infinity],[-Infinity,Infinity],[-Infinity,Infinity]]})();</div></pre></div>
-          </td>
-        </tr>
-      </table>
-  </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-<div class="frame frame-loading" style="display:none;" data-tree-list-url="/mbostock/d3/tree-list/f67e89597db87f017c3d4706448ebe3ff8528853" data-blob-url-prefix="/mbostock/d3/blob/f67e89597db87f017c3d4706448ebe3ff8528853">
-  <img src="https://a248.e.akamai.net/assets.github.com/images/modules/ajax/big_spinner_336699.gif?1310104853" height="32" width="32">
-</div>
-
-      </div>
-      <div class="context-overlay"></div>
-    </div>
-
-
-    <!-- footer -->
-    <div id="footer" >
-      
-  <div class="upper_footer">
-     <div class="container clearfix">
-
-       <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
-       <![if !IE]><h4 id="blacktocat">GitHub Links</h4><![endif]>
-
-       <ul class="footer_nav">
-         <h4>GitHub</h4>
-         <li><a href="https://github.com/about">About</a></li>
-         <li><a href="https://github.com/blog">Blog</a></li>
-         <li><a href="https://github.com/features">Features</a></li>
-         <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
-         <li><a href="https://github.com/training">Training</a></li>
-         <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
-         <li><a href="http://status.github.com/">Site Status</a></li>
-       </ul>
-
-       <ul class="footer_nav">
-         <h4>Tools</h4>
-         <li><a href="http://get.gaug.es/">Gauges: Analyze web traffic</a></li>
-         <li><a href="http://speakerdeck.com">Speaker Deck: Presentations</a></li>
-         <li><a href="https://gist.github.com">Gist: Code snippets</a></li>
-         <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
-         <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
-         <li><a href="http://jobs.github.com/">Job Board</a></li>
-       </ul>
-
-       <ul class="footer_nav">
-         <h4>Extras</h4>
-         <li><a href="http://shop.github.com/">GitHub Shop</a></li>
-         <li><a href="http://octodex.github.com/">The Octodex</a></li>
-       </ul>
-
-       <ul class="footer_nav">
-         <h4>Documentation</h4>
-         <li><a href="http://help.github.com/">GitHub Help</a></li>
-         <li><a href="http://developer.github.com/">Developer API</a></li>
-         <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
-         <li><a href="http://pages.github.com/">GitHub Pages</a></li>
-       </ul>
-
-     </div><!-- /.site -->
-  </div><!-- /.upper_footer -->
-
-<div class="lower_footer">
-  <div class="container clearfix">
-    <!--[if IE]><div id="legal_ie"><![endif]-->
-    <![if !IE]><div id="legal"><![endif]>
-      <ul>
-          <li><a href="https://github.com/site/terms">Terms of Service</a></li>
-          <li><a href="https://github.com/site/privacy">Privacy</a></li>
-          <li><a href="https://github.com/security">Security</a></li>
-      </ul>
-
-      <p>&copy; 2012 <span id="_rrt" title="0.12365s from fe8.rs.github.com">GitHub</span> Inc. All rights reserved.</p>
-    </div><!-- /#legal or /#legal_ie-->
-
-      <div class="sponsor">
-        <a href="http://www.rackspace.com" class="logo">
-          <img alt="Dedicated Server" height="36" src="https://a248.e.akamai.net/assets.github.com/images/modules/footer/rackspace_logo.png?v2" width="38" />
-        </a>
-        Powered by the <a href="http://www.rackspace.com ">Dedicated
-        Servers</a> and<br/> <a href="http://www.rackspacecloud.com">Cloud
-        Computing</a> of Rackspace Hosting<span>&reg;</span>
-      </div>
-  </div><!-- /.site -->
-</div><!-- /.lower_footer -->
-
-    </div><!-- /#footer -->
-
-    
-
-<div id="keyboard_shortcuts_pane" class="instapaper_ignore readability-extra" style="display:none">
-  <h2>Keyboard Shortcuts <small><a href="#" class="js-see-all-keyboard-shortcuts">(see all)</a></small></h2>
-
-  <div class="columns threecols">
-    <div class="column first">
-      <h3>Site wide shortcuts</h3>
-      <dl class="keyboard-mappings">
-        <dt>s</dt>
-        <dd>Focus site search</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>?</dt>
-        <dd>Bring up this help dialog</dd>
-      </dl>
-    </div><!-- /.column.first -->
-
-    <div class="column middle" style='display:none'>
-      <h3>Commit list</h3>
-      <dl class="keyboard-mappings">
-        <dt>j</dt>
-        <dd>Move selection down</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>k</dt>
-        <dd>Move selection up</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>c <em>or</em> o <em>or</em> enter</dt>
-        <dd>Open commit</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>y</dt>
-        <dd>Expand URL to its canonical form</dd>
-      </dl>
-    </div><!-- /.column.first -->
-
-    <div class="column last" style='display:none'>
-      <h3>Pull request list</h3>
-      <dl class="keyboard-mappings">
-        <dt>j</dt>
-        <dd>Move selection down</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>k</dt>
-        <dd>Move selection up</dd>
-      </dl>
-      <dl class="keyboard-mappings">
-        <dt>o <em>or</em> enter</dt>
-        <dd>Open issue</dd>
-      </dl>
-    </div><!-- /.columns.last -->
-
-  </div><!-- /.columns.equacols -->
-
-  <div style='display:none'>
-    <div class="rule"></div>
-
-    <h3>Issues</h3>
-
-    <div class="columns threecols">
-      <div class="column first">
-        <dl class="keyboard-mappings">
-          <dt>j</dt>
-          <dd>Move selection down</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>k</dt>
-          <dd>Move selection up</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>x</dt>
-          <dd>Toggle selection</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>o <em>or</em> enter</dt>
-          <dd>Open issue</dd>
-        </dl>
-      </div><!-- /.column.first -->
-      <div class="column middle">
-        <dl class="keyboard-mappings">
-          <dt>I</dt>
-          <dd>Mark selection as read</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>U</dt>
-          <dd>Mark selection as unread</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>e</dt>
-          <dd>Close selection</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>y</dt>
-          <dd>Remove selection from view</dd>
-        </dl>
-      </div><!-- /.column.middle -->
-      <div class="column last">
-        <dl class="keyboard-mappings">
-          <dt>c</dt>
-          <dd>Create issue</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>l</dt>
-          <dd>Create label</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>i</dt>
-          <dd>Back to inbox</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>u</dt>
-          <dd>Back to issues</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>/</dt>
-          <dd>Focus issues search</dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-
-  <div style='display:none'>
-    <div class="rule"></div>
-
-    <h3>Issues Dashboard</h3>
-
-    <div class="columns threecols">
-      <div class="column first">
-        <dl class="keyboard-mappings">
-          <dt>j</dt>
-          <dd>Move selection down</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>k</dt>
-          <dd>Move selection up</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>o <em>or</em> enter</dt>
-          <dd>Open issue</dd>
-        </dl>
-      </div><!-- /.column.first -->
-    </div>
-  </div>
-
-  <div style='display:none'>
-    <div class="rule"></div>
-
-    <h3>Network Graph</h3>
-    <div class="columns equacols">
-      <div class="column first">
-        <dl class="keyboard-mappings">
-          <dt><span class="badmono">←</span> <em>or</em> h</dt>
-          <dd>Scroll left</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt><span class="badmono">→</span> <em>or</em> l</dt>
-          <dd>Scroll right</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt><span class="badmono">↑</span> <em>or</em> k</dt>
-          <dd>Scroll up</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt><span class="badmono">↓</span> <em>or</em> j</dt>
-          <dd>Scroll down</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>t</dt>
-          <dd>Toggle visibility of head labels</dd>
-        </dl>
-      </div><!-- /.column.first -->
-      <div class="column last">
-        <dl class="keyboard-mappings">
-          <dt>shift <span class="badmono">←</span> <em>or</em> shift h</dt>
-          <dd>Scroll all the way left</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>shift <span class="badmono">→</span> <em>or</em> shift l</dt>
-          <dd>Scroll all the way right</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>shift <span class="badmono">↑</span> <em>or</em> shift k</dt>
-          <dd>Scroll all the way up</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>shift <span class="badmono">↓</span> <em>or</em> shift j</dt>
-          <dd>Scroll all the way down</dd>
-        </dl>
-      </div><!-- /.column.last -->
-    </div>
-  </div>
-
-  <div >
-    <div class="rule"></div>
-    <div class="columns threecols">
-      <div class="column first" >
-        <h3>Source Code Browsing</h3>
-        <dl class="keyboard-mappings">
-          <dt>t</dt>
-          <dd>Activates the file finder</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>l</dt>
-          <dd>Jump to line</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>w</dt>
-          <dd>Switch branch/tag</dd>
-        </dl>
-        <dl class="keyboard-mappings">
-          <dt>y</dt>
-          <dd>Expand URL to its canonical form</dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div id="markdown-help" class="instapaper_ignore readability-extra">
-  <h2>Markdown Cheat Sheet</h2>
-
-  <div class="cheatsheet-content">
-
-  <div class="mod">
-    <div class="col">
-      <h3>Format Text</h3>
-      <p>Headers</p>
-      <pre>
-# This is an &lt;h1&gt; tag
-## This is an &lt;h2&gt; tag
-###### This is an &lt;h6&gt; tag</pre>
-     <p>Text styles</p>
-     <pre>
-*This text will be italic*
-_This will also be italic_
-**This text will be bold**
-__This will also be bold__
-
-*You **can** combine them*
-</pre>
-    </div>
-    <div class="col">
-      <h3>Lists</h3>
-      <p>Unordered</p>
-      <pre>
-* Item 1
-* Item 2
-  * Item 2a
-  * Item 2b</pre>
-     <p>Ordered</p>
-     <pre>
-1. Item 1
-2. Item 2
-3. Item 3
-   * Item 3a
-   * Item 3b</pre>
-    </div>
-    <div class="col">
-      <h3>Miscellaneous</h3>
-      <p>Images</p>
-      <pre>
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
-</pre>
-     <p>Links</p>
-     <pre>
-http://github.com - automatic!
-[GitHub](http://github.com)</pre>
-<p>Blockquotes</p>
-     <pre>
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-</pre>
-    </div>
-  </div>
-  <div class="rule"></div>
-
-  <h3>Code Examples in Markdown</h3>
-  <div class="col">
-      <p>Syntax highlighting with <a href="http://github.github.com/github-flavored-markdown/" title="GitHub Flavored Markdown" target="_blank">GFM</a></p>
-      <pre>
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
+(function(){if (!Date.now) Date.now = function() {
+  return +new Date;
+};
+try {
+  document.createElement("div").style.setProperty("opacity", 0, "");
+} catch (error) {
+  var d3_style_prototype = CSSStyleDeclaration.prototype,
+      d3_style_setProperty = d3_style_prototype.setProperty;
+  d3_style_prototype.setProperty = function(name, value, priority) {
+    d3_style_setProperty.call(this, name, value + "", priority);
+  };
+}
+d3 = {version: "2.7.4"}; // semver
+var d3_array = d3_arraySlice; // conversion for NodeLists
+
+function d3_arrayCopy(pseudoarray) {
+  var i = -1, n = pseudoarray.length, array = [];
+  while (++i < n) array.push(pseudoarray[i]);
+  return array;
+}
+
+function d3_arraySlice(pseudoarray) {
+  return Array.prototype.slice.call(pseudoarray);
+}
+
+try {
+  d3_array(document.documentElement.childNodes)[0].nodeType;
+} catch(e) {
+  d3_array = d3_arrayCopy;
+}
+
+var d3_arraySubclass = [].__proto__?
+
+// Until ECMAScript supports array subclassing, prototype injection works well.
+function(array, prototype) {
+  array.__proto__ = prototype;
+}:
+
+// And if your browser doesn't support __proto__, we'll use direct extension.
+function(array, prototype) {
+  for (var property in prototype) array[property] = prototype[property];
+};
+function d3_this() {
+  return this;
+}
+d3.functor = function(v) {
+  return typeof v === "function" ? v : function() { return v; };
+};
+// Copies a variable number of methods from source to target.
+d3.rebind = function(target, source) {
+  var i = 1, n = arguments.length, method;
+  while (++i < n) target[method = arguments[i]] = d3_rebind(target, source, source[method]);
+  return target;
+};
+
+// Method is assumed to be a standard D3 getter-setter:
+// If passed with no arguments, gets the value.
+// If passed with arguments, sets the value and returns the target.
+function d3_rebind(target, source, method) {
+  return function() {
+    var value = method.apply(source, arguments);
+    return arguments.length ? target : value;
+  };
+}
+d3.ascending = function(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+};
+d3.descending = function(a, b) {
+  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+};
+d3.mean = function(array, f) {
+  var n = array.length,
+      a,
+      m = 0,
+      i = -1,
+      j = 0;
+  if (arguments.length === 1) {
+    while (++i < n) if (d3_number(a = array[i])) m += (a - m) / ++j;
+  } else {
+    while (++i < n) if (d3_number(a = f.call(array, array[i], i))) m += (a - m) / ++j;
+  }
+  return j ? m : undefined;
+};
+d3.median = function(array, f) {
+  if (arguments.length > 1) array = array.map(f);
+  array = array.filter(d3_number);
+  return array.length ? d3.quantile(array.sort(d3.ascending), .5) : undefined;
+};
+d3.min = function(array, f) {
+  var i = -1,
+      n = array.length,
+      a,
+      b;
+  if (arguments.length === 1) {
+    while (++i < n && ((a = array[i]) == null || a != a)) a = undefined;
+    while (++i < n) if ((b = array[i]) != null && a > b) a = b;
+  } else {
+    while (++i < n && ((a = f.call(array, array[i], i)) == null || a != a)) a = undefined;
+    while (++i < n) if ((b = f.call(array, array[i], i)) != null && a > b) a = b;
+  }
+  return a;
+};
+d3.max = function(array, f) {
+  var i = -1,
+      n = array.length,
+      a,
+      b;
+  if (arguments.length === 1) {
+    while (++i < n && ((a = array[i]) == null || a != a)) a = undefined;
+    while (++i < n) if ((b = array[i]) != null && b > a) a = b;
+  } else {
+    while (++i < n && ((a = f.call(array, array[i], i)) == null || a != a)) a = undefined;
+    while (++i < n) if ((b = f.call(array, array[i], i)) != null && b > a) a = b;
+  }
+  return a;
+};
+d3.extent = function(array, f) {
+  var i = -1,
+      n = array.length,
+      a,
+      b,
+      c;
+  if (arguments.length === 1) {
+    while (++i < n && ((a = c = array[i]) == null || a != a)) a = c = undefined;
+    while (++i < n) if ((b = array[i]) != null) {
+      if (a > b) a = b;
+      if (c < b) c = b;
+    }
+  } else {
+    while (++i < n && ((a = c = f.call(array, array[i], i)) == null || a != a)) a = undefined;
+    while (++i < n) if ((b = f.call(array, array[i], i)) != null) {
+      if (a > b) a = b;
+      if (c < b) c = b;
+    }
+  }
+  return [a, c];
+};
+d3.random = {
+  normal: function(mean, deviation) {
+    if (arguments.length < 2) deviation = 1;
+    if (arguments.length < 1) mean = 0;
+    return function() {
+      var x, y, r;
+      do {
+        x = Math.random() * 2 - 1;
+        y = Math.random() * 2 - 1;
+        r = x * x + y * y;
+      } while (!r || r > 1);
+      return mean + deviation * x * Math.sqrt(-2 * Math.log(r) / r);
+    };
+  }
+};
+function d3_number(x) {
+  return x != null && !isNaN(x);
+}
+d3.sum = function(array, f) {
+  var s = 0,
+      n = array.length,
+      a,
+      i = -1;
+
+  if (arguments.length === 1) {
+    while (++i < n) if (!isNaN(a = +array[i])) s += a;
+  } else {
+    while (++i < n) if (!isNaN(a = +f.call(array, array[i], i))) s += a;
+  }
+
+  return s;
+};
+// R-7 per <http://en.wikipedia.org/wiki/Quantile>
+d3.quantile = function(values, p) {
+  var H = (values.length - 1) * p + 1,
+      h = Math.floor(H),
+      v = values[h - 1],
+      e = H - h;
+  return e ? v + e * (values[h] - v) : v;
+};
+d3.transpose = function(matrix) {
+  return d3.zip.apply(d3, matrix);
+};
+d3.zip = function() {
+  if (!(n = arguments.length)) return [];
+  for (var i = -1, m = d3.min(arguments, d3_zipLength), zips = new Array(m); ++i < m;) {
+    for (var j = -1, n, zip = zips[i] = new Array(n); ++j < n;) {
+      zip[j] = arguments[j][i];
+    }
+  }
+  return zips;
+};
+
+function d3_zipLength(d) {
+  return d.length;
+}
+// Locate the insertion point for x in a to maintain sorted order. The
+// arguments lo and hi may be used to specify a subset of the array which should
+// be considered; by default the entire array is used. If x is already present
+// in a, the insertion point will be before (to the left of) any existing
+// entries. The return value is suitable for use as the first argument to
+// `array.splice` assuming that a is already sorted.
+//
+// The returned insertion point i partitions the array a into two halves so that
+// all v < x for v in a[lo:i] for the left side and all v >= x for v in a[i:hi]
+// for the right side.
+d3.bisectLeft = function(a, x, lo, hi) {
+  if (arguments.length < 3) lo = 0;
+  if (arguments.length < 4) hi = a.length;
+  while (lo < hi) {
+    var mid = (lo + hi) >> 1;
+    if (a[mid] < x) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+};
+
+// Similar to bisectLeft, but returns an insertion point which comes after (to
+// the right of) any existing entries of x in a.
+//
+// The returned insertion point i partitions the array into two halves so that
+// all v <= x for v in a[lo:i] for the left side and all v > x for v in a[i:hi]
+// for the right side.
+d3.bisect =
+d3.bisectRight = function(a, x, lo, hi) {
+  if (arguments.length < 3) lo = 0;
+  if (arguments.length < 4) hi = a.length;
+  while (lo < hi) {
+    var mid = (lo + hi) >> 1;
+    if (x < a[mid]) hi = mid;
+    else lo = mid + 1;
+  }
+  return lo;
+};
+d3.first = function(array, f) {
+  var i = 0,
+      n = array.length,
+      a = array[0],
+      b;
+  if (arguments.length === 1) f = d3.ascending;
+  while (++i < n) {
+    if (f.call(array, a, b = array[i]) > 0) {
+      a = b;
+    }
+  }
+  return a;
+};
+d3.last = function(array, f) {
+  var i = 0,
+      n = array.length,
+      a = array[0],
+      b;
+  if (arguments.length === 1) f = d3.ascending;
+  while (++i < n) {
+    if (f.call(array, a, b = array[i]) <= 0) {
+      a = b;
+    }
+  }
+  return a;
+};
+d3.nest = function() {
+  var nest = {},
+      keys = [],
+      sortKeys = [],
+      sortValues,
+      rollup;
+
+  function map(array, depth) {
+    if (depth >= keys.length) return rollup
+        ? rollup.call(nest, array) : (sortValues
+        ? array.sort(sortValues)
+        : array);
+
+    var i = -1,
+        n = array.length,
+        key = keys[depth++],
+        keyValue,
+        object,
+        o = {};
+
+    while (++i < n) {
+      if ((keyValue = key(object = array[i])) in o) {
+        o[keyValue].push(object);
+      } else {
+        o[keyValue] = [object];
+      }
+    }
+
+    for (keyValue in o) {
+      o[keyValue] = map(o[keyValue], depth);
+    }
+
+    return o;
+  }
+
+  function entries(map, depth) {
+    if (depth >= keys.length) return map;
+
+    var a = [],
+        sortKey = sortKeys[depth++],
+        key;
+
+    for (key in map) {
+      a.push({key: key, values: entries(map[key], depth)});
+    }
+
+    if (sortKey) a.sort(function(a, b) {
+      return sortKey(a.key, b.key);
+    });
+
+    return a;
+  }
+
+  nest.map = function(array) {
+    return map(array, 0);
+  };
+
+  nest.entries = function(array) {
+    return entries(map(array, 0), 0);
+  };
+
+  nest.key = function(d) {
+    keys.push(d);
+    return nest;
+  };
+
+  // Specifies the order for the most-recently specified key.
+  // Note: only applies to entries. Map keys are unordered!
+  nest.sortKeys = function(order) {
+    sortKeys[keys.length - 1] = order;
+    return nest;
+  };
+
+  // Specifies the order for leaf values.
+  // Applies to both maps and entries array.
+  nest.sortValues = function(order) {
+    sortValues = order;
+    return nest;
+  };
+
+  nest.rollup = function(f) {
+    rollup = f;
+    return nest;
+  };
+
+  return nest;
+};
+d3.keys = function(map) {
+  var keys = [];
+  for (var key in map) keys.push(key);
+  return keys;
+};
+d3.values = function(map) {
+  var values = [];
+  for (var key in map) values.push(map[key]);
+  return values;
+};
+d3.entries = function(map) {
+  var entries = [];
+  for (var key in map) entries.push({key: key, value: map[key]});
+  return entries;
+};
+d3.permute = function(array, indexes) {
+  var permutes = [],
+      i = -1,
+      n = indexes.length;
+  while (++i < n) permutes[i] = array[indexes[i]];
+  return permutes;
+};
+d3.merge = function(arrays) {
+  return Array.prototype.concat.apply([], arrays);
+};
+d3.split = function(array, f) {
+  var arrays = [],
+      values = [],
+      value,
+      i = -1,
+      n = array.length;
+  if (arguments.length < 2) f = d3_splitter;
+  while (++i < n) {
+    if (f.call(values, value = array[i], i)) {
+      values = [];
+    } else {
+      if (!values.length) arrays.push(values);
+      values.push(value);
+    }
+  }
+  return arrays;
+};
+
+function d3_splitter(d) {
+  return d == null;
+}
+function d3_collapse(s) {
+  return s.replace(/(^\s+)|(\s+$)/g, "").replace(/\s+/g, " ");
+}
+/**
+ * @param {number} start
+ * @param {number=} stop
+ * @param {number=} step
+ */
+d3.range = function(start, stop, step) {
+  if (arguments.length < 3) {
+    step = 1;
+    if (arguments.length < 2) {
+      stop = start;
+      start = 0;
+    }
+  }
+  if ((stop - start) / step == Infinity) throw new Error("infinite range");
+  var range = [],
+       i = -1,
+       j;
+  if (step < 0) while ((j = start + step * ++i) > stop) range.push(j);
+  else while ((j = start + step * ++i) < stop) range.push(j);
+  return range;
+};
+d3.requote = function(s) {
+  return s.replace(d3_requote_re, "\\$&");
+};
+
+var d3_requote_re = /[\\\^\$\*\+\?\|\[\]\(\)\.\{\}]/g;
+d3.round = function(x, n) {
+  return n
+      ? Math.round(x * (n = Math.pow(10, n))) / n
+      : Math.round(x);
+};
+d3.xhr = function(url, mime, callback) {
+  var req = new XMLHttpRequest;
+  if (arguments.length < 3) callback = mime, mime = null;
+  else if (mime && req.overrideMimeType) req.overrideMimeType(mime);
+  req.open("GET", url, true);
+  if (mime) req.setRequestHeader("Accept", mime);
+  req.onreadystatechange = function() {
+    if (req.readyState === 4) callback(req.status < 300 ? req : null);
+  };
+  req.send(null);
+};
+d3.text = function(url, mime, callback) {
+  function ready(req) {
+    callback(req && req.responseText);
+  }
+  if (arguments.length < 3) {
+    callback = mime;
+    mime = null;
+  }
+  d3.xhr(url, mime, ready);
+};
+d3.json = function(url, callback) {
+  d3.text(url, "application/json", function(text) {
+    callback(text ? JSON.parse(text) : null);
+  });
+};
+d3.html = function(url, callback) {
+  d3.text(url, "text/html", function(text) {
+    if (text != null) { // Treat empty string as valid HTML.
+      var range = document.createRange();
+      range.selectNode(document.body);
+      text = range.createContextualFragment(text);
+    }
+    callback(text);
+  });
+};
+d3.xml = function(url, mime, callback) {
+  function ready(req) {
+    callback(req && req.responseXML);
+  }
+  if (arguments.length < 3) {
+    callback = mime;
+    mime = null;
+  }
+  d3.xhr(url, mime, ready);
+};
+var d3_nsPrefix = {
+  svg: "http://www.w3.org/2000/svg",
+  xhtml: "http://www.w3.org/1999/xhtml",
+  xlink: "http://www.w3.org/1999/xlink",
+  xml: "http://www.w3.org/XML/1998/namespace",
+  xmlns: "http://www.w3.org/2000/xmlns/"
+};
+
+d3.ns = {
+  prefix: d3_nsPrefix,
+  qualify: function(name) {
+    var i = name.indexOf(":");
+    return i < 0 ? (name in d3_nsPrefix
+      ? {space: d3_nsPrefix[name], local: name} : name)
+      : {space: d3_nsPrefix[name.substring(0, i)], local: name.substring(i + 1)};
+  }
+};
+d3.dispatch = function() {
+  var dispatch = new d3_dispatch(),
+      i = -1,
+      n = arguments.length;
+  while (++i < n) dispatch[arguments[i]] = d3_dispatch_event(dispatch);
+  return dispatch;
+};
+
+function d3_dispatch() {}
+
+d3_dispatch.prototype.on = function(type, listener) {
+  var i = type.indexOf("."),
+      name = "";
+
+  // Extract optional namespace, e.g., "click.foo"
+  if (i > 0) {
+    name = type.substring(i + 1);
+    type = type.substring(0, i);
+  }
+
+  return arguments.length < 2
+      ? this[type].on(name)
+      : this[type].on(name, listener);
+};
+
+function d3_dispatch_event(dispatch) {
+  var listeners = [],
+      listenerByName = {};
+
+  function event() {
+    var z = listeners, // defensive reference
+        i = -1,
+        n = z.length,
+        l;
+    while (++i < n) if (l = z[i].on) l.apply(this, arguments);
+    return dispatch;
+  }
+
+  event.on = function(name, listener) {
+    var l, i;
+
+    // return the current listener, if any
+    if (arguments.length < 2) return (l = listenerByName[name]) && l.on;
+
+    // remove the old listener, if any (with copy-on-write)
+    if (l = listenerByName[name]) {
+      l.on = null;
+      listeners = listeners.slice(0, i = listeners.indexOf(l)).concat(listeners.slice(i + 1));
+      delete listenerByName[name];
+    }
+
+    // add the new listener, if any
+    if (listener) {
+      listeners.push(listenerByName[name] = {on: listener});
+    }
+
+    return dispatch;
+  };
+
+  return event;
+};
+// TODO align
+d3.format = function(specifier) {
+  var match = d3_format_re.exec(specifier),
+      fill = match[1] || " ",
+      sign = match[3] || "",
+      zfill = match[5],
+      width = +match[6],
+      comma = match[7],
+      precision = match[8],
+      type = match[9],
+      scale = 1,
+      suffix = "",
+      integer = false;
+
+  if (precision) precision = +precision.substring(1);
+
+  if (zfill) {
+    fill = "0"; // TODO align = "=";
+    if (comma) width -= Math.floor((width - 1) / 4);
+  }
+
+  switch (type) {
+    case "n": comma = true; type = "g"; break;
+    case "%": scale = 100; suffix = "%"; type = "f"; break;
+    case "p": scale = 100; suffix = "%"; type = "r"; break;
+    case "d": integer = true; precision = 0; break;
+    case "s": scale = -1; type = "r"; break;
+  }
+
+  // If no precision is specified for r, fallback to general notation.
+  if (type == "r" && !precision) type = "g";
+
+  type = d3_format_types[type] || d3_format_typeDefault;
+
+  return function(value) {
+
+    // Return the empty string for floats formatted as ints.
+    if (integer && (value % 1)) return "";
+
+    // Convert negative to positive, and record the sign prefix.
+    var negative = (value < 0) && (value = -value) ? "\u2212" : sign;
+
+    // Apply the scale, computing it from the value's exponent for si format.
+    if (scale < 0) {
+      var prefix = d3.formatPrefix(value, precision);
+      value *= prefix.scale;
+      suffix = prefix.symbol;
+    } else {
+      value *= scale;
+    }
+
+    // Convert to the desired precision.
+    value = type(value, precision);
+
+    // If the fill character is 0, the sign and group is applied after the fill.
+    if (zfill) {
+      var length = value.length + negative.length;
+      if (length < width) value = new Array(width - length + 1).join(fill) + value;
+      if (comma) value = d3_format_group(value);
+      value = negative + value;
+    }
+
+    // Otherwise (e.g., space-filling), the sign and group is applied before.
+    else {
+      if (comma) value = d3_format_group(value);
+      value = negative + value;
+      var length = value.length;
+      if (length < width) value = new Array(width - length + 1).join(fill) + value;
+    }
+
+    return value + suffix;
+  };
+};
+
+// [[fill]align][sign][#][0][width][,][.precision][type]
+var d3_format_re = /(?:([^{])?([<>=^]))?([+\- ])?(#)?(0)?([0-9]+)?(,)?(\.[0-9]+)?([a-zA-Z%])?/;
+
+var d3_format_types = {
+  g: function(x, p) { return x.toPrecision(p); },
+  e: function(x, p) { return x.toExponential(p); },
+  f: function(x, p) { return x.toFixed(p); },
+  r: function(x, p) { return d3.round(x, p = d3_format_precision(x, p)).toFixed(Math.max(0, Math.min(20, p))); }
+};
+
+function d3_format_precision(x, p) {
+  return p - (x ? 1 + Math.floor(Math.log(x + Math.pow(10, 1 + Math.floor(Math.log(x) / Math.LN10) - p)) / Math.LN10) : 1);
+}
+
+function d3_format_typeDefault(x) {
+  return x + "";
+}
+
+// Apply comma grouping for thousands.
+function d3_format_group(value) {
+  var i = value.lastIndexOf("."),
+      f = i >= 0 ? value.substring(i) : (i = value.length, ""),
+      t = [];
+  while (i > 0) t.push(value.substring(i -= 3, i + 3));
+  return t.reverse().join(",") + f;
+}
+var d3_formatPrefixes = ["y","z","a","f","p","n","μ","m","","k","M","G","T","P","E","Z","Y"].map(d3_formatPrefix);
+
+d3.formatPrefix = function(value, precision) {
+  var i = 0;
+  if (value) {
+    if (value < 0) value *= -1;
+    if (precision) value = d3.round(value, d3_format_precision(value, precision));
+    i = 1 + Math.floor(1e-12 + Math.log(value) / Math.LN10);
+    i = Math.max(-24, Math.min(24, Math.floor((i <= 0 ? i + 1 : i - 1) / 3) * 3));
+  }
+  return d3_formatPrefixes[8 + i / 3];
+};
+
+function d3_formatPrefix(d, i) {
+  return {
+    scale: Math.pow(10, (8 - i) * 3),
+    symbol: d
+  };
+}
+
+/*
+ * TERMS OF USE - EASING EQUATIONS
+ *
+ * Open source under the BSD License.
+ *
+ * Copyright 2001 Robert Penner
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * - Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ *
+ * - Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ * - Neither the name of the author nor the names of contributors may be used to
+ *   endorse or promote products derived from this software without specific
+ *   prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+var d3_ease_quad = d3_ease_poly(2),
+    d3_ease_cubic = d3_ease_poly(3);
+
+var d3_ease = {
+  linear: function() { return d3_ease_linear; },
+  poly: d3_ease_poly,
+  quad: function() { return d3_ease_quad; },
+  cubic: function() { return d3_ease_cubic; },
+  sin: function() { return d3_ease_sin; },
+  exp: function() { return d3_ease_exp; },
+  circle: function() { return d3_ease_circle; },
+  elastic: d3_ease_elastic,
+  back: d3_ease_back,
+  bounce: function() { return d3_ease_bounce; }
+};
+
+var d3_ease_mode = {
+  "in": function(f) { return f; },
+  "out": d3_ease_reverse,
+  "in-out": d3_ease_reflect,
+  "out-in": function(f) { return d3_ease_reflect(d3_ease_reverse(f)); }
+};
+
+d3.ease = function(name) {
+  var i = name.indexOf("-"),
+      t = i >= 0 ? name.substring(0, i) : name,
+      m = i >= 0 ? name.substring(i + 1) : "in";
+  return d3_ease_clamp(d3_ease_mode[m](d3_ease[t].apply(null, Array.prototype.slice.call(arguments, 1))));
+};
+
+function d3_ease_clamp(f) {
+  return function(t) {
+    return t <= 0 ? 0 : t >= 1 ? 1 : f(t);
+  };
+}
+
+function d3_ease_reverse(f) {
+  return function(t) {
+    return 1 - f(1 - t);
+  };
+}
+
+function d3_ease_reflect(f) {
+  return function(t) {
+    return .5 * (t < .5 ? f(2 * t) : (2 - f(2 - 2 * t)));
+  };
+}
+
+function d3_ease_linear(t) {
+  return t;
+}
+
+function d3_ease_poly(e) {
+  return function(t) {
+    return Math.pow(t, e);
   }
 }
-```</pre>
-    </div>
-    <div class="col">
-      <p>Or, indent your code 4 spaces</p>
-      <pre>
-Here is a Python code example
-without syntax highlighting:
 
-    def foo:
-      if not bar:
-        return true</pre>
-    </div>
-    <div class="col">
-      <p>Inline code for comments</p>
-      <pre>
-I think you should use an
-`&lt;addr&gt;` element here instead.</pre>
-    </div>
-  </div>
+function d3_ease_sin(t) {
+  return 1 - Math.cos(t * Math.PI / 2);
+}
 
-  </div>
-</div>
+function d3_ease_exp(t) {
+  return Math.pow(2, 10 * (t - 1));
+}
 
+function d3_ease_circle(t) {
+  return 1 - Math.sqrt(1 - t * t);
+}
 
-    <div class="ajax-error-message">
-      <p><span class="icon"></span> Something went wrong with that request. Please try again. <a href="javascript:;" class="ajax-error-dismiss">Dismiss</a></p>
-    </div>
+function d3_ease_elastic(a, p) {
+  var s;
+  if (arguments.length < 2) p = 0.45;
+  if (arguments.length < 1) { a = 1; s = p / 4; }
+  else s = p / (2 * Math.PI) * Math.asin(1 / a);
+  return function(t) {
+    return 1 + a * Math.pow(2, 10 * -t) * Math.sin((t - s) * 2 * Math.PI / p);
+  };
+}
 
-    
-    
-    
-  </body>
-</html>
+function d3_ease_back(s) {
+  if (!s) s = 1.70158;
+  return function(t) {
+    return t * t * ((s + 1) * t - s);
+  };
+}
 
+function d3_ease_bounce(t) {
+  return t < 1 / 2.75 ? 7.5625 * t * t
+      : t < 2 / 2.75 ? 7.5625 * (t -= 1.5 / 2.75) * t + .75
+      : t < 2.5 / 2.75 ? 7.5625 * (t -= 2.25 / 2.75) * t + .9375
+      : 7.5625 * (t -= 2.625 / 2.75) * t + .984375;
+}
+d3.event = null;
+
+function d3_eventCancel() {
+  d3.event.stopPropagation();
+  d3.event.preventDefault();
+}
+d3.interpolate = function(a, b) {
+  var i = d3.interpolators.length, f;
+  while (--i >= 0 && !(f = d3.interpolators[i](a, b)));
+  return f;
+};
+
+d3.interpolateNumber = function(a, b) {
+  b -= a;
+  return function(t) { return a + b * t; };
+};
+
+d3.interpolateRound = function(a, b) {
+  b -= a;
+  return function(t) { return Math.round(a + b * t); };
+};
+
+d3.interpolateString = function(a, b) {
+  var m, // current match
+      i, // current index
+      j, // current index (for coallescing)
+      s0 = 0, // start index of current string prefix
+      s1 = 0, // end index of current string prefix
+      s = [], // string constants and placeholders
+      q = [], // number interpolators
+      n, // q.length
+      o;
+
+  // Reset our regular expression!
+  d3_interpolate_number.lastIndex = 0;
+
+  // Find all numbers in b.
+  for (i = 0; m = d3_interpolate_number.exec(b); ++i) {
+    if (m.index) s.push(b.substring(s0, s1 = m.index));
+    q.push({i: s.length, x: m[0]});
+    s.push(null);
+    s0 = d3_interpolate_number.lastIndex;
+  }
+  if (s0 < b.length) s.push(b.substring(s0));
+
+  // Find all numbers in a.
+  for (i = 0, n = q.length; (m = d3_interpolate_number.exec(a)) && i < n; ++i) {
+    o = q[i];
+    if (o.x == m[0]) { // The numbers match, so coallesce.
+      if (o.i) {
+        if (s[o.i + 1] == null) { // This match is followed by another number.
+          s[o.i - 1] += o.x;
+          s.splice(o.i, 1);
+          for (j = i + 1; j < n; ++j) q[j].i--;
+        } else { // This match is followed by a string, so coallesce twice.
+          s[o.i - 1] += o.x + s[o.i + 1];
+          s.splice(o.i, 2);
+          for (j = i + 1; j < n; ++j) q[j].i -= 2;
+        }
+      } else {
+          if (s[o.i + 1] == null) { // This match is followed by another number.
+          s[o.i] = o.x;
+        } else { // This match is followed by a string, so coallesce twice.
+          s[o.i] = o.x + s[o.i + 1];
+          s.splice(o.i + 1, 1);
+          for (j = i + 1; j < n; ++j) q[j].i--;
+        }
+      }
+      q.splice(i, 1);
+      n--;
+      i--;
+    } else {
+      o.x = d3.interpolateNumber(parseFloat(m[0]), parseFloat(o.x));
+    }
+  }
+
+  // Remove any numbers in b not found in a.
+  while (i < n) {
+    o = q.pop();
+    if (s[o.i + 1] == null) { // This match is followed by another number.
+      s[o.i] = o.x;
+    } else { // This match is followed by a string, so coallesce twice.
+      s[o.i] = o.x + s[o.i + 1];
+      s.splice(o.i + 1, 1);
+    }
+    n--;
+  }
+
+  // Special optimization for only a single match.
+  if (s.length === 1) {
+    return s[0] == null ? q[0].x : function() { return b; };
+  }
+
+  // Otherwise, interpolate each of the numbers and rejoin the string.
+  return function(t) {
+    for (i = 0; i < n; ++i) s[(o = q[i]).i] = o.x(t);
+    return s.join("");
+  };
+};
+
+d3.interpolateTransform = function(a, b) {
+  var s = [], // string constants and placeholders
+      q = [], // number interpolators
+      n,
+      A = d3.transform(a),
+      B = d3.transform(b),
+      ta = A.translate,
+      tb = B.translate,
+      ra = A.rotate,
+      rb = B.rotate,
+      wa = A.skew,
+      wb = B.skew,
+      ka = A.scale,
+      kb = B.scale;
+
+  if (ta[0] != tb[0] || ta[1] != tb[1]) {
+    s.push("translate(", null, ",", null, ")");
+    q.push({i: 1, x: d3.interpolateNumber(ta[0], tb[0])}, {i: 3, x: d3.interpolateNumber(ta[1], tb[1])});
+  } else if (tb[0] || tb[1]) {
+    s.push("translate(" + tb + ")");
+  } else {
+    s.push("");
+  }
+
+  if (ra != rb) {
+    q.push({i: s.push(s.pop() + "rotate(", null, ")") - 2, x: d3.interpolateNumber(ra, rb)});
+  } else if (rb) {
+    s.push(s.pop() + "rotate(" + rb + ")");
+  }
+
+  if (wa != wb) {
+    q.push({i: s.push(s.pop() + "skewX(", null, ")") - 2, x: d3.interpolateNumber(wa, wb)});
+  } else if (wb) {
+    s.push(s.pop() + "skewX(" + wb + ")");
+  }
+
+  if (ka[0] != kb[0] || ka[1] != kb[1]) {
+    n = s.push(s.pop() + "scale(", null, ",", null, ")");
+    q.push({i: n - 4, x: d3.interpolateNumber(ka[0], kb[0])}, {i: n - 2, x: d3.interpolateNumber(ka[1], kb[1])});
+  } else if (kb[0] != 1 || kb[1] != 1) {
+    s.push(s.pop() + "scale(" + kb + ")");
+  }
+
+  n = q.length;
+  return function(t) {
+    var i = -1, o;
+    while (++i < n) s[(o = q[i]).i] = o.x(t);
+    return s.join("");
+  };
+};
+
+d3.interpolateRgb = function(a, b) {
+  a = d3.rgb(a);
+  b = d3.rgb(b);
+  var ar = a.r,
+      ag = a.g,
+      ab = a.b,
+      br = b.r - ar,
+      bg = b.g - ag,
+      bb = b.b - ab;
+  return function(t) {
+    return "#"
+        + d3_rgb_hex(Math.round(ar + br * t))
+        + d3_rgb_hex(Math.round(ag + bg * t))
+        + d3_rgb_hex(Math.round(ab + bb * t));
+  };
+};
+
+// interpolates HSL space, but outputs RGB string (for compatibility)
+d3.interpolateHsl = function(a, b) {
+  a = d3.hsl(a);
+  b = d3.hsl(b);
+  var h0 = a.h,
+      s0 = a.s,
+      l0 = a.l,
+      h1 = b.h - h0,
+      s1 = b.s - s0,
+      l1 = b.l - l0;
+  return function(t) {
+    return d3_hsl_rgb(h0 + h1 * t, s0 + s1 * t, l0 + l1 * t).toString();
+  };
+};
+
+d3.interpolateArray = function(a, b) {
+  var x = [],
+      c = [],
+      na = a.length,
+      nb = b.length,
+      n0 = Math.min(a.length, b.length),
+      i;
+  for (i = 0; i < n0; ++i) x.push(d3.interpolate(a[i], b[i]));
+  for (; i < na; ++i) c[i] = a[i];
+  for (; i < nb; ++i) c[i] = b[i];
+  return function(t) {
+    for (i = 0; i < n0; ++i) c[i] = x[i](t);
+    return c;
+  };
+};
+
+d3.interpolateObject = function(a, b) {
+  var i = {},
+      c = {},
+      k;
+  for (k in a) {
+    if (k in b) {
+      i[k] = d3_interpolateByName(k)(a[k], b[k]);
+    } else {
+      c[k] = a[k];
+    }
+  }
+  for (k in b) {
+    if (!(k in a)) {
+      c[k] = b[k];
+    }
+  }
+  return function(t) {
+    for (k in i) c[k] = i[k](t);
+    return c;
+  };
+}
+
+var d3_interpolate_number = /[-+]?(?:\d*\.?\d+)(?:[eE][-+]?\d+)?/g;
+
+function d3_interpolateByName(n) {
+  return n == "transform"
+      ? d3.interpolateTransform
+      : d3.interpolate;
+}
+
+d3.interpolators = [
+  d3.interpolateObject,
+  function(a, b) { return (b instanceof Array) && d3.interpolateArray(a, b); },
+  function(a, b) { return (typeof a === "string" || typeof b === "string") && d3.interpolateString(a + "", b + ""); },
+  function(a, b) { return (typeof b === "string" ? b in d3_rgb_names || /^(#|rgb\(|hsl\()/.test(b) : b instanceof d3_Rgb || b instanceof d3_Hsl) && d3.interpolateRgb(a, b); },
+  function(a, b) { return !isNaN(a = +a) && !isNaN(b = +b) && d3.interpolateNumber(a, b); }
+];
+function d3_uninterpolateNumber(a, b) {
+  b = b - (a = +a) ? 1 / (b - a) : 0;
+  return function(x) { return (x - a) * b; };
+}
+
+function d3_uninterpolateClamp(a, b) {
+  b = b - (a = +a) ? 1 / (b - a) : 0;
+  return function(x) { return Math.max(0, Math.min(1, (x - a) * b)); };
+}
+d3.rgb = function(r, g, b) {
+  return arguments.length === 1
+      ? (r instanceof d3_Rgb ? d3_rgb(r.r, r.g, r.b)
+      : d3_rgb_parse("" + r, d3_rgb, d3_hsl_rgb))
+      : d3_rgb(~~r, ~~g, ~~b);
+};
+
+function d3_rgb(r, g, b) {
+  return new d3_Rgb(r, g, b);
+}
+
+function d3_Rgb(r, g, b) {
+  this.r = r;
+  this.g = g;
+  this.b = b;
+}
+
+d3_Rgb.prototype.brighter = function(k) {
+  k = Math.pow(0.7, arguments.length ? k : 1);
+  var r = this.r,
+      g = this.g,
+      b = this.b,
+      i = 30;
+  if (!r && !g && !b) return d3_rgb(i, i, i);
+  if (r && r < i) r = i;
+  if (g && g < i) g = i;
+  if (b && b < i) b = i;
+  return d3_rgb(
+      Math.min(255, Math.floor(r / k)),
+      Math.min(255, Math.floor(g / k)),
+      Math.min(255, Math.floor(b / k)));
+};
+
+d3_Rgb.prototype.darker = function(k) {
+  k = Math.pow(0.7, arguments.length ? k : 1);
+  return d3_rgb(
+      Math.floor(k * this.r),
+      Math.floor(k * this.g),
+      Math.floor(k * this.b));
+};
+
+d3_Rgb.prototype.hsl = function() {
+  return d3_rgb_hsl(this.r, this.g, this.b);
+};
+
+d3_Rgb.prototype.toString = function() {
+  return "#" + d3_rgb_hex(this.r) + d3_rgb_hex(this.g) + d3_rgb_hex(this.b);
+};
+
+function d3_rgb_hex(v) {
+  return v < 0x10
+      ? "0" + Math.max(0, v).toString(16)
+      : Math.min(255, v).toString(16);
+}
+
+function d3_rgb_parse(format, rgb, hsl) {
+  var r = 0, // red channel; int in [0, 255]
+      g = 0, // green channel; int in [0, 255]
+      b = 0, // blue channel; int in [0, 255]
+      m1, // CSS color specification match
+      m2, // CSS color specification type (e.g., rgb)
+      name;
+
+  /* Handle hsl, rgb. */
+  m1 = /([a-z]+)\((.*)\)/i.exec(format);
+  if (m1) {
+    m2 = m1[2].split(",");
+    switch (m1[1]) {
+      case "hsl": {
+        return hsl(
+          parseFloat(m2[0]), // degrees
+          parseFloat(m2[1]) / 100, // percentage
+          parseFloat(m2[2]) / 100 // percentage
+        );
+      }
+      case "rgb": {
+        return rgb(
+          d3_rgb_parseNumber(m2[0]),
+          d3_rgb_parseNumber(m2[1]),
+          d3_rgb_parseNumber(m2[2])
+        );
+      }
+    }
+  }
+
+  /* Named colors. */
+  if (name = d3_rgb_names[format]) return rgb(name.r, name.g, name.b);
+
+  /* Hexadecimal colors: #rgb and #rrggbb. */
+  if (format != null && format.charAt(0) === "#") {
+    if (format.length === 4) {
+      r = format.charAt(1); r += r;
+      g = format.charAt(2); g += g;
+      b = format.charAt(3); b += b;
+    } else if (format.length === 7) {
+      r = format.substring(1, 3);
+      g = format.substring(3, 5);
+      b = format.substring(5, 7);
+    }
+    r = parseInt(r, 16);
+    g = parseInt(g, 16);
+    b = parseInt(b, 16);
+  }
+
+  return rgb(r, g, b);
+}
+
+function d3_rgb_hsl(r, g, b) {
+  var min = Math.min(r /= 255, g /= 255, b /= 255),
+      max = Math.max(r, g, b),
+      d = max - min,
+      h,
+      s,
+      l = (max + min) / 2;
+  if (d) {
+    s = l < .5 ? d / (max + min) : d / (2 - max - min);
+    if (r == max) h = (g - b) / d + (g < b ? 6 : 0);
+    else if (g == max) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
+    h *= 60;
+  } else {
+    s = h = 0;
+  }
+  return d3_hsl(h, s, l);
+}
+
+function d3_rgb_parseNumber(c) { // either integer or percentage
+  var f = parseFloat(c);
+  return c.charAt(c.length - 1) === "%" ? Math.round(f * 2.55) : f;
+}
+
+var d3_rgb_names = {
+  aliceblue: "#f0f8ff",
+  antiquewhite: "#faebd7",
+  aqua: "#00ffff",
+  aquamarine: "#7fffd4",
+  azure: "#f0ffff",
+  beige: "#f5f5dc",
+  bisque: "#ffe4c4",
+  black: "#000000",
+  blanchedalmond: "#ffebcd",
+  blue: "#0000ff",
+  blueviolet: "#8a2be2",
+  brown: "#a52a2a",
+  burlywood: "#deb887",
+  cadetblue: "#5f9ea0",
+  chartreuse: "#7fff00",
+  chocolate: "#d2691e",
+  coral: "#ff7f50",
+  cornflowerblue: "#6495ed",
+  cornsilk: "#fff8dc",
+  crimson: "#dc143c",
+  cyan: "#00ffff",
+  darkblue: "#00008b",
+  darkcyan: "#008b8b",
+  darkgoldenrod: "#b8860b",
+  darkgray: "#a9a9a9",
+  darkgreen: "#006400",
+  darkgrey: "#a9a9a9",
+  darkkhaki: "#bdb76b",
+  darkmagenta: "#8b008b",
+  darkolivegreen: "#556b2f",
+  darkorange: "#ff8c00",
+  darkorchid: "#9932cc",
+  darkred: "#8b0000",
+  darksalmon: "#e9967a",
+  darkseagreen: "#8fbc8f",
+  darkslateblue: "#483d8b",
+  darkslategray: "#2f4f4f",
+  darkslategrey: "#2f4f4f",
+  darkturquoise: "#00ced1",
+  darkviolet: "#9400d3",
+  deeppink: "#ff1493",
+  deepskyblue: "#00bfff",
+  dimgray: "#696969",
+  dimgrey: "#696969",
+  dodgerblue: "#1e90ff",
+  firebrick: "#b22222",
+  floralwhite: "#fffaf0",
+  forestgreen: "#228b22",
+  fuchsia: "#ff00ff",
+  gainsboro: "#dcdcdc",
+  ghostwhite: "#f8f8ff",
+  gold: "#ffd700",
+  goldenrod: "#daa520",
+  gray: "#808080",
+  green: "#008000",
+  greenyellow: "#adff2f",
+  grey: "#808080",
+  honeydew: "#f0fff0",
+  hotpink: "#ff69b4",
+  indianred: "#cd5c5c",
+  indigo: "#4b0082",
+  ivory: "#fffff0",
+  khaki: "#f0e68c",
+  lavender: "#e6e6fa",
+  lavenderblush: "#fff0f5",
+  lawngreen: "#7cfc00",
+  lemonchiffon: "#fffacd",
+  lightblue: "#add8e6",
+  lightcoral: "#f08080",
+  lightcyan: "#e0ffff",
+  lightgoldenrodyellow: "#fafad2",
+  lightgray: "#d3d3d3",
+  lightgreen: "#90ee90",
+  lightgrey: "#d3d3d3",
+  lightpink: "#ffb6c1",
+  lightsalmon: "#ffa07a",
+  lightseagreen: "#20b2aa",
+  lightskyblue: "#87cefa",
+  lightslategray: "#778899",
+  lightslategrey: "#778899",
+  lightsteelblue: "#b0c4de",
+  lightyellow: "#ffffe0",
+  lime: "#00ff00",
+  limegreen: "#32cd32",
+  linen: "#faf0e6",
+  magenta: "#ff00ff",
+  maroon: "#800000",
+  mediumaquamarine: "#66cdaa",
+  mediumblue: "#0000cd",
+  mediumorchid: "#ba55d3",
+  mediumpurple: "#9370db",
+  mediumseagreen: "#3cb371",
+  mediumslateblue: "#7b68ee",
+  mediumspringgreen: "#00fa9a",
+  mediumturquoise: "#48d1cc",
+  mediumvioletred: "#c71585",
+  midnightblue: "#191970",
+  mintcream: "#f5fffa",
+  mistyrose: "#ffe4e1",
+  moccasin: "#ffe4b5",
+  navajowhite: "#ffdead",
+  navy: "#000080",
+  oldlace: "#fdf5e6",
+  olive: "#808000",
+  olivedrab: "#6b8e23",
+  orange: "#ffa500",
+  orangered: "#ff4500",
+  orchid: "#da70d6",
+  palegoldenrod: "#eee8aa",
+  palegreen: "#98fb98",
+  paleturquoise: "#afeeee",
+  palevioletred: "#db7093",
+  papayawhip: "#ffefd5",
+  peachpuff: "#ffdab9",
+  peru: "#cd853f",
+  pink: "#ffc0cb",
+  plum: "#dda0dd",
+  powderblue: "#b0e0e6",
+  purple: "#800080",
+  red: "#ff0000",
+  rosybrown: "#bc8f8f",
+  royalblue: "#4169e1",
+  saddlebrown: "#8b4513",
+  salmon: "#fa8072",
+  sandybrown: "#f4a460",
+  seagreen: "#2e8b57",
+  seashell: "#fff5ee",
+  sienna: "#a0522d",
+  silver: "#c0c0c0",
+  skyblue: "#87ceeb",
+  slateblue: "#6a5acd",
+  slategray: "#708090",
+  slategrey: "#708090",
+  snow: "#fffafa",
+  springgreen: "#00ff7f",
+  steelblue: "#4682b4",
+  tan: "#d2b48c",
+  teal: "#008080",
+  thistle: "#d8bfd8",
+  tomato: "#ff6347",
+  turquoise: "#40e0d0",
+  violet: "#ee82ee",
+  wheat: "#f5deb3",
+  white: "#ffffff",
+  whitesmoke: "#f5f5f5",
+  yellow: "#ffff00",
+  yellowgreen: "#9acd32"
+};
+
+for (var d3_rgb_name in d3_rgb_names) {
+  d3_rgb_names[d3_rgb_name] = d3_rgb_parse(
+      d3_rgb_names[d3_rgb_name],
+      d3_rgb,
+      d3_hsl_rgb);
+}
+d3.hsl = function(h, s, l) {
+  return arguments.length === 1
+      ? (h instanceof d3_Hsl ? d3_hsl(h.h, h.s, h.l)
+      : d3_rgb_parse("" + h, d3_rgb_hsl, d3_hsl))
+      : d3_hsl(+h, +s, +l);
+};
+
+function d3_hsl(h, s, l) {
+  return new d3_Hsl(h, s, l);
+}
+
+function d3_Hsl(h, s, l) {
+  this.h = h;
+  this.s = s;
+  this.l = l;
+}
+
+d3_Hsl.prototype.brighter = function(k) {
+  k = Math.pow(0.7, arguments.length ? k : 1);
+  return d3_hsl(this.h, this.s, this.l / k);
+};
+
+d3_Hsl.prototype.darker = function(k) {
+  k = Math.pow(0.7, arguments.length ? k : 1);
+  return d3_hsl(this.h, this.s, k * this.l);
+};
+
+d3_Hsl.prototype.rgb = function() {
+  return d3_hsl_rgb(this.h, this.s, this.l);
+};
+
+d3_Hsl.prototype.toString = function() {
+  return this.rgb().toString();
+};
+
+function d3_hsl_rgb(h, s, l) {
+  var m1,
+      m2;
+
+  /* Some simple corrections for h, s and l. */
+  h = h % 360; if (h < 0) h += 360;
+  s = s < 0 ? 0 : s > 1 ? 1 : s;
+  l = l < 0 ? 0 : l > 1 ? 1 : l;
+
+  /* From FvD 13.37, CSS Color Module Level 3 */
+  m2 = l <= .5 ? l * (1 + s) : l + s - l * s;
+  m1 = 2 * l - m2;
+
+  function v(h) {
+    if (h > 360) h -= 360;
+    else if (h < 0) h += 360;
+    if (h < 60) return m1 + (m2 - m1) * h / 60;
+    if (h < 180) return m2;
+    if (h < 240) return m1 + (m2 - m1) * (240 - h) / 60;
+    return m1;
+  }
+
+  function vv(h) {
+    return Math.round(v(h) * 255);
+  }
+
+  return d3_rgb(vv(h + 120), vv(h), vv(h - 120));
+}
+function d3_selection(groups) {
+  d3_arraySubclass(groups, d3_selectionPrototype);
+  return groups;
+}
+
+var d3_select = function(s, n) { return n.querySelector(s); },
+    d3_selectAll = function(s, n) { return n.querySelectorAll(s); },
+    d3_selectRoot = document.documentElement,
+    d3_selectMatcher = d3_selectRoot.matchesSelector || d3_selectRoot.webkitMatchesSelector || d3_selectRoot.mozMatchesSelector || d3_selectRoot.msMatchesSelector || d3_selectRoot.oMatchesSelector,
+    d3_selectMatches = function(n, s) { return d3_selectMatcher.call(n, s); };
+
+// Prefer Sizzle, if available.
+if (typeof Sizzle === "function") {
+  d3_select = function(s, n) { return Sizzle(s, n)[0]; };
+  d3_selectAll = function(s, n) { return Sizzle.uniqueSort(Sizzle(s, n)); };
+  d3_selectMatches = Sizzle.matchesSelector;
+}
+
+var d3_selectionPrototype = [];
+
+d3.selection = function() {
+  return d3_selectionRoot;
+};
+
+d3.selection.prototype = d3_selectionPrototype;
+d3_selectionPrototype.select = function(selector) {
+  var subgroups = [],
+      subgroup,
+      subnode,
+      group,
+      node;
+
+  if (typeof selector !== "function") selector = d3_selection_selector(selector);
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    subgroups.push(subgroup = []);
+    subgroup.parentNode = (group = this[j]).parentNode;
+    for (var i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) {
+        subgroup.push(subnode = selector.call(node, node.__data__, i));
+        if (subnode && "__data__" in node) subnode.__data__ = node.__data__;
+      } else {
+        subgroup.push(null);
+      }
+    }
+  }
+
+  return d3_selection(subgroups);
+};
+
+function d3_selection_selector(selector) {
+  return function() {
+    return d3_select(selector, this);
+  };
+}
+d3_selectionPrototype.selectAll = function(selector) {
+  var subgroups = [],
+      subgroup,
+      node;
+
+  if (typeof selector !== "function") selector = d3_selection_selectorAll(selector);
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) {
+        subgroups.push(subgroup = d3_array(selector.call(node, node.__data__, i)));
+        subgroup.parentNode = node;
+      }
+    }
+  }
+
+  return d3_selection(subgroups);
+};
+
+function d3_selection_selectorAll(selector) {
+  return function() {
+    return d3_selectAll(selector, this);
+  };
+}
+d3_selectionPrototype.attr = function(name, value) {
+  name = d3.ns.qualify(name);
+
+  // If no value is specified, return the first value.
+  if (arguments.length < 2) {
+    var node = this.node();
+    return name.local
+        ? node.getAttributeNS(name.space, name.local)
+        : node.getAttribute(name);
+  }
+
+  function attrNull() {
+    this.removeAttribute(name);
+  }
+
+  function attrNullNS() {
+    this.removeAttributeNS(name.space, name.local);
+  }
+
+  function attrConstant() {
+    this.setAttribute(name, value);
+  }
+
+  function attrConstantNS() {
+    this.setAttributeNS(name.space, name.local, value);
+  }
+
+  function attrFunction() {
+    var x = value.apply(this, arguments);
+    if (x == null) this.removeAttribute(name);
+    else this.setAttribute(name, x);
+  }
+
+  function attrFunctionNS() {
+    var x = value.apply(this, arguments);
+    if (x == null) this.removeAttributeNS(name.space, name.local);
+    else this.setAttributeNS(name.space, name.local, x);
+  }
+
+  return this.each(value == null
+      ? (name.local ? attrNullNS : attrNull) : (typeof value === "function"
+      ? (name.local ? attrFunctionNS : attrFunction)
+      : (name.local ? attrConstantNS : attrConstant)));
+};
+d3_selectionPrototype.classed = function(name, value) {
+  var names = name.split(d3_selection_classedWhitespace),
+      n = names.length,
+      i = -1;
+  if (arguments.length > 1) {
+    while (++i < n) d3_selection_classed.call(this, names[i], value);
+    return this;
+  } else {
+    while (++i < n) if (!d3_selection_classed.call(this, names[i])) return false;
+    return true;
+  }
+};
+
+var d3_selection_classedWhitespace = /\s+/g;
+
+function d3_selection_classed(name, value) {
+  var re = new RegExp("(^|\\s+)" + d3.requote(name) + "(\\s+|$)", "g");
+
+  // If no value is specified, return the first value.
+  if (arguments.length < 2) {
+    var node = this.node();
+    if (c = node.classList) return c.contains(name);
+    var c = node.className;
+    re.lastIndex = 0;
+    return re.test(c.baseVal != null ? c.baseVal : c);
+  }
+
+  function classedAdd() {
+    if (c = this.classList) return c.add(name);
+    var c = this.className,
+        cb = c.baseVal != null,
+        cv = cb ? c.baseVal : c;
+    re.lastIndex = 0;
+    if (!re.test(cv)) {
+      cv = d3_collapse(cv + " " + name);
+      if (cb) c.baseVal = cv;
+      else this.className = cv;
+    }
+  }
+
+  function classedRemove() {
+    if (c = this.classList) return c.remove(name);
+    var c = this.className,
+        cb = c.baseVal != null,
+        cv = cb ? c.baseVal : c;
+    cv = d3_collapse(cv.replace(re, " "));
+    if (cb) c.baseVal = cv;
+    else this.className = cv;
+  }
+
+  function classedFunction() {
+    (value.apply(this, arguments)
+        ? classedAdd
+        : classedRemove).call(this);
+  }
+
+  return this.each(typeof value === "function"
+      ? classedFunction : value
+      ? classedAdd
+      : classedRemove);
+}
+d3_selectionPrototype.style = function(name, value, priority) {
+  if (arguments.length < 3) priority = "";
+
+  // If no value is specified, return the first value.
+  if (arguments.length < 2) return window
+      .getComputedStyle(this.node(), null)
+      .getPropertyValue(name);
+
+  function styleNull() {
+    this.style.removeProperty(name);
+  }
+
+  function styleConstant() {
+    this.style.setProperty(name, value, priority);
+  }
+
+  function styleFunction() {
+    var x = value.apply(this, arguments);
+    if (x == null) this.style.removeProperty(name);
+    else this.style.setProperty(name, x, priority);
+  }
+
+  return this.each(value == null
+      ? styleNull : (typeof value === "function"
+      ? styleFunction : styleConstant));
+};
+d3_selectionPrototype.property = function(name, value) {
+
+  // If no value is specified, return the first value.
+  if (arguments.length < 2) return this.node()[name];
+
+  function propertyNull() {
+    delete this[name];
+  }
+
+  function propertyConstant() {
+    this[name] = value;
+  }
+
+  function propertyFunction() {
+    var x = value.apply(this, arguments);
+    if (x == null) delete this[name];
+    else this[name] = x;
+  }
+
+  return this.each(value == null
+      ? propertyNull : (typeof value === "function"
+      ? propertyFunction : propertyConstant));
+};
+d3_selectionPrototype.text = function(value) {
+  return arguments.length < 1
+      ? this.node().textContent : this.each(typeof value === "function"
+      ? function() { var v = value.apply(this, arguments); this.textContent = v == null ? "" : v; } : value == null
+      ? function() { this.textContent = ""; }
+      : function() { this.textContent = value; });
+};
+d3_selectionPrototype.html = function(value) {
+  return arguments.length < 1
+      ? this.node().innerHTML : this.each(typeof value === "function"
+      ? function() { var v = value.apply(this, arguments); this.innerHTML = v == null ? "" : v; } : value == null
+      ? function() { this.innerHTML = ""; }
+      : function() { this.innerHTML = value; });
+};
+// TODO append(node)?
+// TODO append(function)?
+d3_selectionPrototype.append = function(name) {
+  name = d3.ns.qualify(name);
+
+  function append() {
+    return this.appendChild(document.createElementNS(this.namespaceURI, name));
+  }
+
+  function appendNS() {
+    return this.appendChild(document.createElementNS(name.space, name.local));
+  }
+
+  return this.select(name.local ? appendNS : append);
+};
+// TODO insert(node, function)?
+// TODO insert(function, string)?
+// TODO insert(function, function)?
+d3_selectionPrototype.insert = function(name, before) {
+  name = d3.ns.qualify(name);
+
+  function insert() {
+    return this.insertBefore(
+        document.createElementNS(this.namespaceURI, name),
+        d3_select(before, this));
+  }
+
+  function insertNS() {
+    return this.insertBefore(
+        document.createElementNS(name.space, name.local),
+        d3_select(before, this));
+  }
+
+  return this.select(name.local ? insertNS : insert);
+};
+// TODO remove(selector)?
+// TODO remove(node)?
+// TODO remove(function)?
+d3_selectionPrototype.remove = function() {
+  return this.each(function() {
+    var parent = this.parentNode;
+    if (parent) parent.removeChild(this);
+  });
+};
+// TODO data(null) for clearing data?
+d3_selectionPrototype.data = function(data, join) {
+  var enter = [],
+      update = [],
+      exit = [];
+
+  function bind(group, groupData) {
+    var i,
+        n = group.length,
+        m = groupData.length,
+        n0 = Math.min(n, m),
+        n1 = Math.max(n, m),
+        updateNodes = [],
+        enterNodes = [],
+        exitNodes = [],
+        node,
+        nodeData;
+
+    if (join) {
+      var nodeByKey = {},
+          keys = [],
+          key,
+          j = groupData.length;
+
+      for (i = -1; ++i < n;) {
+        key = join.call(node = group[i], node.__data__, i);
+        if (key in nodeByKey) {
+          exitNodes[j++] = node; // duplicate key
+        } else {
+          nodeByKey[key] = node;
+        }
+        keys.push(key);
+      }
+
+      for (i = -1; ++i < m;) {
+        node = nodeByKey[key = join.call(groupData, nodeData = groupData[i], i)];
+        if (node) {
+          node.__data__ = nodeData;
+          updateNodes[i] = node;
+          enterNodes[i] = exitNodes[i] = null;
+        } else {
+          enterNodes[i] = d3_selection_dataNode(nodeData);
+          updateNodes[i] = exitNodes[i] = null;
+        }
+        delete nodeByKey[key];
+      }
+
+      for (i = -1; ++i < n;) {
+        if (keys[i] in nodeByKey) {
+          exitNodes[i] = group[i];
+        }
+      }
+    } else {
+      for (i = -1; ++i < n0;) {
+        node = group[i];
+        nodeData = groupData[i];
+        if (node) {
+          node.__data__ = nodeData;
+          updateNodes[i] = node;
+          enterNodes[i] = exitNodes[i] = null;
+        } else {
+          enterNodes[i] = d3_selection_dataNode(nodeData);
+          updateNodes[i] = exitNodes[i] = null;
+        }
+      }
+      for (; i < m; ++i) {
+        enterNodes[i] = d3_selection_dataNode(groupData[i]);
+        updateNodes[i] = exitNodes[i] = null;
+      }
+      for (; i < n1; ++i) {
+        exitNodes[i] = group[i];
+        enterNodes[i] = updateNodes[i] = null;
+      }
+    }
+
+    enterNodes.update
+        = updateNodes;
+
+    enterNodes.parentNode
+        = updateNodes.parentNode
+        = exitNodes.parentNode
+        = group.parentNode;
+
+    enter.push(enterNodes);
+    update.push(updateNodes);
+    exit.push(exitNodes);
+  }
+
+  var i = -1,
+      n = this.length,
+      group;
+  if (typeof data === "function") {
+    while (++i < n) {
+      bind(group = this[i], data.call(group, group.parentNode.__data__, i));
+    }
+  } else {
+    while (++i < n) {
+      bind(group = this[i], data);
+    }
+  }
+
+  var selection = d3_selection(update);
+  selection.enter = function() { return d3_selection_enter(enter); };
+  selection.exit = function() { return d3_selection(exit); };
+  return selection;
+};
+
+function d3_selection_dataNode(data) {
+  return {__data__: data};
+}
+d3_selectionPrototype.filter = function(filter) {
+  var subgroups = [],
+      subgroup,
+      group,
+      node;
+
+  if (typeof filter !== "function") filter = d3_selection_filter(filter);
+
+  for (var j = 0, m = this.length; j < m; j++) {
+    subgroups.push(subgroup = []);
+    subgroup.parentNode = (group = this[j]).parentNode;
+    for (var i = 0, n = group.length; i < n; i++) {
+      if ((node = group[i]) && filter.call(node, node.__data__, i)) {
+        subgroup.push(node);
+      }
+    }
+  }
+
+  return d3_selection(subgroups);
+};
+
+function d3_selection_filter(selector) {
+  return function() {
+    return d3_selectMatches(this, selector);
+  };
+}
+d3_selectionPrototype.map = function(map) {
+  return this.each(function() {
+    this.__data__ = map.apply(this, arguments);
+  });
+};
+d3_selectionPrototype.order = function() {
+  for (var j = -1, m = this.length; ++j < m;) {
+    for (var group = this[j], i = group.length - 1, next = group[i], node; --i >= 0;) {
+      if (node = group[i]) {
+        if (next && next !== node.nextSibling) next.parentNode.insertBefore(node, next);
+        next = node;
+      }
+    }
+  }
+  return this;
+};
+d3_selectionPrototype.sort = function(comparator) {
+  comparator = d3_selection_sortComparator.apply(this, arguments);
+  for (var j = -1, m = this.length; ++j < m;) this[j].sort(comparator);
+  return this.order();
+};
+
+function d3_selection_sortComparator(comparator) {
+  if (!arguments.length) comparator = d3.ascending;
+  return function(a, b) {
+    return comparator(a && a.__data__, b && b.__data__);
+  };
+}
+// type can be namespaced, e.g., "click.foo"
+// listener can be null for removal
+d3_selectionPrototype.on = function(type, listener, capture) {
+  if (arguments.length < 3) capture = false;
+
+  // parse the type specifier
+  var name = "__on" + type, i = type.indexOf(".");
+  if (i > 0) type = type.substring(0, i);
+
+  // if called with only one argument, return the current listener
+  if (arguments.length < 2) return (i = this.node()[name]) && i._;
+
+  // remove the old event listener, and add the new event listener
+  return this.each(function(d, i) {
+    var node = this;
+
+    if (node[name]) node.removeEventListener(type, node[name], capture);
+    if (listener) node.addEventListener(type, node[name] = l, capture);
+
+    // wrapped event listener that preserves i
+    function l(e) {
+      var o = d3.event; // Events can be reentrant (e.g., focus).
+      d3.event = e;
+      try {
+        listener.call(node, node.__data__, i);
+      } finally {
+        d3.event = o;
+      }
+    }
+
+    // stash the unwrapped listener for retrieval
+    l._ = listener;
+  });
+};
+d3_selectionPrototype.each = function(callback) {
+  for (var j = -1, m = this.length; ++j < m;) {
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      var node = group[i];
+      if (node) callback.call(node, node.__data__, i, j);
+    }
+  }
+  return this;
+};
+//
+// Note: assigning to the arguments array simultaneously changes the value of
+// the corresponding argument!
+//
+// TODO The `this` argument probably shouldn't be the first argument to the
+// callback, anyway, since it's redundant. However, that will require a major
+// version bump due to backwards compatibility, so I'm not changing it right
+// away.
+//
+d3_selectionPrototype.call = function(callback) {
+  callback.apply(this, (arguments[0] = this, arguments));
+  return this;
+};
+d3_selectionPrototype.empty = function() {
+  return !this.node();
+};
+d3_selectionPrototype.node = function(callback) {
+  for (var j = 0, m = this.length; j < m; j++) {
+    for (var group = this[j], i = 0, n = group.length; i < n; i++) {
+      var node = group[i];
+      if (node) return node;
+    }
+  }
+  return null;
+};
+d3_selectionPrototype.transition = function() {
+  var subgroups = [],
+      subgroup,
+      node;
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    subgroups.push(subgroup = []);
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      subgroup.push((node = group[i]) ? {node: node, delay: 0, duration: 250} : null);
+    }
+  }
+
+  return d3_transition(subgroups, d3_transitionInheritId || ++d3_transitionId, Date.now());
+};
+var d3_selectionRoot = d3_selection([[document]]);
+
+d3_selectionRoot[0].parentNode = d3_selectRoot;
+
+// TODO fast singleton implementation!
+// TODO select(function)
+d3.select = function(selector) {
+  return typeof selector === "string"
+      ? d3_selectionRoot.select(selector)
+      : d3_selection([[selector]]); // assume node
+};
+
+// TODO selectAll(function)
+d3.selectAll = function(selector) {
+  return typeof selector === "string"
+      ? d3_selectionRoot.selectAll(selector)
+      : d3_selection([d3_array(selector)]); // assume node[]
+};
+function d3_selection_enter(selection) {
+  d3_arraySubclass(selection, d3_selection_enterPrototype);
+  return selection;
+}
+
+var d3_selection_enterPrototype = [];
+
+d3_selection_enterPrototype.append = d3_selectionPrototype.append;
+d3_selection_enterPrototype.insert = d3_selectionPrototype.insert;
+d3_selection_enterPrototype.empty = d3_selectionPrototype.empty;
+d3_selection_enterPrototype.node = d3_selectionPrototype.node;
+d3_selection_enterPrototype.select = function(selector) {
+  var subgroups = [],
+      subgroup,
+      subnode,
+      upgroup,
+      group,
+      node;
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    upgroup = (group = this[j]).update;
+    subgroups.push(subgroup = []);
+    subgroup.parentNode = group.parentNode;
+    for (var i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) {
+        subgroup.push(upgroup[i] = subnode = selector.call(group.parentNode, node.__data__, i));
+        subnode.__data__ = node.__data__;
+      } else {
+        subgroup.push(null);
+      }
+    }
+  }
+
+  return d3_selection(subgroups);
+};
+function d3_transition(groups, id, time) {
+  d3_arraySubclass(groups, d3_transitionPrototype);
+
+  var tweens = {},
+      event = d3.dispatch("start", "end"),
+      ease = d3_transitionEase;
+
+  groups.id = id;
+
+  groups.time = time;
+
+  groups.tween = function(name, tween) {
+    if (arguments.length < 2) return tweens[name];
+    if (tween == null) delete tweens[name];
+    else tweens[name] = tween;
+    return groups;
+  };
+
+  groups.ease = function(value) {
+    if (!arguments.length) return ease;
+    ease = typeof value === "function" ? value : d3.ease.apply(d3, arguments);
+    return groups;
+  };
+
+  groups.each = function(type, listener) {
+    if (arguments.length < 2) return d3_transition_each.call(groups, type);
+    event.on(type, listener);
+    return groups;
+  };
+
+  d3.timer(function(elapsed) {
+    groups.each(function(d, i, j) {
+      var tweened = [],
+          node = this,
+          delay = groups[j][i].delay,
+          duration = groups[j][i].duration,
+          lock = node.__transition__ || (node.__transition__ = {active: 0, count: 0});
+
+      ++lock.count;
+
+      delay <= elapsed ? start(elapsed) : d3.timer(start, delay, time);
+
+      function start(elapsed) {
+        if (lock.active > id) return stop();
+        lock.active = id;
+
+        for (var tween in tweens) {
+          if (tween = tweens[tween].call(node, d, i)) {
+            tweened.push(tween);
+          }
+        }
+
+        event.start.call(node, d, i);
+        if (!tick(elapsed)) d3.timer(tick, 0, time);
+        return 1;
+      }
+
+      function tick(elapsed) {
+        if (lock.active !== id) return stop();
+
+        var t = (elapsed - delay) / duration,
+            e = ease(t),
+            n = tweened.length;
+
+        while (n > 0) {
+          tweened[--n].call(node, e);
+        }
+
+        if (t >= 1) {
+          stop();
+          d3_transitionInheritId = id;
+          event.end.call(node, d, i);
+          d3_transitionInheritId = 0;
+          return 1;
+        }
+      }
+
+      function stop() {
+        if (!--lock.count) delete node.__transition__;
+        return 1;
+      }
+    });
+    return 1;
+  }, 0, time);
+
+  return groups;
+}
+
+var d3_transitionRemove = {};
+
+function d3_transitionNull(d, i, a) {
+  return a != "" && d3_transitionRemove;
+}
+
+function d3_transitionTween(name, b) {
+  var interpolate = d3_interpolateByName(name);
+
+  function transitionFunction(d, i, a) {
+    var v = b.call(this, d, i);
+    return v == null
+        ? a != "" && d3_transitionRemove
+        : a != v && interpolate(a, v);
+  }
+
+  function transitionString(d, i, a) {
+    return a != b && interpolate(a, b);
+  }
+
+  return typeof b === "function" ? transitionFunction
+      : b == null ? d3_transitionNull
+      : (b += "", transitionString);
+}
+
+var d3_transitionPrototype = [],
+    d3_transitionId = 0,
+    d3_transitionInheritId = 0,
+    d3_transitionEase = d3.ease("cubic-in-out");
+
+d3_transitionPrototype.call = d3_selectionPrototype.call;
+
+d3.transition = function() {
+  return d3_selectionRoot.transition();
+};
+
+d3.transition.prototype = d3_transitionPrototype;
+d3_transitionPrototype.select = function(selector) {
+  var subgroups = [],
+      subgroup,
+      subnode,
+      node;
+
+  if (typeof selector !== "function") selector = d3_selection_selector(selector);
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    subgroups.push(subgroup = []);
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      if ((node = group[i]) && (subnode = selector.call(node.node, node.node.__data__, i))) {
+        if ("__data__" in node.node) subnode.__data__ = node.node.__data__;
+        subgroup.push({node: subnode, delay: node.delay, duration: node.duration});
+      } else {
+        subgroup.push(null);
+      }
+    }
+  }
+
+  return d3_transition(subgroups, this.id, this.time).ease(this.ease());
+};
+d3_transitionPrototype.selectAll = function(selector) {
+  var subgroups = [],
+      subgroup,
+      subnodes,
+      node;
+
+  if (typeof selector !== "function") selector = d3_selection_selectorAll(selector);
+
+  for (var j = -1, m = this.length; ++j < m;) {
+    for (var group = this[j], i = -1, n = group.length; ++i < n;) {
+      if (node = group[i]) {
+        subnodes = selector.call(node.node, node.node.__data__, i);
+        subgroups.push(subgroup = []);
+        for (var k = -1, o = subnodes.length; ++k < o;) {
+          subgroup.push({node: subnodes[k], delay: node.delay, duration: node.duration});
+        }
+      }
+    }
+  }
+
+  return d3_transition(subgroups, this.id, this.time).ease(this.ease());
+};
+d3_transitionPrototype.attr = function(name, value) {
+  return this.attrTween(name, d3_transitionTween(name, value));
+};
+
+d3_transitionPrototype.attrTween = function(nameNS, tween) {
+  var name = d3.ns.qualify(nameNS);
+
+  function attrTween(d, i) {
+    var f = tween.call(this, d, i, this.getAttribute(name));
+    return f === d3_transitionRemove
+        ? (this.removeAttribute(name), null)
+        : f && function(t) { this.setAttribute(name, f(t)); };
+  }
+
+  function attrTweenNS(d, i) {
+    var f = tween.call(this, d, i, this.getAttributeNS(name.space, name.local));
+    return f === d3_transitionRemove
+        ? (this.removeAttributeNS(name.space, name.local), null)
+        : f && function(t) { this.setAttributeNS(name.space, name.local, f(t)); };
+  }
+
+  return this.tween("attr." + nameNS, name.local ? attrTweenNS : attrTween);
+};
+d3_transitionPrototype.style = function(name, value, priority) {
+  if (arguments.length < 3) priority = "";
+  return this.styleTween(name, d3_transitionTween(name, value), priority);
+};
+
+d3_transitionPrototype.styleTween = function(name, tween, priority) {
+  if (arguments.length < 3) priority = "";
+  return this.tween("style." + name, function(d, i) {
+    var f = tween.call(this, d, i, window.getComputedStyle(this, null).getPropertyValue(name));
+    return f === d3_transitionRemove
+        ? (this.style.removeProperty(name), null)
+        : f && function(t) { this.style.setProperty(name, f(t), priority); };
+  });
+};
+d3_transitionPrototype.text = function(value) {
+  return this.tween("text", function(d, i) {
+    this.textContent = typeof value === "function"
+        ? value.call(this, d, i)
+        : value;
+  });
+};
+d3_transitionPrototype.remove = function() {
+  return this.each("end.transition", function() {
+    var p;
+    if (!this.__transition__ && (p = this.parentNode)) p.removeChild(this);
+  });
+};
+d3_transitionPrototype.delay = function(value) {
+  var groups = this;
+  return groups.each(typeof value === "function"
+      ? function(d, i, j) { groups[j][i].delay = +value.apply(this, arguments); }
+      : (value = +value, function(d, i, j) { groups[j][i].delay = value; }));
+};
+d3_transitionPrototype.duration = function(value) {
+  var groups = this;
+  return groups.each(typeof value === "function"
+      ? function(d, i, j) { groups[j][i].duration = +value.apply(this, arguments); }
+      : (value = +value, function(d, i, j) { groups[j][i].duration = value; }));
+};
+function d3_transition_each(callback) {
+  for (var j = 0, m = this.length; j < m; j++) {
+    for (var group = this[j], i = 0, n = group.length; i < n; i++) {
+      var node = group[i];
+      if (node) callback.call(node = node.node, node.__data__, i, j);
+    }
+  }
+  return this;
+}
+d3_transitionPrototype.transition = function() {
+  return this.select(d3_this);
+};
+var d3_timer_queue = null,
+    d3_timer_interval, // is an interval (or frame) active?
+    d3_timer_timeout; // is a timeout active?
+
+// The timer will continue to fire until callback returns true.
+d3.timer = function(callback, delay, then) {
+  var found = false,
+      t0,
+      t1 = d3_timer_queue;
+
+  if (arguments.length < 3) {
+    if (arguments.length < 2) delay = 0;
+    else if (!isFinite(delay)) return;
+    then = Date.now();
+  }
+
+  // See if the callback's already in the queue.
+  while (t1) {
+    if (t1.callback === callback) {
+      t1.then = then;
+      t1.delay = delay;
+      found = true;
+      break;
+    }
+    t0 = t1;
+    t1 = t1.next;
+  }
+
+  // Otherwise, add the callback to the queue.
+  if (!found) d3_timer_queue = {
+    callback: callback,
+    then: then,
+    delay: delay,
+    next: d3_timer_queue
+  };
+
+  // Start animatin'!
+  if (!d3_timer_interval) {
+    d3_timer_timeout = clearTimeout(d3_timer_timeout);
+    d3_timer_interval = 1;
+    d3_timer_frame(d3_timer_step);
+  }
+}
+
+function d3_timer_step() {
+  var elapsed,
+      now = Date.now(),
+      t1 = d3_timer_queue;
+
+  while (t1) {
+    elapsed = now - t1.then;
+    if (elapsed >= t1.delay) t1.flush = t1.callback(elapsed);
+    t1 = t1.next;
+  }
+
+  var delay = d3_timer_flush() - now;
+  if (delay > 24) {
+    if (isFinite(delay)) {
+      clearTimeout(d3_timer_timeout);
+      d3_timer_timeout = setTimeout(d3_timer_step, delay);
+    }
+    d3_timer_interval = 0;
+  } else {
+    d3_timer_interval = 1;
+    d3_timer_frame(d3_timer_step);
+  }
+}
+
+d3.timer.flush = function() {
+  var elapsed,
+      now = Date.now(),
+      t1 = d3_timer_queue;
+
+  while (t1) {
+    elapsed = now - t1.then;
+    if (!t1.delay) t1.flush = t1.callback(elapsed);
+    t1 = t1.next;
+  }
+
+  d3_timer_flush();
+};
+
+// Flush after callbacks, to avoid concurrent queue modification.
+function d3_timer_flush() {
+  var t0 = null,
+      t1 = d3_timer_queue,
+      then = Infinity;
+  while (t1) {
+    if (t1.flush) {
+      t1 = t0 ? t0.next = t1.next : d3_timer_queue = t1.next;
+    } else {
+      then = Math.min(then, t1.then + t1.delay);
+      t1 = (t0 = t1).next;
+    }
+  }
+  return then;
+}
+
+var d3_timer_frame = window.requestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.oRequestAnimationFrame
+    || window.msRequestAnimationFrame
+    || function(callback) { setTimeout(callback, 17); };
+d3.transform = function(string) {
+  var g = document.createElementNS(d3.ns.prefix.svg, "g"),
+      identity = {a: 1, b: 0, c: 0, d: 1, e: 0, f: 0};
+  return (d3.transform = function(string) {
+    g.setAttribute("transform", string);
+    var t = g.transform.baseVal.consolidate();
+    return new d3_transform(t ? t.matrix : identity);
+  })(string);
+};
+
+// Compute x-scale and normalize the first row.
+// Compute shear and make second row orthogonal to first.
+// Compute y-scale and normalize the second row.
+// Finally, compute the rotation.
+function d3_transform(m) {
+  var r0 = [m.a, m.b],
+      r1 = [m.c, m.d],
+      kx = d3_transformNormalize(r0),
+      kz = d3_transformDot(r0, r1),
+      ky = d3_transformNormalize(d3_transformCombine(r1, r0, -kz)) || 0;
+  if (r0[0] * r1[1] < r1[0] * r0[1]) {
+    r0[0] *= -1;
+    r0[1] *= -1;
+    kx *= -1;
+    kz *= -1;
+  }
+  this.rotate = (kx ? Math.atan2(r0[1], r0[0]) : Math.atan2(-r1[0], r1[1])) * d3_transformDegrees;
+  this.translate = [m.e, m.f];
+  this.scale = [kx, ky];
+  this.skew = ky ? Math.atan2(kz, ky) * d3_transformDegrees : 0;
+};
+
+d3_transform.prototype.toString = function() {
+  return "translate(" + this.translate
+      + ")rotate(" + this.rotate
+      + ")skewX(" + this.skew
+      + ")scale(" + this.scale
+      + ")";
+};
+
+function d3_transformDot(a, b) {
+  return a[0] * b[0] + a[1] * b[1];
+}
+
+function d3_transformNormalize(a) {
+  var k = Math.sqrt(d3_transformDot(a, a));
+  if (k) {
+    a[0] /= k;
+    a[1] /= k;
+  }
+  return k;
+}
+
+function d3_transformCombine(a, b, k) {
+  a[0] += k * b[0];
+  a[1] += k * b[1];
+  return a;
+}
+
+var d3_transformDegrees = 180 / Math.PI;
+function d3_noop() {}
+d3.scale = {};
+
+function d3_scaleExtent(domain) {
+  var start = domain[0], stop = domain[domain.length - 1];
+  return start < stop ? [start, stop] : [stop, start];
+}
+
+function d3_scaleRange(scale) {
+  return scale.rangeExtent ? scale.rangeExtent() : d3_scaleExtent(scale.range());
+}
+function d3_scale_nice(domain, nice) {
+  var i0 = 0,
+      i1 = domain.length - 1,
+      x0 = domain[i0],
+      x1 = domain[i1],
+      dx;
+
+  if (x1 < x0) {
+    dx = i0; i0 = i1; i1 = dx;
+    dx = x0; x0 = x1; x1 = dx;
+  }
+
+  if (dx = x1 - x0) {
+    nice = nice(dx);
+    domain[i0] = nice.floor(x0);
+    domain[i1] = nice.ceil(x1);
+  }
+
+  return domain;
+}
+
+function d3_scale_niceDefault() {
+  return Math;
+}
+d3.scale.linear = function() {
+  return d3_scale_linear([0, 1], [0, 1], d3.interpolate, false);
+};
+
+function d3_scale_linear(domain, range, interpolate, clamp) {
+  var output,
+      input;
+
+  function rescale() {
+    var linear = domain.length == 2 ? d3_scale_bilinear : d3_scale_polylinear,
+        uninterpolate = clamp ? d3_uninterpolateClamp : d3_uninterpolateNumber;
+    output = linear(domain, range, uninterpolate, interpolate);
+    input = linear(range, domain, uninterpolate, d3.interpolate);
+    return scale;
+  }
+
+  function scale(x) {
+    return output(x);
+  }
+
+  // Note: requires range is coercible to number!
+  scale.invert = function(y) {
+    return input(y);
+  };
+
+  scale.domain = function(x) {
+    if (!arguments.length) return domain;
+    domain = x.map(Number);
+    return rescale();
+  };
+
+  scale.range = function(x) {
+    if (!arguments.length) return range;
+    range = x;
+    return rescale();
+  };
+
+  scale.rangeRound = function(x) {
+    return scale.range(x).interpolate(d3.interpolateRound);
+  };
+
+  scale.clamp = function(x) {
+    if (!arguments.length) return clamp;
+    clamp = x;
+    return rescale();
+  };
+
+  scale.interpolate = function(x) {
+    if (!arguments.length) return interpolate;
+    interpolate = x;
+    return rescale();
+  };
+
+  scale.ticks = function(m) {
+    return d3_scale_linearTicks(domain, m);
+  };
+
+  scale.tickFormat = function(m) {
+    return d3_scale_linearTickFormat(domain, m);
+  };
+
+  scale.nice = function() {
+    d3_scale_nice(domain, d3_scale_linearNice);
+    return rescale();
+  };
+
+  scale.copy = function() {
+    return d3_scale_linear(domain, range, interpolate, clamp);
+  };
+
+  return rescale();
+};
+
+function d3_scale_linearRebind(scale, linear) {
+  return d3.rebind(scale, linear, "range", "rangeRound", "interpolate", "clamp");
+}
+
+function d3_scale_linearNice(dx) {
+  dx = Math.pow(10, Math.round(Math.log(dx) / Math.LN10) - 1);
+  return {
+    floor: function(x) { return Math.floor(x / dx) * dx; },
+    ceil: function(x) { return Math.ceil(x / dx) * dx; }
+  };
+}
+
+function d3_scale_linearTickRange(domain, m) {
+  var extent = d3_scaleExtent(domain),
+      span = extent[1] - extent[0],
+      step = Math.pow(10, Math.floor(Math.log(span / m) / Math.LN10)),
+      err = m / span * step;
+
+  // Filter ticks to get closer to the desired count.
+  if (err <= .15) step *= 10;
+  else if (err <= .35) step *= 5;
+  else if (err <= .75) step *= 2;
+
+  // Round start and stop values to step interval.
+  extent[0] = Math.ceil(extent[0] / step) * step;
+  extent[1] = Math.floor(extent[1] / step) * step + step * .5; // inclusive
+  extent[2] = step;
+  return extent;
+}
+
+function d3_scale_linearTicks(domain, m) {
+  return d3.range.apply(d3, d3_scale_linearTickRange(domain, m));
+}
+
+function d3_scale_linearTickFormat(domain, m) {
+  return d3.format(",." + Math.max(0, -Math.floor(Math.log(d3_scale_linearTickRange(domain, m)[2]) / Math.LN10 + .01)) + "f");
+}
+function d3_scale_bilinear(domain, range, uninterpolate, interpolate) {
+  var u = uninterpolate(domain[0], domain[1]),
+      i = interpolate(range[0], range[1]);
+  return function(x) {
+    return i(u(x));
+  };
+}
+function d3_scale_polylinear(domain, range, uninterpolate, interpolate) {
+  var u = [],
+      i = [],
+      j = 0,
+      k = domain.length - 1;
+
+  // Handle descending domains.
+  if (domain[k] < domain[0]) {
+    domain = domain.slice().reverse();
+    range = range.slice().reverse();
+  }
+
+  while (++j <= k) {
+    u.push(uninterpolate(domain[j - 1], domain[j]));
+    i.push(interpolate(range[j - 1], range[j]));
+  }
+
+  return function(x) {
+    var j = d3.bisect(domain, x, 1, k) - 1;
+    return i[j](u[j](x));
+  };
+}
+d3.scale.log = function() {
+  return d3_scale_log(d3.scale.linear(), d3_scale_logp);
+};
+
+function d3_scale_log(linear, log) {
+  var pow = log.pow;
+
+  function scale(x) {
+    return linear(log(x));
+  }
+
+  scale.invert = function(x) {
+    return pow(linear.invert(x));
+  };
+
+  scale.domain = function(x) {
+    if (!arguments.length) return linear.domain().map(pow);
+    log = x[0] < 0 ? d3_scale_logn : d3_scale_logp;
+    pow = log.pow;
+    linear.domain(x.map(log));
+    return scale;
+  };
+
+  scale.nice = function() {
+    linear.domain(d3_scale_nice(linear.domain(), d3_scale_niceDefault));
+    return scale;
+  };
+
+  scale.ticks = function() {
+    var extent = d3_scaleExtent(linear.domain()),
+        ticks = [];
+    if (extent.every(isFinite)) {
+      var i = Math.floor(extent[0]),
+          j = Math.ceil(extent[1]),
+          u = pow(extent[0]),
+          v = pow(extent[1]);
+      if (log === d3_scale_logn) {
+        ticks.push(pow(i));
+        for (; i++ < j;) for (var k = 9; k > 0; k--) ticks.push(pow(i) * k);
+      } else {
+        for (; i < j; i++) for (var k = 1; k < 10; k++) ticks.push(pow(i) * k);
+        ticks.push(pow(i));
+      }
+      for (i = 0; ticks[i] < u; i++) {} // strip small values
+      for (j = ticks.length; ticks[j - 1] > v; j--) {} // strip big values
+      ticks = ticks.slice(i, j);
+    }
+    return ticks;
+  };
+
+  scale.tickFormat = function(n, format) {
+    if (arguments.length < 2) format = d3_scale_logFormat;
+    if (arguments.length < 1) return format;
+    var k = n / scale.ticks().length,
+        f = log === d3_scale_logn ? (e = -1e-12, Math.floor) : (e = 1e-12, Math.ceil),
+        e;
+    return function(d) {
+      return d / pow(f(log(d) + e)) < k ? format(d) : "";
+    };
+  };
+
+  scale.copy = function() {
+    return d3_scale_log(linear.copy(), log);
+  };
+
+  return d3_scale_linearRebind(scale, linear);
+};
+
+var d3_scale_logFormat = d3.format(".0e");
+
+function d3_scale_logp(x) {
+  return Math.log(x < 0 ? 0 : x) / Math.LN10;
+}
+
+function d3_scale_logn(x) {
+  return -Math.log(x > 0 ? 0 : -x) / Math.LN10;
+}
+
+d3_scale_logp.pow = function(x) {
+  return Math.pow(10, x);
+};
+
+d3_scale_logn.pow = function(x) {
+  return -Math.pow(10, -x);
+};
+d3.scale.pow = function() {
+  return d3_scale_pow(d3.scale.linear(), 1);
+};
+
+function d3_scale_pow(linear, exponent) {
+  var powp = d3_scale_powPow(exponent),
+      powb = d3_scale_powPow(1 / exponent);
+
+  function scale(x) {
+    return linear(powp(x));
+  }
+
+  scale.invert = function(x) {
+    return powb(linear.invert(x));
+  };
+
+  scale.domain = function(x) {
+    if (!arguments.length) return linear.domain().map(powb);
+    linear.domain(x.map(powp));
+    return scale;
+  };
+
+  scale.ticks = function(m) {
+    return d3_scale_linearTicks(scale.domain(), m);
+  };
+
+  scale.tickFormat = function(m) {
+    return d3_scale_linearTickFormat(scale.domain(), m);
+  };
+
+  scale.nice = function() {
+    return scale.domain(d3_scale_nice(scale.domain(), d3_scale_linearNice));
+  };
+
+  scale.exponent = function(x) {
+    if (!arguments.length) return exponent;
+    var domain = scale.domain();
+    powp = d3_scale_powPow(exponent = x);
+    powb = d3_scale_powPow(1 / exponent);
+    return scale.domain(domain);
+  };
+
+  scale.copy = function() {
+    return d3_scale_pow(linear.copy(), exponent);
+  };
+
+  return d3_scale_linearRebind(scale, linear);
+};
+
+function d3_scale_powPow(e) {
+  return function(x) {
+    return x < 0 ? -Math.pow(-x, e) : Math.pow(x, e);
+  };
+}
+d3.scale.sqrt = function() {
+  return d3.scale.pow().exponent(.5);
+};
+d3.scale.ordinal = function() {
+  return d3_scale_ordinal([], {t: "range", x: []});
+};
+
+function d3_scale_ordinal(domain, ranger) {
+  var index,
+      range,
+      rangeBand;
+
+  function scale(x) {
+    return range[((index[x] || (index[x] = domain.push(x))) - 1) % range.length];
+  }
+
+  function steps(start, step) {
+    return d3.range(domain.length).map(function(i) { return start + step * i; });
+  }
+
+  scale.domain = function(x) {
+    if (!arguments.length) return domain;
+    domain = [];
+    index = {};
+    var i = -1, n = x.length, xi;
+    while (++i < n) if (!index[xi = x[i]]) index[xi] = domain.push(xi);
+    return scale[ranger.t](ranger.x, ranger.p);
+  };
+
+  scale.range = function(x) {
+    if (!arguments.length) return range;
+    range = x;
+    rangeBand = 0;
+    ranger = {t: "range", x: x};
+    return scale;
+  };
+
+  scale.rangePoints = function(x, padding) {
+    if (arguments.length < 2) padding = 0;
+    var start = x[0],
+        stop = x[1],
+        step = (stop - start) / (domain.length - 1 + padding);
+    range = steps(domain.length < 2 ? (start + stop) / 2 : start + step * padding / 2, step);
+    rangeBand = 0;
+    ranger = {t: "rangePoints", x: x, p: padding};
+    return scale;
+  };
+
+  scale.rangeBands = function(x, padding) {
+    if (arguments.length < 2) padding = 0;
+    var start = x[0],
+        stop = x[1],
+        step = (stop - start) / (domain.length + padding);
+    range = steps(start + step * padding, step);
+    rangeBand = step * (1 - padding);
+    ranger = {t: "rangeBands", x: x, p: padding};
+    return scale;
+  };
+
+  scale.rangeRoundBands = function(x, padding) {
+    if (arguments.length < 2) padding = 0;
+    var start = x[0],
+        stop = x[1],
+        step = Math.floor((stop - start) / (domain.length + padding));
+    range = steps(start + Math.round((stop - start - (domain.length - padding) * step) / 2), step);
+    rangeBand = Math.round(step * (1 - padding));
+    ranger = {t: "rangeRoundBands", x: x, p: padding};
+    return scale;
+  };
+
+  scale.rangeBand = function() {
+    return rangeBand;
+  };
+
+  scale.rangeExtent = function() {
+    return ranger.t === "range" ? d3_scaleExtent(ranger.x) : ranger.x;
+  };
+
+  scale.copy = function() {
+    return d3_scale_ordinal(domain, ranger);
+  };
+
+  return scale.domain(domain);
+};
+/*
+ * This product includes color specifications and designs developed by Cynthia
+ * Brewer (http://colorbrewer.org/). See lib/colorbrewer for more information.
+ */
+
+d3.scale.category10 = function() {
+  return d3.scale.ordinal().range(d3_category10);
+};
+
+d3.scale.category20 = function() {
+  return d3.scale.ordinal().range(d3_category20);
+};
+
+d3.scale.category20b = function() {
+  return d3.scale.ordinal().range(d3_category20b);
+};
+
+d3.scale.category20c = function() {
+  return d3.scale.ordinal().range(d3_category20c);
+};
+
+var d3_category10 = [
+  "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
+  "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
+];
+
+var d3_category20 = [
+  "#1f77b4", "#aec7e8",
+  "#ff7f0e", "#ffbb78",
+  "#2ca02c", "#98df8a",
+  "#d62728", "#ff9896",
+  "#9467bd", "#c5b0d5",
+  "#8c564b", "#c49c94",
+  "#e377c2", "#f7b6d2",
+  "#7f7f7f", "#c7c7c7",
+  "#bcbd22", "#dbdb8d",
+  "#17becf", "#9edae5"
+];
+
+var d3_category20b = [
+  "#393b79", "#5254a3", "#6b6ecf", "#9c9ede",
+  "#637939", "#8ca252", "#b5cf6b", "#cedb9c",
+  "#8c6d31", "#bd9e39", "#e7ba52", "#e7cb94",
+  "#843c39", "#ad494a", "#d6616b", "#e7969c",
+  "#7b4173", "#a55194", "#ce6dbd", "#de9ed6"
+];
+
+var d3_category20c = [
+  "#3182bd", "#6baed6", "#9ecae1", "#c6dbef",
+  "#e6550d", "#fd8d3c", "#fdae6b", "#fdd0a2",
+  "#31a354", "#74c476", "#a1d99b", "#c7e9c0",
+  "#756bb1", "#9e9ac8", "#bcbddc", "#dadaeb",
+  "#636363", "#969696", "#bdbdbd", "#d9d9d9"
+];
+d3.scale.quantile = function() {
+  return d3_scale_quantile([], []);
+};
+
+function d3_scale_quantile(domain, range) {
+  var thresholds;
+
+  function rescale() {
+    var k = 0,
+        n = domain.length,
+        q = range.length;
+    thresholds = [];
+    while (++k < q) thresholds[k - 1] = d3.quantile(domain, k / q);
+    return scale;
+  }
+
+  function scale(x) {
+    if (isNaN(x = +x)) return NaN;
+    return range[d3.bisect(thresholds, x)];
+  }
+
+  scale.domain = function(x) {
+    if (!arguments.length) return domain;
+    domain = x.filter(function(d) { return !isNaN(d); }).sort(d3.ascending);
+    return rescale();
+  };
+
+  scale.range = function(x) {
+    if (!arguments.length) return range;
+    range = x;
+    return rescale();
+  };
+
+  scale.quantiles = function() {
+    return thresholds;
+  };
+
+  scale.copy = function() {
+    return d3_scale_quantile(domain, range); // copy on write!
+  };
+
+  return rescale();
+};
+d3.scale.quantize = function() {
+  return d3_scale_quantize(0, 1, [0, 1]);
+};
+
+function d3_scale_quantize(x0, x1, range) {
+  var kx, i;
+
+  function scale(x) {
+    return range[Math.max(0, Math.min(i, Math.floor(kx * (x - x0))))];
+  }
+
+  function rescale() {
+    kx = range.length / (x1 - x0);
+    i = range.length - 1;
+    return scale;
+  }
+
+  scale.domain = function(x) {
+    if (!arguments.length) return [x0, x1];
+    x0 = +x[0];
+    x1 = +x[x.length - 1];
+    return rescale();
+  };
+
+  scale.range = function(x) {
+    if (!arguments.length) return range;
+    range = x;
+    return rescale();
+  };
+
+  scale.copy = function() {
+    return d3_scale_quantize(x0, x1, range); // copy on write
+  };
+
+  return rescale();
+};
+d3.svg = {};
+d3.svg.arc = function() {
+  var innerRadius = d3_svg_arcInnerRadius,
+      outerRadius = d3_svg_arcOuterRadius,
+      startAngle = d3_svg_arcStartAngle,
+      endAngle = d3_svg_arcEndAngle;
+
+  function arc() {
+    var r0 = innerRadius.apply(this, arguments),
+        r1 = outerRadius.apply(this, arguments),
+        a0 = startAngle.apply(this, arguments) + d3_svg_arcOffset,
+        a1 = endAngle.apply(this, arguments) + d3_svg_arcOffset,
+        da = (a1 < a0 && (da = a0, a0 = a1, a1 = da), a1 - a0),
+        df = da < Math.PI ? "0" : "1",
+        c0 = Math.cos(a0),
+        s0 = Math.sin(a0),
+        c1 = Math.cos(a1),
+        s1 = Math.sin(a1);
+    return da >= d3_svg_arcMax
+      ? (r0
+      ? "M0," + r1
+      + "A" + r1 + "," + r1 + " 0 1,1 0," + (-r1)
+      + "A" + r1 + "," + r1 + " 0 1,1 0," + r1
+      + "M0," + r0
+      + "A" + r0 + "," + r0 + " 0 1,0 0," + (-r0)
+      + "A" + r0 + "," + r0 + " 0 1,0 0," + r0
+      + "Z"
+      : "M0," + r1
+      + "A" + r1 + "," + r1 + " 0 1,1 0," + (-r1)
+      + "A" + r1 + "," + r1 + " 0 1,1 0," + r1
+      + "Z")
+      : (r0
+      ? "M" + r1 * c0 + "," + r1 * s0
+      + "A" + r1 + "," + r1 + " 0 " + df + ",1 " + r1 * c1 + "," + r1 * s1
+      + "L" + r0 * c1 + "," + r0 * s1
+      + "A" + r0 + "," + r0 + " 0 " + df + ",0 " + r0 * c0 + "," + r0 * s0
+      + "Z"
+      : "M" + r1 * c0 + "," + r1 * s0
+      + "A" + r1 + "," + r1 + " 0 " + df + ",1 " + r1 * c1 + "," + r1 * s1
+      + "L0,0"
+      + "Z");
+  }
+
+  arc.innerRadius = function(v) {
+    if (!arguments.length) return innerRadius;
+    innerRadius = d3.functor(v);
+    return arc;
+  };
+
+  arc.outerRadius = function(v) {
+    if (!arguments.length) return outerRadius;
+    outerRadius = d3.functor(v);
+    return arc;
+  };
+
+  arc.startAngle = function(v) {
+    if (!arguments.length) return startAngle;
+    startAngle = d3.functor(v);
+    return arc;
+  };
+
+  arc.endAngle = function(v) {
+    if (!arguments.length) return endAngle;
+    endAngle = d3.functor(v);
+    return arc;
+  };
+
+  arc.centroid = function() {
+    var r = (innerRadius.apply(this, arguments)
+        + outerRadius.apply(this, arguments)) / 2,
+        a = (startAngle.apply(this, arguments)
+        + endAngle.apply(this, arguments)) / 2 + d3_svg_arcOffset;
+    return [Math.cos(a) * r, Math.sin(a) * r];
+  };
+
+  return arc;
+};
+
+var d3_svg_arcOffset = -Math.PI / 2,
+    d3_svg_arcMax = 2 * Math.PI - 1e-6;
+
+function d3_svg_arcInnerRadius(d) {
+  return d.innerRadius;
+}
+
+function d3_svg_arcOuterRadius(d) {
+  return d.outerRadius;
+}
+
+function d3_svg_arcStartAngle(d) {
+  return d.startAngle;
+}
+
+function d3_svg_arcEndAngle(d) {
+  return d.endAngle;
+}
+function d3_svg_line(projection) {
+  var x = d3_svg_lineX,
+      y = d3_svg_lineY,
+      interpolate = "linear",
+      interpolator = d3_svg_lineInterpolators[interpolate],
+      tension = .7;
+
+  function line(d) {
+    return d.length < 1 ? null : "M" + interpolator(projection(d3_svg_linePoints(this, d, x, y)), tension);
+  }
+
+  line.x = function(v) {
+    if (!arguments.length) return x;
+    x = v;
+    return line;
+  };
+
+  line.y = function(v) {
+    if (!arguments.length) return y;
+    y = v;
+    return line;
+  };
+
+  line.interpolate = function(v) {
+    if (!arguments.length) return interpolate;
+    interpolator = d3_svg_lineInterpolators[interpolate = v];
+    return line;
+  };
+
+  line.tension = function(v) {
+    if (!arguments.length) return tension;
+    tension = v;
+    return line;
+  };
+
+  return line;
+}
+
+d3.svg.line = function() {
+  return d3_svg_line(Object);
+};
+
+// Converts the specified array of data into an array of points
+// (x-y tuples), by evaluating the specified `x` and `y` functions on each
+// data point. The `this` context of the evaluated functions is the specified
+// "self" object; each function is passed the current datum and index.
+function d3_svg_linePoints(self, d, x, y) {
+  var points = [],
+      i = -1,
+      n = d.length,
+      fx = typeof x === "function",
+      fy = typeof y === "function",
+      value;
+  if (fx && fy) {
+    while (++i < n) points.push([
+      x.call(self, value = d[i], i),
+      y.call(self, value, i)
+    ]);
+  } else if (fx) {
+    while (++i < n) points.push([x.call(self, d[i], i), y]);
+  } else if (fy) {
+    while (++i < n) points.push([x, y.call(self, d[i], i)]);
+  } else {
+    while (++i < n) points.push([x, y]);
+  }
+  return points;
+}
+
+// The default `x` property, which references d[0].
+function d3_svg_lineX(d) {
+  return d[0];
+}
+
+// The default `y` property, which references d[1].
+function d3_svg_lineY(d) {
+  return d[1];
+}
+
+// The various interpolators supported by the `line` class.
+var d3_svg_lineInterpolators = {
+  "linear": d3_svg_lineLinear,
+  "step-before": d3_svg_lineStepBefore,
+  "step-after": d3_svg_lineStepAfter,
+  "basis": d3_svg_lineBasis,
+  "basis-open": d3_svg_lineBasisOpen,
+  "basis-closed": d3_svg_lineBasisClosed,
+  "bundle": d3_svg_lineBundle,
+  "cardinal": d3_svg_lineCardinal,
+  "cardinal-open": d3_svg_lineCardinalOpen,
+  "cardinal-closed": d3_svg_lineCardinalClosed,
+  "monotone": d3_svg_lineMonotone
+};
+
+// Linear interpolation; generates "L" commands.
+function d3_svg_lineLinear(points) {
+  var i = 0,
+      n = points.length,
+      p = points[0],
+      path = [p[0], ",", p[1]];
+  while (++i < n) path.push("L", (p = points[i])[0], ",", p[1]);
+  return path.join("");
+}
+
+// Step interpolation; generates "H" and "V" commands.
+function d3_svg_lineStepBefore(points) {
+  var i = 0,
+      n = points.length,
+      p = points[0],
+      path = [p[0], ",", p[1]];
+  while (++i < n) path.push("V", (p = points[i])[1], "H", p[0]);
+  return path.join("");
+}
+
+// Step interpolation; generates "H" and "V" commands.
+function d3_svg_lineStepAfter(points) {
+  var i = 0,
+      n = points.length,
+      p = points[0],
+      path = [p[0], ",", p[1]];
+  while (++i < n) path.push("H", (p = points[i])[0], "V", p[1]);
+  return path.join("");
+}
+
+// Open cardinal spline interpolation; generates "C" commands.
+function d3_svg_lineCardinalOpen(points, tension) {
+  return points.length < 4
+      ? d3_svg_lineLinear(points)
+      : points[1] + d3_svg_lineHermite(points.slice(1, points.length - 1),
+        d3_svg_lineCardinalTangents(points, tension));
+}
+
+// Closed cardinal spline interpolation; generates "C" commands.
+function d3_svg_lineCardinalClosed(points, tension) {
+  return points.length < 3
+      ? d3_svg_lineLinear(points)
+      : points[0] + d3_svg_lineHermite((points.push(points[0]), points),
+        d3_svg_lineCardinalTangents([points[points.length - 2]]
+        .concat(points, [points[1]]), tension));
+}
+
+// Cardinal spline interpolation; generates "C" commands.
+function d3_svg_lineCardinal(points, tension, closed) {
+  return points.length < 3
+      ? d3_svg_lineLinear(points)
+      : points[0] + d3_svg_lineHermite(points,
+        d3_svg_lineCardinalTangents(points, tension));
+}
+
+// Hermite spline construction; generates "C" commands.
+function d3_svg_lineHermite(points, tangents) {
+  if (tangents.length < 1
+      || (points.length != tangents.length
+      && points.length != tangents.length + 2)) {
+    return d3_svg_lineLinear(points);
+  }
+
+  var quad = points.length != tangents.length,
+      path = "",
+      p0 = points[0],
+      p = points[1],
+      t0 = tangents[0],
+      t = t0,
+      pi = 1;
+
+  if (quad) {
+    path += "Q" + (p[0] - t0[0] * 2 / 3) + "," + (p[1] - t0[1] * 2 / 3)
+        + "," + p[0] + "," + p[1];
+    p0 = points[1];
+    pi = 2;
+  }
+
+  if (tangents.length > 1) {
+    t = tangents[1];
+    p = points[pi];
+    pi++;
+    path += "C" + (p0[0] + t0[0]) + "," + (p0[1] + t0[1])
+        + "," + (p[0] - t[0]) + "," + (p[1] - t[1])
+        + "," + p[0] + "," + p[1];
+    for (var i = 2; i < tangents.length; i++, pi++) {
+      p = points[pi];
+      t = tangents[i];
+      path += "S" + (p[0] - t[0]) + "," + (p[1] - t[1])
+          + "," + p[0] + "," + p[1];
+    }
+  }
+
+  if (quad) {
+    var lp = points[pi];
+    path += "Q" + (p[0] + t[0] * 2 / 3) + "," + (p[1] + t[1] * 2 / 3)
+        + "," + lp[0] + "," + lp[1];
+  }
+
+  return path;
+}
+
+// Generates tangents for a cardinal spline.
+function d3_svg_lineCardinalTangents(points, tension) {
+  var tangents = [],
+      a = (1 - tension) / 2,
+      p0,
+      p1 = points[0],
+      p2 = points[1],
+      i = 1,
+      n = points.length;
+  while (++i < n) {
+    p0 = p1;
+    p1 = p2;
+    p2 = points[i];
+    tangents.push([a * (p2[0] - p0[0]), a * (p2[1] - p0[1])]);
+  }
+  return tangents;
+}
+
+// B-spline interpolation; generates "C" commands.
+function d3_svg_lineBasis(points) {
+  if (points.length < 3) return d3_svg_lineLinear(points);
+  var i = 1,
+      n = points.length,
+      pi = points[0],
+      x0 = pi[0],
+      y0 = pi[1],
+      px = [x0, x0, x0, (pi = points[1])[0]],
+      py = [y0, y0, y0, pi[1]],
+      path = [x0, ",", y0];
+  d3_svg_lineBasisBezier(path, px, py);
+  while (++i < n) {
+    pi = points[i];
+    px.shift(); px.push(pi[0]);
+    py.shift(); py.push(pi[1]);
+    d3_svg_lineBasisBezier(path, px, py);
+  }
+  i = -1;
+  while (++i < 2) {
+    px.shift(); px.push(pi[0]);
+    py.shift(); py.push(pi[1]);
+    d3_svg_lineBasisBezier(path, px, py);
+  }
+  return path.join("");
+}
+
+// Open B-spline interpolation; generates "C" commands.
+function d3_svg_lineBasisOpen(points) {
+  if (points.length < 4) return d3_svg_lineLinear(points);
+  var path = [],
+      i = -1,
+      n = points.length,
+      pi,
+      px = [0],
+      py = [0];
+  while (++i < 3) {
+    pi = points[i];
+    px.push(pi[0]);
+    py.push(pi[1]);
+  }
+  path.push(d3_svg_lineDot4(d3_svg_lineBasisBezier3, px)
+    + "," + d3_svg_lineDot4(d3_svg_lineBasisBezier3, py));
+  --i; while (++i < n) {
+    pi = points[i];
+    px.shift(); px.push(pi[0]);
+    py.shift(); py.push(pi[1]);
+    d3_svg_lineBasisBezier(path, px, py);
+  }
+  return path.join("");
+}
+
+// Closed B-spline interpolation; generates "C" commands.
+function d3_svg_lineBasisClosed(points) {
+  var path,
+      i = -1,
+      n = points.length,
+      m = n + 4,
+      pi,
+      px = [],
+      py = [];
+  while (++i < 4) {
+    pi = points[i % n];
+    px.push(pi[0]);
+    py.push(pi[1]);
+  }
+  path = [
+    d3_svg_lineDot4(d3_svg_lineBasisBezier3, px), ",",
+    d3_svg_lineDot4(d3_svg_lineBasisBezier3, py)
+  ];
+  --i; while (++i < m) {
+    pi = points[i % n];
+    px.shift(); px.push(pi[0]);
+    py.shift(); py.push(pi[1]);
+    d3_svg_lineBasisBezier(path, px, py);
+  }
+  return path.join("");
+}
+
+function d3_svg_lineBundle(points, tension) {
+  var n = points.length - 1,
+      x0 = points[0][0],
+      y0 = points[0][1],
+      dx = points[n][0] - x0,
+      dy = points[n][1] - y0,
+      i = -1,
+      p,
+      t;
+  while (++i <= n) {
+    p = points[i];
+    t = i / n;
+    p[0] = tension * p[0] + (1 - tension) * (x0 + t * dx);
+    p[1] = tension * p[1] + (1 - tension) * (y0 + t * dy);
+  }
+  return d3_svg_lineBasis(points);
+}
+
+// Returns the dot product of the given four-element vectors.
+function d3_svg_lineDot4(a, b) {
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+}
+
+// Matrix to transform basis (b-spline) control points to bezier
+// control points. Derived from FvD 11.2.8.
+var d3_svg_lineBasisBezier1 = [0, 2/3, 1/3, 0],
+    d3_svg_lineBasisBezier2 = [0, 1/3, 2/3, 0],
+    d3_svg_lineBasisBezier3 = [0, 1/6, 2/3, 1/6];
+
+// Pushes a "C" Bézier curve onto the specified path array, given the
+// two specified four-element arrays which define the control points.
+function d3_svg_lineBasisBezier(path, x, y) {
+  path.push(
+      "C", d3_svg_lineDot4(d3_svg_lineBasisBezier1, x),
+      ",", d3_svg_lineDot4(d3_svg_lineBasisBezier1, y),
+      ",", d3_svg_lineDot4(d3_svg_lineBasisBezier2, x),
+      ",", d3_svg_lineDot4(d3_svg_lineBasisBezier2, y),
+      ",", d3_svg_lineDot4(d3_svg_lineBasisBezier3, x),
+      ",", d3_svg_lineDot4(d3_svg_lineBasisBezier3, y));
+}
+
+// Computes the slope from points p0 to p1.
+function d3_svg_lineSlope(p0, p1) {
+  return (p1[1] - p0[1]) / (p1[0] - p0[0]);
+}
+
+// Compute three-point differences for the given points.
+// http://en.wikipedia.org/wiki/Cubic_Hermite_spline#Finite_difference
+function d3_svg_lineFiniteDifferences(points) {
+  var i = 0,
+      j = points.length - 1,
+      m = [],
+      p0 = points[0],
+      p1 = points[1],
+      d = m[0] = d3_svg_lineSlope(p0, p1);
+  while (++i < j) {
+    m[i] = d + (d = d3_svg_lineSlope(p0 = p1, p1 = points[i + 1]));
+  }
+  m[i] = d;
+  return m;
+}
+
+// Interpolates the given points using Fritsch-Carlson Monotone cubic Hermite
+// interpolation. Returns an array of tangent vectors. For details, see
+// http://en.wikipedia.org/wiki/Monotone_cubic_interpolation
+function d3_svg_lineMonotoneTangents(points) {
+  var tangents = [],
+      d,
+      a,
+      b,
+      s,
+      m = d3_svg_lineFiniteDifferences(points),
+      i = -1,
+      j = points.length - 1;
+
+  // The first two steps are done by computing finite-differences:
+  // 1. Compute the slopes of the secant lines between successive points.
+  // 2. Initialize the tangents at every point as the average of the secants.
+
+  // Then, for each segment…
+  while (++i < j) {
+    d = d3_svg_lineSlope(points[i], points[i + 1]);
+
+    // 3. If two successive yk = y{k + 1} are equal (i.e., d is zero), then set
+    // mk = m{k + 1} = 0 as the spline connecting these points must be flat to
+    // preserve monotonicity. Ignore step 4 and 5 for those k.
+
+    if (Math.abs(d) < 1e-6) {
+      m[i] = m[i + 1] = 0;
+    } else {
+      // 4. Let ak = mk / dk and bk = m{k + 1} / dk.
+      a = m[i] / d;
+      b = m[i + 1] / d;
+
+      // 5. Prevent overshoot and ensure monotonicity by restricting the
+      // magnitude of vector <ak, bk> to a circle of radius 3.
+      s = a * a + b * b;
+      if (s > 9) {
+        s = d * 3 / Math.sqrt(s);
+        m[i] = s * a;
+        m[i + 1] = s * b;
+      }
+    }
+  }
+
+  // Compute the normalized tangent vector from the slopes. Note that if x is
+  // not monotonic, it's possible that the slope will be infinite, so we protect
+  // against NaN by setting the coordinate to zero.
+  i = -1; while (++i <= j) {
+    s = (points[Math.min(j, i + 1)][0] - points[Math.max(0, i - 1)][0])
+      / (6 * (1 + m[i] * m[i]));
+    tangents.push([s || 0, m[i] * s || 0]);
+  }
+
+  return tangents;
+}
+
+function d3_svg_lineMonotone(points) {
+  return points.length < 3
+      ? d3_svg_lineLinear(points)
+      : points[0] +
+        d3_svg_lineHermite(points, d3_svg_lineMonotoneTangents(points));
+}
+d3.svg.line.radial = function() {
+  var line = d3_svg_line(d3_svg_lineRadial);
+  line.radius = line.x, delete line.x;
+  line.angle = line.y, delete line.y;
+  return line;
+};
+
+function d3_svg_lineRadial(points) {
+  var point,
+      i = -1,
+      n = points.length,
+      r,
+      a;
+  while (++i < n) {
+    point = points[i];
+    r = point[0];
+    a = point[1] + d3_svg_arcOffset;
+    point[0] = r * Math.cos(a);
+    point[1] = r * Math.sin(a);
+  }
+  return points;
+}
+function d3_svg_area(projection) {
+  var x0 = d3_svg_lineX,
+      x1 = d3_svg_lineX,
+      y0 = 0,
+      y1 = d3_svg_lineY,
+      interpolate,
+      i0,
+      i1,
+      tension = .7;
+
+  function area(d) {
+    if (d.length < 1) return null;
+    var points0 = d3_svg_linePoints(this, d, x0, y0),
+        points1 = d3_svg_linePoints(this, d, x0 === x1 ? d3_svg_areaX(points0) : x1, y0 === y1 ? d3_svg_areaY(points0) : y1);
+    return "M" + i0(projection(points1), tension)
+         + "L" + i1(projection(points0.reverse()), tension)
+         + "Z";
+  }
+
+  area.x = function(x) {
+    if (!arguments.length) return x1;
+    x0 = x1 = x;
+    return area;
+  };
+
+  area.x0 = function(x) {
+    if (!arguments.length) return x0;
+    x0 = x;
+    return area;
+  };
+
+  area.x1 = function(x) {
+    if (!arguments.length) return x1;
+    x1 = x;
+    return area;
+  };
+
+  area.y = function(y) {
+    if (!arguments.length) return y1;
+    y0 = y1 = y;
+    return area;
+  };
+
+  area.y0 = function(y) {
+    if (!arguments.length) return y0;
+    y0 = y;
+    return area;
+  };
+
+  area.y1 = function(y) {
+    if (!arguments.length) return y1;
+    y1 = y;
+    return area;
+  };
+
+  area.interpolate = function(x) {
+    if (!arguments.length) return interpolate;
+    i0 = d3_svg_lineInterpolators[interpolate = x];
+    i1 = i0.reverse || i0;
+    return area;
+  };
+
+  area.tension = function(x) {
+    if (!arguments.length) return tension;
+    tension = x;
+    return area;
+  };
+
+  return area.interpolate("linear");
+}
+
+d3_svg_lineStepBefore.reverse = d3_svg_lineStepAfter;
+d3_svg_lineStepAfter.reverse = d3_svg_lineStepBefore;
+
+d3.svg.area = function() {
+  return d3_svg_area(Object);
+};
+
+function d3_svg_areaX(points) {
+  return function(d, i) {
+    return points[i][0];
+  };
+}
+
+function d3_svg_areaY(points) {
+  return function(d, i) {
+    return points[i][1];
+  };
+}
+d3.svg.area.radial = function() {
+  var area = d3_svg_area(d3_svg_lineRadial);
+  area.radius = area.x, delete area.x;
+  area.innerRadius = area.x0, delete area.x0;
+  area.outerRadius = area.x1, delete area.x1;
+  area.angle = area.y, delete area.y;
+  area.startAngle = area.y0, delete area.y0;
+  area.endAngle = area.y1, delete area.y1;
+  return area;
+};
+d3.svg.chord = function() {
+  var source = d3_svg_chordSource,
+      target = d3_svg_chordTarget,
+      radius = d3_svg_chordRadius,
+      startAngle = d3_svg_arcStartAngle,
+      endAngle = d3_svg_arcEndAngle;
+
+  // TODO Allow control point to be customized.
+
+  function chord(d, i) {
+    var s = subgroup(this, source, d, i),
+        t = subgroup(this, target, d, i);
+    return "M" + s.p0
+      + arc(s.r, s.p1, s.a1 - s.a0) + (equals(s, t)
+      ? curve(s.r, s.p1, s.r, s.p0)
+      : curve(s.r, s.p1, t.r, t.p0)
+      + arc(t.r, t.p1, t.a1 - t.a0)
+      + curve(t.r, t.p1, s.r, s.p0))
+      + "Z";
+  }
+
+  function subgroup(self, f, d, i) {
+    var subgroup = f.call(self, d, i),
+        r = radius.call(self, subgroup, i),
+        a0 = startAngle.call(self, subgroup, i) + d3_svg_arcOffset,
+        a1 = endAngle.call(self, subgroup, i) + d3_svg_arcOffset;
+    return {
+      r: r,
+      a0: a0,
+      a1: a1,
+      p0: [r * Math.cos(a0), r * Math.sin(a0)],
+      p1: [r * Math.cos(a1), r * Math.sin(a1)]
+    };
+  }
+
+  function equals(a, b) {
+    return a.a0 == b.a0 && a.a1 == b.a1;
+  }
+
+  function arc(r, p, a) {
+    return "A" + r + "," + r + " 0 " + +(a > Math.PI) + ",1 " + p;
+  }
+
+  function curve(r0, p0, r1, p1) {
+    return "Q 0,0 " + p1;
+  }
+
+  chord.radius = function(v) {
+    if (!arguments.length) return radius;
+    radius = d3.functor(v);
+    return chord;
+  };
+
+  chord.source = function(v) {
+    if (!arguments.length) return source;
+    source = d3.functor(v);
+    return chord;
+  };
+
+  chord.target = function(v) {
+    if (!arguments.length) return target;
+    target = d3.functor(v);
+    return chord;
+  };
+
+  chord.startAngle = function(v) {
+    if (!arguments.length) return startAngle;
+    startAngle = d3.functor(v);
+    return chord;
+  };
+
+  chord.endAngle = function(v) {
+    if (!arguments.length) return endAngle;
+    endAngle = d3.functor(v);
+    return chord;
+  };
+
+  return chord;
+};
+
+function d3_svg_chordSource(d) {
+  return d.source;
+}
+
+function d3_svg_chordTarget(d) {
+  return d.target;
+}
+
+function d3_svg_chordRadius(d) {
+  return d.radius;
+}
+
+function d3_svg_chordStartAngle(d) {
+  return d.startAngle;
+}
+
+function d3_svg_chordEndAngle(d) {
+  return d.endAngle;
+}
+d3.svg.diagonal = function() {
+  var source = d3_svg_chordSource,
+      target = d3_svg_chordTarget,
+      projection = d3_svg_diagonalProjection;
+
+  function diagonal(d, i) {
+    var p0 = source.call(this, d, i),
+        p3 = target.call(this, d, i),
+        m = (p0.y + p3.y) / 2,
+        p = [p0, {x: p0.x, y: m}, {x: p3.x, y: m}, p3];
+    p = p.map(projection);
+    return "M" + p[0] + "C" + p[1] + " " + p[2] + " " + p[3];
+  }
+
+  diagonal.source = function(x) {
+    if (!arguments.length) return source;
+    source = d3.functor(x);
+    return diagonal;
+  };
+
+  diagonal.target = function(x) {
+    if (!arguments.length) return target;
+    target = d3.functor(x);
+    return diagonal;
+  };
+
+  diagonal.projection = function(x) {
+    if (!arguments.length) return projection;
+    projection = x;
+    return diagonal;
+  };
+
+  return diagonal;
+};
+
+function d3_svg_diagonalProjection(d) {
+  return [d.x, d.y];
+}
+d3.svg.diagonal.radial = function() {
+  var diagonal = d3.svg.diagonal(),
+      projection = d3_svg_diagonalProjection,
+      projection_ = diagonal.projection;
+
+  diagonal.projection = function(x) {
+    return arguments.length
+        ? projection_(d3_svg_diagonalRadialProjection(projection = x))
+        : projection;
+  };
+
+  return diagonal;
+};
+
+function d3_svg_diagonalRadialProjection(projection) {
+  return function() {
+    var d = projection.apply(this, arguments),
+        r = d[0],
+        a = d[1] + d3_svg_arcOffset;
+    return [r * Math.cos(a), r * Math.sin(a)];
+  };
+}
+d3.svg.mouse = function(container) {
+  return d3_svg_mousePoint(container, d3.event);
+};
+
+// https://bugs.webkit.org/show_bug.cgi?id=44083
+var d3_mouse_bug44083 = /WebKit/.test(navigator.userAgent) ? -1 : 0;
+
+function d3_svg_mousePoint(container, e) {
+  var point = (container.ownerSVGElement || container).createSVGPoint();
+  if ((d3_mouse_bug44083 < 0) && (window.scrollX || window.scrollY)) {
+    var svg = d3.select(document.body)
+      .append("svg")
+        .style("position", "absolute")
+        .style("top", 0)
+        .style("left", 0);
+    var ctm = svg[0][0].getScreenCTM();
+    d3_mouse_bug44083 = !(ctm.f || ctm.e);
+    svg.remove();
+  }
+  if (d3_mouse_bug44083) {
+    point.x = e.pageX;
+    point.y = e.pageY;
+  } else {
+    point.x = e.clientX;
+    point.y = e.clientY;
+  }
+  point = point.matrixTransform(container.getScreenCTM().inverse());
+  return [point.x, point.y];
+};
+d3.svg.touches = function(container, touches) {
+  if (arguments.length < 2) touches = d3.event.touches;
+
+  return touches ? d3_array(touches).map(function(touch) {
+    var point = d3_svg_mousePoint(container, touch);
+    point.identifier = touch.identifier;
+    return point;
+  }) : [];
+};
+d3.svg.symbol = function() {
+  var type = d3_svg_symbolType,
+      size = d3_svg_symbolSize;
+
+  function symbol(d, i) {
+    return (d3_svg_symbols[type.call(this, d, i)]
+        || d3_svg_symbols.circle)
+        (size.call(this, d, i));
+  }
+
+  symbol.type = function(x) {
+    if (!arguments.length) return type;
+    type = d3.functor(x);
+    return symbol;
+  };
+
+  // size of symbol in square pixels
+  symbol.size = function(x) {
+    if (!arguments.length) return size;
+    size = d3.functor(x);
+    return symbol;
+  };
+
+  return symbol;
+};
+
+function d3_svg_symbolSize() {
+  return 64;
+}
+
+function d3_svg_symbolType() {
+  return "circle";
+}
+
+// TODO cross-diagonal?
+var d3_svg_symbols = {
+  "circle": function(size) {
+    var r = Math.sqrt(size / Math.PI);
+    return "M0," + r
+        + "A" + r + "," + r + " 0 1,1 0," + (-r)
+        + "A" + r + "," + r + " 0 1,1 0," + r
+        + "Z";
+  },
+  "cross": function(size) {
+    var r = Math.sqrt(size / 5) / 2;
+    return "M" + -3 * r + "," + -r
+        + "H" + -r
+        + "V" + -3 * r
+        + "H" + r
+        + "V" + -r
+        + "H" + 3 * r
+        + "V" + r
+        + "H" + r
+        + "V" + 3 * r
+        + "H" + -r
+        + "V" + r
+        + "H" + -3 * r
+        + "Z";
+  },
+  "diamond": function(size) {
+    var ry = Math.sqrt(size / (2 * d3_svg_symbolTan30)),
+        rx = ry * d3_svg_symbolTan30;
+    return "M0," + -ry
+        + "L" + rx + ",0"
+        + " 0," + ry
+        + " " + -rx + ",0"
+        + "Z";
+  },
+  "square": function(size) {
+    var r = Math.sqrt(size) / 2;
+    return "M" + -r + "," + -r
+        + "L" + r + "," + -r
+        + " " + r + "," + r
+        + " " + -r + "," + r
+        + "Z";
+  },
+  "triangle-down": function(size) {
+    var rx = Math.sqrt(size / d3_svg_symbolSqrt3),
+        ry = rx * d3_svg_symbolSqrt3 / 2;
+    return "M0," + ry
+        + "L" + rx +"," + -ry
+        + " " + -rx + "," + -ry
+        + "Z";
+  },
+  "triangle-up": function(size) {
+    var rx = Math.sqrt(size / d3_svg_symbolSqrt3),
+        ry = rx * d3_svg_symbolSqrt3 / 2;
+    return "M0," + -ry
+        + "L" + rx +"," + ry
+        + " " + -rx + "," + ry
+        + "Z";
+  }
+};
+
+d3.svg.symbolTypes = d3.keys(d3_svg_symbols);
+
+var d3_svg_symbolSqrt3 = Math.sqrt(3),
+    d3_svg_symbolTan30 = Math.tan(30 * Math.PI / 180);
+d3.svg.axis = function() {
+  var scale = d3.scale.linear(),
+      orient = "bottom",
+      tickMajorSize = 6,
+      tickMinorSize = 6,
+      tickEndSize = 6,
+      tickPadding = 3,
+      tickArguments_ = [10],
+      tickFormat_,
+      tickSubdivide = 0;
+
+  function axis(selection) {
+    selection.each(function(d, i, j) {
+      var g = d3.select(this);
+
+      // If selection is a transition, create subtransitions.
+      var transition = selection.delay ? function(o) {
+        var id = d3_transitionInheritId;
+        try {
+          d3_transitionInheritId = selection.id;
+          return o.transition()
+              .delay(selection[j][i].delay)
+              .duration(selection[j][i].duration)
+              .ease(selection.ease());
+        } finally {
+          d3_transitionInheritId = id;
+        }
+      } : Object;
+
+      // Ticks, or domain values for ordinal scales.
+      var ticks = scale.ticks ? scale.ticks.apply(scale, tickArguments_) : scale.domain(),
+          tickFormat = tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments_) : String) : tickFormat_;
+
+      // Minor ticks.
+      var subticks = d3_svg_axisSubdivide(scale, ticks, tickSubdivide),
+          subtick = g.selectAll(".minor").data(subticks, String),
+          subtickEnter = subtick.enter().insert("line", "g").attr("class", "tick minor").style("opacity", 1e-6),
+          subtickExit = transition(subtick.exit()).style("opacity", 1e-6).remove(),
+          subtickUpdate = transition(subtick).style("opacity", 1);
+
+      // Major ticks.
+      var tick = g.selectAll("g").data(ticks, String),
+          tickEnter = tick.enter().insert("g", "path").style("opacity", 1e-6),
+          tickExit = transition(tick.exit()).style("opacity", 1e-6).remove(),
+          tickUpdate = transition(tick).style("opacity", 1),
+          tickTransform;
+
+      // Domain.
+      var range = d3_scaleRange(scale),
+          path = g.selectAll(".domain").data([0]),
+          pathEnter = path.enter().append("path").attr("class", "domain"),
+          pathUpdate = transition(path);
+
+      // Stash a snapshot of the new scale, and retrieve the old snapshot.
+      var scale1 = scale.copy(),
+          scale0 = this.__chart__ || scale1;
+      this.__chart__ = scale1;
+
+      tickEnter.append("line").attr("class", "tick");
+      tickEnter.append("text");
+      tickUpdate.select("text").text(tickFormat);
+
+      switch (orient) {
+        case "bottom": {
+          tickTransform = d3_svg_axisX;
+          subtickEnter.attr("y2", tickMinorSize);
+          subtickUpdate.attr("x2", 0).attr("y2", tickMinorSize);
+          tickEnter.select("line").attr("y2", tickMajorSize);
+          tickEnter.select("text").attr("y", Math.max(tickMajorSize, 0) + tickPadding);
+          tickUpdate.select("line").attr("x2", 0).attr("y2", tickMajorSize);
+          tickUpdate.select("text").attr("x", 0).attr("y", Math.max(tickMajorSize, 0) + tickPadding).attr("dy", ".71em").attr("text-anchor", "middle");
+          pathUpdate.attr("d", "M" + range[0] + "," + tickEndSize + "V0H" + range[1] + "V" + tickEndSize);
+          break;
+        }
+        case "top": {
+          tickTransform = d3_svg_axisX;
+          subtickEnter.attr("y2", -tickMinorSize);
+          subtickUpdate.attr("x2", 0).attr("y2", -tickMinorSize);
+          tickEnter.select("line").attr("y2", -tickMajorSize);
+          tickEnter.select("text").attr("y", -(Math.max(tickMajorSize, 0) + tickPadding));
+          tickUpdate.select("line").attr("x2", 0).attr("y2", -tickMajorSize);
+          tickUpdate.select("text").attr("x", 0).attr("y", -(Math.max(tickMajorSize, 0) + tickPadding)).attr("dy", "0em").attr("text-anchor", "middle");
+          pathUpdate.attr("d", "M" + range[0] + "," + -tickEndSize + "V0H" + range[1] + "V" + -tickEndSize);
+          break;
+        }
+        case "left": {
+          tickTransform = d3_svg_axisY;
+          subtickEnter.attr("x2", -tickMinorSize);
+          subtickUpdate.attr("x2", -tickMinorSize).attr("y2", 0);
+          tickEnter.select("line").attr("x2", -tickMajorSize);
+          tickEnter.select("text").attr("x", -(Math.max(tickMajorSize, 0) + tickPadding));
+          tickUpdate.select("line").attr("x2", -tickMajorSize).attr("y2", 0);
+          tickUpdate.select("text").attr("x", -(Math.max(tickMajorSize, 0) + tickPadding)).attr("y", 0).attr("dy", ".32em").attr("text-anchor", "end");
+          pathUpdate.attr("d", "M" + -tickEndSize + "," + range[0] + "H0V" + range[1] + "H" + -tickEndSize);
+          break;
+        }
+        case "right": {
+          tickTransform = d3_svg_axisY;
+          subtickEnter.attr("x2", tickMinorSize);
+          subtickUpdate.attr("x2", tickMinorSize).attr("y2", 0);
+          tickEnter.select("line").attr("x2", tickMajorSize);
+          tickEnter.select("text").attr("x", Math.max(tickMajorSize, 0) + tickPadding);
+          tickUpdate.select("line").attr("x2", tickMajorSize).attr("y2", 0);
+          tickUpdate.select("text").attr("x", Math.max(tickMajorSize, 0) + tickPadding).attr("y", 0).attr("dy", ".32em").attr("text-anchor", "start");
+          pathUpdate.attr("d", "M" + tickEndSize + "," + range[0] + "H0V" + range[1] + "H" + tickEndSize);
+          break;
+        }
+      }
+
+      // For quantitative scales:
+      // - enter new ticks from the old scale
+      // - exit old ticks to the new scale
+      if (scale.ticks) {
+        tickEnter.call(tickTransform, scale0);
+        tickUpdate.call(tickTransform, scale1);
+        tickExit.call(tickTransform, scale1);
+        subtickEnter.call(tickTransform, scale0);
+        subtickUpdate.call(tickTransform, scale1);
+        subtickExit.call(tickTransform, scale1);
+      }
+
+      // For ordinal scales:
+      // - any entering ticks are undefined in the old scale
+      // - any exiting ticks are undefined in the new scale
+      // Therefore, we only need to transition updating ticks.
+      else {
+        var dx = scale1.rangeBand() / 2, x = function(d) { return scale1(d) + dx; };
+        tickEnter.call(tickTransform, x);
+        tickUpdate.call(tickTransform, x);
+      }
+    });
+  }
+
+  axis.scale = function(x) {
+    if (!arguments.length) return scale;
+    scale = x;
+    return axis;
+  };
+
+  axis.orient = function(x) {
+    if (!arguments.length) return orient;
+    orient = x;
+    return axis;
+  };
+
+  axis.ticks = function() {
+    if (!arguments.length) return tickArguments_;
+    tickArguments_ = arguments;
+    return axis;
+  };
+
+  axis.tickFormat = function(x) {
+    if (!arguments.length) return tickFormat_;
+    tickFormat_ = x;
+    return axis;
+  };
+
+  axis.tickSize = function(x, y, z) {
+    if (!arguments.length) return tickMajorSize;
+    var n = arguments.length - 1;
+    tickMajorSize = +x;
+    tickMinorSize = n > 1 ? +y : tickMajorSize;
+    tickEndSize = n > 0 ? +arguments[n] : tickMajorSize;
+    return axis;
+  };
+
+  axis.tickPadding = function(x) {
+    if (!arguments.length) return tickPadding;
+    tickPadding = +x;
+    return axis;
+  };
+
+  axis.tickSubdivide = function(x) {
+    if (!arguments.length) return tickSubdivide;
+    tickSubdivide = +x;
+    return axis;
+  };
+
+  return axis;
+};
+
+function d3_svg_axisX(selection, x) {
+  selection.attr("transform", function(d) { return "translate(" + x(d) + ",0)"; });
+}
+
+function d3_svg_axisY(selection, y) {
+  selection.attr("transform", function(d) { return "translate(0," + y(d) + ")"; });
+}
+
+function d3_svg_axisSubdivide(scale, ticks, m) {
+  subticks = [];
+  if (m && ticks.length > 1) {
+    var extent = d3_scaleExtent(scale.domain()),
+        subticks,
+        i = -1,
+        n = ticks.length,
+        d = (ticks[1] - ticks[0]) / ++m,
+        j,
+        v;
+    while (++i < n) {
+      for (j = m; --j > 0;) {
+        if ((v = +ticks[i] - j * d) >= extent[0]) {
+          subticks.push(v);
+        }
+      }
+    }
+    for (--i, j = 0; ++j < m && (v = +ticks[i] + j * d) < extent[1];) {
+      subticks.push(v);
+    }
+  }
+  return subticks;
+}
+d3.svg.brush = function() {
+  var event = d3.dispatch("brushstart", "brush", "brushend"),
+      x, // x-scale, optional
+      y, // y-scale, optional
+      extent = [[0, 0], [0, 0]]; // [x0, y0], [x1, y1]
+
+  function brush(g) {
+    var resizes = x && y ? ["n", "e", "s", "w", "nw", "ne", "se", "sw"]
+        : x ? ["e", "w"]
+        : y ? ["n", "s"]
+        : [];
+
+    g.each(function() {
+      var g = d3.select(this).on("mousedown.brush", down),
+          bg = g.selectAll(".background").data([0]),
+          fg = g.selectAll(".extent").data([0]),
+          tz = g.selectAll(".resize").data(resizes, String),
+          e;
+
+      // An invisible, mouseable area for starting a new brush.
+      bg.enter().append("rect")
+          .attr("class", "background")
+          .style("visibility", "hidden")
+          .style("pointer-events", "all")
+          .style("cursor", "crosshair");
+
+      // The visible brush extent; style this as you like!
+      fg.enter().append("rect")
+          .attr("class", "extent")
+          .style("cursor", "move");
+
+      // More invisible rects for resizing the extent.
+      tz.enter().append("rect")
+          .attr("class", function(d) { return "resize " + d; })
+          .attr("width", 6)
+          .attr("height", 6)
+          .style("visibility", "hidden")
+          .style("cursor", function(d) { return d3_svg_brushCursor[d]; });
+
+      // Update the resizers.
+      tz.style("pointer-events", brush.empty() ? "none" : "all");
+
+      // Remove any superfluous resizers.
+      tz.exit().remove();
+
+      // Initialize the background to fill the defined range.
+      // If the range isn't defined, you can post-process.
+      if (x) {
+        e = d3_scaleRange(x);
+        bg.attr("x", e[0]).attr("width", e[1] - e[0]);
+        d3_svg_brushRedrawX(g, extent);
+      }
+      if (y) {
+        e = d3_scaleRange(y);
+        bg.attr("y", e[0]).attr("height", e[1] - e[0]);
+        d3_svg_brushRedrawY(g, extent);
+      }
+    });
+  }
+
+  function down() {
+    var target = d3.select(d3.event.target);
+
+    // Store some global state for the duration of the brush gesture.
+    d3_svg_brush = brush;
+    d3_svg_brushTarget = this;
+    d3_svg_brushExtent = extent;
+    d3_svg_brushOffset = d3.svg.mouse(d3_svg_brushTarget);
+
+    // If the extent was clicked on, drag rather than brush;
+    // store the offset between the mouse and extent origin instead.
+    if (d3_svg_brushDrag = target.classed("extent")) {
+      d3_svg_brushOffset[0] = extent[0][0] - d3_svg_brushOffset[0];
+      d3_svg_brushOffset[1] = extent[0][1] - d3_svg_brushOffset[1];
+    }
+
+    // If a resizer was clicked on, record which side is to be resized.
+    // Also, set the offset to the opposite side.
+    else if (target.classed("resize")) {
+      d3_svg_brushResize = d3.event.target.__data__;
+      d3_svg_brushOffset[0] = extent[+/w$/.test(d3_svg_brushResize)][0];
+      d3_svg_brushOffset[1] = extent[+/^n/.test(d3_svg_brushResize)][1];
+    }
+
+    // If the ALT key is down when starting a brush, the center is at the mouse.
+    else if (d3.event.altKey) {
+      d3_svg_brushCenter = d3_svg_brushOffset.slice();
+    }
+
+    // Restrict which dimensions are resized.
+    d3_svg_brushX = !/^(n|s)$/.test(d3_svg_brushResize) && x;
+    d3_svg_brushY = !/^(e|w)$/.test(d3_svg_brushResize) && y;
+
+    // Notify listeners.
+    d3_svg_brushDispatch = dispatcher(this, arguments);
+    d3_svg_brushDispatch("brushstart");
+    d3_svg_brushMove();
+    d3_eventCancel();
+  }
+
+  function dispatcher(that, argumentz) {
+    return function(type) {
+      var e = d3.event;
+      try {
+        d3.event = {type: type, target: brush};
+        event[type].apply(that, argumentz);
+      } finally {
+        d3.event = e;
+      }
+    };
+  }
+
+  brush.x = function(z) {
+    if (!arguments.length) return x;
+    x = z;
+    return brush;
+  };
+
+  brush.y = function(z) {
+    if (!arguments.length) return y;
+    y = z;
+    return brush;
+  };
+
+  brush.extent = function(z) {
+    var x0, x1, y0, y1, t;
+
+    // Invert the pixel extent to data-space.
+    if (!arguments.length) {
+      if (x) {
+        x0 = extent[0][0], x1 = extent[1][0];
+        if (x.invert) x0 = x.invert(x0), x1 = x.invert(x1);
+        if (x1 < x0) t = x0, x0 = x1, x1 = t;
+      }
+      if (y) {
+        y0 = extent[0][1], y1 = extent[1][1];
+        if (y.invert) y0 = y.invert(y0), y1 = y.invert(y1);
+        if (y1 < y0) t = y0, y0 = y1, y1 = t;
+      }
+      return x && y ? [[x0, y0], [x1, y1]] : x ? [x0, x1] : y && [y0, y1];
+    }
+
+    // Scale the data-space extent to pixels.
+    if (x) {
+      x0 = z[0], x1 = z[1];
+      if (y) x0 = x0[0], x1 = x1[0];
+      if (x.invert) x0 = x(x0), x1 = x(x1);
+      if (x1 < x0) t = x0, x0 = x1, x1 = t;
+      extent[0][0] = x0, extent[1][0] = x1;
+    }
+    if (y) {
+      y0 = z[0], y1 = z[1];
+      if (x) y0 = y0[1], y1 = y1[1];
+      if (y.invert) y0 = y(y0), y1 = y(y1);
+      if (y1 < y0) t = y0, y0 = y1, y1 = t;
+      extent[0][1] = y0, extent[1][1] = y1;
+    }
+
+    return brush;
+  };
+
+  brush.clear = function() {
+    extent[0][0] =
+    extent[0][1] =
+    extent[1][0] =
+    extent[1][1] = 0;
+    return brush;
+  };
+
+  brush.empty = function() {
+    return (x && extent[0][0] === extent[1][0])
+        || (y && extent[0][1] === extent[1][1]);
+  };
+
+  d3.select(window)
+      .on("mousemove.brush", d3_svg_brushMove)
+      .on("mouseup.brush", d3_svg_brushUp)
+      .on("keydown.brush", d3_svg_brushKeydown)
+      .on("keyup.brush", d3_svg_brushKeyup);
+
+  return d3.rebind(brush, event, "on");
+};
+
+var d3_svg_brush,
+    d3_svg_brushDispatch,
+    d3_svg_brushTarget,
+    d3_svg_brushX,
+    d3_svg_brushY,
+    d3_svg_brushExtent,
+    d3_svg_brushDrag,
+    d3_svg_brushResize,
+    d3_svg_brushCenter,
+    d3_svg_brushOffset;
+
+function d3_svg_brushRedrawX(g, extent) {
+  g.select(".extent").attr("x", extent[0][0]);
+  g.selectAll(".n,.s,.w,.nw,.sw").attr("x", extent[0][0] - 2);
+  g.selectAll(".e,.ne,.se").attr("x", extent[1][0] - 3);
+  g.selectAll(".extent,.n,.s").attr("width", extent[1][0] - extent[0][0]);
+}
+
+function d3_svg_brushRedrawY(g, extent) {
+  g.select(".extent").attr("y", extent[0][1]);
+  g.selectAll(".n,.e,.w,.nw,.ne").attr("y", extent[0][1] - 3);
+  g.selectAll(".s,.se,.sw").attr("y", extent[1][1] - 4);
+  g.selectAll(".extent,.e,.w").attr("height", extent[1][1] - extent[0][1]);
+}
+
+function d3_svg_brushKeydown() {
+  if (d3.event.keyCode == 32 && d3_svg_brushTarget && !d3_svg_brushDrag) {
+    d3_svg_brushCenter = null;
+    d3_svg_brushOffset[0] -= d3_svg_brushExtent[1][0];
+    d3_svg_brushOffset[1] -= d3_svg_brushExtent[1][1];
+    d3_svg_brushDrag = 2;
+    d3_eventCancel();
+  }
+}
+
+function d3_svg_brushKeyup() {
+  if (d3.event.keyCode == 32 && d3_svg_brushDrag == 2) {
+    d3_svg_brushOffset[0] += d3_svg_brushExtent[1][0];
+    d3_svg_brushOffset[1] += d3_svg_brushExtent[1][1];
+    d3_svg_brushDrag = 0;
+    d3_eventCancel();
+  }
+}
+
+function d3_svg_brushMove() {
+  if (d3_svg_brushOffset) {
+    var mouse = d3.svg.mouse(d3_svg_brushTarget),
+        g = d3.select(d3_svg_brushTarget);
+
+    if (!d3_svg_brushDrag) {
+
+      // If needed, determine the center from the current extent.
+      if (d3.event.altKey) {
+        if (!d3_svg_brushCenter) {
+          d3_svg_brushCenter = [
+            (d3_svg_brushExtent[0][0] + d3_svg_brushExtent[1][0]) / 2,
+            (d3_svg_brushExtent[0][1] + d3_svg_brushExtent[1][1]) / 2
+          ];
+        }
+
+        // Update the offset, for when the ALT key is released.
+        d3_svg_brushOffset[0] = d3_svg_brushExtent[+(mouse[0] < d3_svg_brushCenter[0])][0];
+        d3_svg_brushOffset[1] = d3_svg_brushExtent[+(mouse[1] < d3_svg_brushCenter[1])][1];
+      }
+
+      // When the ALT key is released, we clear the center.
+      else d3_svg_brushCenter = null;
+    }
+
+    // Update the brush extent for each dimension.
+    if (d3_svg_brushX) {
+      d3_svg_brushMove1(mouse, d3_svg_brushX, 0);
+      d3_svg_brushRedrawX(g, d3_svg_brushExtent);
+    }
+    if (d3_svg_brushY) {
+      d3_svg_brushMove1(mouse, d3_svg_brushY, 1);
+      d3_svg_brushRedrawY(g, d3_svg_brushExtent);
+    }
+
+    // Notify listeners.
+    d3_svg_brushDispatch("brush");
+  }
+}
+
+function d3_svg_brushMove1(mouse, scale, i) {
+  var range = d3_scaleRange(scale),
+      r0 = range[0],
+      r1 = range[1],
+      offset = d3_svg_brushOffset[i],
+      size = d3_svg_brushExtent[1][i] - d3_svg_brushExtent[0][i],
+      min,
+      max;
+
+  // When dragging, reduce the range by the extent size and offset.
+  if (d3_svg_brushDrag) {
+    r0 -= offset;
+    r1 -= size + offset;
+  }
+
+  // Clamp the mouse so that the extent fits within the range extent.
+  min = Math.max(r0, Math.min(r1, mouse[i]));
+
+  // Compute the new extent bounds.
+  if (d3_svg_brushDrag) {
+    max = (min += offset) + size;
+  } else {
+
+    // If the ALT key is pressed, then preserve the center of the extent.
+    if (d3_svg_brushCenter) offset = Math.max(r0, Math.min(r1, 2 * d3_svg_brushCenter[i] - min));
+
+    // Compute the min and max of the offset and mouse.
+    if (offset < min) {
+      max = min;
+      min = offset;
+    } else {
+      max = offset;
+    }
+  }
+
+  // Update the stored bounds.
+  d3_svg_brushExtent[0][i] = min;
+  d3_svg_brushExtent[1][i] = max;
+}
+
+function d3_svg_brushUp() {
+  if (d3_svg_brushOffset) {
+    d3_svg_brushMove();
+    d3.select(d3_svg_brushTarget).selectAll(".resize").style("pointer-events", d3_svg_brush.empty() ? "none" : "all");
+    d3_svg_brushDispatch("brushend");
+    d3_svg_brush =
+    d3_svg_brushDispatch =
+    d3_svg_brushTarget =
+    d3_svg_brushX =
+    d3_svg_brushY =
+    d3_svg_brushExtent =
+    d3_svg_brushDrag =
+    d3_svg_brushResize =
+    d3_svg_brushCenter =
+    d3_svg_brushOffset = null;
+    d3_eventCancel();
+  }
+}
+
+var d3_svg_brushCursor = {
+  n: "ns-resize",
+  e: "ew-resize",
+  s: "ns-resize",
+  w: "ew-resize",
+  nw: "nwse-resize",
+  ne: "nesw-resize",
+  se: "nwse-resize",
+  sw: "nesw-resize"
+};
+d3.behavior = {};
+// TODO Track touch points by identifier.
+
+d3.behavior.drag = function() {
+  var event = d3.dispatch("drag", "dragstart", "dragend"),
+      origin = null;
+
+  function drag() {
+    this
+        .on("mousedown.drag", mousedown)
+        .on("touchstart.drag", mousedown);
+
+    d3.select(window)
+        .on("mousemove.drag", d3_behavior_dragMove)
+        .on("touchmove.drag", d3_behavior_dragMove)
+        .on("mouseup.drag", d3_behavior_dragUp, true)
+        .on("touchend.drag", d3_behavior_dragUp, true)
+        .on("click.drag", d3_behavior_dragClick, true);
+  }
+
+  // snapshot the local context for subsequent dispatch
+  function start() {
+    d3_behavior_dragEvent = event;
+    d3_behavior_dragEventTarget = d3.event.target;
+    d3_behavior_dragTarget = this;
+    d3_behavior_dragArguments = arguments;
+    d3_behavior_dragOrigin = d3_behavior_dragPoint();
+    if (origin) {
+      d3_behavior_dragOffset = origin.apply(d3_behavior_dragTarget, d3_behavior_dragArguments);
+      d3_behavior_dragOffset = [d3_behavior_dragOffset.x - d3_behavior_dragOrigin[0], d3_behavior_dragOffset.y - d3_behavior_dragOrigin[1]];
+    } else {
+      d3_behavior_dragOffset = [0, 0];
+    }
+    d3_behavior_dragMoved = 0;
+  }
+
+  function mousedown() {
+    start.apply(this, arguments);
+    d3_behavior_dragDispatch("dragstart");
+  }
+
+  drag.origin = function(x) {
+    if (!arguments.length) return origin;
+    origin = x;
+    return drag;
+  };
+
+  return d3.rebind(drag, event, "on");
+};
+
+var d3_behavior_dragEvent,
+    d3_behavior_dragEventTarget,
+    d3_behavior_dragTarget,
+    d3_behavior_dragArguments,
+    d3_behavior_dragOffset,
+    d3_behavior_dragOrigin,
+    d3_behavior_dragMoved;
+
+function d3_behavior_dragDispatch(type) {
+  var p = d3_behavior_dragPoint(),
+      o = d3.event,
+      e = d3.event = {type: type};
+
+  if (p) {
+    e.x = p[0] + d3_behavior_dragOffset[0];
+    e.y = p[1] + d3_behavior_dragOffset[1];
+    e.dx = p[0] - d3_behavior_dragOrigin[0];
+    e.dy = p[1] - d3_behavior_dragOrigin[1];
+    d3_behavior_dragMoved |= e.dx | e.dy;
+    d3_behavior_dragOrigin = p;
+  }
+
+  try {
+    d3_behavior_dragEvent[type].apply(d3_behavior_dragTarget, d3_behavior_dragArguments);
+  } finally {
+    d3.event = o;
+  }
+
+  o.stopPropagation();
+  o.preventDefault();
+}
+
+function d3_behavior_dragPoint() {
+  var p = d3_behavior_dragTarget.parentNode,
+      t = d3.event.changedTouches;
+  return p && (t
+      ? d3.svg.touches(p, t)[0]
+      : d3.svg.mouse(p));
+}
+
+function d3_behavior_dragMove() {
+  if (!d3_behavior_dragTarget) return;
+  var parent = d3_behavior_dragTarget.parentNode;
+
+  // O NOES! The drag element was removed from the DOM.
+  if (!parent) return d3_behavior_dragUp();
+
+  d3_behavior_dragDispatch("drag");
+  d3_eventCancel();
+}
+
+function d3_behavior_dragUp() {
+  if (!d3_behavior_dragTarget) return;
+  d3_behavior_dragDispatch("dragend");
+
+  // If the node was moved, prevent the mouseup from propagating.
+  // Also prevent the subsequent click from propagating (e.g., for anchors).
+  if (d3_behavior_dragMoved) {
+    d3_eventCancel();
+    d3_behavior_dragMoved = d3.event.target === d3_behavior_dragEventTarget;
+  }
+
+  d3_behavior_dragEvent =
+  d3_behavior_dragEventTarget =
+  d3_behavior_dragTarget =
+  d3_behavior_dragArguments =
+  d3_behavior_dragOffset =
+  d3_behavior_dragOrigin = null;
+}
+
+function d3_behavior_dragClick() {
+  if (d3_behavior_dragMoved) {
+    d3_eventCancel();
+    d3_behavior_dragMoved = 0;
+  }
+}
+// TODO unbind zoom behavior?
+d3.behavior.zoom = function() {
+  var xyz = [0, 0, 0],
+      event = d3.dispatch("zoom"),
+      extent = d3_behavior_zoomInfiniteExtent;
+
+  function zoom() {
+    this
+        .on("mousedown.zoom", mousedown)
+        .on("mousewheel.zoom", mousewheel)
+        .on("DOMMouseScroll.zoom", mousewheel)
+        .on("dblclick.zoom", dblclick)
+        .on("touchstart.zoom", touchstart);
+
+    d3.select(window)
+        .on("mousemove.zoom", d3_behavior_zoomMousemove)
+        .on("mouseup.zoom", d3_behavior_zoomMouseup)
+        .on("touchmove.zoom", d3_behavior_zoomTouchmove)
+        .on("touchend.zoom", d3_behavior_zoomTouchup)
+        .on("click.zoom", d3_behavior_zoomClick, true);
+  }
+
+  // snapshot the local context for subsequent dispatch
+  function start() {
+    d3_behavior_zoomXyz = xyz;
+    d3_behavior_zoomExtent = extent;
+    d3_behavior_zoomDispatch = event.zoom;
+    d3_behavior_zoomEventTarget = d3.event.target;
+    d3_behavior_zoomTarget = this;
+    d3_behavior_zoomArguments = arguments;
+  }
+
+  function mousedown() {
+    start.apply(this, arguments);
+    d3_behavior_zoomPanning = d3_behavior_zoomLocation(d3.svg.mouse(d3_behavior_zoomTarget));
+    d3_behavior_zoomMoved = 0;
+    d3.event.preventDefault();
+    window.focus();
+  }
+
+  // store starting mouse location
+  function mousewheel() {
+    start.apply(this, arguments);
+    if (!d3_behavior_zoomZooming) d3_behavior_zoomZooming = d3_behavior_zoomLocation(d3.svg.mouse(d3_behavior_zoomTarget));
+    d3_behavior_zoomTo(d3_behavior_zoomDelta() + xyz[2], d3.svg.mouse(d3_behavior_zoomTarget), d3_behavior_zoomZooming);
+  }
+
+  function dblclick() {
+    start.apply(this, arguments);
+    var mouse = d3.svg.mouse(d3_behavior_zoomTarget);
+    d3_behavior_zoomTo(d3.event.shiftKey ? Math.ceil(xyz[2] - 1) : Math.floor(xyz[2] + 1), mouse, d3_behavior_zoomLocation(mouse));
+  }
+
+  // doubletap detection
+  function touchstart() {
+    start.apply(this, arguments);
+    var touches = d3_behavior_zoomTouchup(),
+        touch,
+        now = Date.now();
+    if ((touches.length === 1) && (now - d3_behavior_zoomLast < 300)) {
+      d3_behavior_zoomTo(1 + Math.floor(xyz[2]), touch = touches[0], d3_behavior_zoomLocations[touch.identifier]);
+    }
+    d3_behavior_zoomLast = now;
+  }
+
+  zoom.extent = function(x) {
+    if (!arguments.length) return extent;
+    extent = x == null ? d3_behavior_zoomInfiniteExtent : x;
+    return zoom;
+  };
+
+  return d3.rebind(zoom, event, "on");
+};
+
+var d3_behavior_zoomDiv,
+    d3_behavior_zoomPanning,
+    d3_behavior_zoomZooming,
+    d3_behavior_zoomLocations = {}, // identifier -> location
+    d3_behavior_zoomLast = 0,
+    d3_behavior_zoomXyz,
+    d3_behavior_zoomExtent,
+    d3_behavior_zoomDispatch,
+    d3_behavior_zoomEventTarget,
+    d3_behavior_zoomTarget,
+    d3_behavior_zoomArguments,
+    d3_behavior_zoomMoved;
+
+function d3_behavior_zoomLocation(point) {
+  return [
+    point[0] - d3_behavior_zoomXyz[0],
+    point[1] - d3_behavior_zoomXyz[1],
+    d3_behavior_zoomXyz[2]
+  ];
+}
+
+// detect the pixels that would be scrolled by this wheel event
+function d3_behavior_zoomDelta() {
+
+  // mousewheel events are totally broken!
+  // https://bugs.webkit.org/show_bug.cgi?id=40441
+  // not only that, but Chrome and Safari differ in re. to acceleration!
+  if (!d3_behavior_zoomDiv) {
+    d3_behavior_zoomDiv = d3.select("body").append("div")
+        .style("visibility", "hidden")
+        .style("top", 0)
+        .style("height", 0)
+        .style("width", 0)
+        .style("overflow-y", "scroll")
+      .append("div")
+        .style("height", "2000px")
+      .node().parentNode;
+  }
+
+  var e = d3.event, delta;
+  try {
+    d3_behavior_zoomDiv.scrollTop = 1000;
+    d3_behavior_zoomDiv.dispatchEvent(e);
+    delta = 1000 - d3_behavior_zoomDiv.scrollTop;
+  } catch (error) {
+    delta = e.wheelDelta || (-e.detail * 5);
+  }
+
+  return delta * .005;
+}
+
+// Note: Since we don't rotate, it's possible for the touches to become
+// slightly detached from their original positions. Thus, we recompute the
+// touch points on touchend as well as touchstart!
+function d3_behavior_zoomTouchup() {
+  var touches = d3.svg.touches(d3_behavior_zoomTarget),
+      i = -1,
+      n = touches.length,
+      touch;
+  while (++i < n) d3_behavior_zoomLocations[(touch = touches[i]).identifier] = d3_behavior_zoomLocation(touch);
+  return touches;
+}
+
+function d3_behavior_zoomTouchmove() {
+  var touches = d3.svg.touches(d3_behavior_zoomTarget);
+  switch (touches.length) {
+
+    // single-touch pan
+    case 1: {
+      var touch = touches[0];
+      d3_behavior_zoomTo(d3_behavior_zoomXyz[2], touch, d3_behavior_zoomLocations[touch.identifier]);
+      break;
+    }
+
+    // double-touch pan + zoom
+    case 2: {
+      var p0 = touches[0],
+          p1 = touches[1],
+          p2 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2],
+          l0 = d3_behavior_zoomLocations[p0.identifier],
+          l1 = d3_behavior_zoomLocations[p1.identifier],
+          l2 = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2, l0[2]];
+      d3_behavior_zoomTo(Math.log(d3.event.scale) / Math.LN2 + l0[2], p2, l2);
+      break;
+    }
+  }
+}
+
+function d3_behavior_zoomMousemove() {
+  d3_behavior_zoomZooming = null;
+  if (d3_behavior_zoomPanning) {
+    d3_behavior_zoomMoved = 1;
+    d3_behavior_zoomTo(d3_behavior_zoomXyz[2], d3.svg.mouse(d3_behavior_zoomTarget), d3_behavior_zoomPanning);
+  }
+}
+
+function d3_behavior_zoomMouseup() {
+  if (d3_behavior_zoomPanning) {
+    if (d3_behavior_zoomMoved) {
+      d3_eventCancel();
+      d3_behavior_zoomMoved = d3_behavior_zoomEventTarget === d3.event.target;
+    }
+
+    d3_behavior_zoomXyz =
+    d3_behavior_zoomExtent =
+    d3_behavior_zoomDispatch =
+    d3_behavior_zoomEventTarget =
+    d3_behavior_zoomTarget =
+    d3_behavior_zoomArguments =
+    d3_behavior_zoomPanning = null;
+  }
+}
+
+function d3_behavior_zoomClick() {
+  if (d3_behavior_zoomMoved) {
+    d3_eventCancel();
+    d3_behavior_zoomMoved = 0;
+  }
+}
+
+function d3_behavior_zoomTo(z, x0, x1) {
+  z = d3_behavior_zoomExtentClamp(z, 2);
+  var j = Math.pow(2, d3_behavior_zoomXyz[2]),
+      k = Math.pow(2, z),
+      K = Math.pow(2, (d3_behavior_zoomXyz[2] = z) - x1[2]),
+      x_ = d3_behavior_zoomXyz[0],
+      y_ = d3_behavior_zoomXyz[1],
+      x = d3_behavior_zoomXyz[0] = d3_behavior_zoomExtentClamp((x0[0] - x1[0] * K), 0, k),
+      y = d3_behavior_zoomXyz[1] = d3_behavior_zoomExtentClamp((x0[1] - x1[1] * K), 1, k),
+      o = d3.event; // Events can be reentrant (e.g., focus).
+
+  d3.event = {
+    scale: k,
+    translate: [x, y],
+    transform: function(sx, sy) {
+      if (sx) transform(sx, x_, x);
+      if (sy) transform(sy, y_, y);
+    }
+  };
+
+  function transform(scale, a, b) {
+    scale.domain(scale.range().map(function(v) { return scale.invert(((v - b) * j) / k + a); }));
+  }
+
+  try {
+    d3_behavior_zoomDispatch.apply(d3_behavior_zoomTarget, d3_behavior_zoomArguments);
+  } finally {
+    d3.event = o;
+  }
+
+  o.preventDefault();
+}
+
+var d3_behavior_zoomInfiniteExtent = [
+  [-Infinity, Infinity],
+  [-Infinity, Infinity],
+  [-Infinity, Infinity]
+];
+
+function d3_behavior_zoomExtentClamp(x, i, k) {
+  var range = d3_behavior_zoomExtent[i],
+      r0 = range[0],
+      r1 = range[1];
+  return arguments.length === 3
+      ? Math.max(r1 * (r1 === Infinity ? -Infinity : 1 / k - 1),
+        Math.min(r0 === -Infinity ? Infinity : r0, x / k)) * k
+      : Math.max(r0, Math.min(r1, x));
+}
+})();
