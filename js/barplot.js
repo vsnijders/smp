@@ -1,13 +1,9 @@
 
-var firsttime = true;
 function foo(data) {
   var h = 15*data.length
-  if (firsttime) {
-    d3.select("body").append("svg")
-      .attr("class", "chart")
-    firsttime = false;
-  }
-  d3.select(".chart *").remove();
+  d3.select(".chart").remove();
+  d3.select("body").append("svg")
+    .attr("class", "chart")
   if (selection.x.length) {
     var chart = d3.select(".chart");
     bar_plot_0(chart, data, selection);
@@ -21,8 +17,8 @@ function foo(data) {
 
 function bar_plot_0(chart, data, selection) {
   // determine maximum and minimum values for scale
-  var ymin = d3.min(data, function(d) { return d.value;});
-  var ymax = d3.max(data, function(d) { return d.value;});
+  var ymin = d3.min(data, function(d) { return Number(d.value);});
+  var ymax = d3.max(data, function(d) { return Number(d.value);});
   // nest data
   var data_nested = d3.nest()
     .key(function(d) { return d[selection.x[0]]; })
@@ -31,30 +27,33 @@ function bar_plot_0(chart, data, selection) {
   var nx = data_nested.length;
   var ny = data_nested[0].values.length;
   // set chart height
-  chart.attr("width", 640, "height", nx*ny*15);
+  chart.attr("width", 640).attr("height", nx*ny*15);
   // create barplots
   var y = 0;
   for (var i = 0; i < nx; i++) {
-    bar_plot(chart, data_nested[i].values, 0, y, 640, ny*15, true);
+    bar_plot(chart, data_nested[i].values, 0, y, 640, ny*15, true, ymin, ymax);
     y = y + ny*15;
   }
 }
 
-function bar_plot(chart0, data, x, y, width, height, tickmarks) {
+function bar_plot(chart0, data, x, y, width, height, tickmarks, xmin, xmax) {
   if (tickmarks === undefined) tickmarks = true;
   var yoffset = tickmarks ? 15 : 0;
   // create drawing area
   var chart = chart0.append("g")
     .attr("transform", "translate(" + String(x+110) + "," + String(y+yoffset) + ")");
   // determine y-variable
-  var yvar = d3.keys(data[0])[0];
+  var yvar = d3.keys(data[0]);
+  yvar = yvar[yvar.length - 2];
   // determine minumum, maximum 
   var variables = [];
-  var xmin = 0, xmax = 0;
   for (var i = 0; i < data.length; i++) {
     variables.push(data[i][yvar]);
-    if (data[i].value > xmax) xmax = data[i].value;
-    if (data[i].value < xmin) xmin = data[i].value;
+  }
+  // determine maximum and minimum values for scale
+  if (xmin === undefined | xmax === undefined) {
+    xmin = d3.min(data, function(d) { return Number(d.value);});
+    xmax = d3.max(data, function(d) { return Number(d.value);});
   }
   // create scales
   var x = d3.scale.linear().domain([xmin, xmax]).range([0, width - 110]);
