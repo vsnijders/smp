@@ -3,8 +3,11 @@ function foo(data) {
   var h = 15*data.length
   d3.select(".chart").remove();
   d3.select("body").append("svg")
-    .attr("class", "chart")
-  if (selection.x.length) {
+    .attr("class", "chart");
+
+    var chart = d3.select(".chart");
+    bar_plot_1(chart, data, selection);
+  /*if (selection.x.length) {
     var chart = d3.select(".chart");
     bar_plot_0(chart, data, selection);
   } else {
@@ -12,7 +15,7 @@ function foo(data) {
       .attr("width", 640)
       .attr("height", h);
     bar_plot(chart, data, 0, 0, 640, h);
-  }
+  }*/
 }
 
 function bar_plot_0(chart, data, selection) {
@@ -48,7 +51,7 @@ function bar_plot(chart0, data, x, y, width, height, tickmarks, xmin, xmax) {
 }
 
 // ============================================================================
-// ==== CLASS DEFINITION OF BARPLOT                                        ====
+// ==== CLASS DEFINITION OF BARCHART                                       ====
 // ============================================================================
 
 
@@ -138,12 +141,7 @@ BarChart.prototype.yscale = function(data) {
   return y;
 }
 
-BarChart.prototype.plot = function(chart, data) {
-  // create drawing area
-  var yoffset = this.draw_tickmarks_ ? 15 : 0;
-  var chart = chart.append("g")
-    .attr("transform", "translate(" + String(this.x_+110) + 
-        "," + String(this.y_+yoffset) + ")");
+BarChart.prototype.draw_bars = function(chart, data) {
   // determine y-variable
   var yvar = this.yvar_;
   // create scales
@@ -152,15 +150,29 @@ BarChart.prototype.plot = function(chart, data) {
   // add grid lines
   chart.selectAll("line").data(x.ticks(5))
     .enter().append("line")
-      .attr("x1", x).attr("x2", x).attr("y1", 0).attr("y2", this.height_-yoffset)
+      .attr("x1", x).attr("x2", x)
+      .attr("y1", y.rangeExtent()[0]).attr("y2", y.rangeExtent()[1])
       .style("stroke", "#ccc");
+  // colorscale for bars
+  var z = d3.scale.category20();
+    //.range(colorbrewer.RdBu[9])
   // add bars
   chart.selectAll("rect").data(data)
     .enter().append("rect")
       .attr("x", function(d) { return Math.min(x(0), x(d.value));})
       .attr("y", function(d) { return y(d[yvar]);})
       .attr("width", function(d) { return Math.abs(x(0) - x(d.value));})
-      .attr("height", y.rangeBand());
+      .attr("height", y.rangeBand())
+      .attr("fill", function(d,i) { return z(i);});
+  // add tooltip to bars
+  $('rect').tipsy({
+    gravity: 'w',
+    html: true,
+    title: function() {
+      var d = this.__data__;
+      return d[yvar] + ': ' + d.value;
+    }
+  });
   // add legend
   chart.selectAll("text").data(data)
     .enter().append("text")
@@ -169,6 +181,24 @@ BarChart.prototype.plot = function(chart, data) {
       .attr("dy", ".35em")
       .attr("text-anchor", "begin")
       .text(function(d) { return d[yvar];});
+  // add 0-line
+  chart.append("line")
+    .attr("x1", x(0)).attr("x2", x(0))
+    .attr("y1", y.rangeExtent()[0]).attr("y2", y.rangeExtent()[1])
+    .style("stroke", "#000000");
+}
+
+
+BarChart.prototype.plot = function(chart, data) {
+  // create drawing area
+  var yoffset = this.draw_tickmarks_ ? 15 : 0;
+  var chart = chart.append("g")
+    .attr("transform", "translate(" + String(this.x_+110) + 
+        "," + String(this.y_+yoffset) + ")");
+  // create scales
+  var x = this.xscale(data);
+  // add bars
+  this.draw_bars(chart, data);
   // add tickmarks
   if (this.draw_tickmarks_) {
     chart.selectAll(".rule").data(x.ticks(5))
@@ -177,10 +207,58 @@ BarChart.prototype.plot = function(chart, data) {
         .attr("x", x).attr("y", 0).attr("dy", -3)
         .attr("text-anchor", "middle").text(String);
   }
-  // add 0-line
-  chart.append("line")
-    .attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", this.height_-yoffset)
-    .style("stroke", "#000000");
+}
 
+function bar_plot_1(chart, data, selection) {
+  // some constants
+  var bar_height = 7;
+  var bar_width  = 640;
+  var bar_padding = 4;
+  var tickmark_height = 15;
+  var tickmarks = true;
+  // create barchartobject
+  var barchart = new BarChart;
+  barchart.yvar(selection.y[0]).no_tickmarks().width(bar_width).x(0);
+  // determine maximum and minimum values for scale
+  var ymin = d3.min(data, function(d) { return Number(d.value);});
+  var ymax = d3.max(data, function(d) { return Number(d.value);});
+  barchart.ylim(ymin, ymax);
+  // calculate height
+  var height = data.length*(bar_width+bar_padding) - bar_padding;
+  // draw tickmarks
+  if (tickmarks) {
+    chart.attr("width", bar_width).attr("height", data.length*bar_width);
+    chart = chart.append("g").attr("transform", "translate(0, 15)");
+    var x = barchart.xscale(data);
+    chart.selectAll(".rule").data(x.ticks(5))
+      .enter().append("text")
+        .attr("class", "rule")
+        .attr("x", x).attr("y", 0).attr("dy", -3)
+        .attr("text-anchor", "middle").text(String);
+  } else {
+    chart.attr("width", bar_width).attr("height", data.length*bar_width+tickmark_height);
+  }
+  // draw bars
+  if (selection.x.length == 0) {
+    barchart.height(data.length*bar_height);
+    barchart.draw_bars(chart, data);
+  } else {
+    // nest data
+    var data_nested = d3.nest()
+      .key(function(d) { return d[selection.x[0]]; })
+      .entries(data)
+    // create barplots
+    barchart.height(data_nested[0].values.length*bar_height);
+    var y = 0;
+    for (var i = 0; i < data_nested.length; i++) {
+      var subchart = chart.append("g").attr("transform", "translate(0," + String(y) + ")");
+      barchart.draw_bars(subchart, data_nested[i].values)
+  // add 0-line
+        if (i > 0)
+  subchart.append("line")
+    .attr("x1", 0).attr("x2", bar_width).attr("y1", -bar_padding/2).attr("y2", -bar_padding/2).style("stroke", "#ccc");
+      y += data_nested[i].values.length*bar_height + bar_padding;
+    }
+  }
 }
 

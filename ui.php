@@ -10,6 +10,10 @@
     <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 
+    <!-- tipsy -->
+    <script type="text/javascript" src="js/jquery.tipsy.js"></script>
+    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+
     <!-- D3 includes -->
     <script type="text/javascript" src="js/d3/d3.js"></script>
 
@@ -88,10 +92,10 @@
         position: absolute; 
         margin-left: -1.3em;        
       }
-      .chart rect {
+      /*.chart rect {
         stroke: white;
         fill: steelblue;
-      }
+      }*/
       .chart text {
         font-size : 10px;
         font-family : sans-serif;
