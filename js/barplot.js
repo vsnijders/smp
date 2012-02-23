@@ -138,6 +138,34 @@ BarChart.prototype.yscale = function(data) {
   return y;
 }
 
+BarChart.prototype.plot_bars = function(chart, data, x, y) {
+  var yvar = this.yvar_;
+  // add grid lines
+  chart.selectAll("line").data(x.ticks(5))
+    .enter().append("line")
+      .attr("x1", x).attr("x2", x).attr("y1", 0).attr("y2", this.height_-yoffset)
+      .style("stroke", "#ccc");
+  // add bars
+  chart.selectAll("rect").data(data)
+    .enter().append("rect")
+      .attr("x", function(d) { return Math.min(x(0), x(d.value));})
+      .attr("y", function(d) { return y(d[yvar]);})
+      .attr("width", function(d) { return Math.abs(x(0) - x(d.value));})
+      .attr("height", y.rangeBand());
+  // add legend
+  chart.selectAll("text").data(data)
+    .enter().append("text")
+      .attr("x", -100)
+      .attr("y", function(d) { return y(d[yvar]) + y.rangeBand()/2;})
+      .attr("dy", ".35em")
+      .attr("text-anchor", "begin")
+      .text(function(d) { return d[yvar];});
+  // add 0-line
+  chart.append("line")
+    .attr("x1", x(0)).attr("x2", x(0)).attr("y1", 0).attr("y2", this.height_-yoffset)
+    .style("stroke", "#000000");
+}
+
 BarChart.prototype.plot = function(chart, data) {
   // create drawing area
   var yoffset = this.draw_tickmarks_ ? 15 : 0;
