@@ -5,7 +5,8 @@ function foo(data) {
   d3.select("body").append("svg")
     .attr("class", "chart");
   var chart = d3.select(".chart");
-  bar_plot_1(chart, data, selection);
+  var barchart = new BarChart;
+  barchart.plot(chart, data, selection);
 }
 
 // ============================================================================
@@ -130,14 +131,6 @@ BarChart.prototype.draw_bars = function(chart, data) {
       return d[yvar] + ': ' + d.value;
     }
   });
-  // add legend
-  chart.selectAll("text").data(data)
-    .enter().append("text")
-      .attr("x", -100)
-      .attr("y", function(d) { return y(d[yvar]) + y.rangeBand()/2;})
-      .attr("dy", ".35em")
-      .attr("text-anchor", "begin")
-      .text(function(d) { return d[yvar];});
   // add 0-line
   chart.append("line")
     .attr("x1", x(0)).attr("x2", x(0))
@@ -146,76 +139,67 @@ BarChart.prototype.draw_bars = function(chart, data) {
 }
 
 
-BarChart.prototype.plot = function(chart, data) {
-  // create drawing area
-  var yoffset = this.draw_tickmarks_ ? 15 : 0;
-  var chart = chart.append("g")
-    .attr("transform", "translate(" + String(this.x_+110) + 
-        "," + String(this.y_+yoffset) + ")");
-  // create scales
-  var x = this.xscale(data);
-  // add bars
-  this.draw_bars(chart, data);
-  // add tickmarks
-  if (this.draw_tickmarks_) {
-    chart.selectAll(".rule").data(x.ticks(5))
-      .enter().append("text")
-        .attr("class", "rule")
-        .attr("x", x).attr("y", 0).attr("dy", -3)
-        .attr("text-anchor", "middle").text(String);
-  }
-}
-
-function bar_plot_1(chart, data, selection) {
+BarChart.prototype.plot = function(chart, data, selection) {
   // some constants
-  var bar_height = 7;
+  var bar_height = 5;
   var bar_width  = 640;
   var bar_padding = 4;
   var tickmark_height = 15;
   var tickmarks = true;
-  // create barchartobject
-  var barchart = new BarChart;
-  barchart.yvar(selection.y[0]).no_tickmarks().width(bar_width).x(0);
+  var labelspace = 75;
+  // initialize
+  this.yvar(selection.y[0]).no_tickmarks().width(bar_width).x(0);
+  // set size of canvas
+  if (tickmarks) {
+    chart.attr("width", bar_width).attr("height", data.length*bar_width);
+  } else {
+    chart.attr("width", bar_width).attr("height", data.length*bar_width+tickmark_height);
+  }
+  // create space for labels
+  if (selection.x.length != 0) {
+    chart = chart.append("g").attr("transform", "translate(" + labelspace + ",0)");
+    this.width(bar_width - labelspace);
+  }
   // determine maximum and minimum values for scale
   var ymin = d3.min(data, function(d) { return Number(d.value);});
   var ymax = d3.max(data, function(d) { return Number(d.value);});
-  barchart.ylim(ymin, ymax);
+  this.ylim(ymin, ymax);
   // calculate height
   var height = data.length*(bar_width+bar_padding) - bar_padding;
   // draw tickmarks
   if (tickmarks) {
-    chart.attr("width", bar_width).attr("height", data.length*bar_width);
     chart = chart.append("g").attr("transform", "translate(0, 15)");
-    var x = barchart.xscale(data);
+    var x = this.xscale(data);
     chart.selectAll(".rule").data(x.ticks(5))
       .enter().append("text")
         .attr("class", "rule")
         .attr("x", x).attr("y", 0).attr("dy", -3)
         .attr("text-anchor", "middle").text(String);
-  } else {
-    chart.attr("width", bar_width).attr("height", data.length*bar_width+tickmark_height);
-  }
+  } 
   // draw bars
   if (selection.x.length == 0) {
-    barchart.height(data.length*bar_height);
-    barchart.draw_bars(chart, data);
+    this.height(data.length*bar_height);
+    this.draw_bars(chart, data);
   } else {
     // nest data
     var data_nested = d3.nest()
       .key(function(d) { return d[selection.x[0]]; })
       .entries(data)
     // create barplots
-    barchart.height(data_nested[0].values.length*bar_height);
+    this.height(data_nested[0].values.length*bar_height);
     var y = 0;
     for (var i = 0; i < data_nested.length; i++) {
       var subchart = chart.append("g").attr("transform", "translate(0," + String(y) + ")");
-      barchart.draw_bars(subchart, data_nested[i].values)
+      this.draw_bars(subchart, data_nested[i].values)
       // seperator line
       if (i > 0) {
         subchart.append("line")
           .attr("x1", 0).attr("x2", bar_width)
           .attr("y1", -bar_padding/2).attr("y2", -bar_padding/2).style("stroke", "#ccc");
       }
+      subchart.append("text").attr("x", -labelspace).attr("y", bar_padding)
+        .attr("dy", ".35em").attr("text-anchor", "begin").text(data_nested[i].key);
+      // legend
       // next set of bars
       y += data_nested[i].values.length*bar_height + bar_padding;
     }
