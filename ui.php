@@ -44,7 +44,11 @@
         //$("#graphtype").html("<b>" + graphtype + "</b>");
         //$("#graphdata").load("ui_fetch.php", selection);
         jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          if (graphtype == "bar") foo(data);
+          if (graphtype == "bar") {
+            foo(data);
+          } else {
+            d3.select(".chart").remove();
+          }
         })
       }
 
