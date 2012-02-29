@@ -205,7 +205,7 @@
     echo "<div class=\"collapseblethingy\">\n";
     echo "<form>\n";
     foreach ($meta['levels'][$var] as $level) {
-      echo "<input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</input><br>\n";
+      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
     }
     echo "</form>\n</div>\n</li>\n";
 
