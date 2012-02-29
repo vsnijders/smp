@@ -6,7 +6,7 @@
     <title>jQuery test</title>
 
     <!-- jQuery includes -->
-    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 
@@ -26,14 +26,15 @@
           x : [],
           y : [],
           rows : [],
-          columns : []
+          columns : [],
+          filter : {}
         };
 
       function redraw_graph() {
-        $("#graphtype").html("<b>" + graphtype + "</b>");
-        //$("#graphdata").load("ui_fetch.php", selection);
-        jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          foo(data);
+        //$("#graphtype").html("<b>" + graphtype + "</b>");
+        //$("#graphdata").load("ui_fetch_filter.php", selection);
+        jQuery.getJSON("ui_fetch_filter.php", selection, function(data) {
+          if (graphtype == "bar") foo(data);
         })
       }
 
@@ -56,6 +57,30 @@
           redraw_graph();
         })
       });
+
+
+      $(function(){
+        $('.collapse').click(function() {
+          $(this).next().toggle('slow');
+          return false;
+        }).next().hide();
+      });
+
+      $(function(){
+        $('.filter').change(function() {
+          selection.filter = {};
+          $(".filter:checked").each(function() {
+            var value = this.value;
+            var variable = this.name;
+            if (selection.filter[variable] === undefined) 
+              selection.filter[variable] = [];
+            selection.filter[variable].push(value);
+            return (true);
+          }) ;
+          redraw_graph();
+        });
+      });
+
     </script>
 
     <style type="text/css">
@@ -71,7 +96,7 @@
         margin-bottom : 0pt;
       }
       div.graph {
-        color : red;
+        color : black;
       }
       .connectedSortable { 
         border-top : solid 1px rgb(200,200,200);
@@ -103,7 +128,22 @@
       .draggable {
         cursor: move;
       }
-    </style>	
+      .collapseblethingy {
+        background : rgba(0,0,0, 0.5);
+        color : white;
+        z-index : 10;
+        position : relative;
+        left : 235px;
+        margin-top : -10px;
+        cursor : auto; 
+      }
+      .collapse {
+        position : relative;
+        left : 240px;
+        margin-top : -3px;
+        cursor : pointer;
+      }
+    </style>
 
   </head>
   <body>
@@ -143,11 +183,83 @@
 
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
-      <li class="ui-state-default draggable" id="jaar">Jaar</li>
-      <li class="ui-state-default draggable" id="sbi">SBI</li>
-      <li class="ui-state-default draggable" id="grootteklasse">Grootteklasse</li>
-      <li class="ui-state-default draggable" id="effect">Effect</li>
-      <li class="ui-state-default draggable" id="variable">Variable</li>
+      <li class="ui-state-default draggable collapseble" id="jaar">
+        <span class="ui-icon ui-icon-gear collapse"></span>
+        Jaar 
+        <div class="collapseblethingy">
+          <form>
+            <input type="checkbox" class="filter" name="jaar" value="2007">2007</input><br>
+            <input type="checkbox" class="filter" name="jaar" value="2008">2008</input><br>
+            <input type="checkbox" class="filter" name="jaar" value="2009">2009</input><br>
+            <input type="checkbox" class="filter" name="jaar" value="2010">2010</input><br>
+            <input type="checkbox" class="filter" name="jaar" value="2011">2011</input><br>
+          </form>
+        </div>
+      </li>
+      <li class="ui-state-default draggable collapseble" id="sbi">
+        <span class="ui-icon ui-icon-gear collapse"></span>
+        SBI
+        <div class="collapseblethingy">
+          <form>
+            <input type="checkbox" value="A" class="filter" name="sbi">A</input><br> 
+            <input type="checkbox" value="B" class="filter" name="sbi">B</input><br> 
+            <input type="checkbox" value="C" class="filter" name="sbi">C</input><br>
+            <input type="checkbox" value="D" class="filter" name="sbi">D</input><br> 
+            <input type="checkbox" value="E" class="filter" name="sbi">E</input><br> 
+            <input type="checkbox" value="F" class="filter" name="sbi">F</input><br>
+            <input type="checkbox" value="G" class="filter" name="sbi">G</input><br> 
+            <input type="checkbox" value="H" class="filter" name="sbi">H</input><br> 
+            <input type="checkbox" value="I" class="filter" name="sbi">I</input><br>
+            <input type="checkbox" value="J" class="filter" name="sbi">J</input><br> 
+            <input type="checkbox" value="K" class="filter" name="sbi">K</input><br> 
+            <input type="checkbox" value="M" class="filter" name="sbi">M</input><br>
+            <input type="checkbox" value="N" class="filter" name="sbi">N</input><br> 
+            <input type="checkbox" value="O" class="filter" name="sbi">O</input><br> 
+            <input type="checkbox" value="P" class="filter" name="sbi">P</input><br>
+            <input type="checkbox" value="Q" class="filter" name="sbi">Q</input><br> 
+            <input type="checkbox" value="R" class="filter" name="sbi">R</input><br> 
+            <input type="checkbox" value="S" class="filter" name="sbi">S</input><br>
+            <input type="checkbox" value="T" class="filter" name="sbi">T</input><br> 
+            <input type="checkbox" value="U" class="filter" name="sbi">U</input><br>
+          </form>
+        </div>
+      </li>
+      <li class="ui-state-default draggable" id="grootteklasse">
+        <span class="ui-icon ui-icon-gear collapse"></span>
+        Grootteklasse 
+        <div class="collapseblethingy">
+          <form>
+            <input type="checkbox" value="microbedrijf" class="filter" name="grootteklasse">microbedrijf</input><br>
+            <input type="checkbox" value="kleinbedrijf" class="filter" name="grootteklasse">kleinbedrijf</input><br>
+            <input type="checkbox" value="middenbedrijf" class="filter" name="grootteklasse">middenbedrijf</input><br>
+            <input type="checkbox" value="grootbedrijf" class="filter" name="grootteklasse">grootbedrijf</input><br>
+          </form>
+        </div>
+      </li>
+      <li class="ui-state-default draggable" id="effect">
+        <span class="ui-icon ui-icon-gear collapse"></span>
+        Effect 
+        <div class="collapseblethingy">
+          <form>
+            <input type="checkbox" value="opvoering" class="filter" name="effect">opvoering</input><br>
+            <input type="checkbox" value="afvoering" class="filter" name="effect">afvoering</input><br>
+          </form>
+        </div>
+      </li>
+      <li class="ui-state-default draggable" id="variable">
+        <span class="ui-icon ui-icon-gear collapse"></span>
+        Variable 
+        <div class="collapseblethingy">
+          <form>
+            <input type="checkbox" value="afsplitsing" class="filter" name="variable">afsplitsing</input><br>
+            <input type="checkbox" value="fusie" class="filter" name="variable">fusie</input><br>
+            <input type="checkbox" value="geboorte" class="filter" name="variable">geboorte</input><br>
+            <input type="checkbox" value="overname" class="filter" name="variable">overname</input><br>
+            <input type="checkbox" value="sterfte" class="filter" name="variable">sterfte</input><br>
+            <input type="checkbox" value="uiteenvallen" class="filter" name="variable">uiteenvallen</input><br>
+          </form>
+        </div>
+      </li>
     </ul>
 
   </div>
