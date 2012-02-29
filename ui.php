@@ -32,8 +32,8 @@
 
       function redraw_graph() {
         //$("#graphtype").html("<b>" + graphtype + "</b>");
-        //$("#graphdata").load("ui_fetch_filter.php", selection);
-        jQuery.getJSON("ui_fetch_filter.php", selection, function(data) {
+        //$("#graphdata").load("ui_fetch.php", selection);
+        jQuery.getJSON("ui_fetch.php", selection, function(data) {
           if (graphtype == "bar") foo(data);
         })
       }
