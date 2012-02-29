@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+  require_once("php/meta.php");
+
+  // table id to read in: TODO allow to set using GET/POST
+  $id = 3;
+
+  // read metadata of table
+  $pdo = new PDO("sqlite:data/test.sqlite");
+  $meta = get_meta($pdo, $id);
+?>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -183,85 +193,21 @@
 
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
-      <li class="ui-state-default draggable collapseble" id="jaar">
-        <span class="ui-icon ui-icon-gear collapse"></span>
-        Jaar 
-        <div class="collapseblethingy">
-          <form>
-            <input type="checkbox" class="filter" name="jaar" value="2007">2007</input><br>
-            <input type="checkbox" class="filter" name="jaar" value="2008">2008</input><br>
-            <input type="checkbox" class="filter" name="jaar" value="2009">2009</input><br>
-            <input type="checkbox" class="filter" name="jaar" value="2010">2010</input><br>
-            <input type="checkbox" class="filter" name="jaar" value="2011">2011</input><br>
-          </form>
-        </div>
-      </li>
-      <li class="ui-state-default draggable collapseble" id="sbi">
-        <span class="ui-icon ui-icon-gear collapse"></span>
-        SBI
-        <div class="collapseblethingy">
-          <form>
-            <input type="checkbox" value="A" class="filter" name="sbi">A</input><br> 
-            <input type="checkbox" value="B" class="filter" name="sbi">B</input><br> 
-            <input type="checkbox" value="C" class="filter" name="sbi">C</input><br>
-            <input type="checkbox" value="D" class="filter" name="sbi">D</input><br> 
-            <input type="checkbox" value="E" class="filter" name="sbi">E</input><br> 
-            <input type="checkbox" value="F" class="filter" name="sbi">F</input><br>
-            <input type="checkbox" value="G" class="filter" name="sbi">G</input><br> 
-            <input type="checkbox" value="H" class="filter" name="sbi">H</input><br> 
-            <input type="checkbox" value="I" class="filter" name="sbi">I</input><br>
-            <input type="checkbox" value="J" class="filter" name="sbi">J</input><br> 
-            <input type="checkbox" value="K" class="filter" name="sbi">K</input><br> 
-            <input type="checkbox" value="M" class="filter" name="sbi">M</input><br>
-            <input type="checkbox" value="N" class="filter" name="sbi">N</input><br> 
-            <input type="checkbox" value="O" class="filter" name="sbi">O</input><br> 
-            <input type="checkbox" value="P" class="filter" name="sbi">P</input><br>
-            <input type="checkbox" value="Q" class="filter" name="sbi">Q</input><br> 
-            <input type="checkbox" value="R" class="filter" name="sbi">R</input><br> 
-            <input type="checkbox" value="S" class="filter" name="sbi">S</input><br>
-            <input type="checkbox" value="T" class="filter" name="sbi">T</input><br> 
-            <input type="checkbox" value="U" class="filter" name="sbi">U</input><br>
-          </form>
-        </div>
-      </li>
-      <li class="ui-state-default draggable" id="grootteklasse">
-        <span class="ui-icon ui-icon-gear collapse"></span>
-        Grootteklasse 
-        <div class="collapseblethingy">
-          <form>
-            <input type="checkbox" value="microbedrijf" class="filter" name="grootteklasse">microbedrijf</input><br>
-            <input type="checkbox" value="kleinbedrijf" class="filter" name="grootteklasse">kleinbedrijf</input><br>
-            <input type="checkbox" value="middenbedrijf" class="filter" name="grootteklasse">middenbedrijf</input><br>
-            <input type="checkbox" value="grootbedrijf" class="filter" name="grootteklasse">grootbedrijf</input><br>
-          </form>
-        </div>
-      </li>
-      <li class="ui-state-default draggable" id="effect">
-        <span class="ui-icon ui-icon-gear collapse"></span>
-        Effect 
-        <div class="collapseblethingy">
-          <form>
-            <input type="checkbox" value="opvoering" class="filter" name="effect">opvoering</input><br>
-            <input type="checkbox" value="afvoering" class="filter" name="effect">afvoering</input><br>
-          </form>
-        </div>
-      </li>
-      <li class="ui-state-default draggable" id="variable">
-        <span class="ui-icon ui-icon-gear collapse"></span>
-        Variable 
-        <div class="collapseblethingy">
-          <form>
-            <input type="checkbox" value="afsplitsing" class="filter" name="variable">afsplitsing</input><br>
-            <input type="checkbox" value="fusie" class="filter" name="variable">fusie</input><br>
-            <input type="checkbox" value="geboorte" class="filter" name="variable">geboorte</input><br>
-            <input type="checkbox" value="overname" class="filter" name="variable">overname</input><br>
-            <input type="checkbox" value="sterfte" class="filter" name="variable">sterfte</input><br>
-            <input type="checkbox" value="uiteenvallen" class="filter" name="variable">uiteenvallen</input><br>
-          </form>
-        </div>
-      </li>
-    </ul>
+<?php
+  foreach ($meta['variables'] as $var) {
+    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+    echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
+    echo $var . "\n";
+    echo "<div class=\"collapseblethingy\">\n";
+    echo "<form>\n";
+    foreach ($meta['levels'][$var] as $level) {
+      echo "<input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</input><br>\n";
+    }
+    echo "</form>\n</div>\n</li>\n";
 
+  }
+?>
+    </ul>
   </div>
 
   <div class="graph">
