@@ -66,26 +66,32 @@ Mosaic.prototype.plot = function(chart, data, selection) {
     var width = xtotal*xfactor;
     // calculate y-factor
     var yfactor = (this.height_ - 2*margin - (datan[i].values.length-1)*space)/xtotal;
-    // draw rectangles
+    // calculate coordinates of rectangles
     var y = margin;
     for (var j = 0; j < datan[i].values.length; j++) {
       var height = Math.abs(datan[i].values[j][vvar])*yfactor;
-      chart.append("rect").attr("x", x).attr("width", width)
-        .attr("y", y).attr("height", height)
-        .attr("fill", datan[i].values[j][vvar] < 0 ? "#F99" : "#99F");
-      // add tooltip to rectangles
-      // Doesn't work now since data is not stored with rect; need to use
-      // .data().enter() for that
-      /*$('rect').tipsy({
-        gravity: 'w',
-        html: true,
-        title: function() {
-          var d = this.__data__;
-          return d[xvar] + ', ' + d[yvar] + ': ' + d.value;
-        }
-      });*/
+      datan[i].values[j]["y"] = y;
+      datan[i].values[j]["x"] = x;
+      datan[i].values[j]["width"] = width;
+      datan[i].values[j]["height"] = height;
       y += height + space;
     }
+    // draw rectangles
+    chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
+      .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
+      .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
+      .attr("fill", function(d,i) { return d[vvar] < 0 ? "#F00" : "#00F"});
+    // add tooltip to rects
+    $('rect').tipsy({
+      gravity: 'w',
+      html: true,
+      title: function() {
+        var d = this.__data__;
+        return d[xvar] + ', ' + d[yvar] + ': ' + d[vvar];
+      }
+    });
+    
+
     // next x
     x  += width + space;
   }
