@@ -29,6 +29,7 @@
 
     <!-- Plotting includes -->
     <script type="text/javascript" src="js/barplot.js"></script>
+    <script type="text/javascript" src="js/mosaic.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
@@ -46,6 +47,8 @@
         jQuery.getJSON("ui_fetch.php", selection, function(data) {
           if (graphtype == "bar") {
             foo(data);
+          } else if (graphtype == "mosaic") {
+            draw_mosaic(data, selection);
           } else {
             d3.select(".chart").remove();
           }
