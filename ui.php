@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+  require_once("php/meta.php");
+
+  // table id to read in: TODO allow to set using GET/POST
+  $id = 3;
+
+  // read metadata of table
+  $pdo = new PDO("sqlite:data/test.sqlite");
+  $meta = get_meta($pdo, $id);
+?>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -6,7 +16,7 @@
     <title>jQuery test</title>
 
     <!-- jQuery includes -->
-    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 
@@ -19,6 +29,7 @@
 
     <!-- Plotting includes -->
     <script type="text/javascript" src="js/barplot.js"></script>
+    <script type="text/javascript" src="js/mosaic.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
@@ -26,14 +37,21 @@
           x : [],
           y : [],
           rows : [],
-          columns : []
+          columns : [],
+          filter : {}
         };
 
       function redraw_graph() {
-        $("#graphtype").html("<b>" + graphtype + "</b>");
+        //$("#graphtype").html("<b>" + graphtype + "</b>");
         //$("#graphdata").load("ui_fetch.php", selection);
         jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          foo(data);
+          if (graphtype == "bar") {
+            foo(data);
+          } else if (graphtype == "mosaic") {
+            draw_mosaic(data, selection);
+          } else {
+            d3.select(".chart").remove();
+          }
         })
       }
 
@@ -56,6 +74,30 @@
           redraw_graph();
         })
       });
+
+
+      $(function(){
+        $('.collapse').click(function() {
+          $(this).next().toggle('slow');
+          return false;
+        }).next().hide();
+      });
+
+      $(function(){
+        $('.filter').change(function() {
+          selection.filter = {};
+          $(".filter:checked").each(function() {
+            var value = this.value;
+            var variable = this.name;
+            if (selection.filter[variable] === undefined) 
+              selection.filter[variable] = [];
+            selection.filter[variable].push(value);
+            return (true);
+          }) ;
+          redraw_graph();
+        });
+      });
+
     </script>
 
     <style type="text/css">
@@ -71,7 +113,7 @@
         margin-bottom : 0pt;
       }
       div.graph {
-        color : red;
+        color : black;
       }
       .connectedSortable { 
         border-top : solid 1px rgb(200,200,200);
@@ -103,7 +145,22 @@
       .draggable {
         cursor: move;
       }
-    </style>	
+      .collapseblethingy {
+        background : rgba(0,0,0, 0.5);
+        color : white;
+        z-index : 10;
+        position : relative;
+        left : 235px;
+        margin-top : -10px;
+        cursor : auto; 
+      }
+      .collapse {
+        position : relative;
+        left : 240px;
+        margin-top : -3px;
+        cursor : pointer;
+      }
+    </style>
 
   </head>
   <body>
@@ -143,13 +200,21 @@
 
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
-      <li class="ui-state-default draggable" id="jaar">Jaar</li>
-      <li class="ui-state-default draggable" id="sbi">SBI</li>
-      <li class="ui-state-default draggable" id="grootteklasse">Grootteklasse</li>
-      <li class="ui-state-default draggable" id="effect">Effect</li>
-      <li class="ui-state-default draggable" id="variable">Variable</li>
-    </ul>
+<?php
+  foreach ($meta['variables'] as $var) {
+    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+    echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
+    echo $var . "\n";
+    echo "<div class=\"collapseblethingy\">\n";
+    echo "<form>\n";
+    foreach ($meta['levels'][$var] as $level) {
+      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
+    }
+    echo "</form>\n</div>\n</li>\n";
 
+  }
+?>
+    </ul>
   </div>
 
   <div class="graph">

@@ -6,6 +6,9 @@
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
 
+  //echo "<pre>";
+  //print_r($_REQUEST);
+
   // determine which variables are used in the selection
   // only use x and y and only first variable
   $selectedvars = array();
@@ -30,10 +33,28 @@
   $notselected = array_diff($meta['variables'], $selectedvars);
   $where = array();
   foreach($notselected as $var) {
-    $where[] = $var . "= 'TOTAL'";
+    if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
+      $sub_where = array();
+      foreach($_REQUEST['filter'][$var] as $val) {
+        $sub_where[] = $var . "= '" . $val . "'";
+      }
+      if (sizeof($sub_where))
+        $where[] = '(' . implode(' OR ', $sub_where) . ')';
+    } else {
+      $where[] = $var . "= 'TOTAL'";
+    }
   }
   foreach($selectedvars as $var) {
-    $where[] = $var . "!= 'TOTAL'";
+    if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
+      $sub_where = array();
+      foreach($_REQUEST['filter'][$var] as $val) {
+        $sub_where[] = $var . "= '" . $val . "'";
+      }
+      if (sizeof($sub_where))
+        $where[] = '(' . implode(' OR ', $sub_where) . ')';
+    } else {
+      $where[] = $var . "!= 'TOTAL'";
+    }
   }
   $vars = $selectedvars;
   $vars[] = 'value';
@@ -45,6 +66,7 @@
     $sql .= " ORDER BY " . implode(", ", $selectedvars);
   }
   //echo($sql);
+  //echo("\n");
 
   // run query
   $data = array();
@@ -59,4 +81,5 @@
   //print_r(json_encode($data));
   asJSON($data);
 
+  //echo "</pre>";
 ?>
