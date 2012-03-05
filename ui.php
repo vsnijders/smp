@@ -13,7 +13,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>jQuery test</title>
+    <title>StatMine chart test</title>
 
     <!-- jQuery includes -->
     <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
