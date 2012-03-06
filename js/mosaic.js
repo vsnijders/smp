@@ -5,7 +5,7 @@ function draw_mosaic(data, selection) {
     .attr("class", "chart");
   var chart = d3.select(".chart");
   var mosaic = new Mosaic;
-  mosaic.width(300).height(300).xvar(selection.x[0]).yvar(selection.y[0]);
+  mosaic.width(600).height(600).xvar(selection.x[0]).yvar(selection.y[0]);
   mosaic.plot(chart, data, selection);
 }
 
