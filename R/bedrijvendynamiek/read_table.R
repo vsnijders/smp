@@ -10,70 +10,64 @@ table_info <- function(id) {
 }
 
 read_aantallen <- function() {
-  data <- read.csv2("bedrijvendynamiek/aantallen.csv", header=FALSE)
+    data <- read.csv2("bedrijvendynamiek/aantallen.csv", header=FALSE)
 
-  data <- data[, c(-2, -5)]
+    data <- data[, c(-2, -5)]
 
-  names(data) <- c("sbi_naam", "gk", "jaar", "aantal")
+    names(data) <- c("sbi_naam", "gk", "jaar", "aantal")
 
-  data$sbi <- substr(data$sbi_naam, 1, 1)
+    data$sbi <- substr(data$sbi_naam, 1, 1)
 
-  data$grootteklasse <- NA
-  data$grootteklasse[data$gk == "1 werkzame persoon"] <- 1
-  data$grootteklasse[data$gk == "2 werkzame personen"] <- 2
-  data$grootteklasse[data$gk == "3 tot 5 werkzame personen"] <- 2
-  data$grootteklasse[data$gk == "5 tot 10 werkzame personen"] <- 2
-  data$grootteklasse[data$gk == "10 tot 20 werkzame personen"] <- 3
-  data$grootteklasse[data$gk == "20 tot 50 werkzame personen"] <- 3
-  data$grootteklasse[data$gk == "50 tot 100 werkzame personen"] <- 3
-  data$grootteklasse[data$gk == "100 werkzame personen of meer"] <- 4
-  data$grootteklasse <- factor(data$grootteklasse, levels=1:4, 
-     labels = c("microbedrijf", "kleinbedrijf", "middenbedrijf", "grootbedrijf"))
+    data$grootteklasse <- NA
+    data$grootteklasse[data$gk == "1 werkzame persoon"] <- 1
+    data$grootteklasse[data$gk == "2 werkzame personen"] <- 2
+    data$grootteklasse[data$gk == "3 tot 5 werkzame personen"] <- 2
+    data$grootteklasse[data$gk == "5 tot 10 werkzame personen"] <- 2
+    data$grootteklasse[data$gk == "10 tot 20 werkzame personen"] <- 3
+    data$grootteklasse[data$gk == "20 tot 50 werkzame personen"] <- 3
+    data$grootteklasse[data$gk == "50 tot 100 werkzame personen"] <- 3
+    data$grootteklasse[data$gk == "100 werkzame personen of meer"] <- 4
+    data$grootteklasse <- factor(data$grootteklasse, levels=1:4, 
+       labels = c("microbedrijf", "kleinbedrijf", "middenbedrijf", "grootbedrijf"))
 
-  data$gk <- NULL
-  data$sbi_naam <- NULL
+    data$gk <- NULL
+    data$sbi_naam <- NULL
 
-  # calculate all margins
-  library(plyr)
-  m <- names(data)[names(data) != "aantal"]
- 
-  margins <- data.frame()
-  for (i in (seq_len(length(m))-1)) {
-    c <- combn(m, i)
-    for (j in seq_len(ncol(c))) {
-        margin <- ddply(data, c[,j], function(d) {
-            result <- d[1,]
-            result[, m[!(m %in% c[,j])]] <- NA
-            result$aantal <- sum(d$aantal)
-            return(result)
-        })
-        margin$.id <- NULL
-        cat("calculating margin: ", paste(c[,j], collapse=", "), "\n")
-        print(margin)
-        margins <- rbind(margins, margin)
+    # select years 2007-2010
+    data <- data[data$jaar > 2006 & data$jaar < 2011, ]
+
+    # calculate all margins
+    library(plyr)
+    m <- names(data)[names(data) != "aantal"]
+   
+    margins <- data.frame()
+    for (i in (seq_len(length(m))-1)) {
+        c <- combn(m, i)
+        for (j in seq_len(ncol(c))) {
+            margin <- ddply(data, c[,j], function(d) {
+                result <- d[1,]
+                result[, m[!(m %in% c[,j])]] <- NA
+                result$aantal <- sum(d$aantal)
+                return(result)
+            })
+            margin$.id <- NULL
+            margins <- rbind(margins, margin)
+        }
     }
-  }
 
-  # calculate margins
-  library(plyr)
-  m1 <- ddply(data, "grootteklasse", function(d) {
-        r <- d[1,]
-        r$aantal <- sum(d$aantal)
-        return(r)
-      })
-  m1$sbi <- "TOTAL"
-  m2 <- ddply(data, "sbi", function(d) {
-        r <- d[1,]
-        r$aantal <- sum(d$aantal)
-        return(r)
-      })
-  m2$grootteklasse <- "TOTAL"
+    # Change NA's in margins to TOTAL
+    for (i in seq_along(margins)) {
+        sel <- is.na(margins[, i])
+        margins[sel, i] <- "TOTAL"
+    }
 
-  return(data)
+    # Add margins to data
+    data <- rbind(data, margins)
+    return(data)
 }
 
+read_dynamiek <- function() {
 
-read_table <- function() {
     data <- read.csv2("bedrijvendynamiek/dynamiek.csv")
 
     # change NA's in zeros
@@ -89,10 +83,16 @@ read_table <- function() {
     library(reshape2)
     data <- melt(data, id.var=c("jaar", "grootteklasse", "sbi", "effect"))
 
+    # rename variables
+    names(data)[5:6] <- c("type", "netto_verandering")
+
+    # select years 2007-2010
+    data <- data[data$jaar < 2011, ]
+
     # calculate all margins
     library(plyr)
-    data$value[data$effect == "afvoering"] <- - data$value[data$effect == "afvoering"]
-    m <- names(data)[names(data) != "value"]
+    data$netto_verandering[data$effect == "afvoering"] <- - data$netto_verandering[data$effect == "afvoering"]
+    m <- names(data)[names(data) != "netto_verandering"]
    
     margins <- data.frame()
     for (i in (seq_len(length(m))-1)) {
@@ -101,7 +101,7 @@ read_table <- function() {
           margin <- ddply(data, c[,j], function(d) {
               result <- d[1,]
               result[, !(m %in% c[,j])] <- NA
-              result$value <- sum(d$value)
+              result$netto_verandering <- sum(d$netto_verandering)
               return(result)
           })
           margin$.id <- NULL
@@ -119,6 +119,16 @@ read_table <- function() {
     data <- rbind(data, margins)
     return(data)
     
+}
+
+
+read_table <- function() {
+    dynamiek <- read_dynamiek()
+    aantallen <- read_aantallen()
+
+    data <- merge(dynamiek, aantallen, all.x=FALSE, all.y=FALSE)
+      
+    return (data)
 }
 
 
