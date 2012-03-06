@@ -10,8 +10,8 @@
       'idvariables' => array("gender", "age", "year")
     );
   $META['bedrijvendynamiek'] = array(
-      'variables' => array("jaar", "grootteklasse", "sbi", "effect", "variable"),
-      'idvariables' => array("jaar", "grootteklasse", "sbi", "effect"),
+      'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
+      'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
     );
 
   

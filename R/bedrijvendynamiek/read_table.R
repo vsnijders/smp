@@ -127,7 +127,9 @@ read_table <- function() {
     aantallen <- read_aantallen()
 
     data <- merge(dynamiek, aantallen, all.x=FALSE, all.y=FALSE)
-      
+    data <- melt(data, measure.vars=c("netto_verandering", "aantal"))
+
+
     return (data)
 }
 
