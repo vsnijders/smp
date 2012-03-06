@@ -162,7 +162,9 @@ BarChart.prototype.plot = function(chart, data, selection) {
   }
   // determine maximum and minimum values for scale
   var ymin = d3.min(data, function(d) { return Number(d.value);});
+  if (ymin > 0) ymin = 0;
   var ymax = d3.max(data, function(d) { return Number(d.value);});
+  if (ymax < 0) ymax = 0;
   this.ylim(ymin, ymax);
   // calculate height
   var height = data.length*(bar_width+bar_padding) - bar_padding;
