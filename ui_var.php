@@ -29,6 +29,7 @@
 
     <!-- Plotting includes -->
     <script type="text/javascript" src="js/barplot.js"></script>
+    <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mosaic.js"></script>
 
     <script type="text/javascript">
@@ -42,17 +43,17 @@
         };
 
       function redraw_graph() {
-        $("#graphtype").html("<b>" + graphtype + "</b>");
-        $("#graphdata").load("ui_fetch_var.php?html=1", selection);
-        /*jQuery.getJSON("ui_fetch_var.php", selection, function(data) {
+        //$("#graphtype").html("<b>" + graphtype + "</b>");
+        //$("#graphdata").load("ui_fetch_var.php?html=1", selection);
+        jQuery.getJSON("ui_fetch_var.php", selection, function(data) {
           if (graphtype == "bar") {
-            foo(data);
-          } else if (graphtype == "mosaic") {
-            draw_mosaic(data, selection);
+            bar_chart(data, selection);
+          //} else if (graphtype == "mosaic") {
+            //draw_mosaic(data, selection);
           } else {
             d3.select(".chart").remove();
           }
-        })*/
+        })
       }
 
       $(function() {
