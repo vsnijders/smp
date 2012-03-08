@@ -43,7 +43,7 @@
 
       function redraw_graph() {
         $("#graphtype").html("<b>" + graphtype + "</b>");
-        $("#graphdata").load("ui_fetch_var.php", selection);
+        $("#graphdata").load("ui_fetch_var.php?html=1", selection);
         /*jQuery.getJSON("ui_fetch_var.php", selection, function(data) {
           if (graphtype == "bar") {
             foo(data);

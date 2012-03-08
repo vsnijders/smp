@@ -6,48 +6,25 @@
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
 
-  echo "<pre>";
-  print_r($_REQUEST);
-
-  // determine which variables are used in the selection
+  // Determine which variables are used in the selection
   // only use x and y and only first variable
-  $selectedvars = array();
-  $measurevars = array();
-  $xvar = array();
-  $yvar = array();
-  if (isset($_REQUEST['x'])) {
-    foreach ($_REQUEST['x'] as $var) {
-      if (in_array($var, $meta['levels']['variable'])) {
-        $measurevars[] = $var;
-      } else {
-        if (sizeof($xvar) < 1) {
-          $selectedvars[] = $var;
-          $xvar[] = $var;
+  $selectionvars = array("x", "y");
+  $idvars        = array();
+  $measurevars   = array();
+  foreach($selectionvars as $selectionvar) {
+    if (isset($_REQUEST[$selectionvar])) {
+      foreach ($_REQUEST[$selectionvar] as $var) {
+        if (in_array($var, $meta['levels']['variable'])) {
+          $measurevars[] = $var;
+        } else {
+          $idvars[] = $var;
         }
       }
     }
   }
-  if (isset($_REQUEST['y'])) {
-    foreach ($_REQUEST['y'] as $var) {
-      if (in_array($var, $meta['levels']['variable'])) {
-        $measurevars[] = $var;
-      } else {
-        if (sizeof($xvar) < 1) {
-          $selectedvars[] = $var;
-          $yvar[] = $var;
-        }
-      }
-    }
-  }
-  //if (isset($_REQUEST['columns'])) {
-  //  foreach($_REQUEST['columns'] as $var) $selectedvars[] = $var;
-  //}
-  //if (isset($_REQUEST['rows'])) {
-  //  foreach($_REQUEST['rows'] as $var) $selectedvars[] = $var;
-  //}
 
-  // build query
-  $notselected = array_diff($meta['idvariables'], $selectedvars);
+  // Build query
+  $notselected = array_diff($meta['idvariables'], $idvars);
   $where = array();
   foreach($notselected as $var) {
     if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
@@ -61,7 +38,7 @@
       $where[] = $var . "= 'TOTAL'";
     }
   }
-  foreach($selectedvars as $var) {
+  foreach($idvars as $var) {
     if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
       $sub_where = array();
       foreach($_REQUEST['filter'][$var] as $val) {
@@ -79,58 +56,57 @@
       $sub_where[] = "variable = '" . $var . "'";
     }
     $where[] = '(' . implode(' OR ', $sub_where) . ')';
-    $selectedvars[] = 'variable';
+    $idvars[] = 'variable';
   }
 
-  $vars = $selectedvars;
+  $vars = $idvars;
   $vars[] = 'value';
   $sql = "SELECT " . implode(", ", $vars) . " FROM {$meta['name']}";
   if (sizeof($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
   }
-  if (sizeof($selectedvars)) {
-    $sql .= " ORDER BY " . implode(", ", $selectedvars);
+  if (sizeof($idvars)) {
+    $sql .= " ORDER BY " . implode(", ", $idvars);
   }
-  echo($sql);
-  echo("\n");
 
-  // run query
+  // Run query
   $result = $pdo->query($sql);
-  //$data = $result->fetchAll(PDO::FETCH_ASSOC);
-  //print_r($data);
 
-  /*$data = array();
-  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    $data[] = $row;
-    if ($yvar) {
-      $data[] = array('var' => $row[$yvar[0]], 'val'=> $row['value']);
-    }
-  }*/
-
+  // Transform the results of the database query to something that can be sent back. We want 
+  // something with the following form:
+  //   idvar1 idvar2 ... idvarN measurevar1 ... measurevarM
+  // The following code works, but isn't very pretty. Can probably be improved upon.
   $data = array();
-  $continue = true;
-  while ($continue) {
+  while (true) {
     $data_row = array();
     for ($i = 0; $i < sizeof($measurevars); $i++) {
       $row = $result->fetch(PDO::FETCH_ASSOC);
-      if (!$row) {
-        $continue = false;
-        break;
-      } 
-      foreach ($selectedvars as $var) {
+      if (!$row) break;
+      foreach ($idvars as $var) {
         if ($var != 'variable') {
           $data_row[$var] = $row[$var];
         } else {
-          if ($row['variable'] == $measurevars[$i]) $data_row[$measurevars[$i]] = $row['value'];
+          if ($row['variable'] == $measurevars[$i]) 
+            $data_row[$measurevars[$i]] = $row['value'];
         }
       }
     }
-    if ($continue) $data[] = $data_row;
+    if (sizeof($data_row)) {
+      $data[] = $data_row;
+    } else break;
   }
-  print_r($data);
 
-  //print_r(json_encode($data));
-  //asJSON($data);
 
-  echo "</pre>";
+  // Return data
+  if (isset($_REQUEST['html'])) {
+    echo "<pre>";
+    print_r($_REQUEST);
+    echo("\n");
+    echo($sql);
+    echo("\n");
+    print_r($data);
+    echo "</pre>";
+  } else {
+    asJSON($data);
+  }
 ?>
