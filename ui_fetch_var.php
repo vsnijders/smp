@@ -95,16 +95,41 @@
   echo("\n");
 
   // run query
-  $data = array();
   $result = $pdo->query($sql);
-  $data = $result->fetchAll(PDO::FETCH_ASSOC);
-  /*while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+  //$data = $result->fetchAll(PDO::FETCH_ASSOC);
+  //print_r($data);
+
+  /*$data = array();
+  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
     if ($yvar) {
       $data[] = array('var' => $row[$yvar[0]], 'val'=> $row['value']);
     }
   }*/
-  print_r(json_encode($data));
+
+  $data = array();
+  $continue = true;
+  while ($continue) {
+    $data_row = array();
+    for ($i = 0; $i < sizeof($measurevars); $i++) {
+      $row = $result->fetch(PDO::FETCH_ASSOC);
+      if (!$row) {
+        $continue = false;
+        break;
+      } 
+      foreach ($selectedvars as $var) {
+        if ($var != 'variable') {
+          $data_row[$var] = $row[$var];
+        } else {
+          if ($row['variable'] == $measurevars[$i]) $data_row[$measurevars[$i]] = $row['value'];
+        }
+      }
+    }
+    if ($continue) $data[] = $data_row;
+  }
+  print_r($data);
+
+  //print_r(json_encode($data));
   //asJSON($data);
 
   echo "</pre>";
