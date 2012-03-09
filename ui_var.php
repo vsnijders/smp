@@ -31,6 +31,7 @@
     <script type="text/javascript" src="js/barplot.js"></script>
     <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mosaic.js"></script>
+    <script type="text/javascript" src="js/bubble.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
@@ -48,8 +49,10 @@
         jQuery.getJSON("ui_fetch_var.php", selection, function(data) {
           if (graphtype == "bar") {
             bar_chart(data, selection);
-          //} else if (graphtype == "mosaic") {
-            //draw_mosaic(data, selection);
+          } else if (graphtype == "mosaic") {
+            draw_mosaic(data, selection);
+          } else if (graphtype == "bubble") {
+            draw_bubble(data, selection);
           } else {
             d3.select(".chart").remove();
           }

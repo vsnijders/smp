@@ -1,12 +1,10 @@
 
 function draw_mosaic(data, selection) {
   d3.select(".chart").remove();
-  d3.select("body").append("svg")
-    .attr("class", "chart");
-  var chart = d3.select(".chart");
+  var chart = d3.select("body").append("svg").attr("class", "chart");
   var mosaic = new Mosaic;
-  mosaic.width(600).height(600).xvar(selection.x[0]).yvar(selection.y[0]);
-  mosaic.plot(chart, data, selection);
+  mosaic.width(600).height(600).xvar(selection.x[0]).yvar(selection.y[0])
+    .vvar(selection.y[1]).plot(chart, data, selection);
 }
 
 
@@ -43,7 +41,13 @@ Mosaic.prototype.yvar = function(yvar) {
   return this;
 }
 
+Mosaic.prototype.vvar = function(vvar) {
+  this.vvar_ = vvar;
+  return this;
+}
+
 Mosaic.prototype.plot = function(chart, data, selection) {
+  if (this.vvar_ === undefined | this.yvar_ === undefined | this.xvar_ == undefined) return;
   // some constants
   var space = 3;
   var margin = 15;
