@@ -78,6 +78,7 @@ function cross(data, row, column, callback){
    return d;   
 }
 
+/*
 var data = [ {a: 1, b: 2}
            , {a: 4, b: 1}
            ];
@@ -86,3 +87,5 @@ var vars = ["a", "b"];
 
 var d = cross(data, ["a"], ["b"]);
 console.log(d);
+
+*/

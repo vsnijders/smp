@@ -21,10 +21,15 @@
     <script type="text/javascript" src="js/barplot.js"></script>
 
     <script type="text/javascript" src="js/gog.js"></script>
-    <script type="text/javascript" src="js/sm.js"></script>
     <script type="text/javascript" src="js/cross.js"></script>
     <script type="text/javascript">
+      
+      var smp = {};
+      smp.type = "bar";
+      smp.data = {};
+      
       var graphtype = "bar";
+      
       var selection = {
           x : [],
           y : [],
@@ -32,21 +37,33 @@
           columns : []
         };
 
-      function redraw_graph() {
+      function update_view(data){
+         smp.sm = cross(data, selection.rows, selection.columns);
+         console.log(smp.sm);
+         foo(data);
+         // for (var i = 0; i < smp.sm.length; i ++){
+            // foo(smp.sm[i]);
+         // }
+      }      
+      
+                
+      function update_data(refresh){
+        refresh = refresh || update_view;
         $("#graphtype").html("<b>" + graphtype + "</b>");
         //$("#graphdata").load("ui_fetch.php", selection);
         jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          foo(data);
-        })
+          smp.data = data;
+          refresh(smp.data);
+        })                  
       }
-
+      
       $(function() {
         $(".connectedSortable").sortable({
           connectWith: ".connectedSortable",
           update : function(event, ui) { 
             if (this.id != "variables") {
               selection[this.id] = $(this).sortable('toArray');
-              redraw_graph();
+              update_data();
             }
           }
         }).disableSelection();
@@ -54,10 +71,13 @@
 
       $(function() {
         $("#graph").buttonset();
+        
         $("#graph input").click(function() {
           graphtype = this.id;
-          redraw_graph();
+          update_data();
         })
+        
+        update_data();
       });
     </script>
 
@@ -110,6 +130,7 @@
 
   </head>
   <body>
+  
   <h1>Bedrijvendynamiek</h1>
   <div class="menu">
     <h3>Graph</h3>
@@ -129,6 +150,7 @@
     </form>
 
     <h3>X</h3>
+    
     <ul id="x" class="connectedSortable">
     </ul>
 
@@ -143,7 +165,7 @@
     <h3>Columns</h3>
     <ul id="columns" class="connectedSortable">
     </ul>
-
+    
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
       <li class="ui-state-default draggable" id="jaar">Jaar</li>
