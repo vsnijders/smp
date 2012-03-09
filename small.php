@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>jQuery test</title>
+    <title>StatMine: Bedrijvendynamiek</title>
 
     <!-- jQuery includes -->
     <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
@@ -21,6 +21,8 @@
     <script type="text/javascript" src="js/barplot.js"></script>
 
     <script type="text/javascript" src="js/gog.js"></script>
+    <script type="text/javascript" src="js/sm.js"></script>
+    <script type="text/javascript" src="js/cross.js"></script>
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
@@ -108,7 +110,7 @@
 
   </head>
   <body>
-
+  <h1>Bedrijvendynamiek</h1>
   <div class="menu">
     <h3>Graph</h3>
     <form>
