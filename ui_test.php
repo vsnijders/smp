@@ -8,6 +8,13 @@
   // read metadata of table
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
+
+  $charts = array(
+      'bar' => array('y', 'size'),
+      'mosaic' => array('x', 'y', 'size'),
+      'line' => array('x', 'y', 'points', 'colour'),
+      'bubble' => array('x', 'y', 'points', 'size', 'colour')
+    );
 ?>
 <html>
   <head>
@@ -29,17 +36,11 @@
 
     <!-- Plotting includes -->
     <script type="text/javascript" src="js/barplot.js"></script>
-    <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mosaic.js"></script>
-    <script type="text/javascript" src="js/bubble.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
-          x : [],
-          y : [],
-          rows : [],
-          columns : [],
           filter : {}
         };
 
@@ -102,6 +103,23 @@
         });
       });
 
+      $(function() {
+        $( "#tabs" ).tabs();
+
+        $('#tabs').bind('tabsselect', function(event, ui) {
+          var graph = ui.panel.id;
+          selection[graph] = {};
+          $('.selection li', ui.panel).each(function() {
+            var category = this.parentNode.id;
+            var variable = this.id;
+            if (selection[graph][category] === undefined) {
+              selection[graph][category] = []
+            }
+            selection[graph][category].push(variable);
+          });
+        });
+      });
+
     </script>
 
     <style type="text/css">
@@ -136,7 +154,7 @@
       }
       .connectedSortable li span { 
         position: absolute; 
-        margin-left: -1.3em;        
+        margin-left: -3em;        
       }
       /*.chart rect {
         stroke: white;
@@ -169,62 +187,52 @@
   </head>
   <body>
 
-  <div class="menu">
-    <h3>Graph</h3>
-    <form>
-      <div id="graph">
-        <input type="radio" id="bar" name="radio" checked="checked"/>
-          <label for="bar">bar</label>
-        <input type="radio" id="line" name="radio" />
-          <label for="line">line</label>
-        <input type="radio" id="bubble" name="radio" />
-          <label for="bubble">bubble</label>
-        <input type="radio" id="dot" name="radio" />
-          <label for="dot">dot</label>
-        <input type="radio" id="mosaic" name="radio" />
-          <label for="mosaic">mosaic</label>
-      </div>
-    </form>
-
-    <h3>X</h3>
-    <ul id="x" class="connectedSortable">
-    </ul>
-
-    <h3>Y</h3>
-    <ul id="y" class="connectedSortable">
-    </ul>
-
-    <h3>Rows</h3>
-    <ul id="rows" class="connectedSortable">
-    </ul>
-
-    <h3>Columns</h3>
-    <ul id="columns" class="connectedSortable">
-    </ul>
-
-    <h3>Variables</h3>
-    <ul id="variables" class="connectedSortable">
+  
+  <div class="menu" id="tabs">
+    <ul>
 <?php
-  // id variables
-  foreach ($meta['idvariables'] as $var) {
-    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
-    echo $var . "\n";
-    echo "<div class=\"collapseblethingy\">\n";
-    echo "<form>\n";
-    foreach ($meta['levels'][$var] as $level) {
-      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
-    }
-    echo "</form>\n</div>\n</li>\n";
+  $i = 1;
+  foreach($charts as $chart => $variables) {
+    echo "<li><a href=\"#$chart\">$chart</a></li>\n";
+    $i++;
   }
-  // numeric variables
-  foreach ($meta['levels']['variable'] as $var) {
-    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "$var" . "\n</li>\n";
-  }
-
 ?>
     </ul>
+
+<?php
+  $i = 1;
+  foreach($charts as $chart => $variables) {
+    echo "<div id=\"$chart\" class=\"tab\">\n";
+    foreach($variables as $variable) {
+      echo "<h3>$variable</h3>\n";
+      echo "<ul id=\"$variable\" class=\"selection connectedSortable\">\n";
+      echo "</ul>\n";
+    }
+
+    echo "<h3>Variables</h3>\n";
+    echo "<ul id=\"variables\" class=\"connectedSortable\">\n";
+    // id variables
+    foreach ($meta['idvariables'] as $var) {
+      echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+      echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
+      echo $var . "\n";
+      echo "<div class=\"collapseblethingy\">\n";
+      echo "<form>\n";
+      foreach ($meta['levels'][$var] as $level) {
+        echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
+      }
+      echo "</form>\n</div>\n</li>\n";
+    }
+    // numeric variables
+    foreach ($meta['levels']['variable'] as $var) {
+      echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+      echo "$var" . "\n</li>\n";
+    }
+
+    echo "</div>\n";
+    $i++;
+  }
+?>
   </div>
 
   <div class="graph">

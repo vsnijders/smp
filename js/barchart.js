@@ -1,10 +1,12 @@
 
 
 function bar_chart(data, selection) {
-  d3.select(".chart").remove();
-  chart = d3.select("body").append("svg").attr("class", "chart");
-  var barchart = new Barchart;
-  barchart.categorical(selection.y[0]).numeric(selection.x[0]).plot(chart, data);
+  if (selection.y & selection.size) {
+    d3.select(".chart").remove();
+    var chart = d3.select(".graph").append("svg").attr("class", "chart");
+    var barchart = new Barchart;
+    barchart.categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);
+  }
 }
 
 // ============================================================================

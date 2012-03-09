@@ -8,7 +8,7 @@
 
   // Determine which variables are used in the selection
   // only use x and y and only first variable
-  $selectionvars = array("x", "y");
+  $selectionvars = array('x', 'y', 'size', 'colour', 'points');
   $idvars        = array();
   $measurevars   = array();
   foreach($selectionvars as $selectionvar) {
