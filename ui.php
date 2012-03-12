@@ -35,7 +35,6 @@
     <script type="text/javascript" src="js/d3/d3.js"></script>
 
     <!-- Plotting includes -->
-    <script type="text/javascript" src="js/barplot.js"></script>
     <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mosaic.js"></script>
     <script type="text/javascript" src="js/bubble.js"></script>
