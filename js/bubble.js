@@ -15,7 +15,7 @@ function draw_bubble(data, selection) {
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var bubble = new Bubble;
     bubble.width(400).height(400).xvar(selection.x[0]).yvar(selection.y[0])
-      .plot(chart, data);
+      .sizevar(selection.size[0]).colourvar(selection.colour[0]).plot(chart, data);
   }
 }
 
@@ -29,6 +29,8 @@ function Bubble() {
   this.height_ = undefined;
   this.xvar_ = undefined;
   this.yvar_ = undefined;
+  this.sizevar_ = undefined;
+  this.colourvar_ = undefined;
 }
 
 Bubble.prototype.width = function(width) {
@@ -51,6 +53,16 @@ Bubble.prototype.yvar = function(yvar) {
   return this;
 }
 
+Bubble.prototype.sizevar = function(sizevar) {
+  this.sizevar_ = sizevar;
+  return this;
+}
+
+Bubble.prototype.colourvar = function(colourvar) {
+  this.colourvar_ = colourvar;
+  return this;
+}
+
 Bubble.prototype.plot = function(chart, data) {
   // only plot if variables are set
   if (this.xvar_ === undefined | !this.yvar_=== undefined ) return;
@@ -60,6 +72,8 @@ Bubble.prototype.plot = function(chart, data) {
   var padding = 15;
   var xvar = this.xvar_;
   var yvar = this.yvar_;
+  var sizevar = this.sizevar_;
+  var colourvar = this.colourvar_;
   // set size of canvas
   if (this.width_ === undefined) this.width(400);
   if (this.height_ == undefined) this.height(400);
@@ -71,6 +85,19 @@ Bubble.prototype.plot = function(chart, data) {
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
+  var sizescale = undefined
+  if (sizevar !== undefined) {
+    var sizemin = d3.min(data, function(d) { return Number(d[sizevar]);});
+    var sizemax = d3.max(data, function(d) { return Number(d[sizevar]);});
+    sizescale = d3.scale.linear().domain([sizemin, sizemax]).range([1, 30]);
+  }
+  var colourscale = undefined
+  if (colourvar !== undefined) {
+    //var colourmin = d3.min(data, function(d) { return Number(d[colourvar]);});
+    //var colourmax = d3.max(data, function(d) { return Number(d[colourvar]);});
+    //colourscale = d3.scale.ordinal().range();
+    colourscale = d3.scale.category10();
+  }
   // add grid lines
   chart.selectAll(".gridx").data(xscale.ticks(5))
     .enter().append("line").attr("class", "gridx")
@@ -86,8 +113,11 @@ Bubble.prototype.plot = function(chart, data) {
   chart.selectAll("circle").data(data).enter().append("circle")
       .attr("cx", function(d) { return xscale(d[xvar]);})
       .attr("cy", function(d) { return yscale(d[yvar]);})
-      .attr("r", 5)
-      .attr("fill", "steelblue").attr("stroke", "white");
+      .attr("r", function(d) { return sizevar === undefined ? 5 : sizescale(d[sizevar]);})
+      .attr("fill", function(d) { return colourvar === undefined ? 5 : colourscale(d[colourvar]);})
+      .attr("fill-opacity", 0.5)
+      .attr("stroke", "white");
+      //.attr("fill", "steelblue").attr("stroke", "white");
   // add tickmarks
   chart.selectAll(".rulex").data(xscale.ticks(5))
     .enter().append("text").attr("class", "rulex")
