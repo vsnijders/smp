@@ -1,7 +1,16 @@
 
 
+function validate_bar(selection) {
+  if (selection.y !== undefined && selection.y.length > 0 && 
+    selection.size !== undefined && selection.size.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function draw_bar(data, selection) {
-  if (selection.y && selection.size) {
+  if (validate_bar(selection)) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var barchart = new Barchart;

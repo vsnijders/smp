@@ -50,19 +50,29 @@
         };
 
       function redraw_graph() {
-        $("#graphtype").html("<b>" + graphtype + "</b>");
-        $("#graphdata").load("ui_fetch.php?html=1", selection);
-        jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          if (graphtype == "bar") {
-            draw_bar(data, selection);
-          } else if (graphtype == "mosaic") {
-            draw_mosaic(data, selection);
-          } else if (graphtype == "bubble") {
-            draw_bubble(data, selection);
-          } else {
-            d3.select(".chart").remove();
-          }
-        })
+        var validated = false;
+        if (graphtype == "bar") {
+          validated = validate_bar(selection);
+        } else if (graphtype == "mosaic") {
+          validated = validate_mosaic(selection);
+        } else if (graphtype == "bubble") {
+          validated = validate_bubble(selection);
+        } 
+        if (validated) {
+          $("#graphtype").html("<b>" + graphtype + "</b>");
+          $("#graphdata").load("ui_fetch.php?html=1", selection);
+          jQuery.getJSON("ui_fetch.php", selection, function(data) {
+            if (graphtype == "bar") {
+              draw_bar(data, selection);
+            } else if (graphtype == "mosaic") {
+              draw_mosaic(data, selection);
+            } else if (graphtype == "bubble") {
+              draw_bubble(data, selection);
+            } else {
+              d3.select(".chart").remove();
+            }
+          })
+        }
       }
 
       $(function() {

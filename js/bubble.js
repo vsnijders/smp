@@ -1,6 +1,16 @@
 
+function validate_bubble(selection) {
+  if (selection.x !== undefined && selection.x.length > 0 && 
+    selection.y !== undefined && selection.y.length > 0 &&
+    selection.points !== undefined && selection.points.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function draw_bubble(data, selection) {
-  if (selection.x && selection.y && selection.points) {
+  if (validate_bubble(selection)) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var bubble = new Bubble;
