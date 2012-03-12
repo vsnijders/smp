@@ -1,6 +1,6 @@
 
 
-function bar_chart(data, selection) {
+function draw_bar(data, selection) {
   if (selection.y && selection.size) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");

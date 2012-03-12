@@ -55,7 +55,7 @@
         $("#graphdata").load("ui_fetch.php?html=1", selection);
         jQuery.getJSON("ui_fetch.php", selection, function(data) {
           if (graphtype == "bar") {
-            bar_chart(data, selection);
+            draw_bar(data, selection);
           } else if (graphtype == "mosaic") {
             draw_mosaic(data, selection);
           } else if (graphtype == "bubble") {
