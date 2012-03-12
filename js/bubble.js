@@ -15,7 +15,8 @@ function draw_bubble(data, selection) {
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var bubble = new Bubble;
     bubble.width(400).height(400).xvar(selection.x[0]).yvar(selection.y[0])
-      .sizevar(selection.size[0]).colourvar(selection.colour[0]).plot(chart, data);
+      .sizevar(selection.size[0]).colourvar(selection.colour[0])
+      .pointsvar(selection.points[0]).plot(chart, data);
   }
 }
 
@@ -53,6 +54,11 @@ Bubble.prototype.yvar = function(yvar) {
   return this;
 }
 
+Bubble.prototype.pointsvar = function(pointsvar) {
+  this.pointsvar_ = pointsvar;
+  return this;
+}
+
 Bubble.prototype.sizevar = function(sizevar) {
   this.sizevar_ = sizevar;
   return this;
@@ -73,6 +79,7 @@ Bubble.prototype.plot = function(chart, data) {
   var xvar = this.xvar_;
   var yvar = this.yvar_;
   var sizevar = this.sizevar_;
+  var pointsvar = this.pointsvar_;
   var colourvar = this.colourvar_;
   // set size of canvas
   if (this.width_ === undefined) this.width(400);
@@ -114,10 +121,22 @@ Bubble.prototype.plot = function(chart, data) {
       .attr("cx", function(d) { return xscale(d[xvar]);})
       .attr("cy", function(d) { return yscale(d[yvar]);})
       .attr("r", function(d) { return sizevar === undefined ? 5 : sizescale(d[sizevar]);})
-      .attr("fill", function(d) { return colourvar === undefined ? 5 : colourscale(d[colourvar]);})
-      .attr("fill-opacity", 0.5)
-      .attr("stroke", "white");
-      //.attr("fill", "steelblue").attr("stroke", "white");
+      .attr("fill", function(d) { return colourvar === undefined ? 'steelblue' : colourscale(d[colourvar]);})
+      .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5);
+  // add tooltip to points
+  $('circle').tipsy({
+    gravity: 'w',
+    html: true,
+    title: function() {
+      var d = this.__data__;
+      var tip = d[pointsvar];
+      if (colourvar !== undefined) tip += ' ' + d[colourvar];
+      tip += ': ';
+      tip += xvar + ' = ' + d[xvar] + ', ' + yvar + ' = ' + d[yvar];
+      if (sizevar !== undefined) tip += ', ' + sizevar + ' = ' + d[sizevar];
+      return tip;
+    }
+  });
   // add tickmarks
   chart.selectAll(".rulex").data(xscale.ticks(5))
     .enter().append("text").attr("class", "rulex")

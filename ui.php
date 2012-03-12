@@ -59,8 +59,8 @@
           validated = validate_bubble(selection);
         } 
         if (validated) {
-          $("#graphtype").html("<b>" + graphtype + "</b>");
-          $("#graphdata").load("ui_fetch.php?html=1", selection);
+          //$("#graphtype").html("<b>" + graphtype + "</b>");
+          //$("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             if (graphtype == "bar") {
               draw_bar(data, selection);
