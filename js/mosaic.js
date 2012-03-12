@@ -1,6 +1,6 @@
 
 function draw_mosaic(data, selection) {
-  if (selection.x & selection.y & selection.size) {
+  if (selection.x && selection.y && selection.size) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var mosaic = new Mosaic;
