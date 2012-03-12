@@ -56,11 +56,11 @@
       $sub_where[] = "variable = '" . $var . "'";
     }
     $where[] = '(' . implode(' OR ', $sub_where) . ')';
-    $idvars[] = 'variable';
   }
 
   $vars = $idvars;
   $vars[] = 'value';
+  $vars[] = 'variable';
   $sql = "SELECT " . implode(", ", $vars) . " FROM {$meta['name']}";
   if (sizeof($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
@@ -77,23 +77,25 @@
   //   idvar1 idvar2 ... idvarN measurevar1 ... measurevarM
   // The following code works, but isn't very pretty. Can probably be improved upon.
   $data = array();
-  while (true) {
-    $data_row = array();
-    for ($i = 0; $i < sizeof($measurevars); $i++) {
-      $row = $result->fetch(PDO::FETCH_ASSOC);
-      if (!$row) break;
+  $data_row = array();
+  $i = 0;
+  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    // in case of a new data row: copy values of id-variables to new row
+    if (sizeof($data_row) == 0) {
       foreach ($idvars as $var) {
-        if ($var != 'variable') {
-          $data_row[$var] = $row[$var];
-        } else {
-          if ($row['variable'] == $measurevars[$i]) 
-            $data_row[$measurevars[$i]] = $row['value'];
-        }
+        $data_row[$var] = $row[$var];
       }
     }
-    if (sizeof($data_row)) {
+    // copy current measure value to new row
+    $data_row[$row['variable']] = $row['value'];
+    // if current database row is last for data row: copy data row to data
+    // and start new row
+    $i++;
+    if ($i == sizeof($measurevars)) {
       $data[] = $data_row;
-    } else break;
+      $data_row = array();
+      $i = 0;
+    }
   }
 
 
