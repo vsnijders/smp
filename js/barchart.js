@@ -17,7 +17,7 @@ function validate_bar(selection, variables) {
 
 function draw_bar(data, selection, variables) {
   if (validate_bar(selection, variables)) {
-    d3.select(".chart").remove();
+    $('.graph').children().remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var barchart = new Barchart;
     barchart.categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);

@@ -88,6 +88,8 @@
               d3.select(".chart").remove();
             }
           })
+        } else {
+          $(".graph").html("<p>" + validated + "</p>");
         }
       }
 

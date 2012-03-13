@@ -27,7 +27,7 @@ function validate_bubble(selection, variables) {
 
 function draw_bubble(data, selection, variables) {
   if (validate_bubble(selection, variables)) {
-    d3.select(".chart").remove();
+    $('.graph').children().remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var bubble = new Bubble;
     bubble.width(400).height(400).xvar(selection.x[0]).yvar(selection.y[0])

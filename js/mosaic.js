@@ -19,7 +19,7 @@ function validate_mosaic(selection, variables) {
 
 function draw_mosaic(data, selection, variables) {
   if (validate_mosaic(selection, variables)) {
-    d3.select(".chart").remove();
+    $('.graph').children().remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var mosaic = new Mosaic;
     mosaic.width(400).height(400).xvar(selection.x[0]).yvar(selection.y[0])
