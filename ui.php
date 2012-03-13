@@ -60,7 +60,7 @@
   foreach ($meta['measurevariables'] as $variable) {
     if ($first) $first = false;
     else echo ",";
-    echo $variable . ' : "continuous"';
+    echo $variable . ' : "numerical"';
   }
   echo "      };\n";
 ?>
@@ -68,22 +68,22 @@
       function redraw_graph() {
         var validated = false;
         if (graphtype == "bar") {
-          validated = validate_bar(selection);
+          validated = validate_bar(selection, variables);
         } else if (graphtype == "mosaic") {
-          validated = validate_mosaic(selection);
+          validated = validate_mosaic(selection, variables);
         } else if (graphtype == "bubble") {
-          validated = validate_bubble(selection);
+          validated = validate_bubble(selection, variables);
         } 
-        if (validated) {
+        if (validated === true) {
           //$("#graphtype").html("<b>" + graphtype + "</b>");
           //$("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             if (graphtype == "bar") {
-              draw_bar(data, selection);
+              draw_bar(data, selection, variables);
             } else if (graphtype == "mosaic") {
-              draw_mosaic(data, selection);
+              draw_mosaic(data, selection, variables);
             } else if (graphtype == "bubble") {
-              draw_bubble(data, selection);
+              draw_bubble(data, selection, variables);
             } else {
               d3.select(".chart").remove();
             }

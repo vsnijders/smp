@@ -1,16 +1,24 @@
 
-function validate_mosaic(selection) {
+function validate_mosaic(selection, variables) {
+  // check if required variables are present
   if (selection.x !== undefined && selection.x.length > 0 && 
     selection.y !== undefined && selection.y.length > 0 &&
     selection.size !== undefined && selection.size.length > 0) {
+    // check if variables are correct type
+    if (variables[selection.y[0]] != "categorical") 
+      return "y should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.x[0]] != "categorical") 
+      return "x should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.size[0]] != "numerical")
+      return "size should be a numerical variable; currently it is a categorical variable";
     return true;
   } else {
-    return false;
+    return "Drag and drop one categorical variable on x and y, and a numeric one on size.";
   }
 }
 
-function draw_mosaic(data, selection) {
-  if (validate_mosaic(selection)) {
+function draw_mosaic(data, selection, variables) {
+  if (validate_mosaic(selection, variables)) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var mosaic = new Mosaic;
