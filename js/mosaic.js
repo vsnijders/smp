@@ -14,7 +14,7 @@ function draw_mosaic(data, selection) {
     d3.select(".chart").remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var mosaic = new Mosaic;
-    mosaic.width(600).height(600).xvar(selection.x[0]).yvar(selection.y[0])
+    mosaic.width(400).height(400).xvar(selection.x[0]).yvar(selection.y[0])
       .vvar(selection.size[0]).plot(chart, data, selection);
   }
 }
@@ -96,7 +96,7 @@ Mosaic.prototype.plot = function(chart, data, selection) {
     chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
-      .attr("fill", function(d,i) { return d[vvar] < 0 ? "#F00" : "#00F"});
+      .attr("fill", "steelblue");
     // add tooltip to rects
     $('rect').tipsy({
       gravity: 'w',
@@ -106,8 +106,6 @@ Mosaic.prototype.plot = function(chart, data, selection) {
         return d[xvar] + ', ' + d[yvar] + ': ' + d[vvar];
       }
     });
-    
-
     // next x
     x  += width + space;
   }
