@@ -159,6 +159,16 @@
       });
 
       $(function() {
+        $('#resizable').resizable({
+          minHeight: 300,
+          minWidth: 300,
+          stop: function(event, ui) { 
+            redraw_graph(); 
+          }
+        });
+      });
+
+      $(function() {
         $("#bar").click();
       });
 
@@ -176,9 +186,17 @@
         font-variant : small-caps;
         margin-bottom : 0pt;
       }
-      div.graph {
+      div#resizable {
         margin-left : 240px;
+        padding : 5px;
+        width : 400px;
+        height : 400px;
+      }
+      div.graph {
+        /*margin-left : 240px;*/
         color : black;
+        width : 100%;
+        height : 100%;
       }
       div#graphtype, div#graphdata {
         color : gray;
@@ -285,7 +303,9 @@
     </ul>
   </div>
 
+  <div id="resizable" class="ui-widget-content">
   <div class="graph">
+  </div>
   </div>
 
   <div id="graphtype">

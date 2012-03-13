@@ -20,7 +20,9 @@ function draw_bar(data, selection, variables) {
     $('.graph').children().remove();
     var chart = d3.select(".graph").append("svg").attr("class", "chart");
     var barchart = new Barchart;
-    barchart.categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);
+    var width = $('.graph').width()-10;
+    var height = $('.graph').height()-10;
+    barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);
   }
 }
 
