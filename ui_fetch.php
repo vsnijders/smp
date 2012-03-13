@@ -6,31 +6,25 @@
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
 
-  //echo "<pre>";
-  //print_r($_REQUEST);
-
-  // determine which variables are used in the selection
+  // Determine which variables are used in the selection
   // only use x and y and only first variable
-  $selectedvars = array();
-  $xvar = array();
-  $yvar = array();
-  if (isset($_REQUEST['x'])) {
-    $selectedvars[] = $_REQUEST['x'][0];
-    $xvar[] = $_REQUEST['x'][0];
+  $selectionvars = array('x', 'y', 'size', 'colour', 'points');
+  $idvars        = array();
+  $measurevars   = array();
+  foreach($selectionvars as $selectionvar) {
+    if (isset($_REQUEST[$selectionvar])) {
+      foreach ($_REQUEST[$selectionvar] as $var) {
+        if (in_array($var, $meta['levels']['variable'])) {
+          $measurevars[] = $var;
+        } else {
+          $idvars[] = $var;
+        }
+      }
+    }
   }
-  if (isset($_REQUEST['y'])) {
-    $selectedvars[] = $_REQUEST['y'][0];
-    $yvar[] = $_REQUEST['y'][0];
-  }
-  //if (isset($_REQUEST['columns'])) {
-  //  foreach($_REQUEST['columns'] as $var) $selectedvars[] = $var;
-  //}
-  //if (isset($_REQUEST['rows'])) {
-  //  foreach($_REQUEST['rows'] as $var) $selectedvars[] = $var;
-  //}
 
-  // build query
-  $notselected = array_diff($meta['variables'], $selectedvars);
+  // Build query
+  $notselected = array_diff($meta['idvariables'], $idvars);
   $where = array();
   foreach($notselected as $var) {
     if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
@@ -44,7 +38,7 @@
       $where[] = $var . "= 'TOTAL'";
     }
   }
-  foreach($selectedvars as $var) {
+  foreach($idvars as $var) {
     if (isset($_REQUEST['filter']) && isset($_REQUEST['filter'][$var])) {
       $sub_where = array();
       foreach($_REQUEST['filter'][$var] as $val) {
@@ -56,30 +50,65 @@
       $where[] = $var . "!= 'TOTAL'";
     }
   }
-  $vars = $selectedvars;
+  if (sizeof($measurevars)) {
+    $sub_where = array();
+    foreach($measurevars as $var) {
+      $sub_where[] = "variable = '" . $var . "'";
+    }
+    $where[] = '(' . implode(' OR ', $sub_where) . ')';
+  }
+
+  $vars = $idvars;
   $vars[] = 'value';
+  $vars[] = 'variable';
   $sql = "SELECT " . implode(", ", $vars) . " FROM {$meta['name']}";
   if (sizeof($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
   }
-  if (sizeof($selectedvars)) {
-    $sql .= " ORDER BY " . implode(", ", $selectedvars);
+  if (sizeof($idvars)) {
+    $sql .= " ORDER BY " . implode(", ", $idvars);
   }
-  //echo($sql);
-  //echo("\n");
 
-  // run query
-  $data = array();
+  // Run query
   $result = $pdo->query($sql);
-  $data = $result->fetchAll(PDO::FETCH_ASSOC);
-  /*while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    $data[] = $row;
-    if ($yvar) {
-      $data[] = array('var' => $row[$yvar[0]], 'val'=> $row['value']);
-    }
-  }*/
-  //print_r(json_encode($data));
-  asJSON($data);
 
-  //echo "</pre>";
+  // Transform the results of the database query to something that can be sent back. We want 
+  // something with the following form:
+  //   idvar1 idvar2 ... idvarN measurevar1 ... measurevarM
+  // The following code works, but isn't very pretty. Can probably be improved upon.
+  $data = array();
+  $data_row = array();
+  $i = 0;
+  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    // in case of a new data row: copy values of id-variables to new row
+    if (sizeof($data_row) == 0) {
+      foreach ($idvars as $var) {
+        $data_row[$var] = $row[$var];
+      }
+    }
+    // copy current measure value to new row
+    $data_row[$row['variable']] = $row['value'];
+    // if current database row is last for data row: copy data row to data
+    // and start new row
+    $i++;
+    if ($i == sizeof($measurevars)) {
+      $data[] = $data_row;
+      $data_row = array();
+      $i = 0;
+    }
+  }
+
+
+  // Return data
+  if (isset($_REQUEST['html'])) {
+    echo "<pre>";
+    print_r($_REQUEST);
+    echo("\n");
+    echo($sql);
+    echo("\n");
+    print_r($data);
+    echo "</pre>";
+  } else {
+    asJSON($data);
+  }
 ?>
