@@ -94,15 +94,11 @@ Bubble.prototype.plot = function(chart, data) {
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
   var sizescale = undefined
   if (sizevar !== undefined) {
-    var sizemin = d3.min(data, function(d) { return Number(d[sizevar]);});
-    var sizemax = d3.max(data, function(d) { return Number(d[sizevar]);});
-    sizescale = d3.scale.linear().domain([sizemin, sizemax]).range([1, 30]);
+    var sizemax = d3.max(data, function(d) { return Math.abs(Number(d[sizevar]));});
+    sizescale = d3.scale.linear().domain([0, sizemax]).range([1, 30]);
   }
   var colourscale = undefined
   if (colourvar !== undefined) {
-    //var colourmin = d3.min(data, function(d) { return Number(d[colourvar]);});
-    //var colourmax = d3.max(data, function(d) { return Number(d[colourvar]);});
-    //colourscale = d3.scale.ordinal().range();
     colourscale = d3.scale.category10();
   }
   // add grid lines
