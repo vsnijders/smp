@@ -36,6 +36,7 @@
       }
       $meta['levels'][$variable] = $levels;
     }
+    $meta['measurevariables'] = $meta['levels']['variable'];
     return($meta);
   }
 

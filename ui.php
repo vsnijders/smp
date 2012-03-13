@@ -49,6 +49,22 @@
           filter : {}
         };
 
+<?php
+  echo "      var variables = {";
+  $first = true;
+  foreach ($meta['idvariables'] as $variable) {
+    if ($first) $first = false;
+    else echo ",";
+    echo $variable . ' : "categorical"';
+  }
+  foreach ($meta['measurevariables'] as $variable) {
+    if ($first) $first = false;
+    else echo ",";
+    echo $variable . ' : "continuous"';
+  }
+  echo "      };\n";
+?>
+
       function redraw_graph() {
         var validated = false;
         if (graphtype == "bar") {
@@ -138,6 +154,10 @@
           refresh_selection();
           redraw_graph();
         });
+      });
+
+      $(function() {
+        $("#bar").click();
       });
 
     </script>
