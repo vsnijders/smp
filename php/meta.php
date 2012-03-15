@@ -13,6 +13,10 @@
       'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
     );
+  $META['labourdynamics'] = array(
+      'variables' => array("quarter", "personal_characteristics", "position_begin", "position_end", "variable"),
+      'idvariables' => array("quarter", "personal_characteristics", "position_begin", "position_end"),
+    );
 
   
   function get_meta($pdo, $tableid) {
