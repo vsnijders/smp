@@ -4,6 +4,8 @@
 
   // table id to read in: TODO allow to set using GET/POST
   $id = 3;
+  if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id']))
+    $id = $_REQUEST['id'];
 
   // read metadata of table
   $pdo = new PDO("sqlite:data/test.sqlite");
@@ -42,36 +44,51 @@
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
-          x : [],
-          y : [],
-          rows : [],
-          columns : [],
+          id : <?php echo $id;?>,
           filter : {}
         };
+
+<?php
+  echo "      var variables = {";
+  $first = true;
+  foreach ($meta['idvariables'] as $variable) {
+    if ($first) $first = false;
+    else echo ",";
+    echo $variable . ' : "categorical"';
+  }
+  foreach ($meta['measurevariables'] as $variable) {
+    if ($first) $first = false;
+    else echo ",";
+    echo $variable . ' : "numerical"';
+  }
+  echo "      };\n";
+?>
 
       function redraw_graph() {
         var validated = false;
         if (graphtype == "bar") {
-          validated = validate_bar(selection);
+          validated = validate_bar(selection, variables);
         } else if (graphtype == "mosaic") {
-          validated = validate_mosaic(selection);
+          validated = validate_mosaic(selection, variables);
         } else if (graphtype == "bubble") {
-          validated = validate_bubble(selection);
+          validated = validate_bubble(selection, variables);
         } 
-        if (validated) {
-          //$("#graphtype").html("<b>" + graphtype + "</b>");
-          //$("#graphdata").load("ui_fetch.php?html=1", selection);
+        if (validated === true) {
+          $("#graphtype").html("<b>" + graphtype + "</b>");
+          $("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             if (graphtype == "bar") {
-              draw_bar(data, selection);
+              draw_bar(data, selection, variables);
             } else if (graphtype == "mosaic") {
-              draw_mosaic(data, selection);
+              draw_mosaic(data, selection, variables);
             } else if (graphtype == "bubble") {
-              draw_bubble(data, selection);
+              draw_bubble(data, selection, variables);
             } else {
               d3.select(".chart").remove();
             }
           })
+        } else {
+          $(".graph").html("<p>" + validated + "</p>");
         }
       }
 
@@ -140,6 +157,20 @@
         });
       });
 
+      $(function() {
+        $('#resizable').resizable({
+          minHeight: 300,
+          minWidth: 300,
+          stop: function(event, ui) { 
+            redraw_graph(); 
+          }
+        });
+      });
+
+      $(function() {
+        $("#bar").click();
+      });
+
     </script>
 
     <style type="text/css">
@@ -154,9 +185,17 @@
         font-variant : small-caps;
         margin-bottom : 0pt;
       }
-      div.graph {
+      div#resizable {
         margin-left : 240px;
+        padding : 5px;
+        width : 400px;
+        height : 400px;
+      }
+      div.graph {
+        /*margin-left : 240px;*/
         color : black;
+        width : 100%;
+        height : 100%;
       }
       div#graphtype, div#graphdata {
         color : gray;
@@ -263,7 +302,9 @@
     </ul>
   </div>
 
+  <div id="resizable" class="ui-widget-content">
   <div class="graph">
+  </div>
   </div>
 
   <div id="graphtype">

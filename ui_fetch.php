@@ -2,7 +2,11 @@
   require_once("php/meta.php");
   require_once("php/asJSON.php");
 
+  
   $id = 3;
+  if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id']))
+    $id = $_REQUEST['id'];
+
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
 
