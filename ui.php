@@ -4,6 +4,8 @@
 
   // table id to read in: TODO allow to set using GET/POST
   $id = 3;
+  if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id']))
+    $id = $_REQUEST['id'];
 
   // read metadata of table
   $pdo = new PDO("sqlite:data/test.sqlite");
@@ -42,10 +44,7 @@
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
-          x : [],
-          y : [],
-          rows : [],
-          columns : [],
+          id : <?php echo $id;?>,
           filter : {}
         };
 
@@ -75,8 +74,8 @@
           validated = validate_bubble(selection, variables);
         } 
         if (validated === true) {
-          //$("#graphtype").html("<b>" + graphtype + "</b>");
-          //$("#graphdata").load("ui_fetch.php?html=1", selection);
+          $("#graphtype").html("<b>" + graphtype + "</b>");
+          $("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             if (graphtype == "bar") {
               draw_bar(data, selection, variables);

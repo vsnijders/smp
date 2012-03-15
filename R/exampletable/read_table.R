@@ -28,8 +28,8 @@ read_table <- function() {
 
     library(reshape2)
     table <- melt(table, id.var=c("gender", "age"))
-    table$gender[is.na(table$gender)] <- "Total"
-    table$age[is.na(table$age)] <- "Total"
+    table$gender[is.na(table$gender)] <- "TOTAL"
+    table$age[is.na(table$age)] <- "TOTAL"
 
     return(table)
 }
