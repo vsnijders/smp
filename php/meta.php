@@ -42,6 +42,8 @@
     $tablename = $meta['name'];
     // read meta
     global $META;
+    $meta['longname']    = $META[$tablename]['longname'];
+    $meta['description'] = $META[$tablename]['description'];
     $meta['variables']   = $META[$tablename]['variables'];
     $meta['idvariables'] = $META[$tablename]['idvariables'];
     $meta['levels']      = array();
