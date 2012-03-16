@@ -26,16 +26,32 @@ read_table <- function() {
     m$var2[m$var2 == "total"] <- NA
     m$var2 <- gsub("_", "-", m$var2)
     m$var2 <- gsub("-00", "+", m$var2)
-    m$var2 <- gsub("05", "5", m$var2)
-    m$var2 <- gsub("00", "0", m$var2)
+    #m$var2 <- gsub("05", "5", m$var2)
+    #m$var2 <- gsub("00", "0", m$var2)
 
     m$variable <- NULL
     m <- m[ , c("var1", "var2", "year", "var", "value")]
     names(m) <- c("gender", "age", "year", "variable", "value")
 
-    table1 <- dcast(m, gender + age + year ~ variable)
+    levels(m$gender) <- c(levels(m$gender), "TOTAL")
+    m$gender[is.na(m$gender)] <- "TOTAL"
+    levels(m$age) <- c(levels(m$age), "TOTAL")
+    m$age[is.na(m$age)] <- "TOTAL"
 
-    return(table1)
+    # only select prognoses; ignore confidence intervals for now
+    m <- m[m$variable == "prognosis", ]
+
+    # calculate margins for year
+    library(plyr)
+    margins <- ddply(m, c("gender", "age"), function(d) {
+        result <- d[1, ]
+        result[, "year"] <- "TOTAL"
+        result$value <- sum(d$value)
+        return(result)
+    })
+    m <- rbind(m, margins)
+
+    return(m)
 }
 
 

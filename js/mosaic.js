@@ -1,12 +1,32 @@
 
-function draw_mosaic(data, selection) {
-  d3.select(".chart").remove();
-  d3.select("body").append("svg")
-    .attr("class", "chart");
-  var chart = d3.select(".chart");
-  var mosaic = new Mosaic;
-  mosaic.width(300).height(300).xvar(selection.x[0]).yvar(selection.y[0]);
-  mosaic.plot(chart, data, selection);
+function validate_mosaic(selection, variables) {
+  // check if required variables are present
+  if (selection.x !== undefined && selection.x.length > 0 && 
+    selection.y !== undefined && selection.y.length > 0 &&
+    selection.size !== undefined && selection.size.length > 0) {
+    // check if variables are correct type
+    if (variables[selection.y[0]] != "categorical") 
+      return "y should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.x[0]] != "categorical") 
+      return "x should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.size[0]] != "numerical")
+      return "size should be a numerical variable; currently it is a categorical variable";
+    return true;
+  } else {
+    return "Drag and drop one categorical variable on x and y, and a numeric one on size.";
+  }
+}
+
+function draw_mosaic(data, selection, variables) {
+  if (validate_mosaic(selection, variables)) {
+    $('.graph').children().remove();
+    var chart = d3.select(".graph").append("svg").attr("class", "chart");
+    var mosaic = new Mosaic;
+    var width = $('.graph').width()-10;
+    var height = $('.graph').height()-10;
+    mosaic.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0])
+      .vvar(selection.size[0]).plot(chart, data, selection);
+  }
 }
 
 
@@ -43,7 +63,13 @@ Mosaic.prototype.yvar = function(yvar) {
   return this;
 }
 
+Mosaic.prototype.vvar = function(vvar) {
+  this.vvar_ = vvar;
+  return this;
+}
+
 Mosaic.prototype.plot = function(chart, data, selection) {
+  if (this.vvar_ === undefined | this.yvar_ === undefined | this.xvar_ == undefined) return;
   // some constants
   var space = 3;
   var margin = 15;
@@ -80,7 +106,7 @@ Mosaic.prototype.plot = function(chart, data, selection) {
     chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
-      .attr("fill", function(d,i) { return d[vvar] < 0 ? "#F00" : "#00F"});
+      .attr("fill", "steelblue");
     // add tooltip to rects
     $('rect').tipsy({
       gravity: 'w',
@@ -90,8 +116,6 @@ Mosaic.prototype.plot = function(chart, data, selection) {
         return d[xvar] + ', ' + d[yvar] + ': ' + d[vvar];
       }
     });
-    
-
     // next x
     x  += width + space;
   }
