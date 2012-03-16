@@ -14,7 +14,7 @@
   $charts = array(
       'bar' => array('y', 'size'),
       'mosaic' => array('x', 'y', 'size'),
-      'line' => array('x', 'y', 'points', 'colour'),
+      'line' => array('x', 'y', 'colour'),
       'bubble' => array('x', 'y', 'points', 'size', 'colour')
     );
 ?>
@@ -40,6 +40,9 @@
     <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mosaic.js"></script>
     <script type="text/javascript" src="js/bubble.js"></script>
+    <script type="text/javascript" src="js/linechart.js"></script>
+
+    <script type="text/javascript" src="js/cross.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
@@ -72,6 +75,8 @@
           validated = validate_mosaic(selection, variables);
         } else if (graphtype == "bubble") {
           validated = validate_bubble(selection, variables);
+        } else if (graphtype == "line") {
+          validated = validate_line(selection, variables);
         } 
         if (validated === true) {
           $("#graphtype").html("<b>" + graphtype + "</b>");
@@ -83,6 +88,8 @@
               draw_mosaic(data, selection, variables);
             } else if (graphtype == "bubble") {
               draw_bubble(data, selection, variables);
+            } else if (graphtype == "line") {
+              draw_line(data, selection, variables);
             } else {
               d3.select(".chart").remove();
             }
