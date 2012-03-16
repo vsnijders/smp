@@ -57,7 +57,7 @@ function MultiIndexer(props){
    return MultiIndexer;
 }
 
-function cross(data, row, column, callback){
+function cross2(data, row, column, callback){
    row = row || [];
    column = column || [];
    
@@ -68,6 +68,7 @@ function cross(data, row, column, callback){
    var keys = idx.map(function(i){return i.map});
    var sizes = idx.map(function(i){return i.size()});
 
+   console.log("keys", keys);
    var nest = d3.nest();
    for (var k in keys){
       nest.key(keys[k]);
@@ -78,8 +79,38 @@ function cross(data, row, column, callback){
    return d;   
 }
 
-/*
-var data = [ {a: 1, b: 2}
+function cross(data, row, col, callback){
+   row = row || [];
+   col = col || [];
+   
+   var vars = row.concat(col);
+   if (vars.length == 0)
+      return [[data]];
+	  
+   var rowcat = row.map(function(v){return function(d){return d[v]}});
+   var colcat = col.map(function(v){return function(d){return d[v]}});
+   
+   var rows = d3.keys(d3.nest().key(rowcat[0]).map(data));
+   var cols = d3.keys(d3.nest().key(colcat[0]).map(data));
+   
+   var cross = d3.nest()
+      .key(rowcat[0])
+      .key(colcat[0])
+	  .map(data)
+	  ;
+   
+   var d = rows.map(function(r){
+      return cols.map( function(c){
+	     return cross[r][c] || [];
+	  });
+   });
+   //console.log("cross", cross);
+   //console.log("d", d);
+   return d;   
+}
+
+var data = [ {a: 1, b: 1}
+           , {a: 1, b: 2}
            , {a: 4, b: 1}
            ];
 
@@ -87,5 +118,3 @@ var vars = ["a", "b"];
 
 var d = cross(data, ["a"], ["b"]);
 console.log(d);
-
-*/
