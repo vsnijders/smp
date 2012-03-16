@@ -22,7 +22,11 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>StatMine chart test</title>
+    <title>StatMine - <?php echo $meta['longname'];?></title>
+    
+    <!-- webpage icon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="img/favicon2.png" type="image/png" />
 
     <!-- jQuery includes -->
     <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
@@ -252,6 +256,10 @@
 
   </head>
   <body>
+
+  <header>
+    <h1><a href="index.php">StatMine</a> - <?php echo $meta['longname'];?></h1>
+  </header>
 
   <div class="menu">
     <h3>Graph</h3>
