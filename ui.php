@@ -25,6 +25,7 @@
     <title>StatMine - <?php echo $meta['longname'];?></title>
     
     <!-- webpage icon -->
+    <link type="text/css" href="css/ui.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="img/favicon2.png" type="image/png" />
 
@@ -184,82 +185,14 @@
 
     </script>
 
-    <style type="text/css">
-      * { font-family : sans-serif; font-size: 10px;}
-      div.menu {
-        width : 240px;
-        float : left;
-      }
-      div.menu h3 {
-        font-size : 100%;
-        font-weight : bold;
-        font-variant : small-caps;
-        margin-bottom : 0pt;
-      }
-      div#resizable {
-        margin-left : 240px;
-        padding : 5px;
-        width : 400px;
-        height : 400px;
-      }
-      div.graph {
-        /*margin-left : 240px;*/
-        color : black;
-        width : 100%;
-        height : 100%;
-      }
-      div#graphtype, div#graphdata {
-        color : gray;
-      }
-      .connectedSortable { 
-        border-top : solid 1px rgb(200,200,200);
-        border-bottom : solid 1px rgb(200,200,200);
-        list-style-type: none; 
-        margin: 0; 
-        padding: 4px 0; 
-        width: 100%; 
-      }
-      .connectedSortable li { 
-        margin: 2px 0px 2px 0px; 
-        padding: 0.2em; 
-        padding-left: .8em; 
-        font-size: 10px; 
-        height: 13px; 
-      }
-      .connectedSortable li span { 
-        position: absolute; 
-        margin-left: -1.3em;        
-      }
-      .chart text {
-        font-size : 10px;
-        font-family : sans-serif;
-      }
-      .draggable {
-        cursor: move;
-      }
-      .collapseblethingy {
-        background : rgba(0,0,0, 0.5);
-        color : white;
-        z-index : 10;
-        position : relative;
-        left : 235px;
-        margin-top : -10px;
-        cursor : auto; 
-      }
-      .collapse {
-        position : relative;
-        left : 240px;
-        margin-top : -3px;
-        cursor : pointer;
-      }
-    </style>
-
   </head>
   <body>
-
+   
   <header>
     <h1><a href="index.php">StatMine</a> - <?php echo $meta['longname'];?></h1>
   </header>
+
+  <article>
 
   <div class="menu">
     <h3>Graph</h3>
@@ -317,6 +250,7 @@
     </ul>
   </div>
 
+  <div class="content">
   <div id="resizable" class="ui-widget-content">
   <div class="graph">
   </div>
@@ -326,6 +260,13 @@
   </div>
   <div id="graphdata">
   </div>
+  </div>
+
+
+  </article>
+
+  <footer>
+  </footer>
 
   </body>
 </html>

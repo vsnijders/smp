@@ -1,0 +1,126 @@
+
+BODY {
+  font-family : sans-serif; 
+  font-size: 10px;
+  color : black;
+}
+* {
+  padding : 0pt;
+  margin : 0pt;
+  border : none 0pt;
+  font-weight : normal;
+  text-decoration : none;
+}
+
+/* ========================== GENERIC ============================== */
+
+a {
+  color : steelblue;
+  font-size : inherit;
+}
+
+/* ========================== HEADER/FOOTER ======================== */
+header, footer {
+  background : rgb(120, 120, 120);
+  border-bottom : rgb(10, 10, 10);
+  padding : 20px 10px;
+  color : white;
+}
+header h1 {
+  font-size : 200%;
+  color : inherit;
+  font-variant : small-caps;
+}
+header a {
+  color : #7eb5ff;
+}
+footer {
+  clear : both;
+}
+
+/* ========================== ARTICLE =============================== */
+article {
+  float : left;
+  width : 100%;
+}
+
+/* ========================== MENU ================================== */
+div.menu {
+  float : left;
+  width : 240px;
+  padding : 10px 10px;
+  min-height : 900px;
+  background : rgb(240, 240, 240);
+  border-right : rgb(150, 150, 150) solid 1px;
+}
+div.menu h3 {
+  font-size : 100%;
+  font-weight : bold;
+  font-variant : small-caps;
+  margin-top : 10pt;
+  margin-bottom : 4pt;
+}
+.connectedSortable { 
+  border-top : solid 1px rgb(200,200,200);
+  border-bottom : solid 1px rgb(200,200,200);
+  list-style-type: none; 
+  margin: 0; 
+  padding: 4px 0; 
+  width: 100%; 
+}
+.connectedSortable li { 
+  margin: 2px 0px 2px 0px; 
+  padding: 0.2em; 
+  padding-left: .8em; 
+  font-size: 10px; 
+  height: 13px; 
+}
+.connectedSortable li span { 
+  position: absolute; 
+  margin-left: -1.3em;        
+}
+.draggable {
+  cursor: move;
+}
+
+/* ========================== GRAPH ================================= */
+div.content {
+  margin-left : 265px;
+  padding : 5px;
+}
+div#resizable {
+  padding : 5px;
+  width : 400px;
+  height : 400px;
+}
+div.graph {
+  /*margin-left : 240px;*/
+  color : black;
+  width : 100%;
+  height : 100%;
+}
+div#graphtype, div#graphdata {
+  color : gray;
+}
+
+/* ========================== FILTER MENU =========================== */
+.collapseblethingy {
+  background : rgba(0,0,0, 0.5);
+  color : white;
+  z-index : 10;
+  position : relative;
+  left : 235px;
+  margin-top : -10px;
+  cursor : auto; 
+  padding : 5pt;
+}
+.collapseblethingy input{
+  margin-right : 5pt;
+}
+.collapse {
+  position : relative;
+  left : 240px;
+  margin-top : -3px;
+  cursor : pointer;
+}
+
