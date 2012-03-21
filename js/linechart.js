@@ -7,9 +7,9 @@ function validate_line(selection, variables) {
     // check if variables are correct type
 /*    if (variables[selection.x[0]] != "numerical") 
       return "x should be a numerical variable; currently it is a categorical variable";
-*/
     if (variables[selection.y[0]] != "numerical") 
       return "y should be a numerical variable; currently it is a categorical variable";
+*/
     return true;
   } else {
     return "Drag and drop one numerical variable on x and y, and a categorical one on points. " + 
