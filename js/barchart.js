@@ -18,11 +18,23 @@ function validate_bar(selection, variables) {
 function draw_bar(data, selection, variables) {
   if (validate_bar(selection, variables)) {
     $('.graph').children().remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var barchart = new Barchart;
-    var width = $('.graph').width()-10;
-    var height = $('.graph').height()-10;
-    barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);
+    var crossed = cross(data, selection.row, selection.column);
+
+    var data = crossed.data;
+    
+    var smallmul = d3.select(".graph").append("table").attr("class", "chart");
+    
+    for (var r = 0; r < data.length; r++) {
+       var row = smallmul.append("tr");
+       for (var c = 0; c < data[r].length; c++){
+          var col = row.append("td");
+          var chart = col.append("svg").attr("class", "chart");
+          var barchart = new Barchart;
+          var width = $('.graph').width()-10;
+          var height = $('.graph').height()-10;
+          barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data[r][c]);
+       }
+    }
   }
 }
 
