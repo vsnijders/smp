@@ -39,7 +39,7 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "= 'TOTAL'";
+      $where[] = $var . "=" . $meta[$var]['default'];
     }
   }
   foreach($idvars as $var) {
@@ -51,7 +51,7 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "!= 'TOTAL'";
+      $where[] = $var . "!=" . $meta[$var]['default'];
     }
   }
   if (sizeof($measurevars)) {
@@ -72,6 +72,15 @@
   if (sizeof($idvars)) {
     $sql .= " ORDER BY " . implode(", ", $idvars);
   }
+
+  if (isset($_REQUEST['html'])) {
+    echo "<pre>";
+    print_r($_REQUEST);
+    echo("\n");
+    echo($sql);
+    echo("\n");
+    echo "</pre>";
+  } 
 
   // Run query
   $result = $pdo->query($sql);
