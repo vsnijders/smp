@@ -25,7 +25,10 @@ function draw_line(data, selection, variables) {
     var linechart = new LineChart;
     var width = $('.graph').width()-10;
     var height = $('.graph').height()-10;
-    linechart.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0]).plot(chart, data);
+    linechart.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0]);
+    if (selection.colour != undefined) 
+      linechart.colourvar(selection.colour[0]);
+    linechart.plot(chart, data);
   }
 }
 
@@ -88,12 +91,11 @@ LineChart.prototype.plot = function(chart, data) {
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
-
-  var colourscale = undefined;
   
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
-  }
+  } 
+  
   // add grid lines
   chart.selectAll(".gridx").data(xscale.ticks(5))
     .enter().append("line").attr("class", "gridx")
@@ -105,23 +107,28 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
       .attr("y1", yscale).attr("y2", yscale)
       .style("stroke", "rgba(0,0,0,0.3)");
+  
   //drawlines, TODO one line per color...
-  var d = d3.svg.line()
+  var dl = d3.svg.line()
      .x(function(d){return xscale(d[xvar])})
      .y(function(d){return yscale(d[yvar])})
-	 (data);
-  chart.append("svg:path")
-     .attr("d", d)
-	 .attr("stroke", 'steelblue')
-	 .attr("fill", "none")
-	 ;
-  console.log(d);
+	  ;
+     
+  coldata = (colourvar===undefined)? [data] : d3.values(d3.nest().key(function(d){return d[colourvar];}).map(data));
+  //console.log(coldata);
+  var colgroup = chart.selectAll("g").data(coldata).enter().append("g");
+  colgroup.append("path")
+       .attr("d", function(d){return dl(d);})
+	    .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
+	    .attr("fill", "none")
+       ;
+  //console.log(d);
   // draw points
-  chart.selectAll("circle").data(data).enter().append("circle")
+  colgroup.selectAll("circle").data(data).enter().append("circle")
       .attr("cx", function(d) { return xscale(d[xvar]);})
       .attr("cy", function(d) { return yscale(d[yvar]);})
       .attr("r", 5)
-      .attr("fill", function(d) { return colourvar === undefined ? 'steelblue' : colourscale(d[colourvar]);})
+      .attr("fill", function(d) { return (colourvar === undefined)? "steelblue" : colourscale(d[colourvar]);})
       .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5);
   // add tooltip to points
   $('circle').tipsy({

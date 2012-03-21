@@ -53,7 +53,10 @@
       var graphtype = "bar";
       var selection = {
           id : <?php echo $id;?>,
-          filter : {}
+          filter : {},
+          x : "jaar",
+          y : "aantal",
+          colour: "type"
         };
 
 <?php

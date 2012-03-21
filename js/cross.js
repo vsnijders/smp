@@ -28,7 +28,7 @@ function cross(data, row, col, callback){
    //console.log("d", d);
    return { row: rows
           , col: cols
-		  , data: d
+		    , data: d
           };   
 }
 
@@ -45,7 +45,7 @@ function smallmul(chart, crosseddata, charttype){
 	   .enter()
 	   .append("td")
 	   .append("svg")
-	   .text(BarChart(this, data));
+	   .text(LineChart(this, data));
 }
 
 var data = [ {a: "a1", b: "b1"}
@@ -56,5 +56,5 @@ var data = [ {a: "a1", b: "b1"}
 var vars = ["a", "b"];
 
 var d = cross(data, ["a"], ["b"]);
-smallmul(d3.select('.graph'), d, "line");
+smallmul(d3.select('.graph2'), d, "line");
 console.log(d);
