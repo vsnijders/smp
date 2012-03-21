@@ -26,8 +26,8 @@ read_table <- function() {
     m$var2[m$var2 == "total"] <- NA
     m$var2 <- gsub("_", "-", m$var2)
     m$var2 <- gsub("-00", "+", m$var2)
-    m$var2 <- gsub("05", "5", m$var2)
-    m$var2 <- gsub("00", "0", m$var2)
+    #m$var2 <- gsub("05", "5", m$var2)
+    #m$var2 <- gsub("00", "0", m$var2)
 
     m$variable <- NULL
     m <- m[ , c("var1", "var2", "year", "var", "value")]
