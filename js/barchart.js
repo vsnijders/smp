@@ -23,15 +23,22 @@ function draw_bar(data, selection, variables) {
     var data = crossed.data;
     
     var smallmul = d3.select(".graph").append("table").attr("class", "chart");
-    
+    if (crossed.col.length) {
+       var colhead = smallmul.append("tr");
+       crossed.col.forEach(function(d) {colhead.append("th").text(d)});
+    }
+
     for (var r = 0; r < data.length; r++) {
        var row = smallmul.append("tr");
+       if (crossed.row.length){
+          row.append("th").text(crossed.row[r]);
+       }
        for (var c = 0; c < data[r].length; c++){
           var col = row.append("td");
           var chart = col.append("svg").attr("class", "chart");
           var barchart = new Barchart;
-          var width = $('.graph').width()-10;
-          var height = $('.graph').height()-10;
+          var width = ($('.graph').width()/data[r].length)-10;
+          var height = ($('.graph').height()/data.length)-10;
           barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data[r][c]);
        }
     }
