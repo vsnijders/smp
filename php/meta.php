@@ -63,7 +63,7 @@
         ),
       'default_graph' => array(
           'type' => 'bar',
-          'y' => 'jaar',
+          'y' => 'sbi',
           'size' => 'relatieve_verandering'
         )
     );
