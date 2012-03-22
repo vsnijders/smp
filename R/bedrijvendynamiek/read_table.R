@@ -33,11 +33,20 @@ read_aantallen <- function() {
     data$gk <- NULL
     data$sbi_naam <- NULL
 
+    # aggregate over size class
+    library(plyr)
+    data <- ddply(data, c("jaar", "sbi", "grootteklasse"), function(d) {
+        result <- d[1,]
+        result$aantal <- sum(d$aantal)
+        return(result)
+      })
+
+
+
     # select years 2007-2010
     data <- data[data$jaar > 2006 & data$jaar < 2011, ]
 
     # calculate all margins
-    library(plyr)
     m <- names(data)[names(data) != "aantal"]
    
     margins <- data.frame()
@@ -117,6 +126,16 @@ read_dynamiek <- function() {
 
     # Add margins to data
     data <- rbind(data, margins)
+
+    # Some combinations of year, size class, sbi are missing, fill these
+    # with 0's
+    data$netto_verandering <- as.numeric(data$netto_verandering)
+    data <- dcast(
+        melt(data, 
+            id.vars=c("jaar", "grootteklasse", "sbi", "effect", "type")), 
+        jaar + grootteklasse + sbi + effect + type ~ variable, 
+        drop=FALSE, fill=T)
+
     return(data)
     
 }
@@ -132,6 +151,19 @@ read_table <- function() {
 
     data <- melt(data, measure.vars=c("netto_verandering", "aantal", "relatieve_verandering"))
 
+    # remove sbi T and U
+    data <- data[!(data$sbi == 'U' | data$sbi == 'T'), ]
+    data$sbi <- factor(data$sbi)
+    # change levels to numeric values
+    data$jaar <- as.numeric(as.factor(data$jaar))
+    data$grootteklasse <- as.numeric(factor(data$grootteklasse,
+        levels=c("microbedrijf", "kleinbedrijf", "middenbedrijf", "grootbedrijf", "TOTAL")
+    ))
+    data$sbi <- as.numeric(data$sbi)
+    data$effect <- as.numeric(factor(data$effect))
+    data$type <- as.numeric(factor(data$type,
+        levels=c('afsplitsing', 'fusie', 'geboorte', 'overname', 'sterfte', 'uiteenvallen', 'TOTAL')
+    ))
 
     return (data)
 }
