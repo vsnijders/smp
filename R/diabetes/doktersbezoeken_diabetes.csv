@@ -1,0 +1,176 @@
+"Personen naar door de huisarts geregistreerde diagnose; leeftijd, geslacht";;;
+;;Cijfersoort;Aantal
+;;Onderwerpen;Personen met 1 of meer zorgepisodes
+;;Onderwerpen;T. Endocriene kl./metabol. /voeding
+;;Onderwerpen;Ziekten
+;;Onderwerpen;Diabetes mellitus
+Perioden;Geslacht;Leeftijd;per 1000 personen
+2002;Totaal mannen en vrouwen;Totaal leeftijd;29
+2002;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2002;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2002;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2002;Totaal mannen en vrouwen;45 tot 60 jaar;34
+2002;Totaal mannen en vrouwen;60 tot 75 jaar;92
+2002;Totaal mannen en vrouwen;75 jaar of ouder;125
+2002;Mannen;Totaal leeftijd;28
+2002;Mannen;0 tot 15 jaar;1
+2002;Mannen;15 tot 30 jaar;2
+2002;Mannen;30 tot 45 jaar;8
+2002;Mannen;45 tot 60 jaar;38
+2002;Mannen;60 tot 75 jaar;95
+2002;Mannen;75 jaar of ouder;118
+2002;Vrouwen;Totaal leeftijd;31
+2002;Vrouwen;0 tot 15 jaar;1
+2002;Vrouwen;15 tot 30 jaar;2
+2002;Vrouwen;30 tot 45 jaar;8
+2002;Vrouwen;45 tot 60 jaar;30
+2002;Vrouwen;60 tot 75 jaar;90
+2002;Vrouwen;75 jaar of ouder;129
+2003;Totaal mannen en vrouwen;Totaal leeftijd;31
+2003;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2003;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2003;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2003;Totaal mannen en vrouwen;45 tot 60 jaar;37
+2003;Totaal mannen en vrouwen;60 tot 75 jaar;100
+2003;Totaal mannen en vrouwen;75 jaar of ouder;132
+2003;Mannen;Totaal leeftijd;30
+2003;Mannen;0 tot 15 jaar;1
+2003;Mannen;15 tot 30 jaar;2
+2003;Mannen;30 tot 45 jaar;8
+2003;Mannen;45 tot 60 jaar;41
+2003;Mannen;60 tot 75 jaar;101
+2003;Mannen;75 jaar of ouder;123
+2003;Vrouwen;Totaal leeftijd;33
+2003;Vrouwen;0 tot 15 jaar;1
+2003;Vrouwen;15 tot 30 jaar;2
+2003;Vrouwen;30 tot 45 jaar;7
+2003;Vrouwen;45 tot 60 jaar;33
+2003;Vrouwen;60 tot 75 jaar;100
+2003;Vrouwen;75 jaar of ouder;137
+2004;Totaal mannen en vrouwen;Totaal leeftijd;36
+2004;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2004;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2004;Totaal mannen en vrouwen;30 tot 45 jaar;9
+2004;Totaal mannen en vrouwen;45 tot 60 jaar;41
+2004;Totaal mannen en vrouwen;60 tot 75 jaar;118
+2004;Totaal mannen en vrouwen;75 jaar of ouder;150
+2004;Mannen;Totaal leeftijd;34
+2004;Mannen;0 tot 15 jaar;1
+2004;Mannen;15 tot 30 jaar;3
+2004;Mannen;30 tot 45 jaar;9
+2004;Mannen;45 tot 60 jaar;46
+2004;Mannen;60 tot 75 jaar;122
+2004;Mannen;75 jaar of ouder;128
+2004;Vrouwen;Totaal leeftijd;38
+2004;Vrouwen;0 tot 15 jaar;1
+2004;Vrouwen;15 tot 30 jaar;2
+2004;Vrouwen;30 tot 45 jaar;9
+2004;Vrouwen;45 tot 60 jaar;35
+2004;Vrouwen;60 tot 75 jaar;113
+2004;Vrouwen;75 jaar of ouder;163
+2005;Totaal mannen en vrouwen;Totaal leeftijd;34
+2005;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2005;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2005;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2005;Totaal mannen en vrouwen;45 tot 60 jaar;37
+2005;Totaal mannen en vrouwen;60 tot 75 jaar;109
+2005;Totaal mannen en vrouwen;75 jaar of ouder;144
+2005;Mannen;Totaal leeftijd;33
+2005;Mannen;0 tot 15 jaar;1
+2005;Mannen;15 tot 30 jaar;1
+2005;Mannen;30 tot 45 jaar;10
+2005;Mannen;45 tot 60 jaar;43
+2005;Mannen;60 tot 75 jaar;116
+2005;Mannen;75 jaar of ouder;131
+2005;Vrouwen;Totaal leeftijd;35
+2005;Vrouwen;0 tot 15 jaar;1
+2005;Vrouwen;15 tot 30 jaar;2
+2005;Vrouwen;30 tot 45 jaar;7
+2005;Vrouwen;45 tot 60 jaar;31
+2005;Vrouwen;60 tot 75 jaar;102
+2005;Vrouwen;75 jaar of ouder;152
+2006;Totaal mannen en vrouwen;Totaal leeftijd;39
+2006;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2006;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2006;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2006;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2006;Totaal mannen en vrouwen;60 tot 75 jaar;120
+2006;Totaal mannen en vrouwen;75 jaar of ouder;165
+2006;Mannen;Totaal leeftijd;38
+2006;Mannen;0 tot 15 jaar;1
+2006;Mannen;15 tot 30 jaar;2
+2006;Mannen;30 tot 45 jaar;9
+2006;Mannen;45 tot 60 jaar;48
+2006;Mannen;60 tot 75 jaar;122
+2006;Mannen;75 jaar of ouder;158
+2006;Vrouwen;Totaal leeftijd;41
+2006;Vrouwen;0 tot 15 jaar;1
+2006;Vrouwen;15 tot 30 jaar;3
+2006;Vrouwen;30 tot 45 jaar;7
+2006;Vrouwen;45 tot 60 jaar;38
+2006;Vrouwen;60 tot 75 jaar;118
+2006;Vrouwen;75 jaar of ouder;169
+2007;Totaal mannen en vrouwen;Totaal leeftijd;40
+2007;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2007;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2007;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2007;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2007;Totaal mannen en vrouwen;60 tot 75 jaar;120
+2007;Totaal mannen en vrouwen;75 jaar of ouder;167
+2007;Mannen;Totaal leeftijd;40
+2007;Mannen;0 tot 15 jaar;1
+2007;Mannen;15 tot 30 jaar;2
+2007;Mannen;30 tot 45 jaar;9
+2007;Mannen;45 tot 60 jaar;47
+2007;Mannen;60 tot 75 jaar;126
+2007;Mannen;75 jaar of ouder;169
+2007;Vrouwen;Totaal leeftijd;41
+2007;Vrouwen;0 tot 15 jaar;1
+2007;Vrouwen;15 tot 30 jaar;3
+2007;Vrouwen;30 tot 45 jaar;7
+2007;Vrouwen;45 tot 60 jaar;39
+2007;Vrouwen;60 tot 75 jaar;115
+2007;Vrouwen;75 jaar of ouder;165
+2008;Totaal mannen en vrouwen;Totaal leeftijd;42
+2008;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2008;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2008;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2008;Totaal mannen en vrouwen;45 tot 60 jaar;44
+2008;Totaal mannen en vrouwen;60 tot 75 jaar;122
+2008;Totaal mannen en vrouwen;75 jaar of ouder;172
+2008;Mannen;Totaal leeftijd;42
+2008;Mannen;0 tot 15 jaar;1
+2008;Mannen;15 tot 30 jaar;2
+2008;Mannen;30 tot 45 jaar;12
+2008;Mannen;45 tot 60 jaar;50
+2008;Mannen;60 tot 75 jaar;129
+2008;Mannen;75 jaar of ouder;171
+2008;Vrouwen;Totaal leeftijd;43
+2008;Vrouwen;0 tot 15 jaar;1
+2008;Vrouwen;15 tot 30 jaar;2
+2008;Vrouwen;30 tot 45 jaar;9
+2008;Vrouwen;45 tot 60 jaar;39
+2008;Vrouwen;60 tot 75 jaar;115
+2008;Vrouwen;75 jaar of ouder;173
+2009;Totaal mannen en vrouwen;Totaal leeftijd;45
+2009;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2009;Totaal mannen en vrouwen;45 tot 60 jaar;47
+2009;Totaal mannen en vrouwen;60 tot 75 jaar;128
+2009;Totaal mannen en vrouwen;75 jaar of ouder;178
+2009;Mannen;Totaal leeftijd;45
+2009;Mannen;0 tot 15 jaar;1
+2009;Mannen;15 tot 30 jaar;3
+2009;Mannen;30 tot 45 jaar;13
+2009;Mannen;45 tot 60 jaar;53
+2009;Mannen;60 tot 75 jaar;135
+2009;Mannen;75 jaar of ouder;177
+2009;Vrouwen;Totaal leeftijd;45
+2009;Vrouwen;0 tot 15 jaar;1
+2009;Vrouwen;15 tot 30 jaar;3
+2009;Vrouwen;30 tot 45 jaar;10
+2009;Vrouwen;45 tot 60 jaar;40
+2009;Vrouwen;60 tot 75 jaar;121
+2009;Vrouwen;75 jaar of ouder;179
+© Centraal Bureau voor de Statistiek, Den Haag/Heerlen 22-3-2012;;;
