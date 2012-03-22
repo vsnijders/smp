@@ -88,10 +88,10 @@
       'personal_characteristics' => array(
           'longname' => 'Persoonskenmerken',
           'default' => 15,
-          'levels' => array("Job level: elementary", "Job level: lower", "Job level: middle",
-              "Job level: higher", "Job level: scientific", "Gender: male", "Gender: female",
-              "Age: 15-25 years", "Age: 25-45 years", "Age: 45-65 years", "Education level: lower",
-              "Education level: middle", "Education level: higher", "Education level: unknown",
+          'levels' => array("Beroepsniveau: elementair", "Beroepsniveau: lager", "Beroepsniveau: middelbaar",
+              "Beroepsniveau: hoger", "Beroepsniveau: wetenschappelijk", "Geslacht: man", "Geslacht: vrouw",
+              "Leeftijd: 15-25 jaar", "Leeftijd: 25-45 jaar", "Leeftijd: 45-65 jaar", "Opleidingsniveau: lager onderwijs",
+              "Opleidingsniveau: middelbaar onderwijs", "Opleidingsniveau: hoger onderwijs", "Opleidingsniveau: onbekend",
               "Totaal")
         ),
       'position_begin' => array(
