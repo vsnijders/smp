@@ -3,10 +3,9 @@
 
   // BEVOLKINGSPROGNOSE
   $META['bevolkingsprognoses'] = array(
-      'longname' => 'Prognose-intervallen; bevolking per 1 januari, leeftijdsgroep, 2011-2060',
+      'longname' => 'Bevolkingsprognose; bevolking per 1 januari, leeftijdsgroep, 2011-2060',
       'description' => 'Deze tabel bevat prognosecijfers over de bevolking van Nederland op 1 ' . 
-          'januari naar geslacht en leeftijd. In de tabel zijn ook ' . 
-          'prognose-intervallen opgenomen.',
+          'januari naar geslacht en leeftijd. ',
       'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80755NED&VW=T', 
       'variables' => array("gender", "age", "year", "variable"),
       'idvariables' => array("gender", "age", "year"),
