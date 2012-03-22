@@ -63,32 +63,32 @@
       'variables' => array("quarter", "personal_characteristics", "position_begin", "position_end", "variable"),
       'idvariables' => array("quarter", "personal_characteristics", "position_begin", "position_end"),
       'quarter' => array(
-          'longname' = 'Kwartaal',
-          'default' = 34,
-          'levels' = array("2003-1", "2003-2", "2003-3", "2003-4", "2004-1", "2004-2", "2004-3", "2004-4",
+          'longname' => 'Kwartaal',
+          'default' => 34,
+          'levels' => array("2003-1", "2003-2", "2003-3", "2003-4", "2004-1", "2004-2", "2004-3", "2004-4",
               "2005-1", "2005-2", "2005-3", "2005-4", "2006-1", "2006-2", "2006-3", "2006-4",
               "2007-1", "2007-2", "2007-3", "2007-4", "2008-1", "2008-2", "2008-3", "2008-4",
               "2009-1", "2009-2", "2009-3", "2009-4", "2010-1", "2010-2", "2010-3", "2010-4",
               "2011-1", "2011-2")
         ),
       'personal_characteristics' => array(
-          'longname' = 'Persoonskenmerken',
-          'default' = 15,
-          'levels' = array("Job level: elementary", "Job level: lower", "Job level: middle",
+          'longname' => 'Persoonskenmerken',
+          'default' => 15,
+          'levels' => array("Job level: elementary", "Job level: lower", "Job level: middle",
               "Job level: higher", "Job level: scientific", "Gender: male", "Gender: female",
               "Age: 15-25 years", "Age: 25-45 years", "Age: 45-65 years", "Education level: lower",
               "Education level: middle", "Education level: higher", "Education level: unknown",
               "Totaal")
         ),
       'position_begin' => array(
-          'longname' = 'Arbeidsmarktpositie begin periode',
-          'default' = 4,
-          'levels' = array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
+          'longname' => 'Arbeidsmarktpositie begin periode',
+          'default' => 4,
+          'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
         ),
       'position_end' => array(
-          'longname' = 'Arbeidsmarktpositie einde periode',
-          'default' = 4,
-          'levels' = array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
+          'longname' => 'Arbeidsmarktpositie einde periode',
+          'default' => 4,
+          'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
         )
     );
 
