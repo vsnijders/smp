@@ -107,7 +107,7 @@
     );
   // Diabetes
   $META['diabetes'] = array(
-      'longname' => 'Huisartpatiënten met diabetes',
+      'longname' => 'Huisartspatiënten met diabetes',
       'description' => 'Deze tabel toont voor diabetes het aantal personen dat ' .
         'gedurende het verslagjaar een of meer zorgepisodes heeft gehad, geregistreerd ' . 
         'door de huisarts waar de persoon staat ingeschreven. De aantallen worden ' .
