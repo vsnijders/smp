@@ -1,7 +1,5 @@
-function Aes(name){
-
-   
-   var scale = d3.scale.linear()
+function Aes(name, scale){
+   var scale = scale || d3.scale.linear()
      , format
      , value
      , variable 
@@ -68,11 +66,17 @@ function Aes(name){
    return aes;
 }
 
-
 var data = [{a:1, b:2}, {a:10, b:20}];
 
 var aes = Aes("x")
   .variable("a", "num")
+  .refresh(data);
+
+var aes = {
+}
+
+Aes("color", d3.scale.category20())
+  .variable("a", "cat")
   .refresh(data);
 
 console.log(aes);
