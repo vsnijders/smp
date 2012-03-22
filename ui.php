@@ -15,7 +15,7 @@
       'bar' => array('y', 'size'),
       'mosaic' => array('x', 'y', 'size'),
       'line' => array('x', 'y', 'colour'),
-      'bubble' => array('x', 'y', 'points', 'size', 'colour')
+      'bubble' => array('x', 'y', 'size', 'colour')
     );
 ?>
 <html>

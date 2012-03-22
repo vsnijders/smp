@@ -3,24 +3,21 @@ function validate_bubble(selection, variables) {
   // check if required variables are present
   if (selection.x !== undefined && selection.x.length > 0 && 
     selection.y !== undefined && selection.y.length > 0 &&
-    selection.points !== undefined && selection.points.length > 0) {
+    selection.colour !== undefined && selection.colour.length > 0) {
     // check if variables are correct type
     if (variables[selection.x[0]] != "numerical") 
       return "x should be a numerical variable; currently it is a categorical variable";
     if (variables[selection.y[0]] != "numerical") 
       return "y should be a numerical variable; currently it is a categorical variable";
-    if (variables[selection.points[0]] != "categorical") 
-      return "points should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.colour[0]] != "categorical") 
+      return "colour should be a categorical variable; currently it is a numerical variable";
     if (selection.size !== undefined && selection.size.length > 0 &&
       variables[selection.size[0]] != "numerical") 
       return "size should be a numerical variable; currently it is a categorical variable";
-    if (selection.colour !== undefined && selection.colour.length > 0 &&
-      variables[selection.colour[0]] != "categorical") 
-      return "colour should be a categorical variable; currently it is a numerical variable";
     return true;
   } else {
-    return "Drag and drop one numerical variable on x and y, and a categorical one on points. " + 
-      "A numerical variable on size and a categorical variable on colour is optional.";
+    return "Drag and drop one numerical variable on x and y, and a categorical one on colour. " + 
+      "A numerical variable on size is optional.";
     return false;
   }
 }
@@ -34,7 +31,7 @@ function draw_bubble(data, selection, variables) {
     var height = $('.graph').height()-10;
     bubble.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0])
       .sizevar(selection.size[0]).colourvar(selection.colour[0])
-      .pointsvar(selection.points[0]).plot(chart, data);
+      .plot(chart, data);
   }
 }
 
@@ -72,11 +69,6 @@ Bubble.prototype.yvar = function(yvar) {
   return this;
 }
 
-Bubble.prototype.pointsvar = function(pointsvar) {
-  this.pointsvar_ = pointsvar;
-  return this;
-}
-
 Bubble.prototype.sizevar = function(sizevar) {
   this.sizevar_ = sizevar;
   return this;
@@ -97,7 +89,6 @@ Bubble.prototype.plot = function(chart, data) {
   var xvar = this.xvar_;
   var yvar = this.yvar_;
   var sizevar = this.sizevar_;
-  var pointsvar = this.pointsvar_;
   var colourvar = this.colourvar_;
   // set size of canvas
   if (this.width_ === undefined) this.width(400);
@@ -143,8 +134,7 @@ Bubble.prototype.plot = function(chart, data) {
     html: true,
     title: function() {
       var d = this.__data__;
-      var tip = d[pointsvar];
-      if (colourvar !== undefined) tip += ' ' + d[colourvar];
+      var tip = d[colourvar];
       tip += ': ';
       tip += xvar + ' = ' + d[xvar] + ', ' + yvar + ' = ' + d[yvar];
       if (sizevar !== undefined) tip += ', ' + sizevar + ' = ' + d[sizevar];
