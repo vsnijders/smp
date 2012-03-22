@@ -245,7 +245,7 @@
   // numeric variables
   foreach ($meta['levels']['variable'] as $var) {
     echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo $var . "\n</li>\n";
+    echo $meta[$var]['longname'] . "\n</li>\n";
   }
 
 ?>

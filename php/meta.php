@@ -51,6 +51,15 @@
           'longname' => 'Oorzaak',
           'default' => 7,
           'levels' => array('Afsplitsing', 'Fusie', 'Geboorte', 'Overname', 'Sterfte', 'Uiteenvallen', 'Totaal')
+        ),
+      'aantal'=> array(
+          'longname' => 'Aantal bedrijven'
+        ),
+      'netto_verandering'=> array(
+          'longname' => 'Netto verandering'
+        ),
+      'relatieve_verandering'=> array(
+          'longname' => 'Relatieve verandering'
         )
     );
   // LABOURDYNAMICS
