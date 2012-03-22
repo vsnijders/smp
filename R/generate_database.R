@@ -21,7 +21,6 @@ for (i in seq_along(tables)) {
     table <- read_table()
     info  <- rbind(info, inf)
     dbWriteTable(db, as.character(inf$name), table, row.names=FALSE, overwrite=TRUE)
-
 }
 
 # Write table info to database

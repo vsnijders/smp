@@ -232,18 +232,20 @@
   foreach ($meta['idvariables'] as $var) {
     echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
     echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
-    echo $var . "\n";
+    echo $meta[$var]['longname'] . "\n";
     echo "<div class=\"collapseblethingy\">\n";
     echo "<form>\n";
-    foreach ($meta['levels'][$var] as $level) {
-      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
+    $levelid = 1;
+    foreach($meta[$var]['levels'] as $level){
+      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$levelid}\">{$level}</label><br>\n";
+      $levelid += 1;
     }
     echo "</form>\n</div>\n</li>\n";
   }
   // numeric variables
   foreach ($meta['levels']['variable'] as $var) {
     echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "$var" . "\n</li>\n";
+    echo $var . "\n</li>\n";
   }
 
 ?>

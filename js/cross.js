@@ -26,8 +26,8 @@ function cross(data, row, col, callback){
    });
    //console.log("cross", cross);
    //console.log("d", d);
-   return { row: rows
-          , col: cols
+   return { row: (row.length === 0)? [] : rows
+          , col: (col.length === 0)? [] : cols
 		    , data: d
           };   
 }
