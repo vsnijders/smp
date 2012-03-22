@@ -27,16 +27,19 @@
       'jaar' => array(
           'longname' => 'Jaar',
           'default' => 5,
+          'defaultnot' => 5,
           'levels' => array('2007', '2008', '2009', '2010', 'Totaal 2007-2010')
         ),
       'grootteklasse' => array(
           'longname' => 'Grootteklasse',
           'default' => 5,
+          'defaultnot' => 5,
           'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
         ),
       'sbi' => array(
           'longname' => 'SBI',
           'default' => 20,
+          'defaultnot' => 20,
           'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
               'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
               'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
@@ -45,11 +48,13 @@
       'effect' => array(
           'longname' => 'Ontstaan/verdwijnen',
           'default' => 3,
+          'defaultnot' => 3,
           'levels' => array('Ontstaan', 'Verdwijnen', 'Netto')
         ),
       'type' => array(
           'longname' => 'Oorzaak',
           'default' => 7,
+          'defaultnot' => 7,
           'levels' => array('Afsplitsing', 'Fusie', 'Geboorte', 'Overname', 'Sterfte', 'Uiteenvallen', 'Totaal')
         ),
       'aantal'=> array(
@@ -88,6 +93,7 @@
       'personal_characteristics' => array(
           'longname' => 'Persoonskenmerken',
           'default' => 15,
+          'defaultnot' => 15,
           'levels' => array("Beroepsniveau: elementair", "Beroepsniveau: lager", "Beroepsniveau: middelbaar",
               "Beroepsniveau: hoger", "Beroepsniveau: wetenschappelijk", "Geslacht: man", "Geslacht: vrouw",
               "Leeftijd: 15-25 jaar", "Leeftijd: 25-45 jaar", "Leeftijd: 45-65 jaar", "Opleidingsniveau: lager onderwijs",
@@ -97,11 +103,13 @@
       'position_begin' => array(
           'longname' => 'Arbeidsmarktpositie begin periode',
           'default' => 4,
+          'defaultnot' => 4,
           'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
         ),
       'position_end' => array(
           'longname' => 'Arbeidsmarktpositie einde periode',
           'default' => 4,
+          'defaultnot' => 4,
           'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
         ),
       'number_of_persons' => array(
@@ -114,7 +122,7 @@
           'size' => 'number_of_persons'
         )
     );
-  // Diabetes
+  // DIABETES
   $META['diabetes'] = array(
       'longname' => 'Huisartspatiënten met diabetes',
       'description' => 'Deze tabel toont voor diabetes het aantal personen dat ' .
@@ -132,6 +140,7 @@
       'inkomensgroep' => array(
           'longname' => 'Inkomensgroep',
           'default' => 11,
+          'defaultnot' => 11,
           'levels' => array('1e 10%-inkomensgroep (laag inkomen)', '2e 10%-inkomensgroep',
             '3e 10%-inkomensgroep', '4e 10%-inkomensgroep', '5e 10%-inkomensgroep',
             '6e 10%-inkomensgroep', '7e 10%-inkomensgroep', '8e 10%-inkomensgroep',
@@ -140,11 +149,13 @@
       'geslacht' => array(
           'longname' => 'Geslacht',
           'default' => 3,
+          'defaultnot' => 3,
           'levels' => array('Man', 'Vrouw', 'Totaal')
         ),
       'leeftijd' => array(
           'longname' => 'Leeftijd',
           'default' => 7,
+          'defaultnot' => 7,
           'levels' => array('0 tot 15 jaar', '15 tot 30 jaar', '30 tot 45 jaar',
             '45 tot 60 jaar', '60 tot 75 jaar', '75 jaar of ouder', 'Totaal')
         ),

@@ -51,7 +51,8 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "!=" . $meta[$var]['default'];
+      if (isset($meta[$var]['defaultnot']))
+        $where[] = $var . "!=" . $meta[$var]['defaultnot'];
     }
   }
   if (sizeof($measurevars)) {
