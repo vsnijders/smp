@@ -253,14 +253,16 @@
     echo "<ul id=\"$variable\" class=\"connectedSortable\">\n";
     // id variables
     foreach ($meta['idvariables'] as $var) {
-      if ($meta['default_graph'][$variable] == $var) {
+      if (isset($meta['default_graph']) && isset($meta['default_graph'][$variable]) && 
+          $meta['default_graph'][$variable] == $var) {
         print_variable($var, $meta);
         $variables_used[] = $var;
       }
     }
     // numeric variables
     foreach ($meta['levels']['variable'] as $var) {
-      if ($meta['default_graph'][$variable] == $var) {
+      if (isset($meta['default_graph']) && isset($meta['default_graph'][$variable]) && 
+          $meta['default_graph'][$variable] == $var) {
         print_variable($var, $meta);
         $variables_used[] = $var;
       }
