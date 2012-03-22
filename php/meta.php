@@ -103,6 +103,15 @@
           'longname' => 'Arbeidsmarktpositie einde periode',
           'default' => 4,
           'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
+        ),
+      'number_of_persons' => array(
+          'longname' => 'Aantal personen'
+        ),
+      'default_graph' => array(
+          'type' => 'mosaic',
+          'y' => 'position_end',
+          'x' => 'position_begin',
+          'size' => 'number_of_persons'
         )
     );
   // Diabetes
