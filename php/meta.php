@@ -12,7 +12,41 @@
       'description' => 'This table contains prognoses for the dutch population for the years ' .
         '2011-2060. Specified for age and gender.',
       'variables' => array("gender", "age", "year", "variable"),
-      'idvariables' => array("gender", "age", "year")
+      'idvariables' => array("gender", "age", "year"),
+      'gender' => array(
+          'longname' => 'Geslacht',
+          'default' => 3,
+          'defaultnot' => 3,
+          'levels' => array('Man', 'Vrouw', 'Totaal')
+        ),
+      'age' => array(
+          'longname' => 'Leeftijd',
+          'default' => 21,
+          'defaultnot' => 21,
+          'levels' => array(
+              "0-5",   "5-10",  "10-15", "15-20", "20-25", "25-30", "30-35", "35-40",
+              "40-45", "45-50", "50-55", "55-60", "60-65", "65-70", "70-75", "75-80", "80-85",
+              "85-90", "90-95", "95+", "Totaal")
+        ),
+      'year' => array(
+          'longname' => 'Jaar',
+          'default' => 50,
+          'defaultnot' => 50,
+          'levels' => array(
+              "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020",
+              "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030",
+              "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040",
+              "2041", "2042", "2043", "2044", "2045", "2046", "2047", "2048", "2049", "2050",
+              "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060")
+        ),
+      'prognosis' => array(
+          'longname' => 'Verwacht aantal personen'
+        ),
+      'default_graph' => array(
+          'type' => 'line',
+          'x' => 'year',
+          'y' => 'prognosis'
+        )
     );
   // BEDRIJVENDYNAMIEK
   $META['bedrijvendynamiek'] = array(
@@ -74,10 +108,15 @@
     );
   // LABOURDYNAMICS
   $META['labourdynamics'] = array(
-      'longname' => 'Labourmarket dynamics; changes in labourmarketposition',
-      'description' => 'This table contains quarterly figures on the labourmarket mobility of persons ' . 
-        'ages between 15 and 65 years in The Netherlands. It contains information on the labourmarket ' .
-        'position at the beginning of the survey and that three months later. ',
+      'longname' => 'Arbeidsmarktdynamiek; wisselingen arbeidsmarktpositie',
+      'description' => 'In deze tabel staan kwartaalcijfers over de arbeidsmarktmobiliteit ' . 
+          'van 15 tot 65 jarige personen in Nederland. Vermeld wordt de ' . 
+          'verandering in arbeidsmarktpositie tussen het eerste moment van ' . 
+          'enqûeteren (begin periode) en de arbeidsmarktpositie drie maanden ' . 
+          'later (einde periode). Op deze manier beschrijft deze tabel in hoeverre ' . 
+          'personen na één kwartaal van arbeidsmarktpositie zijn gewisseld. ' . 
+          'Er worden drie arbeidsmarktposities onderscheiden; werkzame ' . 
+          'beroepsbevolking, werkloze beroepsbevolking en niet-beroepsbevolking.' ,
       'url' => 'http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=80220NED&D1=a&D2=a&D3=0-9,13-17&D4=a&STB=G3,G2,T,G1&VW=T',
       'variables' => array("quarter", "personal_characteristics", "position_begin", "position_end", "variable"),
       'idvariables' => array("quarter", "personal_characteristics", "position_begin", "position_end"),
