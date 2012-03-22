@@ -13,9 +13,9 @@
 
   $charts = array(
       'bar' => array('y', 'size', 'row', 'column'),
-      'mosaic' => array('x', 'y', 'size'),
-      'line' => array('x', 'y', 'colour'),
-      'bubble' => array('x', 'y', 'points', 'size', 'colour')
+      'mosaic' => array('x', 'y', 'size','row', 'column'),
+      'line' => array('x', 'y', 'colour', 'row', 'column'),
+      'bubble' => array('x', 'y', 'points', 'size', 'colour','row', 'column')
     );
 ?>
 <html>
@@ -48,6 +48,7 @@
     <script type="text/javascript" src="js/linechart.js"></script>
 
     <script type="text/javascript" src="js/cross.js"></script>
+    <script type="text/javascript" src="js/gog.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
@@ -58,6 +59,9 @@
           y : "aantal",
           colour: "type"
         };
+        
+      var scale = {
+      }
 
 <?php
   echo "      var variables = {";

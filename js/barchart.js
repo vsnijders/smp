@@ -78,6 +78,8 @@ Barchart.prototype.numeric = function(numeric) {
 
 Barchart.prototype.plot = function(chart, data) {
   // only plot if variables are set
+  xformat = d3.format("n");
+  
   if (!this.numeric_ | !this.categorical_) return;
   // settings
   var bar_height = 12;
@@ -95,10 +97,13 @@ Barchart.prototype.plot = function(chart, data) {
   if (xmin > 0) xmin = 0;
   var xmax = d3.max(data, function(d) { return Number(d[numeric]);});
   if (xmax < 0) xmax = 0;
+  
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding])
+  
   var yscale = d3.scale.ordinal()
     .domain(data.map(function(d) { return d[categorical];}))
     .rangeBands([padding_top, this.height_-padding]);
+    
   // add bars
   chart.selectAll("rect").data(data).enter().append("rect")
       .attr("x", function(d) { return Math.min(xscale(0), xscale(d[numeric])); })
@@ -132,6 +137,7 @@ Barchart.prototype.plot = function(chart, data) {
       .attr("class", "rule")
       .attr("x", xscale).attr("y", padding_top).attr("dy", -3)
       .attr("text-anchor", "middle").text(String);
+  console.log("data:", data);
   // add labels
   chart.selectAll(".labels").data(data)
     .enter().append("text").attr("class", "label")

@@ -1,36 +1,78 @@
-var mapping = 
-   { x: null
-   , y: null
-   , color: null
-   , size: null
-   , facetX : null
-   , facetY : null
-   }
+function Aes(name){
 
-var scales = 
-   { x: null
-   , y: null
-   , color: null
-   , size: null
-   }
-
-function aes(mapping, data){
    
-}
+   var scale = d3.scale.linear()
+     , format
+     , value
+     , variable 
+     , type
+     ;
+      
+   var aes = { name : name || ""
+             , scale : scale
+             , format: format
+             };
+             
+   function stringValue(d) {
+      return d[variable];
+   };
+      
+   function numValue(d) {
+      return +d[variable];
+   };
 
-function facets(x, y, data){
-  var vars = x.concat(y);
-  nest = d3.nest();
-  for (var i = 0; i < vars.length; i++){
-     var p = i;
-     var nest = nest.key(function(d) {return d[vars[p]]})
-  }
-  return nest.entries(data);
+   
+   function dateValue(d) {
+      return format.parse(d[variable]);
+   };
+
+   aes.refresh = function(data){
+      scale.range(aes.scale.range());
+      
+      if (type === "cat"){
+         scale = scale.domain(data.map(value));
+      } else {
+         scale = scale.domain([d3.min(data, value), d3.max(data, value)]);
+      }
+      
+      aes.format = format;
+      aes.scale = scale;
+      
+      return aes;
+   }
+   
+   aes.variable = function( _ , _type) {
+      if (!arguments.length){
+         return variable;
+      }
+      variable = _ ;
+      type = _type || "cat";
+      var rg = scale.range();
+      
+      if (type === "num"){
+         scale = d3.scale.linear().range(rg);
+         format = d3.format("n");
+         value = numValue;
+         
+      } else if (type === "time"){
+         scale = d3.scale.linear().range(rg);
+         format = d3.time.format("Y");
+         value = dateValue;
+      } else {
+         scale = d3.scale.ordinal().range(rg);   
+         format = String;
+         value =  stringValue;
+      }
+      return aes;
+   }   
+   return aes;
 }
 
 
 var data = [{a:1, b:2}, {a:10, b:20}];
 
-var fac = facets(["a"], ["b"], data);
+var aes = Aes("x")
+  .variable("a", "num")
+  .refresh(data);
 
-console.log(fac);
+console.log(aes);
