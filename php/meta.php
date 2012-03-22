@@ -38,7 +38,7 @@
           'longname' => 'SBI',
           'default' => 20,
           'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
-              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financi&euml;le dienstverlening', 
+              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
               'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
               'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
         ),
@@ -60,6 +60,11 @@
         ),
       'relatieve_verandering'=> array(
           'longname' => 'Relatieve verandering'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'y' => 'jaar',
+          'size' => 'relatieve_verandering'
         )
     );
   // LABOURDYNAMICS
