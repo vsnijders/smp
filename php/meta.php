@@ -1,12 +1,6 @@
 <?php
   $META = array();
 
-  $META['exampletable'] = array(
-      'longname' => 'Some test table containing artificial data',
-      'description' => '',
-      'variables' => array("gender", "age", "variable"),
-      'idvariables' => array("gender", "age")
-    );
   // BEVOLKINGSPROGNOSE
   $META['bevolkingsprognoses'] = array(
       'longname' => 'Prognose-intervallen; bevolking per 1 januari, leeftijdsgroep, 2011-2060',
