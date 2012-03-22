@@ -7,10 +7,13 @@
       'variables' => array("gender", "age", "variable"),
       'idvariables' => array("gender", "age")
     );
+  // BEVOLKINGSPROGNOSE
   $META['bevolkingsprognoses'] = array(
-      'longname' => 'Population prognoses; population on january the first 2011-2060',
-      'description' => 'This table contains prognoses for the dutch population for the years ' .
-        '2011-2060. Specified for age and gender.',
+      'longname' => 'Prognose-intervallen; bevolking per 1 januari, leeftijdsgroep, 2011-2060',
+      'description' => 'Deze tabel bevat prognosecijfers over de bevolking van Nederland op 1 ' . 
+          'januari naar geslacht en leeftijd. In de tabel zijn ook ' . 
+          'prognose-intervallen opgenomen.',
+      'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80755NED&VW=T', 
       'variables' => array("gender", "age", "year", "variable"),
       'idvariables' => array("gender", "age", "year"),
       'gender' => array(
@@ -50,11 +53,11 @@
     );
   // BEDRIJVENDYNAMIEK
   $META['bedrijvendynamiek'] = array(
-      'longname' => 'Enterprise dynamics; creation and ending of enterprises',
-      'description' => 'This table contains figures on the creation and ending of ' .
-        'enterprises. The figures are specified for SBI and size class. The following ' .
-        'types of events are recognised: split-off, fusion, birth, take-over, death, '.
-        'and breaking-apart.',
+      'longname' => 'Bedrijvendynamiek; ontstaan en verdwijnen van bedrijven',
+      'description' => 'Deze tabel bevat gegevens of het ontstaan en verdwijnen van ' .
+          'bedrijven. De cijfers zijn beschikbaar per SBI en grootteklasse. De volgende '. 
+          'gebeurtenissen worden onderscheiden: splitsing, fusie, geboorte, overname ' .
+          'sterfte en uiteenvallen.', 
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
@@ -168,7 +171,7 @@
         'gedurende het verslagjaar een of meer zorgepisodes heeft gehad, geregistreerd ' . 
         'door de huisarts waar de persoon staat ingeschreven. De aantallen worden ' .
         'uitgedrukt per 1000 personen en uitgesplitst naar leeftijd, geslacht en inkomen.',
-      'url' => '',
+      'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80577NED&VW=T',
       'variables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd", "variable"),
       'idvariables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd"),
       'jaar' => array(
