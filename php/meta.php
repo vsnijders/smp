@@ -105,6 +105,49 @@
           'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
         )
     );
+  // Diabetes
+  $META['diabetes'] = array(
+      'longname' => 'Huisartpatiënten met diabetes',
+      'description' => 'Deze tabel toont voor diabetes het aantal personen dat ' .
+        'gedurende het verslagjaar een of meer zorgepisodes heeft gehad, geregistreerd ' . 
+        'door de huisarts waar de persoon staat ingeschreven. De aantallen worden ' .
+        'uitgedrukt per 1000 personen en uitgesplitst naar leeftijd, geslacht en inkomen.',
+      'url' => '',
+      'variables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd", "variable"),
+      'idvariables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd"),
+      'jaar' => array(
+          'longname' => 'Jaar',
+          'default' => 8,
+          'levels' => array('2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009')
+        ),
+      'inkomensgroep' => array(
+          'longname' => 'Inkomensgroep',
+          'default' => 11,
+          'levels' => array('1e 10%-inkomensgroep (laag inkomen)', '2e 10%-inkomensgroep',
+            '3e 10%-inkomensgroep', '4e 10%-inkomensgroep', '5e 10%-inkomensgroep',
+            '6e 10%-inkomensgroep', '7e 10%-inkomensgroep', '8e 10%-inkomensgroep',
+            '9e 10%-inkomensgroep', '10e 10%-inkomensgroep (hoog inkomen)', 'Totaal')
+        ),
+      'geslacht' => array(
+          'longname' => 'Geslacht',
+          'default' => 3,
+          'levels' => array('Man', 'Vrouw', 'Totaal')
+        ),
+      'leeftijd' => array(
+          'longname' => 'Leeftijd',
+          'default' => 7,
+          'levels' => array('0 tot 15 jaar', '15 tot 30 jaar', '30 tot 45 jaar',
+            '45 tot 60 jaar', '60 tot 75 jaar', '75 jaar of ouder', 'Totaal')
+        ),
+      'aantal_patienten'=> array(
+          'longname' => 'Aantal patiënten met diabetes'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'y' => 'jaar',
+          'size' => 'aantal_patienten'
+        )
+    );
 
   
   function get_meta($pdo, $tableid) {

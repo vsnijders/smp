@@ -1,10 +1,4 @@
-"Personen naar door de huisarts geregistreerde diagnose; inkomen";;;;
-;;;Cijfersoort;Aantal
-;;;Onderwerpen;Personen met 1 of meer zorgepisodes
-;;;Onderwerpen;T. Endocriene kl./metabol. /voeding
-;;;Onderwerpen;Ziekten
-;;;Onderwerpen;Diabetes mellitus
-Perioden;Inkomensgroepen;Geslacht;Leeftijd;per 1000 personen
+jaar;inkomensgroep;geslacht;leeftijd;aantal_patienten
 2006;Totaal alle inkomens;Totaal mannen en vrouwen;Totaal leeftijd;39
 2006;Totaal alle inkomens;Totaal mannen en vrouwen;0 tot 15 jaar;1
 2006;Totaal alle inkomens;Totaal mannen en vrouwen;15 tot 30 jaar;2
@@ -929,4 +923,3 @@ Perioden;Inkomensgroepen;Geslacht;Leeftijd;per 1000 personen
 2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;45 tot 60 jaar;16
 2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;60 tot 75 jaar;63
 2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;75 jaar of ouder;92
-© Centraal Bureau voor de Statistiek, Den Haag/Heerlen 22-3-2012;;;;

@@ -1,10 +1,4 @@
-"Personen naar door de huisarts geregistreerde diagnose; leeftijd, geslacht";;;
-;;Cijfersoort;Aantal
-;;Onderwerpen;Personen met 1 of meer zorgepisodes
-;;Onderwerpen;T. Endocriene kl./metabol. /voeding
-;;Onderwerpen;Ziekten
-;;Onderwerpen;Diabetes mellitus
-Perioden;Geslacht;Leeftijd;per 1000 personen
+jaar;geslacht;leeftijd;aantal_patienten
 2002;Totaal mannen en vrouwen;Totaal leeftijd;29
 2002;Totaal mannen en vrouwen;0 tot 15 jaar;1
 2002;Totaal mannen en vrouwen;15 tot 30 jaar;2
@@ -173,4 +167,3 @@ Perioden;Geslacht;Leeftijd;per 1000 personen
 2009;Vrouwen;45 tot 60 jaar;40
 2009;Vrouwen;60 tot 75 jaar;121
 2009;Vrouwen;75 jaar of ouder;179
-© Centraal Bureau voor de Statistiek, Den Haag/Heerlen 22-3-2012;;;
