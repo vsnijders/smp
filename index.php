@@ -1,35 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>SMP - tables</title>
-    <link rel="stylesheet" href="css/smp.css" type="text/css"/>
+
+    <title>StatMine</title>
+
+    <!-- webpage icon -->
+    <link type="text/css" href="css/ui.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="img/favicon2.png" type="image/png" />
-  </head>
 
+    <!-- jQuery includes -->
+    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+
+  </head>
   <body>
-    <header>
-        <h1><a href="<?php echo $_SERVER['PHP_SELF'];?>">SMP</a> - tables</h1>
-    </header>
-    <article>
+   
+  <header>
+    <h1><a href="index.php">StatMine</a></h1>
+  </header>
+
+  <article>
+    <div class="menu">
+    </div>
+
+    <div class="content">
 
 <?php
+  require_once("php/meta.php");
+
   $pdo = new PDO("sqlite:data/test.sqlite");
   $r = $pdo->query("SELECT * FROM tables");
-
+  
   while ($row = $r->fetch()) {
+    $meta = $META[$row['name']];
     echo '<div class="table">';
-    echo '<h2>' . $row['longname'] . '</h2>';
-    echo '<p>' . $row['description'] . '</p>';
-    echo '<p class="tableoptions"><a href="view.php?id=' . $row['id'] . '">view</a></p>';
+    echo '<h2><a href="ui.php?id=' . $row['id'] . '">' .  $meta['longname'] . '</a></h2>';
+    echo '<p>' . $meta['description'] . '</p>';
+    if (isset($meta['url']) && $meta['url'] != '')
+      echo '<p class="tableoptions"><a href="' . $meta['url'] . '">StatLine</a></p>';
     echo '</div>';
   }
+
 ?>
 
-    </article>
+    </div>
+  </article>
 
+  <footer>
+  </footer>
 
-</body>
+  </body>
 </html>
+
 
