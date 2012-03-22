@@ -143,3 +143,13 @@ div#graphtype, div#graphdata {
   cursor : pointer;
 }
 
+
+
+
+.measurevar {
+  background : rgb(255, 66, 14);
+}
+.idvar {
+  background : rgb(0, 69, 134);
+}
+

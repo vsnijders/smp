@@ -49,6 +49,17 @@
 
     <script type="text/javascript" src="js/cross.js"></script>
 
+    <style>
+
+.measurevar {
+  background : rgb(255, 211, 32);
+}
+.idvar {
+  background : rgb(144, 207, 0);
+}
+
+    </style>
+
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
@@ -210,7 +221,7 @@
 <?php
   function print_variable($var, $meta) {
     if (in_array($var, $meta['idvariables'])) {
-      echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+      echo "<li class=\"ui-state-default draggable collapseble idvar\" id=\"{$var}\">\n";
       echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
       echo $meta[$var]['longname'] . "\n";
       echo "<div class=\"collapseblethingy\">\n";
@@ -222,7 +233,7 @@
       }
       echo "</form>\n</div>\n</li>\n";
     } else {
-      echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+      echo "<li class=\"ui-state-default draggable collapseble measurevar\" id=\"{$var}\">\n";
       echo $meta[$var]['longname'] . "\n</li>\n";
     }
   }
