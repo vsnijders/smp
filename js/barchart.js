@@ -116,10 +116,10 @@ Barchart.prototype.plot = function(chart, data) {
   // add labels
   chart.selectAll(".labels").data(data)
     .enter().append("text").attr("class", "label")
-      .attr("x", padding_left-3)
+      .attr("x", 3)
       .attr("y", function(d) { return yscale(d[categorical]) + yscale.rangeBand() / 2; })
       .attr("dy", ".35em")
-      .attr("text-anchor", "end")
+      .attr("text-anchor", "start")
       .text(function(d) { return d[categorical];});
 }
 
