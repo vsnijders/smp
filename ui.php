@@ -104,8 +104,10 @@
           validated = validate_line(selection, variables);
         } 
         if (validated === true) {
+          <?php if (isset($_REQUEST['echo'])): ?>
           $("#graphtype").html("<b>" + graphtype + "</b>");
           $("#graphdata").load("ui_fetch.php?html=1", selection);
+          <?php endif; ?>
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             if (graphtype == "bar") {
               draw_bar(data, selection, variables);
