@@ -52,10 +52,19 @@
     <style>
 
 .measurevar {
+  /*background : rgb(255, 211, 32);*/
+  background : rgb(255, 241, 132);
+}
+.measurevar:hover {
   background : rgb(255, 211, 32);
+  color : black;
 }
 .idvar {
+  background : rgb(204, 237, 100);
+}
+.idvar:hover {
   background : rgb(144, 207, 0);
+  color : black;
 }
 
     </style>
