@@ -124,12 +124,15 @@ div#graphtype, div#graphdata {
 
 /* ========================== FILTER MENU =========================== */
 .collapseblethingy {
-  background : rgba(0,0,0, 0.5);
-  color : white;
-  z-index : 10;
+  /*background : rgba(0,0,0, 0.5);*/
+  background : rgba(255, 255, 255, 0.8);
+  color : black;
+  /*z-index : 10;*/
   /*position : relative;*/
-  left : 235px;
-  margin-top : -10px;
+  /*left : 235px;*/
+  /*margin-top : -10px;*/
+  margin-top : 3px;
+  margin-left : -6px;
   cursor : auto; 
   padding : 5pt;
 }
