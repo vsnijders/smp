@@ -13,7 +13,7 @@ info <- data.frame()
 # - read_table() that returns the table as a data.frame 
 # - table_info(id) that returns a data.frame with information about the table
 tables <- c("bevolkingsprognoses", "bedrijvendynamiek", "labourmarket",
-    "diabetes", "diabetes_geneesmiddelen")
+    "diabetes", "diabetes_geneesmiddelen", "arbeidsmarktparticipatie")
 
 # Read all tables and add to database
 for (i in seq_along(tables)) {

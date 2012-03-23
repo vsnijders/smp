@@ -257,6 +257,47 @@
           'size' => 'percentage'
         )
     );
+  // PARTICIPATION 
+  $META['participation'] = array(
+      'longname' => 'Netto arbeidsmarktparticipatie 1971-2010 naar geslacht, generatie en leeftijd',
+      'description' => 'Deze tabel bevat de arbeidsparticipatie van mannen en vrouwen uitgesplitst ' .
+          'naar generatie en leeftijd.', 
+      'url' => '',
+      'variables' => array("geslacht", "generatie", "leeftijd", "variable"),
+      'idvariables' => array("geslacht", "generatie", "leeftijd"),
+      'geslacht' => array(
+          'longname' => 'Geslacht',
+          'default' => 2,
+          'levels' => array('Man', 'Vrouw')
+        ),
+      'generatie' => array(
+          'longname' => 'Geboortegeneratie',
+          'default' => 4,
+          'levels' => array(
+              "1906-1910", "1911-1915", "1916-1920", "1921-1925", "1926-1930", "1931-1935", "1936-1940",
+              "1941-1945", "1946-1950", "1951-1955", "1956-1960", "1961-1965", "1966-1970", "1971-1975",
+              "1976-1980", "1981-1985", "1986-1990")
+        ),
+      'leeftijd' => array(
+          'longname' => 'Leeftijd',
+          'default' => 1,
+          'levels' => array(
+              '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', 
+              '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45',
+              '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60',
+              '61', '62', '63', '64', '65', '66', '67')
+        ),
+      'participatie'=> array(
+          'longname' => 'Arbeidsmarktparticipatie'
+        ),
+      'default_graph' => array(
+          'type' => 'line',
+          'ynum' => 'participatie',
+          'xcat' => 'leeftijd',
+          'colour' => 'generatie',
+          'row' => 'geslacht'
+        )
+    );
   
   function get_meta($pdo, $tableid) {
     // get tablename
