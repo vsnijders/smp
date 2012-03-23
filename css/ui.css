@@ -83,6 +83,25 @@ div.menu h3 {
   cursor: move;
 }
 
+/* ========================== TABLES ================================ */
+div.table {
+  margin-top : 10px;
+  margin-bottom : 20px;
+  border-bottom : 1px solid rgb(180, 180, 180);
+  border-top : 1px solid rgb(180, 180, 180);
+  padding : 10px 5px;
+}
+div.table:hover {
+  border-bottom : 1px solid rgb(150, 150, 150);
+  border-top : 1px solid rgb(150, 150, 150);
+}
+div.table H2 {
+  margin-bottom : 8px;
+}
+div.table p.tableoptions {
+  margin-top : 4px;
+}
+
 /* ========================== GRAPH ================================= */
 div.content {
   margin-left : 265px;
@@ -123,4 +142,7 @@ div#graphtype, div#graphdata {
   margin-top : -3px;
   cursor : pointer;
 }
+
+
+
 

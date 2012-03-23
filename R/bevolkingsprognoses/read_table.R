@@ -41,15 +41,16 @@ read_table <- function() {
     # only select prognoses; ignore confidence intervals for now
     m <- m[m$variable == "prognosis", ]
 
-    # calculate margins for year
-    library(plyr)
-    margins <- ddply(m, c("gender", "age"), function(d) {
-        result <- d[1, ]
-        result[, "year"] <- "TOTAL"
-        result$value <- sum(d$value)
-        return(result)
-    })
-    m <- rbind(m, margins)
+    # change levels to numeric
+    m$gender <- as.numeric(factor(m$gender, levels=c(
+        "Male", "Female", "TOTAL"
+      )))
+    m$age <- as.numeric(factor(m$age, levels=c(
+        "00-05", "05-10", "10-15", "15-20", "20-25", "25-30", "30-35", "35-40",
+        "40-45", "45-50", "50-55", "55-60", "60-65", "65-70", "70-75", "75-80", "80-85",
+        "85-90", "90-95", "95+", "TOTAL"
+      )))
+    m$year <- as.numeric(as.factor(m$year))
 
     return(m)
 }

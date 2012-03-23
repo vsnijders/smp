@@ -55,6 +55,30 @@ read_table <- function() {
     data$value[data$value == '.'] <- NA
     data$value <- as.numeric(as.character(data$value))
 
+    # convert factors to numeric
+    data$quarter <- as.numeric(as.factor(data$quarter))
+    data$personal_characteristics <- as.numeric(factor(data$personal_characteristics, 
+        levels=c(
+        "Job level: elementary",
+        "Job level: lower",
+        "Job level: middle",
+        "Job level: higher",
+        "Job level: scientific",
+        "Gender: male",
+        "Gender: female",
+        "Age: 15-25 years",
+        "Age: 25-45 years",
+        "Age: 45-65 years",
+        "Education level: lower",
+        "Education level: middle",
+        "Education level: higher",
+        "Education level: unknown",
+        "TOTAL")))
+    data$position_begin <- as.numeric(factor(data$position_begin, 
+        levels=c( "employed", "unemployed", "non labourforce", "TOTAL")))
+    data$position_end <- as.numeric(factor(data$position_end, 
+        levels=c( "employed", "unemployed", "non labourforce", "TOTAL")))
+
     return(data)
 }
 

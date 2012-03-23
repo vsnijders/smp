@@ -1,0 +1,925 @@
+jaar;inkomensgroep;geslacht;leeftijd;aantal_patienten
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;Totaal leeftijd;39
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;60 tot 75 jaar;120
+2006;Totaal alle inkomens;Totaal mannen en vrouwen;75 jaar of ouder;165
+2006;Totaal alle inkomens;Mannen;Totaal leeftijd;38
+2006;Totaal alle inkomens;Mannen;0 tot 15 jaar;1
+2006;Totaal alle inkomens;Mannen;15 tot 30 jaar;2
+2006;Totaal alle inkomens;Mannen;30 tot 45 jaar;9
+2006;Totaal alle inkomens;Mannen;45 tot 60 jaar;48
+2006;Totaal alle inkomens;Mannen;60 tot 75 jaar;122
+2006;Totaal alle inkomens;Mannen;75 jaar of ouder;158
+2006;Totaal alle inkomens;Vrouwen;Totaal leeftijd;41
+2006;Totaal alle inkomens;Vrouwen;0 tot 15 jaar;1
+2006;Totaal alle inkomens;Vrouwen;15 tot 30 jaar;3
+2006;Totaal alle inkomens;Vrouwen;30 tot 45 jaar;7
+2006;Totaal alle inkomens;Vrouwen;45 tot 60 jaar;38
+2006;Totaal alle inkomens;Vrouwen;60 tot 75 jaar;118
+2006;Totaal alle inkomens;Vrouwen;75 jaar of ouder;169
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;Totaal leeftijd;33
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;1
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;2
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;14
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;63
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;156
+2006;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;75 jaar of ouder;170
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;Totaal leeftijd;31
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;0 tot 15 jaar;.
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;15 tot 30 jaar;2
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;30 tot 45 jaar;17
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;45 tot 60 jaar;70
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;60 tot 75 jaar;137
+2006;1e 10%-inkomensgroep (laag inkomen);Mannen;75 jaar of ouder;176
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;Totaal leeftijd;36
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;0 tot 15 jaar;.
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;15 tot 30 jaar;2
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;30 tot 45 jaar;10
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;45 tot 60 jaar;55
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;60 tot 75 jaar;172
+2006;1e 10%-inkomensgroep (laag inkomen);Vrouwen;75 jaar of ouder;168
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;70
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;14
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;82
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;176
+2006;2e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;198
+2006;2e 10%-inkomensgroep;Mannen;Totaal leeftijd;59
+2006;2e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;2e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2006;2e 10%-inkomensgroep;Mannen;30 tot 45 jaar;14
+2006;2e 10%-inkomensgroep;Mannen;45 tot 60 jaar;88
+2006;2e 10%-inkomensgroep;Mannen;60 tot 75 jaar;176
+2006;2e 10%-inkomensgroep;Mannen;75 jaar of ouder;182
+2006;2e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;78
+2006;2e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;1
+2006;2e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2006;2e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;14
+2006;2e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;77
+2006;2e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;176
+2006;2e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;206
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;59
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;.
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;60
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;148
+2006;3e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;175
+2006;3e 10%-inkomensgroep;Mannen;Totaal leeftijd;49
+2006;3e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;3e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2006;3e 10%-inkomensgroep;Mannen;30 tot 45 jaar;6
+2006;3e 10%-inkomensgroep;Mannen;45 tot 60 jaar;59
+2006;3e 10%-inkomensgroep;Mannen;60 tot 75 jaar;151
+2006;3e 10%-inkomensgroep;Mannen;75 jaar of ouder;151
+2006;3e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;67
+2006;3e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;3e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2006;3e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;9
+2006;3e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;61
+2006;3e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;145
+2006;3e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;187
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;46
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;10
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;52
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;124
+2006;4e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;172
+2006;4e 10%-inkomensgroep;Mannen;Totaal leeftijd;44
+2006;4e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;4e 10%-inkomensgroep;Mannen;15 tot 30 jaar;3
+2006;4e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2006;4e 10%-inkomensgroep;Mannen;45 tot 60 jaar;59
+2006;4e 10%-inkomensgroep;Mannen;60 tot 75 jaar;128
+2006;4e 10%-inkomensgroep;Mannen;75 jaar of ouder;158
+2006;4e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;48
+2006;4e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;4e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2006;4e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;8
+2006;4e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;46
+2006;4e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;120
+2006;4e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;180
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;37
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;.
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;36
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;126
+2006;5e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;163
+2006;5e 10%-inkomensgroep;Mannen;Totaal leeftijd;37
+2006;5e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;5e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2006;5e 10%-inkomensgroep;Mannen;30 tot 45 jaar;8
+2006;5e 10%-inkomensgroep;Mannen;45 tot 60 jaar;42
+2006;5e 10%-inkomensgroep;Mannen;60 tot 75 jaar;129
+2006;5e 10%-inkomensgroep;Mannen;75 jaar of ouder;172
+2006;5e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;36
+2006;5e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;5e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2006;5e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;7
+2006;5e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;30
+2006;5e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;123
+2006;5e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;156
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;33
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;44
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;113
+2006;6e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;138
+2006;6e 10%-inkomensgroep;Mannen;Totaal leeftijd;34
+2006;6e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;6e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2006;6e 10%-inkomensgroep;Mannen;30 tot 45 jaar;7
+2006;6e 10%-inkomensgroep;Mannen;45 tot 60 jaar;49
+2006;6e 10%-inkomensgroep;Mannen;60 tot 75 jaar;120
+2006;6e 10%-inkomensgroep;Mannen;75 jaar of ouder;144
+2006;6e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;32
+2006;6e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;6e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2006;6e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;6
+2006;6e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;39
+2006;6e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;107
+2006;6e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;133
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;33
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;6
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;47
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;99
+2006;7e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;133
+2006;7e 10%-inkomensgroep;Mannen;Totaal leeftijd;33
+2006;7e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;7e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2006;7e 10%-inkomensgroep;Mannen;30 tot 45 jaar;5
+2006;7e 10%-inkomensgroep;Mannen;45 tot 60 jaar;50
+2006;7e 10%-inkomensgroep;Mannen;60 tot 75 jaar;108
+2006;7e 10%-inkomensgroep;Mannen;75 jaar of ouder;140
+2006;7e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;32
+2006;7e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;7e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2006;7e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;7
+2006;7e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;43
+2006;7e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;89
+2006;7e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;129
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;32
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;36
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;110
+2006;8e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;147
+2006;8e 10%-inkomensgroep;Mannen;Totaal leeftijd;36
+2006;8e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;8e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2006;8e 10%-inkomensgroep;Mannen;30 tot 45 jaar;8
+2006;8e 10%-inkomensgroep;Mannen;45 tot 60 jaar;44
+2006;8e 10%-inkomensgroep;Mannen;60 tot 75 jaar;126
+2006;8e 10%-inkomensgroep;Mannen;75 jaar of ouder;172
+2006;8e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;28
+2006;8e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;8e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;4
+2006;8e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;6
+2006;8e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;27
+2006;8e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;93
+2006;8e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;128
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;27
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;5
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;33
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;81
+2006;9e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;130
+2006;9e 10%-inkomensgroep;Mannen;Totaal leeftijd;28
+2006;9e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2006;9e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2006;9e 10%-inkomensgroep;Mannen;30 tot 45 jaar;7
+2006;9e 10%-inkomensgroep;Mannen;45 tot 60 jaar;37
+2006;9e 10%-inkomensgroep;Mannen;60 tot 75 jaar;86
+2006;9e 10%-inkomensgroep;Mannen;75 jaar of ouder;122
+2006;9e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;26
+2006;9e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2006;9e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2006;9e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;3
+2006;9e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;28
+2006;9e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;76
+2006;9e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;137
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;Totaal leeftijd;22
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;5
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;24
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;62
+2006;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;75 jaar of ouder;119
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;Totaal leeftijd;27
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;0 tot 15 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;15 tot 30 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;30 tot 45 jaar;7
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;45 tot 60 jaar;31
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;60 tot 75 jaar;71
+2006;10e 10%-inkomensgroep (hoog inkomen);Mannen;75 jaar of ouder;137
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;Totaal leeftijd;17
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;0 tot 15 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;15 tot 30 jaar;.
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;30 tot 45 jaar;3
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;45 tot 60 jaar;15
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;60 tot 75 jaar;50
+2006;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;75 jaar of ouder;101
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;Totaal leeftijd;40
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;60 tot 75 jaar;120
+2007;Totaal alle inkomens;Totaal mannen en vrouwen;75 jaar of ouder;167
+2007;Totaal alle inkomens;Mannen;Totaal leeftijd;40
+2007;Totaal alle inkomens;Mannen;0 tot 15 jaar;1
+2007;Totaal alle inkomens;Mannen;15 tot 30 jaar;2
+2007;Totaal alle inkomens;Mannen;30 tot 45 jaar;9
+2007;Totaal alle inkomens;Mannen;45 tot 60 jaar;47
+2007;Totaal alle inkomens;Mannen;60 tot 75 jaar;126
+2007;Totaal alle inkomens;Mannen;75 jaar of ouder;169
+2007;Totaal alle inkomens;Vrouwen;Totaal leeftijd;41
+2007;Totaal alle inkomens;Vrouwen;0 tot 15 jaar;1
+2007;Totaal alle inkomens;Vrouwen;15 tot 30 jaar;3
+2007;Totaal alle inkomens;Vrouwen;30 tot 45 jaar;7
+2007;Totaal alle inkomens;Vrouwen;45 tot 60 jaar;39
+2007;Totaal alle inkomens;Vrouwen;60 tot 75 jaar;115
+2007;Totaal alle inkomens;Vrouwen;75 jaar of ouder;165
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;Totaal leeftijd;32
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;1
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;3
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;13
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;60
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;138
+2007;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;75 jaar of ouder;175
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;Totaal leeftijd;30
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;0 tot 15 jaar;.
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;15 tot 30 jaar;4
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;30 tot 45 jaar;13
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;45 tot 60 jaar;66
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;60 tot 75 jaar;133
+2007;1e 10%-inkomensgroep (laag inkomen);Mannen;75 jaar of ouder;184
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;Totaal leeftijd;33
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;0 tot 15 jaar;.
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;15 tot 30 jaar;1
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;30 tot 45 jaar;12
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;45 tot 60 jaar;54
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;60 tot 75 jaar;141
+2007;1e 10%-inkomensgroep (laag inkomen);Vrouwen;75 jaar of ouder;172
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;68
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;15
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;79
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;170
+2007;2e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;188
+2007;2e 10%-inkomensgroep;Mannen;Totaal leeftijd;60
+2007;2e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;2e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;2e 10%-inkomensgroep;Mannen;30 tot 45 jaar;17
+2007;2e 10%-inkomensgroep;Mannen;45 tot 60 jaar;73
+2007;2e 10%-inkomensgroep;Mannen;60 tot 75 jaar;186
+2007;2e 10%-inkomensgroep;Mannen;75 jaar of ouder;182
+2007;2e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;75
+2007;2e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;2e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2007;2e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;14
+2007;2e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;83
+2007;2e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;159
+2007;2e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;191
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;61
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;2
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;.
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;10
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;56
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;147
+2007;3e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;184
+2007;3e 10%-inkomensgroep;Mannen;Totaal leeftijd;51
+2007;3e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;3e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;3e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2007;3e 10%-inkomensgroep;Mannen;45 tot 60 jaar;53
+2007;3e 10%-inkomensgroep;Mannen;60 tot 75 jaar;144
+2007;3e 10%-inkomensgroep;Mannen;75 jaar of ouder;163
+2007;3e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;69
+2007;3e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;3e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2007;3e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;8
+2007;3e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;58
+2007;3e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;149
+2007;3e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;196
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;46
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;10
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;50
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;126
+2007;4e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;168
+2007;4e 10%-inkomensgroep;Mannen;Totaal leeftijd;44
+2007;4e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;4e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;4e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2007;4e 10%-inkomensgroep;Mannen;45 tot 60 jaar;60
+2007;4e 10%-inkomensgroep;Mannen;60 tot 75 jaar;130
+2007;4e 10%-inkomensgroep;Mannen;75 jaar of ouder;160
+2007;4e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;47
+2007;4e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;4e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2007;4e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;9
+2007;4e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;40
+2007;4e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;122
+2007;4e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;172
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;41
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;8
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;42
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;136
+2007;5e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;181
+2007;5e 10%-inkomensgroep;Mannen;Totaal leeftijd;43
+2007;5e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;5e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;5e 10%-inkomensgroep;Mannen;30 tot 45 jaar;10
+2007;5e 10%-inkomensgroep;Mannen;45 tot 60 jaar;44
+2007;5e 10%-inkomensgroep;Mannen;60 tot 75 jaar;147
+2007;5e 10%-inkomensgroep;Mannen;75 jaar of ouder;211
+2007;5e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;40
+2007;5e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;5e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2007;5e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;6
+2007;5e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;39
+2007;5e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;126
+2007;5e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;160
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;35
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;4
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;5
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;121
+2007;6e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;148
+2007;6e 10%-inkomensgroep;Mannen;Totaal leeftijd;36
+2007;6e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;6e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;6e 10%-inkomensgroep;Mannen;30 tot 45 jaar;5
+2007;6e 10%-inkomensgroep;Mannen;45 tot 60 jaar;41
+2007;6e 10%-inkomensgroep;Mannen;60 tot 75 jaar;132
+2007;6e 10%-inkomensgroep;Mannen;75 jaar of ouder;176
+2007;6e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;34
+2007;6e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;6e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;5
+2007;6e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;6
+2007;6e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;45
+2007;6e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;111
+2007;6e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;127
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;35
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;47
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;103
+2007;7e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;146
+2007;7e 10%-inkomensgroep;Mannen;Totaal leeftijd;39
+2007;7e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;7e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;7e 10%-inkomensgroep;Mannen;30 tot 45 jaar;7
+2007;7e 10%-inkomensgroep;Mannen;45 tot 60 jaar;53
+2007;7e 10%-inkomensgroep;Mannen;60 tot 75 jaar;119
+2007;7e 10%-inkomensgroep;Mannen;75 jaar of ouder;182
+2007;7e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;32
+2007;7e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;7e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;5
+2007;7e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;7
+2007;7e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;42
+2007;7e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;86
+2007;7e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;121
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;33
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;38
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;107
+2007;8e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;136
+2007;8e 10%-inkomensgroep;Mannen;Totaal leeftijd;36
+2007;8e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;8e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;8e 10%-inkomensgroep;Mannen;30 tot 45 jaar;10
+2007;8e 10%-inkomensgroep;Mannen;45 tot 60 jaar;47
+2007;8e 10%-inkomensgroep;Mannen;60 tot 75 jaar;115
+2007;8e 10%-inkomensgroep;Mannen;75 jaar of ouder;135
+2007;8e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;29
+2007;8e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;8e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2007;8e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;3
+2007;8e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;29
+2007;8e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;98
+2007;8e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;138
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;28
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;1
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;5
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;33
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;85
+2007;9e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;130
+2007;9e 10%-inkomensgroep;Mannen;Totaal leeftijd;30
+2007;9e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2007;9e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2007;9e 10%-inkomensgroep;Mannen;30 tot 45 jaar;6
+2007;9e 10%-inkomensgroep;Mannen;45 tot 60 jaar;37
+2007;9e 10%-inkomensgroep;Mannen;60 tot 75 jaar;91
+2007;9e 10%-inkomensgroep;Mannen;75 jaar of ouder;145
+2007;9e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;26
+2007;9e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2007;9e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2007;9e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;4
+2007;9e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;29
+2007;9e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;77
+2007;9e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;116
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;Totaal leeftijd;24
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;.
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;3
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;4
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;22
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;68
+2007;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;75 jaar of ouder;120
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;Totaal leeftijd;30
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;0 tot 15 jaar;.
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;15 tot 30 jaar;.
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;30 tot 45 jaar;5
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;45 tot 60 jaar;32
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;60 tot 75 jaar;79
+2007;10e 10%-inkomensgroep (hoog inkomen);Mannen;75 jaar of ouder;142
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;Totaal leeftijd;17
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;0 tot 15 jaar;.
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;15 tot 30 jaar;.
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;30 tot 45 jaar;3
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;45 tot 60 jaar;12
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;60 tot 75 jaar;55
+2007;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;75 jaar of ouder;101
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;Totaal leeftijd;42
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;45 tot 60 jaar;44
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;60 tot 75 jaar;122
+2008;Totaal alle inkomens;Totaal mannen en vrouwen;75 jaar of ouder;172
+2008;Totaal alle inkomens;Mannen;Totaal leeftijd;42
+2008;Totaal alle inkomens;Mannen;0 tot 15 jaar;1
+2008;Totaal alle inkomens;Mannen;15 tot 30 jaar;2
+2008;Totaal alle inkomens;Mannen;30 tot 45 jaar;12
+2008;Totaal alle inkomens;Mannen;45 tot 60 jaar;50
+2008;Totaal alle inkomens;Mannen;60 tot 75 jaar;129
+2008;Totaal alle inkomens;Mannen;75 jaar of ouder;171
+2008;Totaal alle inkomens;Vrouwen;Totaal leeftijd;43
+2008;Totaal alle inkomens;Vrouwen;0 tot 15 jaar;1
+2008;Totaal alle inkomens;Vrouwen;15 tot 30 jaar;2
+2008;Totaal alle inkomens;Vrouwen;30 tot 45 jaar;9
+2008;Totaal alle inkomens;Vrouwen;45 tot 60 jaar;39
+2008;Totaal alle inkomens;Vrouwen;60 tot 75 jaar;115
+2008;Totaal alle inkomens;Vrouwen;75 jaar of ouder;173
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;Totaal leeftijd;33
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;1
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;2
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;17
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;60
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;146
+2008;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;75 jaar of ouder;160
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;Totaal leeftijd;32
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;0 tot 15 jaar;2
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;15 tot 30 jaar;2
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;30 tot 45 jaar;19
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;45 tot 60 jaar;61
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;60 tot 75 jaar;158
+2008;1e 10%-inkomensgroep (laag inkomen);Mannen;75 jaar of ouder;174
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;Totaal leeftijd;34
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;0 tot 15 jaar;.
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;15 tot 30 jaar;2
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;30 tot 45 jaar;16
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;45 tot 60 jaar;59
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;60 tot 75 jaar;135
+2008;1e 10%-inkomensgroep (laag inkomen);Vrouwen;75 jaar of ouder;156
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;76
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;16
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;82
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;170
+2008;2e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;192
+2008;2e 10%-inkomensgroep;Mannen;Totaal leeftijd;67
+2008;2e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;2e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2008;2e 10%-inkomensgroep;Mannen;30 tot 45 jaar;16
+2008;2e 10%-inkomensgroep;Mannen;45 tot 60 jaar;90
+2008;2e 10%-inkomensgroep;Mannen;60 tot 75 jaar;173
+2008;2e 10%-inkomensgroep;Mannen;75 jaar of ouder;195
+2008;2e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;82
+2008;2e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;2e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2008;2e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;16
+2008;2e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;76
+2008;2e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;168
+2008;2e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;191
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;66
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;13
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;68
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;146
+2008;3e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;196
+2008;3e 10%-inkomensgroep;Mannen;Totaal leeftijd;58
+2008;3e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;3e 10%-inkomensgroep;Mannen;15 tot 30 jaar;3
+2008;3e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2008;3e 10%-inkomensgroep;Mannen;45 tot 60 jaar;70
+2008;3e 10%-inkomensgroep;Mannen;60 tot 75 jaar;149
+2008;3e 10%-inkomensgroep;Mannen;75 jaar of ouder;176
+2008;3e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;73
+2008;3e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;2
+2008;3e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2008;3e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;14
+2008;3e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;66
+2008;3e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;144
+2008;3e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;207
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;50
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;12
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;51
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;137
+2008;4e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;181
+2008;4e 10%-inkomensgroep;Mannen;Totaal leeftijd;49
+2008;4e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;4e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2008;4e 10%-inkomensgroep;Mannen;30 tot 45 jaar;14
+2008;4e 10%-inkomensgroep;Mannen;45 tot 60 jaar;55
+2008;4e 10%-inkomensgroep;Mannen;60 tot 75 jaar;137
+2008;4e 10%-inkomensgroep;Mannen;75 jaar of ouder;200
+2008;4e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;51
+2008;4e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;4e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2008;4e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;11
+2008;4e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;48
+2008;4e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;137
+2008;4e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;169
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;40
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;9
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;43
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;128
+2008;5e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;167
+2008;5e 10%-inkomensgroep;Mannen;Totaal leeftijd;43
+2008;5e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;5e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2008;5e 10%-inkomensgroep;Mannen;30 tot 45 jaar;15
+2008;5e 10%-inkomensgroep;Mannen;45 tot 60 jaar;50
+2008;5e 10%-inkomensgroep;Mannen;60 tot 75 jaar;141
+2008;5e 10%-inkomensgroep;Mannen;75 jaar of ouder;163
+2008;5e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;37
+2008;5e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;5e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;4
+2008;5e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;4
+2008;5e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;35
+2008;5e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;115
+2008;5e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;169
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;38
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;1
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;46
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;114
+2008;6e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;162
+2008;6e 10%-inkomensgroep;Mannen;Totaal leeftijd;40
+2008;6e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;6e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2008;6e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2008;6e 10%-inkomensgroep;Mannen;45 tot 60 jaar;53
+2008;6e 10%-inkomensgroep;Mannen;60 tot 75 jaar;124
+2008;6e 10%-inkomensgroep;Mannen;75 jaar of ouder;182
+2008;6e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;35
+2008;6e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;6e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2008;6e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;10
+2008;6e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;40
+2008;6e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;104
+2008;6e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;148
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;34
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;12
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;39
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;113
+2008;7e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;149
+2008;7e 10%-inkomensgroep;Mannen;Totaal leeftijd;37
+2008;7e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;7e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2008;7e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2008;7e 10%-inkomensgroep;Mannen;45 tot 60 jaar;42
+2008;7e 10%-inkomensgroep;Mannen;60 tot 75 jaar;128
+2008;7e 10%-inkomensgroep;Mannen;75 jaar of ouder;153
+2008;7e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;32
+2008;7e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;7e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2008;7e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;11
+2008;7e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;35
+2008;7e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;96
+2008;7e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;146
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;31
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;6
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;39
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;93
+2008;8e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;145
+2008;8e 10%-inkomensgroep;Mannen;Totaal leeftijd;34
+2008;8e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;8e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2008;8e 10%-inkomensgroep;Mannen;30 tot 45 jaar;7
+2008;8e 10%-inkomensgroep;Mannen;45 tot 60 jaar;45
+2008;8e 10%-inkomensgroep;Mannen;60 tot 75 jaar;106
+2008;8e 10%-inkomensgroep;Mannen;75 jaar of ouder;132
+2008;8e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;29
+2008;8e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;8e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2008;8e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;6
+2008;8e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;32
+2008;8e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;79
+2008;8e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;155
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;30
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;6
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;32
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;96
+2008;9e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;131
+2008;9e 10%-inkomensgroep;Mannen;Totaal leeftijd;33
+2008;9e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2008;9e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2008;9e 10%-inkomensgroep;Mannen;30 tot 45 jaar;8
+2008;9e 10%-inkomensgroep;Mannen;45 tot 60 jaar;37
+2008;9e 10%-inkomensgroep;Mannen;60 tot 75 jaar;112
+2008;9e 10%-inkomensgroep;Mannen;75 jaar of ouder;126
+2008;9e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;26
+2008;9e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2008;9e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2008;9e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;4
+2008;9e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;26
+2008;9e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;78
+2008;9e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;135
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;Totaal leeftijd;24
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;5
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;27
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;63
+2008;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;75 jaar of ouder;109
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;Totaal leeftijd;30
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;0 tot 15 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;15 tot 30 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;30 tot 45 jaar;6
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;45 tot 60 jaar;37
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;60 tot 75 jaar;78
+2008;10e 10%-inkomensgroep (hoog inkomen);Mannen;75 jaar of ouder;124
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;Totaal leeftijd;17
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;0 tot 15 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;15 tot 30 jaar;.
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;30 tot 45 jaar;3
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;45 tot 60 jaar;16
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;60 tot 75 jaar;45
+2008;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;75 jaar of ouder;95
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;Totaal leeftijd;45
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;45 tot 60 jaar;47
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;60 tot 75 jaar;128
+2009;Totaal alle inkomens;Totaal mannen en vrouwen;75 jaar of ouder;178
+2009;Totaal alle inkomens;Mannen;Totaal leeftijd;45
+2009;Totaal alle inkomens;Mannen;0 tot 15 jaar;1
+2009;Totaal alle inkomens;Mannen;15 tot 30 jaar;3
+2009;Totaal alle inkomens;Mannen;30 tot 45 jaar;13
+2009;Totaal alle inkomens;Mannen;45 tot 60 jaar;53
+2009;Totaal alle inkomens;Mannen;60 tot 75 jaar;135
+2009;Totaal alle inkomens;Mannen;75 jaar of ouder;177
+2009;Totaal alle inkomens;Vrouwen;Totaal leeftijd;45
+2009;Totaal alle inkomens;Vrouwen;0 tot 15 jaar;1
+2009;Totaal alle inkomens;Vrouwen;15 tot 30 jaar;3
+2009;Totaal alle inkomens;Vrouwen;30 tot 45 jaar;10
+2009;Totaal alle inkomens;Vrouwen;45 tot 60 jaar;40
+2009;Totaal alle inkomens;Vrouwen;60 tot 75 jaar;121
+2009;Totaal alle inkomens;Vrouwen;75 jaar of ouder;179
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;Totaal leeftijd;38
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;2
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;21
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;68
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;150
+2009;1e 10%-inkomensgroep (laag inkomen);Totaal mannen en vrouwen;75 jaar of ouder;192
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;Totaal leeftijd;37
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;0 tot 15 jaar;1
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;15 tot 30 jaar;4
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;30 tot 45 jaar;22
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;45 tot 60 jaar;80
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;60 tot 75 jaar;149
+2009;1e 10%-inkomensgroep (laag inkomen);Mannen;75 jaar of ouder;218
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;Totaal leeftijd;39
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;0 tot 15 jaar;2
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;15 tot 30 jaar;3
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;30 tot 45 jaar;19
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;45 tot 60 jaar;56
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;60 tot 75 jaar;152
+2009;1e 10%-inkomensgroep (laag inkomen);Vrouwen;75 jaar of ouder;183
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;76
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;17
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;75
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;174
+2009;2e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;210
+2009;2e 10%-inkomensgroep;Mannen;Totaal leeftijd;66
+2009;2e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;2e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2009;2e 10%-inkomensgroep;Mannen;30 tot 45 jaar;18
+2009;2e 10%-inkomensgroep;Mannen;45 tot 60 jaar;75
+2009;2e 10%-inkomensgroep;Mannen;60 tot 75 jaar;176
+2009;2e 10%-inkomensgroep;Mannen;75 jaar of ouder;214
+2009;2e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;85
+2009;2e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;1
+2009;2e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2009;2e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;17
+2009;2e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;75
+2009;2e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;173
+2009;2e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;209
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;69
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;13
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;72
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;160
+2009;3e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;195
+2009;3e 10%-inkomensgroep;Mannen;Totaal leeftijd;63
+2009;3e 10%-inkomensgroep;Mannen;0 tot 15 jaar;1
+2009;3e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2009;3e 10%-inkomensgroep;Mannen;30 tot 45 jaar;17
+2009;3e 10%-inkomensgroep;Mannen;45 tot 60 jaar;74
+2009;3e 10%-inkomensgroep;Mannen;60 tot 75 jaar;171
+2009;3e 10%-inkomensgroep;Mannen;75 jaar of ouder;174
+2009;3e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;74
+2009;3e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;3e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;.
+2009;3e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;10
+2009;3e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;69
+2009;3e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;151
+2009;3e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;207
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;53
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;4
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;58
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;148
+2009;4e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;188
+2009;4e 10%-inkomensgroep;Mannen;Totaal leeftijd;54
+2009;4e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;4e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2009;4e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2009;4e 10%-inkomensgroep;Mannen;45 tot 60 jaar;61
+2009;4e 10%-inkomensgroep;Mannen;60 tot 75 jaar;161
+2009;4e 10%-inkomensgroep;Mannen;75 jaar of ouder;197
+2009;4e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;53
+2009;4e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;4e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2009;4e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;9
+2009;4e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;55
+2009;4e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;137
+2009;4e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;182
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;42
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;2
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;10
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;46
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;132
+2009;5e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;174
+2009;5e 10%-inkomensgroep;Mannen;Totaal leeftijd;44
+2009;5e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;5e 10%-inkomensgroep;Mannen;15 tot 30 jaar;.
+2009;5e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2009;5e 10%-inkomensgroep;Mannen;45 tot 60 jaar;52
+2009;5e 10%-inkomensgroep;Mannen;60 tot 75 jaar;146
+2009;5e 10%-inkomensgroep;Mannen;75 jaar of ouder;176
+2009;5e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;40
+2009;5e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;5e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;2
+2009;5e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;9
+2009;5e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;40
+2009;5e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;117
+2009;5e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;172
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;41
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;.
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;11
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;47
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;124
+2009;6e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;163
+2009;6e 10%-inkomensgroep;Mannen;Totaal leeftijd;42
+2009;6e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;6e 10%-inkomensgroep;Mannen;15 tot 30 jaar;2
+2009;6e 10%-inkomensgroep;Mannen;30 tot 45 jaar;12
+2009;6e 10%-inkomensgroep;Mannen;45 tot 60 jaar;54
+2009;6e 10%-inkomensgroep;Mannen;60 tot 75 jaar;137
+2009;6e 10%-inkomensgroep;Mannen;75 jaar of ouder;162
+2009;6e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;39
+2009;6e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;6e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;4
+2009;6e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;10
+2009;6e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;39
+2009;6e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;112
+2009;6e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;164
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;38
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;12
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;45
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;113
+2009;7e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;159
+2009;7e 10%-inkomensgroep;Mannen;Totaal leeftijd;41
+2009;7e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;7e 10%-inkomensgroep;Mannen;15 tot 30 jaar;3
+2009;7e 10%-inkomensgroep;Mannen;30 tot 45 jaar;13
+2009;7e 10%-inkomensgroep;Mannen;45 tot 60 jaar;53
+2009;7e 10%-inkomensgroep;Mannen;60 tot 75 jaar;123
+2009;7e 10%-inkomensgroep;Mannen;75 jaar of ouder;170
+2009;7e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;35
+2009;7e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;7e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2009;7e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;10
+2009;7e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;38
+2009;7e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;102
+2009;7e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;151
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;34
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;9
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;41
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;101
+2009;8e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;131
+2009;8e 10%-inkomensgroep;Mannen;Totaal leeftijd;38
+2009;8e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;8e 10%-inkomensgroep;Mannen;15 tot 30 jaar;4
+2009;8e 10%-inkomensgroep;Mannen;30 tot 45 jaar;10
+2009;8e 10%-inkomensgroep;Mannen;45 tot 60 jaar;48
+2009;8e 10%-inkomensgroep;Mannen;60 tot 75 jaar;112
+2009;8e 10%-inkomensgroep;Mannen;75 jaar of ouder;144
+2009;8e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;31
+2009;8e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;8e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2009;8e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;7
+2009;8e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;35
+2009;8e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;90
+2009;8e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;120
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;Totaal leeftijd;31
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;0 tot 15 jaar;1
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;30 tot 45 jaar;7
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;45 tot 60 jaar;34
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;60 tot 75 jaar;99
+2009;9e 10%-inkomensgroep;Totaal mannen en vrouwen;75 jaar of ouder;115
+2009;9e 10%-inkomensgroep;Mannen;Totaal leeftijd;36
+2009;9e 10%-inkomensgroep;Mannen;0 tot 15 jaar;.
+2009;9e 10%-inkomensgroep;Mannen;15 tot 30 jaar;3
+2009;9e 10%-inkomensgroep;Mannen;30 tot 45 jaar;10
+2009;9e 10%-inkomensgroep;Mannen;45 tot 60 jaar;43
+2009;9e 10%-inkomensgroep;Mannen;60 tot 75 jaar;111
+2009;9e 10%-inkomensgroep;Mannen;75 jaar of ouder;115
+2009;9e 10%-inkomensgroep;Vrouwen;Totaal leeftijd;26
+2009;9e 10%-inkomensgroep;Vrouwen;0 tot 15 jaar;.
+2009;9e 10%-inkomensgroep;Vrouwen;15 tot 30 jaar;3
+2009;9e 10%-inkomensgroep;Vrouwen;30 tot 45 jaar;5
+2009;9e 10%-inkomensgroep;Vrouwen;45 tot 60 jaar;24
+2009;9e 10%-inkomensgroep;Vrouwen;60 tot 75 jaar;84
+2009;9e 10%-inkomensgroep;Vrouwen;75 jaar of ouder;115
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;Totaal leeftijd;26
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;0 tot 15 jaar;.
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;15 tot 30 jaar;3
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;30 tot 45 jaar;4
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;45 tot 60 jaar;25
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;60 tot 75 jaar;74
+2009;10e 10%-inkomensgroep (hoog inkomen);Totaal mannen en vrouwen;75 jaar of ouder;118
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;Totaal leeftijd;32
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;0 tot 15 jaar;.
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;15 tot 30 jaar;3
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;30 tot 45 jaar;4
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;45 tot 60 jaar;34
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;60 tot 75 jaar;84
+2009;10e 10%-inkomensgroep (hoog inkomen);Mannen;75 jaar of ouder;145
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;Totaal leeftijd;20
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;0 tot 15 jaar;.
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;15 tot 30 jaar;.
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;30 tot 45 jaar;3
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;45 tot 60 jaar;16
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;60 tot 75 jaar;63
+2009;10e 10%-inkomensgroep (hoog inkomen);Vrouwen;75 jaar of ouder;92

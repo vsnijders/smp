@@ -51,7 +51,8 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "!=" . $meta[$var]['default'];
+      if (isset($meta[$var]['defaultnot']))
+        $where[] = $var . "!=" . $meta[$var]['defaultnot'];
     }
   }
   if (sizeof($measurevars)) {
@@ -96,7 +97,8 @@
     // in case of a new data row: copy values of id-variables to new row
     if (sizeof($data_row) == 0) {
       foreach ($idvars as $var) {
-        $data_row[$var] = $row[$var];
+        $level = intval($row[$var])-1;
+        $data_row[$var] = $meta[$var]['levels'][$level];
       }
     }
     // copy current measure value to new row

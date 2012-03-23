@@ -49,6 +49,26 @@
     <script type="text/javascript" src="js/cross.js"></script>
     <script type="text/javascript" src="js/gog.js"></script>
 
+    <style>
+
+.measurevar {
+  /*background : rgb(255, 211, 32);*/
+  background : rgb(255, 241, 132);
+}
+.measurevar:hover {
+  background : rgb(255, 211, 32);
+  color : black;
+}
+.idvar {
+  background : rgb(204, 237, 100);
+}
+.idvar:hover {
+  background : rgb(144, 207, 0);
+  color : black;
+}
+
+    </style>
+
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
@@ -89,8 +109,10 @@
           validated = validate_line(selection, variables);
         } 
         if (validated === true) {
+          <?php if (isset($_REQUEST['echo'])): ?>
           $("#graphtype").html("<b>" + graphtype + "</b>");
           $("#graphdata").load("ui_fetch.php?html=1", selection);
+          <?php endif; ?>
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             
 			mapping.refresh(data);
@@ -194,7 +216,7 @@
       });
 
       $(function() {
-        $("#bar").click();
+        $("#<?php echo $meta['default_graph']['type'];?>").click();
       });
 
     </script>
@@ -222,6 +244,25 @@
     </form>
 
 <?php
+  function print_variable($var, $meta) {
+    if (in_array($var, $meta['idvariables'])) {
+      echo "<li class=\"ui-state-default draggable collapseble idvar\" id=\"{$var}\">\n";
+      echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
+      echo $meta[$var]['longname'] . "\n";
+      echo "<div class=\"collapseblethingy\">\n";
+      echo "<form>\n";
+      $levelid = 1;
+      foreach($meta[$var]['levels'] as $level){
+	echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$levelid}\">{$level}</label><br>\n";
+	$levelid += 1;
+      }
+      echo "</form>\n</div>\n</li>\n";
+    } else {
+      echo "<li class=\"ui-state-default draggable collapseble measurevar\" id=\"{$var}\">\n";
+      echo $meta[$var]['longname'] . "\n</li>\n";
+    }
+  }
+
   $vars = array();
   foreach($charts as $chart => $variables) {
     foreach ($variables as $variable) {
@@ -229,11 +270,28 @@
       $vars[$variable][] = $chart;
     }
   }
+  $variables_used = array();
   foreach($vars as $variable => $charttypes) {
     $class = implode(" ", $charttypes);
     echo "<div class=\"plotvariable $class\">\n";
     echo "<h3>$variable</h3>\n";
     echo "<ul id=\"$variable\" class=\"connectedSortable\">\n";
+    // id variables
+    foreach ($meta['idvariables'] as $var) {
+      if (isset($meta['default_graph']) && isset($meta['default_graph'][$variable]) && 
+          $meta['default_graph'][$variable] == $var) {
+        print_variable($var, $meta);
+        $variables_used[] = $var;
+      }
+    }
+    // numeric variables
+    foreach ($meta['levels']['variable'] as $var) {
+      if (isset($meta['default_graph']) && isset($meta['default_graph'][$variable]) && 
+          $meta['default_graph'][$variable] == $var) {
+        print_variable($var, $meta);
+        $variables_used[] = $var;
+      }
+    }
     echo "</ul>\n";
     echo "</div>\n";
   }
@@ -244,20 +302,13 @@
 <?php
   // id variables
   foreach ($meta['idvariables'] as $var) {
-    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "<span class=\"ui-icon ui-icon-triangle-1-e collapse\"></span>\n";
-    echo $var . "\n";
-    echo "<div class=\"collapseblethingy\">\n";
-    echo "<form>\n";
-    foreach ($meta['levels'][$var] as $level) {
-      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
-    }
-    echo "</form>\n</div>\n</li>\n";
+    if (!in_array($var, $variables_used)) 
+      print_variable($var, $meta);
   }
   // numeric variables
   foreach ($meta['levels']['variable'] as $var) {
-    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "$var" . "\n</li>\n";
+    if (!in_array($var, $variables_used)) 
+      print_variable($var, $meta);
   }
 
 ?>
