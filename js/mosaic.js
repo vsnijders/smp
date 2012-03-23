@@ -41,6 +41,12 @@ function Mosaic() {
   this.xvar_ = undefined;
   this.yvar_ = undefined;
   this.vvar_ = "value";
+  this.mapping_ = undefined;
+}
+
+Mosaic.prototype.mapping = function(_) {
+  this.mapping_ = _;
+  return this;
 }
 
 Mosaic.prototype.width = function(width) {

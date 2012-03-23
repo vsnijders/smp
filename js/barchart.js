@@ -45,7 +45,9 @@ function draw_bar2(data, selection, variables, mapping) {
   }
 }
 
-function draw_bar(data, selection, variables, mapping) {
+function draw_bar(data, selection, variables, mapping, type) {
+ type = type || "bar";
+ 
  var graph = $(".graph");
  
  var width = graph.width();
@@ -79,9 +81,14 @@ function draw_bar(data, selection, variables, mapping) {
 	   for (var c = 0; c < data[r].length; c++){
 		  var col = row.append("td");
 		  var chart = col.append("svg").attr("class", "chart");
-		  var barchart = new Barchart;
-		  barchart.mapping(mapping);
-		  barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data[r][c]);
+		  var ct;
+		  if (type === "bar"){
+			  var ct = new Barchart;
+			  //TODO remove next line, will be taken care by mapping...
+			  ct.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]);
+		  }
+		  ct.mapping(mapping);
+		  ct.plot(chart, data[r][c]);
 	   }
 	}
 }

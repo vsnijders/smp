@@ -13,7 +13,7 @@
 
   $charts = array(
       'line' => array('x', 'y', 'colour', 'row', 'column'),
-      'bubble' => array('x', 'y', 'points', 'size', 'colour','row', 'column'),
+      'bubble' => array('x', 'y', 'size', 'colour','row', 'column'),
       'bar' => array('y', 'size', 'colour', 'row', 'column'),
       'mosaic' => array('x', 'y', 'colour', 'size','row', 'column')
     );
@@ -95,6 +95,8 @@
             
 			mapping.refresh(data);
 			
+			drawchart(data,selection, variables, mapping, graphtype);
+			/*
 			if (graphtype == "bar") {
               draw_bar(data, selection, variables, mapping);
             } else if (graphtype == "mosaic") {
@@ -106,6 +108,7 @@
             } else {
               d3.select(".chart").remove();
             }
+			*/
           })
         } else {
           $(".graph").html("<p>" + validated + "</p>");
@@ -136,7 +139,8 @@
           // only use the first variable in a category
           if (selection[category].length == 0){ 
 		     selection[category].push(variable);
-			 mapping.map()[category].variable(variable, variables[variable]);
+			 mapping.map()[category]
+			    .variable(variable, variables[variable]);
 		  }
         });
         // update the filter

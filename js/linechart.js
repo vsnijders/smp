@@ -43,6 +43,12 @@ function LineChart() {
   this.xvar_ = undefined;
   this.yvar_ = undefined;
   this.colourvar_ = undefined;
+  this.mapping_ = undefined;
+}
+
+LineChart.prototype.mapping = function(_) {
+  this.mapping_ = _;
+  return this;
 }
 
 LineChart.prototype.width = function(width) {

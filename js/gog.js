@@ -118,7 +118,7 @@ function Mapping(sel) {
    mapping.mapped = function(){
      var mapped = d3.entries(_map)
 	    .filter(function(v) v.value.variable() !== null)
-	    .map(function (v) v.key)
+	    .map(function(v) v.key)
 		;
 	 var m = {};
 	 mapped.forEach(function (v) {m[v] = _map[v].variable();})
