@@ -2,7 +2,7 @@
 table_info <- function(id) {
     data.frame(
         id = id,
-        name = "diabetes",
+        name = "diabetes_medicine",
         longname = "",
         description = "",
         url = ""

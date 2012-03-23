@@ -203,7 +203,59 @@
           'size' => 'aantal_patienten'
         )
     );
-
+  // DIABETES MEDICINE
+  $META['diabetes_medicine'] = array(
+      'longname' => 'Personen met verstrekte geneesmiddelen voor diabetes; herkomst en generatie',
+      'description' => 'Deze tabel geeft het aantal en het percentage personen aan wie gedurende ' .
+          'het verslagjaar geneesmiddelen zijn verstrekt die vergoed worden uit de ' .
+          'verplichte basisverzekering voor geneeskundige zorg. ' .
+          'Geneesmiddelen die aan opgenomen personen in ziekenhuizen (ziekenhuiszorg) ' .
+          'en verpleeghuizen (AWBZ) worden verstrekt, zijn niet inbegrepen. Verstrekte ' .
+          'geneesmiddelen aan personen in verzorgingshuizen zijn wel inbegrepen. ' . 
+          'De cijfers worden uitgesplitst naar geneesmiddelengroep, herkomst, ' .
+          'generatie, leeftijd en geslacht. ',
+      'url' => 'http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=81072NED&D1=a&D2=a&D3=a&D4=a&D5=35&D6=a&HDR=T&STB=G4,G5,G3,G1,G2&FILE=~/Download/Geneesmiddelen,_herk_230312100131.csv&VW=T',
+      'variables' => array("jaar", "herkomst", "geslacht", "leeftijd", "variable"),
+      'idvariables' => array("jaar", "herkomst", "geslacht", "leeftijd"),
+      'jaar' => array(
+          'longname' => 'Jaar',
+          'default' => 4,
+          'levels' => array('2006', '2007', '2008', '2009')
+        ),
+      'herkomst' => array(
+          'longname' => 'Herkomst en generatie',
+          'default' => 1,
+          'defaultnot' => 1,
+          'levels' => array("Totaal", "Autochtoon", "Totaal allochtoon",
+              "Westerse allochtoon", "Totaal niet-westerse allochtoon", "Marokko",
+              "Turkije", "Suriname", "(voormalige) Nederlandse Antillen, Aruba",
+              "Overig niet-westers", "Allochtoon, 1e generatie", "Allochtoon, 2e generatie")
+        ),
+      'geslacht' => array(
+          'longname' => 'Geslacht',
+          'default' => 3,
+          'defaultnot' => 3,
+          'levels' => array('Man', 'Vrouw', 'Totaal')
+        ),
+      'leeftijd' => array(
+          'longname' => 'Leeftijd',
+          'default' => 9,
+          'defaultnot' => 9,
+          'levels' => array("0 tot 15 jaar", "15 tot 25 jaar", "25 tot 35 jaar", "35 tot 45 jaar",
+              "45 tot 55 jaar", "55 tot 65 jaar", "65 tot 75 jaar", "75 of ouder", "Totaal")
+        ),
+      'aantal'=> array(
+          'longname' => 'Aantal personen met verstrekte geneesmiddel'
+        ),
+      'percentage'=> array(
+          'longname' => 'Percentage personen met verstrekte geneesmiddel'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'y' => 'herkomst',
+          'size' => 'percentage'
+        )
+    );
   
   function get_meta($pdo, $tableid) {
     // get tablename

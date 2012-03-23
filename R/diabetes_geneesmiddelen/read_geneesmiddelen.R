@@ -2,7 +2,7 @@
 
 read_geneesmiddelen <- function() {
 
-    data <- read.csv2("diabetes_geneesmiddelen/geneesmiddelen_diabetes.csv")
+    data <- read.csv2("diabetes_geneesmiddelen/geneesmiddelen_diabetes.csv", dec='.')
 
 
     # remove columns with medication type (which is the same for all records)
