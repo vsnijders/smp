@@ -162,12 +162,10 @@ div.categorical ul {
           $("#graphdata").load("ui_fetch.php?html=1", selection);
           <?php endif; ?>
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
-            
-			mapping.refresh(data);
-			
-			drawchart(data,selection, variables, mapping, graphtype);
-			/*
-			if (graphtype == "bar") {
+            mapping.refresh(data);
+            drawchart(data,selection, variables, mapping, graphtype);
+            /*
+            if (graphtype == "bar") {
               draw_bar(data, selection, variables, mapping);
             } else if (graphtype == "mosaic") {
               draw_mosaic(data, selection, variables);
@@ -177,8 +175,7 @@ div.categorical ul {
               draw_line(data, selection, variables);
             } else {
               d3.select(".chart").remove();
-            }
-			*/
+            } */
           })
         } else {
           $(".graph").html("<p>" + validated + "</p>");

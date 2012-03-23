@@ -40,8 +40,9 @@
         ),
       'default_graph' => array(
           'type' => 'line',
-          'x' => 'year',
-          'y' => 'prognosis'
+          'xcat' => 'year',
+          'ynum' => 'prognosis',
+          'colour' => 'gender'
         )
     );
   // BEDRIJVENDYNAMIEK
@@ -98,7 +99,7 @@
         ),
       'default_graph' => array(
           'type' => 'bar',
-          'y' => 'sbi',
+          'ycat' => 'sbi',
           'size' => 'relatieve_verandering'
         )
     );
@@ -152,8 +153,8 @@
         ),
       'default_graph' => array(
           'type' => 'mosaic',
-          'y' => 'position_end',
-          'x' => 'position_begin',
+          'ycat' => 'position_end',
+          'xcat' => 'position_begin',
           'size' => 'number_of_persons'
         )
     );
@@ -199,7 +200,7 @@
         ),
       'default_graph' => array(
           'type' => 'bar',
-          'y' => 'jaar',
+          'ycat' => 'jaar',
           'size' => 'aantal_patienten'
         )
     );
@@ -252,7 +253,7 @@
         ),
       'default_graph' => array(
           'type' => 'bar',
-          'y' => 'herkomst',
+          'ycat' => 'herkomst',
           'size' => 'percentage'
         )
     );
