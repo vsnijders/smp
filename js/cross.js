@@ -32,6 +32,10 @@ function cross(data, row, col, callback){
           };   
 }
 
+function drawchart(data, type, selection, mapping){
+
+}
+
 function smallmul(chart, crosseddata, charttype){
   var row = crosseddata.row;
   var col = crosseddata.col;

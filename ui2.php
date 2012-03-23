@@ -12,10 +12,10 @@
   $meta = get_meta($pdo, $id);
 
   $charts = array(
-      'bar' => array('y', 'size', 'row', 'column'),
-      'mosaic' => array('x', 'y', 'size','row', 'column'),
       'line' => array('x', 'y', 'colour', 'row', 'column'),
-      'bubble' => array('x', 'y', 'points', 'size', 'colour','row', 'column')
+      'bubble' => array('x', 'y', 'points', 'size', 'colour','row', 'column'),
+      'bar' => array('y', 'size', 'colour', 'row', 'column'),
+      'mosaic' => array('x', 'y', 'colour', 'size','row', 'column')
     );
 ?>
 <html>
@@ -59,8 +59,7 @@
           colour: "type"
         };
         
-      var scale = {
-      }
+      var mapping = Mapping();
 
 <?php
   echo "      var variables = {";
@@ -93,8 +92,11 @@
           $("#graphtype").html("<b>" + graphtype + "</b>");
           $("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
-            if (graphtype == "bar") {
-              draw_bar(data, selection, variables);
+            
+			mapping.refresh(data);
+			
+			if (graphtype == "bar") {
+              draw_bar(data, selection, variables, mapping);
             } else if (graphtype == "mosaic") {
               draw_mosaic(data, selection, variables);
             } else if (graphtype == "bubble") {
@@ -132,8 +134,10 @@
           var variable = this.id;
           var category = this.parentNode.id;
           // only use the first variable in a category
-          if (selection[category].length == 0) 
-            selection[category].push(variable);
+          if (selection[category].length == 0){ 
+		     selection[category].push(variable);
+			 mapping.map()[category].variable(variable, variables[variable]);
+		  }
         });
         // update the filter
         selection.filter = {}
