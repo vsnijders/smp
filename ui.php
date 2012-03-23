@@ -12,10 +12,10 @@
   $meta = get_meta($pdo, $id);
 
   $charts = array(
-      'bar' => array('y', 'size'),
-      'mosaic' => array('x', 'y', 'size'),
-      'line' => array('x', 'y', 'colour'),
-      'bubble' => array('x', 'y', 'points', 'size', 'colour')
+      'line' => array('x', 'y', 'colour', 'row', 'column'),
+      'bubble' => array('x', 'y', 'size', 'colour','row', 'column'),
+      'bar' => array('y', 'size', 'colour', 'row', 'column'),
+      'mosaic' => array('x', 'y', 'colour', 'size','row', 'column')
     );
 ?>
 <html>
@@ -46,15 +46,20 @@
     <script type="text/javascript" src="js/mosaic.js"></script>
     <script type="text/javascript" src="js/bubble.js"></script>
     <script type="text/javascript" src="js/linechart.js"></script>
-
     <script type="text/javascript" src="js/cross.js"></script>
+    <script type="text/javascript" src="js/gog.js"></script>
 
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
           id : <?php echo $id;?>,
-          filter : {}
+          filter : {},
+          x : "jaar",
+          y : "aantal",
+          colour: "type"
         };
+        
+      var mapping = Mapping();
 
 <?php
   echo "      var variables = {";
@@ -87,8 +92,13 @@
           $("#graphtype").html("<b>" + graphtype + "</b>");
           $("#graphdata").load("ui_fetch.php?html=1", selection);
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
-            if (graphtype == "bar") {
-              draw_bar(data, selection, variables);
+            
+			mapping.refresh(data);
+			
+			drawchart(data,selection, variables, mapping, graphtype);
+			/*
+			if (graphtype == "bar") {
+              draw_bar(data, selection, variables, mapping);
             } else if (graphtype == "mosaic") {
               draw_mosaic(data, selection, variables);
             } else if (graphtype == "bubble") {
@@ -98,6 +108,7 @@
             } else {
               d3.select(".chart").remove();
             }
+			*/
           })
         } else {
           $(".graph").html("<p>" + validated + "</p>");
@@ -126,8 +137,11 @@
           var variable = this.id;
           var category = this.parentNode.id;
           // only use the first variable in a category
-          if (selection[category].length == 0) 
-            selection[category].push(variable);
+          if (selection[category].length == 0){ 
+		     selection[category].push(variable);
+			 mapping.map()[category]
+			    .variable(variable, variables[variable]);
+		  }
         });
         // update the filter
         selection.filter = {}
@@ -231,21 +245,19 @@
   // id variables
   foreach ($meta['idvariables'] as $var) {
     echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
-    echo $meta[$var]['longname'] . "\n";
+    echo "<span class=\"ui-icon ui-icon-triangle-1-e collapse\"></span>\n";
+    echo $var . "\n";
     echo "<div class=\"collapseblethingy\">\n";
     echo "<form>\n";
-    $levelid = 1;
-    foreach($meta[$var]['levels'] as $level){
-      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$levelid}\">{$level}</label><br>\n";
-      $levelid += 1;
+    foreach ($meta['levels'][$var] as $level) {
+      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
     }
     echo "</form>\n</div>\n</li>\n";
   }
   // numeric variables
   foreach ($meta['levels']['variable'] as $var) {
     echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
-    echo $var . "\n</li>\n";
+    echo "$var" . "\n</li>\n";
   }
 
 ?>
@@ -256,12 +268,13 @@
   <div id="resizable" class="ui-widget-content">
   <div class="graph">
   </div>
+  <div class="graph2">
+  </div>
   </div>
 
   <div id="graphtype">
   </div>
   <div id="graphdata">
-  </div>
   </div>
 
 
