@@ -18,11 +18,30 @@ function validate_bar(selection, variables) {
 function draw_bar(data, selection, variables) {
   if (validate_bar(selection, variables)) {
     $('.graph').children().remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var barchart = new Barchart;
-    var width = $('.graph').width()-10;
-    var height = $('.graph').height()-10;
-    barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data);
+    var crossed = cross(data, selection.row, selection.column);
+
+    var data = crossed.data;
+    
+    var smallmul = d3.select(".graph").append("table").attr("class", "chart");
+    if (crossed.col.length) {
+       var colhead = smallmul.append("tr");
+       crossed.col.forEach(function(d) {colhead.append("th").text(d)});
+    }
+
+    for (var r = 0; r < data.length; r++) {
+       var row = smallmul.append("tr");
+       if (crossed.row.length){
+          row.append("th").text(crossed.row[r]);
+       }
+       for (var c = 0; c < data[r].length; c++){
+          var col = row.append("td");
+          var chart = col.append("svg").attr("class", "chart");
+          var barchart = new Barchart;
+          var width = ($('.graph').width()/data[r].length)-10;
+          var height = ($('.graph').height()/data.length)-10;
+          barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data[r][c]);
+       }
+    }
   }
 }
 
@@ -59,6 +78,8 @@ Barchart.prototype.numeric = function(numeric) {
 
 Barchart.prototype.plot = function(chart, data) {
   // only plot if variables are set
+  xformat = d3.format("n");
+  
   if (!this.numeric_ | !this.categorical_) return;
   // settings
   var bar_height = 12;
@@ -76,10 +97,13 @@ Barchart.prototype.plot = function(chart, data) {
   if (xmin > 0) xmin = 0;
   var xmax = d3.max(data, function(d) { return Number(d[numeric]);});
   if (xmax < 0) xmax = 0;
+  
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding])
+  
   var yscale = d3.scale.ordinal()
     .domain(data.map(function(d) { return d[categorical];}))
     .rangeBands([padding_top, this.height_-padding]);
+    
   // add bars
   chart.selectAll("rect").data(data).enter().append("rect")
       .attr("x", function(d) { return Math.min(xscale(0), xscale(d[numeric])); })
@@ -113,6 +137,7 @@ Barchart.prototype.plot = function(chart, data) {
       .attr("class", "rule")
       .attr("x", xscale).attr("y", padding_top).attr("dy", -3)
       .attr("text-anchor", "middle").text(String);
+  console.log("data:", data);
   // add labels
   chart.selectAll(".labels").data(data)
     .enter().append("text").attr("class", "label")

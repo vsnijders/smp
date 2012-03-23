@@ -6,8 +6,8 @@ function cross(data, row, col, callback){
    if (vars.length == 0)
       return {row: "", col: "", data: [[data]]};
 	  
-   var rowcat = row.map(function(v){return function(d){return d[v]}});
-   var colcat = col.map(function(v){return function(d){return d[v]}});
+   var rowcat = (row.length === 0)? [function(d){return 0;}] : row.map(function(v){return function(d){return d[v]}});
+   var colcat = (col.length === 0)? [function(d){return 0;}] : col.map(function(v){return function(d){return d[v]}});
    
    var rows = d3.keys(d3.nest().key(rowcat[0]).map(data));
    var cols = d3.keys(d3.nest().key(colcat[0]).map(data));
@@ -26,9 +26,9 @@ function cross(data, row, col, callback){
    });
    //console.log("cross", cross);
    //console.log("d", d);
-   return { row: rows
-          , col: cols
-		  , data: d
+   return { row: (row.length === 0)? [] : rows
+          , col: (col.length === 0)? [] : cols
+		    , data: d
           };   
 }
 
@@ -45,10 +45,10 @@ function smallmul(chart, crosseddata, charttype){
 	   .enter()
 	   .append("td")
 	   .append("svg")
-	   .text(BarChart(this, data));
+	   .text(LineChart(this, data));
 }
 
-var data = [ {a: "a1", b: "b1"}
+/*var data = [ {a: "a1", b: "b1"}
            , {a: "a1", b: "b2"}
            , {a: "a4", b: "b1"}
            ];
@@ -56,5 +56,6 @@ var data = [ {a: "a1", b: "b1"}
 var vars = ["a", "b"];
 
 var d = cross(data, ["a"], ["b"]);
-smallmul(d3.select('.graph'), d, "line");
+smallmul(d3.select('.graph2'), d, "line");
 console.log(d);
+*/

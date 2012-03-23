@@ -73,7 +73,7 @@ div.menu h3 {
   padding: 0.2em; 
   padding-left: .8em; 
   font-size: 10px; 
-  height: 13px; 
+  /*height: 13px; */
 }
 .connectedSortable li span { 
   position: absolute; 
@@ -127,7 +127,7 @@ div#graphtype, div#graphdata {
   background : rgba(0,0,0, 0.5);
   color : white;
   z-index : 10;
-  position : relative;
+  /*position : relative;*/
   left : 235px;
   margin-top : -10px;
   cursor : auto; 
@@ -137,7 +137,7 @@ div#graphtype, div#graphdata {
   margin-right : 5pt;
 }
 .collapse {
-  position : relative;
+  /*position : relative;*/
   left : 240px;
   margin-top : -3px;
   cursor : pointer;
