@@ -17,18 +17,6 @@ function validate_mosaic(selection, variables) {
   }
 }
 
-function draw_mosaic(data, selection, variables) {
-  if (validate_mosaic(selection, variables)) {
-    $('.graph').children().remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var mosaic = new Mosaic;
-    var width = $('.graph').width()-10;
-    var height = $('.graph').height()-10;
-    mosaic.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0])
-      .vvar(selection.size[0]).plot(chart, data, selection);
-  }
-}
-
 
 // ============================================================================
 // ==== CLASS DEFINITION OF MOSAIC                                         ====
