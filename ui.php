@@ -15,9 +15,51 @@
       'line' => array('x', 'y', 'colour', 'row', 'column'),
       'bubble' => array('x', 'y', 'size', 'colour','row', 'column'),
       'bar' => array('y', 'size', 'row', 'column'),
-      'mosaic' => array('x', 'y', 'colour', 'size','row', 'column')
+      'mosaic' => array('x', 'y', 'size','row', 'column')
     );
-  $chart_variables = array('x', 'y', 'size', 'colour', 'row', 'column');
+  //$chart_variables = array('x', 'y', 'size', 'colour', 'row', 'column');
+  $chart_variables = array(
+      'xcat' => array(
+          'title' => 'x',
+          'type' => 'categorical',
+          'charts' => array('line', 'mosaic')
+        ),
+      'xnum' => array(
+          'title' => 'x',
+          'type' => 'numeric',
+          'charts' => array('bubble')
+        ),
+      'ycat' => array(
+          'title' => 'y',
+          'type' => 'categorical',
+          'charts' => array('bar', 'mosaic')
+        ),
+      'ynum' => array(
+          'title' => 'y',
+          'type' => 'numeric',
+          'charts' => array('line', 'bubble')
+        ),
+      'size' => array(
+          'title' => 'size',
+          'type' => 'numeric',
+          'charts' => array('bubble', 'bar', 'mosaic')
+        ),
+      'colour' => array(
+          'title' => 'colour',
+          'type' => 'categorical',
+          'charts' => array('line', 'bubble')
+        ),
+      'row' => array(
+          'title' => 'row',
+          'type' => 'categorical',
+          'charts' => array('line', 'bubble', 'bar', 'mosaic')
+        ),
+      'column' => array(
+          'title' => 'column',
+          'type' => 'categorical',
+          'charts' => array('line', 'bubble', 'bar', 'mosaic')
+        ),
+    );
 ?>
 <html>
   <head>
@@ -67,6 +109,14 @@
   background : rgb(144, 207, 0);
   color : black;
 }
+div.numeric ul {
+  border-top : solid 1px rgb(255, 211, 32);
+  border-bottom : solid 1px rgb(255, 211, 32);
+}
+div.categorical ul {
+  border-top : solid 1px rgb(144, 207, 0);
+  border-bottom : solid 1px rgb(144, 207, 0);
+}
 
     </style>
 
@@ -75,9 +125,6 @@
       var selection = {
           id : <?php echo $id;?>,
           filter : {},
-          x : "jaar",
-          y : "aantal",
-          colour: "type"
         };
         
       var mapping = Mapping();
@@ -264,25 +311,19 @@
     }
   }
 
-  $vars = array();
-  foreach ($chart_variables as $var) {
-    $vars[$var] = array();
-    foreach ($charts as $chart => $variables) {
-      if (in_array($var, $variables)) $vars[$var][] = $chart;
-    }
-  }
-  /*foreach($charts as $chart => $variables) {
-    foreach ($variables as $variable) {
-      if (!isset($vars[$variable])) $vars[$variable] = array();
-      $vars[$variable][] = $chart;
-    }
+  /*$vars = array();
+  foreach ($chart_variables as $var => $info) {
+    $vars[$var] = $info['charts'];
   }*/
+
   $variables_used = array();
-  foreach($vars as $variable => $charttypes) {
-    $class = implode(" ", $charttypes);
-    echo "<div class=\"plotvariable $class\">\n";
-    echo "<h3>$variable</h3>\n";
-    echo "<ul id=\"$variable\" class=\"connectedSortable\">\n";
+  //foreach($vars as $variable => $charttypes) {
+  foreach($chart_variables as $variable => $info) {
+    $class = implode(" ", $info['charts']);
+    echo "<div class=\"plotvariable $class {$info['type']}\">\n";
+    echo "<h3>{$info['title']}</h3>\n";
+    echo "<ul id=\"{$info['title']}\" class=\"connectedSortable\">\n";
+    //echo "<ul id=\"{$variable}\" class=\"connectedSortable\">\n";
     // id variables
     foreach ($meta['idvariables'] as $var) {
       if (isset($meta['default_graph']) && isset($meta['default_graph'][$variable]) && 
