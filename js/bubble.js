@@ -9,11 +9,6 @@ function validate_bubble(selection, variables) {
       return "x should be a numerical variable; currently it is a categorical variable";
     if (variables[selection.y[0]] != "numerical") 
       return "y should be a numerical variable; currently it is a categorical variable";
-<<<<<<< HEAD
-=======
-    if (variables[selection.colour[0]] != "categorical") 
-      return "colour should be a categorical variable; currently it is a numerical variable";
->>>>>>> d7064607a8aec9141dd85a3d94c30b5fee7e8f84
     if (selection.size !== undefined && selection.size.length > 0 &&
       variables[selection.size[0]] != "numerical") 
       return "size should be a numerical variable; currently it is a categorical variable";
@@ -24,20 +19,6 @@ function validate_bubble(selection, variables) {
     return false;
   }
 }
-
-function draw_bubble(data, selection, variables) {
-  if (validate_bubble(selection, variables)) {
-    $('.graph').children().remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var bubble = new Bubble;
-    var width = $('.graph').width()-10;
-    var height = $('.graph').height()-10;
-    bubble.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0])
-      .sizevar(selection.size[0]).colourvar(selection.colour[0])
-      .plot(chart, data);
-  }
-}
-
 
 // ============================================================================
 // ==== CLASS DEFINITION OF BUBBLE                                         ====

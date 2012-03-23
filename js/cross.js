@@ -81,8 +81,7 @@ function drawchart(data, selection, variables, mapping, type) {
 				.xvar(selection.x[0])
 				.yvar(selection.y[0])
                 .sizevar(selection.size[0])
-				.colourvar(selection.colour[0])
-                .pointsvar(selection.points[0]);
+				.colourvar(selection.colour[0]);
 		  } else if (type === "line"){
 				var ct = linechart = new LineChart;
 				linechart
@@ -101,22 +100,6 @@ function drawchart(data, selection, variables, mapping, type) {
 		  ct.plot(chart, data[r][c]);
 	   }
 	}
-}
-
-function smallmul(chart, crosseddata, charttype){
-  var row = crosseddata.row;
-  var col = crosseddata.col;
-  var data = crosseddata.data;
-  
-  var table = chart.append("table");
-  table.selectAll("tr").data(data)
-     .enter()
-	 .append("tr")
-	 .selectAll("td").data(data)
-	   .enter()
-	   .append("td")
-	   .append("svg")
-	   .text(LineChart(this, data));
 }
 
 /*var data = [ {a: "a1", b: "b1"}

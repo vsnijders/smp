@@ -212,7 +212,7 @@
           stop: function(event, ui) { 
             redraw_graph(); 
           }
-        });
+        }).width("90%");
       });
 
       $(function() {
@@ -318,8 +318,6 @@
   <div class="content">
   <div id="resizable" class="ui-widget-content">
   <div class="graph">
-  </div>
-  <div class="graph2">
   </div>
   </div>
 
