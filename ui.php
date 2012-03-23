@@ -14,9 +14,10 @@
   $charts = array(
       'line' => array('x', 'y', 'colour', 'row', 'column'),
       'bubble' => array('x', 'y', 'size', 'colour','row', 'column'),
-      'bar' => array('y', 'size', 'colour', 'row', 'column'),
+      'bar' => array('y', 'size', 'row', 'column'),
       'mosaic' => array('x', 'y', 'colour', 'size','row', 'column')
     );
+  $chart_variables = array('x', 'y', 'size', 'colour', 'row', 'column');
 ?>
 <html>
   <head>
@@ -264,12 +265,18 @@
   }
 
   $vars = array();
-  foreach($charts as $chart => $variables) {
+  foreach ($chart_variables as $var) {
+    $vars[$var] = array();
+    foreach ($charts as $chart => $variables) {
+      if (in_array($var, $variables)) $vars[$var][] = $chart;
+    }
+  }
+  /*foreach($charts as $chart => $variables) {
     foreach ($variables as $variable) {
       if (!isset($vars[$variable])) $vars[$variable] = array();
       $vars[$variable][] = $chart;
     }
-  }
+  }*/
   $variables_used = array();
   foreach($vars as $variable => $charttypes) {
     $class = implode(" ", $charttypes);
