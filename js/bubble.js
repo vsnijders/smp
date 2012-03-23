@@ -2,15 +2,18 @@
 function validate_bubble(selection, variables) {
   // check if required variables are present
   if (selection.x !== undefined && selection.x.length > 0 && 
-    selection.y !== undefined && selection.y.length > 0 &&
-    selection.colour !== undefined && selection.colour.length > 0) {
+    selection.y !== undefined && selection.y.length > 0) 
+  {
     // check if variables are correct type
     if (variables[selection.x[0]] != "numerical") 
       return "x should be a numerical variable; currently it is a categorical variable";
     if (variables[selection.y[0]] != "numerical") 
       return "y should be a numerical variable; currently it is a categorical variable";
+<<<<<<< HEAD
+=======
     if (variables[selection.colour[0]] != "categorical") 
       return "colour should be a categorical variable; currently it is a numerical variable";
+>>>>>>> d7064607a8aec9141dd85a3d94c30b5fee7e8f84
     if (selection.size !== undefined && selection.size.length > 0 &&
       variables[selection.size[0]] != "numerical") 
       return "size should be a numerical variable; currently it is a categorical variable";
@@ -47,6 +50,12 @@ function Bubble() {
   this.yvar_ = undefined;
   this.sizevar_ = undefined;
   this.colourvar_ = undefined;
+  this.mapping_ = undefined;
+}
+
+Bubble.prototype.mapping = function(mapping) {
+  this.mapping_ = mapping;
+  return this;
 }
 
 Bubble.prototype.width = function(width) {
@@ -134,7 +143,8 @@ Bubble.prototype.plot = function(chart, data) {
     html: true,
     title: function() {
       var d = this.__data__;
-      var tip = d[colourvar];
+      var tip = "";
+      if (colourvar !== undefined) tip += ' ' + d[colourvar];
       tip += ': ';
       tip += xvar + ' = ' + d[xvar] + ', ' + yvar + ' = ' + d[yvar];
       if (sizevar !== undefined) tip += ', ' + sizevar + ' = ' + d[sizevar];

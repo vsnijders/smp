@@ -1,5 +1,4 @@
 
-
 function validate_bar(selection, variables) {
   // check if required variables are present
   if (selection.y !== undefined && selection.y.length > 0 && 
@@ -15,11 +14,11 @@ function validate_bar(selection, variables) {
   }
 }
 
-function draw_bar(data, selection, variables) {
+function draw_bar2(data, selection, variables, mapping) {
   if (validate_bar(selection, variables)) {
     $('.graph').children().remove();
-    var crossed = cross(data, selection.row, selection.column);
-
+    
+	var crossed = cross(data, selection.row, selection.column);
     var data = crossed.data;
     
     var smallmul = d3.select(".graph").append("table").attr("class", "chart");
@@ -39,10 +38,59 @@ function draw_bar(data, selection, variables) {
           var barchart = new Barchart;
           var width = ($('.graph').width()/data[r].length)-10;
           var height = ($('.graph').height()/data.length)-10;
+		  barchart.mapping(mapping);
           barchart.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]).plot(chart, data[r][c]);
        }
     }
   }
+}
+
+function draw_bar(data, selection, variables, mapping, type) {
+ type = type || "bar";
+ 
+ var graph = $(".graph");
+ 
+ var width = graph.width();
+ var height = graph.height();
+ 
+ graph = d3.select(graph[0]);
+ 
+ //clear the graph
+ graph.html("");  
+ 
+ var crossed = cross(data, selection.row, selection.column);
+ var data = crossed.data;
+ 
+ width = (width/data[0].length) -10;
+ height = (height/data.length) - 10;
+ 
+ mapping.width(width);
+ mapping.height(height);
+    
+ var smallmul = graph.append("table").attr("class", "smallmultiple");
+	if (crossed.col.length) {
+	   var colhead = smallmul.append("tr");
+	   crossed.col.forEach(function(d) {colhead.append("th").text(d)});
+	}
+
+	for (var r = 0; r < data.length; r++) {
+	   var row = smallmul.append("tr");
+	   if (crossed.row.length){
+		  row.append("th").text(crossed.row[r]);
+	   }
+	   for (var c = 0; c < data[r].length; c++){
+		  var col = row.append("td");
+		  var chart = col.append("svg").attr("class", "chart");
+		  var ct;
+		  if (type === "bar"){
+			  var ct = new Barchart;
+			  //TODO remove next line, will be taken care by mapping...
+			  ct.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]);
+		  }
+		  ct.mapping(mapping);
+		  ct.plot(chart, data[r][c]);
+	   }
+	}
 }
 
 // ============================================================================
@@ -54,6 +102,12 @@ function Barchart() {
   this.height_ = undefined;
   this.categorical_ = undefined;
   this.numeric_ = undefined;
+  this.mapping_ = Mapping();
+}
+
+Barchart.prototype.mapping = function(mapping) {
+  this.mapping_ = mapping;
+  return this;
 }
 
 Barchart.prototype.width = function(width) {
@@ -80,7 +134,11 @@ Barchart.prototype.plot = function(chart, data) {
   // only plot if variables are set
   xformat = d3.format("n");
   
+  var map = this.mapping_.map();
+  //console.log(map);
+  
   if (!this.numeric_ | !this.categorical_) return;
+  
   // settings
   var bar_height = 12;
   var padding_top = 15;
@@ -91,19 +149,30 @@ Barchart.prototype.plot = function(chart, data) {
   // set size of canvas
   if (this.width_ === undefined) this.width(400);
   if (this.height_ == undefined) this.height(data.length*bar_height + padding_top + padding);
+  
   chart.attr("width", this.width_).attr("height", this.height_);
+  
   // create scales
+  var sizedomain = map.size.scale.domain();
+  sizedomain[0] = (sizedomain[0] > 0)? 0 : sizedomain[0];
+  sizedomain[1] = (sizedomain[1] < 0)? 0 : sizedomain[1];
+  map.size.scale.domain(sizedomain);
+    
   var xmin = d3.min(data, function(d) { return Number(d[numeric]);});
   if (xmin > 0) xmin = 0;
   var xmax = d3.max(data, function(d) { return Number(d[numeric]);});
   if (xmax < 0) xmax = 0;
   
-  var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding])
+  var xscale = map.size.scale;
+  console.log(xscale.range());
+  /*var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding])
+  */
   
-  var yscale = d3.scale.ordinal()
+  var yscale = map.y.scale.rangeBands([padding_top, this.height_-padding]); 
+  /*d3.scale.ordinal()
     .domain(data.map(function(d) { return d[categorical];}))
     .rangeBands([padding_top, this.height_-padding]);
-    
+  */
   // add bars
   chart.selectAll("rect").data(data).enter().append("rect")
       .attr("x", function(d) { return Math.min(xscale(0), xscale(d[numeric])); })
@@ -120,6 +189,7 @@ Barchart.prototype.plot = function(chart, data) {
       return d[categorical] + ': ' + numeric + ' = ' + d[numeric];
     }
   });
+  
   // add grid lines
   chart.selectAll("line").data(xscale.ticks(5))
     .enter().append("line")
@@ -136,8 +206,7 @@ Barchart.prototype.plot = function(chart, data) {
     .enter().append("text")
       .attr("class", "rule")
       .attr("x", xscale).attr("y", padding_top).attr("dy", -3)
-      .attr("text-anchor", "middle").text(String);
-  console.log("data:", data);
+      .attr("text-anchor", "middle").text(map.size.format);
   // add labels
   chart.selectAll(".labels").data(data)
     .enter().append("text").attr("class", "label")
