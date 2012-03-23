@@ -18,21 +18,6 @@ function validate_line(selection, variables) {
   }
 }
 
-function draw_line(data, selection, variables) {
-  if (validate_line(selection, variables)) {
-    $('.graph').children().remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var linechart = new LineChart;
-    var width = $('.graph').width()-10;
-    var height = $('.graph').height()-10;
-    linechart.width(width).height(height).xvar(selection.x[0]).yvar(selection.y[0]);
-    if (selection.colour != undefined) 
-      linechart.colourvar(selection.colour[0]);
-    linechart.plot(chart, data);
-  }
-}
-
-
 // ============================================================================
 // ==== CLASS DEFINITION OF LINECHART                                         ====
 // ============================================================================
@@ -78,6 +63,8 @@ LineChart.prototype.colourvar = function(colourvar) {
 
 LineChart.prototype.plot = function(chart, data) {
   // only plot if variables are set
+  var map = this.mapping_.map();
+  
   if (this.xvar_ === undefined | !this.yvar_=== undefined ) return;
   // settings
   var padding_left = 55;
@@ -86,17 +73,27 @@ LineChart.prototype.plot = function(chart, data) {
   var xvar = this.xvar_;
   var yvar = this.yvar_;
   var colourvar = this.colourvar_;
+  
   // set size of canvas
   if (this.width_ === undefined) this.width(400);
   if (this.height_ == undefined) this.height(400);
+  
   chart.attr("width", this.width_).attr("height", this.height_);
+  
   // create scales
+  /*var xscale = map.x.scale;
+  console.log(xscale);
+  */
+  
   var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
   var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
+  
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
+  
+  var yscale = map.y.scale;
   
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
@@ -114,7 +111,6 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("y1", yscale).attr("y2", yscale)
       .style("stroke", "rgba(0,0,0,0.3)");
   
-  //drawlines, TODO one line per color...
   var dl = d3.svg.line()
      .x(function(d){return xscale(d[xvar])})
      .y(function(d){return yscale(d[yvar])})
