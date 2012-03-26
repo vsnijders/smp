@@ -25,7 +25,7 @@
     <div id="navigation">
       <ul>
         <li><a href="index.php">Tables</a></li>
-        <li><a href="#">Help</a></li>
+        <li><a href="help/index.php">Help</a></li>
       </ul>
     </div>
   </div>
