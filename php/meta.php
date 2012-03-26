@@ -324,7 +324,7 @@
           'longname' => 'Percentage personen met ernstig overgewicht (2001-2009)'
         ),
       'aantalpatienten' => array(
-          'longname' => 'Aantal patiënten dat contact heeft gehad met huisarts (2002-2009)'
+          'longname' => 'Percentage personen dat contact heeft gehad met huisarts (2002-2009)'
         ),
       'default_graph' => array(
           'type' => 'bar',
