@@ -21,6 +21,14 @@
   <header>
     <h1><a href="index.php">StatMine</a></h1>
   </header>
+  <div id="navigation-container">
+    <div id="navigation">
+      <ul>
+        <li><a href="index.php">Tables</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </div>
+  </div>
 
   <article>
     <div class="menu">

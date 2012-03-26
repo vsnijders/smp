@@ -21,8 +21,10 @@ a {
 
 /* ========================== HEADER/FOOTER ======================== */
 header, footer {
-  background : rgb(120, 120, 120);
-  border-bottom : rgb(10, 10, 10);
+  /*background : rgb(120, 120, 120);*/
+  background : rgb(100, 100, 100);
+  /*border-bottom : 1px solid rgb(80, 80, 80);*/
+  border-bottom : 1px solid rgb(40, 40, 40);
   padding : 20px 10px;
   color : white;
 }
@@ -38,6 +40,50 @@ footer {
   clear : both;
 }
 
+/* ========================== MENU BAR TOP ========================= */
+#navigation-container
+{
+  /*background : steelblue;*/
+  background : rgb(80, 80, 80);
+  border-bottom : 1px solid rgb(120, 120, 120);
+  float: left;
+  width: 100%;
+}
+
+#navigation
+{
+  margin: 0px;
+  width: 100%;
+}
+
+#navigation ul
+{
+  margin: 0;
+  padding: 0;
+}
+
+#navigation ul li
+{
+  list-style-type: none;
+  display: inline;
+}
+
+#navigation li a
+{
+  display: block;
+  float: left;
+  padding: 5px 10px;
+  color : white;
+  font-variant : small-caps;
+  font-size : 120%;
+  border-right : 1px solid rgb(80, 80, 80);
+  border-right : 1px solid rgb(180, 180, 180);
+}
+
+#navigation li a:hover { 
+  background : #7eb5ff;
+  background : steelblue;
+}
 /* ========================== ARTICLE =============================== */
 article {
   float : left;
