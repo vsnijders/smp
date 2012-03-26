@@ -297,34 +297,34 @@
             "55 tot 65 jaar", "65 tot 75 jaar", "75 jaar of ouder", "Totaal")
         ),
       'aantalgeneesmiddel' => array(
-          'longname' => 'Aantal personen dat geneesmiddel voor diabetes gebruikt'
+          'longname' => 'Aantal personen dat geneesmiddel voor diabetes gebruikt (2006-2009)'
         ),
       'percentageneesmiddel' => array(
-          'longname' => 'Percentage personen dat geneesmiddel voor diabetes gebruikt'
+          'longname' => 'Percentage personen dat geneesmiddel voor diabetes gebruikt (2006-2009)'
         ),
       'suiker' => array(
-          'longname' => 'Percentage personen met suikerziekte'
+          'longname' => 'Percentage personen met suikerziekte (2001-2009)'
         ),
       'suiker1' => array(
-          'longname' => 'Percentage personen met suikerziekte type 1'
+          'longname' => 'Percentage personen met suikerziekte type 1 (2001-2009)'
         ),
       'suiker2' => array(
-          'longname' => 'Percentage personen met suikerziekte type 2'
+          'longname' => 'Percentage personen met suikerziekte type 2 (2001-2009)'
         ),
       'ondergewicht' => array(
-          'longname' => 'Percentage personen met ondergewicht'
+          'longname' => 'Percentage personen met ondergewicht (2001-2009)'
         ),
       'normaalgewicht' => array(
-          'longname' => 'Percentage personen met normaal gewicht'
+          'longname' => 'Percentage personen met normaal gewicht (2001-2009)'
         ),
       'matigovergewicht' => array(
-          'longname' => 'Percentage personen met matig overgewicht'
+          'longname' => 'Percentage personen met matig overgewicht (2001-2009)'
         ),
       'ernstigovergewicht' => array(
-          'longname' => 'Percentage personen met ernstig overgewicht'
+          'longname' => 'Percentage personen met ernstig overgewicht (2001-2009)'
         ),
       'aantalpatienten' => array(
-          'longname' => 'Aantal patiënten dat contact heeft gehad met huisarts'
+          'longname' => 'Aantal patiënten dat contact heeft gehad met huisarts (2002-2009)'
         ),
       'default_graph' => array(
           'type' => 'bar',
