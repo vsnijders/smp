@@ -70,8 +70,14 @@ Mosaic.prototype.plot = function(chart, data, selection) {
   var xvar = this.xvar_;
   var yvar = this.yvar_;
   var vvar = this.vvar_;
+  var colourvar = this.yvar_;
   // set size of canvas
   chart.attr("width", this.width_).attr("height", this.height_);
+  // create scales
+  var colourscale = undefined
+  if (colourvar !== undefined) {
+    colourscale = d3.scale.category10();
+  }
   // nest data
   var datan = d3.nest()
     .key(function(d){ return d[xvar]; }).entries(data)
@@ -100,7 +106,8 @@ Mosaic.prototype.plot = function(chart, data, selection) {
     chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
-      .attr("fill", "steelblue");
+      .attr("fill", function(d) { return colourvar === undefined ? 'steelblue' : colourscale(d[colourvar]);})
+      //.attr("fill", "steelblue");
     // add tooltip to rects
     $('rect').tipsy({
       gravity: 'w',
