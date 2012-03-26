@@ -160,12 +160,12 @@
     );
   // DIABETES
   $META['diabetes'] = array(
-      'longname' => 'Huisartspatiënten met diabetes',
+      'longname' => 'Personen met door de huisarts geregistreerde diagnose diabetes; inkomen',
       'description' => 'Deze tabel toont voor diabetes het aantal personen dat ' .
         'gedurende het verslagjaar een of meer zorgepisodes heeft gehad, geregistreerd ' . 
         'door de huisarts waar de persoon staat ingeschreven. De aantallen worden ' .
         'uitgedrukt per 1000 personen en uitgesplitst naar leeftijd, geslacht en inkomen.',
-      'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80577NED&VW=T',
+      'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80824NED&VW=T',
       'variables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd", "variable"),
       'idvariables' => array("jaar", "inkomensgroep", "geslacht", "leeftijd"),
       'jaar' => array(
