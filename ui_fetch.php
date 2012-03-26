@@ -94,6 +94,7 @@
   $data = array();
   $data_row = array();
   $i = 0;
+  $missing = false;
   while($row = $result->fetch(PDO::FETCH_ASSOC)) {
     // in case of a new data row: copy values of id-variables to new row
     if (sizeof($data_row) == 0) {
@@ -104,11 +105,13 @@
     }
     // copy current measure value to new row
     $data_row[$row['variable']] = $row['value'];
+    if (is_null($row['value'])) $missing = true;
     // if current database row is last for data row: copy data row to data
     // and start new row
     $i++;
     if ($i == sizeof($measurevars)) {
-      $data[] = $data_row;
+      if (!$missing) $data[] = $data_row;
+      $missing = false;
       $data_row = array();
       $i = 0;
     }
