@@ -195,6 +195,7 @@ div.categorical ul {
       });
 
       refresh_selection = function() {
+	    mapping.resetVariables();
         // update the selection itself
         $('.plotvariable ul').each(function() {
           var category = this.id;

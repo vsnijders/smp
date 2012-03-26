@@ -4,6 +4,7 @@ function Aes(scale){
      , value
      , variable = null
      , type
+	 , astype
      ;
       
    var aes = { scale : scale
@@ -22,6 +23,14 @@ function Aes(scale){
    function dateValue(d) {
       return format.parse(d[variable]);
    };
+   
+   function scaledValue(d) {
+      return scale(value(d));
+   }
+   
+   function labelValue(d) {
+      return variable + ": " + format(value(d));
+   }
 
    aes.refresh = function(data){
       if (variable === null){
@@ -38,8 +47,34 @@ function Aes(scale){
       aes.format = format;
       aes.scale = scale;
 	  aes.value = value;
+      aes.scaledValue = scaledValue;
+      aes.labelValue = labelValue;
       
       return aes;
+   }
+   
+   //note that scaletype doesn't have to match var type (that is by design)
+   aes.setScaleType = function(_type){
+      
+	  _type = _type || type;
+	  
+	  var rg = scale.range();
+      
+      if (_type === "numerical"){
+         scale = d3.scale.linear().range(rg);
+         format = d3.format("n");
+         value = numValue;
+         
+      } else if (_type === "time"){
+         scale = d3.scale.linear().range(rg);
+         format = d3.time.format("Y");
+         value = dateValue;
+      } else {
+         scale = d3.scale.ordinal().range(rg);   
+         format = String;
+         value = stringValue;
+      }
+      return aes;      
    }
    
    aes.variable = function( _ , _type) {
@@ -49,23 +84,8 @@ function Aes(scale){
       variable = _ ;
 	  
       type = _type || "categorical";
-      var rg = scale.range();
-      
-      if (type === "numerical"){
-         scale = d3.scale.linear().range(rg);
-         format = d3.format("n");
-         value = numValue;
-         
-      } else if (type === "time"){
-         scale = d3.scale.linear().range(rg);
-         format = d3.time.format("Y");
-         value = dateValue;
-      } else {
-         scale = d3.scale.ordinal().range(rg);   
-         format = String;
-         value = stringValue;
-      }
-      return aes;
+	  
+	  return aes.setScaleType(type);	  
    }   
    return aes;
 }
@@ -75,6 +95,9 @@ function Mapping(sel) {
    var _width = _height = 400;
    
    var _padding = 5;
+   var _paddingBottom = 15;
+   var _paddingTop = 15;
+   var _paddingLeft = 25;
    
    var _map = {
 	  x : Aes(d3.scale.linear()),
@@ -92,8 +115,8 @@ function Mapping(sel) {
 	     return _width;
 	  }  
 	  _width = _;
-	  _map.x.scale.range([0 + _padding, _width - _padding]);
-	  _map.size.scale.range([0 + _padding, _width - _padding]);
+	  _map.x.scale.range([0 + _paddingLeft, _width - _padding]);
+	  _map.size.scale.range([0 + _paddingLeft, _width - _padding]);
 	  return mapping;
    }
    
@@ -107,7 +130,7 @@ function Mapping(sel) {
 	     return _height;
 	  }  
 	  _height = _;
-	  _map.y.scale.range([0 + _padding,_height - _padding]);
+	  _map.y.scale.range([_height - _paddingBottom, 0 + _paddingTop]);
 	  return mapping;
    }
    
@@ -123,6 +146,18 @@ function Mapping(sel) {
 	 var m = {};
 	 mapped.forEach(function (v) {m[v] = _map[v].variable();})
 	 return m;
+   }
+   
+   mapping.resetVariables = function(){
+      d3.values(_map).forEach(function(a){a.variable(null);});
+   }
+   
+   mapping.toLabel = function(d){
+   var s = d3.entries(_map)
+   	  .filter(function(v) v.value.variable() !== null)
+	  .map(function(v) { return _map[v.key].labelValue(d)})
+	  ;
+	 return s.join(", ");
    }
    
    return mapping;

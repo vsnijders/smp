@@ -78,7 +78,7 @@ LineChart.prototype.plot = function(chart, data) {
   if (this.width_ === undefined) this.width(400);
   if (this.height_ == undefined) this.height(400);
   
-  chart.attr("width", this.width_).attr("height", this.height_);
+  chart.attr("width", this.mapping_.width()).attr("height", this.mapping_.height());
   
   // create scales
   /*var xscale = map.x.scale;
@@ -93,7 +93,7 @@ LineChart.prototype.plot = function(chart, data) {
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
   
-  var yscale = map.y.scale;
+  var yscale = map.y.scale.nice();
   
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
@@ -105,6 +105,7 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("x1", xscale).attr("x2", xscale)
       .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
       .style("stroke", "rgba(0,0,0,0.3)");
+	  
   chart.selectAll(".gridy").data(yscale.ticks(5))
     .enter().append("line").attr("class", "gridy")
       .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
@@ -115,8 +116,9 @@ LineChart.prototype.plot = function(chart, data) {
      .x(function(d){return xscale(d[xvar])})
      .y(function(d){return yscale(d[yvar])})
 	  ;
-     
+  
   coldata = (colourvar===undefined)? [data] : d3.values(d3.nest().key(function(d){return d[colourvar];}).map(data));
+  
   //console.log(coldata);
   var colgroup = chart.selectAll("g").data(coldata).enter().append("g");
   colgroup.append("path")
@@ -132,19 +134,29 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("r", 5)
       .attr("fill", function(d) { return (colourvar === undefined)? "steelblue" : colourscale(d[colourvar]);})
       .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5);
+
   // add tooltip to points
   $('circle').tipsy({
     gravity: 'w',
     html: true,
     title: function() {
       var d = this.__data__;
-      var tip = '';
-      if (colourvar !== undefined) tip += ' ' + d[colourvar];
-      tip += ': ';
-      tip += xvar + ' = ' + d[xvar] + ', ' + yvar + ' = ' + d[yvar];
-      return tip;
+	  return mapping.toLabel(d);
     }
   });
+  // add grid lines
+  chart.selectAll(".gridx").data(xscale.ticks(5))
+    .enter().append("line").attr("class", "gridx")
+      .attr("x1", xscale).attr("x2", xscale)
+      .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
+      .style("stroke", "rgba(0,0,0,0.3)");
+  chart.selectAll(".gridy").data(yscale.ticks(5))
+    .enter().append("line").attr("class", "gridy")
+      .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
+      .attr("y1", yscale).attr("y2", yscale)
+      .style("stroke", "rgba(0,0,0,0.3)");
+  
+  console.log(yscale.range());
   // add tickmarks
   chart.selectAll(".rulex").data(xscale.ticks(5))
     .enter().append("text").attr("class", "rulex")
@@ -153,7 +165,7 @@ LineChart.prototype.plot = function(chart, data) {
   chart.selectAll(".ruley").data(yscale.ticks(5))
     .enter().append("text").attr("class", "ruley")
       .attr("y", yscale).attr("x", padding_left-3).attr("dy", "0.35em")
-      .attr("text-anchor", "end").text(String);
+      .attr("text-anchor", "end").text(map.y.format);
 
 
 }
