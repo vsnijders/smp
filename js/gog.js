@@ -31,11 +31,11 @@ function Aes(scale){
    function labelValue(d) {
       return variable + ": " + format(value(d));
    }
-   
+      
    function setScaleType(_type){  
 	  _type = _type || type;
 	  
-	  var rg = scale.range();
+	  var rg = extent();
       
       if (_type === "numerical"){
          scale = d3.scale.linear().range(rg);
@@ -51,14 +51,27 @@ function Aes(scale){
          format = String;
          value = stringValue;
       }
+	  extent(rg);
       return aes;      
    }
+   
+   //extent function that "knows" if it should use rangeExtent or normal range
+   function extent(_){
+      if (!arguments.length){
+	     return (scale.rangeExtent || scale.range)()
+	  }
+      (scale.rangePoints || scale.range)(_);
+	  return aes;
+   }
+   
+   aes.extent = extent;
+
 
    aes.refresh = function(data){
       if (variable === null){
 	     return aes;
 	  }
-      scale.range(aes.scale.range());
+      extent(aes.extent());
       
       if (type === "categorical"){
          scale = scale.domain(data.map(value));
