@@ -73,7 +73,11 @@ Bubble.prototype.colourvar = function(colourvar) {
 
 Bubble.prototype.plot = function(chart, data) {
   // only plot if variables are set
+  var mapping = this.mapping_;
+  var map = mapping.map();
+  
   if (this.xvar_ === undefined | !this.yvar_=== undefined ) return;
+  
   // settings
   var padding_left = 55;
   var padding_bottom = 25;
@@ -82,17 +86,22 @@ Bubble.prototype.plot = function(chart, data) {
   var yvar = this.yvar_;
   var sizevar = this.sizevar_;
   var colourvar = this.colourvar_;
+  
   // set size of canvas
-  if (this.width_ === undefined) this.width(400);
-  if (this.height_ == undefined) this.height(400);
-  chart.attr("width", this.width_).attr("height", this.height_);
+  chart.attr("width", mapping.width())
+       .attr("height", mapping.height())
+	   ;
+  
   // create scales
   var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
   var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
+  
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
+  var yscale = map.y.scale;
+  
   var sizescale = undefined
   if (sizevar !== undefined) {
     var sizemax = d3.max(data, function(d) { return Math.abs(Number(d[sizevar]));});
@@ -102,6 +111,7 @@ Bubble.prototype.plot = function(chart, data) {
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
   }
+  
   // add grid lines
   chart.selectAll(".gridx").data(xscale.ticks(5))
     .enter().append("line").attr("class", "gridx")
@@ -126,23 +136,17 @@ Bubble.prototype.plot = function(chart, data) {
     html: true,
     title: function() {
       var d = this.__data__;
-      var tip = "";
-      if (colourvar !== undefined) tip += ' ' + d[colourvar];
-      tip += ': ';
-      tip += xvar + ' = ' + d[xvar] + ', ' + yvar + ' = ' + d[yvar];
-      if (sizevar !== undefined) tip += ', ' + sizevar + ' = ' + d[sizevar];
-      return tip;
+	  return mapping.toLabel(d);
     }
   });
+  
   // add tickmarks
   chart.selectAll(".rulex").data(xscale.ticks(5))
     .enter().append("text").attr("class", "rulex")
       .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
-      .attr("text-anchor", "middle").text(String);
+      .attr("text-anchor", "middle").text(map.x.format);
   chart.selectAll(".ruley").data(yscale.ticks(5))
     .enter().append("text").attr("class", "ruley")
       .attr("y", yscale).attr("x", padding_left-3).attr("dy", "0.35em")
-      .attr("text-anchor", "end").text(String);
-
-
+      .attr("text-anchor", "end").text(map.y.format);
 }

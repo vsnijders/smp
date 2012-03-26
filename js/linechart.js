@@ -75,22 +75,27 @@ LineChart.prototype.plot = function(chart, data) {
   var colourvar = this.colourvar_;
   
   // set size of canvas
-  if (this.width_ === undefined) this.width(400);
-  if (this.height_ == undefined) this.height(400);
-  
-  chart.attr("width", this.mapping_.width()).attr("height", this.mapping_.height());
+  chart.attr("width", mapping.width())
+       .attr("height", mapping.height())
+	   ;
   
   // create scales
   /*var xscale = map.x.scale;
-  console.log(xscale);
   */
-  
+  //map.x.variable(map.x.variable(), "time");
+  //map.x.type("time");
+  //console.log(map.x.type());
   var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
   var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
+  console.log("xscale", xscale.domain(), xscale.range());
+  console.log("map.x.scale", map.x.scale.domain());
+  var xscale = map.x.scale;  
+  //var xscale = (map.x.type() === "numerical")? xscale : d3.scale.ordinal().domain(map.x.scale.domain()).range(xscale.range());
   
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
+  
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
   
   var yscale = map.y.scale.nice();
@@ -99,18 +104,6 @@ LineChart.prototype.plot = function(chart, data) {
     colourscale = d3.scale.category10();
   } 
   
-  // add grid lines
-  chart.selectAll(".gridx").data(xscale.ticks(5))
-    .enter().append("line").attr("class", "gridx")
-      .attr("x1", xscale).attr("x2", xscale)
-      .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
-      .style("stroke", "rgba(0,0,0,0.3)");
-	  
-  chart.selectAll(".gridy").data(yscale.ticks(5))
-    .enter().append("line").attr("class", "gridy")
-      .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
-      .attr("y1", yscale).attr("y2", yscale)
-      .style("stroke", "rgba(0,0,0,0.3)");
   
   var dl = d3.svg.line()
      .x(function(d){return xscale(d[xvar])})
@@ -144,28 +137,39 @@ LineChart.prototype.plot = function(chart, data) {
 	  return mapping.toLabel(d);
     }
   });
+  
   // add grid lines
-  chart.selectAll(".gridx").data(xscale.ticks(5))
+  if (map.x.type() === "numerical"){
+    var xticks = xscale.ticks(5);  
+    chart.selectAll(".gridx").data(xscale.ticks(5))
     .enter().append("line").attr("class", "gridx")
       .attr("x1", xscale).attr("x2", xscale)
       .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
       .style("stroke", "rgba(0,0,0,0.3)");
-  chart.selectAll(".gridy").data(yscale.ticks(5))
-    .enter().append("line").attr("class", "gridy")
-      .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
-      .attr("y1", yscale).attr("y2", yscale)
-      .style("stroke", "rgba(0,0,0,0.3)");
-  
-  console.log(yscale.range());
   // add tickmarks
   chart.selectAll(".rulex").data(xscale.ticks(5))
     .enter().append("text").attr("class", "rulex")
       .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
-      .attr("text-anchor", "middle").text(String);
+      .attr("text-anchor", "middle").text(map.x.format);
+ } else {
+	  chart.selectAll(".rulex").data(map.x.scale.domain())
+		.enter().append("text").attr("class", "rulex")
+		  .attr("x", xscale)
+		  .attr("y", yscale.range()[0])
+		  .attr("dy", "1.2em")
+		  .attr("text-anchor", "middle").text(map.x.format);
+ }
+ 
+  var xlim = (xscale.rangeExtent || xscale.range)();
+  chart.selectAll(".gridy").data(yscale.ticks(5))
+    .enter().append("line").attr("class", "gridy")
+      .attr("x1", xlim[0]).attr("x2", xlim[1])
+      .attr("y1", yscale).attr("y2", yscale)
+      .style("stroke", "rgba(0,0,0,0.3)");
+  
+  // add tickmarks
   chart.selectAll(".ruley").data(yscale.ticks(5))
     .enter().append("text").attr("class", "ruley")
       .attr("y", yscale).attr("x", padding_left-3).attr("dy", "0.35em")
       .attr("text-anchor", "end").text(map.y.format);
-
-
 }

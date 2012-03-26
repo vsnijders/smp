@@ -21,7 +21,7 @@ function Aes(scale){
 
    
    function dateValue(d) {
-      return format.parse(d[variable]);
+      return new Date(d[variable]);
    };
    
    function scaledValue(d) {
@@ -30,6 +30,28 @@ function Aes(scale){
    
    function labelValue(d) {
       return variable + ": " + format(value(d));
+   }
+   
+   function setScaleType(_type){  
+	  _type = _type || type;
+	  
+	  var rg = scale.range();
+      
+      if (_type === "numerical"){
+         scale = d3.scale.linear().range(rg);
+         format = d3.format("n");
+         value = numValue;
+         
+      } else if (_type === "time"){
+         scale = d3.time.scale().range(rg);
+         format = d3.time.format("%Y");
+         value = dateValue;
+      } else {
+         scale = d3.scale.ordinal().rangePoints(rg);   
+         format = String;
+         value = stringValue;
+      }
+      return aes;      
    }
 
    aes.refresh = function(data){
@@ -49,32 +71,16 @@ function Aes(scale){
 	  aes.value = value;
       aes.scaledValue = scaledValue;
       aes.labelValue = labelValue;
-      
+      aes.setScaleType = setScaleType;  
       return aes;
    }
    
-   //note that scaletype doesn't have to match var type (that is by design)
-   aes.setScaleType = function(_type){
-      
-	  _type = _type || type;
-	  
-	  var rg = scale.range();
-      
-      if (_type === "numerical"){
-         scale = d3.scale.linear().range(rg);
-         format = d3.format("n");
-         value = numValue;
-         
-      } else if (_type === "time"){
-         scale = d3.scale.linear().range(rg);
-         format = d3.time.format("Y");
-         value = dateValue;
-      } else {
-         scale = d3.scale.ordinal().range(rg);   
-         format = String;
-         value = stringValue;
+   aes.type = function(_){
+      if (!arguments.length){
+         return type;
       }
-      return aes;      
+      type = _ ;	  
+	  return setScaleType(type);	  
    }
    
    aes.variable = function( _ , _type) {
@@ -85,7 +91,7 @@ function Aes(scale){
 	  
       type = _type || "categorical";
 	  
-	  return aes.setScaleType(type);	  
+	  return setScaleType(type); 
    }   
    return aes;
 }
@@ -115,8 +121,8 @@ function Mapping(sel) {
 	     return _width;
 	  }  
 	  _width = _;
-	  _map.x.scale.range([0 + _paddingLeft, _width - _padding]);
-	  _map.size.scale.range([0 + _paddingLeft, _width - _padding]);
+	  (_map.x.scale.rangePoints || _map.x.scale.range)([0 + _paddingLeft, _width - _padding]);
+	  (_map.size.scale.rangePoints || _map.size.scale.range)([0 + _paddingLeft, _width - _padding]);
 	  return mapping;
    }
    
@@ -130,7 +136,7 @@ function Mapping(sel) {
 	     return _height;
 	  }  
 	  _height = _;
-	  _map.y.scale.range([_height - _paddingBottom, 0 + _paddingTop]);
+	  (_map.y.scale.rangePoints || _map.y.scale.range)([_height - _paddingBottom, 0 + _paddingTop]);
 	  return mapping;
    }
    
