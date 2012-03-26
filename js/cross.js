@@ -48,7 +48,8 @@ function drawchart(data, selection, variables, mapping, type) {
  var crossed = cross(data, selection.row, selection.column);
  var data = crossed.data;
  
- width = (width/data[0].length) -10;
+ 
+ width = (width/data[0].length) - 10;
  height = (height/data.length) - 10;
  
  mapping.width(width);

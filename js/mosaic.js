@@ -65,6 +65,8 @@ Mosaic.prototype.vvar = function(vvar) {
 Mosaic.prototype.plot = function(chart, data, selection) {
   if (this.vvar_ === undefined | this.yvar_ === undefined | this.xvar_ == undefined) return;
   // some constants
+  var map = mapping.map();
+  
   var space = 3;
   var margin = 15;
   var xvar = this.xvar_;
@@ -96,17 +98,20 @@ Mosaic.prototype.plot = function(chart, data, selection) {
       datan[i].values[j]["height"] = height;
       y += height + space;
     }
+	
     // draw rectangles
     chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
       .attr("fill", "steelblue");
     // add tooltip to rects
-    $('rect').tipsy({
+    
+	$('rect').tipsy({
       gravity: 'w',
       html: true,
       title: function() {
         var d = this.__data__;
+		return mapping.toLabel(d);
         return d[xvar] + ', ' + d[yvar] + ': ' + d[vvar];
       }
     });

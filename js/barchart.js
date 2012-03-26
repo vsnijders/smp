@@ -108,7 +108,6 @@ Barchart.prototype.plot = function(chart, data) {
     title: function() {
       var d = this.__data__;
 	  return mapping.toLabel(d);
-      return d[categorical] + ': ' + numeric + ' = ' + d[numeric];
     }
   });
   
