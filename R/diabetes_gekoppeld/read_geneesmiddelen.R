@@ -34,7 +34,7 @@ read_geneesmiddelen <- function() {
     data <- ddply(data, c("jaar", "geslacht", "leeftijd"), function(d) {
             result <- d[1,]
             result$aantal <- sum(d$aantal, na.rm=TRUE)
-            result$percentage <- round(mean(d$percentage, na.rm=TRUE)/10,1)
+            result$percentage <- round(mean(d$percentage, na.rm=TRUE),2)
             return(result)
         })
 

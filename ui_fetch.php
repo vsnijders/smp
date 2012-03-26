@@ -62,7 +62,7 @@
     }
     $where[] = '(' . implode(' OR ', $sub_where) . ')';
   }
-  $where[] = '( value IS NOT NULL )';
+  #$where[] = '( value IS NOT NULL )';
 
   $vars = $idvars;
   $vars[] = 'value';
