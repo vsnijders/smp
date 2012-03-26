@@ -257,6 +257,81 @@
           'size' => 'percentage'
         )
     );
+  // DIABETES LINKED
+  $META['diabetes_linked'] = array(
+      'longname' => 'Diabetes; gekoppelde tabel',
+      'description' => 'Deze tabel bevat gegevens over diabetes uit drie verschillende
+          tabellen. Ten eerste gegevens uit POLS (Permanent Onderzoek Leefsituatie) met
+          daarin informatie over: percentage personen met diabetes (type I en II), en
+          percentages personen met overgewicht voor de jaren 2001-2009 uitgesplitst naar
+          geslacht en leeftijd. Ten tweede, gegevens over patiëntcontacten met de 
+          huisarts: aantal patiënten dat contact heeft gehad met de huisarts gedurende
+          het jaar voor de jaren 2002-2009 uitgesplitst naar leeftijd en geslacht. Ten
+          derde, gegevens over medicijngebruik: aantal patiënten dat diabetes medicijnen
+          gebruikt voor de jaren 2006-2009 uitgesplitst naar leeftijd en geslacht.', 
+      'url' => array(
+          'http://statline.cbs.nl/StatWeb/publication/default.aspx?DM=SLNL&PA=80193NED&D1=137&D2=a&D3=0-17&D4=0&D5=a&HDR=G3&STB=T%2cG4%2cG1%2cG2&VW=D',
+          'http://statline.cbs.nl/StatWeb/publication/default.aspx?DM=SLNL&PA=03799&D1=139-141%2c267-268%2c270-271&D2=27-44&D3=0&D4=1-9&HDR=G2%2cT&STB=G1%2cG3&VW=D',
+          'http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=81072NED&D1=a&D2=a&D3=a&D4=a&D5=35&D6=a&HDR=T&STB=G4,G5,G3,G1,G2&FILE=~/Download/Geneesmiddelen,_herk_230312100131.csv&VW=T'
+        ),
+      'variables' => array("jaar", "geslacht", "leeftijd", "variable"),
+      'idvariables' => array("jaar", "geslacht", "leeftijd"),
+      'jaar' => array(
+          'longname' => 'Jaar',
+          'default' => 9,
+          'levels' => array('2001', '2002', '2003', '2004', '2005', '2006',
+              '2007', '2008', '2009')
+        ),
+      'geslacht' => array(
+          'longname' => 'Geslacht',
+          'default' => 3,
+          'defaultnot' => 3,
+          'levels' => array('Man', 'Vrouw', 'Totaal')
+        ),
+      'leeftijd' => array(
+          'longname' => 'Leeftijd',
+          'default' => 8,
+          'defaultnot' => 8,
+          'levels' => array(
+            "0 tot 25 jaar", "25 tot 35 jaar", "35 tot 45 jaar", "45 tot 55 jaar", 
+            "55 tot 65 jaar", "65 tot 75 jaar", "75 jaar of ouder", "Totaal")
+        ),
+      'aantalgeneesmiddel' => array(
+          'longname' => 'Aantal personen dat geneesmiddel voor diabetes gebruikt'
+        ),
+      'percentageneesmiddel' => array(
+          'longname' => 'Percentage personen dat geneesmiddel voor diabetes gebruikt'
+        ),
+      'suiker' => array(
+          'longname' => 'Percentage personen met suikerziekte'
+        ),
+      'suiker1' => array(
+          'longname' => 'Percentage personen met suikerziekte type 1'
+        ),
+      'suiker2' => array(
+          'longname' => 'Percentage personen met suikerziekte type 2'
+        ),
+      'ondergewicht' => array(
+          'longname' => 'Percentage personen met ondergewicht'
+        ),
+      'normaalgewicht' => array(
+          'longname' => 'Percentage personen met normaal gewicht'
+        ),
+      'matigovergewicht' => array(
+          'longname' => 'Percentage personen met matig overgewicht'
+        ),
+      'ernstigovergewicht' => array(
+          'longname' => 'Percentage personen met ernstig overgewicht'
+        ),
+      'aantalpatienten' => array(
+          'longname' => 'Aantal patiënten dat contact heeft gehad met huisarts'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'ycat' => 'jaar',
+          'size' => 'suiker'
+        )
+    );
   // PARTICIPATION 
   $META['participation'] = array(
       'longname' => 'Netto arbeidsmarktparticipatie 1971-2010 naar geslacht, generatie en leeftijd',

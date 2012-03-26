@@ -39,8 +39,12 @@
     echo '<div class="table">';
     echo '<h2><a href="ui.php?id=' . $row['id'] . '">' .  $meta['longname'] . '</a></h2>';
     echo '<p>' . $meta['description'] . '</p>';
-    if (isset($meta['url']) && $meta['url'] != '')
-      echo '<p class="tableoptions"><a href="' . $meta['url'] . '">StatLine</a></p>';
+    if (isset($meta['url']) && $meta['url'] != '') {
+      echo '<p class="tableoptions">';
+      if (!is_array($meta['url'])) $meta['url'] = array($meta['url']);
+      foreach($meta['url'] as $url) echo '<a href="' . $url . '">StatLine</a> ';
+      echo '</p>';
+    }
     echo '</div>';
   }
 
