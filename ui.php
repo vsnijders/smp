@@ -125,6 +125,7 @@ div.categorical ul {
       var selection = {
           id : <?php echo $id;?>,
           filter : {},
+          filter_text : {}
         };
         
       var mapping = Mapping();
@@ -163,6 +164,7 @@ div.categorical ul {
           <?php endif; ?>
           jQuery.getJSON("ui_fetch.php", selection, function(data) {
             mapping.refresh(data);
+            update_caption();
             drawchart(data,selection, variables, mapping, graphtype);
             /*
             if (graphtype == "bar") {
@@ -180,6 +182,20 @@ div.categorical ul {
         } else {
           $(".graph").html("<p>" + validated + "</p>");
         }
+      }
+
+      function update_caption() {
+        var caption = "<p>The following selection is applied to this graph:</p><table>";
+        var is_filtered = false;
+        for (var variable in selection.filter_text) {
+          if (variable === 'length' || !selection.filter_text.hasOwnProperty(variable)) 
+            continue;
+          is_filtered = true;
+          var filter = selection.filter_text[variable];
+          caption += "<tr><td>" + variable + ": </td><td>" + filter.join(', ') + "</td>";
+        }
+        caption += "</table>";
+        if (is_filtered) $('#caption').html(caption);
       }
 
       $(function() {
@@ -219,9 +235,13 @@ div.categorical ul {
         $(".filter:checked").each(function() {
           var value = this.value;
           var variable = this.name;
-          if (selection.filter[variable] === undefined) 
+          var value_text = this.parentNode.textContent
+          if (selection.filter[variable] === undefined) {
             selection.filter[variable] = [];
+            selection.filter_text[variable] = [];
+          }
           selection.filter[variable].push(value);
+          selection.filter_text[variable].push(value_text);
           return (true);
         }) ;
       }
@@ -377,6 +397,7 @@ div.categorical ul {
   <div id="resizable" class="ui-widget-content">
   <div class="graph">
   </div>
+  <div id="caption"></div>
   </div>
 
   <div id="graphtype">

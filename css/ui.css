@@ -192,6 +192,11 @@ div#graphtype, div#graphdata {
   cursor : pointer;
 }
 
-
-
-
+/* ========================== GRAPH CAPTION ========================= */
+#caption {
+  font-style : italic;
+  margin-top : 20px;
+}
+#caption table {
+  margin-left : 20px;
+}
