@@ -209,6 +209,9 @@ div.categorical ul {
 		     selection[category].push(variable);
 			 mapping.map()[category]
 			    .variable(variable, variables[variable]);
+			 if (variable == "Year" ||  variable == "Jaar"){
+			    mapping.map()[category].type("time");
+			 }
 		  }
         });
         // update the filter

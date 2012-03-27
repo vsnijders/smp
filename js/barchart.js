@@ -107,7 +107,7 @@ Barchart.prototype.plot = function(chart, data) {
     html: true,
     title: function() {
       var d = this.__data__;
-      return d[categorical] + ': ' + numeric + ' = ' + d[numeric];
+	  return mapping.toLabel(d);
     }
   });
   
@@ -122,6 +122,7 @@ Barchart.prototype.plot = function(chart, data) {
     .attr("x1", xscale(0)).attr("x2", xscale(0))
     .attr("y1", yscale.rangeExtent()[0]).attr("y2", yscale.rangeExtent()[1])
     .style("stroke", "#000000");
+	
   // add tickmarks
   chart.selectAll(".rule").data(xscale.ticks(5))
     .enter().append("text")
