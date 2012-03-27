@@ -329,7 +329,8 @@
       'default_graph' => array(
           'type' => 'bar',
           'ycat' => 'jaar',
-          'size' => 'suiker'
+          'size' => 'suiker',
+          'column' => 'geslacht'
         )
     );
   // PARTICIPATION 
