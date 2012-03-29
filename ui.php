@@ -13,7 +13,7 @@
 
   $charts = array(
       'line' => array('x', 'y', 'colour', 'row', 'column'),
-      'bubble' => array('x', 'y', 'size', 'colour','row', 'column'),
+      'scatter' => array('x', 'y', 'size', 'colour','row', 'column'),
       'bar' => array('y', 'size', 'row', 'column'),
       'mosaic' => array('x', 'y', 'size','row', 'column')
     );
@@ -27,7 +27,7 @@
       'xnum' => array(
           'title' => 'x',
           'type' => 'numeric',
-          'charts' => array('bubble')
+          'charts' => array('scatter')
         ),
       'ycat' => array(
           'title' => 'y',
@@ -37,27 +37,27 @@
       'ynum' => array(
           'title' => 'y',
           'type' => 'numeric',
-          'charts' => array('line', 'bubble')
+          'charts' => array('line', 'scatter')
         ),
       'size' => array(
           'title' => 'size',
           'type' => 'numeric',
-          'charts' => array('bubble', 'bar', 'mosaic')
+          'charts' => array('scatter', 'bar', 'mosaic')
         ),
       'colour' => array(
           'title' => 'colour',
           'type' => 'categorical',
-          'charts' => array('line', 'bubble')
+          'charts' => array('line', 'scatter')
         ),
       'row' => array(
           'title' => 'row',
           'type' => 'categorical',
-          'charts' => array('line', 'bubble', 'bar', 'mosaic')
+          'charts' => array('line', 'scatter', 'bar', 'mosaic')
         ),
       'column' => array(
           'title' => 'column',
           'type' => 'categorical',
-          'charts' => array('line', 'bubble', 'bar', 'mosaic')
+          'charts' => array('line', 'scatter', 'bar', 'mosaic')
         ),
     );
 ?>
@@ -152,7 +152,7 @@ div.categorical ul {
           validated = validate_bar(selection, variables);
         } else if (graphtype == "mosaic") {
           validated = validate_mosaic(selection, variables);
-        } else if (graphtype == "bubble") {
+        } else if (graphtype == "scatter") {
           validated = validate_bubble(selection, variables);
         } else if (graphtype == "line") {
           validated = validate_line(selection, variables);

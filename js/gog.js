@@ -116,7 +116,7 @@ function Mapping(sel) {
    var _padding = 5;
    var _paddingBottom = 15;
    var _paddingTop = 15;
-   var _paddingLeft = 25;
+   var _paddingLeft = 55;
    
    var _map = {
 	  x : Aes(d3.scale.linear()),

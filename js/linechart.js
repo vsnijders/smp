@@ -88,8 +88,8 @@ LineChart.prototype.plot = function(chart, data) {
   var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
   var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
-  console.log("xscale", xscale.domain(), xscale.range());
-  console.log("map.x.scale", map.x.scale.domain());
+  //console.log("xscale", xscale.domain(), xscale.range());
+  //console.log("map.x.scale", map.x.scale.domain());
   var xscale = map.x.scale;  
   //var xscale = (map.x.type() === "numerical")? xscale : d3.scale.ordinal().domain(map.x.scale.domain()).range(xscale.range());
   

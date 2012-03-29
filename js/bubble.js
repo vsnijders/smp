@@ -5,13 +5,14 @@ function validate_bubble(selection, variables) {
     selection.y !== undefined && selection.y.length > 0) 
   {
     // check if variables are correct type
-    if (variables[selection.x[0]] != "numerical") 
+    /* if (variables[selection.x[0]] != "numerical") 
       return "x should be a numerical variable; currently it is a categorical variable";
-    if (variables[selection.y[0]] != "numerical") 
+    */
+	if (variables[selection.y[0]] != "numerical") 
       return "y should be a numerical variable; currently it is a categorical variable";
-    if (variables[selection.colour[0]] != "categorical") 
+/*    if (variables[selection.colour[0]] != "categorical") 
       return "colour should be a categorical variable; currently it is a numerical variable";
-    if (selection.size !== undefined && selection.size.length > 0 &&
+*/    if (selection.size !== undefined && selection.size.length > 0 &&
       variables[selection.size[0]] != "numerical") 
       return "size should be a numerical variable; currently it is a categorical variable";
     return true;
@@ -93,13 +94,20 @@ Bubble.prototype.plot = function(chart, data) {
 	   ;
   
   // create scales
+  /*
   var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
   var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
+  
   var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
+  */
+  var xscale = map.x.scale;
+  
+  /*
   var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
   var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
   
   var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
+  */
   var yscale = map.y.scale;
   
   var sizescale = undefined
@@ -107,22 +115,46 @@ Bubble.prototype.plot = function(chart, data) {
     var sizemax = d3.max(data, function(d) { return Math.abs(Number(d[sizevar]));});
     sizescale = d3.scale.linear().domain([0, sizemax]).range([1, 30]);
   }
+  
   var colourscale = undefined
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
   }
   
   // add grid lines
-  chart.selectAll(".gridx").data(xscale.ticks(5))
-    .enter().append("line").attr("class", "gridx")
-      .attr("x1", xscale).attr("x2", xscale)
-      .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
-      .style("stroke", "rgba(0,0,0,0.3)");
+  if (map.x.type() == "numerical"){
+	  chart.selectAll(".gridx").data(xscale.ticks(5))
+		.enter().append("line").attr("class", "gridx")
+		  .attr("x1", xscale).attr("x2", xscale)
+		  .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
+		  .style("stroke", "rgba(0,0,0,0.3)");
+  
+  // add tickmarks
+  chart.selectAll(".rulex").data(xscale.ticks(5))
+    .enter().append("text").attr("class", "rulex")
+      .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
+      .attr("text-anchor", "middle").text(map.x.format);
+
+  } else {
+	  chart.selectAll(".rulex").data(map.x.scale.domain())
+		.enter().append("text").attr("class", "rulex")
+		  .attr("x", xscale)
+		  .attr("y", yscale.range()[0])
+		  .attr("dy", "1.2em")
+		  .attr("text-anchor", "middle").text(map.x.format);
+  }
+  var xextent = map.x.extent();
   chart.selectAll(".gridy").data(yscale.ticks(5))
     .enter().append("line").attr("class", "gridy")
-      .attr("x1", xscale.range()[0]).attr("x2", xscale.range()[1])
+      .attr("x1", xextent[0]).attr("x2", xextent[1])
       .attr("y1", yscale).attr("y2", yscale)
       .style("stroke", "rgba(0,0,0,0.3)");
+  
+  chart.selectAll(".ruley").data(yscale.ticks(5))
+    .enter().append("text").attr("class", "ruley")
+      .attr("y", yscale).attr("x", padding_left-3).attr("dy", "0.35em")
+      .attr("text-anchor", "end").text(map.y.format);
+
   // draw points
   chart.selectAll("circle").data(data).enter().append("circle")
       .attr("cx", function(d) { return xscale(d[xvar]);})
@@ -140,13 +172,4 @@ Bubble.prototype.plot = function(chart, data) {
     }
   });
   
-  // add tickmarks
-  chart.selectAll(".rulex").data(xscale.ticks(5))
-    .enter().append("text").attr("class", "rulex")
-      .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
-      .attr("text-anchor", "middle").text(map.x.format);
-  chart.selectAll(".ruley").data(yscale.ticks(5))
-    .enter().append("text").attr("class", "ruley")
-      .attr("y", yscale).attr("x", padding_left-3).attr("dy", "0.35em")
-      .attr("text-anchor", "end").text(map.y.format);
 }

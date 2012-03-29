@@ -74,7 +74,7 @@ function drawchart(data, selection, variables, mapping, type) {
 			  var ct = new Barchart;
 			  //TODO remove next line, will be taken care by mapping...
 			  ct.width(width).height(height).categorical(selection.y[0]).numeric(selection.size[0]);
-		  } else if (type === "bubble"){
+		  } else if (type === "scatter"){
 		      var ct = bubble = new Bubble;
               bubble
 			    .width(width)
