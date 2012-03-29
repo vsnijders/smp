@@ -1,10 +1,11 @@
-function Aes(scale){
+function Aes(scale, defaultValue){
    var scale = scale || d3.scale.linear()
      , format = String
      , value
      , variable = null
      , type
 	 , astype
+	 , defaultValue = defaultValue || "empty"
      ;
       
    var aes = { scale : scale
@@ -46,11 +47,15 @@ function Aes(scale){
          scale = d3.time.scale().range(rg);
          format = d3.time.format("%Y");
          value = dateValue;
-      } else {
+      } else if (_type === "categorical"){
          scale = d3.scale.ordinal().rangePoints(rg);   
          format = String;
          value = stringValue;
-      }
+      } else {
+         scale = d3.scale.ordinal().rangePoints(rg);   
+         format = String;
+         value = function(d) defaulValue;
+	  }
 	  extent(rg);
       return aes;      
    }
@@ -75,8 +80,12 @@ function Aes(scale){
       
       if (type === "categorical"){
          scale = scale.domain(data.map(value));
-      } else {
+      } else if (type === "numerical"){
          scale = scale.domain([d3.min(data, value), d3.max(data, value)]);
+      } else if (type === "numerical"){
+         scale = scale.domain([d3.min(data, value), d3.max(data, value)]);
+      } else {
+         scale = scale.domain(defaultValue);
       }
       
       aes.format = format;
@@ -84,7 +93,7 @@ function Aes(scale){
 	  aes.value = value;
       aes.scaledValue = scaledValue;
       aes.labelValue = labelValue;
-      aes.setScaleType = setScaleType;  
+      aes.setScaleType = setScaleType;
       return aes;
    }
    
@@ -105,7 +114,11 @@ function Aes(scale){
       type = _type || "categorical";
 	  
 	  return setScaleType(type); 
-   }   
+   }
+   
+   aes.value = function(d) defaultValue;
+   aes.scaledValue = scaledValue;
+   
    return aes;
 }
 

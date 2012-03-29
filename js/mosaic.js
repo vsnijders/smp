@@ -110,7 +110,7 @@ Mosaic.prototype.plot = function(chart, data, selection) {
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
       .attr("fill", function(d) { return colourvar === undefined ? 'steelblue' : colourscale(d[colourvar]);})
-      //.attr("fill", "steelblue");
+    //.attr("fill", "steelblue");
     // add tooltip to rects
     
 	$('rect').tipsy({
