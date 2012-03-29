@@ -192,7 +192,7 @@ div.categorical ul {
             continue;
           is_filtered = true;
           var filter = selection.filter_text[variable];
-          caption += "<tr><td>" + variable + ": </td><td>" + filter.join(', ') + "</td>";
+          caption += "<tr><td>" + variable + ": </td><td class='value'>" + filter.join(', ') + "</td>";
         }
         caption += "</table>";
         if (is_filtered) $('#caption').html(caption);

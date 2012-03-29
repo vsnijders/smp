@@ -168,6 +168,10 @@ div#graphtype, div#graphdata {
   color : gray;
 }
 
+td.value {
+   font-weight: bold;
+}
+
 /* ========================== FILTER MENU =========================== */
 .collapseblethingy {
   /*background : rgba(0,0,0, 0.5);*/
