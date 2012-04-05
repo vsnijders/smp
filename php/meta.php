@@ -80,7 +80,7 @@
           'longname' => 'Ontstaan/verdwijnen',
           'default' => 3,
           'defaultnot' => 3,
-          'levels' => array('Ontstaan', 'Verdwijnen', 'Netto')
+          'levels' => array('Verdwijnen', 'Ontstaan', 'Netto')
         ),
       'type' => array(
           'longname' => 'Oorzaak',
