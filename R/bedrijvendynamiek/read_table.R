@@ -160,7 +160,7 @@ read_table <- function() {
         levels=c("microbedrijf", "kleinbedrijf", "middenbedrijf", "grootbedrijf", "TOTAL")
     ))
     data$sbi <- as.numeric(data$sbi)
-    data$effect <- as.numeric(factor(data$effect))
+    #data$effect <- as.numeric(factor(data$effect))
     data$type <- as.numeric(factor(data$type,
         levels=c('afsplitsing', 'fusie', 'geboorte', 'overname', 'sterfte', 'uiteenvallen', 'TOTAL')
     ))
