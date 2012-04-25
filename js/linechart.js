@@ -103,8 +103,9 @@ LineChart.prototype.plot = function(chart, data) {
   
   //console.log(coldata);
   var colgroup = chart.selectAll("g.colour")
-      .data(d3.keys(coldata))
-	   .enter()
+      .data(d3.keys(coldata));
+   
+  colgroup.enter()
 	   .append("g")
       .classed("colour", true)
 	   .style("fill", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d);})
@@ -113,8 +114,11 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("stroke-opacity", 0.5)
 	   ;
       
+  colgroup.exit().remove();      
+  
   colgroup.each(function(d, i){
      var cg = d3.select(this);
+     cg.text("");
      var data = coldata[d];
      cg.append("path")
         .attr("d", function(d){return dl(data);})
