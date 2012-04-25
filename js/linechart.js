@@ -77,7 +77,7 @@ LineChart.prototype.plot = function(chart, data) {
   // set size of canvas
   chart.attr("width", mapping.width())
        .attr("height", mapping.height())
-	   ;
+	    ;
   
   // create scales
   /*var xscale = map.x.scale;
@@ -99,33 +99,40 @@ LineChart.prototype.plot = function(chart, data) {
      .y(map.y.scaledValue)
 	 ;
   
-  coldata = (colourvar===undefined)? [data] : d3.values(d3.nest().key(function(d){return d[colourvar];}).map(data));
+  coldata = (colourvar===undefined)? [data] : d3.nest().key(function(d){return d[colourvar];}).map(data);
   
   //console.log(coldata);
-  var colgroup = chart.selectAll("g")
-       .data(coldata)
+  var colgroup = chart.selectAll("g.colour")
+      .data(d3.keys(coldata))
 	   .enter()
 	   .append("g")
-	   .style("fill", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
+      .classed("colour", true)
+	   .style("fill", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d);})
+      .attr("fill-opacity", 0.5)
+      .attr("stroke", "white")
+      .attr("stroke-opacity", 0.5)
 	   ;
-
-  colgroup.append("path")
-       .attr("d", function(d){return dl(d);})
-	   .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
-	   .attr("fill", "none")
-       ;
-	   
-  //console.log(d);
-  // draw points
+      
+  colgroup.each(function(d, i){
+     var cg = d3.select(this);
+     var data = coldata[d];
+     cg.append("path")
+        .attr("d", function(d){return dl(data);})
+	     .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d);})
+        .attr("stroke-opacity", 1)
+	     .attr("fill", "none")
+        ;
+        
+     cg.selectAll("circle").data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", map.x.scaledValue)
+        .attr("cy", map.y.scaledValue)
+        .attr("r", 3)
+	     ;
+     return cg;
+  })
   
-  colgroup.selectAll("circle").data(data).enter().append("circle")
-      .attr("cx", map.x.scaledValue)
-      .attr("cy", map.y.scaledValue)
-      .attr("r", 3)
-      .attr("fill", function(d) { return (colourvar === undefined)? "steelblue" : colourscale(d[colourvar]);})
-      .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5)
-	  ;
-
   // add tooltip to points
   $('circle').tipsy({
     gravity: 'w',
