@@ -85,48 +85,46 @@ LineChart.prototype.plot = function(chart, data) {
   //map.x.variable(map.x.variable(), "time");
   //map.x.type("time");
   //console.log(map.x.type());
-  var xmin = d3.min(data, function(d) { return Number(d[xvar]);});
-  var xmax = d3.max(data, function(d) { return Number(d[xvar]);});
-  var xscale = d3.scale.linear().domain([xmin, xmax]).range([padding_left, this.width_ - padding]).nice();
   //console.log("xscale", xscale.domain(), xscale.range());
   //console.log("map.x.scale", map.x.scale.domain());
   var xscale = map.x.scale;  
-  //var xscale = (map.x.type() === "numerical")? xscale : d3.scale.ordinal().domain(map.x.scale.domain()).range(xscale.range());
-  
-  var ymin = d3.min(data, function(d) { return Number(d[yvar]);});
-  var ymax = d3.max(data, function(d) { return Number(d[yvar]);});
-  
-  var yscale = d3.scale.linear().domain([ymin, ymax]).range([this.height_ - padding, padding_bottom]).nice();
-  
   var yscale = map.y.scale.nice();
   
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
   } 
   
-  
   var dl = d3.svg.line()
-     .x(function(d){return xscale(d[xvar])})
-     .y(function(d){return yscale(d[yvar])})
-	  ;
+     .x(map.x.scaledValue)
+     .y(map.y.scaledValue)
+	 ;
   
   coldata = (colourvar===undefined)? [data] : d3.values(d3.nest().key(function(d){return d[colourvar];}).map(data));
   
   //console.log(coldata);
-  var colgroup = chart.selectAll("g").data(coldata).enter().append("g");
+  var colgroup = chart.selectAll("g")
+       .data(coldata)
+	   .enter()
+	   .append("g")
+	   .style("fill", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
+	   ;
+
   colgroup.append("path")
        .attr("d", function(d){return dl(d);})
-	    .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
-	    .attr("fill", "none")
+	   .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d[0][colourvar]);})
+	   .attr("fill", "none")
        ;
+	   
   //console.log(d);
   // draw points
+  
   colgroup.selectAll("circle").data(data).enter().append("circle")
-      .attr("cx", function(d) { return xscale(d[xvar]);})
-      .attr("cy", function(d) { return yscale(d[yvar]);})
-      .attr("r", 5)
+      .attr("cx", map.x.scaledValue)
+      .attr("cy", map.y.scaledValue)
+      .attr("r", 3)
       .attr("fill", function(d) { return (colourvar === undefined)? "steelblue" : colourscale(d[colourvar]);})
-      .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5);
+      .attr("fill-opacity", 0.5).attr("stroke", "white").attr("stroke-opacity", 0.5)
+	  ;
 
   // add tooltip to points
   $('circle').tipsy({

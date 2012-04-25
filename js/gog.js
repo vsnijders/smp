@@ -6,6 +6,7 @@ function Aes(scale, defaultValue){
      , type
 	 , astype
 	 , defaultValue = defaultValue || "empty"
+	 , axis = d3.svg.axis()
      ;
       
    var aes = { scale : scale
@@ -20,10 +21,12 @@ function Aes(scale, defaultValue){
       return +d[variable];
    };
 
-   
    function dateValue(d) {
       return new Date(d[variable]);
    };
+   
+   function quarterValue(d){
+   }
    
    function scaledValue(d) {
       return scale(value(d));
@@ -82,7 +85,7 @@ function Aes(scale, defaultValue){
          scale = scale.domain(data.map(value));
       } else if (type === "numerical"){
          scale = scale.domain([d3.min(data, value), d3.max(data, value)]);
-      } else if (type === "numerical"){
+      } else if (type === "time"){
          scale = scale.domain([d3.min(data, value), d3.max(data, value)]);
       } else {
          scale = scale.domain(defaultValue);
@@ -95,6 +98,15 @@ function Aes(scale, defaultValue){
       aes.labelValue = labelValue;
       aes.setScaleType = setScaleType;
       return aes;
+   }
+   
+   aes.axis = function(_){
+      if (!arguments.length){
+         return axis;
+      }
+	  
+      axis = _ ;	  
+	  return axis;  
    }
    
    aes.type = function(_){
