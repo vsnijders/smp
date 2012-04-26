@@ -204,3 +204,24 @@ td.value {
 #caption table {
   margin-left : 20px;
 }
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.x.axis line {
+  stroke: #fff;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  /*display: none;*/
+}
+
+.axis line, .axis path {
+  fill: none;
+  stroke: #333;
+}

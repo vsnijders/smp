@@ -75,8 +75,11 @@ LineChart.prototype.plot = function(chart, data) {
   var colourvar = this.colourvar_;
   
   // set size of canvas
-  chart.attr("width", mapping.width())
-       .attr("height", mapping.height())
+  var w = mapping.width(),
+      h = mapping.height();
+      
+  chart.attr("width", w)
+       .attr("height", h)
 	    ;
   
   // create scales
@@ -87,9 +90,22 @@ LineChart.prototype.plot = function(chart, data) {
   //console.log(map.x.type());
   //console.log("xscale", xscale.domain(), xscale.range());
   //console.log("map.x.scale", map.x.scale.domain());
-  var xscale = map.x.scale;  
-  var yscale = map.y.scale.nice();
   
+  var xscale = map.x.scale;
+  //map.x.dx(xscale.rangeBand() / 2);
+  var yscale = map.y.scale.nice();
+
+  data = data.map(function(d) d);
+  totimeiftime(map.x, data);
+  
+  /*xvar = map.x.variable();
+  if (xvar === "year"){
+     data.forEach(function(d){d.year = new Date(d.year);});
+     map.x.type("time");
+     map.x.refresh(data);
+  } else if (xvar === "quarter"){
+  }
+  */
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
   } 
@@ -143,7 +159,7 @@ LineChart.prototype.plot = function(chart, data) {
     html: true,
     title: function() {
       var d = this.__data__;
-	  return mapping.toLabel(d);
+	   return mapping.toLabel(d);
     }
   });
   
@@ -156,18 +172,30 @@ LineChart.prototype.plot = function(chart, data) {
       .attr("y1", yscale.range()[0]).attr("y2", yscale.range()[1])
       .style("stroke", "rgba(0,0,0,0.3)");
   // add tickmarks
-  chart.selectAll(".rulex").data(xscale.ticks(5))
-    .enter().append("text").attr("class", "rulex")
-      .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
-      .attr("text-anchor", "middle").text(map.x.format);
+  // chart.selectAll(".rulex").data(xscale.ticks(5))
+    // .enter().append("text").attr("class", "rulex")
+      // .attr("x", xscale).attr("y", yscale.range()[0]).attr("dy", "1.2em")
+      // .attr("text-anchor", "middle").text(map.x.format);
  } else {
-	  chart.selectAll(".rulex").data(map.x.scale.domain())
-		.enter().append("text").attr("class", "rulex")
-		  .attr("x", xscale)
-		  .attr("y", yscale.range()[0])
-		  .attr("dy", "1.2em")
-		  .attr("text-anchor", "middle").text(map.x.format);
+	  // chart.selectAll(".rulex").data(map.x.scale.domain())
+		// .enter().append("text").attr("class", "rulex")
+		  // .attr("x", xscale)
+		  // .attr("y", yscale.range()[0])
+		  // .attr("dy", "1.2em")
+		  // .attr("text-anchor", "middle").text(map.x.format);
  }
+ 
+  var xAxis = d3.svg.axis().scale(map.x.scale).orient("bottom");
+  chart.append("g")
+    .attr("class", "axis x")
+    .attr("transform", "translate(0, "+ (h - 20) +")")
+    .call(xAxis);
+  
+  var yAxis = d3.svg.axis().scale(map.y.scale).orient("left");
+  chart.append("g")
+    .attr("class", "axis y")
+    //.attr("transform", "translate(0, "+ height +")")
+    .call(yAxis);
  
   var xlim = (xscale.rangeExtent || xscale.range)();
   chart.selectAll(".gridy").data(yscale.ticks(5))

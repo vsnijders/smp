@@ -4,9 +4,10 @@ function Aes(scale, defaultValue){
      , value
      , variable = null
      , type
-	 , astype
-	 , defaultValue = defaultValue || "empty"
-	 , axis = d3.svg.axis()
+	  , astype
+     , dx = 0
+	  , defaultValue = defaultValue || "empty"
+	  , axis = d3.svg.axis()
      ;
       
    var aes = { scale : scale
@@ -29,7 +30,7 @@ function Aes(scale, defaultValue){
    }
    
    function scaledValue(d) {
-      return scale(value(d));
+      return scale(value(d)) + dx;
    }
    
    function labelValue(d) {
@@ -37,9 +38,10 @@ function Aes(scale, defaultValue){
    }
       
    function setScaleType(_type){  
-	  _type = _type || type;
-	  
-	  var rg = extent();
+	   _type = _type || type;
+	   dx = 0;
+      
+	   var rg = extent();
       
       if (_type === "numerical"){
          scale = d3.scale.linear().range(rg);
@@ -51,16 +53,25 @@ function Aes(scale, defaultValue){
          format = d3.time.format("%Y");
          value = dateValue;
       } else if (_type === "categorical"){
-         scale = d3.scale.ordinal().rangePoints(rg);   
+         scale = d3.scale.ordinal().rangeBands(rg);
+         //console.log(scale.rangeBand(), rg);
+         //dx = scale.rangeBand() / 2;
          format = String;
          value = stringValue;
       } else {
-         scale = d3.scale.ordinal().rangePoints(rg);   
+         scale = d3.scale.ordinal().rangeBands(rg);   
          format = String;
-         value = function(d) defaulValue;
+         value = function(d) defaultValue;
 	  }
 	  extent(rg);
-      return aes;      
+      aes.format = format;
+      aes.scale = scale;
+	   aes.value = value;
+      aes.scaledValue = scaledValue;
+      aes.labelValue = labelValue;
+      aes.setScaleType = setScaleType;
+
+     return aes;
    }
    
    //extent function that "knows" if it should use rangeExtent or normal range
@@ -68,7 +79,8 @@ function Aes(scale, defaultValue){
       if (!arguments.length){
 	     return (scale.rangeExtent || scale.range)()
 	  }
-      (scale.rangePoints || scale.range)(_);
+     (scale.rangeBands || scale.range)(_);
+     //dx = (scale.rangeBand || d3.functor(0))() /2;
 	  return aes;
    }
    
@@ -93,7 +105,7 @@ function Aes(scale, defaultValue){
       
       aes.format = format;
       aes.scale = scale;
-	  aes.value = value;
+	   aes.value = value;
       aes.scaledValue = scaledValue;
       aes.labelValue = labelValue;
       aes.setScaleType = setScaleType;
@@ -114,7 +126,16 @@ function Aes(scale, defaultValue){
          return type;
       }
       type = _ ;	  
-	  return setScaleType(type);	  
+	  return setScaleType(type);
+   }
+   
+   aes.dx = function(_){
+      if (!arguments.length){
+         return dx;
+      }
+      
+      dx = _ ;
+      return aes;
    }
    
    aes.variable = function( _ , _type) {
@@ -159,8 +180,10 @@ function Mapping(sel) {
 	     return _width;
 	  }  
 	  _width = _;
-	  (_map.x.scale.rangePoints || _map.x.scale.range)([0 + _paddingLeft, _width - _padding]);
-	  (_map.size.scale.rangePoints || _map.size.scale.range)([0 + _paddingLeft, _width - _padding]);
+     rb = (_map.x.scale.rangeBand || d3.functor(0))()/2;
+     //console.log("rb", rb);
+	  (_map.x.scale.rangeBands || _map.x.scale.range)([0 + (_paddingLeft + rb), _width - _padding]);
+	  (_map.size.scale.rangeBands || _map.size.scale.range)([0 + _paddingLeft, _width - _padding]);
 	  return mapping;
    }
    
@@ -174,7 +197,7 @@ function Mapping(sel) {
 	     return _height;
 	  }  
 	  _height = _;
-	  (_map.y.scale.rangePoints || _map.y.scale.range)([_height - _paddingBottom, 0 + _paddingTop]);
+	  (_map.y.scale.rangeBands || _map.y.scale.range)([_height - _paddingBottom, 0 + _paddingTop]);
 	  return mapping;
    }
    
@@ -198,13 +221,33 @@ function Mapping(sel) {
    
    mapping.toLabel = function(d){
    var s = d3.entries(_map)
-   	  .filter(function(v) v.value.variable() !== null)
-	  .map(function(v) { return _map[v.key].labelValue(d)})
+     .filter(function(v) v.value.variable() !== null)
+	  .map(function(v) _map[v.key].labelValue(d))
 	  ;
-	 return s.join(", ");
+	 return s.join("<br>");
    }
    
    return mapping;
+}
+
+function totimeiftime(v, data){
+   var variable = v.variable();
+   if (variable === "year"){
+     data.forEach(function(d){d.year = new Date(d.year);});
+     v.type("time");
+     v.refresh(data);
+     //console.log(data)   
+   } else if (variable === "quarter"){
+       var qre = /(\d{4})-(\d)/
+       data.forEach(function(d){
+         qu = d.quarter.match(qre);
+         d.quarter = new Date(qu[1], (3 * (+qu[2])))
+       });
+       v.type("time");
+       v.refresh(data);
+       //console.log(data);
+   }
+   return v;
 }
 /*
 var data = [{a:1, b:2}, {a:10, b:20}];
