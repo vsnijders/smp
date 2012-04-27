@@ -225,3 +225,13 @@ td.value {
   fill: none;
   stroke: #333;
 }
+
+table.label th {
+   text-align: left;
+   color: silver;
+}
+
+table.label td {
+   font-weight: bold;
+   text-align: right;
+}

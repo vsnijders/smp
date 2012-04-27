@@ -25,14 +25,15 @@ function Aes(scale, defaultValue){
    function dateValue(d) {
       return new Date(d[variable]);
    };
-   
-   function quarterValue(d){
-   }
-   
+      
    function scaledValue(d) {
       return scale(value(d)) + dx;
    }
    
+   function formatValue(d) {
+      return format(value(d));
+   }
+
    function labelValue(d) {
       return variable + ": " + format(value(d));
    }
@@ -51,7 +52,7 @@ function Aes(scale, defaultValue){
       } else if (_type === "time"){
          scale = d3.time.scale().range(rg);
          format = d3.time.format("%Y");
-         value = dateValue;
+         value = stringValue;
       } else if (_type === "categorical"){
          scale = d3.scale.ordinal().rangeBands(rg);
          //console.log(scale.rangeBand(), rg);
@@ -69,6 +70,7 @@ function Aes(scale, defaultValue){
 	   aes.value = value;
       aes.scaledValue = scaledValue;
       aes.labelValue = labelValue;
+      aes.formatValue = formatValue;
       aes.setScaleType = setScaleType;
 
      return aes;
@@ -222,9 +224,9 @@ function Mapping(sel) {
    mapping.toLabel = function(d){
    var s = d3.entries(_map)
      .filter(function(v) v.value.variable() !== null)
-	  .map(function(v) _map[v.key].labelValue(d))
+	  .map(function(v) "<tr><th>" + v.value.variable() + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>")
 	  ;
-	 return s.join("<br>");
+	 return "<table class='label'>" + s.join("") + "</table>";
    }
    
    return mapping;
@@ -241,7 +243,7 @@ function totimeiftime(v, data){
        var qre = /(\d{4})-(\d)/
        data.forEach(function(d){
          qu = d.quarter.match(qre);
-         d.quarter = new Date(qu[1], (3 * (+qu[2])))
+         d.quarter = new Date(qu[1], 1 + (3 * (+qu[2])), 15)
        });
        v.type("time");
        v.refresh(data);
