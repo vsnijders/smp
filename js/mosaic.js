@@ -114,7 +114,7 @@ Mosaic.prototype.plot = function(chart, data, selection) {
     // add tooltip to rects
     
 	$('rect').tipsy({
-      gravity: 'w',
+      gravity: 'e',
       html: true,
       title: function() {
         var d = this.__data__;

@@ -18,6 +18,24 @@ function validate_line(selection, variables) {
   }
 }
 
+function highlightLine(lines){
+  lines
+     .on("mouseover", function(d){
+           d3.selectAll("g.colour").filter(function(d1) d1 != d)
+              .style("stroke-opacity", 0.2)
+              .style("fill-opacity", 0.2)
+              ;
+        })
+     .on("mouseout", function(d){
+           d3.selectAll("g.colour")
+              .style("stroke-opacity", 1)
+              .style("fill-opacity", 0.5)
+              ;
+       })
+     ;
+  return lines;
+}
+
 // ============================================================================
 // ==== CLASS DEFINITION OF LINECHART                                         ====
 // ============================================================================
@@ -81,31 +99,12 @@ LineChart.prototype.plot = function(chart, data) {
   chart.attr("width", w)
        .attr("height", h)
 	    ;
-  
-  // create scales
-  /*var xscale = map.x.scale;
-  */
-  //map.x.variable(map.x.variable(), "time");
-  //map.x.type("time");
-  //console.log(map.x.type());
-  //console.log("xscale", xscale.domain(), xscale.range());
-  //console.log("map.x.scale", map.x.scale.domain());
-  
+    
   var xscale = map.x.scale;
-  //map.x.dx(xscale.rangeBand() / 2);
   var yscale = map.y.scale.nice();
 
-  data = data.map(function(d) d);
   totimeiftime(map.x, data);
   
-  /*xvar = map.x.variable();
-  if (xvar === "year"){
-     data.forEach(function(d){d.year = new Date(d.year);});
-     map.x.type("time");
-     map.x.refresh(data);
-  } else if (xvar === "quarter"){
-  }
-  */
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
   } 
@@ -127,10 +126,10 @@ LineChart.prototype.plot = function(chart, data) {
 	   .style("fill", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d);})
       .attr("fill-opacity", 0.5)
       .attr("stroke", "white")
-      .attr("stroke-opacity", 0.5)
+      .attr("stroke-opacity", 1)
 	   ;
       
-  colgroup.exit().remove();      
+  colgroup.exit().remove();
   
   colgroup.each(function(d, i){
      var cg = d3.select(this);
@@ -139,7 +138,7 @@ LineChart.prototype.plot = function(chart, data) {
      cg.append("path")
         .attr("d", function(d){return dl(data);})
 	     .attr("stroke", function(d){ return (colourvar === undefined)? "steelblue" : colourscale(d);})
-        .attr("stroke-opacity", 1)
+        //.attr("stroke-opacity", 1)
 	     .attr("fill", "none")
         ;
         
@@ -151,11 +150,11 @@ LineChart.prototype.plot = function(chart, data) {
         .attr("r", 3)
 	     ;
      return cg;
-  })
+  }).call(highlightLine);
   
   // add tooltip to points
   $('circle').tipsy({
-    gravity: 'w',
+    gravity: 's',
     html: true,
     title: function() {
       var d = this.__data__;

@@ -14,6 +14,26 @@ function validate_bar(selection, variables) {
   }
 }
 
+function highlightBar(bars, scale){
+  bars
+     .on("mouseover", function(d,i){
+           //console.log(d,i);
+           d3.selectAll("rect.bar").filter(function(d1,i1) scale(d1) != scale(d))
+              .style("stroke-opacity", 0.2)
+              .style("fill-opacity", 0.2)
+              ;
+        })
+     .on("mouseout", function(d){
+           d3.selectAll("rect.bar")
+             .style("stroke-opacity", 1)
+             .style("fill-opacity", 1)
+             ;
+       })
+     ;
+  return bars;
+}
+
+
 // ============================================================================
 // ==== CLASS DEFINITION OF BARCHART                                       ====
 // ============================================================================
@@ -90,17 +110,25 @@ Barchart.prototype.plot = function(chart, data) {
   */
   
   var yscale = map.y.scale.rangeBands([padding_top, this.height_-padding]); 
-  /*d3.scale.ordinal()
-    .domain(data.map(function(d) { return d[categorical];}))
-    .rangeBands([padding_top, this.height_-padding]);
-  */
+
   // add bars
-  chart.selectAll("rect").data(data).enter().append("rect")
-      .attr("x", function(d) { return Math.min(xscale(0), xscale(d[numeric])); })
-      .attr("y", function(d) { return yscale(d[categorical]); })
-      .attr("width", function(d) { return Math.abs(xscale(0) - xscale(d[numeric])); })
-      .attr("height", yscale.rangeBand())
-      .attr("fill", "steelblue").attr("stroke", "white");
+  var bars = chart.selectAll("rect").data(data);
+  
+  bars.enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return Math.min(xscale(0), xscale(d[numeric])); })
+        .attr("y", function(d) { return yscale(d[categorical]); })
+        .attr("width", function(d) { return Math.abs(xscale(0) - xscale(d[numeric])); })
+        .attr("height", yscale.rangeBand())
+        .attr("fill", "steelblue")
+        .attr("stroke", "white")
+        ;
+        
+   bars.exit().remove();
+   
+   bars.call(highlightBar, map.y.scaledValue);
+  
   // add tooltip to bars
   $('rect').tipsy({
     gravity: 'w',
