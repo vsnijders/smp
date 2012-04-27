@@ -58,6 +58,9 @@ function drawchart(data, selection, variables, mapping, type) {
  var smallmul = graph.append("table").attr("class", "smallmultiple");
 	if (crossed.col.length) {
 	   var colhead = smallmul.append("tr");
+      if (crossed.row.length){
+         colhead.append("th");
+      }
 	   crossed.col.forEach(function(d) {colhead.append("th").text(d)});
 	}
 
