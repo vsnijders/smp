@@ -226,6 +226,10 @@ td.value {
   stroke: #333;
 }
 
+table.smallmultiple th{
+  font-style: italic;
+}
+
 table.label th {
    text-align: left;
    color: silver;
