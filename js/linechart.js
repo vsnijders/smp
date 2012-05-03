@@ -100,10 +100,12 @@ LineChart.prototype.plot = function(chart, data) {
        .attr("height", h)
 	    ;
     
+  
   var xscale = map.x.scale;
   var yscale = map.y.scale.nice();
-
-  totimeiftime(map.x, data);
+  
+  
+  //totimeiftime(map.x, data);
   
   if (colourvar !== undefined) {
     colourscale = d3.scale.category10();
