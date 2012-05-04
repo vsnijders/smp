@@ -46,8 +46,8 @@
         )
     );
   // BEDRIJVENDYNAMIEK
-  $META['bedrijvendynamiek'] = array(
-      'longname' => 'Bedrijvendynamiek; ontstaan en verdwijnen van bedrijven',
+  $META['bedrijvendynamiek_gekoppeld'] = array(
+      'longname' => 'Bedrijvendynamiek gekoppeld; ontstaan en verdwijnen van bedrijven',
       'description' => 'Deze tabel bevat gegevens of het ontstaan en verdwijnen van ' .
           'bedrijven. De cijfers zijn beschikbaar per SBI en grootteklasse. De volgende '. 
           'gebeurtenissen worden onderscheiden: splitsing, fusie, geboorte, overname ' .
@@ -101,6 +101,96 @@
           'type' => 'bar',
           'ycat' => 'sbi',
           'size' => 'relatieve_verandering'
+        )
+    );
+  // BEDRIJVENAANTALLEN
+  $META['bedrijvenaantallen'] = array(
+      'longname' => 'Bedrijvenaantallen',
+      'description' => 'Deze tabel bevat aanntallen bedrijven uitgesplitst ' .
+          'naar SBI en grootteklasse.',
+      'url' => '',
+      'variables' => array("jaar", "grootteklasse", "sbi", "variable"),
+      'idvariables' => array("jaar", "grootteklasse", "sbi"),
+      'jaar' => array(
+          'longname' => 'Jaar',
+          'default' => 5,
+          'defaultnot' => 5,
+          'levels' => array('2006', '2007', '2008', '2009', '2010')
+        ),
+      'grootteklasse' => array(
+          'longname' => 'Grootteklasse',
+          'default' => 5,
+          'defaultnot' => 5,
+          'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
+        ),
+      'sbi' => array(
+          'longname' => 'SBI',
+          'default' => 20,
+          'defaultnot' => 20,
+          'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
+              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
+              'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
+              'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
+        ),
+      'aantal'=> array(
+          'longname' => 'Aantal bedrijven'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'ycat' => 'sbi',
+          'size' => 'aantal'
+        )
+    );
+  // BEDRIJVENDYNAMIEK
+  $META['bedrijvendynamiek'] = array(
+      'longname' => 'Bedrijvendynamiek; ontstaan en verdwijnen van bedrijven',
+      'description' => 'Deze tabel bevat gegevens of het ontstaan en verdwijnen van ' .
+          'bedrijven. De cijfers zijn beschikbaar per SBI en grootteklasse. De volgende '. 
+          'gebeurtenissen worden onderscheiden: splitsing, fusie, geboorte, overname ' .
+          'sterfte en uiteenvallen.', 
+      'url' => '',
+      'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
+      'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
+      'jaar' => array(
+          'longname' => 'Jaar',
+          'default' => 5,
+          'defaultnot' => 5,
+          'levels' => array('2007', '2008', '2009', '2010', '2011')
+        ),
+      'grootteklasse' => array(
+          'longname' => 'Grootteklasse',
+          'default' => 5,
+          'defaultnot' => 5,
+          'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
+        ),
+      'sbi' => array(
+          'longname' => 'SBI',
+          'default' => 20,
+          'defaultnot' => 20,
+          'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
+              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
+              'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
+              'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
+        ),
+      'effect' => array(
+          'longname' => 'Ontstaan/verdwijnen',
+          'default' => 3,
+          'defaultnot' => 3,
+          'levels' => array('Verdwijnen', 'Ontstaan', 'Netto')
+        ),
+      'type' => array(
+          'longname' => 'Oorzaak',
+          'default' => 7,
+          'defaultnot' => 7,
+          'levels' => array('Afsplitsing', 'Fusie', 'Geboorte', 'Overname', 'Sterfte', 'Uiteenvallen', 'Totaal')
+        ),
+      'netto_verandering'=> array(
+          'longname' => 'Netto verandering'
+        ),
+      'default_graph' => array(
+          'type' => 'bar',
+          'ycat' => 'sbi',
+          'size' => 'netto_verandering'
         )
     );
   // LABOURDYNAMICS
