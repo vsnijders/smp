@@ -1,23 +1,74 @@
 function Merge(tab1, tab2){
+   var tab1 = tab1;
+   var tab2 = tab2;
+   
+   var merge = { dims: {}
+               , topics: {}
+               , tabs: [tab1,tab2]
+               }
+               ;
 
-   var merge = {};
-
-   merge.dimension = function(d1, d2, name){
-      var d = { from1: d1
-              , from2: d2
+   mergedimension = function(d1, d2, name){
+      var d = { from: [d1,d2]
               , name: name || d1.name
-              , categories: []
+              , categories: mergecategories(d1,d2)
               }
-      return d;
+      merge.dims[d.name] = d;
+      return merge;
+   }
+   
+   function mergecategories(d1, d2){
+      var cats1 = d1.categories;
+      var cats2 = d2.categories;
+      
+      var cats = cats1.map(function(c){
+         var i = cats2.indexOf(c);
+         return { name: c
+                , from: [c, (i > -1)? cats2[i] : null]
+                };
+      });
+
+      cats2 = cats2.filter(function(c){return cats1.indexOf(c) == -1;});
+      cats = cats.concat(cats2.map(function(c){ 
+         return {name: c, from: [null, c]};
+      }));
+      return cats;      
    }
 
-   merge.category = function(c1, c2, name){
-     var c = { from1: c1
-             , from2: c2
-             , name :  name || c1.name
+   merge.mergecategory = function(dim, c1, c2, name){
+     var c = { from: [c1, c2]
+             , name:  name || c1
              }
-     return c;
+     dim[c.name] = c;
+     return merge;
    }
+   
+   merge.splitcategory = fuction(dim, c){
+      var i = indexOf(dim.categories.indexOf(c));
+      if (i > -1){
+         var from = dim.categories[i].from;
+         dim.categories.splice(i, 1, {from: [from[0],null], name=from[0]}, {from: [null, from[1]], name=from[1]}
+         var c2 = from[1];
+         from[1] = null;
+         dim.categories
+      }
+   }
+   
+   function initialize(){
+       for (var i = 0; i < tab1.dimensions.length; i++){
+          var d1 = tab1.dimensions[i];
+          for (var j = 0; j < tab2.dimensions.length; j++){
+            var d2 = tab2.dimensions[j];
+            if (tab1.dimensions[i].name == tab2.dimensions[j].name){
+               mergedimension(d1,d2);
+            }
+         }
+       }
+   }
+   
+   
+   initialize();
+   return merge;
 }
 
 function Table(name, topics, dimensions){
@@ -28,14 +79,32 @@ function Table(name, topics, dimensions){
           }
 }
 
-function Dimension(name, type, categories){
+function Dimension(name, categories, type){
    return { name: name || ""
-          , type: type || "categorical"
           , categories: categories || []
+          , type: type || "categorical"
           }
 }
 
-var d = Dimension("year", [2001,2002]);
-console.log(d)
+var tab1 = Table( "pop"
+                , ["Population"
+                  ]
+                , [ Dimension("gender", ["male","female"])
+                  , Dimension("year", [2001,2002])
+                  ]
+                )
 
+var tab2 = Table( "inc"
+                , ["Income"
+                  ]
+                , [ Dimension("gender", ["male","female"])
+                  , Dimension("year", [2002, 2003])
+                  ]
+                )
+
+//console.log(tab1)
+//console.log(tab2)
+
+var m = Merge(tab1, tab2)
+console.log(m);
 //var t = Table("T1",,[d])   
