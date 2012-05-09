@@ -1,36 +1,3 @@
-function Table(name, topics, dimensions){
-   var table = {}
-     , name = name || ""
-     , topics = topics || []
-     , dimensions = dimensions || []
-     ;
-     
-   table.topics = function(_){
-      return topics;
-   }
-   
-   table.dimensions = function(_){
-      return dimensions;
-   }
-   
-   table.name = function(_){
-      if (!arguments.length)
-         return name;
-      name = _;
-      return table;
-   }
-   
-   return table;
-}
-
-function Dimension(name, categories){
-   var name = name || "D"
-     , categories = categories || []
-     ;
-     
-   
-}
-
 function Merge(tab1, tab2){
 
    var merge = {};
@@ -52,3 +19,23 @@ function Merge(tab1, tab2){
      return c;
    }
 }
+
+function Table(name, topics, dimensions){
+   return { name: name || ""
+          , topics: topics || []
+          , dimensions: dimensions || []
+          , columns: []
+          }
+}
+
+function Dimension(name, type, categories){
+   return { name: name || ""
+          , type: type || "categorical"
+          , categories: categories || []
+          }
+}
+
+var d = Dimension("year", [2001,2002]);
+console.log(d)
+
+//var t = Table("T1",,[d])   
