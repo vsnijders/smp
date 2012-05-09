@@ -40,6 +40,7 @@
         }
 
       $(function(){
+/*
           $.each(meta.table1.columns, function(index, value) {
               var div = $("<div class=\"dimension\">");
               div.html("<div class=\"dimhead\"><span>" + 
@@ -52,6 +53,38 @@
               div.html("<h3>" + index + "</h3>");
               $("#merge").append(div);
             });
+*/
+        
+        
+           var tab1 = Table( "pop"
+                   , ["Population"
+                     ]
+                   , [ Dimension("gender", ["male","female"])
+                     , Dimension("year", [2001,2002])
+                     ]
+                   )
+
+           var tab2 = Table( "inc"
+                   , ["Income"
+                     ]
+                   , [ Dimension("gender", ["male","female"])
+                     , Dimension("year", [2002, 2003])
+                     ]
+                   )
+
+           var m = Merge(tab1, tab2);
+           
+           var merge = d3.select("#merge");
+           
+           var dimensions = merge.selectAll("div.dimension").data(d3.values(m.dims));
+           
+           dimensions.enter().append("div")
+              .classed("dimension", true)
+              .text(function(d) {return d.name;})
+              ;
+              
+           dimensions.exit().remove();
+
         });
     </script>
 

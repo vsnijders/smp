@@ -9,7 +9,7 @@ function Merge(tab1, tab2){
                ;
 
    mergedimension = function(d1, d2, name){
-      var d = { from: [d1,d2]
+      var d = { from: [d1.name,d2.name]
               , name: name || d1.name
               , categories: mergecategories(d1,d2)
               }
@@ -36,30 +36,34 @@ function Merge(tab1, tab2){
    }
 
    merge.mergecategory = function(dim, c1, c2, name){
+     //TODO remove old mapping
      var c = { from: [c1, c2]
              , name:  name || c1
              }
-     dim[c.name] = c;
+     dim.push = c;
      return merge;
    }
    
+   merge.mergedimension = mergedimension;
+   
+   /*
    merge.splitcategory = fuction(dim, c){
       var i = indexOf(dim.categories.indexOf(c));
       if (i > -1){
          var from = dim.categories[i].from;
-         dim.categories.splice(i, 1, {from: [from[0],null], name=from[0]}, {from: [null, from[1]], name=from[1]}
-         var c2 = from[1];
-         from[1] = null;
-         dim.categories
+         dim.categories.splice(i, 1, {from: [from[0], null], name: from[0]}
+                                   , {from: [null, from[1]], name: from[1]}
+                              );
       }
    }
-   
+   */
+  
    function initialize(){
        for (var i = 0; i < tab1.dimensions.length; i++){
           var d1 = tab1.dimensions[i];
           for (var j = 0; j < tab2.dimensions.length; j++){
             var d2 = tab2.dimensions[j];
-            if (tab1.dimensions[i].name == tab2.dimensions[j].name){
+            if (d1.name == d2.name){
                mergedimension(d1,d2);
             }
          }
