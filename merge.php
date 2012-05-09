@@ -19,37 +19,83 @@
       var meta = {
           'table1' : {
               'columns' : {
-                  'jaar' : [],
-                  'sbi' : [],
-                  'grootteklasse' : []
+                  'Jaar' : [],
+                  'SBI' : [],
+                  'Grootteklasse' : []
                 }
             },
           'table2' : {
               'columns' : {
-                  'jaar' : [],
-                  'sbi' : [],
-                  'grootteklasse' : [],
-                  'oorzaak' : [],
-                  'effect' : []
+                  'Jaar' : [],
+                  'SBI' : [],
+                  'Grootteklasse' : [],
+                  'Oorzaak' : [],
+                  'Effect' : []
                 }
             }
         }
 
-      $(function(){
-          $.each(meta.table1.columns, function(index, value) {
-              var div = $("<div class=\"dimension\">");
-              div.html("<div class=\"dimhead\"><span>" + 
-                index + 
-                "</span><input type=\"text\"></input></div>");
-              $("#merge").append(div);
-            });
-          $.each(meta.table2.columns, function(index, value) {
-              var div = $("<div class=\"dimension\">");
-              div.html("<h3>" + index + "</h3>");
-              $("#merge").append(div);
-            });
-        });
+
+      $(function() {
+        $("#merge").accordion({
+            collapsible : true,
+            autoHeight : false,
+            active : false,
+            header : 'div.foo'
+          });
+
+    $(".no-event-bubble-up").each(function() {
+      $(this).click(function(e) {
+        e.stopPropagation();
+      });
+    });
+      });
     </script>
+    <style>
+      
+      /*DIV.dimensionheader {
+        border : solid 1px blue;
+        padding : 2pt 2pt;
+      }
+      DIV.dimension1, DIV.dimension2 {
+        width : 49%;
+        border : 1px solid yellow;
+        padding : 2pt 0pt;
+      }
+      DIV.dimension1 { 
+        float : left;
+      }
+      DIV.dimension2 {
+        margin-left : 50%;
+      }
+      DIV.dimensionheader SELECT {
+        width : 100%;
+      }
+      DIV.dimensionsettings {
+        border : solid 1px red;
+      }*/
+
+      DIV.table1column SELECT {
+        position : relative;
+        left : 50%;
+        top : -22px;
+        width : 48%;
+      }
+      DIV.table2column H3 {
+        position : relative;
+        left : 50%;
+        top : -23px;
+        width : 48%;
+        margin-left : -24.2px;
+      }
+      DIV.table2column SELECT {
+        margin-top : 1px;
+        margin-left : 24.2px;
+      }
+      DIV.foo {
+        height : 25px;
+      }
+    </style>
 
   </head>
   <body>
@@ -71,9 +117,54 @@
     </div>
 
     <div class="content">
-      <form id="merge">
-      </form>
-    </div>
+      <div id="merge">
+
+        <div class="foo table1column">
+          <h3><a href="#">Jaar</a></h3>
+          <select class="no-event-bubble-up">
+            <option>Foo</option>
+            <option>BarM</option>
+          </select>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table1column">
+          <h3><a href="#">SBI</a></h3>
+          <select class="no-event-bubble-up">
+            <option>Foo</option>
+            <option>BarM</option>
+          </select>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table1column">
+          <h3><a href="#">Grootteklasse</a></h3>
+          <select class="no-event-bubble-up">
+            <option>Foo</option>
+            <option>BarM</option>
+          </select>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table2column">
+          <select class="no-event-bubble-up">
+            <option>Foo</option>
+            <option>BarM</option>
+          </select>
+          <h3><a href="#">Grootteklasse</a></h3>
+        </div>
+        <div>
+          FOO
+        </div>
+
+      </div>
+
   </article>
 
   <footer>
