@@ -54,7 +54,8 @@
               $("#merge").append(div);
             });
 */
-        
+           function dimCreate(selection){
+           }
         
            var tab1 = Table( "pop"
                    , ["Population"
@@ -67,7 +68,7 @@
            var tab2 = Table( "inc"
                    , ["Income"
                      ]
-                   , [ Dimension("gender", ["male","female"])
+                   , [ Dimension("age", ["young","old"])
                      , Dimension("year", [2002, 2003])
                      ]
                    )
@@ -80,23 +81,29 @@
            
            dimensions.enter().append("div")
               .classed("dimension", true)
-              .append("h3")
-              .append("a")
-              .text(function(d) {return d.name;})
+              .each( function(d,i){
+                 
+                 var dim = d3.select(this);
+                 dim.append("div")
+                   .classed("foo", true)
+                   .append("h3")
+                     .append("a")
+                        .text(function(d) {return d.name;})
+                 
+                 var cats = dim.append("div")
+                   .classed("categories", true);
+                   
+                 cats.selectAll("div.category")
+                      .data(d.categories)
+                      .enter()
+                      .append("div")
+                      .classed("category", true)
+                      .text(function(c) {return c.name;})
+              })
               ;
               
            dimensions.exit().remove();
-           
-           dimensions.selectAll("select")
-              .data(function(d){return d;})
-              .enter()
-              .append("select")
-              .selectAll("options")
-              .data(function(d){return d.categories;})
-              .enter().append("option").text(function(d) {return d;})
-              
-           
-
+          
         });
 
       $(function() {
