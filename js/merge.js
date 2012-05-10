@@ -89,26 +89,3 @@ function Dimension(name, categories, type){
           , type: type || "categorical"
           }
 }
-
-var tab1 = Table( "pop"
-                , ["Population"
-                  ]
-                , [ Dimension("gender", ["male","female"])
-                  , Dimension("year", [2001,2002])
-                  ]
-                )
-
-var tab2 = Table( "inc"
-                , ["Income"
-                  ]
-                , [ Dimension("gender", ["male","female"])
-                  , Dimension("year", [2002, 2003])
-                  ]
-                )
-
-//console.log(tab1)
-//console.log(tab2)
-
-var m = Merge(tab1, tab2)
-console.log(m);
-//var t = Table("T1",,[d])   

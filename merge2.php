@@ -20,42 +20,9 @@
     
 
     <script type="text/javascript">
-      var meta = {
-          'table1' : {
-              'columns' : {
-                  'Jaar' : [],
-                  'SBI' : [],
-                  'Grootteklasse' : []
-                }
-            },
-          'table2' : {
-              'columns' : {
-                  'Jaar' : [],
-                  'SBI' : [],
-                  'Grootteklasse' : [],
-                  'Oorzaak' : [],
-                  'Effect' : []
-                }
-            }
-        }
-      
       var m;
 
       $(function(){
-/*
-          $.each(meta.table1.columns, function(index, value) {
-              var div = $("<div class=\"dimension\">");
-              div.html("<div class=\"dimhead\"><span>" + 
-                index + 
-                "</span><input type=\"text\"></input></div>");
-              $("#merge").append(div);
-            });
-          $.each(meta.table2.columns, function(index, value) {
-              var div = $("<div class=\"dimension\">");
-              div.html("<h3>" + index + "</h3>");
-              $("#merge").append(div);
-            });
-*/
            function dimCreate(selection){
            }
         
@@ -101,49 +68,32 @@
               
                  var dim = d3.select(this);
                  var dimmerged = dim.append("div")
-                   .classed("foo", true)
-                   .classed("merged", true);
-                 
-                 dimmerged.append("h3") 
+                   .classed("merged", true)
+                   .append("h3") 
                      .append("a")
                         .text(function(d) {return d.name;})
                  
-                 dimmerged.append("label")
-                   .attr("for", function(d) {return "dim_" + d.name + "_0";})
-                   .text("Table '" + m.tabs[0].name + "' : ")
-                   ;
-                   
-                 dimmerged.append("select")
-                   .attr("id", function(d) {return "dim_" + d.name + "_0";})
-                   .attr("value", function(d) {return d.from[0]})
-                   .call(addOptions, m.tabs[0].dimensions.map(function(d){return d.name;}), d.from[0])
-                   ;
-                   
-                 dimmerged.append("label")
-                   .attr("for", function(d) {return "dim_" + d.name + "_1";})
-                   .text("Table '" + m.tabs[1].name + "' : ")
-                    ;
-                    
-                 dimmerged.append("select")
-                   .attr("id", function(d) {return "dim_" + d.name + "_1";})
-                   .attr("value", function(d) {return d.from[1]})
-                   .call(function(_){
-                      var dims = m.tabs[1].dimensions.map(function(d){return d.name});
-                      for (var i = 0; i < dims.length; i++){
-                         _.node().options[i] = new Option(dims[i], dims[i], d.name == dims[i]);
-                      }
-                    })
+                 var cats = dim.append("div")
+                   .classed("categories", true)
+                   .append("table")
                    ;
 
-                 var cats = dim.append("div")
-                   .classed("categories", true);
-                   
-                 cats.selectAll("div.category")
+                /*                   
+                 cats.append("tr");
+                   .data()
+                */
+                 cats.selectAll("tr.category")
                       .data(d.categories)
                       .enter()
-                      .append("div")
+                      .append("tr")
                       .classed("category", true)
-                      .text(function(c) {return c.name;})
+                      .classed("odd", function(d,i){ return i%2;})
+                      .each(function(d,i){
+                         var tr = d3.select(this);
+                         tr.append("th").append("input").attr("value", d.name);
+                         tr.append("th").append("input").attr("value", d.from[0]);
+                         tr.append("th").append("input").attr("value", d.from[1]);
+                       })
               })
               ;
               
@@ -156,7 +106,7 @@
             collapsible : true,
             autoHeight : false,
             active : false,
-            header : 'div.foo'
+            header : 'div.merged'
           });
 
     $(".no-event-bubble-up").each(function() {
@@ -209,7 +159,7 @@
         margin-top : 1px;
         margin-left : 24.2px;
       }
-      DIV.foo {
+      DIV.merged {
         height : 25px;
       }
       
@@ -240,52 +190,34 @@
 
     <div class="content">
       <div id="merge">
-
-        <div class="foo table1column">
+      
+        <div class="merged">
           <h3><a href="#">Jaar</a></h3>
-          <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
-          </select>
         </div>
         <div>
-          FOO
+         <table>
+           <tr>
+              <th></th>
+              <th>
+               <label>table 1:</label>
+               <select>
+                  <option ></option>
+                  <option selected="true">year</option>
+               </select>
+              </th>
+              <th>table 2</th>
+           </tr>
+           <tr class="category">
+             <td><label>cat 1</label><input value="bla"></td>
+             <td><input value="bla"></td>
+             <td><input value="bla"></td>
+           <tr>
+         </table>
         </div>
 
-        <div class="foo table1column">
-          <h3><a href="#">SBI</a></h3>
-          <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
-          </select>
-        </div>
-        <div>
-          FOO
-        </div>
-
-        <div class="foo table1column">
-          <h3><a href="#">Grootteklasse</a></h3>
-          <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
-          </select>
-        </div>
-        <div>
-          FOO
-        </div>
-
-        <div class="foo table2column">
-          <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
-          </select>
-          <h3><a href="#">Grootteklasse</a></h3>
-        </div>
-        <div>
-          FOO
-        </div>
 
       </div>
+    </div>
 
   </article>
 
