@@ -7,6 +7,7 @@
 
     <!-- webpage icon -->
     <link type="text/css" href="css/ui_merge.css" rel="stylesheet" />
+    <link type="text/css" href="css/flexigrid.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="img/favicon2.png" type="image/png" />
 
@@ -17,6 +18,7 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
     <script type="text/javascript" src="js/d3/d3.js"></script>
     <script type="text/javascript" src="js/merge.js"></script>
+    <script type="text/javascript" src="js/flexigrid.js"></script>
     
 
     <script type="text/javascript">
@@ -73,10 +75,26 @@
                      .append("a")
                         .text(function(d) {return d.name;})
                  
-                 var cats = dim.append("div")
-                   .classed("categories", true)
+                 var mapping = dim.append("div")
                    .append("table")
+                   .classed("mapping", true)
                    ;
+                   
+                 mapping.append("thead")
+                   .append("tr")
+                   .selectAll("th").data([null, 0, 1, null])
+                     .enter()
+                     .append("th")
+                     .text(function(d, i) {
+                        if (d != null){
+                           return m.tabs[i-1].name;
+                        } else {
+                           return "name"
+                        }
+                     })
+                   ;
+                 
+                 var cats = mapping.append("tbody");
 
                 /*                   
                  cats.append("tr");
@@ -90,9 +108,12 @@
                       .classed("odd", function(d,i){ return i%2;})
                       .each(function(d,i){
                          var tr = d3.select(this);
-                         tr.append("th").append("input").attr("value", d.name);
-                         tr.append("th").append("input").attr("value", d.from[0]);
-                         tr.append("th").append("input").attr("value", d.from[1]);
+                         tr.append("td").append("input").attr("value", d.name);
+                         tr.append("td").append("input").attr("value", d.from[0]);
+                         tr.append("td").append("input").attr("value", d.from[1]);
+                         var cb = tr.append("td").append("input").attr("type", "checkbox")
+                         if (d.include)  cb.attr("checked",true)
+                           ;
                        })
               })
               ;
@@ -108,12 +129,9 @@
             active : false,
             header : 'div.merged'
           });
-
-    $(".no-event-bubble-up").each(function() {
-      $(this).click(function(e) {
-        e.stopPropagation();
-      });
-    });
+          
+        $(".mapping").flexigrid();
+          
       });
       
       
@@ -190,7 +208,6 @@
 
     <div class="content">
       <div id="merge">
-      
         <div class="merged">
           <h3><a href="#">Jaar</a></h3>
         </div>
@@ -217,6 +234,9 @@
 
 
       </div>
+      <div id="slickmerge">
+      </div>
+
     </div>
 
   </article>

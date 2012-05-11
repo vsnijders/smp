@@ -18,15 +18,26 @@ function validate_line(selection, variables) {
   }
 }
 
+function highlightPoint(points){
+   points
+     .on("mouseover", function(d){
+           console.log(d);
+        })
+     ;
+}
+
 function highlightLine(lines){
   lines
      .on("mouseover", function(d){
-           d3.selectAll("g.colour").filter(function(d1) d1 != d)
+           d3.selectAll("g.colour")
+              .style("stroke-width", function(d1) {return (d1 != d)? 1: 2;})
+              .filter(function(d1) {return (d1 != d)})
               .style("stroke-opacity", 0.2)
               .style("fill-opacity", 0.2)
               ;
         })
      .on("mouseout", function(d){
+           d3.select(this).style("stroke-width", 1);
            d3.selectAll("g.colour")
               .style("stroke-opacity", 1)
               .style("fill-opacity", 0.5)
@@ -150,6 +161,7 @@ LineChart.prototype.plot = function(chart, data) {
         .attr("cx", map.x.scaledValue)
         .attr("cy", map.y.scaledValue)
         .attr("r", 3)
+        .call(highlightPoint)
 	     ;
      return cg;
   }).call(highlightLine);
