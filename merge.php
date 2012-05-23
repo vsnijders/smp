@@ -106,6 +106,10 @@
             active : false,
             header : 'div.foo'
           });
+        $(".leaveout").change(function() {
+            var foo = $(this).parent().parent().parent();
+            $(".selectaggregate", $(this).parent().parent().parent()).toggle();
+          });
 
     $(".no-event-bubble-up").each(function() {
       $(this).click(function(e) {
@@ -158,7 +162,11 @@
         margin-left : 24.2px;
       }
       DIV.foo {
+        margin-top : 20px;
         height : 25px;
+      }
+      TD, TH {
+        vertical-align : top;
       }
     </style>
 
@@ -187,19 +195,47 @@
         <div class="foo table1column">
           <h3><a href="#">Jaar</a></h3>
           <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+            <option>Oorzaak</option>
+            <option>Effect</option>
           </select>
         </div>
         <div>
-          FOO
+          <p>You haven't selected a column with which to link this column. How do you want this column to show up in
+          the merged table?</p>
+          <form>
+            <table>
+              <tr><td><input type="radio" class="leaveout" name="nt1d1"></td><td>
+                  Leave column out of the merged table
+                  <div class="selectaggregate">
+                    <em>Use the following category as the selected aggregate:</em><br>
+                    <table>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2006</td</tr>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2007</td</tr>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2008</td</tr>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2009</td</tr>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2010</td</tr>
+                      <tr><td><input type="radio" name="nt1d1c1"></td><td>2011</td</tr>
+                    </table>
+                  </div>
+                </td></tr>
+              <tr><td><input type="radio" class="leaveout" name="nt1d1"></td><td>Convert the column to variables</td></tr>
+            </table>
+          </form>
         </div>
 
         <div class="foo table1column">
           <h3><a href="#">SBI</a></h3>
           <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+            <option>Oorzaak</option>
+            <option>Effect</option>
           </select>
         </div>
         <div>
@@ -209,9 +245,103 @@
         <div class="foo table1column">
           <h3><a href="#">Grootteklasse</a></h3>
           <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+            <option>Oorzaak</option>
+            <option>Effect</option>
           </select>
+        </div>
+        <div>
+          <table>
+            <tr><td>Microbedrijf</td><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+            </td></tr>
+            <tr><td>Kleinbedrijf</td><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+            </td></tr>
+            <tr><td>Middenbedrijf</td><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+            </td></tr>
+            <tr><td>Grootbedrijf</td><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+            </td></tr>
+            <tr><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+              </td><td>Microbedrijf
+            </td></tr>
+            <tr><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+              </td><td>Kleinbedrijf
+            </td></tr>
+            <tr><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+              </td><td>Middenbedrijf
+            </td></tr>
+            <tr><td>
+              <select>
+                <option>Do not link category</option>
+                <option>Microbedrijf</option>
+                <option>Kleinbedrijf</option>
+                <option>Middenbedrijf</option>
+                <option>Grootbedrijf</option>
+              </select>
+              </td><td>Grootbedrijf
+            </td></tr>
+          </table>
+        </div>
+
+        <div class="foo table2column">
+          <select class="no-event-bubble-up">
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+          </select>
+          <h3><a href="#">Jaar</a></h3>
         </div>
         <div>
           FOO
@@ -219,10 +349,51 @@
 
         <div class="foo table2column">
           <select class="no-event-bubble-up">
-            <option>Foo</option>
-            <option>BarM</option>
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+          </select>
+          <h3><a href="#">SBI</a></h3>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table2column">
+          <select class="no-event-bubble-up">
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
           </select>
           <h3><a href="#">Grootteklasse</a></h3>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table2column">
+          <select class="no-event-bubble-up">
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+          </select>
+          <h3><a href="#">Oorzaak</a></h3>
+        </div>
+        <div>
+          FOO
+        </div>
+
+        <div class="foo table2column">
+          <select class="no-event-bubble-up">
+            <option>Do not link with column in other table</option>
+            <option>Jaar</option>
+            <option>SBI</option>
+            <option>Grootteklasse</option>
+          </select>
+          <h3><a href="#">Effect</a></h3>
         </div>
         <div>
           FOO
