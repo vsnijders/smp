@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- jQuery includes -->
+    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+
+    <script type="text/javascript">
+      function newlinkdiv(base) {
+        var link = $("<div>").addClass("link");
+        $("<div>").addClass("table1").droppable({
+            activeClass : "active",
+            hoverClass : "hover",
+            accept: function(d) {
+                if ($(this).find("div." + base + "table1column").length) return false;
+                return (d.hasClass(base + "table1column"));
+              },
+            drop: function(event, ui) {
+              $("<div></div>" ).text(ui.draggable.text()).addClass(base + "table1column").addClass("table1column").
+                draggable({revert:"invalid"}).appendTo(this);
+              ui.draggable.remove();
+              if (!lastempty(base)) newlinkdiv(base);
+              checkempty(base);
+            }
+          }).appendTo(link);
+        $("<div>").addClass("table2").droppable({
+            activeClass : "active",
+            hoverClass : "hover",
+            accept: function(d) {
+                if ($(this).find("div." + base + "table2column").length) return false;
+                return (d.hasClass(base + "table2column"));
+              },
+            drop: function(event, ui) {
+              $("<div></div>" ).text(ui.draggable.text()).addClass(base + "table2column").addClass("table2column").
+                draggable({revert:"invalid"}).appendTo(this);
+              ui.draggable.remove();
+              if (!lastempty(base)) newlinkdiv(base);
+              checkempty(base);
+            }
+          }).appendTo(link);
+        link.hide();
+        link.appendTo("#" + base + " > .links");
+        link.show("slow");
+      }
+
+      function lastempty(base) {
+        if ($("#" + base + "> .links > div.link:last-child").find("div.table1column").length) return false;
+        if ($("#" + base + "> .links > div.link:last-child").find("div.table2column").length) return false;
+        return true;
+      }
+      function checkempty(base) {
+        var divs =  $("#" + base + "> .links > div.link");
+        var n = divs.length
+        $("#" + base + "> .links > div.link").each(function(i, e) {
+          if (!$("> div.table1 > div.table1column", e).length &&
+              !$("> div.table2 > div.table2column", e).length && i < (n-1)) {
+            $(e).hide('blind', {}, "slow", function() {
+                $(this).remove();
+              });
+          }
+        });
+      }
+
+
+      var tabellen = {
+        't1' : ['Kolom A', 'Kolom B', 'Kolom C', 'Kolom D'],
+        't2' : ['Kolom I', 'Kolom II', 'Kolom III', 'Kolom V'],
+      };
+
+      function create_link_page(base, data) {
+        $("<div>").addClass("links").appendTo($("#" + base));
+        var tablecolumns = $("<div>").addClass("tablecolumns").html(
+          "<div id=\"contentwrapper\"><div class=\"table1columns\"></div></div>" +
+          "<div class=\"table2columns\"></div>")
+          .appendTo($("#" + base));
+        $.each(data.t1, function(index, value) {
+          $("<div>").addClass(base + "table1column").addClass("table1column").text(value)
+            .appendTo($(".table1columns", tablecolumns)).draggable({
+              revert : "invalid"
+            });
+        });
+        $.each(data.t2, function(index, value) {
+          $("<div>").addClass(base + "table2column").addClass("table2column").text(value)
+            .appendTo($(".table2columns", tablecolumns)).draggable({
+              revert : "invalid"
+            });
+
+        });
+        newlinkdiv(base);
+        $(".table1columns", tablecolumns).droppable({
+          accept: "." + base + "table1column",
+          activeClass : "active",
+          hoverClass : "hover",
+          drop: function(event, ui) {
+            $("<div></div>" ).text(ui.draggable.text()).addClass(base+"table1column").addClass("table1column").
+              draggable({revert:"invalid"}).appendTo(this);
+            ui.draggable.remove();
+            checkempty(base);
+          }
+        });
+        $(".table2columns", tablecolumns).droppable({
+          accept: "." + base + "table2column",
+          activeClass : "active",
+          hoverClass : "hover",
+          drop: function(event, ui) {
+            $("<div></div>" ).text(ui.draggable.text()).addClass(base+"table2column").addClass("table2column").
+              draggable({revert:"invalid"}).appendTo(this);
+            ui.draggable.remove();
+            checkempty(base);
+          }
+        });
+      }
+
+
+      $(function() {
+        create_link_page("foo", tabellen);
+        create_link_page("bar", tabellen);
+      });
+    </script>
+
+    <style>
+      DIV {
+      }
+      .active {
+        background-color : rgb(180, 180, 180);
+      }
+      .hover{
+        background-color : rgb(255, 255, 255);
+      }
+      DIV.link {
+        margin-top : 5px;
+        margin-bottom : 5px;
+        padding-top : 1px;
+        padding-bottom : 1px;
+        padding-left : 2px;
+        min-height : 25px;
+        background : rgb(230,230,230);
+        border-radius : 5px;
+        border : 1px solid rgb(100, 100, 100);
+      }
+      DIV.link DIV.table1 {
+        float : left;
+        width : 250px;
+        margin-right : 10px;
+      }
+      DIV.link DIV.table2 {
+        float : left;
+        width : 250px;
+      }
+      DIV.table1, DIV.table2 {
+        padding-top : 1px;
+        padding-bottom : 1px;
+        min-height : 22px;
+      }
+      DIV.table1column, DIV.table2column {
+        background : rgb(210,210,210);
+        margin-left : 10px;
+        margin-right : 10px;
+        margin-top : 5px;
+        margin-bottom : 5px;
+      }
+      DIV.table1 DIV.table1column, DIV.table2 DIV.table2column {
+        margin-top : 0px;
+        margin-bottom : 0px;
+      }
+      DIV#contentwrapper {
+        float : left;
+        width : 100%;
+      }
+      DIV.table1columns {
+        margin-right: 50%;
+        min-height : 20px;
+      }
+      DIV.table2columns {
+        float : left;
+        width : 50%;
+        margin-left : -50%;
+        min-height : 20px;
+      }
+      DIV.table1column, DIV.table2column {
+        width : 200px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="foo">
+    </div>
+	
+    <div id="bar">
+    </div>
+	
+  </body>
+</html>
