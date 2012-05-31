@@ -12,6 +12,7 @@ function Merge(tab1, tab2){
       var d = { from: [d1.name,d2.name]
               , name: name || d1.name
               , categories: mergecategories(d1,d2)
+              , include: true
               }
       merge.dims[d.name] = d;
       return merge;
@@ -25,22 +26,26 @@ function Merge(tab1, tab2){
          var i = cats2.indexOf(c);
          return { name: c
                 , from: [c, (i > -1)? cats2[i] : null]
+                , include: (i > -1)
                 };
       });
 
       cats2 = cats2.filter(function(c){return cats1.indexOf(c) == -1;});
       cats = cats.concat(cats2.map(function(c){ 
-         return {name: c, from: [null, c]};
+         return { name: c
+                , from: [null, c]
+                , include: false
+                };
       }));
       return cats;      
    }
 
-   merge.mergecategory = function(dim, c1, c2, name){
+   merge.mergecategory = function(dim, c0, c1, c2, name){
      //TODO remove old mapping
-     var c = { from: [c1, c2]
-             , name:  name || c1
-             }
-     dim.push = c;
+     c0.from = [c1,c2];
+     c0.name = name || c1;
+     c0.include = true;
+     
      return merge;
    }
    
@@ -89,26 +94,3 @@ function Dimension(name, categories, type){
           , type: type || "categorical"
           }
 }
-
-var tab1 = Table( "pop"
-                , ["Population"
-                  ]
-                , [ Dimension("gender", ["male","female"])
-                  , Dimension("year", [2001,2002])
-                  ]
-                )
-
-var tab2 = Table( "inc"
-                , ["Income"
-                  ]
-                , [ Dimension("gender", ["male","female"])
-                  , Dimension("year", [2002, 2003])
-                  ]
-                )
-
-//console.log(tab1)
-//console.log(tab2)
-
-var m = Merge(tab1, tab2)
-console.log(m);
-//var t = Table("T1",,[d])   

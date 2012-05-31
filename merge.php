@@ -38,6 +38,8 @@
                 }
             }
         }
+      
+      var m;
 
       $(function(){
 /*
@@ -54,7 +56,8 @@
               $("#merge").append(div);
             });
 */
-        
+           function dimCreate(selection){
+           }
         
            var tab1 = Table( "pop"
                    , ["Population"
@@ -67,12 +70,26 @@
            var tab2 = Table( "inc"
                    , ["Income"
                      ]
-                   , [ Dimension("gender", ["male","female"])
+                   , [ Dimension("age", ["young","old"])
                      , Dimension("year", [2002, 2003])
                      ]
                    )
 
-           var m = Merge(tab1, tab2);
+           m = Merge(tab1, tab2);
+           
+           function addOptions(selections, options, selected){
+
+              var opts = selections.selectAll("option")
+                    .data(options);
+                    
+              opts.enter()
+                  .append("option")
+                  .text(function(d){return d;})
+                  ;
+              opts.exit().remove();
+              
+              opts.filter(function(d) {return d == selected}).attr("selected", true);
+           }
            
            var merge = d3.select("#merge");
            
@@ -80,23 +97,58 @@
            
            dimensions.enter().append("div")
               .classed("dimension", true)
-              .append("h3")
-              .append("a")
-              .text(function(d) {return d.name;})
+              .each( function(d,i){
+              
+                 var dim = d3.select(this);
+                 var dimmerged = dim.append("div")
+                   .classed("foo", true)
+                   .classed("merged", true);
+                 
+                 dimmerged.append("h3") 
+                     .append("a")
+                        .text(function(d) {return d.name;})
+                 
+                 dimmerged.append("label")
+                   .attr("for", function(d) {return "dim_" + d.name + "_0";})
+                   .text("Table '" + m.tabs[0].name + "' : ")
+                   ;
+                   
+                 dimmerged.append("select")
+                   .attr("id", function(d) {return "dim_" + d.name + "_0";})
+                   .attr("value", function(d) {return d.from[0]})
+                   .call(addOptions, m.tabs[0].dimensions.map(function(d){return d.name;}), d.from[0])
+                   ;
+                   
+                 dimmerged.append("label")
+                   .attr("for", function(d) {return "dim_" + d.name + "_1";})
+                   .text("Table '" + m.tabs[1].name + "' : ")
+                    ;
+                    
+                 dimmerged.append("select")
+                   .attr("id", function(d) {return "dim_" + d.name + "_1";})
+                   .attr("value", function(d) {return d.from[1]})
+                   .call(function(_){
+                      var dims = m.tabs[1].dimensions.map(function(d){return d.name});
+                      for (var i = 0; i < dims.length; i++){
+                         _.node().options[i] = new Option(dims[i], dims[i], d.name == dims[i]);
+                      }
+                    })
+                   ;
+
+                 var cats = dim.append("div")
+                   .classed("categories", true);
+                   
+                 cats.selectAll("div.category")
+                      .data(d.categories)
+                      .enter()
+                      .append("div")
+                      .classed("category", true)
+                      .text(function(c) {return c.name;})
+              })
               ;
               
            dimensions.exit().remove();
-           
-           dimensions.selectAll("select")
-              .data(function(d){return d;})
-              .enter()
-              .append("select")
-              .selectAll("options")
-              .data(function(d){return d.categories;})
-              .enter().append("option").text(function(d) {return d;})
-              
-           
-
+          
         });
 
       $(function() {
@@ -164,6 +216,11 @@
       DIV.foo {
         margin-top : 20px;
         height : 25px;
+      }
+      
+      DIV.merged SELECT, DIV.merged label {
+         position: relative;
+         top: -22px;
       }
       TD, TH {
         vertical-align : top;
@@ -408,4 +465,3 @@
 
   </body>
 </html>
-
