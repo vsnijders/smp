@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- jQuery includes -->
+    <link type="text/css" href="../../css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/linker.js"></script>
+
+    <script type="text/javascript">
+      var tabellen = {
+        't1' : ['Kolom A', 'Kolom B', 'Kolom C', 'Kolom D'],
+        't2' : ['Kolom I', 'Kolom II', 'Kolom III', 'Kolom V'],
+      };
+
+      $(function() {
+        var foo = Linker_new($("#foo"), tabellen);
+
+        var bar = Linker_new($("#bar"), tabellen);
+      });
+    </script>
+
+    <style>
+      DIV {
+      }
+      .active {
+        background-color : rgb(180, 180, 180);
+      }
+      .hover{
+        background-color : rgb(255, 255, 255);
+      }
+      DIV.link {
+        margin : 5px 0px;
+        padding : 1px 2px 1px 2px;
+        min-height : 25px;
+        background : rgb(230,230,230);
+        border-radius : 5px;
+        border : 1px solid rgb(100, 100, 100);
+      }
+      DIV.link DIV.table1, DIV.link DIV.table2 {
+        float : left;
+        width : 250px;
+        min-height : 22px;
+        margin : 0px 10px;
+        padding : 1px 0px;
+      }
+      DIV.table1column, DIV.table2column {
+        background : rgb(210,210,210);
+        margin-left : 10px;
+        margin-right : 10px;
+        margin-top : 0px;
+        margin-bottom : 5px;
+        width : 200px;
+      }
+      DIV.table1columns, DIV.table2columns {
+        min-height : 20px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="foo">
+    </div>
+	
+    <div id="bar">
+    </div>
+	
+  </body>
+</html>
