@@ -12,7 +12,9 @@ info <- data.frame()
 # r-script read_table.R defining the functions
 # - read_table() that returns the table as a data.frame 
 # - table_info(id) that returns a data.frame with information about the table
-tables <- c("bevolkingsprognoses", "exampletable", "bedrijvendynamiek")
+tables <- c("bevolkingsprognoses", "bedrijvendynamiek_gekoppeld", "labourmarket",
+    "diabetes", "diabetes_geneesmiddelen", "diabetes_gekoppeld", 
+    "arbeidsmarktparticipatie", "bedrijvenaantallen", "bedrijvendynamiek")
 
 # Read all tables and add to database
 for (i in seq_along(tables)) {
@@ -21,7 +23,6 @@ for (i in seq_along(tables)) {
     table <- read_table()
     info  <- rbind(info, inf)
     dbWriteTable(db, as.character(inf$name), table, row.names=FALSE, overwrite=TRUE)
-
 }
 
 # Write table info to database

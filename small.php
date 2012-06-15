@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<?php
+  require_once("php/meta.php");
+
+  // table id to read in: TODO allow to set using GET/POST
+  $id = 3;
+
+  // read metadata of table
+  $pdo = new PDO("sqlite:data/test.sqlite");
+  $meta = get_meta($pdo, $id);
+
+  $charts = array(
+      'bar' => array('y', 'size'),
+      'mosaic' => array('x', 'y', 'size'),
+      'line' => array('x', 'y', 'points', 'colour'),
+      'bubble' => array('x', 'y', 'points', 'size', 'colour')
+    );
+?>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -6,7 +23,7 @@
     <title>jQuery test</title>
 
     <!-- jQuery includes -->
-    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+    <link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 
@@ -18,24 +35,44 @@
     <script type="text/javascript" src="js/d3/d3.js"></script>
 
     <!-- Plotting includes -->
-    <script type="text/javascript" src="js/barplot.js"></script>
+    <script type="text/javascript" src="js/barchart.js"></script>
+    <script type="text/javascript" src="js/mosaic.js"></script>
+    <script type="text/javascript" src="js/bubble.js"></script>
 
-    <script type="text/javascript" src="js/gog.js"></script>
     <script type="text/javascript">
       var graphtype = "bar";
       var selection = {
           x : [],
           y : [],
           rows : [],
-          columns : []
+          columns : [],
+          filter : {}
         };
 
       function redraw_graph() {
-        $("#graphtype").html("<b>" + graphtype + "</b>");
-        //$("#graphdata").load("ui_fetch.php", selection);
-        jQuery.getJSON("ui_fetch.php", selection, function(data) {
-          foo(data);
-        })
+        var validated = false;
+        if (graphtype == "bar") {
+          validated = validate_bar(selection);
+        } else if (graphtype == "mosaic") {
+          validated = validate_mosaic(selection);
+        } else if (graphtype == "bubble") {
+          validated = validate_bubble(selection);
+        } 
+        if (validated) {
+          //$("#graphtype").html("<b>" + graphtype + "</b>");
+          //$("#graphdata").load("ui_fetch.php?html=1", selection);
+          jQuery.getJSON("ui_fetch.php", selection, function(data) {
+            if (graphtype == "bar") {
+              draw_bar(data, selection);
+            } else if (graphtype == "mosaic") {
+              draw_mosaic(data, selection);
+            } else if (graphtype == "bubble") {
+              draw_bubble(data, selection);
+            } else {
+              d3.select(".chart").remove();
+            }
+          })
+        }
       }
 
       $(function() {
@@ -43,20 +80,66 @@
           connectWith: ".connectedSortable",
           update : function(event, ui) { 
             if (this.id != "variables") {
-              selection[this.id] = $(this).sortable('toArray');
+              refresh_selection();
               redraw_graph();
             }
           }
         }).disableSelection();
       });
 
+      refresh_selection = function() {
+        // update the selection itself
+        $('.plotvariable ul').each(function() {
+          var category = this.id;
+          selection[category] = [];
+        });
+        $('.plotvariable li').each(function() {
+          var variable = this.id;
+          var category = this.parentNode.id;
+          // only use the first variable in a category
+          if (selection[category].length == 0) 
+            selection[category].push(variable);
+        });
+        // update the filter
+        selection.filter = {}
+        $(".filter:checked").each(function() {
+          var value = this.value;
+          var variable = this.name;
+          if (selection.filter[variable] === undefined) 
+            selection.filter[variable] = [];
+          selection.filter[variable].push(value);
+          return (true);
+        }) ;
+      }
+
       $(function() {
         $("#graph").buttonset();
         $("#graph input").click(function() {
           graphtype = this.id;
+          var sel = $('.plotvariable').not('.' + graphtype);
+          $('li', sel).appendTo('#variables');
+          sel.hide();
+          $('.' + graphtype).show();
+          refresh_selection();
           redraw_graph();
         })
       });
+
+
+      $(function(){
+        $('.collapse').click(function() {
+          $(this).next().toggle('slow');
+          return false;
+        }).next().hide();
+      });
+
+      $(function(){
+        $('.filter').change(function() {
+          refresh_selection();
+          redraw_graph();
+        });
+      });
+
     </script>
 
     <style type="text/css">
@@ -72,7 +155,11 @@
         margin-bottom : 0pt;
       }
       div.graph {
-        color : red;
+        margin-left : 240px;
+        color : black;
+      }
+      div#graphtype, div#graphdata {
+        color : gray;
       }
       .connectedSortable { 
         border-top : solid 1px rgb(200,200,200);
@@ -93,10 +180,6 @@
         position: absolute; 
         margin-left: -1.3em;        
       }
-      /*.chart rect {
-        stroke: white;
-        fill: steelblue;
-      }*/
       .chart text {
         font-size : 10px;
         font-family : sans-serif;
@@ -104,7 +187,22 @@
       .draggable {
         cursor: move;
       }
-    </style>	
+      .collapseblethingy {
+        background : rgba(0,0,0, 0.5);
+        color : white;
+        z-index : 10;
+        position : relative;
+        left : 235px;
+        margin-top : -10px;
+        cursor : auto; 
+      }
+      .collapse {
+        position : relative;
+        left : 240px;
+        margin-top : -3px;
+        cursor : pointer;
+      }
+    </style>
 
   </head>
   <body>
@@ -113,51 +211,64 @@
     <h3>Graph</h3>
     <form>
       <div id="graph">
-        <input type="radio" id="bar" name="radio" checked="checked"/>
-          <label for="bar">bar</label>
-        <input type="radio" id="line" name="radio" />
-          <label for="line">line</label>
-        <input type="radio" id="bubble" name="radio" />
-          <label for="bubble">bubble</label>
-        <input type="radio" id="dot" name="radio" />
-          <label for="dot">dot</label>
-        <input type="radio" id="mosaic" name="radio" />
-          <label for="mosaic">mosaic</label>
+<?php
+  foreach($charts as $chart => $variables) {
+    echo "<input type=\"radio\" id=\"$chart\" name=\"radio\" checked=\"checked\"/>\n";
+    echo "<label for=\"$chart\">$chart</label>\n";
+  }
+?>
       </div>
     </form>
 
-    <h3>X</h3>
-    <ul id="x" class="connectedSortable">
-    </ul>
-
-    <h3>Y</h3>
-    <ul id="y" class="connectedSortable">
-    </ul>
-
-    <h3>Rows</h3>
-    <ul id="rows" class="connectedSortable">
-    </ul>
-
-    <h3>Columns</h3>
-    <ul id="columns" class="connectedSortable">
-    </ul>
+<?php
+  $vars = array();
+  foreach($charts as $chart => $variables) {
+    foreach ($variables as $variable) {
+      if (!isset($vars[$variable])) $vars[$variable] = array();
+      $vars[$variable][] = $chart;
+    }
+  }
+  foreach($vars as $variable => $charttypes) {
+    $class = implode(" ", $charttypes);
+    echo "<div class=\"plotvariable $class\">\n";
+    echo "<h3>$variable</h3>\n";
+    echo "<ul id=\"$variable\" class=\"connectedSortable\">\n";
+    echo "</ul>\n";
+    echo "</div>\n";
+  }
+?>
 
     <h3>Variables</h3>
     <ul id="variables" class="connectedSortable">
-      <li class="ui-state-default draggable" id="jaar">Jaar</li>
-      <li class="ui-state-default draggable" id="sbi">SBI</li>
-      <li class="ui-state-default draggable" id="grootteklasse">Grootteklasse</li>
-      <li class="ui-state-default draggable" id="effect">Effect</li>
-      <li class="ui-state-default draggable" id="variable">Variable</li>
-    </ul>
+<?php
+  // id variables
+  foreach ($meta['idvariables'] as $var) {
+    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+    echo "<span class=\"ui-icon ui-icon-gear collapse\"></span>\n";
+    echo $var . "\n";
+    echo "<div class=\"collapseblethingy\">\n";
+    echo "<form>\n";
+    foreach ($meta['levels'][$var] as $level) {
+      echo "<label><input type=\"checkbox\" class=\"filter\" name=\"{$var}\" value=\"{$level}\">{$level}</label><br>\n";
+    }
+    echo "</form>\n</div>\n</li>\n";
+  }
+  // numeric variables
+  foreach ($meta['levels']['variable'] as $var) {
+    echo "<li class=\"ui-state-default draggable collapseble\" id=\"{$var}\">\n";
+    echo "$var" . "\n</li>\n";
+  }
 
+?>
+    </ul>
   </div>
 
   <div class="graph">
-    <div id="graphtype">
-    </div>
-    <div id="graphdata">
-    </div>
+  </div>
+
+  <div id="graphtype">
+  </div>
+  <div id="graphdata">
   </div>
 
   </body>

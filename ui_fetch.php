@@ -2,13 +2,17 @@
   require_once("php/meta.php");
   require_once("php/asJSON.php");
 
+  
   $id = 3;
+  if (isset($_REQUEST['id']) && is_numeric($_REQUEST['id']))
+    $id = $_REQUEST['id'];
+
   $pdo = new PDO("sqlite:data/test.sqlite");
   $meta = get_meta($pdo, $id);
 
   // Determine which variables are used in the selection
   // only use x and y and only first variable
-  $selectionvars = array('x', 'y', 'size', 'colour', 'points');
+  $selectionvars = array('x', 'y', 'size', 'colour', 'points', 'row', 'column');
   $idvars        = array();
   $measurevars   = array();
   foreach($selectionvars as $selectionvar) {
@@ -35,7 +39,7 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "= 'TOTAL'";
+      $where[] = $var . "=" . $meta[$var]['default'];
     }
   }
   foreach($idvars as $var) {
@@ -47,7 +51,8 @@
       if (sizeof($sub_where))
         $where[] = '(' . implode(' OR ', $sub_where) . ')';
     } else {
-      $where[] = $var . "!= 'TOTAL'";
+      if (isset($meta[$var]['defaultnot']))
+        $where[] = $var . "!=" . $meta[$var]['defaultnot'];
     }
   }
   if (sizeof($measurevars)) {
@@ -56,11 +61,12 @@
       $sub_where[] = "variable = '" . $var . "'";
     }
     $where[] = '(' . implode(' OR ', $sub_where) . ')';
-    $idvars[] = 'variable';
   }
+  #$where[] = '( value IS NOT NULL )';
 
   $vars = $idvars;
   $vars[] = 'value';
+  $vars[] = 'variable';
   $sql = "SELECT " . implode(", ", $vars) . " FROM {$meta['name']}";
   if (sizeof($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
@@ -68,6 +74,15 @@
   if (sizeof($idvars)) {
     $sql .= " ORDER BY " . implode(", ", $idvars);
   }
+
+  if (isset($_REQUEST['html'])) {
+    echo "<pre>";
+    print_r($_REQUEST);
+    echo("\n");
+    echo($sql);
+    echo("\n");
+    echo "</pre>";
+  } 
 
   // Run query
   $result = $pdo->query($sql);
@@ -84,24 +99,29 @@
 
 
   $data = array();
-  while (true) {
-    $data_row = array();
-    for ($i = 0; $i < sizeof($measurevars); $i++) {
-      $row = $result->fetch(PDO::FETCH_ASSOC);
-      print_r($row);echo("<br>");
-      if (!$row) break;
+  $data_row = array();
+  $i = 0;
+  $missing = false;
+  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    // in case of a new data row: copy values of id-variables to new row
+    if (sizeof($data_row) == 0) {
       foreach ($idvars as $var) {
-        if ($var != 'variable') {
-          $data_row[$var] = $row[$var];
-        } else {
-          if ($row['variable'] == $measurevars[$i]) 
-            $data_row[$measurevars[$i]] = $row['value'];
-        }
+        $level = intval($row[$var])-1;
+        $data_row[$var] = $meta[$var]['levels'][$level];
       }
     }
-    if (sizeof($data_row)) {
-      $data[] = $data_row;
-    } else break;
+    // copy current measure value to new row
+    $data_row[$row['variable']] = $row['value'];
+    if (is_null($row['value'])) $missing = true;
+    // if current database row is last for data row: copy data row to data
+    // and start new row
+    $i++;
+    if ($i == sizeof($measurevars)) {
+      if (!$missing) $data[] = $data_row;
+      $missing = false;
+      $data_row = array();
+      $i = 0;
+    }
   }
 
 

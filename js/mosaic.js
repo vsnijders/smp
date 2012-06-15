@@ -1,11 +1,19 @@
 
-function draw_mosaic(data, selection) {
-  if (selection.x & selection.y & selection.size) {
-    d3.select(".chart").remove();
-    var chart = d3.select(".graph").append("svg").attr("class", "chart");
-    var mosaic = new Mosaic;
-    mosaic.width(600).height(600).xvar(selection.x[0]).yvar(selection.y[0])
-      .vvar(selection.size[0]).plot(chart, data, selection);
+function validate_mosaic(selection, variables) {
+  // check if required variables are present
+  if (selection.x !== undefined && selection.x.length > 0 && 
+    selection.y !== undefined && selection.y.length > 0 &&
+    selection.size !== undefined && selection.size.length > 0) {
+    // check if variables are correct type
+    if (variables[selection.y[0]] != "categorical") 
+      return "y should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.x[0]] != "categorical") 
+      return "x should be a categorical variable; currently it is a numerical variable";
+    if (variables[selection.size[0]] != "numerical")
+      return "size should be a numerical variable; currently it is a categorical variable";
+    return true;
+  } else {
+    return "Drag and drop one categorical variable on x and y, and a numeric one on size.";
   }
 }
 
@@ -21,6 +29,12 @@ function Mosaic() {
   this.xvar_ = undefined;
   this.yvar_ = undefined;
   this.vvar_ = "value";
+  this.mapping_ = undefined;
+}
+
+Mosaic.prototype.mapping = function(_) {
+  this.mapping_ = _;
+  return this;
 }
 
 Mosaic.prototype.width = function(width) {
@@ -51,13 +65,21 @@ Mosaic.prototype.vvar = function(vvar) {
 Mosaic.prototype.plot = function(chart, data, selection) {
   if (this.vvar_ === undefined | this.yvar_ === undefined | this.xvar_ == undefined) return;
   // some constants
+  var map = mapping.map();
+  
   var space = 3;
   var margin = 15;
   var xvar = this.xvar_;
   var yvar = this.yvar_;
   var vvar = this.vvar_;
+  var colourvar = this.yvar_;
   // set size of canvas
   chart.attr("width", this.width_).attr("height", this.height_);
+  // create scales
+  var colourscale = undefined
+  if (colourvar !== undefined) {
+    colourscale = d3.scale.category10();
+  }
   // nest data
   var datan = d3.nest()
     .key(function(d){ return d[xvar]; }).entries(data)
@@ -82,22 +104,24 @@ Mosaic.prototype.plot = function(chart, data, selection) {
       datan[i].values[j]["height"] = height;
       y += height + space;
     }
+	
     // draw rectangles
     chart.selectAll("#rect" + i).data(datan[i].values).enter().append("rect")
       .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y;})
       .attr("width", function(d) { return d.width;}).attr("height", function(d) { return d.height;})
-      .attr("fill", function(d,i) { return d[vvar] < 0 ? "#F00" : "#00F"});
+      .attr("fill", function(d) { return colourvar === undefined ? 'steelblue' : colourscale(d[colourvar]);})
+    //.attr("fill", "steelblue");
     // add tooltip to rects
-    $('rect').tipsy({
-      gravity: 'w',
+    
+	$('rect').tipsy({
+      gravity: 'e',
       html: true,
       title: function() {
         var d = this.__data__;
+		return mapping.toLabel(d);
         return d[xvar] + ', ' + d[yvar] + ': ' + d[vvar];
       }
     });
-    
-
     // next x
     x  += width + space;
   }

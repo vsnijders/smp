@@ -26,16 +26,33 @@ read_table <- function() {
     m$var2[m$var2 == "total"] <- NA
     m$var2 <- gsub("_", "-", m$var2)
     m$var2 <- gsub("-00", "+", m$var2)
-    m$var2 <- gsub("05", "5", m$var2)
-    m$var2 <- gsub("00", "0", m$var2)
+    #m$var2 <- gsub("05", "5", m$var2)
+    #m$var2 <- gsub("00", "0", m$var2)
 
     m$variable <- NULL
     m <- m[ , c("var1", "var2", "year", "var", "value")]
     names(m) <- c("gender", "age", "year", "variable", "value")
 
-    table1 <- dcast(m, gender + age + year ~ variable)
+    levels(m$gender) <- c(levels(m$gender), "TOTAL")
+    m$gender[is.na(m$gender)] <- "TOTAL"
+    levels(m$age) <- c(levels(m$age), "TOTAL")
+    m$age[is.na(m$age)] <- "TOTAL"
 
-    return(table1)
+    # only select prognoses; ignore confidence intervals for now
+    m <- m[m$variable == "prognosis", ]
+
+    # change levels to numeric
+    m$gender <- as.numeric(factor(m$gender, levels=c(
+        "Male", "Female", "TOTAL"
+      )))
+    m$age <- as.numeric(factor(m$age, levels=c(
+        "00-05", "05-10", "10-15", "15-20", "20-25", "25-30", "30-35", "35-40",
+        "40-45", "45-50", "50-55", "55-60", "60-65", "65-70", "70-75", "75-80", "80-85",
+        "85-90", "90-95", "95+", "TOTAL"
+      )))
+    m$year <- as.numeric(as.factor(m$year))
+
+    return(m)
 }
 
 
