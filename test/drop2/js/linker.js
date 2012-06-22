@@ -6,15 +6,20 @@
 //       - .column1
 //     - .link2
 //       - .column2
+//     - .linkcontent
 // - .columns
 //   - .columns1
 //     -* .column1
 //   - .columns2
 //     -* .column2
-function Linker_new(base, tables) {
-  this.base   = base;
-  this.tables = tables;
-  
+function Linker(base, tables) {
+  //TEST
+  this.on_link_change_ = undefined;
+  this.on_link_remove_ = undefined;
+  var linker = this;
+  //TEST
+
+
   // base/links
   var links = $("<div>").addClass("links").appendTo(base);
  
@@ -34,7 +39,14 @@ function Linker_new(base, tables) {
       return (d.hasClass("column1") && $(d.parent().parent().parent()).is(links));
     },
     drop : function(event, ui) {
+      // TEST
+      //ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      var link = ui.draggable.parent().parent();
       ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      if (linker.on_link_remove_ !== undefined) 
+        linker.on_link_remove_(ui.draggable.text(), undefined, link);
+      /// TEST
+      remove_empty();
     }
   });
 
@@ -51,7 +63,14 @@ function Linker_new(base, tables) {
       return (d.hasClass("column2") && $(d.parent().parent().parent()).is(links));
     },
     drop : function(event, ui) {
+      // TEST
+      //ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      var link = ui.draggable.parent().parent();
       ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      if (linker.on_link_remove_ !== undefined) 
+        linker.on_link_remove_(undefined, ui.draggable.text(), link);
+      /// TEST
+      remove_empty();
     }
   });
 
@@ -61,139 +80,94 @@ function Linker_new(base, tables) {
   function new_link() {
     this.links = links;
     var link = $("<div>").addClass("link");
-    $("<div>").addClass("table1").droppable({
+    $("<div>").addClass("link1").droppable({
         activeClass : "active",
         hoverClass : "hover",
         accept: function(d) {
           if ($(this).children(".column1").length) return false;
-          return ($(d.parent()).is(columns1));
+          return (
+            (d.hasClass("column1") &&
+              $(d.parent().parent().parent()).is(links)) ||
+            $(d.parent()).is(columns1) 
+          );
         },
         drop : function(event, ui) {
           ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+          //TEST
+          var link1 = $(this).text();
+          var link2 = $("> .link2", $(this).parent()).find(".column2")[0];
+          if (link2 !== undefined) link2 = $(link2).text();
+          if (linker.on_link_change_ !== undefined) 
+            linker.on_link_change_(link1, link2, $(this).parent());
+          ///TEST
           if (!last_link_empty()) new_link();
+          remove_empty();
         }
       }).appendTo(link);
-    $("<div>").addClass("table2").droppable({
+    $("<div>").addClass("link2").droppable({
         activeClass : "active",
         hoverClass : "hover",
         accept: function(d) {
           if ($(this).children(".column2").length) return false;
-          return ($(d.parent()).is(columns2));
+          return (
+            (d.hasClass("column2") &&
+              $(d.parent().parent().parent()).is(links)) ||
+            $(d.parent()).is(columns2) 
+          );
         },
         drop : function(event, ui) {
           ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+          //TEST
+          var link1 = $("> .link1", $(this).parent()).find(".column1")[0];
+          if (link1 !== undefined) link1 = $(link1).text();
+          var link2 = $(this).text();
+          if (linker.on_link_change_ !== undefined)
+            linker.on_link_change_(link1, link2, $(this).parent());
+          ///TEST
           if (!last_link_empty()) new_link();
+          remove_empty();
         }
       }).appendTo(link);
+    $("<div>").addClass("linkcontent").appendTo(link);
     link.hide();
     link.appendTo(this.links);
     link.show("slow");
   }
   // check if there are any empty links the need to be deleted
+  function link_empty(link) {
+    if ($("> .link1 > .column1", link).length) return false;
+    if ($("> .link2 > .column2", link).length) return false;
+    return true;
+  }
   function last_link_empty() {
-    if ($("> .link:last-child > .link1", links).find(".column1")) return false;
-    if ($("> .link:last-child > .link2", links).find(".column2")) return false;
-    return true;
+    return (link_empty($("> .link:last-child", links)));
   }
-
-
-
-  new_link();
-
-  // create
-}
-
-function Linker(base, table) {
-  this.base  = base;
-  this.table = table;
-
-  function on_table_drop(event, ui, base, table, num) {
-    $("<div></div>" ).text(ui.draggable.text())
-      .addClass(base + "table" + num + "column")
-      .addClass("table" + num + "column")
-      .draggable({revert:"invalid"}).appendTo(table);
-    ui.draggable.remove();
-    if (!lastempty(base)) newlinkdiv(base);
-    checkempty(base);
-  }
-
-  function on_table_accept(d, base, table, num) {
-    if ($(table).find("div." + base + "table" + num + "column").length) return false;
-    return (d.hasClass(base + "table" + num + "column"));
-  }
-
-  function newlinkdiv(base) {
-    var link = $("<div>").addClass("link");
-    $("<div>").addClass("table1").droppable({
-        activeClass : "active",
-        hoverClass : "hover",
-        accept: function(d) { return(on_table_accept(d, base, this, 1));},
-        drop: function(event, ui) { on_table_drop(event, ui, base, this, 1);}
-      }).appendTo(link);
-    $("<div>").addClass("table2").droppable({
-        activeClass : "active",
-        hoverClass : "hover",
-        accept: function(d) { return(on_table_accept(d, base, this, 2));},
-        drop: function(event, ui) { on_table_drop(event, ui, base, this, 2);}
-      }).appendTo(link);
-    link.hide();
-    link.appendTo("#" + base + " > .links");
-    link.show("slow");
-  }
-
-  function lastempty(base) {
-    if ($("#" + base + "> .links > div.link:last-child").find("div.table1column").length) return false;
-    if ($("#" + base + "> .links > div.link:last-child").find("div.table2column").length) return false;
-    return true;
-  }
-  function checkempty(base) {
-    var divs =  $("#" + base + "> .links > div.link");
+  function remove_empty() {
+    var divs =  $("> .link", links);
     var n = divs.length
-    $("#" + base + "> .links > div.link").each(function(i, e) {
-      if (!$("> div.table1 > div.table1column", e).length &&
-          !$("> div.table2 > div.table2column", e).length && i < (n-1)) {
-        $(e).hide('blind', {}, "slow", function() {
-            $(this).remove();
-          });
+    $(divs).each(function(i, e) {
+      if (link_empty(e) && i < (n-1)) {
+        $(e).hide('blind', {}, "slow", function() { $(this).remove(); });
       }
     });
   }
 
-  function create_link_page(base, data) {
-    $("<div>").addClass("links").appendTo($("#" + base));
-    var tablecolumns = $("<div>").addClass("tablecolumns").html(
-      "<div class=\"table1columns\"></div>" +
-      "<div class=\"table2columns\"></div>")
-      .appendTo($("#" + base));
-    $.each(data.t1, function(index, value) {
-      $("<div>").addClass(base + "table1column").addClass("table1column").text(value)
-        .appendTo($(".table1columns", tablecolumns)).draggable({
-          revert : "invalid"
-        });
-    });
-    $.each(data.t2, function(index, value) {
-      $("<div>").addClass(base + "table2column").addClass("table2column").text(value)
-        .appendTo($(".table2columns", tablecolumns)).draggable({
-          revert : "invalid"
-        });
-
-    });
-    newlinkdiv(base);
-    $(".table1columns", tablecolumns).droppable({
-      accept: "." + base + "table1column",
-      activeClass : "active",
-      hoverClass : "hover",
-      drop: function(event, ui) { on_table_drop(event, ui, base, this, 1);}
-    });
-    $(".table2columns", tablecolumns).droppable({
-      accept: "." + base + "table2column",
-      activeClass : "active",
-      hoverClass : "hover",
-      drop: function(event, ui) { on_table_drop(event, ui, base, this, 2);}
-    });
-  }
-
-  create_link_page(base, table);
+  new_link();
 }
 
+//TEST
+Linker.prototype.on_link_change = function(f) {
+  this.on_link_change_ = f;
+  return(this);
+}
+
+Linker.prototype.on_link_remove = function(f) {
+  this.on_link_remove_ = f;
+  return(this);
+}
+
+///TEST
+
+Linker.prototype.link_content = function() {
+}
 

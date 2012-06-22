@@ -15,10 +15,46 @@
         't2' : ['Kolom I', 'Kolom II', 'Kolom III', 'Kolom V'],
       };
 
-      $(function() {
-        var foo = Linker_new($("#foo"), tabellen);
+      var foo_links = [];
 
-        var bar = Linker_new($("#bar"), tabellen);
+      function add_link(link1, link2) {
+        remove_link(link1, link2);
+        foo_links.push([link1, link2]);
+      }
+
+      function remove_link(link1, link2) {
+        for (var i = 0; i < foo_links.length; ++i) {
+          if (link1 !== undefined && foo_links[i][0] == link1) {
+            foo_links[i][0] = undefined
+            if (foo_links[i][1] === undefined) foo_links.splice(i,1);
+            break;
+          }
+        }
+        for (var i = 0; i < foo_links.length; ++i) {
+          if (link2 !== undefined && foo_links[i][1] == link2) {
+            foo_links[i][1] = undefined
+            if (foo_links[i][0] === undefined) foo_links.splice(i,1);
+            break;
+          }
+        }
+      }
+
+      $(function() {
+        var foo = new Linker($("#foo"), tabellen);
+        foo.on_link_change(function(link1, link2, link) { 
+          add_link(link1, link2);
+          //$("> .linkcontent", link).text(link1 + " is now connected to " + link2);
+        });
+
+        foo.on_link_remove(function(link1, link2, link) {
+          remove_link(link1, link2);
+          //if (link2 === undefined) {
+            //$("> .linkcontent", link).text("Removed " + link1 + " from table1");
+          //} else {
+            //$("> .linkcontent", link).text("Removed " + link2 + " from table2");
+          //}
+        });
+
       });
     </script>
 
