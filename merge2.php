@@ -82,15 +82,11 @@
                    
                  mapping.append("thead")
                    .append("tr")
-                   .selectAll("th").data([null, 0, 1, null])
+                   .selectAll("th").data(["name", m.tabs[0].name, m.tabs[1].name, "include"])
                      .enter()
                      .append("th")
-                     .text(function(d, i) {
-                        if (d != null){
-                           return m.tabs[i-1].name;
-                        } else {
-                           return "name"
-                        }
+                     .text(function(d) {
+                        return d;
                      })
                    ;
                  
@@ -108,12 +104,20 @@
                       .classed("odd", function(d,i){ return i%2;})
                       .each(function(d,i){
                          var tr = d3.select(this);
-                         tr.append("td").append("input").attr("value", d.name);
-                         tr.append("td").append("input").attr("value", d.from[0]);
-                         tr.append("td").append("input").attr("value", d.from[1]);
+                         tr.classed("included", d.include);
+                         
+                         var name = tr.append("td").text(d.name);
+                         tr.append("td").text(d.from[0]);
+                         tr.append("td").text(d.from[1]);
+                         // tr.append("td").append("input").attr("value", d.name);
+                         // tr.append("td").append("input").attr("value", d.from[0]);
+                         // tr.append("td").append("input").attr("value", d.from[1]);
                          var cb = tr.append("td").append("input").attr("type", "checkbox")
-                         if (d.include)  cb.attr("checked",true)
-                           ;
+                         if (d.include){ 
+                            name.on("mouseover",function(d,i){ console.log(d);})
+                            cb.attr("checked",true)
+                         }
+                         ;
                        })
               })
               ;
@@ -130,7 +134,7 @@
             header : 'div.merged'
           });
           
-        $(".mapping").flexigrid();
+        // $(".mapping").flexigrid({height:"auto", width: "auto", dblClickResize: true});
           
       });
       
