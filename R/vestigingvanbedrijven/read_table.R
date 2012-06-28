@@ -1,3 +1,4 @@
+require(reshape)
 
 table_info <- function(id) {
     data.frame(
@@ -10,13 +11,17 @@ table_info <- function(id) {
 }
 
 read_table <- function() {
-  data <- read.csv2("R/banenvanwerknemers/Banen_van_werknemers.csv")
+  data <- read.csv2("R/vestigingvanbedrijven/Vestigingen_bedrijven.csv", header=FALSE)
+  data <- t(data)
+  colnames(data) <- data[1,]
+  rownames(data) <- NULL
+  data <- as.data.frame(data[-1,-3])
+  data[c(-1,-2)] <- lapply(data[c(-1,-2)], function(x) as.numeric(as.character(x)))
   
-  # to numeric columns and x 1000 (data is in 1000...)
-  data[c(4:5)] <- lapply(data[c(4:5)], function(x) 1000 * as.numeric(as.character(x)))
+  data <- melt(data, id.vars=1:2, variable_name="SBI", na.rm=FALSE)
   
   #dump_levels(data)
-  data <- alter_levels(data)
+  #data <- alter_levels(data)
   
   data
 }
