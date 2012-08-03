@@ -41,26 +41,26 @@
 
       $(function() {
         var foo = new Linker($("#foo"), tabellen);
+
         foo.on_link_change(function(link1, link2, link) { 
           add_link(link1, link2);
-          //$("> .linkcontent", link).text(link1 + " is now connected to " + link2);
+
+          if (link1 !== undefined && link2 !== undefined) {
+            var bar = new Linker($("> .linkcontent", link), tabellen)
+          } else {
+            $("> .linkcontent", link).text();
+          }
         });
 
         foo.on_link_remove(function(link1, link2, link) {
           remove_link(link1, link2);
-          //if (link2 === undefined) {
-            //$("> .linkcontent", link).text("Removed " + link1 + " from table1");
-          //} else {
-            //$("> .linkcontent", link).text("Removed " + link2 + " from table2");
-          //}
+          $("> .linkcontent", link).text();
         });
 
       });
     </script>
 
     <style>
-      DIV {
-      }
       .active {
         background-color : rgb(180, 180, 180);
       }
@@ -68,17 +68,15 @@
         background-color : rgb(255, 255, 255);
       }
       DIV {
-        min-height : 25px;
+        /*min-height : 25px;*/
         border : 1px solid black;
       }
     </style>
+    <link type="text/css" href="drop.css" rel="stylesheet" />
 
   </head>
   <body>
     <div id="foo">
-    </div>
-	
-    <div id="bar">
     </div>
 	
   </body>
