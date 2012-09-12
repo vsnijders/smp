@@ -18,7 +18,7 @@ function highlightBar(bars, scale){
   bars
      .on("mouseover", function(d,i){
            //console.log(d,i);
-           d3.selectAll("rect.bar").filter(function(d1,i1) scale(d1) != scale(d))
+           d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
               .style("stroke-opacity", 0.2)
               .style("fill-opacity", 0.2)
               ;

@@ -62,7 +62,7 @@ function Aes(scale, defaultValue){
       } else {
          scale = d3.scale.ordinal().rangeBands(rg);   
          format = String;
-         value = function(d) defaultValue;
+         value = function(d){return defaultValue;};
 	  }
 	  extent(rg);
       aes.format = format;
@@ -151,7 +151,7 @@ function Aes(scale, defaultValue){
 	  return setScaleType(type); 
    }
    
-   aes.value = function(d) defaultValue;
+   aes.value = function(d) { return defaultValue;};
    aes.scaledValue = scaledValue;
    
    return aes;
@@ -209,8 +209,8 @@ function Mapping(sel) {
    
    mapping.mapped = function(){
      var mapped = d3.entries(_map)
-	    .filter(function(v) v.value.variable() !== null)
-	    .map(function(v) v.key)
+	    .filter(function(v) { return v.value.variable() !== null;})
+	    .map(function(v) {return v.key;})
 		;
 	 var m = {};
 	 mapped.forEach(function (v) {m[v] = _map[v].variable();})
@@ -223,8 +223,8 @@ function Mapping(sel) {
    
    mapping.toLabel = function(d){
    var s = d3.entries(_map)
-     .filter(function(v) v.value.variable() !== null)
-	  .map(function(v) "<tr><th>" + v.value.variable() + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>")
+     .filter(function(v) { return v.value.variable() !== null;})
+	  .map(function(v) { return "<tr><th>" + v.value.variable() + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>";})
 	  ;
 	 return "<table class='label'>" + s.join("") + "</table>";
    }
