@@ -225,19 +225,19 @@
               "Totaal")
         ),
       'position_begin' => array(
-          'longname' => 'Arbeidsmarktpositie begin periode',
+          'longname' => 'Labor participation begin',
           'default' => 4,
           'defaultnot' => 4,
-          'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
+          'levels' => array("Employed", "Unemployed", "No labor force", "Total")
         ),
       'position_end' => array(
           'longname' => 'Arbeidsmarktpositie einde periode',
           'default' => 4,
           'defaultnot' => 4,
-          'levels' => array("Werkzaam", "Werkloos", "Niet-beroeps", "Totaal")
+          'levels' => array("Employed", "Unemployed", "No labor force", "Total")
         ),
       'number_of_persons' => array(
-          'longname' => 'Aantal personen'
+          'longname' => 'Person count'
         ),
       'default_graph' => array(
           'type' => 'mosaic',
@@ -423,8 +423,8 @@
     );
   // PARTICIPATION 
   $META['participation'] = array(
-      'longname' => 'Nett employment rate 1971-2010 by age, generation and age',
-      'description' => 'This table contains the employment rate for man and women crossed by birth cohort and age.', 
+      'longname' => 'Nett labor participation rate 1971-2010 by age, generation and age',
+      'description' => 'This table contains the labor participation rate for man and women crossed by birth cohort and age.', 
       'url' => '',
       'variables' => array("geslacht", "generatie", "leeftijd", "variable"),
       'idvariables' => array("geslacht", "generatie", "leeftijd"),
