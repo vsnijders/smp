@@ -104,35 +104,34 @@
     );
   // BEDRIJVENAANTALLEN
   $META['bedrijvenaantallen'] = array(
-      'longname' => 'Bedrijvenaantallen',
-      'description' => 'Deze tabel bevat aanntallen bedrijven uitgesplitst ' .
-          'naar SBI en grootteklasse.',
+      'longname' => 'Number of enterprises',
+      'description' => 'This table contains the number of enterprises by NACE and size',
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi"),
       'jaar' => array(
-          'longname' => 'Jaar',
+          'longname' => 'Year',
           'default' => 5,
           'defaultnot' => 5,
           'levels' => array('2006', '2007', '2008', '2009', '2010')
         ),
       'grootteklasse' => array(
-          'longname' => 'Grootteklasse',
+          'longname' => 'Size',
           'default' => 5,
           'defaultnot' => 5,
-          'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
+          'levels' => array('Tiny', 'Small', 'Medium', 'Large', 'Totaal')
         ),
       'sbi' => array(
-          'longname' => 'SBI',
+          'longname' => 'NACE',
           'default' => 20,
           'defaultnot' => 20,
-          'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
-              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
-              'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
-              'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
+          'levels' => array('A Agriculture, forestry and fishing', 'B Mining and quarrying', 'C Manufacturing', 'D Electricity, gas, steam and air conditioning supply', 'E Water supply;', 
+              'F Construction', 'G Trade', 'H Transporting and storage', 'I Accommodation and food service activities ', 'J Information and communication', 'K Financial and insurance activities', 
+              'L Real estate activities', 'M Professional, scientific and technical activities', 'N Administrative and support service activities', 
+              'O Public administration and defence; compulsory social security', 'P Education', 'Q Human health and social work activities', 'R Arts, entertainment and recreation', 'S Other services activities', 'Totaal')
         ),
       'aantal'=> array(
-          'longname' => 'Aantal bedrijven'
+          'longname' => 'Enterprises'
         ),
       'default_graph' => array(
           'type' => 'bar',
@@ -424,19 +423,18 @@
     );
   // PARTICIPATION 
   $META['participation'] = array(
-      'longname' => 'Netto arbeidsmarktparticipatie 1971-2010 naar geslacht, generatie en leeftijd',
-      'description' => 'Deze tabel bevat de arbeidsparticipatie van mannen en vrouwen uitgesplitst ' .
-          'naar generatie en leeftijd.', 
+      'longname' => 'Nett employment rate 1971-2010 by age, generation and age',
+      'description' => 'This table contains the employment rate for man and women crossed by birth cohort and age.', 
       'url' => '',
       'variables' => array("geslacht", "generatie", "leeftijd", "variable"),
       'idvariables' => array("geslacht", "generatie", "leeftijd"),
       'geslacht' => array(
-          'longname' => 'Geslacht',
+          'longname' => 'Gender',
           'default' => 2,
-          'levels' => array('Man', 'Vrouw')
+          'levels' => array('male', 'female')
         ),
       'generatie' => array(
-          'longname' => 'Geboortegeneratie',
+          'longname' => 'birth cohort',
           'default' => 4,
           'levels' => array(
               "1906-1910", "1911-1915", "1916-1920", "1921-1925", "1926-1930", "1931-1935", "1936-1940",
@@ -444,7 +442,7 @@
               "1976-1980", "1981-1985", "1986-1990")
         ),
       'leeftijd' => array(
-          'longname' => 'Leeftijd',
+          'longname' => 'Age',
           'default' => 1,
           'levels' => array(
               '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', 
@@ -453,7 +451,7 @@
               '61', '62', '63', '64', '65', '66', '67')
         ),
       'participatie'=> array(
-          'longname' => 'Arbeidsmarktparticipatie'
+          'longname' => 'Employment rate'
         ),
       'default_graph' => array(
           'type' => 'line',
