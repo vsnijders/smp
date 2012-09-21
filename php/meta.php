@@ -3,29 +3,28 @@
 
   // BEVOLKINGSPROGNOSE
   $META['bevolkingsprognoses'] = array(
-      'longname' => 'Bevolkingsprognose; bevolking per 1 januari, leeftijdsgroep, 2011-2060',
-      'description' => 'Deze tabel bevat prognosecijfers over de bevolking van Nederland op 1 ' . 
-          'januari naar geslacht en leeftijd. ',
+      'longname' => 'Population prognosis; on Jan 1st, age group, 2011-2060',
+      'description' => 'This table contains a prognosis on the population of the Netherlands on Jan 1st by gender and age.',
       'url' => 'http://statline.cbs.nl/StatWeb/selection/?DM=SLNL&PA=80755NED&VW=T', 
       'variables' => array("gender", "age", "year", "variable"),
       'idvariables' => array("gender", "age", "year"),
       'gender' => array(
-          'longname' => 'Geslacht',
+          'longname' => 'Gender',
           'default' => 3,
           'defaultnot' => 3,
-          'levels' => array('Man', 'Vrouw', 'Totaal')
+          'levels' => array('Male', 'Female', 'Total')
         ),
       'age' => array(
-          'longname' => 'Leeftijd',
+          'longname' => 'Age',
           'default' => 21,
           'defaultnot' => 21,
           'levels' => array(
               "0-5",   "5-10",  "10-15", "15-20", "20-25", "25-30", "30-35", "35-40",
               "40-45", "45-50", "50-55", "55-60", "60-65", "65-70", "70-75", "75-80", "80-85",
-              "85-90", "90-95", "95+", "Totaal")
+              "85-90", "90-95", "95+", "Total")
         ),
       'year' => array(
-          'longname' => 'Jaar',
+          'longname' => 'Year',
           'default' => 50,
           'defaultnot' => 50,
           'levels' => array(
@@ -36,7 +35,7 @@
               "2051", "2052", "2053", "2054", "2055", "2056", "2057", "2058", "2059", "2060")
         ),
       'prognosis' => array(
-          'longname' => 'Verwacht aantal personen'
+          'longname' => 'Expected count'
         ),
       'default_graph' => array(
           'type' => 'line',
