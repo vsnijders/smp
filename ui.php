@@ -144,6 +144,7 @@ div.categorical ul {
     echo $variable . ' : "numerical"';
   }
   echo "      };\n";
+  echo "var meta = ". json_encode($meta) . ";\n"
 ?>
 
       function redraw_graph() {

@@ -34,8 +34,9 @@ function Aes(scale, defaultValue){
       return format(value(d));
    }
 
+   //DIRTY HACK!
    function labelValue(d) {
-      return variable + ": " + format(value(d));
+      return meta[variable].longname + ": " + format(value(d));
    }
       
    function setScaleType(_type){  
@@ -67,7 +68,7 @@ function Aes(scale, defaultValue){
 	  extent(rg);
       aes.format = format;
       aes.scale = scale;
-	   aes.value = value;
+ 	    aes.value = value;
       aes.scaledValue = scaledValue;
       aes.labelValue = labelValue;
       aes.formatValue = formatValue;
@@ -224,7 +225,7 @@ function Mapping(sel) {
    mapping.toLabel = function(d){
    var s = d3.entries(_map)
      .filter(function(v) { return v.value.variable() !== null;})
-	  .map(function(v) { return "<tr><th>" + v.value.variable() + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>";})
+	  .map(function(v) { return "<tr><th>" + meta[v.value.variable()].longname + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>";})
 	  ;
 	 return "<table class='label'>" + s.join("") + "</table>";
    }

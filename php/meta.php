@@ -119,7 +119,7 @@
           'longname' => 'Size',
           'default' => 5,
           'defaultnot' => 5,
-          'levels' => array('Tiny', 'Small', 'Medium', 'Large', 'Totaal')
+          'levels' => array('Tiny', 'Small', 'Medium', 'Large', 'Total')
         ),
       'sbi' => array(
           'longname' => 'NACE',
@@ -128,7 +128,7 @@
           'levels' => array('A Agriculture, forestry and fishing', 'B Mining and quarrying', 'C Manufacturing', 'D Electricity, gas, steam and air conditioning supply', 'E Water supply;', 
               'F Construction', 'G Trade', 'H Transporting and storage', 'I Accommodation and food service activities ', 'J Information and communication', 'K Financial and insurance activities', 
               'L Real estate activities', 'M Professional, scientific and technical activities', 'N Administrative and support service activities', 
-              'O Public administration and defence; compulsory social security', 'P Education', 'Q Human health and social work activities', 'R Arts, entertainment and recreation', 'S Other services activities', 'Totaal')
+              'O Public administration and defence; compulsory social security', 'P Education', 'Q Human health and social work activities', 'R Arts, entertainment and recreation', 'S Other services activities', 'Total')
         ),
       'aantal'=> array(
           'longname' => 'Enterprises'
@@ -142,14 +142,14 @@
   // BEDRIJVENDYNAMIEK
   $META['bedrijvendynamiek'] = array(
       'longname' => 'Enterprise dynamics; births and deaths of enterprises',
-      'description' => 'The figures are avaible by NACE and size. The events measures are fusion, birth, take-over, split-up, death and disassemble.', 
+      'description' => 'The figures are avaible by economic activity and size. The events measures are fusion, birth, take-over, split-up, death and disassemble.', 
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
       'jaar' => array(
           'longname' => 'Year',
           'default' => 5,
-          'defaultnot' => 5,
+          #'defaultnot' => 5,
           'levels' => array('2007', '2008', '2009', '2010', '2011')
         ),
       'grootteklasse' => array(
@@ -162,10 +162,10 @@
           'longname' => 'Economic activity',
           'default' => 20,
           'defaultnot' => 20,
-          'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
-              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
-              'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
-              'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
+          'levels' => array('A Agriculture, forestry and fishing', 'B Mining and quarrying', 'C Manufacturing', 'D Electricity, gas, steam and air conditioning supply', 'E Water supply;', 
+              'F Construction', 'G Trade', 'H Transporting and storage', 'I Accommodation and food service activities ', 'J Information and communication', 'K Financial and insurance activities', 
+              'L Real estate activities', 'M Professional, scientific and technical activities', 'N Administrative and support service activities', 
+              'O Public administration and defence; compulsory social security', 'P Education', 'Q Human health and social work activities', 'R Arts, entertainment and recreation', 'S Other services activities', 'Total')
         ),
       'effect' => array(
           'longname' => 'Existence',
