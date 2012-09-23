@@ -141,28 +141,25 @@
     );
   // BEDRIJVENDYNAMIEK
   $META['bedrijvendynamiek'] = array(
-      'longname' => 'Bedrijvendynamiek; ontstaan en verdwijnen van bedrijven',
-      'description' => 'Deze tabel bevat gegevens of het ontstaan en verdwijnen van ' .
-          'bedrijven. De cijfers zijn beschikbaar per SBI en grootteklasse. De volgende '. 
-          'gebeurtenissen worden onderscheiden: splitsing, fusie, geboorte, overname ' .
-          'sterfte en uiteenvallen.', 
+      'longname' => 'Enterprise dynamics; births and deaths of enterprises',
+      'description' => 'The figures are avaible by NACE and size. The events measures are fusion, birth, take-over, split-up, death and disassemble.', 
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
       'jaar' => array(
-          'longname' => 'Jaar',
+          'longname' => 'Year',
           'default' => 5,
           'defaultnot' => 5,
           'levels' => array('2007', '2008', '2009', '2010', '2011')
         ),
       'grootteklasse' => array(
-          'longname' => 'Grootteklasse',
+          'longname' => 'size',
           'default' => 5,
           'defaultnot' => 5,
-          'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
+          'levels' => array('Micro', 'Small', 'Medium', 'Large', 'Total')
         ),
       'sbi' => array(
-          'longname' => 'SBI',
+          'longname' => 'Economic activity',
           'default' => 20,
           'defaultnot' => 20,
           'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
@@ -171,19 +168,19 @@
               'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
         ),
       'effect' => array(
-          'longname' => 'Ontstaan/verdwijnen',
+          'longname' => 'Existence',
           'default' => 3,
           'defaultnot' => 3,
-          'levels' => array('Verdwijnen', 'Ontstaan', 'Netto')
+          'levels' => array('Disappeared', 'Created', 'Nett')
         ),
       'type' => array(
-          'longname' => 'Oorzaak',
+          'longname' => 'Cause',
           'default' => 7,
           'defaultnot' => 7,
-          'levels' => array('Afsplitsing', 'Fusie', 'Geboorte', 'Overname', 'Sterfte', 'Uiteenvallen', 'Totaal')
+          'levels' => array('Split up', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
         ),
       'netto_verandering'=> array(
-          'longname' => 'Netto verandering'
+          'longname' => 'Nett change'
         ),
       'default_graph' => array(
           'type' => 'bar',
