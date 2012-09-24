@@ -46,55 +46,52 @@
     );
   // BEDRIJVENDYNAMIEK
   $META['bedrijvendynamiek_gekoppeld'] = array(
-      'longname' => 'Bedrijvendynamiek gekoppeld; ontstaan en verdwijnen van bedrijven',
-      'description' => 'Deze tabel bevat gegevens of het ontstaan en verdwijnen van ' .
-          'bedrijven. De cijfers zijn beschikbaar per SBI en grootteklasse. De volgende '. 
-          'gebeurtenissen worden onderscheiden: splitsing, fusie, geboorte, overname ' .
-          'sterfte en uiteenvallen.', 
+      'longname' => 'Enterprise dynamics (relative)',
+      'description' => 'This table contains the number and percentage of enterprises by economic activity and size', 
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "effect", "type", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi", "effect", "type"),
       'jaar' => array(
-          'longname' => 'Jaar',
+          'longname' => 'Year',
           'default' => 5,
           'defaultnot' => 5,
           'levels' => array('2007', '2008', '2009', '2010', 'Totaal 2007-2010')
         ),
       'grootteklasse' => array(
-          'longname' => 'Grootteklasse',
+          'longname' => 'Size',
           'default' => 5,
           'defaultnot' => 5,
-          'levels' => array('Microbedrijf', 'Kleinbedrijf', 'Middenbedrijf', 'Grootbedrijf', 'Totaal')
+          'levels' => array('Tiny', 'Small', 'Medium', 'Large', 'Total')
         ),
       'sbi' => array(
-          'longname' => 'SBI',
+          'longname' => 'Economic activity',
           'default' => 20,
           'defaultnot' => 20,
-          'levels' => array('A Landbouw, bosbouw en visserij', 'B Delfstoffenwinning', 'C Industrie', 'D Energievoorziening', 'E Waterbedrijven en afvalbeheer', 
-              'F Bouwnijverheid', 'G Handel', 'H Vervoer en opslag', 'I Horeca', 'J Informatie en communicatie', 'K Financiële dienstverlening', 
-              'L Verhuur en handel van onroerend goed', 'M Specialistische zakelijke diensten', 'N Verhuur en overige zakelijke diensten', 
-              'O Openbaar bestuur en overheidsdiensten', 'P Onderwijs', 'Q Gezondheids- en welzijnszorg', 'R Cultuur, sport en recreatie', 'S Overige dienstverlening', 'Totaal')
+          'levels' => array('A Agriculture, forestry and fishing', 'B Mining and quarrying', 'C Manufacturing', 'D Electricity, gas, steam and air conditioning supply', 'E Water supply;', 
+              'F Construction', 'G Trade', 'H Transporting and storage', 'I Accommodation and food service activities ', 'J Information and communication', 'K Financial and insurance activities', 
+              'L Real estate activities', 'M Professional, scientific and technical activities', 'N Administrative and support service activities', 
+              'O Public administration and defence; compulsory social security', 'P Education', 'Q Human health and social work activities', 'R Arts, entertainment and recreation', 'S Other services activities', 'Total')
         ),
       'effect' => array(
-          'longname' => 'Ontstaan/verdwijnen',
+          'longname' => 'Existence',
           'default' => 3,
           'defaultnot' => 3,
-          'levels' => array('Verdwijnen', 'Ontstaan', 'Netto')
+          'levels' => array('Disappeared', 'Created', 'Nett')
         ),
       'type' => array(
-          'longname' => 'Oorzaak',
+          'longname' => 'Cause',
           'default' => 7,
           'defaultnot' => 7,
-          'levels' => array('Afsplitsing', 'Fusie', 'Geboorte', 'Overname', 'Sterfte', 'Uiteenvallen', 'Totaal')
+          'levels' => array('Split up', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
         ),
       'aantal'=> array(
-          'longname' => 'Aantal bedrijven'
+          'longname' => 'Enterprises'
         ),
       'netto_verandering'=> array(
-          'longname' => 'Netto verandering'
+          'longname' => 'Nett change'
         ),
       'relatieve_verandering'=> array(
-          'longname' => 'Relatieve verandering'
+          'longname' => 'Relative change'
         ),
       'default_graph' => array(
           'type' => 'bar',
@@ -105,7 +102,7 @@
   // BEDRIJVENAANTALLEN
   $META['bedrijvenaantallen'] = array(
       'longname' => 'Number of enterprises',
-      'description' => 'This table contains the number of enterprises by NACE and size',
+      'description' => 'This table contains the number of enterprises by ecnomic activity and size',
       'url' => '',
       'variables' => array("jaar", "grootteklasse", "sbi", "variable"),
       'idvariables' => array("jaar", "grootteklasse", "sbi"),
@@ -122,7 +119,7 @@
           'levels' => array('Tiny', 'Small', 'Medium', 'Large', 'Total')
         ),
       'sbi' => array(
-          'longname' => 'NACE',
+          'longname' => 'Economic activity',
           'default' => 20,
           'defaultnot' => 20,
           'levels' => array('A Agriculture, forestry and fishing', 'B Mining and quarrying', 'C Manufacturing', 'D Electricity, gas, steam and air conditioning supply', 'E Water supply;', 
@@ -431,7 +428,7 @@
           'levels' => array('male', 'female')
         ),
       'generatie' => array(
-          'longname' => 'birth cohort',
+          'longname' => 'Birth cohort',
           'default' => 4,
           'levels' => array(
               "1906-1910", "1911-1915", "1916-1920", "1921-1925", "1926-1930", "1931-1935", "1936-1940",
