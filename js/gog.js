@@ -42,9 +42,12 @@ function Aes(scale, defaultValue){
    function setScaleType(_type){  
 	   _type = _type || type;
 	   dx = 0;
-      
+
 	   var rg = extent();
-      
+     if ((meta[variable] || {})["type"] === "integer"){
+        type = _type = "numerical";
+     }
+     
       if (_type === "numerical"){
          scale = d3.scale.linear().range(rg);
          format = d3.format("n");
@@ -129,6 +132,7 @@ function Aes(scale, defaultValue){
          return type;
       }
       type = _ ;	  
+      
 	  return setScaleType(type);
    }
    
