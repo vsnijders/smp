@@ -82,7 +82,7 @@
           'longname' => 'Cause',
           'default' => 7,
           'defaultnot' => 7,
-          'levels' => array('Split up', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
+          'levels' => array('Split off', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
         ),
       'aantal'=> array(
           'longname' => 'Enterprises'
@@ -174,7 +174,7 @@
           'longname' => 'Cause',
           'default' => 7,
           'defaultnot' => 7,
-          'levels' => array('Split up', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
+          'levels' => array('Split off', 'Fusion', 'Birth', 'Take over', 'Death', 'Apart', 'Total')
         ),
       'netto_verandering'=> array(
           'longname' => 'Nett change'
@@ -417,7 +417,7 @@
     );
   // PARTICIPATION 
   $META['participation'] = array(
-      'longname' => 'Nett labor participation rate 1971-2010 by age, generation and age',
+      'longname' => 'Nett labor participation rate 1971-2010 by age, generation and gender',
       'description' => 'This table contains the labor participation rate for man and women crossed by birth cohort and age.', 
       'url' => '',
       'variables' => array("geslacht", "generatie", "leeftijd", "variable"),
@@ -452,8 +452,8 @@
           'type' => 'line',
           'ynum' => 'participatie',
           'xcat' => 'leeftijd',
-          'colour' => 'generatie',
-          'row' => 'geslacht'
+          'colour' => 'generatie'
+          #,'row' => 'geslacht'
         )
     );
   

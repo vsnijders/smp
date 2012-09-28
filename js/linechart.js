@@ -21,7 +21,6 @@ function validate_line(selection, variables) {
 function highlightPoint(points){
    points
      .on("mouseover", function(d){
-           
            console.log(d);
         })
      ;

@@ -4,10 +4,10 @@ function Aes(scale, defaultValue){
      , value
      , variable = null
      , type
-	  , astype
+	   , astype
      , dx = 0
-	  , defaultValue = defaultValue || "empty"
-	  , axis = d3.svg.axis()
+	   , defaultValue = defaultValue || "empty"
+ 	   , axis = d3.svg.axis()
      ;
       
    var aes = { scale : scale
