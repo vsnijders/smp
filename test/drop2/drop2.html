@@ -45,16 +45,17 @@
         foo.on_link_change(function(link1, link2, link) { 
           add_link(link1, link2);
 
-          if (link1 !== undefined && link2 !== undefined) {
-            var bar = new Linker($("> .linkcontent", link), tabellen)
+          /*if (link1 !== undefined && link2 !== undefined) {
+            //var bar = new Linker($("> .linkcontent", link), tabellen)
+            $("> .linkcontent", link).html("<button class=\"linkcategories\">Link categories</button>");
           } else {
-            $("> .linkcontent", link).text();
-          }
+            $("> .linkcontent", link).html("");
+          }*/
         });
 
         foo.on_link_remove(function(link1, link2, link) {
           remove_link(link1, link2);
-          $("> .linkcontent", link).text();
+          $("> .linkcontent", link).html("");
         });
 
       });
@@ -81,3 +82,23 @@
 	
   </body>
 </html>
+
+<!--
+
+
+var foo = [];
+
+$("div.link").each(function(i, e) {
+    var c1 = $(">div.link1", e).find(".column1");
+    if (c1 !== undefined) c1 = c1.text();
+    var c2 = $(">div.link2", e).find(".column2");
+    if (c2 !== undefined) c2 = c2.text();
+    foo[i] = [c1, c2];
+    console.log(c1 + ", " + c2);
+})
+
+foo
+
+
+
+-->
