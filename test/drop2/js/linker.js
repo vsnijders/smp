@@ -14,8 +14,7 @@
 //     -* .column2
 function Linker(base, tables) {
   //TEST
-  this.on_link_change_ = undefined;
-  this.on_link_remove_ = undefined;
+  this.on_change_ = undefined;
   var linker = this;
   //TEST
 
@@ -40,11 +39,12 @@ function Linker(base, tables) {
     },
     drop : function(event, ui) {
       // TEST
-      //ui.draggable.appendTo($(this)).attr("style", "position:relative;");
-      var link = ui.draggable.parent().parent();
+      ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      if (linker.on_change_ !== undefined) linker.on_change_();
+      /*var link = ui.draggable.parent().parent();
       ui.draggable.appendTo($(this)).attr("style", "position:relative;");
       if (linker.on_link_remove_ !== undefined) 
-        linker.on_link_remove_(ui.draggable.text(), undefined, link);
+        linker.on_link_remove_(ui.draggable.text(), undefined, link);*/
       /// TEST
       remove_empty();
     }
@@ -64,11 +64,12 @@ function Linker(base, tables) {
     },
     drop : function(event, ui) {
       // TEST
-      //ui.draggable.appendTo($(this)).attr("style", "position:relative;");
-      var link = ui.draggable.parent().parent();
+      ui.draggable.appendTo($(this)).attr("style", "position:relative;");
+      if (linker.on_change_ !== undefined) linker.on_change_();
+      /*var link = ui.draggable.parent().parent();
       ui.draggable.appendTo($(this)).attr("style", "position:relative;");
       if (linker.on_link_remove_ !== undefined) 
-        linker.on_link_remove_(undefined, ui.draggable.text(), link);
+        linker.on_link_remove_(undefined, ui.draggable.text(), link);*/
       /// TEST
       remove_empty();
     }
@@ -94,11 +95,12 @@ function Linker(base, tables) {
         drop : function(event, ui) {
           ui.draggable.appendTo($(this)).attr("style", "position:relative;");
           //TEST
-          var link1 = $(this).text();
+          if (linker.on_change_ !== undefined) linker.on_change_();
+          /*var link1 = $(this).text();
           var link2 = $("> .link2", $(this).parent()).find(".column2")[0];
           if (link2 !== undefined) link2 = $(link2).text();
           if (linker.on_link_change_ !== undefined) 
-            linker.on_link_change_(link1, link2, $(this).parent());
+            linker.on_link_change_(link1, link2, $(this).parent());*/
           ///TEST
           if (!last_link_empty()) new_link();
           remove_empty();
@@ -118,11 +120,12 @@ function Linker(base, tables) {
         drop : function(event, ui) {
           ui.draggable.appendTo($(this)).attr("style", "position:relative;");
           //TEST
-          var link1 = $("> .link1", $(this).parent()).find(".column1")[0];
+          if (linker.on_change_ !== undefined) linker.on_change_();
+          /*var link1 = $("> .link1", $(this).parent()).find(".column1")[0];
           if (link1 !== undefined) link1 = $(link1).text();
           var link2 = $(this).text();
           if (linker.on_link_change_ !== undefined)
-            linker.on_link_change_(link1, link2, $(this).parent());
+            linker.on_link_change_(link1, link2, $(this).parent());*/
           ///TEST
           if (!last_link_empty()) new_link();
           remove_empty();
@@ -156,8 +159,8 @@ function Linker(base, tables) {
 }
 
 //TEST
-Linker.prototype.on_link_change = function(f) {
-  this.on_link_change_ = f;
+Linker.prototype.on_change = function(f) {
+  this.on_change_ = f;
   return(this);
 }
 

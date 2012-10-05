@@ -17,45 +17,33 @@
 
       var foo_links = [];
 
-      function add_link(link1, link2) {
-        remove_link(link1, link2);
-        foo_links.push([link1, link2]);
-      }
-
-      function remove_link(link1, link2) {
-        for (var i = 0; i < foo_links.length; ++i) {
-          if (link1 !== undefined && foo_links[i][0] == link1) {
-            foo_links[i][0] = undefined
-            if (foo_links[i][1] === undefined) foo_links.splice(i,1);
-            break;
-          }
-        }
-        for (var i = 0; i < foo_links.length; ++i) {
-          if (link2 !== undefined && foo_links[i][1] == link2) {
-            foo_links[i][1] = undefined
-            if (foo_links[i][0] === undefined) foo_links.splice(i,1);
-            break;
-          }
-        }
-      }
-
       $(function() {
         var foo = new Linker($("#foo"), tabellen);
 
-        foo.on_link_change(function(link1, link2, link) { 
-          add_link(link1, link2);
+        foo.on_change(function() {
+          var new_links = [];
+          var j = 0;
+          $("div.link").each(function(i, e) {
+            var c1 = $(">div.link1", e).find(".column1");
+            if (c1 !== undefined) c1 = c1.text();
+            var c2 = $(">div.link2", e).find(".column2");
+            if (c2 !== undefined) c2 = c2.text();
+            if (c1 !== "" || c2 !== "") new_links[j++] = [c1, c2];
+            if (c1 !== "" && c2 !== "") {
+              // add button if no button
+              if ($("> .linkcontent", e).find("button").length == 0) {
+                var button = $('<button/>').text('Link categories').click(function () { 
+                  alert('Link categories'); 
+                });
+                $("> .linkcontent", e).append(button);
+              }
+            } else {
+              $("> .linkcontent", e).html("");
+            }
+          })
 
-          /*if (link1 !== undefined && link2 !== undefined) {
-            //var bar = new Linker($("> .linkcontent", link), tabellen)
-            $("> .linkcontent", link).html("<button class=\"linkcategories\">Link categories</button>");
-          } else {
-            $("> .linkcontent", link).html("");
-          }*/
-        });
+          foo_links = new_links;
 
-        foo.on_link_remove(function(link1, link2, link) {
-          remove_link(link1, link2);
-          $("> .linkcontent", link).html("");
         });
 
       });
