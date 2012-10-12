@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- jQuery includes -->
+    <link type="text/css" href="../../css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../js/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="../../js/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/linker.js"></script>
+
+    <script type="text/javascript">
+      var tabellen = {
+        't1' : ['Kolom A', 'Kolom B', 'Kolom C', 'Kolom D'],
+        't2' : ['Kolom I', 'Kolom II', 'Kolom III', 'Kolom V'],
+      };
+      var categorien = {
+        'Kolom A' : ['A', 'B', 'C', 'D'],
+        'Kolom B' : ['A', 'B', 'C', 'D'],
+        'Kolom C' : ['A', 'B', 'C', 'D'],
+        'Kolom D' : ['A', 'B', 'C', 'D'],
+        'Kolom I' : ['a', 'b', 'c', 'd'],
+        'Kolom II' : ['a', 'b', 'c', 'd'],
+        'Kolom III' : ['a', 'b', 'c', 'd'],
+        'Kolom V' : ['a', 'b', 'c', 'd']
+      }
+
+      var foo_links = [];
+
+      $(function() {
+        var foo = new Linker($("#foo"), tabellen);
+
+        foo.on_change(function() {
+          var new_links = [];
+          var j = 0;
+          $("div.link").each(function(i, e) {
+            var c1 = $(">div.link1", e).find(".column1");
+            if (c1 !== undefined) c1 = c1.text();
+            var c2 = $(">div.link2", e).find(".column2");
+            if (c2 !== undefined) c2 = c2.text();
+            if (c1 !== "" || c2 !== "") new_links[j++] = [c1, c2];
+            if (c1 !== "" && c2 !== "") {
+              // add button if no button
+              if ($("> .linkcontent", e).find("button").length == 0) {
+                var div = $("<div/>").addClass("categories").hide();
+                var button = $('<button/>').text('Link categories').click(function () { 
+                  div.toggle();
+                });
+                $("> .linkcontent", e).append(button);
+                var cats = {'t1' : categorien[c1], 't2' : categorien[c2]};
+                $("> .linkcontent", e).append(div);
+                var bar = new Linker(div, cats);
+
+              }
+            } else {
+              $("> .linkcontent", e).html("");
+            }
+          })
+
+          foo_links = new_links;
+
+        });
+
+      });
+    </script>
+
+    <style>
+      .active {
+        background-color : rgb(180, 180, 180);
+      }
+      .hover{
+        background-color : rgb(255, 255, 255);
+      }
+      DIV {
+        /*min-height : 25px;*/
+        border : 1px solid black;
+      }
+      DIV.categories {
+        border : none;
+        padding : 10px;
+        background : white;
+      }
+      DIV.linkcontent button {
+        margin-top : -50px;
+        margin-left : 450px;
+      }
+    </style>
+    <link type="text/css" href="drop.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <div id="foo">
+    </div>
+	
+  </body>
+</html>
+
+<!--
+
+
+var foo = [];
+
+$("div.link").each(function(i, e) {
+    var c1 = $(">div.link1", e).find(".column1");
+    if (c1 !== undefined) c1 = c1.text();
+    var c2 = $(">div.link2", e).find(".column2");
+    if (c2 !== undefined) c2 = c2.text();
+    foo[i] = [c1, c2];
+    console.log(c1 + ", " + c2);
+})
+
+foo
+
+
+
+-->

@@ -11,7 +11,6 @@
     <script type="text/javascript">
       function newlinkdiv() {
         var link = $("<div>").addClass("link");
-        //$("<p>").text("Table1").appendTo(link);
         $("<div>").addClass("table1").droppable({
             activeClass : "active",
             hoverClass : "hover",
@@ -27,7 +26,6 @@
               checkempty();
             }
           }).appendTo(link);
-        //$("<p>").text("Table2").appendTo(link);
         $("<div>").addClass("table2").droppable({
             activeClass : "active",
             hoverClass : "hover",
@@ -99,18 +97,21 @@
       DIV {
       }
       .active {
-        background-color : rgb(200, 200, 200);
+        background-color : rgb(180, 180, 180);
       }
       .hover{
-        background-color : rgb(100, 100, 100);
+        background-color : rgb(255, 255, 255);
       }
       DIV.link {
         margin-top : 5px;
         margin-bottom : 5px;
-        padding-top : 5px;
-        padding-left : 5px;
-        height : 30px;
-        background : yellow;
+        padding-top : 1px;
+        padding-bottom : 1px;
+        padding-left : 2px;
+        min-height : 25px;
+        background : rgb(230,230,230);
+        border-radius : 5px;
+        border : 1px solid rgb(100, 100, 100);
       }
       DIV.link DIV.table1 {
         float : left;
@@ -122,17 +123,20 @@
         width : 250px;
       }
       DIV.table1, DIV.table2 {
-        border-top : 1px solid black;
-        border-bottom : 1px solid black;
-        padding-top : 5px;
-        padding-bottom : 5px;
-        min-height : 15px;
+        padding-top : 1px;
+        padding-bottom : 1px;
+        min-height : 22px;
       }
       DIV.table1column, DIV.table2column {
-        border-top : 1px solid black;
-        border-bottom : 1px solid black;
+        background : rgb(210,210,210);
         margin-left : 10px;
         margin-right : 10px;
+        margin-top : 5px;
+        margin-bottom : 5px;
+      }
+      DIV.table1 DIV.table1column, DIV.table2 DIV.table2column {
+        margin-top : 0px;
+        margin-bottom : 0px;
       }
       DIV#contentwrapper {
         float : left;
@@ -140,11 +144,13 @@
       }
       DIV#table1columns {
         margin-right: 50%;
+        min-height : 20px;
       }
       DIV#table2columns {
         float : left;
         width : 50%;
         margin-left : -50%;
+        min-height : 20px;
       }
       DIV.table1column, DIV.table2column {
         width : 200px;
