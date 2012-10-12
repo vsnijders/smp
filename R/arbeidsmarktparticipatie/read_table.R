@@ -26,8 +26,35 @@ read_table <- function() {
     data$variable <- "participatie"
 
     data <- data[ , c("geslacht", "generatie", "leeftijd", "variable", "value")]
+    meta <- read_meta()
+    
+    data$variable <- meta$name
+    
+    names(data) <- meta$slices
 
+    for (n in names(meta$variables)){
+      v <- meta$variables[[n]]
+      print(list(name=n, v=v))
+      if (v$type == "factor")
+        browser()
+        levels(data[[n]]) <- v$categories
+        print(data[[n]])
+    }
+    
     return(data)
 }
 
+read_meta <- function(){
+  require(yaml)
+  meta <- yaml.load_file("arbeidsmarktparticipatie/meta.yaml")
+  meta
+}
 
+dump_meta <- function(data){
+  require(yaml)
+  # TODO write meta information from a data.frame
+}
+
+### testing 
+#read_meta()
+dat <- read_table()
