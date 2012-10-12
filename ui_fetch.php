@@ -87,10 +87,17 @@
   // Run query
   $result = $pdo->query($sql);
 
+  if (isset($_REQUEST['html'])) {
+    print_r($measurevars);
+    print_r($idvars);
+  }
+
   // Transform the results of the database query to something that can be sent back. We want 
   // something with the following form:
   //   idvar1 idvar2 ... idvarN measurevar1 ... measurevarM
   // The following code works, but isn't very pretty. Can probably be improved upon.
+
+
   $data = array();
   $data_row = array();
   $i = 0;
