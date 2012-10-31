@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>StatMine</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/statmine.css" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
+
+
+    <script type="text/javascript">
+      function tree(data) {    
+          if (typeof(data) == 'object') {        
+              var ul = $('<ul>');
+              for (var i in data) {            
+                  ul.append($('<li>').text(i).append(tree(data[i])));         
+              }        
+              return ul;
+          } else {       
+              var textNode = document.createTextNode(' => ' + data);
+              return textNode;
+          }
+      }
+
+      $(function() {
+        var table1_name = $(document).getUrlParam("table1");
+        var table2_name = $(document).getUrlParam("table2");
+
+        jQuery.getJSON("r/get_meta.r", {"table":table1_name}, 
+            function(data) {
+          $("#meta1").append("<h3>" + table1_name + "</h3>");
+          $("#meta1").append(tree(data.dimensions));
+        });
+        jQuery.getJSON("r/get_meta.r", {"table":table2_name}, 
+            function(data) {
+          $("#meta2").append("<h3>" + table2_name + "</h3>");
+          $("#meta2").append(tree(data.dimensions));
+        });
+
+
+        $("#linkform").submit(function(e) {
+          var json = this.link.value;
+          $.ajax({
+            url: "r/link.r",
+            dataType: 'json',
+            data: {"link":json},
+            type: "POST",
+            success: function(data) {
+              if (data.fail) {
+                $("#linkresult").html("Creation of table failed: '" + 
+                  data.message + "'");
+              } else {
+                $("#linkresult").html("<a href=\"table.html?table=" + data + 
+                  "\">Table successfully created</a>");
+              }
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="index.html">StatMine</a></h1>
+    </header>
+
+    <article>
+      <form id="linkform">
+        <p>
+          Link:<br>
+          <textarea name="link" rows="20" cols="80">
+{
+  "table2" : "gezo",
+  "table1" : "huisartspatienten",
+  "newtable" : "diabetes",
+  "dimensions" : [
+    { 
+      "dimension1" : "jaar",
+      "dimension2" : "jaar",
+      "categories" : [
+        {"category2" : "2001"},
+        {"category1" : "2002", "category2" : "2002"},
+        {"category1" : "2003", "category2" : "2003"},
+        {"category1" : "2004", "category2" : "2004"},
+        {"category1" : "2005", "category2" : "2005"},
+        {"category1" : "2006", "category2" : "2006"},
+        {"category1" : "2007", "category2" : "2007"},
+        {"category1" : "2008", "category2" : "2008"},
+        {"category1" : "2009", "category2" : "2009"}
+      ]
+    },
+    { 
+      "dimension1" : "geslacht",
+      "dimension2" : "geslacht",
+      "categories" : [
+        {"category1" : "Vrouw", "category2" : "Vrouw"},
+        {"category1" : "Man", "category2" : "Man"},
+        {"category1" : "Totaal", "category2" : "Totaal"}
+      ]
+    },
+    { 
+      "dimension1" : "leeftijd",
+      "dimension2" : "leeftijd",
+      "categories" : [
+        {"category1" : "0 tot 25", "category2" : "0 tot 25"},
+        {"category1" : "25 tot 35", "category2" : "25 tot 35"},
+        {"category1" : "35 tot 45", "category2" : "35 tot 45"},
+        {"category1" : "45 tot 55", "category2" : "45 tot 55"},
+        {"category1" : "55 tot 65", "category2" : "55 tot 65"},
+        {"category1" : "65 tot 75", "category2" : "65 tot 75"},
+        {"category1" : "75+", "category2" : "75+"},
+        {"category1" : "Totaal", "category2" : "Totaal"}
+      ]
+    }
+  ]
+}
+          </textarea><br>
+          <input type="submit" value="Link">
+        </p>
+        <p id="linkresult"></p>
+      </form>
+      <h2>Meta data of tables that should be linked</h2>
+      <div id="meta1">
+      </div>
+      <div id="meta2">
+      </div>
+    </article>
+  </body>
+</html>
+

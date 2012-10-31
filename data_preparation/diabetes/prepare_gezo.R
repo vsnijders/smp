@@ -1,0 +1,68 @@
+
+source("../settings.R", chdir=TRUE)
+library(rjson)
+
+# read data
+data <- read.csv2("gezo.csv", dec='.', na.strings='.')
+
+# split gender and age
+data$geslacht <- "Totaal"
+data$geslacht[grep("man|Mannen", data$leeftijd_geslacht)] <- "Man"
+data$geslacht[grep("vrouw|Vrouwen", data$leeftijd_geslacht)] <- "Vrouw"
+
+data$leeftijd <- "Totaal"
+data$leeftijd[grep("75", data$leeftijd_geslacht)] <- "75+"
+lft <- regexpr("[0-9]+ tot [0-9]+", data$leeftijd_geslacht)
+data$leeftijd[lft > 0] <- regmatches(data$leeftijd_geslacht, lft)
+
+# remove gender:age column and reorder columns
+nms <- names(data)[!(names(data) %in% c("jaar", "leeftijd_geslacht",
+  "leeftijd", "geslacht"))]
+data <- data[, c("jaar", "leeftijd", "geslacht", nms)]
+
+# aggregate age categories
+age <- data$leeftijd
+age[data$leeftijd == "0 tot 12"] <- "0 tot 25"
+age[data$leeftijd == "12 tot 18"] <- "0 tot 25"
+age[data$leeftijd == "18 tot 25"] <- "0 tot 25"
+data$leeftijd <- age
+
+library(plyr)
+data <- ddply(data, c("jaar", "leeftijd", "geslacht"), function(d) {
+        result <- d[1,]
+        result[, nms] <- round(colMeans(d[, nms], na.rm=TRUE),1)
+        return(result)
+    })
+
+# Assign levels of table dimensions
+lvls <- unique(data$jaar)
+data$jaar <- factor(data$jaar, levels=lvls, labels=lvls)
+lvls <- unique(data$leeftijd)
+data$leeftijd <- factor(data$leeftijd, levels=lvls, labels=lvls)
+lvls <- c("Vrouw", "Man", "Totaal")
+data$geslacht <- factor(data$geslacht, levels=lvls, labels=lvls)
+
+# Order
+o <- order(data$jaar, data$leeftijd, data$geslacht)
+data <- data[o, ]
+
+# Create meta
+meta <- create_meta(data)
+write(toJSON(meta), file=paste0(TABLE_DIR, "/gezo_meta.json"))
+
+# Save data
+write.table(data, paste0(TABLE_DIR, "/gezo.csv"), sep=",", quote=FALSE, na="", 
+  row.names=FALSE)
+
+# Add new table to list of tables
+tables <- list()
+tryCatch(tables <- readLines(paste0(TABLE_DIR, "/tables.json")), 
+    error=function(e){}, warning=function(e){})
+if (is.character(tables)) {
+    tables <- fromJSON(paste(tables, collapse=""))
+}
+tables[["gezo"]] <- list(data = "gezo.csv", meta="gezo_meta.json")
+write(toJSON(tables), file=paste0(TABLE_DIR, "/tables.json"))
+
+
+

@@ -1,0 +1,26 @@
+
+body {
+  font-family : "Ubuntu";
+  font-size : 15px;
+  font-weight : 300;
+  background : white;
+  color : rgb(50, 50, 50);
+}
+h1 {
+  font-size : 150%;
+  font-weight : 400;
+}
+a {
+  color : blue;
+  text-decoration : none;
+}
+table {
+  font-size : 80%;
+}
+td, th {
+  text-align : right;
+  border-bottom : 1px solid rgb(200,200,200);
+  padding : 0px 5px;
+}
+
+

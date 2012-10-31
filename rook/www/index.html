@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>StatMine</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/statmine.css" type="text/css"/>
+
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+
+    <script type="text/javascript">
+      $(function() {
+        jQuery.getJSON("r/list_tables.r", function(data) {
+          jQuery.each(data, function(i, d) {
+            $("#tables").append("<li><label><input type=\"checkbox\" name=\"foo\" value=\"" + d + "\"><a href=\"table.html?table=" + d  + "\">" + d + "</a></input></label></li>");
+          })
+          $("input").change(function() {
+            var nselected = $("input:checked").length;
+            if (nselected == 2) {
+              $("#link_tables").show();
+            } else {
+              $("#link_tables").hide();
+            }
+          });
+        });
+
+
+        $("#link_tables").hide();
+
+        $("#link_tables").click(function() {
+          var tables = {
+            "table1": $($("input:checked")[0]).val(),
+            "table2": $($("input:checked")[1]).val()
+          };
+          window.open("link.html?table1=" + tables.table1 + "&table2=" + tables.table2, "_self", false);
+        })
+      });
+    </script>
+
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="index.html">StatMine</a></h1>
+    </header>
+
+    <article>
+      <ul id="tables">
+      </ul>
+      <p><a href="#" id="link_tables">Link tables</a></p>
+    </article>
+  </body>
+</html>
+
