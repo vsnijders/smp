@@ -1,3 +1,11 @@
+#' Rook application that returns the data of a table in JSON format
+#'
+#' @param env Rook environment variable
+#'
+#' @return Rook Request object
+#'
+#' @export
+#'
 app_get_table <- function(env){
   res <- Rook::Response$new()
   req <- Rook::Request$new(env)
