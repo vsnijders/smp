@@ -16,6 +16,10 @@
         var tablename = $(document).getUrlParam("table");
         jQuery.getJSON("r/get_table.r", {"table":tablename}, 
             function(data) {
+          if (data.fail) {
+            $("#table").html("<p>" + data.message + "</p>");
+            return;
+          }
           var div   = $("#table");
           var table = $("<table>");
           var tr    = $("<tr>").appendTo(table);
