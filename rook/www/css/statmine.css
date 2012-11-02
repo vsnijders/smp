@@ -43,8 +43,8 @@ header, footer {
 header h1 {
   font-size : 200%;
   color : inherit;
-  font-variant : small-caps;
   margin : 0pt 0pt;
+  font-weight : 400;
 }
 header a {
   color : #7eb5ff;
@@ -86,7 +86,6 @@ footer {
   float: left;
   padding: 5px 10px;
   color : white;
-  font-variant : small-caps;
   font-size : 120%;
   border-right : 1px solid rgb(80, 80, 80);
   border-right : 1px solid rgb(180, 180, 180);
@@ -113,8 +112,7 @@ div.menu {
 }
 div.menu h3 {
   font-size : 100%;
-  font-weight : bold;
-  font-variant : small-caps;
+  font-weight : 400;
   margin-top : 10pt;
   margin-bottom : 4pt;
 }
@@ -179,7 +177,7 @@ div#graphtype, div#graphdata {
 }
 
 td.value {
-   font-weight: bold;
+   font-weight: 400;
 }
 
 /* ========================== FILTER MENU =========================== */
@@ -239,6 +237,6 @@ table.label th {
 }
 
 table.label td {
-   font-weight: bold;
+   font-weight: 400;
    text-align: right;
 }
