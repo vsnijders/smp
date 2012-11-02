@@ -11,9 +11,16 @@ Table = class StatMine.Table extends Batman.Model
 AppController = class StatMine.AppController extends Batman.Controller
   routingKey: 'app'
 
-  index: ->
-#          Table.load (error, tables) ->
-#             throw error if error
-    @render false
+  check: (n, e) ->
+  	nsel = $("input:checked").length
+  	console.log nsel
+  	StatMine.set "nselected", nsel == 2
 
-StatMine.run()
+  index: ->
+        Table.load (error, tables) ->
+            throw error if error
+            StatMine.set "tables", tables
+        @render false
+
+$ () ->
+	StatMine.run()
