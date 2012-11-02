@@ -1,0 +1,61 @@
+name: Diabetes en overgewicht uit 'Gezondheid, leefstijl, zorggebruik'
+description: Selectie uit de StatLine tabel 'Gezondheid, leefstijl, zorggebruik'
+  met daarin informatie over voorkomen van diabetes en overgewicht. 
+dimensions:
+  jaar:
+    name: Jaar
+    levels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009]
+    default: 2009
+    type: [numeric, ordinal, year, categorical]
+  leeftijd:
+    name: Leeftijd
+    levels: [0 tot 25, 25 tot 35, 35 tot 45, 45 tot 55, 55 tot 65, 
+      65 tot 75, 75+, Totaal]
+    aggregate: Totaal
+    default: Totaal
+    type: [ordinal, categorical]
+  geslacht:
+    name: Geslacht
+    levels: [Vrouw, Man, Totaal]
+    aggregate: Totaal
+    default: Totaal
+    type: [categorical]
+variables:
+  suiker:
+    name: Percentage personen met diabetes
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  suiker1:
+    name: Percentage personen met diabetes type 1
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  suiker2:
+    name: Percentage personen met diabetes type 2
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  ondergewicht:
+    name: Percentage personen met ondergewicht
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  normaalgewicht:
+    name: Percentage personen met normaal gewicht
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  matigovergewicht:
+    name: Percentage personen met matig overgewicht
+    type: [numeric]
+    unit: "%"
+    population: gezo
+  ernstigovergewicht:
+    name: Percentage personen met ernstig overgewicht
+    type: [numeric]
+    unit: "%"
+    population: gezo
+populations:
+  gezo: In Nederland ingeschreven personen
+
