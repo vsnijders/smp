@@ -4,13 +4,19 @@
     <meta charset="utf-8" />
     <title>StatMine</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
-    <link rel="stylesheet" href="css/statmine.css" type="text/css"/>
+    <!-- webpage icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="images/favicon2.png" type="image/png" />
 
+    <!-- jQuery includes -->
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
 
+    <!-- styling -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link type="text/css" href="css/statmine.css" rel="stylesheet" />
 
+    <!-- scripting -->
     <script type="text/javascript">
       function tree(data) {    
           if (typeof(data) == 'object') {        
@@ -69,12 +75,24 @@
     <header>
       <h1><a href="index.html">StatMine</a></h1>
     </header>
+    <div id="navigation-container">
+      <div id="navigation">
+        <ul>
+          <li><a href="index.html">Tables</a></li>
+          <li><a href="help/index.php">Help</a></li>
+        </ul>
+      </div>
+    </div>
 
     <article>
-      <form id="linkform">
-        <p>
-          Link:<br>
-          <textarea name="link" rows="20" cols="80">
+      <div class="menu">
+      </div>
+
+      <div class="content">
+        <form id="linkform">
+          <p>
+            Link:<br>
+            <textarea name="link" rows="20" cols="80">
 {
   "table2" : "gezo",
   "table1" : "huisartspatienten",
@@ -120,17 +138,22 @@
     }
   ]
 }
-          </textarea><br>
-          <input type="submit" value="Link">
-        </p>
-        <p id="linkresult"></p>
-      </form>
-      <h2>Meta data of tables that should be linked</h2>
-      <div id="meta1">
-      </div>
-      <div id="meta2">
+            </textarea><br>
+            <input type="submit" value="Link">
+          </p>
+          <p id="linkresult"></p>
+        </form>
+        <h2>Meta data of tables that should be linked</h2>
+        <div id="meta1">
+        </div>
+        <div id="meta2">
+        </div>
       </div>
     </article>
+
+    <footer>
+    </footer>
+
   </body>
 </html>
 
