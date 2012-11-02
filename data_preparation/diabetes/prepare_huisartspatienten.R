@@ -69,20 +69,7 @@ if (!file.exists(meta_file)) {
     "default meta data is used.\n", sep=""))
 } 
 meta <- yaml.load_file(meta_file)
-write(toJSON(meta), file=paste0(TABLE_DIR, "/huisartspatienten_meta.json"))
 
 # Save data
-write.table(data, paste0(TABLE_DIR, "/huisartspatienten.csv"), sep=",", 
-  quote=FALSE, na="", row.names=FALSE)
-
-# Add new table to list of tables
-tables <- list()
-tryCatch(tables <- readLines(paste0(TABLE_DIR, "/tables.json")), error=function(e){}, 
-    warning=function(e){})
-if (is.character(tables)) {
-    tables <- fromJSON(paste(tables, collapse=""))
-}
-tables[["huisartspatienten"]] <- list(data = "huisartspatienten.csv", 
-    meta="huisartspatienten_meta.json")
-write(toJSON(tables), file=paste0(TABLE_DIR, "/tables.json"))
+add_table("huisartspatienten", data, meta)
 

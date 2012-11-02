@@ -58,21 +58,7 @@ if (!file.exists(meta_file)) {
     "the default meta data is used.\n", sep=""))
 } 
 meta <- yaml.load_file(meta_file)
-write(toJSON(meta), file=paste0(TABLE_DIR, "/gezo_meta.json"))
 
 # Save data
-write.table(data, paste0(TABLE_DIR, "/gezo.csv"), sep=",", quote=FALSE, na="", 
-  row.names=FALSE)
-
-# Add new table to list of tables
-tables <- list()
-tryCatch(tables <- readLines(paste0(TABLE_DIR, "/tables.json")), 
-    error=function(e){}, warning=function(e){})
-if (is.character(tables)) {
-    tables <- fromJSON(paste(tables, collapse=""))
-}
-tables[["gezo"]] <- list(data = "gezo.csv", meta="gezo_meta.json")
-write(toJSON(tables), file=paste0(TABLE_DIR, "/tables.json"))
-
-
+add_table("gezo", data, meta)
 

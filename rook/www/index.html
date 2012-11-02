@@ -21,7 +21,7 @@
       $(function() {
         jQuery.getJSON("r/list_tables.r", function(data) {
           jQuery.each(data, function(i, d) {
-            $("#tables").append("<p><label><input type=\"checkbox\" name=\"foo\" value=\"" + d + "\"><a href=\"table.html?table=" + d  + "\">" + d + "</a></input></label></p>");
+            $("#tables").append("<p><label><input type=\"checkbox\" name=\"foo\" value=\"" + i + "\"><a href=\"table.html?table=" + i + "\">" + d.name + "</a></input></label></p>");
           })
           $("input").change(function() {
             var nselected = $("input:checked").length;
