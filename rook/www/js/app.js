@@ -52,7 +52,20 @@
 
     AppController.prototype.routingKey = 'app';
 
+    AppController.prototype.check = function(n, e) {
+      var nsel;
+      nsel = $("input:checked").length;
+      console.log(nsel);
+      return StatMine.set("nselected", nsel === 2);
+    };
+
     AppController.prototype.index = function() {
+      Table.load(function(error, tables) {
+        if (error) {
+          throw error;
+        }
+        return StatMine.set("tables", tables);
+      });
       return this.render(false);
     };
 
@@ -60,6 +73,8 @@
 
   })(Batman.Controller);
 
-  StatMine.run();
+  $(function() {
+    return StatMine.run();
+  });
 
 }).call(this);
