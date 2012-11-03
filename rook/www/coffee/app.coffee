@@ -5,8 +5,9 @@ Table = class StatMine.Table extends Batman.Model
   @encode "name"
   @resourceName: "table"
   @persist Batman.RestStorage
-  @url = "custom/statmine/tables"
-  url: -> "custom/statmine/tables?name=#{@get('id')}"
+  @url = "/custom/statmine/tables"
+  url: -> "./tables?name=#{@get('name')}"
+  @accessor "Url", -> @url()
 
 AppController = class StatMine.AppController extends Batman.Controller
   routingKey: 'app'

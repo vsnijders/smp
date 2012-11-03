@@ -32,11 +32,15 @@
 
     Table.persist(Batman.RestStorage);
 
-    Table.url = "custom/statmine/tables";
+    Table.url = "/custom/statmine/tables";
 
     Table.prototype.url = function() {
-      return "custom/statmine/tables?name=" + (this.get('id'));
+      return "./tables?name=" + (this.get('name'));
     };
+
+    Table.accessor("Url", function() {
+      return this.url();
+    });
 
     return Table;
 
