@@ -20,46 +20,12 @@
     <!-- styling -->
     <link type="text/css" href="css/statmine.css" rel="stylesheet" />
 
-    <!-- scripting -->
-    <script type="text/javascript">
-    /*
-      $(function() {
-        jQuery.getJSON("r/list_tables.r", function(data) {
-          jQuery.each(data, function(i, d) {
-            $("#tables").append("<p><label><input type=\"checkbox\" name=\"foo\" value=\"" + d + "\"><a href=\"table.html?table=" + d  + "\">" + d + "</a></input></label></p>");
-          })
-          $("input").change(function() {
-            var nselected = $("input:checked").length;
-            if (nselected == 2) {
-              $("#link_tables").show();
-            } else {
-              $("#link_tables").hide();
-            }
-          });
-        });
-
-
-        $("#link_tables").hide();
-
-        $("#link_tables").click(function() {
-          var tables = {
-            "table1": $($("input:checked")[0]).val(),
-            "table2": $($("input:checked")[1]).val()
-          };
-          window.open("link.html?table1=" + tables.table1 + "&table2=" + tables.table2, "_self", false);
-        })
-      });
-
-      //StatMine.run();
-      */
-    </script>
-
   </head>
   <body>
   <div id="container">
         <p data-foreach-tab="tables">
             <label>
-               <input type="checkbox" data-event-change="controllers.app.check" /><a data-bind-href="tab.Url" data-bind="tab.name">Name</a>
+               <input type="checkbox" data-event-change="controllers.app.check" /><a data-bind-href="tab.url" data-bind="tab.name">Name</a>
             </label>
         </p>
         <button data-showif="nselected">Link tables</button>
