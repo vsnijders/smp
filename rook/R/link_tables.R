@@ -119,28 +119,8 @@ link_tables <- function(link) {
   t <- t[o, ]
 
   # ==== Output
-  # TODO Perhaps better is to have a separate function that saves the table and
-  # adds it to the list of tables
-
-  # Write table to temporary tables directory
-  filename <- paste0("data/tmp/", link$newtable, ".csv")
-  write.table(t, filename, sep=",", quote=FALSE, na="", row.names=FALSE)
-
-  # Create meta
-  filename_meta <- paste0("data/tmp/", link$newtable, "_meta.json")
-  meta <- create_meta(t)
-  write(toJSON(meta), file=filename_meta)
-
-  # Add new table to list of tables
-  tables <- list()
-  tryCatch(tables <- readLines("data/tmp/tables.json"), error=function(e){}, 
-      warning=function(e){})
-  if (is.character(tables)) {
-      tables <- fromJSON(paste(tables, collapse=""))
-  }
-  tables[[link$newtable]] <- list(data = paste0(link$newtable, ".csv"),
-      meta = paste0(link$newtable, "_meta.json"))
-  write(toJSON(tables), file="data/tmp/tables.json")
+  meta <- create_meta(t, name=link$newtable)
+  add_table(link$newtable, t, meta)
 
   # Return new table name
   return(link$newtable)
