@@ -9,8 +9,8 @@
 app_list_tables <- function(env){
   res <- Rook::Response$new()
   res$header("Content-Type", "application/json")
-  tables <- names(list_tables())
-  if (is.null(tables)) tables <- character(0)
+  tables <- list_tables()
+  if (is.null(tables)) tables <- list()
   res$write(toJSON(tables))
   res$finish()
 }
