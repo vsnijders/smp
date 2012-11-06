@@ -1,0 +1,27 @@
+/*  
+  Specific formatting for index.html page
+*/
+#tables {
+  width : 100%;
+}
+#tables h3 a {
+  color : inherit;
+}
+#tables h3 a:hover {
+  color : steelblue;
+}
+#tables h3 {
+  margin : 0px;
+}
+#tables p {
+  margin : 0px;
+  max-width : 500px;
+}
+#tables td {
+  padding : 10px 0px;
+  vertical-align : top;
+}
+#tables tbody {
+  border-bottom : 1px solid rgb(200,200,200);
+  border-top : 1px solid rgb(200,200,200);
+}
