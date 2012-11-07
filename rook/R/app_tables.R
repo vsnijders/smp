@@ -11,7 +11,8 @@ app_tables <- function(env){
   res$header("Content-Type", "application/json")
 
   req <- Rook::Request$new(env)
-  tables <- data.frame(name=names(list_tables()))
+  tables <- as.data.frame(do.call(rbind,list_tables()))
+  print(tables)
   res$write(df_to_json(tables))
   res$finish()
 }

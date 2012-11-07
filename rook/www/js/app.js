@@ -26,7 +26,7 @@
       return Table.__super__.constructor.apply(this, arguments);
     }
 
-    Table.encode("name");
+    Table.encode("name", "description");
 
     Table.resourceName = "table";
 

@@ -2,7 +2,7 @@
   @root "app#index"
 
 Table = class StatMine.Table extends Batman.Model
-  @encode "name"
+  @encode "name", "description"
   @resourceName: "table"
   @persist Batman.RestStorage
   @url = "/custom/statmine/tables"
