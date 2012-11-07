@@ -34,21 +34,9 @@
     <!-- ======================== SCRIPTING ========================== -->
     <script type="text/javascript">
       $(function() {
-        $(function() {
-          $("#tabs").tabs();
-        });
 
-        // Create buttonset to select graph type
-        /*$("#graph").buttonset();
-        $("#graph input").click(function() {
-          graphtype = this.id;
-          var sel = $('.plotvariable').not('.' + graphtype);
-          $('li', sel).appendTo('#variables');
-          sel.hide();
-          $('.' + graphtype).show();
-          //refresh_selection();
-          //redraw_graph();
-        })*/
+        // Create tabbed pages for each of the graph types
+        $("#tabs").tabs();
 
         // Make graph container resizable
         $('#resizable').resizable({
