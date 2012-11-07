@@ -46,6 +46,28 @@
             redraw_graph(); 
           }
         }).width("90%");
+
+
+        $(".draggable").draggable({
+          revert : "invalid"
+        });
+        $(".droppable").droppable({
+          accept: ".draggable",
+          activeClass: "ui-state-hover",
+          hoverClass: "ui-state-active",
+          drop: function(event, ui) {
+
+            $(".droppable", $(this)).appendTo($(".droppable", $(this.parent.parent)).last());
+            // move existing variables to variables section
+            $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
+            }
+          /*drop: function( event, ui ) {
+            $( this )
+              .addClass( "ui-state-highlight" )
+              .find( "p" )
+              .html( "Dropped!" );
+          }*/
+        });
       });
 
     </script>
@@ -66,18 +88,45 @@
   <article>
     <div class="menu">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab1" data-toggle="tab">lines</a></li>
-        <li><a href="#tab2" data-toggle="tab">scatter</a></li>
-        <li><a href="#tab3" data-toggle="tab">bar</a></li>
-        <li><a href="#tab4" data-toggle="tab">mosaic</a></li>
+        <li class="active"><a href="#lines" data-toggle="tab">lines</a></li>
+        <li><a href="#scatter" data-toggle="tab">scatter</a></li>
+        <li><a href="#bar" data-toggle="tab">bar</a></li>
+        <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tab1">
+
+        <div class="tab-pane active" id="lines">
+          <div class="plotvariable">
+            <h3>x</h3> <ul id="x" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>y</h3> <ul id="y" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>colour</h3> <ul id="colour" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>row</h3> <ul id="row" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>column</h3> <ul id="column" class="droppable"></ul>
+          </div>
+          <h3>variables</h3>
+          <ul id="variables" class="droppable">
+            <li class="draggable">Test 1</li>
+            <li class="draggable">Test 2</li>
+          </ul>
+        </div>
+
+        <div class="tab-pane" id="scatter">
           <div class="plotvariable">
             <h3>x</h3> <ul id="x" class="connectedSortable"></ul>
           </div>
           <div class="plotvariable">
             <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>size</h3> <ul id="size" class="connectedSortable"></ul>
           </div>
           <div class="plotvariable">
             <h3>colour</h3> <ul id="colour" class="connectedSortable"></ul>
@@ -88,34 +137,11 @@
           <div class="plotvariable">
             <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
           </div>
-          <h3>Variables</h3>
+          <h3>variables</h3>
           <ul id="variables" class="connectedSortable"></ul>
         </div>
 
-        <div class="tab-pane" id="tab2">
-          <div class="plotvariable">
-            <h3>x</h3> <ul id="x" class="connectedSortable"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>size</h3> <ul id="size" class="connectedSortable"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>colour</h3> <ul id="colour" class="connectedSortable"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>row</h3> <ul id="row" class="connectedSortable"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
-          </div>
-          <h3>Variables</h3>
-          <ul id="variables" class="connectedSortable"></ul>
-        </div>
-
-        <div class="tab-pane" id="tab3">
+        <div class="tab-pane" id="bar">
           <div class="plotvariable">
             <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
           </div>
@@ -128,11 +154,11 @@
           <div class="plotvariable">
             <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
           </div>
-          <h3>Variables</h3>
+          <h3>variables</h3>
           <ul id="variables" class="connectedSortable"></ul>
         </div>
 
-        <div class="tab-pane" id="tab4">
+        <div class="tab-pane" id="mosaic">
           <div class="plotvariable">
             <h3>x</h3> <ul id="x" class="connectedSortable"></ul>
           </div>
@@ -146,9 +172,9 @@
             <h3>row</h3> <ul id="row" class="connectedSortable"></ul>
           </div>
           <div class="plotvariable">
-            <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
+            <h3>column</h3> <ul id="colum" class="connectedSortable"></ul>
           </div>
-          <h3>Variables</h3>
+          <h3>variables</h3>
           <ul id="variables" class="connectedSortable"></ul>
         </div>
       </div>
