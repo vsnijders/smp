@@ -29,6 +29,30 @@
 
     <!-- ======================== SCRIPTING ========================== -->
     <script type="text/javascript">
+      $(function() {
+
+        // Create buttonset to select graph type
+        $("#graph").buttonset();
+        $("#graph input").click(function() {
+          graphtype = this.id;
+          var sel = $('.plotvariable').not('.' + graphtype);
+          $('li', sel).appendTo('#variables');
+          sel.hide();
+          $('.' + graphtype).show();
+          /*refresh_selection();
+          redraw_graph();*/
+        })
+
+        // Make graph container resizable
+        $('#resizable').resizable({
+          minHeight: 300,
+          minWidth: 300,
+          stop: function(event, ui) { 
+            redraw_graph(); 
+          }
+        }).width("90%");
+      });
+
     </script>
 
     <!-- ======================== PAGE =============================== -->
