@@ -3,15 +3,13 @@
 div.menu {
   float : left;
   width : 240px;
-  padding : 10px 10px;
-  min-height : 1500px;
-  background : rgb(240, 240, 240);
+  padding : 0px 10px 20px 0px;
   border-right : rgb(150, 150, 150) solid 1px;
 }
 div.menu h3 {
   font-size : 100%;
   font-weight : 400;
-  margin-top : 10pt;
+  margin-top : 0pt;
   margin-bottom : 4pt;
 }
 .connectedSortable { 
@@ -32,8 +30,28 @@ div.menu h3 {
   position: absolute; 
   margin-left: -1.3em;        
 }
+
+.droppable {
+  margin : 0px;
+  padding : 0px;
+  min-height : 15px;
+  border-top : solid 1px white;
+  border-bottom : solid 1px white;
+}
+.droppable_active {
+  background : rgb(230,230,230);
+  border-top : solid 1px rgb(200,200,200);
+  border-bottom : solid 1px rgb(200,200,200);
+}
+.droppable_hover {
+  background : none;
+}
 .draggable {
   cursor: move;
+  display : block;
+  border : 1px solid black;
+  margin : 2px 0px;
+  background : white;
 }
 
 /* ========================== GRAPH ================================= */

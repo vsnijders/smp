@@ -35,9 +35,29 @@
     <script type="text/javascript">
       $(function() {
 
+        // ================== VARIABLE SELECTION =======================
         // Create tabbed pages for each of the graph types
         $("#tabs").tabs();
 
+        // Drag-and-drop of variables on graph dimensions
+        $(".draggable").draggable({
+          revert : "invalid",
+          axis : "y"
+        });
+        $(".droppable").droppable({
+          accept: ".draggable",
+          activeClass: "droppable_active", 
+          hoverClass: "droppable_hover", 
+          drop: function(event, ui) {
+            // move existing variables to variables section
+            $(".draggable", $(this)).appendTo($(".variables", $(this).parent().parent()));
+            // append newly dropped variable to the list
+            $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
+            // TODO update selection
+          }
+        });
+
+        // ========================== GRAPH =============================
         // Make graph container resizable
         $('#resizable').resizable({
           minHeight: 300,
@@ -47,27 +67,6 @@
           }
         }).width("90%");
 
-
-        $(".draggable").draggable({
-          revert : "invalid"
-        });
-        $(".droppable").droppable({
-          accept: ".draggable",
-          activeClass: "ui-state-hover",
-          hoverClass: "ui-state-active",
-          drop: function(event, ui) {
-
-            $(".droppable", $(this)).appendTo($(".droppable", $(this.parent.parent)).last());
-            // move existing variables to variables section
-            $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
-            }
-          /*drop: function( event, ui ) {
-            $( this )
-              .addClass( "ui-state-highlight" )
-              .find( "p" )
-              .html( "Dropped!" );
-          }*/
-        });
       });
 
     </script>
@@ -97,22 +96,22 @@
 
         <div class="tab-pane active" id="lines">
           <div class="plotvariable">
-            <h3>x</h3> <ul id="x" class="droppable"></ul>
+            <h3>x</h3> <ul id="lines_x" class="droppable"></ul>
           </div>
           <div class="plotvariable">
-            <h3>y</h3> <ul id="y" class="droppable"></ul>
+            <h3>y</h3> <ul id="lines_y" class="droppable"></ul>
           </div>
           <div class="plotvariable">
-            <h3>colour</h3> <ul id="colour" class="droppable"></ul>
+            <h3>colour</h3> <ul id="lines_colour" class="droppable"></ul>
           </div>
           <div class="plotvariable">
-            <h3>row</h3> <ul id="row" class="droppable"></ul>
+            <h3>row</h3> <ul id="lines_row" class="droppable"></ul>
           </div>
           <div class="plotvariable">
-            <h3>column</h3> <ul id="column" class="droppable"></ul>
+            <h3>column</h3> <ul id="lines_column" class="droppable"></ul>
           </div>
           <h3>variables</h3>
-          <ul id="variables" class="droppable">
+          <ul id="lines_variables" class="variables droppable">
             <li class="draggable">Test 1</li>
             <li class="draggable">Test 2</li>
           </ul>
