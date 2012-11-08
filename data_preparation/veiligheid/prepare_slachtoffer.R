@@ -5,8 +5,11 @@ library(yaml)
 # read data
 data <- read.csv2("slachtoffer.csv", dec='.', na.strings=NA_STRINGS)
 
-names(data) <- c("Jaar", "Regio", "Slachtofferschap", "Geweldsdelicten", 
-                 "Vermogensdelicten", "Vandalisme-delicten", "Overige delicten")
+data <- data[c(1,2,5,7)]
+
+names(data) <- c("Jaar", "Regio", "Delict", "Slachtofferschap")
+levels(data$Delict) <- c("Geweldsdelicten", "Overige delicten", "Totaal", 
+                           "Vandalismedelicten", "Vermogensdelicten")
 
 # Create meta
 meta <- load_meta(data, "slachtoffer.yaml")

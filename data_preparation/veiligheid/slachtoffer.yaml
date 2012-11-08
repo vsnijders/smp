@@ -1,4 +1,4 @@
-name: Slachtoffers misdrijven
+name: Percentage slachtoffers van delicten
 description: 
 dimensions:
   Jaar:
@@ -10,7 +10,7 @@ dimensions:
     - 2011*
     aggregate: 2011*
     default: 2011*
-    type: categorical
+    type: [categorical, int]
   Regio:
     name: Regio
     levels:
@@ -43,32 +43,23 @@ dimensions:
     aggregate: Zuid-Holland-Zuid (PO)
     default: Zuid-Holland-Zuid (PO)
     type: categorical
+  Delict:
+    name: Delict
+    levels:
+    - Geweldsdelicten
+    - Overige delicten
+    - Totaal
+    - Vandalismedelicten
+    - Vermogensdelicten
+    aggregate: Vermogensdelicten
+    default: Vermogensdelicten
+    type: categorical
 variables:
   Slachtofferschap:
     name: Slachtofferschap
     type: numeric
-    unit: 
-    population: Name missing
-  Geweldsdelicten:
-    name: Geweldsdelicten
-    type: numeric
-    unit: 
-    population: Name missing
-  Vermogensdelicten:
-    name: Vermogensdelicten
-    type: numeric
-    unit: 
-    population: Name missing
-  Vandalisme-delicten:
-    name: Vandalisme-delicten
-    type: numeric
-    unit: 
-    population: Name missing
-  Overige delicten:
-    name: Overige delicten
-    type: numeric
-    unit: 
-    population: Name missing
+    unit: "%"
+    population: Slachtoffers
 populations:
-  Name missing: No population description availabla
+  Slachtoffer:
 

@@ -37,12 +37,12 @@ dimensions:
   Soort:
     name: Soort
     levels:
-    - 1 Vermogensmisdrijven
-    - 2 Vernielingen, misdr.openb.orde/gezag
-    - 3 Gewelds- en seksuele misdrijven
-    - Misdrijven, totaal
-    aggregate: Misdrijven, totaal
-    default: Misdrijven, totaal
+    - Vermogensmisdrijven
+    - Vernielingen misdr.openb.orde
+    - Gewelds- en seksuele misdrijven
+    - Totaal
+    aggregate: Totaal
+    default: Totaal
     type: categorical
   Jaar:
     name: Jaar
