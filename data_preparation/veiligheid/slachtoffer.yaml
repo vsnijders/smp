@@ -1,3 +1,5 @@
+name: Name missing
+description: 
 dimensions:
   Jaar:
     name: Jaar
@@ -6,9 +8,11 @@ dimensions:
     - 2009*
     - 2010*
     - 2011*
+    aggregate: 2011*
     default: 2011*
-  regio:
-    name: regio
+    type: categorical
+  Regio:
+    name: Regio
     levels:
     - Amsterdam-Amstelland (PO)
     - Brabant-Noord (PO)
@@ -36,17 +40,35 @@ dimensions:
     - Zaanstreek-Waterland (PO)
     - Zeeland (PO)
     - Zuid-Holland-Zuid (PO)
+    aggregate: Zuid-Holland-Zuid (PO)
     default: Zuid-Holland-Zuid (PO)
-  Misdrijf:
-    name: Misdrijf
-    levels:
-    - Geweldsdelicten
-    - Overige delicten
-    - Slachtofferschap totaal
-    - Vandalismedelicten
-    - Vermogensdelicten
-    default: Vermogensdelicten
+    type: categorical
 variables:
-  Slachtofferpercentage:
-    name: Slachtofferpercentage
+  Slachtofferschap:
+    name: Slachtofferschap
+    type: numeric
+    unit: 
+    population: Name missing
+  Geweldsdelicten:
+    name: Geweldsdelicten
+    type: numeric
+    unit: 
+    population: Name missing
+  Vermogensdelicten:
+    name: Vermogensdelicten
+    type: numeric
+    unit: 
+    population: Name missing
+  Vandalisme-delicten:
+    name: Vandalisme-delicten
+    type: numeric
+    unit: 
+    population: Name missing
+  Overige delicten:
+    name: Overige delicten
+    type: numeric
+    unit: 
+    population: Name missing
+populations:
+  Name missing: No population description availabla
 
