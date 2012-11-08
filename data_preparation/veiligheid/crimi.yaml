@@ -1,5 +1,5 @@
-name: Geregistreerde misdrijven
-description: Geregistreerde misdrijven
+name: Geregistreerde misdrijven naar politieregio
+description: "Selectie uit StatLine tabel 'Geregistreerde criminaliteit; misdrijven en verdachten naar regio'"
 dimensions:
   Regio:
     name: Regio
@@ -34,11 +34,11 @@ dimensions:
     aggregate: Zuid-Holland-Zuid (PO)
     default: Zuid-Holland-Zuid (PO)
     type: categorical
-  Soort:
-    name: Soort
+  Misdrijf:
+    name: Misdrijf
     levels:
     - Vermogensmisdrijven
-    - Vernielingen misdr.openb.orde
+    - Vernielingen/misdr.openb.orde
     - Gewelds- en seksuele misdrijven
     - Totaal
     aggregate: Totaal
@@ -79,5 +79,5 @@ variables:
     unit: 
     population: Geregistreerde misdrijven
 populations:
-  Geregistreerde misdrijven: No population description availabla
+  Geregistreerde misdrijven: Geregistreerde misdrijven
 
