@@ -1,5 +1,7 @@
 
 add_table <- function(tablename, data, meta, table_dir = "data/tmp") {
+  stopifnot(require(rjson))
+  
   # Save data
   dname    <- paste0(tablename, ".csv")
   filename <- paste0(table_dir, "/", dname)
