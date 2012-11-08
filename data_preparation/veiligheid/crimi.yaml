@@ -1,5 +1,5 @@
-name: Geregistreerde misdrijven
-description: 
+name: Geregistreerde misdrijven naar politieregio
+description: "Selectie uit StatLine tabel 'Geregistreerde criminaliteit; misdrijven en verdachten naar regio'"
 dimensions:
   Regio:
     name: Regio
