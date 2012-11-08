@@ -6,7 +6,7 @@ ROOT_DIR  <- getwd()
 ROOK_DIR  <- paste0(ROOT_DIR, "/rook")
 R_DIR     <- paste0(ROOK_DIR, "/R")
 TABLE_DIR <- paste0(ROOK_DIR, "/data/tables")
-NA_STRINGS <- c(".", "x")
+NA_STRINGS <- c(".", "x","-")
 
 # Source all r-files
 rfiles <- list.files(R_DIR, pattern="\\.[rR]$")
