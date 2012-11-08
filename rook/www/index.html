@@ -14,15 +14,30 @@
 
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
-    <link type="text/css" href="css/statmine.css" rel="stylesheet" />
+    <link type="text/css" href="css/statmine2.css" rel="stylesheet" />
+    <link type="text/css" href="css/index.css" rel="stylesheet" />
 
     <!-- scripting -->
     <script type="text/javascript">
       $(function() {
+
+        // Load list of tables and add the tables to the page
         jQuery.getJSON("r/list_tables.r", function(data) {
+
+          // Create a new row in the table #tables for each table
           jQuery.each(data, function(i, d) {
-            $("#tables").append("<tr><td><input type=\"checkbox\" name=\"foo\" value=\"" + i + "\"></input></td><td><a href=\"table.html?table=" + i + "\">" + d.name + "</a></td></tr>");
+            var newt = $("<tbody>");
+            $("<tr>").appendTo(newt).html(
+              "<td class=\"select\"><input type=\"checkbox\" name=\"foo\" value=\"" + i + "\"></input></td>" + 
+              "<td class=\"description\"><h3><a href=\"table.html?table=" + i + "\">" + d.name + "</a></h3>" + 
+              "<p>" + d.description + "</p></td>"
+            );
+            $("#tables").append(newt);
           })
+
+          // Only show the link to page where tables can be linked when 2 tables 
+          // are selected; otherwise hide
+          $("#link_tables").hide();
           $("input").change(function() {
             var nselected = $("input:checked").length;
             if (nselected == 2) {
@@ -33,9 +48,7 @@
           });
         });
 
-
-        $("#link_tables").hide();
-
+        // Handle clicks on the link link
         $("#link_tables").click(function() {
           var tables = {
             "table1": $($("input:checked")[0]).val(),
@@ -51,17 +64,15 @@
    
   <header>
     <h1><a href="index.html">StatMine</a></h1>
-  </header>
-  <div id="navigation-container">
-    <div id="navigation">
+    <nav>
       <ul>
         <li><a href="index.html">Tables</a></li>
-        <li><a href="help/index.php">Help</a></li>
       </ul>
-    </div>
-  </div>
+    </nav>
+  </header>
 
   <article>
+    <h2>Available tables</h2>
     <table id="tables">
     </table>
     <p><a href="#" id="link_tables">Link tables</a></p>

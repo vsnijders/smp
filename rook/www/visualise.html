@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>StatMine</title>
+
+    <!-- ======================== INCLUDES ========================== -->
+    <!-- webpage icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="images/favicon2.png" type="image/png" />
+
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <link type="text/css" href="css/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-ui-1.9.1.custom.min.js"></script>
+
+    <!-- bootstrap includes -->
+    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- tipsy.js -->
+    <script type="text/javascript" src="js/jquery.tipsy.js"></script>
+    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+
+    <!-- d3.js includes -->
+    <script type="text/javascript" src="js/d3.v2.min.js"></script>
+
+    <!-- styling -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link type="text/css" href="css/statmine2.css" rel="stylesheet" />
+    <link type="text/css" href="css/visualise.css" rel="stylesheet" />
+
+    <!-- ======================== SCRIPTING ========================== -->
+    <script type="text/javascript">
+      $(function() {
+
+        // Create tabbed pages for each of the graph types
+        $("#tabs").tabs();
+
+        // Make graph container resizable
+        $('#resizable').resizable({
+          minHeight: 300,
+          minWidth: 300,
+          stop: function(event, ui) { 
+            redraw_graph(); 
+          }
+        }).width("90%");
+
+
+        $(".draggable").draggable({
+          revert : "invalid"
+        });
+        $(".droppable").droppable({
+          accept: ".draggable",
+          activeClass: "ui-state-hover",
+          hoverClass: "ui-state-active",
+          drop: function(event, ui) {
+
+            $(".droppable", $(this)).appendTo($(".droppable", $(this.parent.parent)).last());
+            // move existing variables to variables section
+            $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
+            }
+          /*drop: function( event, ui ) {
+            $( this )
+              .addClass( "ui-state-highlight" )
+              .find( "p" )
+              .html( "Dropped!" );
+          }*/
+        });
+      });
+
+    </script>
+
+    <!-- ======================== PAGE =============================== -->
+  </head>
+  <body>
+   
+  <header>
+    <h1><a href="index.html">StatMine</a></h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Tables</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <article>
+    <div class="menu">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#lines" data-toggle="tab">lines</a></li>
+        <li><a href="#scatter" data-toggle="tab">scatter</a></li>
+        <li><a href="#bar" data-toggle="tab">bar</a></li>
+        <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
+      </ul>
+      <div class="tab-content">
+
+        <div class="tab-pane active" id="lines">
+          <div class="plotvariable">
+            <h3>x</h3> <ul id="x" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>y</h3> <ul id="y" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>colour</h3> <ul id="colour" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>row</h3> <ul id="row" class="droppable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>column</h3> <ul id="column" class="droppable"></ul>
+          </div>
+          <h3>variables</h3>
+          <ul id="variables" class="droppable">
+            <li class="draggable">Test 1</li>
+            <li class="draggable">Test 2</li>
+          </ul>
+        </div>
+
+        <div class="tab-pane" id="scatter">
+          <div class="plotvariable">
+            <h3>x</h3> <ul id="x" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>size</h3> <ul id="size" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>colour</h3> <ul id="colour" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>row</h3> <ul id="row" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
+          </div>
+          <h3>variables</h3>
+          <ul id="variables" class="connectedSortable"></ul>
+        </div>
+
+        <div class="tab-pane" id="bar">
+          <div class="plotvariable">
+            <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>size</h3> <ul id="size" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>row</h3> <ul id="row" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>column</h3> <ul id="column" class="connectedSortable"></ul>
+          </div>
+          <h3>variables</h3>
+          <ul id="variables" class="connectedSortable"></ul>
+        </div>
+
+        <div class="tab-pane" id="mosaic">
+          <div class="plotvariable">
+            <h3>x</h3> <ul id="x" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>y</h3> <ul id="y" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>size</h3> <ul id="size" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>row</h3> <ul id="row" class="connectedSortable"></ul>
+          </div>
+          <div class="plotvariable">
+            <h3>column</h3> <ul id="colum" class="connectedSortable"></ul>
+          </div>
+          <h3>variables</h3>
+          <ul id="variables" class="connectedSortable"></ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="content">
+      <div id="resizable" class="ui-widget-content">
+        <div class="graph"></div>
+        <div id="caption"></div>
+      </div>
+
+      <div id="graphtype"></div>
+      <div id="graphdata"></div>
+    </div>
+
+  </article>
+
+  <footer>
+  </footer>
+
+  </body>
+</html>
+
+
+

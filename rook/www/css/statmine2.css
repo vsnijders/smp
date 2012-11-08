@@ -1,0 +1,79 @@
+
+BODY {
+  font-family : "Ubuntu", sans-serif;
+  font-weight : 300;
+  font-size: 12px;
+  color : black;
+  margin : 0pt;
+}
+* {
+  font-weight : 300;
+  text-decoration : none;
+}
+
+/* ========================== GENERIC ============================== */
+
+a {
+  color : steelblue;
+  font-size : inherit;
+}
+
+/* Tables */
+table {
+  border-collapse : collapse;
+}
+td, th {
+  padding : 0px 5px;
+  text-align : left;
+}
+.numeric td, .numeric th {
+  text-align : right;
+}
+th {
+  font-weight : 400;
+}
+
+/* ========================== HEADER/FOOTER ======================== */
+header, footer {
+  margin : 0px 20px;
+  padding : 0px;
+}
+header h1 {
+  font-size : 150%;
+  color : inherit;
+  margin : 10px 0px 10px 0px;
+  font-weight : 400;
+}
+footer {
+}
+
+/* ========================== MENU BAR TOP ========================= */
+nav ul {
+  margin: 0px 0px;
+  padding: 0;
+  background : steelblue;
+  color : white;
+}
+nav a {
+  color : white;
+  color : rgb(230,230,230);
+}
+nav a:hover {
+  color : white;
+}
+nav li {
+  display: inline-block;
+  border-right : 1px solid rgb(80, 80, 80);
+  border-right : 1px solid rgb(white, white, white);
+  padding : 3pt 10px 3px 10px;
+}
+
+/* ========================== ARTICLE =============================== */
+article {
+  margin : 0px 20px;
+  min-height : 500px;
+  padding-top : 20px;
+  padding-bottom : 100px;
+}
+
+

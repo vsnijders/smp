@@ -71,5 +71,5 @@ if (!file.exists(meta_file)) {
 meta <- yaml.load_file(meta_file)
 
 # Save data
-add_table("huisartspatienten", data, meta)
+add_table("huisartspatienten", data, meta, TABLE_DIR)
 

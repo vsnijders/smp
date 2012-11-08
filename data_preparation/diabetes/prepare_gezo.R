@@ -60,5 +60,5 @@ if (!file.exists(meta_file)) {
 meta <- yaml.load_file(meta_file)
 
 # Save data
-add_table("gezo", data, meta)
+add_table("gezo", data, meta, TABLE_DIR)
 
