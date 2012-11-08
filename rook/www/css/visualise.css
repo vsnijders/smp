@@ -9,26 +9,12 @@ div.menu {
 div.menu h3 {
   font-size : 100%;
   font-weight : 400;
-  margin-top : 0pt;
-  margin-bottom : 4pt;
+  margin-top : 10px;
+  margin-bottom : 4px;
+  line-height : normal;
 }
-.connectedSortable { 
-  border-top : solid 1px rgb(200,200,200);
-  border-bottom : solid 1px rgb(200,200,200);
-  list-style-type: none; 
-  margin: 0; 
-  padding: 4px 0; 
-  width: 100%; 
-}
-.connectedSortable li { 
-  margin: 2px 0px 2px 0px; 
-  padding: 0.2em; 
-  padding-left: .8em; 
-  font-size: 10px; 
-}
-.connectedSortable li span { 
-  position: absolute; 
-  margin-left: -1.3em;        
+div.menu ul {
+  margin-top : 0px;
 }
 
 .droppable {
@@ -49,9 +35,13 @@ div.menu h3 {
 .draggable {
   cursor: move;
   display : block;
-  border : 1px solid black;
   margin : 2px 0px;
   background : white;
+  color : black;
+  border : rgb(200,200,200) 1px solid;
+  padding : 2px 3px 2px 3px;
+  border-radius: 5px;
+  font-size : 90%;
 }
 
 /* ========================== GRAPH ================================= */
@@ -78,21 +68,30 @@ td.value {
 }
 
 /* ========================== FILTER MENU =========================== */
-.collapseblethingy {
-  background : rgba(255, 255, 255, 0.8);
-  color : black;
-  margin-top : 3px;
-  margin-left : -6px;
-  cursor : auto; 
-  padding : 5pt;
+
+.togglefilter {
+  float : right; 
+  width : 15px; 
+  padding-left : 5px;
 }
-.collapseblethingy input{
-  margin-right : 5pt;
+form {
+  margin : 0pt;
+  padding : 0pt;
 }
-.collapse {
-  left : 240px;
-  margin-top : -3px;
-  cursor : pointer;
+
+
+/* Undo some of the settings from bootstrap.css */
+div.filter {
+  margin : 0pt;
+}
+label {
+  display: block;
+}
+label, input, button, select, textarea {
+  font-size: inherit;
+  font-weight: 300;
+  line-height: inherit;
+  margin-bottom : 0pt;
 }
 
 /* ========================== GRAPH CAPTION ========================= */
