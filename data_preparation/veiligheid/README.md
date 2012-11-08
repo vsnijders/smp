@@ -1,1 +1,3 @@
-http://statline.cbs.nlStatWebpublicationDM=SLNL&PA=80169NED&D1=0-1,5,15-16&D2=a&D3=0&D4=a&HDR=G2,T&STB=G3,G1
+Hyperlink naar CBS tabel: [Slachtofferschap en ondervonden delicten; politieregio (IVM)](http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80169NED&D1=0-1,5,15-16&D2=a&D3=0&D4=a&HD=121102-1437&HDR=G2,T&STB=G3,G1)
+ 
+Hyperlink naar CBS tabel: [Geregistreerde criminaliteit; misdrijven en verdachten naar regio](http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=80344NED&D1=0,2-4&D2=0-1,18,42&D3=0,417-442&D4=a&HDR=T&STB=G2,G1,G3&VW=T)
