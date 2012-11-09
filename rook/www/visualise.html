@@ -33,98 +33,11 @@
     <link type="text/css" href="css/visualise.css" rel="stylesheet" />
 
     <!-- ======================== SCRIPTING ========================== -->
+    <script type="text/javascript" src="js/visualise_menu.js"></script>
+
+
     <script type="text/javascript">
-
-      // =================== GLOBAL VARIABLES ========================
-      var selection = {};
-      var graphtype = "lines";
-
       $(function() {
-
-
-        var tablename = $(document).getUrlParam("table");
-        jQuery.getJSON("r/get_meta.r", {"table":tablename}, 
-            function(data) {
-          if (data.fail) {
-            alert("Error fetching data");
-            return;
-          }
-          // add dimensions to page
-          jQuery.each(data.dimensions, function(dim, dat) {
-            var li = $("<li>").addClass("draggable categorical")
-              .attr("data-variable", dim).text(dat.name)
-              .draggable({
-                revert : "invalid",
-                axis : "y"
-              });
-            var a = $("<a>").attr("href", "#").addClass("togglefilter")
-              .html('<i class=\"icon-filter"></i>').appendTo(li)
-              .click(function() {
-                $(this).next().toggle('slow');
-                return false;
-              });
-              
-            var div = $("<div>").addClass("filter").appendTo(li).hide();
-            var form = $("<form>").appendTo(div);
-            jQuery.each(dat.levels, function(i, lab) {
-              form.append('<label><input type="checkbox" class="filter" name="' + 
-                dat.name + '" value="' + lab + '">' + lab + '</label>');
-            });
-            $(".variables").first().append(li)
-          });
-
-          // add variables to page
-          jQuery.each(data.variables, function(dim, dat) {
-            var li = $("<li>").addClass("draggable numeric")
-              .attr("data-variable", dim).text(dat.name)
-              .draggable({
-                revert : "invalid",
-                axis : "y"
-              });
-            $(".variables").first().append(li)
-          });
-        });
-
-
-        // ================== VARIABLE SELECTION =======================
-        // Create tabbed pages for each of the graph types
-        $("#tabs").tabs();
-        // Keep track of which tab = graphtype is selected
-        $('a[data-toggle="tab"]').on('shown', function (e) {
-          graphtype = $(this).text();
-        });
-
-        // Drag-and-drop of variables on graph dimensions
-        $(".droppable").droppable({
-          accept: ".draggable",
-          activeClass: "droppable_active", 
-          hoverClass: "droppable_hover", 
-          tolerance : "touch",
-          drop: function(event, ui) {
-            var granpa = $(this).parent().parent();
-            // move existing variables to variables section
-            $(".draggable", $(this)).appendTo($(".variables", granpa));
-            // append newly dropped variable to the list
-            $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
-            // update selection
-            selection = {};
-            $("div.plotvariable .droppable", granpa).each(function(i, ul) {
-              var dimension = $(ul).attr("data-dimension");
-              selection[dimension] = [];
-              $("li.draggable", $(ul)).each(function(j, li) {
-                selection[dimension][j] = $(li).attr("data-variable");
-              });
-            })
-          },
-          accept : function(draggable) {
-            return (($(this).hasClass("numeric") && $(draggable).hasClass("numeric")) || 
-              ($(this).hasClass("categorical") && $(draggable).hasClass("categorical")) ||
-              $(this).hasClass("variables"))
-          }
-
-
-        });
-
         // ========================== GRAPH =============================
         // Make graph container resizable
         $('#resizable').resizable({
@@ -136,7 +49,6 @@
         }).width("90%");
 
       });
-
     </script>
 
     <!-- ======================== PAGE =============================== -->
@@ -155,14 +67,14 @@
   <article>
     <div class="menu">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#lines" data-toggle="tab">lines</a></li>
+        <li><a href="#lines" data-toggle="tab">lines</a></li>
         <li><a href="#scatter" data-toggle="tab">scatter</a></li>
         <li><a href="#bar" data-toggle="tab">bar</a></li>
         <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
       </ul>
       <div class="tab-content">
 
-        <div class="tab-pane active" id="lines">
+        <div class="tab-pane" id="lines">
           <div class="plotvariable">
             <h3>x</h3> <ul data-dimension="x" class="droppable numeric"></ul>
           </div>
