@@ -32,9 +32,17 @@
     <link type="text/css" href="css/statmine2.css" rel="stylesheet" />
     <link type="text/css" href="css/visualise.css" rel="stylesheet" />
 
+    <!-- Plotting includes -->
+    <script type="text/javascript" src="js/barchart.js"></script>
+    <script type="text/javascript" src="js/mosaic.js"></script>
+    <script type="text/javascript" src="js/bubble.js"></script>
+    <script type="text/javascript" src="js/linechart.js"></script>
+    <script type="text/javascript" src="js/cross.js"></script>
+    <script type="text/javascript" src="js/gog.js"></script>
+
     <!-- ======================== SCRIPTING ========================== -->
     <script type="text/javascript" src="js/visualise_menu.js"></script>
-
+    <script type="text/javascript" src="js/visualise_graph.js"></script>
 
     <script type="text/javascript">
       $(function() {
@@ -49,6 +57,7 @@
           }
 
           on_meta_loaded(data);
+          on_meta_loaded_graph(data);
 
         });
 
@@ -80,16 +89,16 @@
   <article>
     <div class="menu">
       <ul class="nav nav-tabs">
-        <li><a href="#lines" data-toggle="tab">lines</a></li>
+        <li><a href="#line" data-toggle="tab">line</a></li>
         <li><a href="#scatter" data-toggle="tab">scatter</a></li>
         <li><a href="#bar" data-toggle="tab">bar</a></li>
         <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
       </ul>
       <div class="tab-content">
 
-        <div class="tab-pane" id="lines">
+        <div class="tab-pane" id="line">
           <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable numeric"></ul>
+            <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical"></ul>
           </div>
           <div class="plotvariable">
             <h3>y</h3> <ul data-dimension="y" class="droppable numeric"></ul>
@@ -132,7 +141,7 @@
 
         <div class="tab-pane" id="bar">
           <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable numeric"></ul>
+            <h3>y</h3> <ul data-dimension="y" class="droppable categorical"></ul>
           </div>
           <div class="plotvariable">
             <h3>size</h3> <ul data-dimension="size" class="droppable numeric"></ul>

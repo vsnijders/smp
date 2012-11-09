@@ -17,6 +17,9 @@ function update_filter() {
 }
 
 function update_selection(context) {
+  // TODO check mapping code
+  mapping.resetVariables();
+
   if (context === undefined) context = $('#' + graphtype);
   selection = {};
   $("div.plotvariable .droppable", $(context).closest(".tab-pane")).each(function(i, ul) {
@@ -24,6 +27,14 @@ function update_selection(context) {
     selection[dimension] = [];
     $("li.draggable", $(ul)).each(function(j, li) {
       selection[dimension][j] = $(li).attr("data-variable");
+
+      // TODO check mapping code
+      var variable = $(li).attr("data-variable");
+      mapping.map()[dimension]
+        .variable(variable, variables[variable]);
+      if (variable == "Year" || variable == "Jaar") {
+        mapping.map()[dimension].type("time");
+      }
     });
   })
 }
@@ -52,8 +63,8 @@ function on_meta_loaded(data) {
       jQuery.each(dat.levels, function(i, lab) {
         var label = $("<label>").text(lab).appendTo(form);
         $("<input>").attr("type", "checkbox").addClass("filter")
-          .attr("name", dat.name).val(lab).click(update_filter)
-          .prependTo(label);
+          .attr("name", dim).val(lab).click(update_filter)
+          .click(redraw_graph).prependTo(label);
       });
       $(el).append(li)
     });
@@ -82,6 +93,7 @@ $(function() {
     graphtype = $(this).text();
     update_selection();
     update_filter();
+    redraw_graph();
   });
   // Select first tab
   $('.nav a:first').tab("show");
@@ -100,6 +112,7 @@ $(function() {
       $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
       // update selection
       update_selection(this);
+      redraw_graph();
     },
     accept : function(draggable) {
       return (($(this).hasClass("numeric") && $(draggable).hasClass("numeric")) || 
