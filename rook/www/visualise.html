@@ -38,7 +38,20 @@
 
     <script type="text/javascript">
       $(function() {
-        // ========================== GRAPH =============================
+
+        // Load meta data
+        var tablename = $(document).getUrlParam("table");
+        jQuery.getJSON("r/get_meta.r", {"table":tablename}, 
+            function(data) {
+          if (data.fail) {
+            alert("Error fetching data");
+            return;
+          }
+
+          on_meta_loaded(data);
+
+        });
+
         // Make graph container resizable
         $('#resizable').resizable({
           minHeight: 300,

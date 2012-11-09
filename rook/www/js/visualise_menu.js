@@ -28,65 +28,53 @@ function update_selection(context) {
   })
 }
 
+function on_meta_loaded(data) {
+  // TODO: following code block needs cleanup
+  $(".variables").each(function(i, el) {
 
-$(function() {
-
-
-  var tablename = $(document).getUrlParam("table");
-  jQuery.getJSON("r/get_meta.r", {"table":tablename}, 
-      function(data) {
-    if (data.fail) {
-      alert("Error fetching data");
-      return;
-    }
-
-    // TODO: following code block needs cleanup
-    $(".variables").each(function(i, el) {
-
-      // add dimensions to page
-      jQuery.each(data.dimensions, function(dim, dat) {
-        var li = $("<li>").addClass("draggable categorical")
-          .attr("data-variable", dim).text(dat.name)
-          .draggable({
-            revert : "invalid",
-            axis : "y"
-          });
-        var a = $("<a>").attr("href", "#").addClass("togglefilter")
-          .html('<i class=\"icon-filter"></i>').appendTo(li)
-          .click(function() {
-            $(this).next().toggle('slow');
-            return false;
-          });
-          
-        var div = $("<div>").addClass("filter").appendTo(li).hide();
-        var form = $("<form>").appendTo(div);
-        jQuery.each(dat.levels, function(i, lab) {
-          var label = $("<label>").text(lab).appendTo(form);
-          $("<input>").attr("type", "checkbox").addClass("filter")
-            .attr("name", dat.name).val(lab).click(update_filter)
-            .prependTo(label);
+    // add dimensions to page
+    jQuery.each(data.dimensions, function(dim, dat) {
+      var li = $("<li>").addClass("draggable categorical")
+        .attr("data-variable", dim).text(dat.name)
+        .draggable({
+          revert : "invalid",
+          axis : "y"
         });
-        $(el).append(li)
+      var a = $("<a>").attr("href", "#").addClass("togglefilter")
+        .html('<i class=\"icon-filter"></i>').appendTo(li)
+        .click(function() {
+          $(this).next().toggle('slow');
+          return false;
+        });
+        
+      var div = $("<div>").addClass("filter").appendTo(li).hide();
+      var form = $("<form>").appendTo(div);
+      jQuery.each(dat.levels, function(i, lab) {
+        var label = $("<label>").text(lab).appendTo(form);
+        $("<input>").attr("type", "checkbox").addClass("filter")
+          .attr("name", dat.name).val(lab).click(update_filter)
+          .prependTo(label);
       });
+      $(el).append(li)
+    });
 
 
-      // add variables to page
-      jQuery.each(data.variables, function(dim, dat) {
-        var li = $("<li>").addClass("draggable numeric")
-          .attr("data-variable", dim).text(dat.name)
-          .draggable({
-            revert : "invalid",
-            axis : "y"
-          });
-        $(el).append(li)
-      });
-
+    // add variables to page
+    jQuery.each(data.variables, function(dim, dat) {
+      var li = $("<li>").addClass("draggable numeric")
+        .attr("data-variable", dim).text(dat.name)
+        .draggable({
+          revert : "invalid",
+          axis : "y"
+        });
+      $(el).append(li)
     });
 
   });
+}
 
 
-  // ================== VARIABLE SELECTION =======================
+$(function() {
   // Create tabbed pages for each of the graph types
   $("#tabs").tabs();
   // Keep track of which tab = graphtype is selected
@@ -105,7 +93,7 @@ $(function() {
     hoverClass: "droppable_hover", 
     tolerance : "touch",
     drop: function(event, ui) {
-      var granpa = $(this).parent().parent();
+      var granpa = $(this).closest(".tab-pane");
       // move existing variables to variables section
       $(".draggable", $(this)).appendTo($(".variables", granpa));
       // append newly dropped variable to the list
