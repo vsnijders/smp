@@ -1,5 +1,5 @@
 name: Toegevoegde waarde per bedrijfstak
-description: 
+description: "Select uit 'Bbp, productie en bestedingen; productie en inkomens naar bedrijfstak'"
 dimensions:
   Sector:
     name: Sector
