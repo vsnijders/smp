@@ -109,12 +109,6 @@ $(function() {
       var granpa = $(this).closest(".tab-pane");
       // move existing variables to variables section
       $(".draggable", $(this)).appendTo($(".variables", granpa));
-
-      // if 
-      if ($(this).hasClass("variables")) {
-        $("input").attr("type", "radio");
-      }
-
       // append newly dropped variable to the list
       $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
       // update selection
