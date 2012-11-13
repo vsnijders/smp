@@ -52,12 +52,13 @@ function on_meta_loaded(data) {
           axis : "y"
         });
       var a = $("<a>").attr("href", "#").addClass("togglefilter")
-        .html('<i class=\"icon-filter"></i>').appendTo(li)
+        .html('<i class=\"icon-check"></i>').appendTo(li)
         .click(function() {
           $(this).next().toggle('slow');
           return false;
         });
-        
+
+
       var div = $("<div>").addClass("filter").appendTo(li).hide();
       var form = $("<form>").appendTo(div);
       jQuery.each(dat.levels, function(i, lab) {
@@ -66,7 +67,7 @@ function on_meta_loaded(data) {
           .attr("name", dim).val(lab).click(update_filter)
           .click(redraw_graph).prependTo(label);
       });
-      $(el).append(li)
+      $(el).append(li);
     });
 
 

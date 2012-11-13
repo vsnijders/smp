@@ -11,6 +11,9 @@ names(data) <- c("Jaar", "Regio", "Delict", "Slachtofferschap")
 levels(data$Delict) <- c("Geweldsdelicten", "Overige delicten", "Totaal", 
                            "Vandalismedelicten", "Vermogensdelicten")
 
+# Remove the * from Jaar
+levels(data$Jaar) <- gsub("\\*$", "", levels(data$Jaar))
+
 # Create meta
 meta <- load_meta(data, "slachtoffer.yaml")
 

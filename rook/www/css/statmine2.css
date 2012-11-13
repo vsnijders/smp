@@ -17,6 +17,21 @@ a {
   color : steelblue;
   font-size : inherit;
 }
+h1, h2, h3 {
+  line-height : normal;
+}
+h1 {
+  font-size : 150%;
+  font-weight : 400;
+}
+h2 {
+  font-size : 150%;
+  font-weight : 400;
+}
+h3 {
+  font-size : 130%;
+  font-weight : 400;
+}
 
 /* Tables */
 table {

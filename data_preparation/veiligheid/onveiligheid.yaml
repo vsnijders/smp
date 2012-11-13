@@ -1,0 +1,88 @@
+name: Beleving onveiligheid
+description: "Selectie uit 'Onveiligheidsbeleving; politieregio (IVM)'"
+dimensions:
+  Regio:
+    name: Regio
+    levels:
+    - Amsterdam-Amstelland (PO)
+    - Brabant-Noord (PO)
+    - Brabant-Zuidoost (PO)
+    - Drenthe (PO)
+    - Flevoland (PO)
+    - Friesland (PO)
+    - Gelderland-Midden (PO)
+    - Gelderland-Zuid (PO)
+    - Gooi en Vechtstreek (PO)
+    - Groningen (PO)
+    - Haaglanden (PO)
+    - Hollands Midden (PO)
+    - IJsselland (PO)
+    - Kennemerland (PO)
+    - Limburg-Noord (PO)
+    - Limburg-Zuid (PO)
+    - Midden- en West-Brabant (PO)
+    - Nederland
+    - Noord- en Oost-Gelderland (PO)
+    - Noord-Holland-Noord (PO)
+    - Rotterdam-Rijnmond (PO)
+    - Twente (PO)
+    - Utrecht (PO)
+    - Zaanstreek-Waterland (PO)
+    - Zeeland (PO)
+    - Zuid-Holland-Zuid (PO)
+    aggregate: Zuid-Holland-Zuid (PO)
+    default: Zuid-Holland-Zuid (PO)
+    type: categorical
+variables:
+  Jaar:
+    name: Jaar
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich.wel.eens.onveilig:
+    name: Voelt zich wel eens onveilig
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich.vaak.onveilig:
+    name: Voelt zich vaak onveilig
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich.wel.eens.onveilig.in.eigen.buurt.:
+    name: Voelt zich wel eens onveilig in eigen buurt
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich.vaak.onveilig.in.eigen.buurt:
+    name: Voelt zich vaak onveilig in eigen buurt
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich..s.avonds.in.buurt.onveilig:
+    name: Voelt zich 's avonds in buurt onveilig
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Voelt.zich..s.avonds.niet.op.gemak:
+    name: Voelt zich 's avonds niet op gemak
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Ingeschatte.kans.op.woninginbraak:
+    name: Ingeschatte kans op woninginbraak
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Ingeschatte.kans.op.mishandeling:
+    name: Ingeschatte kans op mishandeling
+    type: numeric
+    unit: "%"
+    population: bevolking
+  Ingeschatte.kans.op.portemonneediefstal:
+    name: Ingeschatte kans op portemonneediefstal
+    type: numeric
+    unit: "%"
+    population: bevolking
+populations:
+  bevolking: bevolking
