@@ -32,9 +32,9 @@ function update_selection(context) {
       var variable = $(li).attr("data-variable");
       mapping.map()[dimension]
         .variable(variable, variables[variable]);
-      if (variable == "Year" || variable == "Jaar") {
+      /*if (variable == "Year" || variable == "Jaar") {
         mapping.map()[dimension].type("time");
-      }
+      }*/
     });
   })
 }
