@@ -57,7 +57,8 @@ function on_meta_loaded(data) {
           $(this).next().toggle('slow');
           return false;
         });
-        
+
+
       var div = $("<div>").addClass("filter").appendTo(li).hide();
       var form = $("<form>").appendTo(div);
       jQuery.each(dat.levels, function(i, lab) {
@@ -66,7 +67,7 @@ function on_meta_loaded(data) {
           .attr("name", dim).val(lab).click(update_filter)
           .click(redraw_graph).prependTo(label);
       });
-      $(el).append(li)
+      $(el).append(li);
     });
 
 
@@ -108,6 +109,12 @@ $(function() {
       var granpa = $(this).closest(".tab-pane");
       // move existing variables to variables section
       $(".draggable", $(this)).appendTo($(".variables", granpa));
+
+      // if 
+      if ($(this).hasClass("variables")) {
+        $("input").attr("type", "radio");
+      }
+
       // append newly dropped variable to the list
       $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
       // update selection
