@@ -52,7 +52,7 @@ function on_meta_loaded(data) {
           axis : "y"
         });
       var a = $("<a>").attr("href", "#").addClass("togglefilter")
-        .html('<i class=\"icon-filter"></i>').appendTo(li)
+        .html('<i class=\"icon-check"></i>').appendTo(li)
         .click(function() {
           $(this).next().toggle('slow');
           return false;
