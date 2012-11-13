@@ -12,6 +12,10 @@
     <!-- jQuery includes -->
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 
+    <!-- bootstrap includes -->
+    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
     <link type="text/css" href="css/statmine2.css" rel="stylesheet" />
@@ -29,8 +33,10 @@
             var newt = $("<tbody>");
             $("<tr>").appendTo(newt).html(
               "<td class=\"select\"><input type=\"checkbox\" name=\"foo\" value=\"" + i + "\"></input></td>" + 
-              "<td class=\"description\"><h3><a href=\"table.html?table=" + i + "\">" + d.name + "</a></h3>" + 
-              "<p>" + d.description + "</p></td>"
+              "<td class=\"description\"><h3>" + d.name + 
+              ' <a href="table.html?table=' + i + '"><i class="icon-th"></i></a> ' + 
+              ' <a href="visualise.html?table=' + i + '"><i class="icon-eye-open"></i></a>' + 
+              '</h3>' + "<p>" + d.description + "</p></td>"
             );
             $("#tables").append(newt);
           })
