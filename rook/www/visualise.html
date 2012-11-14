@@ -17,8 +17,8 @@
     <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
 
     <!-- bootstrap includes -->
-    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+    <link type="text/css" href="js/bootstrap2/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap2/js/bootstrap.min.js"></script>
 
     <!-- tipsy.js -->
     <script type="text/javascript" src="js/jquery.tipsy.js"></script>
@@ -29,7 +29,7 @@
 
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
-    <link type="text/css" href="css/statmine2.css" rel="stylesheet" />
+    <link type="text/css" href="css/statmine.css" rel="stylesheet" />
     <link type="text/css" href="css/visualise.css" rel="stylesheet" />
 
     <!-- Plotting includes -->
@@ -58,6 +58,23 @@
 
           on_meta_loaded(data);
           on_meta_loaded_graph(data);
+
+          // Read default settings for graphs and select default graph
+          if (data.defaultgraphs !== undefined) {
+            jQuery.each(data.defaultgraphs, function(graph, def) {
+              jQuery.each(def, function(dim, variable) {
+                var li = $('li[data-variable="' + variable + '"]', $('#' + graph));
+                var ul = $('ul[data-dimension="' + dim + '"]', $('#' + graph));
+                li.appendTo(ul);
+              });
+            });
+            if (data.defaultgraph !== undefined) {
+              $('.nav a[href="#' + data.defaultgraph + '"]').tab('show');
+            } else {
+              update_selection();
+              redraw_graph();
+            }
+          }
 
         });
 

@@ -58,4 +58,24 @@ variables:
     population: gezo
 populations:
   gezo: In Nederland ingeschreven personen
+defaultgraphs:
+  bar:
+    size: suiker
+    y: jaar
+    row: geslacht
+  line:
+    x: jaar
+    y: suiker
+    colour: geslacht
+  scatter:
+    x: ernstigovergewicht
+    y: suiker
+    colour: leeftijd
+    column: geslacht
+  mosaic:
+    x: jaar
+    y: geslacht
+    size: suiker
+    column: leeftijd
+defaultgraph: bar
 
