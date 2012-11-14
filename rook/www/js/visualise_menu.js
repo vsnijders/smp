@@ -53,8 +53,9 @@ function on_meta_loaded(data) {
           axis : "y"
         });
       var a = $("<a>").attr("href", "#").addClass("togglefilter")
-        .html('<i class=\"icon-check"></i>').appendTo(li)
+        .html('<i class="icon-chevron-right"></i>').appendTo(li)
         .click(function() {
+          $("i", this).toggleClass('icon-chevron-down');
           $(this).next().toggle('slow');
           return false;
         });

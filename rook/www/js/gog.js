@@ -226,7 +226,7 @@ function Mapping(sel) {
      .filter(function(v) { return v.value.variable() !== null;})
 	  .map(function(v) { return "<tr><th>" + v.value.variable() + ": </th><td>" + _map[v.key].formatValue(d) + "</td></tr>";})
 	  ;
-	 return "<table class='label'>" + s.join("") + "</table>";
+	 return "<table class='tooltiplabel'>" + s.join("") + "</table>";
    }
    
    return mapping;
