@@ -79,4 +79,11 @@ variables:
     population: Geregistreerde misdrijven
 populations:
   Geregistreerde misdrijven: Geregistreerde misdrijven
+defaultgraph: line
+defaultgraphs:
+  line: 
+    x: Jaar
+    y: PercOpgehelderd
+    colour: Regio
+    column: Misdrijf
 

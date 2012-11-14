@@ -29,3 +29,10 @@ variables:
     population: huisartspatienten
 populations:
   huisartspatienten: In Nederland ingeschreven personen
+defaultgraph: line
+defaultgraphs: 
+  line:
+    x: jaar
+    y: aantalpatienten
+    colour: leeftijd
+    column: geslacht

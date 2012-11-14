@@ -60,4 +60,8 @@ variables:
     population: bevolking
 populations:
   bevolking: 
+defaultgraph: bar
+  bar: 
+    y: Regio
+    size: Veiligheid
 
