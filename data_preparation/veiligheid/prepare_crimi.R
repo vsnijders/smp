@@ -9,6 +9,10 @@ names(data) <- c("Regio", "Misdrijf", "Jaar", "AantalMisdrijven",
 
 levels(data$Misdrijf) <- c("Vermogensmisdrijven", "Vernielingen/misdr.openb.orde", 
                            "Gewelds- en seksuele misdrijven", "Totaal")
+
+# Remove the * from Jaar
+levels(data$Jaar) <- gsub("\\*$", "", levels(data$Jaar))
+
 # Create meta
 meta <- load_meta(data, "crimi.yaml", pop_name="Geregistreerde misdrijven")
 
