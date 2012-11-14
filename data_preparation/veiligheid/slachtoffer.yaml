@@ -8,7 +8,6 @@ dimensions:
     - 2009
     - 2010
     - 2011
-    aggregate: 2011
     default: 2011
     type: [categorical, int]
   Regio:
