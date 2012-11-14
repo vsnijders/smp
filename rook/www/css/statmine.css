@@ -17,226 +17,78 @@ a {
   color : steelblue;
   font-size : inherit;
 }
-TABLE {
+h1, h2, h3 {
+  line-height : normal;
+}
+h1 {
+  font-size : 150%;
+  font-weight : 400;
+}
+h2 {
+  font-size : 150%;
+  font-weight : 400;
+}
+h3 {
+  font-size : 130%;
+  font-weight : 400;
+}
+
+/* Tables */
+table {
   border-collapse : collapse;
 }
-.numeric {
+td, th {
+  padding : 0px 5px;
+  text-align : left;
+}
+.numeric td, .numeric th {
   text-align : right;
 }
-TR {
-  border-bottom : 1px solid rgb(200,200,200);
-}
-TD, TH {
-  padding : 0px 5px;
-}
-TH {
+th {
   font-weight : 400;
 }
 
 /* ========================== HEADER/FOOTER ======================== */
 header, footer {
-  background : rgb(100, 100, 100);
-  border-bottom : 1px solid rgb(40, 40, 40);
-  padding : 20px 10px;
-  color : white;
+  margin : 0px 20px;
+  padding : 0px;
 }
 header h1 {
-  font-size : 200%;
+  font-size : 150%;
   color : inherit;
-  margin : 0pt 0pt;
+  margin : 10px 0px 10px 0px;
   font-weight : 400;
 }
-header a {
-  color : #7eb5ff;
-}
 footer {
-  clear : both;
 }
 
 /* ========================== MENU BAR TOP ========================= */
-#navigation-container
-{
-  background : rgb(80, 80, 80);
-  border-bottom : 1px solid rgb(120, 120, 120);
-  width: 100%;
-  height: 30px;
-}
-
-#navigation
-{
-  margin: 0px;
-  width: 100%;
-}
-
-#navigation ul
-{
-  margin: 0;
+nav ul {
+  margin: 0px 0px;
   padding: 0;
-}
-
-#navigation ul li
-{
-  list-style-type: none;
-  display: inline;
-}
-
-#navigation li a
-{
-  display: block;
-  float: left;
-  padding: 5px 10px;
-  color : white;
-  font-size : 120%;
-  border-right : 1px solid rgb(80, 80, 80);
-  border-right : 1px solid rgb(180, 180, 180);
-}
-
-#navigation li a:hover { 
-  background : #7eb5ff;
   background : steelblue;
+  color : white;
 }
+nav a {
+  color : white;
+  color : rgb(230,230,230);
+}
+nav a:hover {
+  color : white;
+}
+nav li {
+  display: inline-block;
+  border-right : 1px solid rgb(80, 80, 80);
+  border-right : 1px solid rgb(white, white, white);
+  padding : 3pt 10px 3px 10px;
+}
+
 /* ========================== ARTICLE =============================== */
 article {
+  margin : 0px 20px;
   min-height : 500px;
+  padding-top : 20px;
   padding-bottom : 100px;
 }
 
-/* ========================== MENU ================================== */
-div.menu {
-  float : left;
-  width : 240px;
-  padding : 10px 10px;
-  min-height : 1500px;
-  background : rgb(240, 240, 240);
-  border-right : rgb(150, 150, 150) solid 1px;
-}
-div.menu h3 {
-  font-size : 100%;
-  font-weight : 400;
-  margin-top : 10pt;
-  margin-bottom : 4pt;
-}
-.connectedSortable { 
-  border-top : solid 1px rgb(200,200,200);
-  border-bottom : solid 1px rgb(200,200,200);
-  list-style-type: none; 
-  margin: 0; 
-  padding: 4px 0; 
-  width: 100%; 
-}
-.connectedSortable li { 
-  margin: 2px 0px 2px 0px; 
-  padding: 0.2em; 
-  padding-left: .8em; 
-  font-size: 10px; 
-}
-.connectedSortable li span { 
-  position: absolute; 
-  margin-left: -1.3em;        
-}
-.draggable {
-  cursor: move;
-}
 
-/* ========================== TABLES ================================ */
-div.table {
-  margin-top : 10px;
-  margin-bottom : 20px;
-  border-bottom : 1px solid rgb(180, 180, 180);
-  border-top : 1px solid rgb(180, 180, 180);
-  padding : 10px 5px;
-}
-div.table:hover {
-  border-bottom : 1px solid rgb(150, 150, 150);
-  border-top : 1px solid rgb(150, 150, 150);
-}
-div.table H2 {
-  margin-bottom : 8px;
-}
-div.table p.tableoptions {
-  margin-top : 4px;
-}
-
-/* ========================== GRAPH ================================= */
-div.content {
-  margin-left : 265px;
-  padding : 5px;
-}
-div#resizable {
-  padding : 5px;
-  width : 400px;
-  height : 400px;
-}
-div.graph {
-  color : black;
-  width : 100%;
-  height : 100%;
-}
-div#graphtype, div#graphdata {
-  color : gray;
-}
-
-td.value {
-   font-weight: 400;
-}
-
-/* ========================== FILTER MENU =========================== */
-.collapseblethingy {
-  background : rgba(255, 255, 255, 0.8);
-  color : black;
-  margin-top : 3px;
-  margin-left : -6px;
-  cursor : auto; 
-  padding : 5pt;
-}
-.collapseblethingy input{
-  margin-right : 5pt;
-}
-.collapse {
-  left : 240px;
-  margin-top : -3px;
-  cursor : pointer;
-}
-
-/* ========================== GRAPH CAPTION ========================= */
-#caption {
-  font-style : italic;
-  margin-top : 20px;
-}
-#caption table {
-  margin-left : 20px;
-}
-
-.axis {
-  shape-rendering: crispEdges;
-}
-
-.x.axis line {
-  stroke: #fff;
-}
-
-.x.axis .minor {
-  stroke-opacity: .5;
-}
-
-.x.axis path {
-}
-
-.axis line, .axis path {
-  fill: none;
-  stroke: #333;
-}
-
-table.smallmultiple th{
-  font-style: italic;
-}
-
-table.label th {
-   text-align: left;
-   color: silver;
-}
-
-table.label td {
-   font-weight: 400;
-   text-align: right;
-}
