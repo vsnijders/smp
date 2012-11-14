@@ -118,6 +118,7 @@ $(function() {
       redraw_graph();
     },
     accept : function(draggable) {
+      if ($(draggable).parent()[0] == $(this)[0]) return (false);
       return (($(this).hasClass("numeric") && $(draggable).hasClass("numeric")) || 
         ($(this).hasClass("categorical") && $(draggable).hasClass("categorical")) ||
         $(this).hasClass("variables"))
