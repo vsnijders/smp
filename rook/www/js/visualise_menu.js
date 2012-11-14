@@ -32,6 +32,7 @@ function update_selection(context) {
       var variable = $(li).attr("data-variable");
       mapping.map()[dimension]
         .variable(variable, variables[variable]);
+      // TODO following block commented out as it gave rise to various errors
       /*if (variable == "Year" || variable == "Jaar") {
         mapping.map()[dimension].type("time");
       }*/

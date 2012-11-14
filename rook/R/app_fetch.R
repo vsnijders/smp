@@ -40,8 +40,20 @@ app_fetch <- function(env){
     if (!is.null(filter[[dim]])) {
       default <- filter[[dim]][1]
     }
-    sel <- sel & (table[[dim]] == meta$dimensions[[dim]]$default)
+    sel <- sel & (table[[dim]] == default)
   }
+
+  # Select for the selected dimensions the non-aggregated values
+  for (dim in dimensions_sel) {
+    # get aggregate category
+    default <- meta$dimensions[[dim]]$aggregate
+    if (is.null(default)) next;
+    # when categories selected in filter we do not filter
+    if (is.null(filter[[dim]])) {
+      sel <- sel & !(table[[dim]] %in% default)
+    }
+  }
+
 
   # Filter the data
   for (dim in names(filter)) {

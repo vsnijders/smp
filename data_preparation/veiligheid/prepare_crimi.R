@@ -3,9 +3,9 @@ source("../settings.R", chdir=TRUE)
 # read data
 data <- read.csv2("crimi.csv", dec='.', na.strings=NA_STRINGS)
 
-names(data) <- c("Regio", "Misdrijf", "Jaar", "Aantal misdrijven", 
-                 "Misdrijven per 1000 inwoners", "Opgehelderde misdrijven", 
-                 "Perc. opgehelderd")
+names(data) <- c("Regio", "Misdrijf", "Jaar", "AantalMisdrijven", 
+                 "MisdrijvenPer1000Inwoners", "OpgehelderdeMisdrijven", 
+                 "PercOpgehelderd")
 
 levels(data$Misdrijf) <- c("Vermogensmisdrijven", "Vernielingen/misdr.openb.orde", 
                            "Gewelds- en seksuele misdrijven", "Totaal")
