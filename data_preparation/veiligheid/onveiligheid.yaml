@@ -30,15 +30,15 @@ dimensions:
     - Zaanstreek-Waterland (PO)
     - Zeeland (PO)
     - Zuid-Holland-Zuid (PO)
-    aggregate: Zuid-Holland-Zuid (PO)
-    default: Zuid-Holland-Zuid (PO)
+    aggregate: Nederland
+    default: Nederland
     type: categorical
-variables:
   Jaar:
     name: Jaar
-    type: numeric
-    unit: "%"
-    population: bevolking
+    levels: [2008, 2009, 2010, 2011]
+    default: 2011
+    type: categorical
+variables:
   Voelt.zich.wel.eens.onveilig:
     name: Voelt zich wel eens onveilig
     type: numeric

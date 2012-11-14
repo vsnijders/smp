@@ -16,7 +16,6 @@ dimensions:
     - Mensen worden op straat lastig gevallen
     - Overlast van groepen jongeren
     - Straatroof
-    aggregate: Straatroof
     default: Straatroof
     type: categorical
   Regio:
@@ -48,8 +47,8 @@ dimensions:
     - Zaanstreek-Waterland (PO)
     - Zeeland (PO)
     - Zuid-Holland-Zuid (PO)
-    aggregate: Zuid-Holland-Zuid (PO)
-    default: Zuid-Holland-Zuid (PO)
+    aggregate: Nederland
+    default: Nederland
     type: categorical
   Jaar:
     name: Jaar
@@ -58,7 +57,6 @@ dimensions:
     - 2009
     - 2010
     - 2011
-    aggregate: 2011
     default: 2011
     type: categorical
 variables:
