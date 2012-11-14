@@ -1,4 +1,4 @@
-Sector,Jaar,Bruto toegevoegde waarde basisprijzen (2005),Bruto.toegevoegde.waarde.basisprijzen (index)
+Sector,Jaar,BrutoToegevoegdeWaardeBasisprijzen,BrutoToegevoegdeWaardeBasisprijzenIndex
 A-U Alle economische activiteiten,1988,215786,68.9
 A-U Alle economische activiteiten,1989,234610,69.9
 A-U Alle economische activiteiten,1990,245851,70.9
@@ -21,8 +21,8 @@ A-U Alle economische activiteiten,2006,541566,101.6
 A-U Alle economische activiteiten,2007,576620,103.6
 A-U Alle economische activiteiten,2008,619889,105.6
 A-U Alle economische activiteiten,2009,584289,105.6
-A-U Alle economische activiteiten,2010**,614047,106.8
-A-U Alle economische activiteiten,2011*,646934,108.2
+A-U Alle economische activiteiten,2010,614047,106.8
+A-U Alle economische activiteiten,2011,646934,108.2
 01 Landbouw,1988,10340,132.5
 01 Landbouw,1989,10834,143.9
 01 Landbouw,1990,10411,135.1
@@ -45,8 +45,8 @@ A-U Alle economische activiteiten,2011*,646934,108.2
 01 Landbouw,2007,15219,107.5
 01 Landbouw,2008,16985,95.6
 01 Landbouw,2009,16291,81.5
-01 Landbouw,2010**,16916,97.6
-01 Landbouw,2011*,18114,89.3
+01 Landbouw,2010,16916,97.6
+01 Landbouw,2011,18114,89.3
 02 Bosbouw,1988,34,176.9
 02 Bosbouw,1989,38,146.6
 02 Bosbouw,1990,40,160.8
@@ -69,8 +69,8 @@ A-U Alle economische activiteiten,2011*,646934,108.2
 02 Bosbouw,2007,94,95.9
 02 Bosbouw,2008,99,92.4
 02 Bosbouw,2009,98,92.4
-02 Bosbouw,2010**,103,86.7
-02 Bosbouw,2011*,96,85.2
+02 Bosbouw,2010,103,86.7
+02 Bosbouw,2011,96,85.2
 03 Visserij,1988,188,121
 03 Visserij,1989,196,123.5
 03 Visserij,1990,192,119.7
@@ -93,8 +93,8 @@ A-U Alle economische activiteiten,2011*,646934,108.2
 03 Visserij,2007,317,95.8
 03 Visserij,2008,353,76.8
 03 Visserij,2009,281,79.1
-03 Visserij,2010**,330,69.9
-03 Visserij,2011*,340,73.9
+03 Visserij,2010,330,69.9
+03 Visserij,2011,340,73.9
 B Delfstoffenwinning,1988,1415,47.8
 B Delfstoffenwinning,1989,1525,48.8
 B Delfstoffenwinning,1990,1673,55.8
@@ -117,8 +117,8 @@ B Delfstoffenwinning,2006,5183,130.4
 B Delfstoffenwinning,2007,5079,128.4
 B Delfstoffenwinning,2008,5587,163.5
 B Delfstoffenwinning,2009,5437,124.5
-B Delfstoffenwinning,2010**,5730,120.8
-B Delfstoffenwinning,2011*,5790,151.1
+B Delfstoffenwinning,2010,5730,120.8
+B Delfstoffenwinning,2011,5790,151.1
 10-12 Voedings-  genotmiddelenindustrie,1988,26845,80.2
 10-12 Voedings-  genotmiddelenindustrie,1989,28659,78.4
 10-12 Voedings-  genotmiddelenindustrie,1990,28078,82
@@ -141,8 +141,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 10-12 Voedings-  genotmiddelenindustrie,2007,42663,104.5
 10-12 Voedings-  genotmiddelenindustrie,2008,46763,105
 10-12 Voedings-  genotmiddelenindustrie,2009,42743,109.1
-10-12 Voedings-  genotmiddelenindustrie,2010**,46687,108.3
-10-12 Voedings-  genotmiddelenindustrie,2011*,52574,113.2
+10-12 Voedings-  genotmiddelenindustrie,2010,46687,108.3
+10-12 Voedings-  genotmiddelenindustrie,2011,52574,113.2
 13-15 Textiel-  kleding-  lederindustrie,1988,2557,100.7
 13-15 Textiel-  kleding-  lederindustrie,1989,2790,101.4
 13-15 Textiel-  kleding-  lederindustrie,1990,2944,104.2
@@ -165,8 +165,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 13-15 Textiel-  kleding-  lederindustrie,2007,2864,100.3
 13-15 Textiel-  kleding-  lederindustrie,2008,2702,99.5
 13-15 Textiel-  kleding-  lederindustrie,2009,2395,105
-13-15 Textiel-  kleding-  lederindustrie,2010**,2640,102.7
-13-15 Textiel-  kleding-  lederindustrie,2011*,2856,101.8
+13-15 Textiel-  kleding-  lederindustrie,2010,2640,102.7
+13-15 Textiel-  kleding-  lederindustrie,2011,2856,101.8
 16 Houtindustrie,1988,1017,56.7
 16 Houtindustrie,1989,1101,58.5
 16 Houtindustrie,1990,1122,60.8
@@ -189,8 +189,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 16 Houtindustrie,2007,1947,112.2
 16 Houtindustrie,2008,1904,118.6
 16 Houtindustrie,2009,1620,117.6
-16 Houtindustrie,2010**,1609,108.2
-16 Houtindustrie,2011*,1718,107.3
+16 Houtindustrie,2010,1609,108.2
+16 Houtindustrie,2011,1718,107.3
 17 Papierindustrie,1988,2482,100.7
 17 Papierindustrie,1989,2725,102.8
 17 Papierindustrie,1990,2812,107.4
@@ -213,8 +213,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 17 Papierindustrie,2007,4380,103.4
 17 Papierindustrie,2008,4271,97.4
 17 Papierindustrie,2009,3654,96.1
-17 Papierindustrie,2010**,3950,104
-17 Papierindustrie,2011*,4181,109.7
+17 Papierindustrie,2010,3950,104
+17 Papierindustrie,2011,4181,109.7
 18 Grafische industrie,1988,2434,87.7
 18 Grafische industrie,1989,2622,88.5
 18 Grafische industrie,1990,2769,93
@@ -237,8 +237,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 18 Grafische industrie,2007,3557,97.8
 18 Grafische industrie,2008,3450,96.5
 18 Grafische industrie,2009,3213,95.3
-18 Grafische industrie,2010**,3253,90.6
-18 Grafische industrie,2011*,3409,88.1
+18 Grafische industrie,2010,3253,90.6
+18 Grafische industrie,2011,3409,88.1
 19 Aardolie-industrie,1988,6134,16.1
 19 Aardolie-industrie,1989,7767,19.1
 19 Aardolie-industrie,1990,8122,20.4
@@ -261,8 +261,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 19 Aardolie-industrie,2007,27222,70.6
 19 Aardolie-industrie,2008,34038,81.5
 19 Aardolie-industrie,2009,24250,62.8
-19 Aardolie-industrie,2010**,32712,70.2
-19 Aardolie-industrie,2011*,40875,85.1
+19 Aardolie-industrie,2010,32712,70.2
+19 Aardolie-industrie,2011,40875,85.1
 20 Chemische industrie,1988,12013,113.7
 20 Chemische industrie,1989,13168,111.4
 20 Chemische industrie,1990,13571,101.9
@@ -285,8 +285,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 20 Chemische industrie,2007,35887,102.2
 20 Chemische industrie,2008,36798,104.8
 20 Chemische industrie,2009,30413,77.6
-20 Chemische industrie,2010**,37911,99.1
-20 Chemische industrie,2011*,42647,113.7
+20 Chemische industrie,2010,37911,99.1
+20 Chemische industrie,2011,42647,113.7
 21 Farmaceutische industrie,1988,1682,138
 21 Farmaceutische industrie,1989,1847,131.6
 21 Farmaceutische industrie,1990,1903,136.1
@@ -309,8 +309,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 21 Farmaceutische industrie,2007,5248,79
 21 Farmaceutische industrie,2008,4880,105.6
 21 Farmaceutische industrie,2009,4453,115.4
-21 Farmaceutische industrie,2010**,4902,102.5
-21 Farmaceutische industrie,2011*,5439,94.7
+21 Farmaceutische industrie,2010,4902,102.5
+21 Farmaceutische industrie,2011,5439,94.7
 22 Rubber- en kunststofproductindustrie,1988,2281,99.3
 22 Rubber- en kunststofproductindustrie,1989,2538,99.8
 22 Rubber- en kunststofproductindustrie,1990,2664,101.9
@@ -333,8 +333,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 22 Rubber- en kunststofproductindustrie,2007,5302,94.1
 22 Rubber- en kunststofproductindustrie,2008,5372,93.7
 22 Rubber- en kunststofproductindustrie,2009,4348,110.5
-22 Rubber- en kunststofproductindustrie,2010**,4995,96.9
-22 Rubber- en kunststofproductindustrie,2011*,5531,94.4
+22 Rubber- en kunststofproductindustrie,2010,4995,96.9
+22 Rubber- en kunststofproductindustrie,2011,5531,94.4
 23 Bouwmaterialenindustrie,1988,2242,77.5
 23 Bouwmaterialenindustrie,1989,2397,80.1
 23 Bouwmaterialenindustrie,1990,2582,82.7
@@ -357,8 +357,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 23 Bouwmaterialenindustrie,2007,4452,112.3
 23 Bouwmaterialenindustrie,2008,4734,115.1
 23 Bouwmaterialenindustrie,2009,3910,131.3
-23 Bouwmaterialenindustrie,2010**,3668,128.7
-23 Bouwmaterialenindustrie,2011*,4005,125.6
+23 Bouwmaterialenindustrie,2010,3668,128.7
+23 Bouwmaterialenindustrie,2011,4005,125.6
 24 Basismetaalindustrie,1988,2764,93.2
 24 Basismetaalindustrie,1989,3243,105.2
 24 Basismetaalindustrie,1990,3098,93.2
@@ -381,8 +381,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 24 Basismetaalindustrie,2007,6605,98.7
 24 Basismetaalindustrie,2008,6971,77.9
 24 Basismetaalindustrie,2009,4827,62.6
-24 Basismetaalindustrie,2010**,6680,60.7
-24 Basismetaalindustrie,2011*,7209,62.6
+24 Basismetaalindustrie,2010,6680,60.7
+24 Basismetaalindustrie,2011,7209,62.6
 25 Metaalproductenindustrie,1988,5057,81.8
 25 Metaalproductenindustrie,1989,5636,83.3
 25 Metaalproductenindustrie,1990,6173,86.6
@@ -405,8 +405,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 25 Metaalproductenindustrie,2007,12724,104.4
 25 Metaalproductenindustrie,2008,13691,109.7
 25 Metaalproductenindustrie,2009,11346,113.3
-25 Metaalproductenindustrie,2010**,12417,102.5
-25 Metaalproductenindustrie,2011*,13583,101.8
+25 Metaalproductenindustrie,2010,12417,102.5
+25 Metaalproductenindustrie,2011,13583,101.8
 26 Elektrotechnische industrie,1988,4821,121
 26 Elektrotechnische industrie,1989,5400,120.7
 26 Elektrotechnische industrie,1990,5374,122
@@ -429,8 +429,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 26 Elektrotechnische industrie,2007,9966,88
 26 Elektrotechnische industrie,2008,10341,85.5
 26 Elektrotechnische industrie,2009,9473,90.6
-26 Elektrotechnische industrie,2010**,10288,89.9
-26 Elektrotechnische industrie,2011*,10796,90.9
+26 Elektrotechnische industrie,2010,10288,89.9
+26 Elektrotechnische industrie,2011,10796,90.9
 27 Elektrische apparatenindustrie,1988,1383,105.8
 27 Elektrische apparatenindustrie,1989,1532,105.2
 27 Elektrische apparatenindustrie,1990,1654,110
@@ -453,8 +453,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 27 Elektrische apparatenindustrie,2007,3397,99.8
 27 Elektrische apparatenindustrie,2008,3483,102.5
 27 Elektrische apparatenindustrie,2009,2892,100.6
-27 Elektrische apparatenindustrie,2010**,3075,86.9
-27 Elektrische apparatenindustrie,2011*,3328,81.1
+27 Elektrische apparatenindustrie,2010,3075,86.9
+27 Elektrische apparatenindustrie,2011,3328,81.1
 28 Machine-industrie,1988,4637,86.7
 28 Machine-industrie,1989,5165,88.2
 28 Machine-industrie,1990,5685,90.2
@@ -477,8 +477,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 28 Machine-industrie,2007,13113,104.7
 28 Machine-industrie,2008,13031,107.2
 28 Machine-industrie,2009,11086,113.6
-28 Machine-industrie,2010**,12757,113.2
-28 Machine-industrie,2011*,14336,112.8
+28 Machine-industrie,2010,12757,113.2
+28 Machine-industrie,2011,14336,112.8
 29 Auto- en aanhangwagenindustrie,1988,3101,95
 29 Auto- en aanhangwagenindustrie,1989,3560,99.9
 29 Auto- en aanhangwagenindustrie,1990,3583,107.4
@@ -501,8 +501,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 29 Auto- en aanhangwagenindustrie,2007,8556,99.9
 29 Auto- en aanhangwagenindustrie,2008,8795,106.3
 29 Auto- en aanhangwagenindustrie,2009,4305,100.7
-29 Auto- en aanhangwagenindustrie,2010**,6106,96.5
-29 Auto- en aanhangwagenindustrie,2011*,8168,93.3
+29 Auto- en aanhangwagenindustrie,2010,6106,96.5
+29 Auto- en aanhangwagenindustrie,2011,8168,93.3
 30 Overige transportmiddelenindustrie,1988,1645,70.6
 30 Overige transportmiddelenindustrie,1989,1929,77.9
 30 Overige transportmiddelenindustrie,1990,2322,76.6
@@ -525,8 +525,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 30 Overige transportmiddelenindustrie,2007,3306,101.6
 30 Overige transportmiddelenindustrie,2008,3713,105
 30 Overige transportmiddelenindustrie,2009,3587,101.6
-30 Overige transportmiddelenindustrie,2010**,3531,99.5
-30 Overige transportmiddelenindustrie,2011*,3568,101.1
+30 Overige transportmiddelenindustrie,2010,3531,99.5
+30 Overige transportmiddelenindustrie,2011,3568,101.1
 31-32 Meubel- en overige industrie,1988,2481,72.8
 31-32 Meubel- en overige industrie,1989,2633,73
 31-32 Meubel- en overige industrie,1990,2922,73.4
@@ -549,8 +549,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 31-32 Meubel- en overige industrie,2007,4826,101.1
 31-32 Meubel- en overige industrie,2008,4996,102.2
 31-32 Meubel- en overige industrie,2009,4348,108.7
-31-32 Meubel- en overige industrie,2010**,4560,110.1
-31-32 Meubel- en overige industrie,2011*,4623,109.6
+31-32 Meubel- en overige industrie,2010,4560,110.1
+31-32 Meubel- en overige industrie,2011,4623,109.6
 33 Reparatie en installatie van machines,1988,2483,79.3
 33 Reparatie en installatie van machines,1989,2873,85.7
 33 Reparatie en installatie van machines,1990,3279,85.1
@@ -573,8 +573,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 33 Reparatie en installatie van machines,2007,5236,101.1
 33 Reparatie en installatie van machines,2008,5398,106.6
 33 Reparatie en installatie van machines,2009,5099,110.1
-33 Reparatie en installatie van machines,2010**,5580,107.3
-33 Reparatie en installatie van machines,2011*,5822,106.6
+33 Reparatie en installatie van machines,2010,5580,107.3
+33 Reparatie en installatie van machines,2011,5822,106.6
 35 Energiebedrijven,1988,7586,66.2
 35 Energiebedrijven,1989,7872,66.4
 35 Energiebedrijven,1990,9161,68.2
@@ -597,8 +597,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 35 Energiebedrijven,2007,24255,136.3
 35 Energiebedrijven,2008,28631,137.8
 35 Energiebedrijven,2009,25332,186
-35 Energiebedrijven,2010**,26158,168.8
-35 Energiebedrijven,2011*,26364,161.1
+35 Energiebedrijven,2010,26158,168.8
+35 Energiebedrijven,2011,26364,161.1
 36 Waterleidingbedrijven,1988,356,54.7
 36 Waterleidingbedrijven,1989,369,55.9
 36 Waterleidingbedrijven,1990,380,56.3
@@ -621,8 +621,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 36 Waterleidingbedrijven,2007,726,96.3
 36 Waterleidingbedrijven,2008,768,92.7
 36 Waterleidingbedrijven,2009,769,94
-36 Waterleidingbedrijven,2010**,803,92.2
-36 Waterleidingbedrijven,2011*,817,91.8
+36 Waterleidingbedrijven,2010,803,92.2
+36 Waterleidingbedrijven,2011,817,91.8
 37-39 Afvalbeheer,1988,1238,65
 37-39 Afvalbeheer,1989,1309,65.9
 37-39 Afvalbeheer,1990,1511,65.4
@@ -645,8 +645,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 37-39 Afvalbeheer,2007,6005,105.8
 37-39 Afvalbeheer,2008,6682,107.9
 37-39 Afvalbeheer,2009,6718,106.4
-37-39 Afvalbeheer,2010**,7014,108.3
-37-39 Afvalbeheer,2011*,7508,109.1
+37-39 Afvalbeheer,2010,7014,108.3
+37-39 Afvalbeheer,2011,7508,109.1
 41 Algemene bouw en projectontwikkeling,1988,11796,45.7
 41 Algemene bouw en projectontwikkeling,1989,12456,46.1
 41 Algemene bouw en projectontwikkeling,1990,13001,47.2
@@ -669,8 +669,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 41 Algemene bouw en projectontwikkeling,2007,25378,105.3
 41 Algemene bouw en projectontwikkeling,2008,27380,107.6
 41 Algemene bouw en projectontwikkeling,2009,25509,114
-41 Algemene bouw en projectontwikkeling,2010**,21839,116.2
-41 Algemene bouw en projectontwikkeling,2011*,22759,112.4
+41 Algemene bouw en projectontwikkeling,2010,21839,116.2
+41 Algemene bouw en projectontwikkeling,2011,22759,112.4
 42 Grond-  water-  en wegenbouw,1988,2862,60.8
 42 Grond-  water-  en wegenbouw,1989,3220,61.1
 42 Grond-  water-  en wegenbouw,1990,3554,65
@@ -693,8 +693,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 42 Grond-  water-  en wegenbouw,2007,8187,108.6
 42 Grond-  water-  en wegenbouw,2008,8840,114.9
 42 Grond-  water-  en wegenbouw,2009,9244,112.3
-42 Grond-  water-  en wegenbouw,2010**,8585,120.7
-42 Grond-  water-  en wegenbouw,2011*,9059,123.4
+42 Grond-  water-  en wegenbouw,2010,8585,120.7
+42 Grond-  water-  en wegenbouw,2011,9059,123.4
 43 Gespecialiseerde bouw,1988,7055,51.6
 43 Gespecialiseerde bouw,1989,7611,53.3
 43 Gespecialiseerde bouw,1990,7969,55.7
@@ -717,8 +717,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 43 Gespecialiseerde bouw,2007,17975,105.7
 43 Gespecialiseerde bouw,2008,19511,110.3
 43 Gespecialiseerde bouw,2009,18282,116.9
-43 Gespecialiseerde bouw,2010**,17287,119
-43 Gespecialiseerde bouw,2011*,18426,116.8
+43 Gespecialiseerde bouw,2010,17287,119
+43 Gespecialiseerde bouw,2011,18426,116.8
 45 Autohandel en -reparatie,1988,2971,69.2
 45 Autohandel en -reparatie,1989,3161,69.7
 45 Autohandel en -reparatie,1990,3380,72.3
@@ -741,8 +741,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 45 Autohandel en -reparatie,2007,7707,100.8
 45 Autohandel en -reparatie,2008,8158,101.9
 45 Autohandel en -reparatie,2009,7657,102.7
-45 Autohandel en -reparatie,2010**,7981,105.5
-45 Autohandel en -reparatie,2011*,8335,106.1
+45 Autohandel en -reparatie,2010,7981,105.5
+45 Autohandel en -reparatie,2011,8335,106.1
 46 Groothandel en handelsbemiddeling,1988,8667,94.7
 46 Groothandel en handelsbemiddeling,1989,9516,98
 46 Groothandel en handelsbemiddeling,1990,10259,98.7
@@ -765,8 +765,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 46 Groothandel en handelsbemiddeling,2007,30279,99.8
 46 Groothandel en handelsbemiddeling,2008,32085,100.9
 46 Groothandel en handelsbemiddeling,2009,30262,97.5
-46 Groothandel en handelsbemiddeling,2010**,31804,101.4
-46 Groothandel en handelsbemiddeling,2011*,32945,104.8
+46 Groothandel en handelsbemiddeling,2010,31804,101.4
+46 Groothandel en handelsbemiddeling,2011,32945,104.8
 47 Detailhandel (niet in auto's),1988,4608,68.3
 47 Detailhandel (niet in auto's),1989,4983,69.7
 47 Detailhandel (niet in auto's),1990,5460,71.6
@@ -789,8 +789,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 47 Detailhandel (niet in auto's),2007,12717,96.3
 47 Detailhandel (niet in auto's),2008,13256,93.9
 47 Detailhandel (niet in auto's),2009,12969,97.3
-47 Detailhandel (niet in auto's),2010**,12904,92.1
-47 Detailhandel (niet in auto's),2011*,12811,87.3
+47 Detailhandel (niet in auto's),2010,12904,92.1
+47 Detailhandel (niet in auto's),2011,12811,87.3
 49 Vervoer over land,1988,2847,78.3
 49 Vervoer over land,1989,3113,77.8
 49 Vervoer over land,1990,3338,78.8
@@ -813,8 +813,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 49 Vervoer over land,2007,9212,102.8
 49 Vervoer over land,2008,9926,104
 49 Vervoer over land,2009,9081,106.6
-49 Vervoer over land,2010**,9515,104.7
-49 Vervoer over land,2011*,10099,104.7
+49 Vervoer over land,2010,9515,104.7
+49 Vervoer over land,2011,10099,104.7
 50 Vervoer over water,1988,1981,97
 50 Vervoer over water,1989,2135,103.4
 50 Vervoer over water,1990,2223,97.2
@@ -837,8 +837,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 50 Vervoer over water,2007,4208,83.7
 50 Vervoer over water,2008,4587,80.6
 50 Vervoer over water,2009,3994,70.5
-50 Vervoer over water,2010**,3907,62
-50 Vervoer over water,2011*,4088,60.9
+50 Vervoer over water,2010,3907,62
+50 Vervoer over water,2011,4088,60.9
 51 Vervoer door de lucht,1988,1851,243.6
 51 Vervoer door de lucht,1989,2075,224
 51 Vervoer door de lucht,1990,2153,204.7
@@ -861,8 +861,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 51 Vervoer door de lucht,2007,7449,87.4
 51 Vervoer door de lucht,2008,8365,68.3
 51 Vervoer door de lucht,2009,7236,33.4
-51 Vervoer door de lucht,2010**,7926,24.9
-51 Vervoer door de lucht,2011*,8887,0.3
+51 Vervoer door de lucht,2010,7926,24.9
+51 Vervoer door de lucht,2011,8887,0.3
 52 Opslag  dienstverlening voor vervoer,1988,1219,66.3
 52 Opslag  dienstverlening voor vervoer,1989,1299,67
 52 Opslag  dienstverlening voor vervoer,1990,1375,69.1
@@ -885,8 +885,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 52 Opslag  dienstverlening voor vervoer,2007,4663,103.5
 52 Opslag  dienstverlening voor vervoer,2008,5191,108.2
 52 Opslag  dienstverlening voor vervoer,2009,4885,108.3
-52 Opslag  dienstverlening voor vervoer,2010**,4978,108.2
-52 Opslag  dienstverlening voor vervoer,2011*,5134,110.6
+52 Opslag  dienstverlening voor vervoer,2010,4978,108.2
+52 Opslag  dienstverlening voor vervoer,2011,5134,110.6
 53 Post en koeriers,1988,1090,72.6
 53 Post en koeriers,1989,1075,75.6
 53 Post en koeriers,1990,1093,75
@@ -909,8 +909,8 @@ B Delfstoffenwinning,2011*,5790,151.1
 53 Post en koeriers,2007,1978,105.6
 53 Post en koeriers,2008,1983,107.7
 53 Post en koeriers,2009,1885,106.7
-53 Post en koeriers,2010**,1974,100.4
-53 Post en koeriers,2011*,1982,104
+53 Post en koeriers,2010,1974,100.4
+53 Post en koeriers,2011,1982,104
 I Horeca,1988,3729,52.3
 I Horeca,1989,4029,53.6
 I Horeca,1990,4246,55.5
@@ -933,8 +933,8 @@ I Horeca,2006,8712,100.6
 I Horeca,2007,9167,104.9
 I Horeca,2008,9357,108.1
 I Horeca,2009,8875,114.5
-I Horeca,2010**,8898,117.3
-I Horeca,2011*,9161,118.6
+I Horeca,2010,8898,117.3
+I Horeca,2011,9161,118.6
 58 Uitgeverijen,1988,2043,56.8
 58 Uitgeverijen,1989,2199,58.3
 58 Uitgeverijen,1990,2323,59.4
@@ -957,8 +957,8 @@ I Horeca,2011*,9161,118.6
 58 Uitgeverijen,2007,4059,104
 58 Uitgeverijen,2008,4038,106.3
 58 Uitgeverijen,2009,3781,111.9
-58 Uitgeverijen,2010**,3683,116.5
-58 Uitgeverijen,2011*,3524,120.3
+58 Uitgeverijen,2010,3683,116.5
+58 Uitgeverijen,2011,3524,120.3
 59-60 Film radio en t.v.,1988,1718,63.2
 59-60 Film radio en t.v.,1989,1884,64.5
 59-60 Film radio en t.v.,1990,1930,65.7
@@ -981,8 +981,8 @@ I Horeca,2011*,9161,118.6
 59-60 Film radio en t.v.,2007,4039,103.3
 59-60 Film radio en t.v.,2008,4136,104.5
 59-60 Film radio en t.v.,2009,3970,107.9
-59-60 Film radio en t.v.,2010**,3949,111.5
-59-60 Film radio en t.v.,2011*,4004,113.2
+59-60 Film radio en t.v.,2010,3949,111.5
+59-60 Film radio en t.v.,2011,4004,113.2
 61 Telecommunicatie,1988,1270,141.8
 61 Telecommunicatie,1989,1487,150.7
 61 Telecommunicatie,1990,1672,150.2
@@ -1005,8 +1005,8 @@ I Horeca,2011*,9161,118.6
 61 Telecommunicatie,2007,10826,90.4
 61 Telecommunicatie,2008,10679,83.1
 61 Telecommunicatie,2009,10262,80.2
-61 Telecommunicatie,2010**,10188,79.3
-61 Telecommunicatie,2011*,10361,80.4
+61 Telecommunicatie,2010,10188,79.3
+61 Telecommunicatie,2011,10361,80.4
 62-63 IT- en informatiedienstverlening,1988,988,86.3
 62-63 IT- en informatiedienstverlening,1989,1076,83.5
 62-63 IT- en informatiedienstverlening,1990,1197,83.9
@@ -1029,8 +1029,8 @@ I Horeca,2011*,9161,118.6
 62-63 IT- en informatiedienstverlening,2007,8038,107.2
 62-63 IT- en informatiedienstverlening,2008,8690,109
 62-63 IT- en informatiedienstverlening,2009,8417,106.2
-62-63 IT- en informatiedienstverlening,2010**,8289,107.1
-62-63 IT- en informatiedienstverlening,2011*,8547,104.1
+62-63 IT- en informatiedienstverlening,2010,8289,107.1
+62-63 IT- en informatiedienstverlening,2011,8547,104.1
 64 Bankwezen,1988,4410,74.3
 64 Bankwezen,1989,5055,67.9
 64 Bankwezen,1990,5446,58.8
@@ -1053,8 +1053,8 @@ I Horeca,2011*,9161,118.6
 64 Bankwezen,2007,19516,61
 64 Bankwezen,2008,22698,64.9
 64 Bankwezen,2009,27578,94.8
-64 Bankwezen,2010**,27507,113.3
-64 Bankwezen,2011*,25912,111.7
+64 Bankwezen,2010,27507,113.3
+64 Bankwezen,2011,25912,111.7
 65 Verzekeraars en pensioenfondsen,1988,3035,43.1
 65 Verzekeraars en pensioenfondsen,1989,3270,45.4
 65 Verzekeraars en pensioenfondsen,1990,3097,37.8
@@ -1077,32 +1077,32 @@ I Horeca,2011*,9161,118.6
 65 Verzekeraars en pensioenfondsen,2007,10222,98.4
 65 Verzekeraars en pensioenfondsen,2008,10053,81
 65 Verzekeraars en pensioenfondsen,2009,9768,86.8
-65 Verzekeraars en pensioenfondsen,2010**,9937,86.7
-65 Verzekeraars en pensioenfondsen,2011*,10141,87.4
-66 Overige financiële dienstverlening,1988,529,47.9
-66 Overige financiële dienstverlening,1989,552,52.5
-66 Overige financiële dienstverlening,1990,577,52.7
-66 Overige financiële dienstverlening,1991,614,55.5
-66 Overige financiële dienstverlening,1992,647,61.4
-66 Overige financiële dienstverlening,1993,684,62.9
-66 Overige financiële dienstverlening,1994,766,68.8
-66 Overige financiële dienstverlening,1995,805,70.7
-66 Overige financiële dienstverlening,1996,993,74.3
-66 Overige financiële dienstverlening,1997,1059,78.7
-66 Overige financiële dienstverlening,1998,1247,81.1
-66 Overige financiële dienstverlening,1999,1363,83.7
-66 Overige financiële dienstverlening,2000,1578,88.6
-66 Overige financiële dienstverlening,2001,1669,92
-66 Overige financiële dienstverlening,2002,1742,94.7
-66 Overige financiële dienstverlening,2003,1699,97.8
-66 Overige financiële dienstverlening,2004,1751,100.7
-66 Overige financiële dienstverlening,2005,1791,100
-66 Overige financiële dienstverlening,2006,1831,104.3
-66 Overige financiële dienstverlening,2007,1896,104.2
-66 Overige financiële dienstverlening,2008,2066,85.3
-66 Overige financiële dienstverlening,2009,1996,84.5
-66 Overige financiële dienstverlening,2010**,2016,82.4
-66 Overige financiële dienstverlening,2011*,2018,83.8
+65 Verzekeraars en pensioenfondsen,2010,9937,86.7
+65 Verzekeraars en pensioenfondsen,2011,10141,87.4
+66 Overige financiÃ«le dienstverlening,1988,529,47.9
+66 Overige financiÃ«le dienstverlening,1989,552,52.5
+66 Overige financiÃ«le dienstverlening,1990,577,52.7
+66 Overige financiÃ«le dienstverlening,1991,614,55.5
+66 Overige financiÃ«le dienstverlening,1992,647,61.4
+66 Overige financiÃ«le dienstverlening,1993,684,62.9
+66 Overige financiÃ«le dienstverlening,1994,766,68.8
+66 Overige financiÃ«le dienstverlening,1995,805,70.7
+66 Overige financiÃ«le dienstverlening,1996,993,74.3
+66 Overige financiÃ«le dienstverlening,1997,1059,78.7
+66 Overige financiÃ«le dienstverlening,1998,1247,81.1
+66 Overige financiÃ«le dienstverlening,1999,1363,83.7
+66 Overige financiÃ«le dienstverlening,2000,1578,88.6
+66 Overige financiÃ«le dienstverlening,2001,1669,92
+66 Overige financiÃ«le dienstverlening,2002,1742,94.7
+66 Overige financiÃ«le dienstverlening,2003,1699,97.8
+66 Overige financiÃ«le dienstverlening,2004,1751,100.7
+66 Overige financiÃ«le dienstverlening,2005,1791,100
+66 Overige financiÃ«le dienstverlening,2006,1831,104.3
+66 Overige financiÃ«le dienstverlening,2007,1896,104.2
+66 Overige financiÃ«le dienstverlening,2008,2066,85.3
+66 Overige financiÃ«le dienstverlening,2009,1996,84.5
+66 Overige financiÃ«le dienstverlening,2010,2016,82.4
+66 Overige financiÃ«le dienstverlening,2011,2018,83.8
 68 Verhuur en handel van onroerend goed,1988,6612,63.6
 68 Verhuur en handel van onroerend goed,1989,7086,65.6
 68 Verhuur en handel van onroerend goed,1990,7308,67.7
@@ -1125,8 +1125,8 @@ I Horeca,2011*,9161,118.6
 68 Verhuur en handel van onroerend goed,2007,16019,123.7
 68 Verhuur en handel van onroerend goed,2008,16419,126.8
 68 Verhuur en handel van onroerend goed,2009,25969,99.4
-68 Verhuur en handel van onroerend goed,2010**,27550,94.8
-68 Verhuur en handel van onroerend goed,2011*,26183,100.2
+68 Verhuur en handel van onroerend goed,2010,27550,94.8
+68 Verhuur en handel van onroerend goed,2011,26183,100.2
 69-70 Managementadvies en holdings,1988,4806,53.2
 69-70 Managementadvies en holdings,1989,5511,53.7
 69-70 Managementadvies en holdings,1990,5889,56.1
@@ -1149,8 +1149,8 @@ I Horeca,2011*,9161,118.6
 69-70 Managementadvies en holdings,2007,15492,108.6
 69-70 Managementadvies en holdings,2008,16553,110.5
 69-70 Managementadvies en holdings,2009,16103,110.3
-69-70 Managementadvies en holdings,2010**,15680,107.2
-69-70 Managementadvies en holdings,2011*,15559,107.1
+69-70 Managementadvies en holdings,2010,15680,107.2
+69-70 Managementadvies en holdings,2011,15559,107.1
 71 Architecten-  ingenieursbureaus e.d.,1988,1630,66.2
 71 Architecten-  ingenieursbureaus e.d.,1989,1808,66.3
 71 Architecten-  ingenieursbureaus e.d.,1990,2025,68.2
@@ -1173,8 +1173,8 @@ I Horeca,2011*,9161,118.6
 71 Architecten-  ingenieursbureaus e.d.,2007,6892,108.6
 71 Architecten-  ingenieursbureaus e.d.,2008,7486,112.9
 71 Architecten-  ingenieursbureaus e.d.,2009,7368,113.2
-71 Architecten-  ingenieursbureaus e.d.,2010**,6958,112.3
-71 Architecten-  ingenieursbureaus e.d.,2011*,6811,112.5
+71 Architecten-  ingenieursbureaus e.d.,2010,6958,112.3
+71 Architecten-  ingenieursbureaus e.d.,2011,6811,112.5
 72 Research,1988,663,67.2
 72 Research,1989,718,66.8
 72 Research,1990,831,67.9
@@ -1197,8 +1197,8 @@ I Horeca,2011*,9161,118.6
 72 Research,2007,1929,102.7
 72 Research,2008,1843,103.3
 72 Research,2009,1756,106
-72 Research,2010**,1781,105.8
-72 Research,2011*,1802,105.8
+72 Research,2010,1781,105.8
+72 Research,2011,1802,105.8
 73 Reclamewezen en marktonderzoek,1988,2504,59.6
 73 Reclamewezen en marktonderzoek,1989,2680,59.1
 73 Reclamewezen en marktonderzoek,1990,3021,63.7
@@ -1221,8 +1221,8 @@ I Horeca,2011*,9161,118.6
 73 Reclamewezen en marktonderzoek,2007,5209,106.4
 73 Reclamewezen en marktonderzoek,2008,5313,108.9
 73 Reclamewezen en marktonderzoek,2009,4878,109.4
-73 Reclamewezen en marktonderzoek,2010**,4775,110.5
-73 Reclamewezen en marktonderzoek,2011*,4647,112.2
+73 Reclamewezen en marktonderzoek,2010,4775,110.5
+73 Reclamewezen en marktonderzoek,2011,4647,112.2
 74-75 Design en veterinaire diensten,1988,626,59.8
 74-75 Design en veterinaire diensten,1989,689,60.7
 74-75 Design en veterinaire diensten,1990,794,63.6
@@ -1245,8 +1245,8 @@ I Horeca,2011*,9161,118.6
 74-75 Design en veterinaire diensten,2007,3189,105.8
 74-75 Design en veterinaire diensten,2008,3402,108.8
 74-75 Design en veterinaire diensten,2009,3347,113.8
-74-75 Design en veterinaire diensten,2010**,3263,116.2
-74-75 Design en veterinaire diensten,2011*,3370,118.1
+74-75 Design en veterinaire diensten,2010,3263,116.2
+74-75 Design en veterinaire diensten,2011,3370,118.1
 77 Verhuur van roerende goederen,1988,820,79
 77 Verhuur van roerende goederen,1989,883,80.1
 77 Verhuur van roerende goederen,1990,999,82.5
@@ -1269,8 +1269,8 @@ I Horeca,2011*,9161,118.6
 77 Verhuur van roerende goederen,2007,3993,108
 77 Verhuur van roerende goederen,2008,4568,103.5
 77 Verhuur van roerende goederen,2009,4624,104.7
-77 Verhuur van roerende goederen,2010**,4652,102.6
-77 Verhuur van roerende goederen,2011*,4801,103
+77 Verhuur van roerende goederen,2010,4652,102.6
+77 Verhuur van roerende goederen,2011,4801,103
 78 Uitzendbureaus en arbeidsbemiddeling,1988,410,59.6
 78 Uitzendbureaus en arbeidsbemiddeling,1989,463,59.8
 78 Uitzendbureaus en arbeidsbemiddeling,1990,516,62.5
@@ -1293,8 +1293,8 @@ I Horeca,2011*,9161,118.6
 78 Uitzendbureaus en arbeidsbemiddeling,2007,3090,108.6
 78 Uitzendbureaus en arbeidsbemiddeling,2008,3414,113.6
 78 Uitzendbureaus en arbeidsbemiddeling,2009,3093,116.5
-78 Uitzendbureaus en arbeidsbemiddeling,2010**,3051,116.2
-78 Uitzendbureaus en arbeidsbemiddeling,2011*,3182,117.3
+78 Uitzendbureaus en arbeidsbemiddeling,2010,3051,116.2
+78 Uitzendbureaus en arbeidsbemiddeling,2011,3182,117.3
 79 Reisbureaus  reisorganisatie en -info,1988,1723,60.6
 79 Reisbureaus  reisorganisatie en -info,1989,1798,60.8
 79 Reisbureaus  reisorganisatie en -info,1990,1896,62.2
@@ -1317,8 +1317,8 @@ I Horeca,2011*,9161,118.6
 79 Reisbureaus  reisorganisatie en -info,2007,4694,110.6
 79 Reisbureaus  reisorganisatie en -info,2008,4882,107.3
 79 Reisbureaus  reisorganisatie en -info,2009,4440,145.3
-79 Reisbureaus  reisorganisatie en -info,2010**,4724,142.6
-79 Reisbureaus  reisorganisatie en -info,2011*,5018,144.3
+79 Reisbureaus  reisorganisatie en -info,2010,4724,142.6
+79 Reisbureaus  reisorganisatie en -info,2011,5018,144.3
 80-82 Beveiliging en ov. zakelijke diens,1988,1057,61
 80-82 Beveiliging en ov. zakelijke diens,1989,1163,62.1
 80-82 Beveiliging en ov. zakelijke diens,1990,1291,63.7
@@ -1341,8 +1341,8 @@ I Horeca,2011*,9161,118.6
 80-82 Beveiliging en ov. zakelijke diens,2007,5195,101.9
 80-82 Beveiliging en ov. zakelijke diens,2008,5571,104.7
 80-82 Beveiliging en ov. zakelijke diens,2009,5467,109.3
-80-82 Beveiliging en ov. zakelijke diens,2010**,5448,110.1
-80-82 Beveiliging en ov. zakelijke diens,2011*,5521,110.5
+80-82 Beveiliging en ov. zakelijke diens,2010,5448,110.1
+80-82 Beveiliging en ov. zakelijke diens,2011,5521,110.5
 84 Openbaar bestuur en overheidsdiensten,1988,9380,64.3
 84 Openbaar bestuur en overheidsdiensten,1989,9799,64.2
 84 Openbaar bestuur en overheidsdiensten,1990,10379,65.5
@@ -1365,8 +1365,8 @@ I Horeca,2011*,9161,118.6
 84 Openbaar bestuur en overheidsdiensten,2007,27042,104.8
 84 Openbaar bestuur en overheidsdiensten,2008,29461,108.3
 84 Openbaar bestuur en overheidsdiensten,2009,32388,110
-84 Openbaar bestuur en overheidsdiensten,2010**,31561,109.9
-84 Openbaar bestuur en overheidsdiensten,2011*,29914,110.7
+84 Openbaar bestuur en overheidsdiensten,2010,31561,109.9
+84 Openbaar bestuur en overheidsdiensten,2011,29914,110.7
 85 Onderwijs,1988,2606,47.1
 85 Onderwijs,1989,2659,48
 85 Onderwijs,1990,2697,50.4
@@ -1389,8 +1389,8 @@ I Horeca,2011*,9161,118.6
 85 Onderwijs,2007,7126,108.1
 85 Onderwijs,2008,7448,112.5
 85 Onderwijs,2009,7667,118.9
-85 Onderwijs,2010**,7803,120.4
-85 Onderwijs,2011*,8062,120.2
+85 Onderwijs,2010,7803,120.4
+85 Onderwijs,2011,8062,120.2
 86 Gezondheidszorg,1988,3072,57.1
 86 Gezondheidszorg,1989,3193,58.1
 86 Gezondheidszorg,1990,3355,60.6
@@ -1413,8 +1413,8 @@ I Horeca,2011*,9161,118.6
 86 Gezondheidszorg,2007,9068,105.8
 86 Gezondheidszorg,2008,9884,107.3
 86 Gezondheidszorg,2009,10464,109.3
-86 Gezondheidszorg,2010**,10853,109.9
-86 Gezondheidszorg,2011*,11426,109.5
+86 Gezondheidszorg,2010,10853,109.9
+86 Gezondheidszorg,2011,11426,109.5
 87-88 Verzorging en welzijn,1988,2294,50.3
 87-88 Verzorging en welzijn,1989,2372,51.4
 87-88 Verzorging en welzijn,1990,2508,53.8
@@ -1437,8 +1437,8 @@ I Horeca,2011*,9161,118.6
 87-88 Verzorging en welzijn,2007,6649,103.1
 87-88 Verzorging en welzijn,2008,7181,106
 87-88 Verzorging en welzijn,2009,7405,108.2
-87-88 Verzorging en welzijn,2010**,7601,110.2
-87-88 Verzorging en welzijn,2011*,7946,109.9
+87-88 Verzorging en welzijn,2010,7601,110.2
+87-88 Verzorging en welzijn,2011,7946,109.9
 90-92 Kunst  cultuur en loterij,1988,1286,60.2
 90-92 Kunst  cultuur en loterij,1989,1345,62.1
 90-92 Kunst  cultuur en loterij,1990,1410,63.3
@@ -1461,8 +1461,8 @@ I Horeca,2011*,9161,118.6
 90-92 Kunst  cultuur en loterij,2007,4209,98.7
 90-92 Kunst  cultuur en loterij,2008,4316,102.8
 90-92 Kunst  cultuur en loterij,2009,4217,108.4
-90-92 Kunst  cultuur en loterij,2010**,4227,112.1
-90-92 Kunst  cultuur en loterij,2011*,4205,114.4
+90-92 Kunst  cultuur en loterij,2010,4227,112.1
+90-92 Kunst  cultuur en loterij,2011,4205,114.4
 93 Sport en recreatie,1988,816,50.5
 93 Sport en recreatie,1989,844,52.4
 93 Sport en recreatie,1990,881,54.1
@@ -1485,32 +1485,32 @@ I Horeca,2011*,9161,118.6
 93 Sport en recreatie,2007,2217,102.7
 93 Sport en recreatie,2008,2324,102.1
 93 Sport en recreatie,2009,2323,107.5
-93 Sport en recreatie,2010**,2345,111.6
-93 Sport en recreatie,2011*,2361,114.1
-94 Ideële  belangen-  hobbyverenigingen,1988,783,63.3
-94 Ideële  belangen-  hobbyverenigingen,1989,831,64.1
-94 Ideële  belangen-  hobbyverenigingen,1990,867,66.7
-94 Ideële  belangen-  hobbyverenigingen,1991,969,67.7
-94 Ideële  belangen-  hobbyverenigingen,1992,1023,70.4
-94 Ideële  belangen-  hobbyverenigingen,1993,1079,71.9
-94 Ideële  belangen-  hobbyverenigingen,1994,1108,71.8
-94 Ideële  belangen-  hobbyverenigingen,1995,1128,72.7
-94 Ideële  belangen-  hobbyverenigingen,1996,1199,74.6
-94 Ideële  belangen-  hobbyverenigingen,1997,1285,80.8
-94 Ideële  belangen-  hobbyverenigingen,1998,1353,83.9
-94 Ideële  belangen-  hobbyverenigingen,1999,1467,84.3
-94 Ideële  belangen-  hobbyverenigingen,2000,1592,87
-94 Ideële  belangen-  hobbyverenigingen,2001,1643,91.1
-94 Ideële  belangen-  hobbyverenigingen,2002,1695,93.9
-94 Ideële  belangen-  hobbyverenigingen,2003,1761,98.2
-94 Ideële  belangen-  hobbyverenigingen,2004,1863,101
-94 Ideële  belangen-  hobbyverenigingen,2005,1959,100
-94 Ideële  belangen-  hobbyverenigingen,2006,2079,100.1
-94 Ideële  belangen-  hobbyverenigingen,2007,2218,99.2
-94 Ideële  belangen-  hobbyverenigingen,2008,2401,101.5
-94 Ideële  belangen-  hobbyverenigingen,2009,2316,108.2
-94 Ideële  belangen-  hobbyverenigingen,2010**,2326,111.1
-94 Ideële  belangen-  hobbyverenigingen,2011*,2329,114.9
+93 Sport en recreatie,2010,2345,111.6
+93 Sport en recreatie,2011,2361,114.1
+94 IdeÃ«le  belangen-  hobbyverenigingen,1988,783,63.3
+94 IdeÃ«le  belangen-  hobbyverenigingen,1989,831,64.1
+94 IdeÃ«le  belangen-  hobbyverenigingen,1990,867,66.7
+94 IdeÃ«le  belangen-  hobbyverenigingen,1991,969,67.7
+94 IdeÃ«le  belangen-  hobbyverenigingen,1992,1023,70.4
+94 IdeÃ«le  belangen-  hobbyverenigingen,1993,1079,71.9
+94 IdeÃ«le  belangen-  hobbyverenigingen,1994,1108,71.8
+94 IdeÃ«le  belangen-  hobbyverenigingen,1995,1128,72.7
+94 IdeÃ«le  belangen-  hobbyverenigingen,1996,1199,74.6
+94 IdeÃ«le  belangen-  hobbyverenigingen,1997,1285,80.8
+94 IdeÃ«le  belangen-  hobbyverenigingen,1998,1353,83.9
+94 IdeÃ«le  belangen-  hobbyverenigingen,1999,1467,84.3
+94 IdeÃ«le  belangen-  hobbyverenigingen,2000,1592,87
+94 IdeÃ«le  belangen-  hobbyverenigingen,2001,1643,91.1
+94 IdeÃ«le  belangen-  hobbyverenigingen,2002,1695,93.9
+94 IdeÃ«le  belangen-  hobbyverenigingen,2003,1761,98.2
+94 IdeÃ«le  belangen-  hobbyverenigingen,2004,1863,101
+94 IdeÃ«le  belangen-  hobbyverenigingen,2005,1959,100
+94 IdeÃ«le  belangen-  hobbyverenigingen,2006,2079,100.1
+94 IdeÃ«le  belangen-  hobbyverenigingen,2007,2218,99.2
+94 IdeÃ«le  belangen-  hobbyverenigingen,2008,2401,101.5
+94 IdeÃ«le  belangen-  hobbyverenigingen,2009,2316,108.2
+94 IdeÃ«le  belangen-  hobbyverenigingen,2010,2326,111.1
+94 IdeÃ«le  belangen-  hobbyverenigingen,2011,2329,114.9
 95 Reparatie van consumentenartikelen,1988,172,61.6
 95 Reparatie van consumentenartikelen,1989,184,62.7
 95 Reparatie van consumentenartikelen,1990,198,64.3
@@ -1533,8 +1533,8 @@ I Horeca,2011*,9161,118.6
 95 Reparatie van consumentenartikelen,2007,406,104.7
 95 Reparatie van consumentenartikelen,2008,411,110.7
 95 Reparatie van consumentenartikelen,2009,387,116.9
-95 Reparatie van consumentenartikelen,2010**,388,118.5
-95 Reparatie van consumentenartikelen,2011*,391,120.2
+95 Reparatie van consumentenartikelen,2010,388,118.5
+95 Reparatie van consumentenartikelen,2011,391,120.2
 96 Overige persoonlijke dienstverlening,1988,641,41.6
 96 Overige persoonlijke dienstverlening,1989,660,43.9
 96 Overige persoonlijke dienstverlening,1990,668,45.4
@@ -1557,8 +1557,8 @@ I Horeca,2011*,9161,118.6
 96 Overige persoonlijke dienstverlening,2007,1521,107.6
 96 Overige persoonlijke dienstverlening,2008,1577,111.2
 96 Overige persoonlijke dienstverlening,2009,1538,118.6
-96 Overige persoonlijke dienstverlening,2010**,1519,122.7
-96 Overige persoonlijke dienstverlening,2011*,1516,123.9
+96 Overige persoonlijke dienstverlening,2010,1519,122.7
+96 Overige persoonlijke dienstverlening,2011,1516,123.9
 97 Huishoudens met personeel,1988,,53.3
 97 Huishoudens met personeel,1989,,54.9
 97 Huishoudens met personeel,1990,,57.2
@@ -1581,8 +1581,8 @@ I Horeca,2011*,9161,118.6
 97 Huishoudens met personeel,2007,,105.9
 97 Huishoudens met personeel,2008,,109.3
 97 Huishoudens met personeel,2009,,113
-97 Huishoudens met personeel,2010**,,115.9
-97 Huishoudens met personeel,2011*,,119.7
+97 Huishoudens met personeel,2010,,115.9
+97 Huishoudens met personeel,2011,,119.7
 99 Extraterritoriale organisaties,1988,,
 99 Extraterritoriale organisaties,1989,,
 99 Extraterritoriale organisaties,1990,,
@@ -1605,8 +1605,8 @@ I Horeca,2011*,9161,118.6
 99 Extraterritoriale organisaties,2007,,
 99 Extraterritoriale organisaties,2008,,
 99 Extraterritoriale organisaties,2009,,
-99 Extraterritoriale organisaties,2010**,,
-99 Extraterritoriale organisaties,2011*,,
+99 Extraterritoriale organisaties,2010,,
+99 Extraterritoriale organisaties,2011,,
 Goederen en diensten n.e.g.,1988,846,
 Goederen en diensten n.e.g.,1989,905,
 Goederen en diensten n.e.g.,1990,935,
@@ -1629,8 +1629,8 @@ Goederen en diensten n.e.g.,2006,1205,
 Goederen en diensten n.e.g.,2007,1252,
 Goederen en diensten n.e.g.,2008,1315,
 Goederen en diensten n.e.g.,2009,1274,
-Goederen en diensten n.e.g.,2010**,1289,
-Goederen en diensten n.e.g.,2011*,1320,
+Goederen en diensten n.e.g.,2010,1289,
+Goederen en diensten n.e.g.,2011,1320,
 Verschil toegerekende en afgedragen BTW,1988,,
 Verschil toegerekende en afgedragen BTW,1989,,
 Verschil toegerekende en afgedragen BTW,1990,,
@@ -1653,8 +1653,8 @@ Verschil toegerekende en afgedragen BTW,2006,,
 Verschil toegerekende en afgedragen BTW,2007,,
 Verschil toegerekende en afgedragen BTW,2008,,
 Verschil toegerekende en afgedragen BTW,2009,,
-Verschil toegerekende en afgedragen BTW,2010**,,
-Verschil toegerekende en afgedragen BTW,2011*,,
+Verschil toegerekende en afgedragen BTW,2010,,
+Verschil toegerekende en afgedragen BTW,2011,,
 Totaal activiteiten en overige posten,1988,216632,68.9
 Totaal activiteiten en overige posten,1989,235515,69.9
 Totaal activiteiten en overige posten,1990,246786,70.9
@@ -1677,5 +1677,5 @@ Totaal activiteiten en overige posten,2006,542771,101.6
 Totaal activiteiten en overige posten,2007,577872,103.6
 Totaal activiteiten en overige posten,2008,621204,105.6
 Totaal activiteiten en overige posten,2009,585563,105.6
-Totaal activiteiten en overige posten,2010**,615336,106.8
-Totaal activiteiten en overige posten,2011*,648254,108.2
+Totaal activiteiten en overige posten,2010,615336,106.8
+Totaal activiteiten en overige posten,2011,648254,108.2
