@@ -17,6 +17,8 @@ data19 <- ddply(data19, c("Energiedragers", "Jaar"), summarise
 # remove ","
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))
 
+# Remove the * from Jaar
+levels(data$Jaar) <- gsub("\\**$", "", levels(data$Jaar))
 
 # Create meta
 meta <- load_meta(data, "energiebalans.yaml", name="Energiebalans", pop_name="Bedrijven")

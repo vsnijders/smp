@@ -42,8 +42,8 @@ dimensions:
     - Waterkracht
     - Windenergie
     - Zonne-energie
-    aggregate: Zonne-energie
-    default: Zonne-energie
+    aggregate: Totaal energiedragers
+    default: Totaal energiedragers
     type: categorical
   Jaar:
     name: Jaar
@@ -109,8 +109,8 @@ dimensions:
     - Vervoer
     - Visserij
     - Wegverkeer
-    aggregate: Wegverkeer
-    default: Wegverkeer
+    aggregate: Totaal energieafnemers
+    default: Totaal energieafnemers
     type: categorical
 variables:
   Energieaanbod:
@@ -124,5 +124,5 @@ variables:
     unit: PJ
     population: Bedrijven
 populations:
-  Bedrijven: No population description availabla
+  Bedrijven: No population description available
 
