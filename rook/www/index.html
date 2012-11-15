@@ -43,24 +43,52 @@
 
           // Only show the link to page where tables can be linked when 2 tables 
           // are selected; otherwise hide
-          $("#link_tables").hide();
+          $(".one, .two, .any").addClass("disabled");
           $("input").change(function() {
             var nselected = $("input:checked").length;
-            if (nselected == 2) {
-              $("#link_tables").show();
+            if (nselected > 0) {
+              $(".any").removeClass("disabled");
             } else {
-              $("#link_tables").hide();
+              $(".any").addClass("disabled");
             }
+            if (nselected == 2) {
+              $(".two").removeClass("disabled");
+            } else {
+              $(".two").addClass("disabled");
+            }
+            if (nselected == 1) {
+              $(".one").removeClass("disabled");
+            } else {
+              $(".one").addClass("disabled");
+            } 
           });
         });
 
         // Handle clicks on the link link
         $("#link_tables").click(function() {
-          var tables = {
-            "table1": $($("input:checked")[0]).val(),
-            "table2": $($("input:checked")[1]).val()
-          };
-          window.open("link.html?table1=" + tables.table1 + "&table2=" + tables.table2, "_self", false);
+          if (!$(this).hasClass("disabled")) {
+            var tables = {
+              "table1": $($("input:checked")[0]).val(),
+              "table2": $($("input:checked")[1]).val()
+            };
+            window.open("link.html?table1=" + tables.table1 + "&table2=" + tables.table2, "_self", false);
+          }
+        });
+
+        // Handle clicks on the view link
+        $("#view_table").click(function() {
+          if (!$(this).hasClass("disabled")) {
+            var table = $($("input:checked")[0]).val();
+            window.open("visualise.html?table=" + table, "_self", false);
+          }
+        });
+
+        // Handle clicks on the browse link
+        $("#browse_table").click(function() {
+          if (!$(this).hasClass("disabled")) {
+            var table = $($("input:checked")[0]).val();
+            window.open("table.html?table=" + table, "_self", false);
+          }
         })
       });
     </script>
@@ -79,9 +107,15 @@
 
   <article>
     <h2>Available tables</h2>
+
+    <div class="btn-group">
+      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i> View</button>
+      <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> Browse</button>
+      <button id="link_tables"  class="btn btn-small two">Link tables</button>
+    </div>
+
     <table id="tables">
     </table>
-    <p><a href="#" id="link_tables">Link tables</a></p>
   </article>
 
   <footer>
