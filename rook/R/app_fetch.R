@@ -11,11 +11,13 @@ app_fetch <- function(env){
   req <- Rook::Request$new(env)
   res$header("Content-Type", "application/json")
 
-
   # Extract query from POST/GET request
-  table_name <- req$params()$table
-  selection  <- fromJSON(req$params()$selection)
-  filter     <- fromJSON(req$params()$filter)
+  # Temporary fix for problem with rook; now use our own get_params instead
+  # of the usual req$params(). get_params only works with get request
+  params     <- get_params(req);
+  table_name <- params$table
+  selection  <- fromJSON(params$selection)
+  filter     <- fromJSON(params$filter)
 
   # Read data
   table <- get_table(table_name, meta=TRUE)

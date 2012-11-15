@@ -2,7 +2,7 @@
 library(Rook)
 library(rjson)
 
-# Check to see if the rook server is already started. If not start is; if it is
+# Check to see if the rook server is already started. If not, start it; if it is
 # we will only update the rook application without starting the server
 init_rook <- !exists("rook_server")
 if (init_rook) {
