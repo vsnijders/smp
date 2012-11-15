@@ -1,4 +1,3 @@
-
 #' Links two tables using the information given in the list \code{link}.
 #'
 #' @param link a link specifying which tables and how the tables should be 
@@ -18,6 +17,10 @@ link_tables <- function(link) {
   t2_meta <- t2$meta
   t2      <- t2$data
 
+  # Initialise list with meta for dimensions and variables
+  dimensions_meta <- list()
+  variables_meta <- list()
+
   # ==== Prepare table 1
   dimensions   <- names(t1_meta$dimensions)
   variables    <- names(t1_meta$variables)
@@ -33,24 +36,34 @@ link_tables <- function(link) {
   }
   t1 <- t1[sel, c(selected, variables)]
 
+
   # Remove non-selected categories in selected dimensions
   sel_tab <- rep(TRUE, nrow(t1))
   for (dim in link$dimensions) {
     sel_dim <- rep(FALSE, nrow(t1))
 
+    # TEST
+    #dimensions_meta[[dim$dimension1]] <- t1_meta$dimensions[[dim$dimension1]]
+    #dimensions_meta[[dim$dimension1]]$levels <- character(0)
+
     for (cat in dim$categories) {
       if (is.null(cat$category1)) next
       sel <- t1[[dim$dimension1]] == cat$category1
       sel_dim[sel] <- TRUE
+
+      # TEST
+      #dimensions_meta[[dim$dimension1]]$levels <- c(
+        #dimensions_meta[[dim$dimension1]]$levels,
+        #cat$category1)
+
     }
     sel_tab <- sel_tab & sel_dim
   }
 
   t1 <- t1[sel_tab, ]
 
-
-
-
+  # TEST
+  variables_meta <- t1_meta$variables[variables]
 
   # ==== Prepare table 2
   dimensions   <- names(t2_meta$dimensions)
@@ -79,6 +92,10 @@ link_tables <- function(link) {
 
     sel_dim <- rep(FALSE, nrow(t2))
 
+    # TEST
+    dimensions_meta[[dim$dimension1]] <- t2_meta$dimensions[[dim$dimension1]]
+    dimensions_meta[[dim$dimension1]]$levels <- character(0)
+
     levels[[dim$dimension1]] <- character(0)
 
     for (cat in dim$categories) {
@@ -105,6 +122,8 @@ link_tables <- function(link) {
   }
   t2 <- t2[sel_tab, ]
 
+  # TEST
+  variables_meta <- c(variables_meta, t2_meta$variables[variables])
 
   # ==== Merge
   dimensions1 <- sapply(link$dimensions, function(d) d$dimension1)
@@ -118,11 +137,35 @@ link_tables <- function(link) {
   o <- do.call(order, t[names(levels)])
   t <- t[o, ]
 
+  # TEST
+  for (dim in names(levels)) {
+    dimensions_meta[[dim]]$levels <- levels[[dim]]
+    # Check if aggregate and default present; if not use last level
+    if (!is.null(dimensions_meta[[dim]]$default) &&
+        !(dimensions_meta[[dim]]$default %in% levels[[dim]])) {
+      dimensions_meta[[dim]]$default <- tail(levels[[dim]], 1)
+    }
+    if (!is.null(dimensions_meta[[dim]]$aggregate) &&
+        !(dimensions_meta[[dim]]$aggregate %in% levels[[dim]])) {
+      dimensions_meta[[dim]]$aggregate <- tail(levels[[dim]], 1)
+    }
+  }
+
+  meta <- t1_meta
+  meta$dimensions <- dimensions_meta
+  meta$variables  <- variables_meta
+  meta$name <- link$newtable
+  meta$description <- paste0("Table created by linking the tables '", 
+    t1_meta$name, "' and '", t2_meta$name, "'.");
+  meta$populations <- c(t1_meta$populations, t2_meta$populations)
+  meta$defaultgraph <- NULL
+  meta$defaultgraphs <- NULL
+
   # ==== Output
-  meta <- create_meta(t, name=link$newtable)
   add_table(link$newtable, t, meta)
 
   # Return new table name
   return(link$newtable)
 }
+
 
