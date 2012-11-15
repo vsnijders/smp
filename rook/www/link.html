@@ -13,7 +13,13 @@
     <link type="text/css" href="css/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-ui-1.9.1.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
-    <script type="text/javascript" src="js/link.js"></script>
+    
+	<!-- bootstrap includes -->
+    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+
+	
+	<script type="text/javascript" src="js/link.js"></script>
 
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
@@ -23,19 +29,6 @@
     <script type="text/javascript">
       
       var T1 = null;
-
-      function tree(data) {    
-          if (typeof(data) == 'object') {        
-              var ul = $('<ul>');
-              for (var i in data) {            
-                  ul.append($('<li>').text(i).append(tree(data[i])));         
-              }        
-              return ul;
-          } else {       
-              var textNode = document.createTextNode(' => ' + data);
-              return textNode;
-          }
-      }
 
       $(function() {
 
@@ -54,7 +47,8 @@
               catLink(e.target, dragevent.draggable)
             }
           });
-
+		  
+		data = Link.getData("#link");
 
         var table1_name = $(document).getUrlParam("table1");
         var table2_name = $(document).getUrlParam("table2");
@@ -108,24 +102,46 @@
     </header>
 
     <article>
-      <table>
-        <tr class="category dropable">
-          <td> <div class="cat1 draggable" data-name="cat1">cat1 </div></td>
-          <td> <div class="cat2 draggable" data-name="cat2">cat2 </div></td>
-          <td></td>
-        </tr>
-        <tr class="category dropable">
-          <td> <div class="cat1 draggable" data-name="cat1">cat1 </div></td>
-          <td> </td>
-          <td></td>
-        </tr>
-        <tr class="category dropable">
-          <td> <div class="cat1 draggable" data-name="cat1">cat1 </div></td>
-          <td> <div class="cat2 draggable" data-name="cat2">cat2 </div></td>
-          <td></td>
-        </tr>
-      </table>
-
+	  <div id="link">
+	  <input name="newtable" id="newtable" value="newtable"></input>
+	  <table>
+	     <thead>
+			<tr>
+				<th><div class="table">Table 1</th>
+				<th><div class="table">Table 2</th>
+			</tr>
+		 </thead>
+		 <tbody>
+	     <tr class="dimension">
+			<td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
+			<td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
+			<td><i class="icon-remove"></i></td>
+		 </tr>
+		 <tr class="categories">
+		   <td colspan="3" >
+			 <table class="table table-condensed">
+				<tr class="category dropable">
+				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+				  <td></td>
+				</tr>
+				<tr class="category dropable">
+				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+				  <td> </td>
+				  <td></td>
+				</tr>
+				<tr class="category dropable">
+				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+				  <td></td>
+				</tr>
+			  </table>
+		   </td>
+		 </tr>
+		 </tbody>
+	  </table>
+	  </div>
+ 
       <h2>Link tables</h2>
 
       <form id="linkform">
