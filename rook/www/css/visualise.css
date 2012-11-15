@@ -84,14 +84,21 @@ form {
 div.filter {
   margin : 0pt;
 }
+
 label {
   display: block;
 }
+
 label, input, button, select, textarea {
   font-size: inherit;
   font-weight: 300;
   line-height: inherit;
   margin-bottom : 0pt;
+}
+
+
+input[type="checkbox"] {
+    margin: auto 1ex auto auto;
 }
 
 /* ========================== GRAPH CAPTION ========================= */
