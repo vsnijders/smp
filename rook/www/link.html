@@ -113,51 +113,49 @@
     </header>
 
     <article>
-    <div id="link2">
-    </div>
-	  <div id="link">
-	  <input name="newtable" id="newtable" value="newtable"></input>
-	  <table>
-	     <thead>
-			<tr>
-				<th><div class="table">Table 1</th>
-				<th><div class="table">Table 2</th>
-			</tr>
-		 </thead>
-		 <tbody>
-	     <tr class="dimension droppable">
-			<td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
-			<td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
-			<td><i class="icon-remove"></i></td>
-		 </tr>
-		 <tr class="categories">
-		   <td colspan="3" >
-			 <table class="table table-condensed">
-				<tr class="category droppable">
-				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
-				  <td></td>
-				</tr>
-				<tr class="category droppable">
-				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-				  <td> </td>
-				  <td></td>
-				</tr>
-				<tr class="category droppable">
-				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
-				  <td></td>
-				</tr>
-			  </table>
-		   </td>
-		 </tr>
-		 </tbody>
-	  </table>
-	  </div>
- 
       <h2>Link tables</h2>
 
       <form id="linkform">
+      <div id="link">
+      <input name="newtable" id="newtable" value="linked.table"></input>
+      <table>
+        <thead>
+      <tr>
+        <th><div class="table">Table 1</th>
+        <th><div class="table">Table 2</th>
+      </tr>
+     </thead>
+     <tbody>
+       <tr class="dimension droppable">
+      <td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
+      <td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
+      <td><i class="icon-remove"></i></td>
+     </tr>
+     <tr class="categories">
+       <td colspan="3" >
+       <table class="table table-condensed">
+        <tr class="category droppable">
+          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+          <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+          <td></td>
+        </tr>
+        <tr class="category droppable">
+          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+          <td> </td>
+          <td></td>
+        </tr>
+        <tr class="category droppable">
+          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+          <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+          <td></td>
+        </tr>
+        </table>
+       </td>
+     </tr>
+     </tbody>
+    </table>
+    </div>
+ 
         <p>
           Link:<br>
           <textarea name="link" id="linkdump" rows="20" cols="80">
