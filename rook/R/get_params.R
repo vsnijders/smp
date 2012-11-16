@@ -37,6 +37,23 @@ get_params <- function(request) {
     params$params
   }
 
+  #POST <- function() 
+  #{
+  #  if (!exists("rook.input", env)) 
+  #      stop("Missing rook.input")
+  #  if (exists("rook.request.form_list", env)) 
+  #      env[["rook.request.form_list"]]
+  #  else if (form_data() || parseable_data()) {
+  #      env[["rook.request.form_list"]] <<- Multipart$parse(env)
+  #      if (length(env[["rook.request.form_list"]]) == 0) {
+  #          form_vars <- env[["rook.input"]]$read()
+  #          env[["rook.request.form_list"]] <<- Utils$parse_query(rawToChar(form_vars))
+  #      }
+  #  }
+  #  env[["rook.request.form_list"]]
+  #}
+
+
   parse_query(request$query_string())
 }
 
