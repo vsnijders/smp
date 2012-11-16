@@ -27,6 +27,7 @@ rook_server$add(name = "statmine", app = Builder$new(
     "^/r/get_table.r" = app_get_table,
     "^/r/get_meta.r" = app_get_meta,
     "^/r/link.r" = app_link,
+    "^/r/gen_link.r" = app_gen_link,
     "^/r/fetch.r" = app_fetch,
     "^/tables" = app_tables,
     ".*" = Redirect$new("/index.html")

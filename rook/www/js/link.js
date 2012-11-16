@@ -35,7 +35,13 @@ Link = window.Link = {
 		return link;
 	},
 	
-	render: function(data){
+	render: function(el,data){
+		el = $(el);
+		var tab = el.find("table");
+		console.log(tab);
+		el.html("<table><tr><th>d</th><th>d</th></tr><tr></tr></table>");
+//		var tab = $("<table>").appendTo(el);
+
 	},
 	
 	renderCat: function(target, cat){

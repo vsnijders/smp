@@ -44,14 +44,24 @@
             hoverClass: "droppable_hover", 
             tolerance : "touch",
             drop: function(e, dragevent){
-              catLink(e.target, dragevent.draggable)
+              Link.renderCat(e.target, dragevent.draggable)
             }
           });
+
 		  
 		data = Link.getData("#link");
 
         var table1_name = $(document).getUrlParam("table1");
         var table2_name = $(document).getUrlParam("table2");
+
+        jQuery.getJSON("r/gen_link.r", {"table1":table1_name, "table2": table2_name}, 
+            function(data) {
+              $("#linkdump").text(JSON.stringify(data));
+
+              Link.render("#link2", data)
+        });
+
+
 
         jQuery.getJSON("r/get_meta.r", {"table":table1_name}, 
             function(data) {
@@ -59,6 +69,7 @@
           $("#meta1").append("<h3>" + table1_name + "</h3>");
           $("#meta1").append(tree(data.dimensions));
         });
+
         jQuery.getJSON("r/get_meta.r", {"table":table2_name}, 
             function(data) {
           $("#meta2").append("<h3>" + table2_name + "</h3>");
@@ -102,6 +113,8 @@
     </header>
 
     <article>
+    <div id="link2">
+    </div>
 	  <div id="link">
 	  <input name="newtable" id="newtable" value="newtable"></input>
 	  <table>
@@ -112,7 +125,7 @@
 			</tr>
 		 </thead>
 		 <tbody>
-	     <tr class="dimension">
+	     <tr class="dimension droppable">
 			<td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
 			<td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
 			<td><i class="icon-remove"></i></td>
@@ -120,17 +133,17 @@
 		 <tr class="categories">
 		   <td colspan="3" >
 			 <table class="table table-condensed">
-				<tr class="category dropable">
+				<tr class="category droppable">
 				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
 				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
 				  <td></td>
 				</tr>
-				<tr class="category dropable">
+				<tr class="category droppable">
 				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
 				  <td> </td>
 				  <td></td>
 				</tr>
-				<tr class="category dropable">
+				<tr class="category droppable">
 				  <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
 				  <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
 				  <td></td>
@@ -147,53 +160,9 @@
       <form id="linkform">
         <p>
           Link:<br>
-          <textarea name="link" rows="20" cols="80">
-{
-  "table2" : "gezo",
-  "table1" : "huisartspatienten",
-  "newtable" : "diabetes",
-  "dimensions" : [
-    { 
-      "dimension1" : "jaar",
-      "dimension2" : "jaar",
-      "categories" : [
-        {"category2" : "2001"},
-        {"category1" : "2002", "category2" : "2002"},
-        {"category1" : "2003", "category2" : "2003"},
-        {"category1" : "2004", "category2" : "2004"},
-        {"category1" : "2005", "category2" : "2005"},
-        {"category1" : "2006", "category2" : "2006"},
-        {"category1" : "2007", "category2" : "2007"},
-        {"category1" : "2008", "category2" : "2008"},
-        {"category1" : "2009", "category2" : "2009"}
-      ]
-    },
-    { 
-      "dimension1" : "geslacht",
-      "dimension2" : "geslacht",
-      "categories" : [
-        {"category1" : "Vrouw", "category2" : "Vrouw"},
-        {"category1" : "Man", "category2" : "Man"},
-        {"category1" : "Totaal", "category2" : "Totaal"}
-      ]
-    },
-    { 
-      "dimension1" : "leeftijd",
-      "dimension2" : "leeftijd",
-      "categories" : [
-        {"category1" : "0 tot 25", "category2" : "0 tot 25"},
-        {"category1" : "25 tot 35", "category2" : "25 tot 35"},
-        {"category1" : "35 tot 45", "category2" : "35 tot 45"},
-        {"category1" : "45 tot 55", "category2" : "45 tot 55"},
-        {"category1" : "55 tot 65", "category2" : "55 tot 65"},
-        {"category1" : "65 tot 75", "category2" : "65 tot 75"},
-        {"category1" : "75+", "category2" : "75+"},
-        {"category1" : "Totaal", "category2" : "Totaal"}
-      ]
-    }
-  ]
-}
-          </textarea><br>
+          <textarea name="link" id="linkdump" rows="20" cols="80">
+          </textarea>
+          <br>
           <input type="submit" value="Link">
         </p>
         <p id="linkresult"></p>

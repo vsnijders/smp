@@ -66,8 +66,11 @@ function on_meta_loaded(data) {
       jQuery.each(dat.levels, function(i, lab) {
         var label = $("<label>").text(lab).appendTo(form);
         $("<input>").attr("type", "checkbox").addClass("filter")
-          .attr("name", dim).val(lab).click(update_filter)
-          .click(redraw_graph).prependTo(label);
+          .attr("name", dim)
+          .val(lab)
+          .click(update_filter)
+          .click(redraw_graph)
+          .prependTo(label);
       });
       $(el).append(li);
     });
