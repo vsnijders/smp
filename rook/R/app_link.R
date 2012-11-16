@@ -3,7 +3,7 @@ app_link <- function(env){
   res <- Rook::Response$new()
   req <- Rook::Request$new(env)
   res$header("Content-Type", "application/json")
-  link <- req$params()$link
+  link <- get_params(req)$link
   if (is.null(link)) {
     res$write(toJSON(list(fail=TRUE, message="No link given.")))
     return(res$finish())
