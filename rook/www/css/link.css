@@ -1,0 +1,26 @@
+.droppable {
+  margin : 0px;
+  padding : 0px;
+  min-height : 15px;
+  border-top : solid 1px white;
+  border-bottom : solid 1px white;
+}
+.droppable_active {
+  background : rgb(230,230,230);
+  border-top : solid 1px rgb(200,200,200);
+  border-bottom : solid 1px rgb(200,200,200);
+}
+.droppable_hover {
+  background : none;
+}
+.draggable {
+  cursor: move;
+  display : block;
+  margin : 2px 0px;
+  background : white;
+  color : black;
+  border : rgb(200,200,200) 1px solid;
+  padding : 2px 3px 2px 3px;
+  border-radius: 5px;
+  font-size : 90%;
+}

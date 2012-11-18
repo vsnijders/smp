@@ -37,10 +37,91 @@ Link = window.Link = {
 	
 	render: function(el,data){
 		el = $(el);
-		var tab = el.find("table");
-		console.log(tab);
-		el.html("<table><tr><th>d</th><th>d</th></tr><tr></tr></table>");
-//		var tab = $("<table>").appendTo(el);
+
+		$("#newtable", el).val(data.newtable);
+		
+		$("div.table").each(function(i,div){
+			$(div).text(data["table"+(i+1)]);
+		});
+		
+		var tab = el.find("tbody").first();
+		
+		//skeletons
+		var _trd = $("tr.dimension", tab);
+		var _trc = $("tr.categories", tab);
+		var _trcat = $("tr.category", tab);
+		
+		var dims = data.dimensions;
+
+		tab.html("")
+		for (var d in data.dimensions){
+			_trd.clone().appendTo(tab);
+			_trc.clone()
+			   .data("dimension", d)
+			   .appendTo(tab)
+			   ;
+		}
+
+		$("div.dimension", tab).each(function(i,div){
+			div = $(div);
+			var d = dims[i >> 1];
+			div.text(d ? d["dimension"+((i%2)+1)] : "");
+		});
+
+		$("a", tab).each(function(i,a){
+			$(a).attr("data-target", "#categories_" + i)
+			    .on("click", function(){ $("i", this).toggleClass("icon-chevron-down")})
+			    ;
+		});
+
+		$("tr.categories", tab).each(function(i,tr){
+			
+			var cats = $("tbody", tr).first();
+			cats.html("");
+
+			$("div.collapse", tr).attr("id", "categories_"+i);
+
+			var categories = dims[i].categories;
+			for (var c in categories){
+				_trcat.clone()
+				   .data("value", c)
+				   .appendTo(cats)
+				   ;
+			}
+
+			$("div.category", cats).each(function(j, div){
+				div = $(div);
+				div.text(categories[j>>1]["category"+((j%2)+1)]);
+			});
+
+		});
+
+        $("div.draggable")
+          .css("cursor", "move")
+          .draggable( {axis:"y", revert: "invalid"} )
+          ;
+
+        $(".dimension.droppable")
+          .droppable({
+            accept: ".dimension.draggable",
+            activeClass: "droppable_active", 
+            hoverClass: "droppable_hover", 
+            tolerance : "touch",
+            drop: function(e, dragevent){
+              Link.renderCat(e.target, dragevent.draggable)
+            }
+          });
+
+        $(".category.droppable")
+          .droppable({
+            accept: ".category.draggable",
+            activeClass: "droppable_active", 
+            hoverClass: "droppable_hover", 
+            tolerance : "touch",
+            drop: function(e, dragevent){
+              Link.renderCat(e.target, dragevent.draggable)
+            }
+          });
 
 	},
 	

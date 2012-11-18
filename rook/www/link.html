@@ -24,6 +24,7 @@
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
     <link type="text/css" href="css/statmine.css" rel="stylesheet" />
+    <link type="text/css" href="css/link.css" rel="stylesheet" />
 
     <!-- scripting -->
     <script type="text/javascript">
@@ -31,25 +32,8 @@
       var T1 = null;
 
       $(function() {
-
-        $("div.draggable")
-          .css("cursor", "move")
-          .draggable( {axis:"y", revert: "invalid"} )
-          ;
-
-        $(".dropable")
-          .droppable({
-            accept: ".draggable",
-            activeClass: "droppable_active", 
-            hoverClass: "droppable_hover", 
-            tolerance : "touch",
-            drop: function(e, dragevent){
-              Link.renderCat(e.target, dragevent.draggable)
-            }
-          });
-
 		  
-		data = Link.getData("#link");
+		    data = Link.getData("#link");
 
         var table1_name = $(document).getUrlParam("table1");
         var table2_name = $(document).getUrlParam("table2");
@@ -57,8 +41,7 @@
         jQuery.getJSON("r/gen_link.r", {"table1":table1_name, "table2": table2_name}, 
             function(data) {
               $("#linkdump").text(JSON.stringify(data));
-
-              Link.render("#link2", data)
+              Link.render("#link", data)
         });
 
 
@@ -120,36 +103,30 @@
       <input name="newtable" id="newtable" value="linked.table"></input>
       <table>
         <thead>
-      <tr>
-        <th><div class="table">Table 1</th>
-        <th><div class="table">Table 2</th>
-      </tr>
-     </thead>
+        <tr>
+          <th><div class="table">Table 1</th>
+          <th></th>
+          <th><div class="table">Table 2</th>
+        </tr>
+       </thead>
      <tbody>
        <tr class="dimension droppable">
-      <td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
-      <td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
-      <td><i class="icon-remove"></i></td>
-     </tr>
+          <td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
+          <td><i class="icon-remove-sign"></i></td>
+          <td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
+          <td><a href="#" data-toggle="collapse" data-target=""><i class="icon-chevron-right"></i></a></td>
+       </tr>
      <tr class="categories">
        <td colspan="3" >
-       <table class="table table-condensed">
-        <tr class="category droppable">
-          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-          <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
-          <td></td>
-        </tr>
-        <tr class="category droppable">
-          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-          <td> </td>
-          <td></td>
-        </tr>
-        <tr class="category droppable">
-          <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-          <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
-          <td></td>
-        </tr>
-        </table>
+        <div class="collapse">
+         <table class="table table-condensed">
+            <tr class="category droppable">
+              <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
+              <td><i class="icon-remove-sign"></i></td>
+              <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+            </tr>
+          </div>
+          </table>
        </td>
      </tr>
      </tbody>
@@ -158,7 +135,7 @@
  
         <p>
           Link:<br>
-          <textarea name="link" id="linkdump" rows="20" cols="80">
+          <textarea name="link" id="linkdump" rows="20" cols="80" style="width:400px">
           </textarea>
           <br>
           <input type="submit" value="Link">
