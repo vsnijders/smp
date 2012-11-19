@@ -43,11 +43,21 @@ matchdims <- function(dims1, dims2){
         }
         ,i1, i2,SIMPLIFY=FALSE)
   
+  # dims <- c(dims, makeUnlinkedDimension(dims1))
   # TODO add unlinked dims
   dims
 }
 
-makeUnlinkedDimension <- function(dims){
+makeUnlinkedDimension <- function(dims, i){
+  if (i == 1) {
+    dims <- lapply(dims, function(x){
+      list(dimension1=x, categories=matchcats(x$levels, character()))
+    })
+  } else {
+    dims <- lapply(dims, function(x){
+      list(dimension2=x, categories=matchcats(character(), x$levels))
+    })
+  }
 }
 
 matchcats <- function(cats1, cats2){

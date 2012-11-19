@@ -14,7 +14,7 @@ Link = window.Link = {
 		
 		$("tr.dimension", el).each(function(i){
 			var dim = {};
-			$("div.dimension", this).each(function(i){
+			$("span.dim", this).each(function(i){
 				dim["dimension"+(i+1)] = $(this).text();
 			});
 			dims.push(dim);
@@ -64,9 +64,10 @@ Link = window.Link = {
 			   ;
 		}
 
-		$("div.dimension", tab).each(function(i,div){
+		$("span.dim", tab).each(function(i,div){
 			div = $(div);
 			var d = dims[i >> 1];
+			div.data("value",d);
 			div.text(d ? d["dimension"+((i%2)+1)] : "");
 		});
 
