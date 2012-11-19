@@ -12,7 +12,9 @@ gen_link <- function(table1, table2) {
   
   link$newtable = paste(table1, table2, sep=".")
   link$table1 = table1
+  link$meta1 = t1_meta
   link$table2 = table2
+  link$meta2 = t2_meta
   
   link$dimensions = matchdims(t1_meta$dimensions,t2_meta$dimensions)
   
@@ -54,8 +56,6 @@ matchcats <- function(cats1, cats2){
   i2 <- match(cats1, cats2, nomatch=0)
   i1 <- which(i2>0)
   i2 <- i2[i1]
-  
-  cats1_ul <- cats1[i2==0]
   
   cats <- c(cats, mapply( function(c1, c2){
      list(category1=cats1[c1], category2=cats2[c2])

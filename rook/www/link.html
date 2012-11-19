@@ -33,39 +33,26 @@
 
       $(function() {
 		  
-		    data = Link.getData("#link");
-
         var table1_name = $(document).getUrlParam("table1");
         var table2_name = $(document).getUrlParam("table2");
 
         jQuery.getJSON("r/gen_link.r", {"table1":table1_name, "table2": table2_name}, 
             function(data) {
-              $("#linkdump").text(JSON.stringify(data));
+              $("#linkdump")
+                .text(JSON.stringify(data))
+                //.hide()
+                ;
               Link.render("#link", data)
         });
 
-
-
-        jQuery.getJSON("r/get_meta.r", {"table":table1_name}, 
-            function(data) {
-              T1 = data;
-          $("#meta1").append("<h3>" + table1_name + "</h3>");
-          $("#meta1").append(tree(data.dimensions));
-        });
-
-        jQuery.getJSON("r/get_meta.r", {"table":table2_name}, 
-            function(data) {
-          $("#meta2").append("<h3>" + table2_name + "</h3>");
-          $("#meta2").append(tree(data.dimensions));
-        });
-
-
         $("#linkform").submit(function(e) {
-          var json = this.link.value;
+          //var json = this.link.value;
+          var json = Link.getData("#link");
+          console.log(json);
           $.ajax({
             url: "r/link.r",
             dataType: 'json',
-            data: {"link":json},
+            data: {"link":JSON.stringify(json)},
             type: "POST",
             success: function(data) {
               if (data.fail) {
@@ -110,20 +97,20 @@
         </tr>
        </thead>
      <tbody>
-       <tr class="dimension droppable">
-          <td><div class="dimension" data-dim="dim1" data-value="jaar">Jaar</div></td>
-          <td><i class="icon-remove-sign"></i></td>
-          <td><div class="dimension" data-dim="dim2" data-value="jaar">Jaar</div></td>
+       <tr class="dimension">
+          <td><i class="icon-list"></i><div class="dimension draggable1">Jaar</div></td>
+          <td><i class="icon-resize-horizontal"></i></td>
+          <td><i class="icon-list"><div class="dimension draggable2"></i>Jaar</div></td>
           <td><a href="#" data-toggle="collapse" data-target=""><i class="icon-chevron-right"></i></a></td>
        </tr>
      <tr class="categories">
        <td colspan="3" >
         <div class="collapse">
          <table class="table table-condensed">
-            <tr class="category droppable">
-              <td> <div class="category draggable" data-name="cat1">cat1 </div></td>
-              <td><i class="icon-remove-sign"></i></td>
-              <td> <div class="category draggable" data-name="cat2">cat2 </div></td>
+            <tr class="category">
+              <td> <div class="category draggable1">cat1 </div></td>
+              <td><i class="icon-resize-horizontal"></i></td>
+              <td> <div class="category draggable2">cat2 </div></td>
             </tr>
           </div>
           </table>
@@ -137,16 +124,15 @@
           Link:<br>
           <textarea name="link" id="linkdump" rows="20" cols="80" style="width:400px">
           </textarea>
+          getData:<br>
+          <textarea name="datalink" id="datalinked" rows="20" cols="80" style="width:400px">
+          </textarea>
           <br>
-          <input type="submit" value="Link">
+          <input class="btn" type="submit" value="Link">
+          <a class="btn" href="#" onclick="Link.getData('#link')">getData</a>
         </p>
         <p id="linkresult"></p>
       </form>
-      <h2>Meta data of tables that should be linked</h2>
-      <div id="meta1">
-      </div>
-      <div id="meta2">
-      </div>
     </article>
 
     <footer>

@@ -1,6 +1,7 @@
 Link = window.Link = {
 	getData: function(el){
 		var el = $(el);
+		
 		var link = {};
 		
 		$("div.table", el).each(function(i, div){
@@ -32,6 +33,7 @@ Link = window.Link = {
 		});
 		
 		console.log(link);
+		$("#datalinked").text(JSON.stringify(link));
 		return link;
 	},
 	
@@ -46,7 +48,7 @@ Link = window.Link = {
 		
 		var tab = el.find("tbody").first();
 		
-		//skeletons
+		//skeletons from html
 		var _trd = $("tr.dimension", tab);
 		var _trc = $("tr.categories", tab);
 		var _trcat = $("tr.category", tab);
@@ -91,12 +93,26 @@ Link = window.Link = {
 
 			$("div.category", cats).each(function(j, div){
 				div = $(div);
-				div.text(categories[j>>1]["category"+((j%2)+1)]);
+				var d = ((j%2)+1);
+				var cattext = categories[j>>1]["category"+ d];
+				if (cattext){ 
+					div.text(cattext);
+				} else {
+					div.text(" ")
+					   .removeClass("draggable"+d)
+					   .addClass("droppable"+d)
+					   ;
+				}
 			});
 
 		});
 
-        $("div.draggable")
+        $("div.draggable1")
+          .css("cursor", "move")
+          .draggable( {axis:"y", revert: "invalid"} )
+          ;
+
+        $("div.draggable2")
           .css("cursor", "move")
           .draggable( {axis:"y", revert: "invalid"} )
           ;
@@ -112,15 +128,41 @@ Link = window.Link = {
             }
           });
 
-        $(".category.droppable")
+        function catDrop(e, dragevent){
+        	var dragged = dragevent.draggable;
+        	var target = $(this);
+        	
+        	var stub = target.clone().insertBefore(dragged);
+
+        	dragged.insertBefore(target)
+        		   .attr("style", "position:relative")
+        	       ;
+
+        	target.insertBefore(stub);
+        	stub.remove();
+
+        	// add empty row
+        	//dragged.closest("tbody").append(_trcat.clone())
+        	
+        	console.log(dragevent, dragged)
+        }
+
+        $(".category.droppable1")
           .droppable({
-            accept: ".category.draggable",
+            accept: ".category.draggable1",
             activeClass: "droppable_active", 
             hoverClass: "droppable_hover", 
             tolerance : "touch",
-            drop: function(e, dragevent){
-              Link.renderCat(e.target, dragevent.draggable)
-            }
+            drop: catDrop
+          });
+
+        $(".category.droppable2")
+          .droppable({
+            accept: ".category.draggable2",
+            activeClass: "droppable_active", 
+            hoverClass: "droppable_hover", 
+            tolerance : "touch",
+            drop: catDrop
           });
 
 	},

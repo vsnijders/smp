@@ -1,19 +1,22 @@
-.droppable {
+.droppable1, .droppable2 {
   margin : 0px;
   padding : 0px;
   min-height : 15px;
   border-top : solid 1px white;
   border-bottom : solid 1px white;
 }
+
 .droppable_active {
   background : rgb(230,230,230);
   border-top : solid 1px rgb(200,200,200);
   border-bottom : solid 1px rgb(200,200,200);
 }
+
 .droppable_hover {
   background : none;
 }
-.draggable {
+
+.draggable1, .draggable2 {
   cursor: move;
   display : block;
   margin : 2px 0px;
