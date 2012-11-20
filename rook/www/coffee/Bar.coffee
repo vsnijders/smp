@@ -7,6 +7,9 @@ class BarChart
 		@map = {size: null, y: null}
 		@margin = {top:0, left:0, right:0, bottom: 0}
 
+	a = () ->
+		null
+
 	map: (variables, dims) ->
 		@map
 		return @
@@ -23,16 +26,20 @@ class BarChart
 			.attr("height", @height)
 
 		svg = d3.select($svg.first())
+		# to clean up javascript code
+		size = @size
+		y = @y
+		map = @map
 
 		bars = svg.selectAll("rect").data(data)
 
 		bars.enter()
 			.append("rect")
 			.attr( class: "bar",
-			       x: (d) -> Math.min(@size 0, @size d[@map.size]),
-			       y: (d) -> @y d[@map.y],
-			       width: (d) -> Math.abs(@size 0, @size d[@map.size]),
-			       height: @y.rangeBand(),
+			       x: (d) -> Math.min size(0), size(d[map.size]),
+			       y: (d) -> @y d[map.y],
+			       width: (d) -> Math.abs size(0), size(d[map.size]),
+			       height: y.rangeBand(),
 			       fill: "steelblue",
 			       stroke: "white"
 				 )
@@ -42,6 +49,7 @@ class BarChart
 		#highlight
 
 		# add tipsy
+		
 
 		return @
 
