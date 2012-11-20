@@ -69,38 +69,6 @@ header h1 a {
 footer {
 }
 
-/* ========================== MENU BAR TOP ========================= */
-nav ul {
-  margin: 0px 0px;
-  padding: 0;
-  background : steelblue;
-  color : white;
-  border-radius: 5px;
-  /*background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);*/
-  background-image: linear-gradient(to bottom, steelblue, #4A708B);
-  border: 1px solid rgb(100,100,100);
-}
-nav li:hover{
-  background-image: linear-gradient(to bottom, #4A708B, #4A708B);
-}
-nav a {
-  color : inherit;
-  font-weight: 400;
-}
-nav a:hover {
-  color : inherit;
-}
-nav li {
-  display: inline-block;
-  border-right : 1px solid rgb(80, 80, 80);
-  border-right : 1px solid rgb(white, white, white);
-  border-right: 1px solid rgb(100,100,100);
-  padding : 3pt 10px 3px 10px;
-}
-
 /* ========================== ARTICLE =============================== */
 article {
   margin : 0px 20px;
