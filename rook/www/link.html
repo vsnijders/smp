@@ -74,12 +74,14 @@
 
   <body>
     <header>
-      <h1><a href="index.html">StatMine</a></h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Tables</a></li>
-        </ul>
-      </nav>
+      <div class="navbar navbar-static-top navbar-inverse">
+        <div class="navbar-inner">
+          <a class="brand" href="index.html">StatMine</a>
+          <ul class="nav">
+            <li><a href="index.html">Tables</a></li>
+          </ul>
+        </div>
+      </div>
     </header>
 
     <article>
@@ -88,7 +90,7 @@
       <form id="linkform">
       <div id="link">
       <label>Name of new table: <input name="newtable" id="newtable" value="linked.table"></input></label>
-      <button class="btn" type="submit"><i class="icon-resize-horizontal"></i>Create</button>
+      <button class="btn" type="submit"><i class="icon-resize-horizontal"></i> Create</button>
       <p id="linkresult"></p>
 
       <table>

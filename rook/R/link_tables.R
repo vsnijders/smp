@@ -48,7 +48,7 @@ link_tables <- function(link) {
     sel_dim <- rep(FALSE, nrow(t1))
 
     for (cat in dim$categories) {
-      if (is.null(cat$category1)) next
+      if (is.null(cat$category1) || grepl("^[[:space:]]*$", cat$category1)) next
       sel <- t1[[dim$dimension1]] == cat$category1
       sel_dim[sel] <- TRUE
     }
@@ -86,19 +86,18 @@ link_tables <- function(link) {
     t2[[dim$dimension2]] <- NA
 
     sel_dim <- rep(FALSE, nrow(t2))
-
-    # TEST
+    # Copy dimensions to meta
     meta$dimensions[[dim$dimension1]] <- t2_meta$dimensions[[dim$dimension1]]
     meta$dimensions[[dim$dimension1]]$levels <- character(0)
 
     levels[[dim$dimension1]] <- character(0)
 
     for (cat in dim$categories) {
-      if (is.null(cat$category2)) {
+      if (is.null(cat$category2) || grepl("^[[:space:]]*$", cat$category2)) {
         levels[[dim$dimension1]] <- c(levels[[dim]], cat$category1)
         next
       }
-      if (is.null(cat$category1)) {
+      if (is.null(cat$category1) || grepl("^[[:space:]]*$", cat$category1)) {
         sel <- old == cat$category2
         sel_dim[sel] <- TRUE
         # TODO check if cat$category2 also present in table 1; in that case there
