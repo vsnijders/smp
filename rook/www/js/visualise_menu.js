@@ -40,6 +40,16 @@ function update_selection(context) {
   })
 }
 
+// Checkboxes in the variables section need to behave like a radiobox. This is handled in the 
+// next bit of code.
+function behave_like_radio() {
+  var ul = $(this).closest('ul.droppable');
+  if (ul.hasClass('variables')) {
+    var div = $(this).closest('div.filter');
+    $("input:checked", div).not($(this)).attr("checked", false);
+  }
+}
+
 function on_meta_loaded(data) {
   // TODO: following code block needs cleanup
   $(".variables").each(function(i, el) {
@@ -68,6 +78,7 @@ function on_meta_loaded(data) {
         $("<input>").attr("type", "checkbox").addClass("filter")
           .attr("name", dim)
           .val(lab)
+          .click(behave_like_radio) 
           .click(update_filter)
           .click(redraw_graph)
           .prependTo(label);
@@ -113,10 +124,20 @@ $(function() {
     drop: function(event, ui) {
       var granpa = $(this).closest(".tab-pane");
       // move existing variables to variables section
-      $(".draggable", $(this)).appendTo($(".variables", granpa));
+      var old = $(".draggable", $(this));
+      old.appendTo($(".variables", granpa));
       // append newly dropped variable to the list
       $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
+      // when draggables are moves to the variables section and more than
+      // one category is selected; these need to be unselected
+      if ($(this).hasClass('variables')) {
+        var sel = $("input.filter:checked", $(ui.draggable));
+      } else {
+        var sel = $("input.filter:checked", old);
+      }
+      if (sel.length > 1) sel.attr("checked", false);
       // update selection
+      update_filter();
       update_selection(this);
       redraw_graph();
     },
