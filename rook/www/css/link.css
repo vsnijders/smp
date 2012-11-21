@@ -1,4 +1,4 @@
-.droppable1, .droppable2 {
+.droppable{
   margin : 0px;
   padding : 0px;
   min-height : 15px;
@@ -16,7 +16,7 @@
   background : none;
 }
 
-.draggable1, .draggable2 {
+.draggable{
   cursor: move;
   display : block;
   margin : 2px 0px;
@@ -26,4 +26,8 @@
   padding : 2px 3px 2px 3px;
   border-radius: 5px;
   font-size : 90%;
+}
+
+select.categories{
+  font-size: 90%;
 }
