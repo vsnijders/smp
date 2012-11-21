@@ -1,43 +1,32 @@
 
-// =================== GLOBAL VARIABLES ========================
-var selection = {};
-var filter = {};
-var graphtype;
-
 function update_filter() {
   var context = $(this);
-  if (!context.is('input')) context = $('#' + graphtype);
-  filter = {};
+  if (!context.is('input')) context = $('#' + cntrl.graph());
+  var filter = {};
   $("input.filter:checked", context.closest(".tab-pane")).each(function() {
     var variable = this.name;
     var level    = this.value;
     if (filter[variable] === undefined) filter[variable] = [];
     filter[variable].push(level);
   });
+  cntrl.filter(filter);
 }
 
 function update_selection(context) {
-  // TODO check mapping code
-  mapping.resetVariables();
-
-  if (context === undefined) context = $('#' + graphtype);
-  selection = {};
+  if (context === undefined) context = $('#' + cntrl.graph());
+  var selection = {};
   $("div.plotvariable .droppable", $(context).closest(".tab-pane")).each(function(i, ul) {
     var dimension = $(ul).attr("data-dimension");
     selection[dimension] = [];
     $("li.draggable", $(ul)).each(function(j, li) {
       selection[dimension][j] = $(li).attr("data-variable");
-
-      // TODO check mapping code
-      var variable = $(li).attr("data-variable");
-      mapping.map()[dimension]
-        .variable(variable, variables[variable]);
-      // TODO following block commented out as it gave rise to various errors
-      /*if (variable == "Year" || variable == "Jaar") {
-        mapping.map()[dimension].type("time");
-      }*/
     });
   })
+  cntrl.selection(selection);
+}
+
+function redraw_graph() {
+  cntrl.redraw();
 }
 
 // Checkboxes in the variables section need to behave like a radiobox. This is handled in the 
@@ -107,7 +96,7 @@ $(function() {
   $("#tabs").tabs();
   // Keep track of which tab = graphtype is selected
   $('a[data-toggle="tab"]').on('shown', function (e) {
-    graphtype = $(this).text();
+    cntrl.graph($(this).text());
     update_selection();
     update_filter();
     redraw_graph();

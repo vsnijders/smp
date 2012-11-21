@@ -13,13 +13,19 @@
     <link type="text/css" href="css/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery-ui-1.9.1.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.getUrlParam.js"></script>
-    
+  
+  <!-- backbone includes -->
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/backbone-min.js"></script>
+
+
 	<!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
 
 	
 	<script type="text/javascript" src="js/link.js"></script>
+    <script type="text/javascript" src="js/link2.js"></script>
 
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
@@ -42,12 +48,12 @@
                 .text(JSON.stringify(data))
                 .hide()
                 ;
-              Link.render("#link", data)
+              lv.render("#link", data)
         });
 
         $("#linkform").submit(function(e) {
           //var json = this.link.value;
-          var json = Link.getData("#link");
+          var json = lv.getData("#link");
           console.log(json);
           $.ajax({
             url: "r/link.r",
@@ -68,6 +74,66 @@
         });
 
       });
+    </script>
+
+    <script type="text/template" id="dimview_linked">
+       <tr class="dimension">
+          <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension1" data-value="<%=dimension1%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension1 %></span></div>
+          </td>
+          <td><i class="icon-resize-horizontal"></i></td>
+          <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
+                <i class="icon-list"></i>
+               <span class="dim"><%=dimension2 %></span></div>
+          </td>
+          <td> <a href="#" data-toggle="collapse" data-target="#categories_<%=i%>">
+              <i class="icon-chevron-right"></i></a>
+          </td>
+       </tr>
+
+       <tr class="categories">
+       <td colspan="4" >
+        <div class="collapse" id="categories_<%=i%>">
+         <table class="" style="width:100%">
+           <% _.each(categories, function(category){ %>
+            <tr class="category">
+              <td> 
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+              </td>
+              <td style="align:center"><i class="icon-resize-horizontal"></i></td>
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+            </tr>
+            <%});%>
+          </table>
+        </div>
+       </td>
+      </tr>
+    </script>
+
+    <script type="text/template" id="dimview_unlinked1">
+       <tr class="dimension">
+          <td> <div class="dimension draggable"  data-index="<%=i%>" data-dim="dimension1" data-value="<%=dimension1%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension1 %></span></div>
+          </td>
+          <td></td>
+          <td> <div class="dimension droppable"  data-index="<%=i%>" data-dim="dimension2" data-value="">
+               </div>
+          </td>
+          <td></td>
+       </tr>
+       <tr class="categories">
+       <td>
+        <div>
+           <select class="categories">
+           <% _.each(categories, function(category){ %>
+            <option class="category" val="<%=category.category1%>" data-cat="<%=category.category1%>"><%=category.category1%></option>
+            <%});%>
+           </select>
+        </div>
+       </td>
+     </tr>
     </script>
 
   </head>
@@ -95,36 +161,15 @@
       <table>
         <thead>
         <tr>
-          <th><div class="table">Table 1</th>
+          <th><div id="table1" class="table">Table 1</th>
           <th></th>
-          <th><div class="table">Table 2</th>
+          <th><div id="table2" class="table">Table 2</th>
         </tr>
        </thead>
-     <tbody>
-       <tr class="dimension">
-          <td><div class="dimension draggable1"><i class="icon-list"></i><span class="dim">Jaar</span></div></td>
-          <td><i class="icon-resize-horizontal"></i></td>
-          <td><div class="dimension draggable2"><i class="icon-list"></i><span class="dim">Jaar</span></div></td>
-          <td><a href="#" data-toggle="collapse" data-target=""><i class="icon-chevron-right"></i></a></td>
-       </tr>
-     <tr class="categories">
-       <td colspan="3" >
-        <div class="collapse">
-         <table class="" style="width:100%">
-            <tr class="category">
-              <td> <div class="category draggable1">cat1 </div></td>
-              <td><i class="icon-resize-horizontal"></i></td>
-              <td> <div class="category draggable2">cat2 </div></td>
-            </tr>
-          </div>
-          </table>
-       </td>
-     </tr>
+     <tbody class="link">
      </tbody>
     </table>
-    </div>
- 
-    <textarea name="link" id="linkdump" rows="20" cols="80" style="width:400px"> </textarea>
+    </div> 
       </form>
     </article>
 

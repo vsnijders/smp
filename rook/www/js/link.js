@@ -109,12 +109,7 @@ Link = window.Link = {
 
 		});
 
-        $("div.draggable1")
-          .css("cursor", "move")
-          .draggable( {axis:"y", revert: "invalid"} )
-          ;
-
-        $("div.draggable2")
+        $("div.draggable")
           .css("cursor", "move")
           .draggable( {axis:"y", revert: "invalid"} )
           ;
@@ -149,18 +144,9 @@ Link = window.Link = {
         	console.log(dragevent, dragged)
         }
 
-        $(".category.droppable1")
+        $(".category.droppable")
           .droppable({
-            accept: ".category.draggable1",
-            activeClass: "droppable_active", 
-            hoverClass: "droppable_hover", 
-            tolerance : "touch",
-            drop: catDrop
-          });
-
-        $(".category.droppable2")
-          .droppable({
-            accept: ".category.draggable2",
+            accept: ".category.draggable",
             activeClass: "droppable_active", 
             hoverClass: "droppable_hover", 
             tolerance : "touch",
@@ -185,4 +171,3 @@ function tree(data) {
 	  return textNode;
   }
 }
-
