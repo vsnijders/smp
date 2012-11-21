@@ -1,28 +1,4 @@
-_.extend(Backbone.Model.prototype, {
-    parse: function(resp, xhr) {
-        var attr, model, models, collection, options;
-        for (var prop in resp) {
-            if (this.defaults && this.defaults[prop]) {
-                attr = this.defaults[prop];
-                if (attr instanceof Backbone.Model) {
-                    model = attr.clone();
-                    model.set(resp[prop]);
-                    resp[prop] = model;
-                } else if (attr instanceof Backbone.Collection) {
-                    models = attr.map(function (model) { return model.clone(); });
-                    options = _.clone(attr.options);
-                    collection = new attr.constructor(models, options);
-                    collection.add(resp[prop]);
-                    resp[prop] = collection;
-                }
-            }
-        }
-        return resp;
-    }
-});
-
 var Category = Backbone.Model.extend({
-
 	isLink: function(){
 		return this.has("category1") && this.has("category2");
 	},
@@ -40,7 +16,25 @@ var Category = Backbone.Model.extend({
 });
 
 var Categories = Backbone.Collection.extend({
-	model: Category
+	model: Category,
+
+	unlink: function(at){
+		var cat1 = this.at(at);
+		var cat2 = new Category({category2:cat1.get("category2")});
+		this.add(cat2, {at: at});
+		cat1.unset("category2");
+	},
+
+	link: function(from, to){
+		var catfrom = this.at(from);
+		var catto = this.at(to);
+
+		if (catto.has("category1"))
+			catto.set("category2", catfrom.get("category2"))
+		else 
+			catto.set("category1", dimfrom.get("category1"))
+		this.remove(dimfrom);
+	}
 });
 
 var Dimension = Backbone.Model.extend({
@@ -58,11 +52,39 @@ var Dimension = Backbone.Model.extend({
 	initialize: function(init){
 		init = init || {};
 		this.categories = new Categories(init.categories);
+	},
+
+	toJSON: function(){
+		return _.extend(this.attributes, {categories: this.categories.toJSON()})
 	}
 });
 
 var Dimensions = Backbone.Collection.extend({
-	model: Dimension
+	model: Dimension,
+
+	unlink: function(at){
+		var dim = this.at(at);
+		var cats = dim.categories.toJSON();
+
+		var cats1 = _.filter(cats, function(c){return c.category1});
+		var cats2 = _.filter(cats, function(c){return c.category2});
+		var dim2 = new Dimension({dimension2:dim.get("dimension2"), categories: cats2});
+		this.add(dim2, {at: at});
+		dim.unset("dimension2");
+		dim.categories.reset(cats1);
+	},
+
+	link: function(from, to){
+		var dimfrom = this.at(from);
+		var dimto = this.at(to);
+
+		dimto.categories.add(dimfrom.categories.toJSON());
+		if (dimto.has("dimension1"))
+			dimto.set("dimension2", dimfrom.get("dimension2"))
+		else 
+			dimto.set("dimension1", dimfrom.get("dimension1"))
+		this.remove(dimfrom);
+	}
 });
 
 var Link = Backbone.Model.extend({
@@ -76,7 +98,10 @@ var Link = Backbone.Model.extend({
 	initialize: function(init){
 		init = init || {};
 		this.dimensions = new Dimensions(init.dimensions);
-		init.dimensions = null;
+	},
+
+	toJSON: function(){
+		return _.extend(this.attributes, {dimensions: this.dimensions.toJSON()})
 	}
 });
 
@@ -164,8 +189,9 @@ var LinkView = Backbone.View.extend({
 	        	var t = target.data();
 
 	        	//unset?
-	        	l.dimensions.at(d.index).unset(d.dim);
-	        	l.dimensions.at(t.index).set(d.dim, d.value);
+	        	l.dimensions.link(d.index, t.index);
+	        	//l.dimensions.at(d.index).unset(d.dim);
+	        	//l.dimensions.at(t.index).set(d.dim, d.value);
 	        	lv.render();
             }
           });
@@ -202,6 +228,7 @@ var DimensionView = Backbone.View.extend({
 	initialize: function(){
 		this.template = _.template($("#dimview_linked").html());
 		this.template_ul1 = _.template($("#dimview_unlinked1").html());
+		this.template_ul2 = _.template($("#dimview_unlinked2").html());
 	},
 
 	render: function(par){
@@ -210,15 +237,22 @@ var DimensionView = Backbone.View.extend({
 
 		var html = "";
 
-		if (!dim.isLink()){
-			html = this.template_ul1(dim.toJSON());
-		} else {
+		if (dim.isLink()){
 			html = this.template(dim.toJSON());
+		} else if (dim.has("dimension1")) {
+			html = this.template_ul1(dim.toJSON());
+		} else if (dim.has("dimension2")){
+			html = this.template_ul2(dim.toJSON());
 		}
 		//$el.html(html);
 		$(html).appendTo(par);
 
 		//$el.appendTo(par);
+		$("a.unlink", par).on("click", function(){
+			var at = $(this).data("index");
+			l.dimensions.unlink(at);
+			lv.render();
+		})
 		return this;
 	}
 });
@@ -245,6 +279,8 @@ var link =
 $(function(){
 	//console.log(link);
 	var l = new Link(link);
+	l.dimensions.unlink(1);
+	console.log(l.toJSON())
 	window.l = l;
 	window.lv = new LinkView({model:l});
 	lv.render();

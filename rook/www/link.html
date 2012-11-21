@@ -82,7 +82,7 @@
                <i class="icon-list"></i> 
                <span class="dim"><%=dimension1 %></span></div>
           </td>
-          <td><i class="icon-resize-horizontal"></i></td>
+          <td><a class="unlink" href="#" data-index="<%=i%>"><i class="icon-resize-horizontal"></i></a></td>
           <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
                 <i class="icon-list"></i>
                <span class="dim"><%=dimension2 %></span></div>
@@ -129,6 +129,33 @@
            <select class="categories">
            <% _.each(categories, function(category){ %>
             <option class="category" val="<%=category.category1%>" data-cat="<%=category.category1%>"><%=category.category1%></option>
+            <%});%>
+           </select>
+        </div>
+       </td>
+     </tr>
+    </script>
+
+    <script type="text/template" id="dimview_unlinked2">
+       <tr class="dimension">
+          <td> <div class="dimension droppable"  data-index="<%=i%>" data-dim="dimension1" data-value="">
+               </div>
+          </td>
+          <td></td>
+          <td> <div class="dimension draggable"  data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension2 %></span></div>
+          </td>
+          <td></td>
+       </tr>
+       <tr class="categories">
+       <td></td>
+       <td></td>
+       <td>
+        <div>
+           <select class="categories">
+           <% _.each(categories, function(category){ %>
+            <option class="category" val="<%=category.category2%>" data-cat="<%=category.category2%>"><%=category.category2%></option>
             <%});%>
            </select>
         </div>
