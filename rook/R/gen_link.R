@@ -84,5 +84,6 @@ matchcats <- function(cats1, cats2){
 
 # library(rjson)
 # gen_link("slachtoffer", "crimi") -> l
+# link_tables(link=l)
 #l
 #toJSON(l)
