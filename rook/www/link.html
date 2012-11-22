@@ -48,7 +48,12 @@
                 .text(JSON.stringify(data))
                 .hide()
                 ;
-              lv.render("#link", data)
+
+                window.l = new Link(data);
+                window.lv = new LinkView({model:l});
+                lv.render();
+
+                //lv.render("#link", data)
         });
 
         $("#linkform").submit(function(e) {
@@ -128,7 +133,7 @@
         <div>
            <select class="categories">
            <% _.each(categories, function(category){ %>
-            <option class="category" val="<%=category.category1%>" data-cat="<%=category.category1%>"><%=category.category1%></option>
+            <option class="category" val="<%=category.category1%>" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1%></option>
             <%});%>
            </select>
         </div>
@@ -155,13 +160,34 @@
         <div>
            <select class="categories">
            <% _.each(categories, function(category){ %>
-            <option class="category" val="<%=category.category2%>" data-cat="<%=category.category2%>"><%=category.category2%></option>
+            <option class="category" val="<%=category.category2%>" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2%></option>
             <%});%>
            </select>
         </div>
        </td>
      </tr>
     </script>
+
+    <script type="text/template" id="template-linked_categories">
+      <tr class="categories">
+       <td colspan="4" >
+        <div class="collapse" id="categories_<%=i%>">
+         <table class="" style="width:100%">
+           <% _.each(categories, function(category){ %>
+            <tr class="category">
+              <td> 
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+              </td>
+              <td style="align:center"><i class="icon-resize-horizontal"></i></td>
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+            </tr>
+            <%});%>
+          </table>
+        </div>
+       </td>
+      </tr>
+    </script>
+
 
   </head>
 

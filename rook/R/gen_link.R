@@ -42,7 +42,22 @@ matchdims <- function(dims1, dims2){
                 ) 
         }
         ,i1, i2,SIMPLIFY=FALSE)
-  # TODO add unlinked dims
+  
+  dims1.u <- lapply(names(dims1)[-i1], function(d){
+    list( dimension1 = d
+        , categories = lapply(dims1[[d]]$levels, function(c){list(category1=c)})
+        )
+  })
+  
+  dims2.u <- lapply(names(dims2)[-i2], function(d){
+    list( dimension2 = d
+          , categories = lapply(dims2[[d]]$levels, function(c){list(category2=c)})
+    )
+  })
+  
+  dims <- append(dims, dims1.u)
+  dims <- append(dims, dims2.u)
+  names(dims) <- NULL
   dims
 }
 
@@ -69,4 +84,6 @@ matchcats <- function(cats1, cats2){
 
 # library(rjson)
 # gen_link("slachtoffer", "crimi") -> l
-# #toJSON(l)
+# link_tables(link=l)
+#l
+#toJSON(l)

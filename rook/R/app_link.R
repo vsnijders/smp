@@ -16,7 +16,7 @@ app_link <- function(env){
     res$write(toJSON(new_table))
     res$finish()
   }, error = function(e) {
-    res$write(toJSON(list(fail=TRUE, message="Link was invalid.")))
+    res$write(toJSON(list(fail=TRUE, message=as.character(e))))
   })
   res$finish()
 }
