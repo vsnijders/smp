@@ -5,14 +5,8 @@ var Category = Backbone.Model.extend({
 	
 	isEmpty: function(){
 		return !this.has("category1") && !this.has("category2");
-	},
-
-	//splits the category
-	splitOf: function(){
-		var cat = new Category({category2:this.get("category2")});
-		this.unset("category2");
-		return cat;   
 	}
+
 });
 
 var Categories = Backbone.Collection.extend({
@@ -66,17 +60,32 @@ var Dimensions = Backbone.Collection.extend({
 		var dim = this.at(at);
 		var cats = dim.categories.toJSON();
 
-		var cats1 = _.filter(cats, function(c){return c.category1});
-		var cats2 = _.filter(cats, function(c){return c.category2});
+		var cats1 =  _.filter(cats, function(c){return c.category1})
+		              .map( function(c){return _.pick(c, "category1")})
+		              ;
+		var cats2 = _.filter(cats, function(c){return c.category2})
+		             .map( function(c){return _.pick(c, "category2")})
+		              ;
+
+//		console.log("cats1", cats1);
+//		console.log("cats2" ,cats2);
 		var dim2 = new Dimension({dimension2:dim.get("dimension2"), categories: cats2});
-		this.add(dim2, {at: at});
+		this.add(dim2, {at: at+1});
 		dim.unset("dimension2");
 		dim.categories.reset(cats1);
 	},
 
 	link: function(from, to){
-		var dimfrom = this.at(from);
 		var dimto = this.at(to);
+		var to_dim1 = dimto.has("dimension1");
+
+		var dimfrom = this.at(from);
+
+		if (dimfrom.isLink()){
+			this.unlink(from);
+			from = (to_dim1)? from + 1 :  from
+			dimfrom = this.at(from);
+		}
 
 		dimto.categories.add(dimfrom.categories.toJSON());
 		if (dimto.has("dimension1"))
@@ -126,7 +135,7 @@ var LinkView = Backbone.View.extend({
 	},
 
 	getData: function(el){
-				var el = $(el);
+		var el = $(el);
 		
 		var link = {};
 
@@ -140,7 +149,7 @@ var LinkView = Backbone.View.extend({
 			var dim = {};
 			$("div.dimension", this).each(function(){
 				var data = $(this).data();
-				dim[data.dim] = data.value;
+				if (data.value != "") {dim[data.dim] = data.value};
 			});
 			dims.push(dim);
 		})
@@ -156,11 +165,23 @@ var LinkView = Backbone.View.extend({
 				});
 				cats.push(cat);
 			});
+
+			$("option.category", tr).each(function(i){
+			    var cat = {};
+				var data = $(this).data();
+				cat[data.cat] = data.value;
+				cats.push(cat);
+				console.log(cats);
+			});
+
 		});
 		return link;
 	},
 
 	refreshDrop: function(){
+
+		var _linkview = this;
+
 		//select empty nodes and make them droppable
 		$("[data-value='']")
 			.removeClass("draggable")
@@ -188,15 +209,27 @@ var LinkView = Backbone.View.extend({
 	        	var d = dragged.data();
 	        	var t = target.data();
 
-	        	//unset?
-	        	l.dimensions.link(d.index, t.index);
+	        	//nasty!!!!
+	        	var link = _linkview.model = new Link(_linkview.getData("#link"));
+
+
+	        	console.log(link);
+	        	link.dimensions.link(d.index, t.index);
+	        	console.log(link);
+
+	        	// should be triggered by previous statement
+	        	_linkview.render();
+
+	        		//unset?
+	        	//l.dimensions.link(d.index, t.index);
 	        	//l.dimensions.at(d.index).unset(d.dim);
 	        	//l.dimensions.at(t.index).set(d.dim, d.value);
-	        	lv.render();
+	        	//lv.render();
             }
           });
 
         function catDrop(e, dragevent){
+
         	var dragged = dragevent.draggable;
         	var target = $(this);
         	
@@ -221,6 +254,23 @@ var LinkView = Backbone.View.extend({
             drop: catDrop
           });
 	}
+});
+
+var CategoriesView = Backbone.View.extend({
+	initialize: function(options){
+		this.linked = options.linked;
+		//this.template = _.template($("#dimview_linked").html());
+		//this.template_ul1 = _.template($("#dimview_unlinked1").html());
+		//this.template_ul2 = _.template($("#dimview_unlinked2").html());
+	},
+
+	render: function(par){
+		var cats = this.collection;
+
+		cats.each(function(cat){
+
+		})	
+	}	
 });
 
 var DimensionView = Backbone.View.extend({
@@ -250,9 +300,12 @@ var DimensionView = Backbone.View.extend({
 		//$el.appendTo(par);
 		$("a.unlink", par).on("click", function(){
 			var at = $(this).data("index");
+
+			//ugly!!! replace with event or view!
 			l.dimensions.unlink(at);
 			lv.render();
 		})
+
 		return this;
 	}
 });
@@ -263,6 +316,7 @@ var CategoryView = Backbone.View.extend({
 	}
 });
 
+/*
 var link = 
       { table1: "slachtoffer",
         table2: "crimi",
@@ -285,3 +339,4 @@ $(function(){
 	window.lv = new LinkView({model:l});
 	lv.render();
 })
+*/
