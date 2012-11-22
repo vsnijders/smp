@@ -21,7 +21,6 @@ function validate_line(selection, variables) {
 function highlightPoint(points){
    points
      .on("mouseover", function(d){
-           
            console.log(d);
         })
      ;
@@ -200,6 +199,7 @@ LineChart.prototype.plot = function(chart, data) {
  }
  
   var xAxis = d3.svg.axis().scale(map.x.scale).orient("bottom");
+  
   chart.append("g")
     .attr("class", "axis x")
     .attr("transform", "translate(0, "+ (h - 20) +")")

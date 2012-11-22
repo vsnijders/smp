@@ -39,6 +39,7 @@ Link = window.Link = {
 	
 	render: function(el,data){
 		el = $(el);
+		console.log(data);
 
 		$("#newtable", el).val(data.newtable);
 		
