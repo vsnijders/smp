@@ -41,11 +41,12 @@ function Cntrl(table, node) {
   }
 
   draw = function(data) {
-    node.html();
-    var canvas = node.append('svg').attr('class', 'chart')
+    node_ = $("#graph"); // TODO
+    node_.html();
+    var canvas = node_.append('svg').attr('class', 'chart')
       .attr('width', width_, 'height', height_);
     graphs_[graph_].data(data).selection(selection_)
-      .canvas(canvas_).draw();
+      .canvas(canvas).draw();
   }
 
   cntrl.redraw = function() {

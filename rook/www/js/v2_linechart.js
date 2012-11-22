@@ -4,6 +4,10 @@ function Linechart() {
   var data_;
   var selection_;
   var canvas_;
+  var axes = {
+    'x' : LinearXAxis(),
+    'y' : LinearYAxis()
+  };
 
   chart.data = function(data) {
     if (!arguments.length) {
@@ -39,8 +43,147 @@ function Linechart() {
 
   chart.draw = function() {
     console.log("Drawing line chart");
+    var xheight = axes.x.variable(selection_.x).domain(data_).height();
+    var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
+    var width   = canvas_.attr('width');
+    var height  = canvas_.attr('height');
+    var gwidth  = width - ywidth;
+    var gheight = height - xheight;
+    var g = canvas_.append('g').attr('class', 'chart')
+      .attr('transform', 'translate(' + ywidth, ',0)');
+    this.draw1(g, gwidth, gheight);
+  }
+
+  chart.draw1 = function(g, width, height) {
+    g.append('rect').attr('width', width)
+      .attr('height', height).attr('fill', 'gray');
+    
   }
 
   return chart;
 };
+
+// ============================================================================
+// =======                         AXES                                 =======
+// ============================================================================
+
+function LinearYAxis() {
+  var axis = {};
+  
+  var variable_;
+  var range_  = [undefined, undefined];
+  var width_  = 30;
+  var height_;
+  var canvas_;
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
+
+  axis.domain = function(data) {
+    range_ = d3.extent(data, function(d) { return d[variable_];});
+    return(this);
+  }
+
+  axis.width = function() {
+    return 30;
+  }
+
+  axis.height = function(height) {
+    if (!arguments.length) {
+      return height_;
+    } else {
+      height_ = height;
+      return this;
+    }
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.transform = function(value) {
+    var range = range_[1] - range_[0];
+    return (height - (value - range_[0]) / range);
+  }
+
+  axis.draw = function() {
+  }
+
+
+  return axis;
+}
+
+
+
+
+
+function LinearXAxis() {
+  var axis = {};
+  
+  var variable_;
+  var range_  = [undefined, undefined];
+  var width_;
+  var height_ = 30;
+  var canvas_;
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
+
+  axis.domain = function(data) {
+    range_ = d3.extent(data, function(d) { return d[variable_];});
+    return(this);
+  }
+
+  axis.width = function() {
+    if (!arguments.length) {
+      return width_;
+    } else {
+      width_ = width;
+      return this;
+    }
+  }
+
+  axis.height = function(height) {
+    return height_;
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.transform = function(value) {
+    var range = range_[1] - range_[0];
+    return (width - (value - range_[0]) / range);
+  }
+
+  axis.draw = function() {
+  }
+
+
+  return axis;
+}
+
+
 
