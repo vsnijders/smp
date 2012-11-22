@@ -55,7 +55,7 @@ function Cntrl(table, node) {
         'selection' : JSON.stringify(selection_),
         'filter' : JSON.stringify(filter_)
       };
-      jQuery.getJSON('r/fetch.r', query, draw());
+      jQuery.getJSON('r/fetch.r', query, draw);
     }
     return this;
   }
