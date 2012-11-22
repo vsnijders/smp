@@ -50,8 +50,14 @@ function Linechart() {
     var gwidth  = width - ywidth;
     var gheight = height - xheight;
     var g = canvas_.append('g').attr('class', 'chart')
-      .attr('transform', 'translate(' + ywidth, ',0)');
+      .attr('transform', 'translate(' + ywidth + ',0)');
     this.draw1(g, gwidth, gheight);
+    var g = canvas_.append('g').attr('class', 'chart')
+      .attr('transform', 'translate(0,0)');
+    axes.y.height(gheight).canvas(g).draw()
+    var g = canvas_.append('g').attr('class', 'chart')
+      .attr('transform', 'translate(' + ywidth + ',' + gheight + ')');
+    axes.x.width(gwidth).canvas(g).draw()
   }
 
   chart.draw1 = function(g, width, height) {
@@ -118,6 +124,8 @@ function LinearYAxis() {
   }
 
   axis.draw = function() {
+    canvas_.append('rect').attr('width', width_)
+      .attr('height', height_).attr('fill', 'red');
   }
 
 
@@ -151,7 +159,7 @@ function LinearXAxis() {
     return(this);
   }
 
-  axis.width = function() {
+  axis.width = function(width) {
     if (!arguments.length) {
       return width_;
     } else {
@@ -160,7 +168,7 @@ function LinearXAxis() {
     }
   }
 
-  axis.height = function(height) {
+  axis.height = function() {
     return height_;
   }
 
@@ -179,6 +187,8 @@ function LinearXAxis() {
   }
 
   axis.draw = function() {
+    canvas_.append('rect').attr('width', width_)
+      .attr('height', height_).attr('fill', 'blue');
   }
 
 

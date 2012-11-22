@@ -6,7 +6,6 @@ function Cntrl(table, node) {
   var graphs_    = {};
   var selection_ = {};
   var filter_    = {};
-  // TODO add methods to set width and height
   var width_     = 400;
   var height_    = 400;
 
@@ -31,6 +30,17 @@ function Cntrl(table, node) {
     }
   }
 
+  // ==== size ====
+  cntrl.size = function(width, height) {
+    if (!arguments.length) {
+      return [width_, height_];
+    } else {
+      width_ = width;
+      height_ = height;
+      return this;
+    }
+  }
+
   // ==== redrawing of graph ====
   is_valid = function() {
     if (graph_ === undefined || graphs_[graph_] == undefined) 
@@ -41,10 +51,10 @@ function Cntrl(table, node) {
   }
 
   draw = function(data) {
-    node_ = $("#graph"); // TODO
-    node_.html();
+    node_ = d3.select("#graph"); //TODO
+    node_.html("");
     var canvas = node_.append('svg').attr('class', 'chart')
-      .attr('width', width_, 'height', height_);
+      .attr('width', width_).attr('height', height_);
     graphs_[graph_].data(data).selection(selection_)
       .canvas(canvas).draw();
   }
