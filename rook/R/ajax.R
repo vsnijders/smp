@@ -31,7 +31,7 @@
 # 
 # wrapFunction <- function(f){
 #   
-#   wrapped <- function(env){
+#  wrapped <- function(env){
 #     require(rsjon)
 #     res <- Rook::Response$new()
 #     req <- Rook::Request$new(env)
@@ -54,8 +54,10 @@
 # wrapJS <- function(f, name=deparse(substitute(f))){
 #   arg <- names(formals(f))
 #   arg <- paste(arg, collapse=",")
-#   paste0("function ",name,"(", arg, "){"
-#         , 
+#   object <- paste(arg, arg, collapse=",", sep=":")
+#   paste0("function ",name,"(", arg, "){\n"
+          , "var data = {",obj,"}"
+#         , "return $.ajax({type='POST', 'data: data'});\n"
 #         , "}\n"
 #         )
 # }
