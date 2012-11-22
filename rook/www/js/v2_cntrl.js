@@ -6,6 +6,9 @@ function Cntrl(table, node) {
   var graphs_    = {};
   var selection_ = {};
   var filter_    = {};
+  // TODO add methods to set width and height
+  var width_     = 400;
+  var height_    = 400;
 
   // ==== create the cntrl object ====
   var cntrl = {};
@@ -33,13 +36,16 @@ function Cntrl(table, node) {
     if (graph_ === undefined || graphs_[graph_] == undefined) 
       return false;
     var graph = graphs_[graph_];
-    // TODO pass selection to graph
+    // TODO: meta is probably also needed
     return graph.is_valid(selection_);
   }
 
   draw = function(data) {
-    // TODO pass data and selection etc to graph
-    graphs_[graph_].draw();
+    node.html();
+    var canvas = node.append('svg').attr('class', 'chart')
+      .attr('width', width_, 'height', height_);
+    graphs_[graph_].data(data).selection(selection_)
+      .canvas(canvas_).draw();
   }
 
   cntrl.redraw = function() {
