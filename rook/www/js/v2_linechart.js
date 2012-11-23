@@ -51,6 +51,16 @@ function Linechart() {
     var gheight = height - xheight;
     var g = canvas_.append('g').attr('class', 'chart')
       .attr('transform', 'translate(' + ywidth + ',0)');
+
+    var foo = d3.nest();
+    if (selection_.row !== undefined) {
+      foo.key(function(d) { return d[selection_.row];})
+    } else foo.key(function(d) { return 'empty'; });
+    if (selection_.column !== undefined) {
+      foo.key(function(d) { return d[selection_.column];})
+    } else foo.key(function(d) { return 'empty'; });
+
+
     this.draw1(g, gwidth, gheight);
     var g = canvas_.append('g').attr('class', 'chart')
       .attr('transform', 'translate(0,0)');
