@@ -37,7 +37,7 @@
               ' <a href="table.html?table=' + i + '"><i class="icon-th"></i></a> ' + 
               ' <a href="visualise.html?table=' + i + '"><i class="icon-eye-open"></i></a>' + 
               '</h3>' + "<p>" + d.description + "</p></td>"
-            );
+            ); 
             $("#tables").append(newt);
           })
 
@@ -45,6 +45,9 @@
           // are selected; otherwise hide
           $(".one, .two, .any").addClass("disabled");
           $("input").change(function() {
+            var checked = $(this);
+            console.log(checked);
+            
             var nselected = $("input:checked").length;
             if (nselected > 0) {
               $(".any").removeClass("disabled");
