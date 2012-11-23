@@ -53,6 +53,11 @@ div#resizable {
   padding : 5px;
   width : 400px;
   height : 400px;
+  padding-bottom : 20px;
+}
+div#graph {
+  width : 100%;
+  height : 100%;
 }
 div.graph {
   color : black;
