@@ -51,18 +51,57 @@ function Linechart() {
     var gheight = height - xheight;
     var g = canvas_.append('g').attr('class', 'chart')
       .attr('transform', 'translate(' + ywidth + ',0)');
-    this.draw1(g, gwidth, gheight);
-    var g = canvas_.append('g').attr('class', 'chart')
-      .attr('transform', 'translate(0,0)');
-    axes.y.height(gheight).canvas(g).draw()
-    var g = canvas_.append('g').attr('class', 'chart')
-      .attr('transform', 'translate(' + ywidth + ',' + gheight + ')');
-    axes.x.width(gwidth).canvas(g).draw()
+
+    var nesting = d3.nest();
+    if (selection_.row !== undefined && selection_.row.length) {
+      nesting.key(function(d) { return d[selection_.row];})
+    } else {
+      nesting.key(function() { return 'empty'; });
+    }
+    if (selection_.column !== undefined && selection_.column.length) {
+      nesting.key(function(d) { return d[selection_.column];})
+    } else {
+      nesting.key(function() { return 'empty'; });
+    }
+    var nested_data = nesting.map(data_);
+    var rows     = d3.keys(nested_data);
+    var nrow     = d3.keys(nested_data).length;
+    var columns  = d3.keys(nested_data[d3.keys(nested_data)[0]]);
+    var ncolumn  = d3.keys(nested_data[d3.keys(nested_data)[0]]).length;
+
+    var padding  = 5;
+    var gheight = (height - xheight - (nrow-1)*padding) / nrow;
+    var gwidth  = (width - ywidth - (ncolumn-1)*padding) / ncolumn;
+    axes.x.width(gwidth);
+    axes.y.height(gheight);
+    var y = 0;
+    for (var i = 0; i < rows.length; ++i) {
+      var row = rows[i];
+      var x = 0;
+      var g = canvas_.append('g').attr('class', 'chart')
+        .attr('transform', 'translate(' + x + ',' + y + ')');
+      axes.y.canvas(g).draw()
+      x += ywidth;
+      for (var j = 0; j < columns.length; ++j) {
+        var column = columns[j];
+        var g = canvas_.append('g').attr('class', 'chart')
+          .attr('transform', 'translate('+ x + ',' + y + ')');
+        this.draw1(nested_data[row][column], g);
+
+        if (i == (rows.length - 1)) {
+          var g = canvas_.append('g').attr('class', 'chart')
+            .attr('transform', 'translate(' + x + ',' + (y + gheight) + ')');
+          axes.x.canvas(g).draw() 
+        }
+        x += gwidth + padding;
+      }
+      y += gheight + padding;
+    }
   }
 
-  chart.draw1 = function(g, width, height) {
-    g.append('rect').attr('width', width)
-      .attr('height', height).attr('fill', 'gray');
+  chart.draw1 = function(data, g) {
+    g.append('rect').attr('width', axes.x.width())
+      .attr('height', axes.y.height()).attr('fill', 'gray');
     
   }
 

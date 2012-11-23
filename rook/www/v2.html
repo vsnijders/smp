@@ -91,12 +91,15 @@
 
         // Make graph container resizable
         $('#resizable').resizable({
-          minHeight: 600,
+          minHeight: 300,
           minWidth: 300,
           stop: function(event, ui) { 
+            var width = $('#graph').width();
+            var height = $('#graph').height();
+            cntrl.size(width, height);
             redraw_graph(); 
           }
-        }).width("90%");
+        }).height(cntrl.size()[1]).width(cntrl.size()[2]);
 
       });
     </script>
