@@ -101,7 +101,12 @@ function Linechart() {
 
   chart.draw1 = function(data, g) {
     g.append('rect').attr('width', axes.x.width())
-      .attr('height', axes.y.height()).attr('fill', 'gray');
+      .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
+    g.selectAll('circle').data(data).enter().append('circle')
+      .attr('cx', axes.x.transform)
+      .attr('cy', axes.y.transform)
+      .attr('r', 3)
+      .attr('fill', 'steelblue');
     
   }
 
@@ -131,7 +136,7 @@ function LinearYAxis() {
   }
 
   axis.domain = function(data) {
-    range_ = d3.extent(data, function(d) { return d[variable_];});
+    range_ = d3.extent(data, function(d) { return Number(d[variable_]);});
     return(this);
   }
 
@@ -159,7 +164,11 @@ function LinearYAxis() {
 
   axis.transform = function(value) {
     var range = range_[1] - range_[0];
-    return (height - (value - range_[0]) / range);
+    var res = (height_ - height_ * (value[variable_] - range_[0]) / range);
+    if (res < 0) {
+      console.log("Aargh");
+    }
+    return(res);
   }
 
   axis.draw = function() {
@@ -222,7 +231,7 @@ function LinearXAxis() {
 
   axis.transform = function(value) {
     var range = range_[1] - range_[0];
-    return (width - (value - range_[0]) / range);
+    return (width_ * (value[variable_] - range_[0]) / range);
   }
 
   axis.draw = function() {
