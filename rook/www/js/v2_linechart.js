@@ -6,7 +6,8 @@ function Linechart() {
   var canvas_;
   var axes = {
     'x' : LinearXAxis(),
-    'y' : LinearYAxis()
+    'y' : LinearYAxis(),
+    'colour' : ColourAxis()
   };
 
   chart.data = function(data) {
@@ -51,6 +52,14 @@ function Linechart() {
     var gheight = height - xheight;
     var g = canvas_.append('g').attr('class', 'chart')
       .attr('transform', 'translate(' + ywidth + ',0)');
+
+    // Setting of colour domain should probably occur in draw1, as this has 
+    // nothing to do with small multiples. However, we need to calculate the
+    // domain using the full data set. Perhaps we can avoid this if we use the
+    // levels from the meta information on the data.
+    if (selection_.colour !== undefined && selection_.colour.length) {
+      axes.colour.variable(selection_.colour).domain(data_);
+    }
 
     var nesting = d3.nest();
     if (selection_.row !== undefined && selection_.row.length) {
@@ -100,13 +109,31 @@ function Linechart() {
   }
 
   chart.draw1 = function(data, g) {
+
+    var nesting = d3.nest();
+    if (selection_.colour !== undefined && selection_.colour.length) {
+      nesting.key(function(d) { return d[selection_.colour];})
+    } else {
+      nesting.key(function() { return 'empty'; });
+    }
+    nested_data = nesting.map(data);
+
+    var line = d3.svg.line()
+      .x(axes.x.transform)
+      .y(axes.y.transform);
+
     g.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
+
+    for (d in nested_data) {
+      var colour = axes.colour.transform(nested_data[d][1]);
+      g.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
+    }
     g.selectAll('circle').data(data).enter().append('circle')
       .attr('cx', axes.x.transform)
       .attr('cy', axes.y.transform)
-      .attr('r', 3)
-      .attr('fill', 'steelblue');
+      .attr('r', 2)
+      .attr('fill', axes.colour.transform);
     
   }
 
@@ -237,6 +264,63 @@ function LinearXAxis() {
   axis.draw = function() {
     canvas_.append('rect').attr('width', width_)
       .attr('height', height_).attr('fill', 'blue');
+  }
+
+
+  return axis;
+}
+
+
+
+
+
+
+function ColourAxis() {
+  var axis = {};
+  
+  var variable_;
+  var scale_  = d3.scale.category10();
+  var width_  = 0;
+  var height_ = 0;
+  var canvas_;
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
+
+  axis.domain = function(data) {
+    scale_.domain(d3.map(data, function(d) { return d[variabele_];}));
+    return(this);
+  }
+
+  axis.width = function() {
+    return width_;
+  }
+
+  axis.height = function() {
+    return height_;
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.transform = function(value) {
+    if (variable_ === undefined) return ('steelblue');
+    return(scale_(value[variable_]));
+  }
+
+  axis.draw = function() {
   }
 
 
