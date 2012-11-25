@@ -125,6 +125,17 @@ function Linechart() {
     g.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
 
+    g.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
+      .attr('class','hrule')
+      .attr('x1', 0).attr('x2', axes.x.width())
+      .attr('y1', axes.y.transform_val).attr('y2', axes.y.transform_val)
+      .attr('stroke', '#FFFFFF');
+    g.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
+      .attr('class','vrule')
+      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('y1', 0).attr('y2', axes.y.height())
+      .attr('stroke', '#FFFFFF');
+
     for (d in nested_data) {
       var colour = axes.colour.transform(nested_data[d][1]);
       g.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
@@ -152,6 +163,8 @@ function LinearYAxis() {
   var width_  = 30;
   var height_;
   var canvas_;
+  var labels_;
+  var label_range_;
 
   axis.variable = function(variable) {
     if (!arguments.length) {
@@ -176,6 +189,8 @@ function LinearYAxis() {
       return height_;
     } else {
       height_ = height;
+      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, height_);
+      label_range_ = d3.extent(labels_);
       return this;
     }
   }
@@ -189,18 +204,29 @@ function LinearYAxis() {
     }
   }
 
-  axis.transform = function(value) {
-    var range = range_[1] - range_[0];
-    var res = (height_ - height_ * (value[variable_] - range_[0]) / range);
-    if (res < 0) {
-      console.log("Aargh");
-    }
+  axis.transform_val = function(value) {
+    var range = label_range_[1] - label_range_[0];
+    var res = (height_ - height_ * (value - label_range_[0]) / range);
     return(res);
   }
 
+  axis.transform = function(value) {
+    return(axis.transform_val(value[variable_]));
+  }
+
+  axis.ticks = function() {
+    return (labels_);
+  }
+
   axis.draw = function() {
-    canvas_.append('rect').attr('width', width_)
-      .attr('height', height_).attr('fill', 'red');
+    canvas_.selectAll("line").data(labels_).enter().append("line")
+      .attr("x1", width_-5).attr("x2", width_)
+      .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
+      .attr("stroke", "#000000");
+    canvas_.selectAll('text').data(labels_).enter().append('text')
+      .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
+      .attr('text-anchor', 'end').text(function(d) { return (d);});
+
   }
 
 
@@ -219,6 +245,8 @@ function LinearXAxis() {
   var width_;
   var height_ = 30;
   var canvas_;
+  var labels_;
+  var label_range_;
 
   axis.variable = function(variable) {
     if (!arguments.length) {
@@ -239,6 +267,8 @@ function LinearXAxis() {
       return width_;
     } else {
       width_ = width;
+      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      label_range_ = d3.extent(labels_);
       return this;
     }
   }
@@ -256,14 +286,28 @@ function LinearXAxis() {
     }
   }
 
+  axis.transform_val = function(value) {
+    var range = label_range_[1] - label_range_[0];
+    return (width_ * (value - label_range_[0]) / range);
+  }
+
   axis.transform = function(value) {
-    var range = range_[1] - range_[0];
-    return (width_ * (value[variable_] - range_[0]) / range);
+    return (axis.transform_val(value[variable_]));
+  }
+
+  axis.ticks = function() {
+    return (labels_);
   }
 
   axis.draw = function() {
-    canvas_.append('rect').attr('width', width_)
-      .attr('height', height_).attr('fill', 'blue');
+    canvas_.selectAll("line").data(labels_).enter().append("line")
+      .attr("x1", axis.transform_val).attr("x2", axis.transform_val)
+      .attr("y1", 0).attr("y2", 5)
+      .attr("stroke", "#000000");
+    canvas_.selectAll('text').data(labels_).enter().append('text')
+      .attr('x', axis.transform_val)
+      .attr('y', 5).attr('dy', '1.2em')
+      .attr('text-anchor', 'middle').text(function(d) { return (d);});
   }
 
 
