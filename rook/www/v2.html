@@ -48,6 +48,7 @@
     <script type="text/javascript" src="js/v2_cntrl.js"></script>
     <script type="text/javascript" src="js/v2_linechart.js"></script>
     <script type="text/javascript" src="js/v2_barchart.js"></script>
+    <script type="text/javascript" src="js/R.js"></script>
 
     <script type="text/javascript">
       var table = $(document).getUrlParam('table');
@@ -60,7 +61,8 @@
 
         // Load meta data
         var tablename = $(document).getUrlParam("table");
-        jQuery.getJSON("r/get_meta.r", {"table":tablename}, 
+        cntrl.get_meta(tablename);
+/*        jQuery.getJSON("r/get_meta.r", {"table":tablename}, 
             function(data) {
           if (data.fail) {
             alert("Error fetching data");
@@ -90,7 +92,7 @@
           }
 
         });
-
+*/
         // Make graph container resizable
         $('#resizable').resizable({
           minHeight: 300,
@@ -99,7 +101,7 @@
             var width = $('#graph').width();
             var height = $('#graph').height();
             cntrl.size(width, height);
-            redraw_graph(); 
+            cntrl.redraw(); 
           }
         }).height(cntrl.size()[1]).width(cntrl.size()[2]);
 

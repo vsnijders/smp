@@ -8,6 +8,8 @@ function Cntrl(table, node) {
   var filter_    = {};
   var width_     = 400;
   var height_    = 400;
+  var meta_;
+  var menu_ = new Menu();
 
   // ==== create the cntrl object ====
   var cntrl = {};
@@ -18,6 +20,20 @@ function Cntrl(table, node) {
     if (graph_ === undefined) {
       graph_ = name;
     }
+    return this;
+  }
+
+  cntrl.meta = function(){
+    return meta_;
+  }
+
+  cntrl.get_meta = function(){
+    R.get_meta(table_)
+     .success(function(meta){
+        meta_ = meta;
+        menu_.render(meta);
+     });
+    //update stuff?
     return this;
   }
 

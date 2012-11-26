@@ -29,26 +29,20 @@ ajaxify <- function(list=NULL){
   dispatch <- function(env){
     
     req <- Rook::Request$new(env)
-    f <- gsub("^.+/R/", "", req$path())
-    params <- get_params(req)
-    
     res <- Rook::Response$new()
     res$header("Content-Type", "application/json")  
-  
-    tryCatch({
-          params <- lapply(params, fromJSON)
-          print(str(params))
-          result <- do.call(f, params)
-          # TODO write nested data frames the correct way
-          if (is.data.frame(result)){
-            json <- df_to_json(result)
-          } else {
-            json <- toJSON(result)
-          }
-          res$write(json)
-        }
-        , error=function(e){ res$write(toJSON(list(fail=TRUE, message=as.character(e))))}
-        )
+    f <- gsub("^.+/R/", "", req$path())
+    params <- get_params(req)
+    params <- lapply(params, fromJSON)
+    result <- do.call(f, params)
+    
+    # TODO write nested data frames the correct way
+    if (is.data.frame(result)){
+      json <- df_to_json(result)
+    } else {
+      json <- toJSON(result)
+    }
+    res$write(json)
     res$finish()
   }
   
@@ -74,4 +68,4 @@ wrapJS <- function(f, name=deparse(substitute(f))){
         )
 }
 
-#ajaxify("list_tables") -> l
+# ajaxify("list_tables") -> l

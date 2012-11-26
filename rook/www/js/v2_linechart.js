@@ -3,6 +3,8 @@ function Linechart() {
 
   var data_;
   var selection_;
+  var selector_;
+
   var canvas_;
   var axes = {
     'x' : LinearXAxis(),
@@ -24,6 +26,7 @@ function Linechart() {
       return selection_;
     } else {
       selection_ = selection;
+            
       return this;
     }
   }
