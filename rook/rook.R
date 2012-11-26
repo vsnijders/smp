@@ -30,6 +30,7 @@ rook_server$add(name = "statmine", app = Builder$new(
     "^/r/gen_link.r" = app_gen_link,
     "^/r/fetch.r" = app_fetch,
     "^/tables" = app_tables,
+    "^/R" = ajaxify(list=c("link_tables","get_table", "gen_link")),
     ".*" = Redirect$new("/index.html")
   )
 ))
