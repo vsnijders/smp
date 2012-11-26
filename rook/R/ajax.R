@@ -39,6 +39,7 @@ ajaxify <- function(list=NULL){
           params <- lapply(params, fromJSON)
           print(str(params))
           result <- do.call(f, params)
+          # TODO write data frames the correct way
           res$write(toJSON(result))
         }
         , error=function(e){ res$write(toJSON(list(fail=TRUE, message=as.character(e))))}
@@ -51,18 +52,19 @@ ajaxify <- function(list=NULL){
   
 wrapJS <- function(f, name=deparse(substitute(f))){
   arg <- names(formals(f))
-  obj <- paste0("JSON.stringify(", arg,")")
-  obj <- paste(arg, ": ", obj, collapse=",\n\t\t", sep="")
   
-  arg <- paste(arg, collapse=",")
+  obj <- paste0("\tif (",arg," !== undefined) $data['",arg,"'] = JSON.stringify(",arg,");\n", collapse="")
+  
+  arg <- paste(arg, collapse=", ")
   url <- paste0("./R/", name)
   paste0(name,": function(", arg, "){\n"
-        , "\tvar data = {",obj,"};\n"
+        , "\tvar $data = {};\n"
+        , obj
         , "\treturn $.ajax({\n"
         , "\t\turl: '", url, "',\n"
         ,  "\t\tdataType:'json',\n"
         ,  "\t\ttype:'POST',\n"
-        ,  "\t\tdata: data});\n"
+        ,  "\t\tdata: $data});\n"
         , "\t}"
         )
 }
