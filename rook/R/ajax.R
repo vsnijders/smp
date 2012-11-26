@@ -58,19 +58,19 @@ ajaxify <- function(list=NULL){
 wrapJS <- function(f, name=deparse(substitute(f))){
   arg <- names(formals(f))
   
-  obj <- paste0("\tif (",arg," !== undefined) $data['",arg,"'] = JSON.stringify(",arg,");\n", collapse="")
+  obj <- paste0("\t\tif (",arg," !== undefined) $data['",arg,"'] = JSON.stringify(",arg,");\n", collapse="")
   
   arg <- paste(arg, collapse=", ")
   url <- paste0("./R/", name)
-  paste0(name,": function(", arg, "){\n"
-        , "\tvar $data = {};\n"
+  paste0("\t",name,": function(", arg, "){\n"
+        , "\t\tvar $data = {};\n"
         , obj
-        , "\treturn $.ajax({\n"
-        , "\t\turl: '", url, "',\n"
-        ,  "\t\tdataType:'json',\n"
-        ,  "\t\ttype:'POST',\n"
-        ,  "\t\tdata: $data});\n"
-        , "\t}"
+        , "\t\treturn $.ajax({\n"
+        , "\t\t\turl: '", url, "',\n"
+        ,  "\t\t\tdataType:'json',\n"
+        ,  "\t\t\ttype:'POST',\n"
+        ,  "\t\t\tdata: $data});\n"
+        , "\t\t}"
         )
 }
 
