@@ -226,9 +226,7 @@ function LinearYAxis() {
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return (d);});
-
   }
-
 
   return axis;
 }
@@ -323,7 +321,7 @@ function ColourAxis() {
   var axis = {};
   
   var variable_;
-  var scale_  = d3.scale.category10();
+  var scale_  = d3.scale.category20();
   var width_  = 0;
   var height_ = 0;
   var canvas_;
