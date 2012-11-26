@@ -4,8 +4,11 @@
 var label_widths = {};
 var dummy;
 $(function() {
-  dummy = d3.select("body").append("svg");
+  dummy = d3.select("body").append("svg")
+            .style("visibility", "invisible")
+            ;
 });
+
 function label_width(label) {
   if (label_widths[label]) {
     return (label_widths[label]);
