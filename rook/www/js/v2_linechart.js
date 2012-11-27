@@ -75,6 +75,7 @@ function Linechart() {
     } else {
       nesting.key(function() { return 'empty'; });
     }
+    
     var nested_data = nesting.map(data_);
     var rows     = d3.keys(nested_data);
     var nrow     = d3.keys(nested_data).length;
@@ -324,7 +325,7 @@ function ColourAxis() {
   var axis = {};
   
   var variable_;
-  var scale_  = d3.scale.category20();
+  var scale_  = d3.scale.category10();
   var width_  = 0;
   var height_ = 0;
   var canvas_;
