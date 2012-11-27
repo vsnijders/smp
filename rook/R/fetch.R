@@ -1,4 +1,4 @@
-fetch <- function(table, selection, filter){
+fetch <- function(table_name, selection, filter){
 
   # Read data
   table <- get_table(table_name, meta=TRUE)
