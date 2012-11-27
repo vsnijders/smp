@@ -4,32 +4,48 @@ function Linechart() {
   
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
+  var selection_;
+  var values_;
 
+  
   chart.is_valid = function(selection) {
     return (selection.x !== undefined && selection.x.length > 0 &&
       selection.y !== undefined && selection.y.length > 0);
   }
 
-  // initializes axes
-  chart.setAxes = function(data, g){
+  chart.setValues = function(selection, values){
+    selection_ = selection;
+    values_ = values;
+    // assume x and y are correctly set
+    
+    var selx = selection.x[0];
+    values.x = function(d) {return Number(d[selx]);}
 
+    var sely = selection.y[0];
+    values.y = function(d) {return Number(d[sely]);}
+
+    if (selection.colour !== undefined && selection.colour.length){
+        var selcolour = selection.colour[0];
+        values.colour = function(d){return d[selcolour];};
+    }
+  }
+
+  // initializes axes
+  chart.setDomains = function(data){
   }
 
   chart.subdraw = function(data, g) {
     var nesting = d3.nest();
 
+    // may be these can be removed
     selection_ = this.selection();
+    values_ = this.values();
+    //
 
-    if (selection_.colour !== undefined && selection_.colour.length) {
-      nesting.key(function(d) { return d[selection_.colour];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
+    nesting.key(values_.colour);
     nested_data = nesting.map(data);
 
-    var line = d3.svg.line()
-      .x(axes.x.transform)
-      .y(axes.y.transform);
+    //grid
 
     g.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
@@ -45,16 +61,22 @@ function Linechart() {
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
 
+
+    // the data!!!
+    var line = d3.svg.line()
+      .x(axes.x.transform)
+      .y(axes.y.transform);
+
     for (d in nested_data) {
       var colour = axes.colour.transform(nested_data[d][1]);
       g.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
     }
+
     g.selectAll('circle').data(data).enter().append('circle')
       .attr('cx', axes.x.transform)
       .attr('cy', axes.y.transform)
       .attr('r', 2)
       .attr('fill', axes.colour.transform);
-    
   }
 
   return chart;

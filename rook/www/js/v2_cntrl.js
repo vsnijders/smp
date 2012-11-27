@@ -5,6 +5,9 @@ function Cntrl(table, node) {
   var graph_;
   var graphs_    = {};
   var selection_ = {};
+
+  // values_ is an object with corrosponding functions to retrieve data
+  var values_    = {};
   var filter_    = {};
   var width_     = 400;
   var height_    = 400;
@@ -76,18 +79,17 @@ function Cntrl(table, node) {
         height: height_
       });
 
-    graphs_[graph_].data(data).selection(selection_)
-      .canvas(canvas).draw();
+    graphs_[graph_]
+       .data(data)
+       .selection(selection_)
+       .values(values_)
+       .canvas(canvas).draw();
   }
 
   cntrl.redraw = function() {
     if (is_valid()) {
-      var query = {
-        'table' : table_,
-        'selection' : JSON.stringify(selection_),
-        'filter' : JSON.stringify(filter_)
-      };
-      jQuery.getJSON('r/fetch.r', query, draw);
+      R.fetch(table_, selection_, filter_)
+       .success(draw);
     }
     return this;
   }
@@ -98,7 +100,7 @@ function Cntrl(table, node) {
     if (!arguments.length) {
       return selection_;
     } else {
-      selection_ = selection;
+      selection_ = selection;      
       return this;
     }
   }
