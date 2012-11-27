@@ -49,5 +49,16 @@ var R = window.R = {
 			dataType:'json',
 			type:'POST',
 			data: $data});
+		},
+	fetch: function(table_name, selection, filter){
+		var $data = {};
+		if (table_name !== undefined) $data['table_name'] = JSON.stringify(table_name);
+		if (selection !== undefined) $data['selection'] = JSON.stringify(selection);
+		if (filter !== undefined) $data['filter'] = JSON.stringify(filter);
+		return $.ajax({
+			url: './R/fetch',
+			dataType:'json',
+			type:'POST',
+			data: $data});
 		} };
 
