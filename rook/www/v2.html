@@ -26,7 +26,8 @@
 
     <!-- d3.js includes -->
     <script type="text/javascript" src="js/d3.v2.min.js"></script>
-    <script type="text/javascript" src="js/colorbrewer.js"></script>
+
+<!--    <script type="text/javascript" src="js/colorbrewer.js"></script>-->
 
     <!-- styling -->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
@@ -36,13 +37,13 @@
     <!-- ======================== SCRIPTING ========================== -->
     <script type="text/javascript" src="js/R.js"></script>
 
-    <
     <script type="text/javascript" src="js/smp.js"></script>
     <!-- debugging  smp.js -->
     <script type="text/javascript" src="js/v2/cntrl.js"></script>
     <script type="text/javascript" src="js/v2/axis.js"></script>
     <script type="text/javascript" src="js/v2/chart.js"></script>
     <script type="text/javascript" src="js/v2/linechart.js"></script>
+    <script type="text/javascript" src="js/v2/scatterchart.js"></script>
     <!-- end debugging -->
 
     <script type="text/javascript">
@@ -53,6 +54,7 @@
         
         window.cntrl = Cntrl(table, $('#graph'));
         cntrl.add_graph('line', Linechart());
+        cntrl.add_graph('scatter', Scatterchart());
 
         //cntrl.add_graph('bar',  Barchart());
 

@@ -1,3 +1,19 @@
+// basic axis functionality
+function BaseAxis(){
+  var axis = {};
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  return axis;
+};
+
 function LinearYAxis() {
   var axis = {};
   
@@ -71,7 +87,9 @@ function LinearYAxis() {
     canvas_.selectAll("line").data(labels_).enter().append("line")
       .attr("x1", width_-5).attr("x2", width_)
       .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
-      .attr("stroke", "#000000");
+      .attr("stroke", "#000000")
+      ;
+
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return (d);});
@@ -79,10 +97,6 @@ function LinearYAxis() {
 
   return axis;
 }
-
-
-
-
 
 function LinearXAxis() {
   var axis = {};
@@ -140,10 +154,13 @@ function LinearXAxis() {
     }
   }
 
-  axis.transform_val = function(value) {
+
+  axis.scale = function(value) {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
   }
+
+  axis.transform_val = axis.scale;
 
   axis.transform = function(value) {
     return (axis.transform_val(value[variable_]));
@@ -166,6 +183,72 @@ function LinearXAxis() {
 
   return axis;
 }
+
+function RadiusAxis() {
+  var axis = {};
+  
+  var variable_;
+  var scale_  = d3.scale.sqrt();
+  var width_  = 0;
+  var height_ = 0;
+  var canvas_;
+  var value_ = d3.functor(5); // maybe move this into a generic empty function
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      if (variable === undefined || variable.length == 0){
+        value_ = d3.functor(1);
+        scale_.range([0, 5]);
+      } else {
+        value_ = function(d) {return Number(d[variable_]);};
+        scale_.range([0, 20]);
+      }
+      return this;
+    }
+  }
+
+  axis.value = function(){
+    return value_;
+  }
+
+  axis.domain = function(data) {
+    scale_.domain([0, d3.max(data, value_)]);
+    return this;
+  }
+
+  axis.width = function() {
+    return width_;
+  }
+
+  axis.height = function() {
+    return height_;
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.scale = scale_;
+
+  axis.transform = function(d) {
+    //console.log(d, value_(d));
+    return scale_(value_(d));
+  }
+
+  axis.draw = function() {
+  }
+  
+  return axis;
+}
+
 
 function ColourAxis() {
   var axis = {};
