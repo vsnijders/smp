@@ -82,7 +82,6 @@ function Cntrl(table, node) {
     graphs_[graph_]
        .data(data)
        .selection(selection_)
-       .values(values_)
        .canvas(canvas).draw();
   }
 

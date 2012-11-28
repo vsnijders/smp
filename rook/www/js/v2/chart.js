@@ -46,24 +46,11 @@ function Chart() {
         var variable = selection.column[0];
         values_.column = function(d){return d[variable];};
       }
-
-      // sets value accessors, to be overridden in subclasses
-      this.setValues(selection, values_);
-
       return this;
     }
   }
 
-  chart.setValues = function(selection, values_){
-    throw "setValues(selection, values_) needs to be implemented on subclass";
-  }
-
-  chart.values = function() {
-    return values_;
-  }
-
-
-  //TODO remove, but of overkill
+  //TODO remove, may be overkill
   chart.canvas = function(canvas) {
     if (!arguments.length) {
       return canvas_;
@@ -74,8 +61,7 @@ function Chart() {
   }
 
   chart.is_valid = function(selection) {
-    return (selection.x !== undefined && selection.x.length > 0 &&
-      selection.y !== undefined && selection.y.length > 0);
+    throw "'is_valid' should be implemented on charts"
   }
 
   chart.draw = function() {
@@ -163,6 +149,7 @@ function Chart() {
       }
       y += gheight + padding;
     }
+    return this;
   }
 
   return chart;

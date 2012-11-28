@@ -175,7 +175,7 @@ function ColourAxis() {
   var width_  = 0;
   var height_ = 0;
   var canvas_;
-  var value_;
+  var value_ = d3.functor("<empty>"); // maybe move this into a generic empty function
 
   axis.variable = function(variable) {
     if (!arguments.length) {
@@ -213,9 +213,8 @@ function ColourAxis() {
     }
   }
 
-  axis.transform = function(value) {
-    if (variable_ === undefined) return ('steelblue');
-    return(scale_(value[variable_]));
+  axis.transform = function(d) {
+    return scale_(value_(d));
   }
 
   axis.draw = function() {

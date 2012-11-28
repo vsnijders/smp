@@ -39,10 +39,8 @@ function Linechart() {
 
     // may be these can be removed
     selection_ = this.selection();
-    values_ = this.values();
-    //
 
-    nesting.key(values_.colour);
+    nesting.key(axes.colour.value());
     nested_data = nesting.map(data);
 
     //grid

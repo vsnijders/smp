@@ -82,7 +82,6 @@ function Cntrl(table, node) {
     graphs_[graph_]
        .data(data)
        .selection(selection_)
-       .values(values_)
        .canvas(canvas).draw();
   }
 
@@ -934,22 +933,9 @@ function ColourAxis() {
         var variable = selection.column[0];
         values_.column = function(d){return d[variable];};
       }
-
-      // sets value accessors, to be overridden in subclasses
-      this.setValues(selection, values_);
-
       return this;
     }
   }
-
-  chart.setValues = function(selection, values_){
-    throw "setValues(selection, values_) needs to be implemented on subclass";
-  }
-
-  chart.values = function() {
-    return values_;
-  }
-
 
   //TODO remove, but of overkill
   chart.canvas = function(canvas) {
@@ -1051,6 +1037,7 @@ function ColourAxis() {
       }
       y += gheight + padding;
     }
+    return this;
   }
 
   return chart;

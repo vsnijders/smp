@@ -34,13 +34,16 @@
     <link type="text/css" href="css/visualise.css" rel="stylesheet" />
 
     <!-- ======================== SCRIPTING ========================== -->
-    <script type="text/javascript" src="js/smp.js"></script>
     <script type="text/javascript" src="js/R.js"></script>
-    
-    <!-- debugging -->
+
+    <
+    <script type="text/javascript" src="js/smp.js"></script>
+    <!-- debugging  smp.js -->
+    <script type="text/javascript" src="js/v2/cntrl.js"></script>
     <script type="text/javascript" src="js/v2/axis.js"></script>
     <script type="text/javascript" src="js/v2/chart.js"></script>
     <script type="text/javascript" src="js/v2/linechart.js"></script>
+    <!-- end debugging -->
 
     <script type="text/javascript">
       //TODO move to seperate script
@@ -50,6 +53,7 @@
         
         window.cntrl = Cntrl(table, $('#graph'));
         cntrl.add_graph('line', Linechart());
+
         //cntrl.add_graph('bar',  Barchart());
 
         // Load meta data
