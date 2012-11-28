@@ -45,6 +45,10 @@ function Mosaicchart() {
     /*
     grid???
     */
+
+    var x_scale = d3.scale.linear();
+    var y_scale = d3.scale.linear();
+
     var x_var = axes.x.variable();
 
     var xfractions = d3.nest()

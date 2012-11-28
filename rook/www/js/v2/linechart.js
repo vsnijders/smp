@@ -55,15 +55,24 @@ function Linechart() {
   function show_crosshair(points){
     points
       .on("mouseover", function(d){
-        var crosshair = d3.selectAll("g.crosshair");
-        crosshair.selectAll("line").each(function(l, i){
-        });
-        crosshair.style("visibility", "visible");
+        d3.selectAll("line.vline")
+          .attr("x1", axes.x.transform(d))
+          .attr("x2", axes.x.transform(d))
+          ;
+
+        d3.selectAll("line.hline")
+          .attr("y1", axes.y.transform(d))
+          .attr("y2", axes.y.transform(d))
+          ;
+
+        d3.selectAll("g.crosshair")
+          .style("visibility", "visible");
       })
       .on("mouseout", function(d){
         d3.selectAll("g.crosshair")
           .style("visibility", "hidden");
       })
+      return points;
   }
 
 
@@ -94,18 +103,23 @@ function Linechart() {
     var crosshair = g.append("g")
                      .attr('class', 'crosshair')
                      .style("visibility", "hidden")
+                     .style("stroke-width", 0.5)
+                     .style("stroke", "black")
+                     .style("stroke-dasharray", "3 3")
                      ;
 
     crosshair.append("line")
+      .attr("class", "vline")
       .attr("x1", 0)
       .attr("x2", 0)
       .attr("y1", 0)
-      .attr("y2", 0)
+      .attr("y2", axes.y.height())
       ;
 
     crosshair.append("line")
+      .attr("class", "hline")
       .attr("x1", 0)
-      .attr("x2", 0)
+      .attr("x2", axes.x.width())
       .attr("y1", 0)
       .attr("y2", 0)
       ;
@@ -144,6 +158,7 @@ function Linechart() {
           .attr('cy', axes.y.transform)
           .attr('r', 3)
           .attr('fill', axes.colour.transform)
+          .call(show_crosshair)
           ;
       })
       .call(highlightLine)
