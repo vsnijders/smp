@@ -192,7 +192,7 @@ function ColourAxis() {
   }
 
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, value);
+    scale_.domain(d3.map(data, value));
     return(this);
   }
 

@@ -5,8 +5,10 @@ function Cntrl(table, node) {
   var graph_;
   var graphs_    = {};
   var selection_ = {};
-  var filter_    = {};
+
+  // values_ is an object with corrosponding functions to retrieve data
   var values_    = {};
+  var filter_    = {};
   var width_     = 400;
   var height_    = 400;
   var meta_;
@@ -77,23 +79,17 @@ function Cntrl(table, node) {
         height: height_
       });
 
-    graphs_[graph_].data(data).selection(selection_)
-      .canvas(canvas).draw();
+    graphs_[graph_]
+       .data(data)
+       .selection(selection_)
+       .values(values_)
+       .canvas(canvas).draw();
   }
 
   cntrl.redraw = function() {
     if (is_valid()) {
       R.fetch(table_, selection_, filter_)
        .success(draw);
-      
-      /*
-      var query = {
-        'table' : table_,
-        'selection' : JSON.stringify(selection_),
-        'filter' : JSON.stringify(filter_)
-      };
-      jQuery.getJSON('r/fetch.r', query, draw);
-      */
     }
     return this;
   }
@@ -104,22 +100,9 @@ function Cntrl(table, node) {
     if (!arguments.length) {
       return selection_;
     } else {
-      selection_ = selection;
-      
-      //update values...
-      values_ = { colour: d3.functor("steelblue")
-                };
-
-      $.each(selection, function(axis, variable){
-        values_[axis] = function(d) {return d[variable];}
-      })
-
+      selection_ = selection;      
       return this;
     }
-  }
-
-  cntrl.values = function(){
-    return values_;
   }
 
   cntrl.filter = function(filter) {
@@ -689,18 +672,24 @@ function LinearYAxis() {
   var canvas_;
   var labels_;
   var label_range_;
+  var value_;
 
   axis.variable = function(variable) {
     if (!arguments.length) {
       return variable_;
     } else {
       variable_ = variable;
+      value_ = function(d) { return Number(d[variable_]);};
       return this;
     }
   }
 
+  axis.value = function(){
+    return value_;
+  }
+
   axis.domain = function(data) {
-    range_ = d3.extent(data, function(d) { return Number(d[variable_]);});
+    range_ = d3.extent(data, value_);
     return(this);
   }
 
@@ -734,8 +723,8 @@ function LinearYAxis() {
     return(res);
   }
 
-  axis.transform = function(value) {
-    return(axis.transform_val(value[variable_]));
+  axis.transform = function(d) {
+    return(axis.transform_val(d[variable_]));
   }
 
   axis.ticks = function() {
@@ -770,17 +759,24 @@ function LinearXAxis() {
   var labels_;
   var label_range_;
 
+  var value_;
+
   axis.variable = function(variable) {
     if (!arguments.length) {
       return variable_;
     } else {
       variable_ = variable;
+      value_ = function(d) { return Number(d[variable_]);};
       return this;
     }
   }
 
+  axis.value = function(){
+    return value_;
+  }
+
   axis.domain = function(data) {
-    range_ = d3.extent(data, function(d) { return d[variable_];});
+    range_ = d3.extent(data, value_);
     return(this);
   }
 
@@ -832,7 +828,6 @@ function LinearXAxis() {
       .attr('text-anchor', 'middle').text(function(d) { return (d);});
   }
 
-
   return axis;
 }
 
@@ -844,18 +839,24 @@ function ColourAxis() {
   var width_  = 0;
   var height_ = 0;
   var canvas_;
+  var value_;
 
   axis.variable = function(variable) {
     if (!arguments.length) {
       return variable_;
     } else {
       variable_ = variable;
+      value_ = function(d) {return d[variable_];};
       return this;
     }
   }
 
+  axis.value = function(){
+    return value_;
+  }
+
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, function(d) { return d[variabele_];}));
+    scale_.domain(d3.map(data, value));
     return(this);
   }
 
@@ -883,18 +884,14 @@ function ColourAxis() {
 
   axis.draw = function() {
   }
-
-
+  
   return axis;
-}
-
-
-
-function Chart() {
+}function Chart() {
   var chart = {};
 
   var data_;
   var selection_;
+  var values_;
 
   var canvas_;
 
@@ -917,16 +914,42 @@ function Chart() {
     }
   }
 
-  //TODO remove since selection is freely available at cntrl.selection
   chart.selection = function(selection) {
     if (!arguments.length) {
       return selection_;
     } else {
       selection_ = selection;
-            
+
+      values_ = { row: d3.functor("<empty>"),
+                  column: d3.functor("<empty>"),
+                  colour: d3.functor("steelblue")
+                };
+
+      if (selection.row !== undefined && selection.row.length){
+        var variable = selection.row[0];
+        values_.row = function(d){return d[variable];};
+      }
+
+      if (selection.column !== undefined && selection.column.length){
+        var variable = selection.column[0];
+        values_.column = function(d){return d[variable];};
+      }
+
+      // sets value accessors, to be overridden in subclasses
+      this.setValues(selection, values_);
+
       return this;
     }
   }
+
+  chart.setValues = function(selection, values_){
+    throw "setValues(selection, values_) needs to be implemented on subclass";
+  }
+
+  chart.values = function() {
+    return values_;
+  }
+
 
   //TODO remove, but of overkill
   chart.canvas = function(canvas) {
@@ -945,6 +968,7 @@ function Chart() {
 
   chart.draw = function() {
     console.log("Drawing chart");
+
     //initialize axes with data and selection
     var xheight = axes.x.variable(selection_.x).domain(data_).height();
     var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
@@ -952,11 +976,10 @@ function Chart() {
     var width   = canvas_.attr('width');
     var height  = canvas_.attr('height');
     
-    var gwidth  = width - ywidth;
-    var gheight = height - xheight;
-    
-    var g = canvas_.append('g').attr('class', 'chart')
-      .attr('transform', 'translate(' + ywidth + ',0)');
+    var g = canvas_.append('g')
+      .attr('class', 'chart')
+      .attr('transform', 'translate(' + ywidth + ',0)')
+      ;
 
     // Setting of colour domain should probably occur in draw1, as this has 
     // nothing to do with small multiples. However, we need to calculate the
@@ -1037,32 +1060,48 @@ function Chart() {
   
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
+  var selection_;
+  var values_;
 
+  
   chart.is_valid = function(selection) {
     return (selection.x !== undefined && selection.x.length > 0 &&
       selection.y !== undefined && selection.y.length > 0);
   }
 
-  // initializes axes
-  chart.setDomain = function(data){
+  chart.setValues = function(selection, values){
+    selection_ = selection;
+    values_ = values;
+    // assume x and y are correctly set
+    
+    var selx = selection.x[0];
+    values.x = function(d) {return Number(d[selx]);}
 
+    var sely = selection.y[0];
+    values.y = function(d) {return Number(d[sely]);}
+
+    if (selection.colour !== undefined && selection.colour.length){
+        var selcolour = selection.colour[0];
+        values.colour = function(d){return d[selcolour];};
+    }
+  }
+
+  // initializes axes
+  chart.setDomains = function(data){
   }
 
   chart.subdraw = function(data, g) {
     var nesting = d3.nest();
 
+    // may be these can be removed
     selection_ = this.selection();
+    values_ = this.values();
+    //
 
-    if (selection_.colour !== undefined && selection_.colour.length) {
-      nesting.key(function(d) { return d[selection_.colour];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
+    nesting.key(values_.colour);
     nested_data = nesting.map(data);
 
-    var line = d3.svg.line()
-      .x(axes.x.transform)
-      .y(axes.y.transform);
+    //grid
 
     g.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
@@ -1078,16 +1117,22 @@ function Chart() {
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
 
+
+    // the data!!!
+    var line = d3.svg.line()
+      .x(axes.x.transform)
+      .y(axes.y.transform);
+
     for (d in nested_data) {
       var colour = axes.colour.transform(nested_data[d][1]);
       g.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
     }
+
     g.selectAll('circle').data(data).enter().append('circle')
       .attr('cx', axes.x.transform)
       .attr('cy', axes.y.transform)
       .attr('r', 2)
       .attr('fill', axes.colour.transform);
-    
   }
 
   return chart;
