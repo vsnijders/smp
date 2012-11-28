@@ -44,6 +44,7 @@
     <script type="text/javascript" src="js/v2/chart.js"></script>
     <script type="text/javascript" src="js/v2/linechart.js"></script>
     <script type="text/javascript" src="js/v2/scatterchart.js"></script>
+    <script type="text/javascript" src="js/v2/mosaicchart.js"></script>
     <!-- end debugging -->
 
     <script type="text/javascript">
@@ -55,6 +56,7 @@
         window.cntrl = Cntrl(table, $('#graph'));
         cntrl.add_graph('line', Linechart());
         cntrl.add_graph('scatter', Scatterchart());
+        cntrl.add_graph('mosaic', Mosaicchart());
 
         //cntrl.add_graph('bar',  Barchart());
 
@@ -123,7 +125,7 @@
 
         <div class="tab-pane" id="scatter">
           <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable numeric"></ul>
+            <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical"></ul>
           </div>
           <div class="plotvariable">
             <h3>y</h3> <ul data-dimension="y" class="droppable numeric"></ul>

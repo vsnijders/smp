@@ -75,6 +75,8 @@ function LinearYAxis() {
     return(res);
   }
 
+  axis.scale = axis.transform_val;
+
   axis.transform = function(d) {
     return(axis.transform_val(d[variable_]));
   }

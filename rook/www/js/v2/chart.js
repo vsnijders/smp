@@ -68,9 +68,6 @@ function Chart() {
     this.initAxes(selection_);
     this.setDomains(data_);
 
-    //initialize axes with data and selection
-//    var xheight = axes.x.variable(selection_.x).domain(data_).height();
-//    var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
     var xheight = axes.x.height();
     var ywidth  = axes.y.width()
     
@@ -89,6 +86,7 @@ function Chart() {
     
     //TODO use meta data in stead of nesting the data itself
     var nested_data = nesting.map(data_);
+    
     var rows     = d3.keys(nested_data);
     var nrow     = rows.length;
     var columns  = d3.keys(nested_data[rows[0]]);
@@ -108,7 +106,7 @@ function Chart() {
 
       // y axis draw
       var g = canvas_.append('g')
-                     .attr('class', 'chart')
+                     .attr('class', 'axis y')
                      .attr('transform', 'translate(' + x + ',' + y + ')')
                      ;
 
@@ -119,7 +117,7 @@ function Chart() {
       for (var j = 0; j < columns.length; ++j) {
           var column = columns[j];
           var g = canvas_.append('g')
-                       .attr('class', 'chart')
+                       .attr('class', 'data')
                        .attr('transform', 'translate('+ x + ',' + y + ')')
                        ;
           
@@ -127,7 +125,7 @@ function Chart() {
 
           if (i == (rows.length - 1)) {
             var g = canvas_.append('g')
-                           .attr('class', 'chart')
+                           .attr('class', 'axis x')
                            .attr('transform', 'translate(' + x + ',' + (y + gheight) + ')')
                            ;
             axes.x.canvas(g).draw() 
