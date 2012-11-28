@@ -52,6 +52,20 @@ function Linechart() {
       return lines;
   }
 
+  function show_crosshair(points){
+    points
+      .on("mouseover", function(d){
+        var crosshair = d3.selectAll("g.crosshair");
+        crosshair.selectAll("line").each(function(l, i){
+        });
+        crosshair.style("visibility", "visible");
+      })
+      .on("mouseout", function(d){
+        d3.selectAll("g.crosshair")
+          .style("visibility", "hidden");
+      })
+  }
+
 
   chart.subdraw = function(data, g) {
     
@@ -74,6 +88,27 @@ function Linechart() {
       .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
+
+
+    // crosshair
+    var crosshair = g.append("g")
+                     .attr('class', 'crosshair')
+                     .style("visibility", "hidden")
+                     ;
+
+    crosshair.append("line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", 0)
+      ;
+
+    crosshair.append("line")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", 0)
+      ;
 
 
     var groupBy = d3.nest()
