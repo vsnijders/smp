@@ -27,3 +27,6 @@ get_table <- function(table_name, data=TRUE, meta=TRUE) {
   return(list(data=data, meta=meta))
 } 
 
+get_meta <- function(table_name){
+  get_table(table_name, data=FALSE, meta=TRUE)$meta
+}

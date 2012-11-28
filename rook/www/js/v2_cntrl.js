@@ -5,10 +5,14 @@ function Cntrl(table, node) {
   var graph_;
   var graphs_    = {};
   var selection_ = {};
+
+  // values_ is an object with corrosponding functions to retrieve data
+  var values_    = {};
   var filter_    = {};
-  // TODO add methods to set width and height
   var width_     = 400;
   var height_    = 400;
+  var meta_;
+  var menu_ = new Menu();
 
   // ==== create the cntrl object ====
   var cntrl = {};
@@ -22,11 +26,36 @@ function Cntrl(table, node) {
     return this;
   }
 
+  cntrl.meta = function(){
+    return meta_;
+  }
+
+  cntrl.get_meta = function(){
+    R.get_meta(table_)
+     .success(function(meta){
+        meta_ = meta;
+        menu_.render(meta);
+     });
+    //update stuff?
+    return this;
+  }
+
   cntrl.graph = function(name) {
     if (!arguments.length) {
       return graph_;
     } else {
       graph_ = name;
+      return this;
+    }
+  }
+
+  // ==== size ====
+  cntrl.size = function(width, height) {
+    if (!arguments.length) {
+      return [width_, height_];
+    } else {
+      width_ = width;
+      height_ = height;
       return this;
     }
   }
@@ -41,22 +70,26 @@ function Cntrl(table, node) {
   }
 
   draw = function(data) {
-    node_ = $("#graph"); // TODO
-    node_.html();
-    var canvas = node_.append('svg').attr('class', 'chart')
-      .attr('width', width_, 'height', height_);
-    graphs_[graph_].data(data).selection(selection_)
-      .canvas(canvas).draw();
+    node_ = d3.select("#graph"); //TODO
+    node_.html("");
+    
+    var canvas = node_.append('svg').attr(
+      {'class':'chart', 
+        width : width_, 
+        height: height_
+      });
+
+    graphs_[graph_]
+       .data(data)
+       .selection(selection_)
+       .values(values_)
+       .canvas(canvas).draw();
   }
 
   cntrl.redraw = function() {
     if (is_valid()) {
-      var query = {
-        'table' : table_,
-        'selection' : JSON.stringify(selection_),
-        'filter' : JSON.stringify(filter_)
-      };
-      jQuery.getJSON('r/fetch.r', query, draw);
+      R.fetch(table_, selection_, filter_)
+       .success(draw);
     }
     return this;
   }
@@ -67,7 +100,7 @@ function Cntrl(table, node) {
     if (!arguments.length) {
       return selection_;
     } else {
-      selection_ = selection;
+      selection_ = selection;      
       return this;
     }
   }

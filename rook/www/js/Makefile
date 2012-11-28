@@ -1,0 +1,16 @@
+JS = v2_cntrl.js \
+     v2_menu.js \
+     labeling.js \
+     v2_axis.js \
+     v2_chart.js \
+     v2_linechart.js \
+     v2_barchart.js
+
+all: smp.js
+
+smp.js: $(JS)
+	rm -f $@
+	cat $(JS) > $@
+
+clean: 
+	rm -f smp.js
