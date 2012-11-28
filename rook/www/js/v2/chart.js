@@ -1,4 +1,5 @@
-function Chart() {
+function Chart(axes) {
+  
   var chart = {};
 
   var empty_ = function(d) {return "<empty>";};
@@ -12,8 +13,7 @@ function Chart() {
 
   var canvas_;
 
-  // hack 
-  var axes = chart.axes = {
+  var axes = chart.axes = axes || {
     'x' : LinearXAxis(),
     'y' : LinearYAxis(),
     'colour' : ColourAxis()
