@@ -276,6 +276,8 @@ function ColourAxis() {
     }
   }
 
+  axis.scale = scale_;
+
   axis.value = function(){
     return value_;
   }

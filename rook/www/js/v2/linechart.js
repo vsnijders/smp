@@ -30,17 +30,34 @@ function Linechart() {
     axes.colour.domain(data);
   }
 
+
+    function highlightLine(lines){
+      lines
+         .on("mouseover", function(d){
+               d3.selectAll("g.color")
+                  .style("stroke-width", function(d1) {return (d1.key != d.key)? 1: 2;})
+                  .filter(function(d1) {return (d1.key != d.key)})
+                  .style("stroke-opacity", 0.2)
+                  .style("fill-opacity", 0.2)
+                  ;
+            })
+         .on("mouseout", function(d){
+               d3.select(this).style("stroke-width", 1);
+               d3.selectAll("g.color")
+                  .style("stroke-opacity", 1)
+                  .style("fill-opacity", 0.5)
+                  ;
+           })
+         ;
+      return lines;
+  }
+
+
   chart.subdraw = function(data, g) {
     
     // may be these can be removed
     selection_ = this.selection();
     
-    var groupBy = d3.nest()
-      .key(axes.colour.value())
-      ;
-
-    byColor_data = groupBy.map(data);
-
     //grid
     var grid = g.append("g").attr('class', 'grid');
 
@@ -59,6 +76,12 @@ function Linechart() {
       .attr('stroke', '#FFFFFF');
 
 
+    var groupBy = d3.nest()
+      .key(axes.colour.value())
+      ;
+
+    byColor_data = groupBy.entries(data);
+
     // the data!!!
     var g_data = g.append("g").attr('class', 'data');
     
@@ -66,21 +89,31 @@ function Linechart() {
       .x(axes.x.transform)
       .y(axes.y.transform);
 
-    for (d in byColor_data) {
-      var colour = axes.colour.transform(byColor_data[d][1]);
-      g_data.append("svg:path")
-         .attr("d", line(byColor_data[d]))
-         .attr('stroke', colour)
-         .attr('fill', 'none')
+    g_data.selectAll("g.color").data(byColor_data).enter()
+      .append("g")
+      .attr("class", "color")
+      .style("stroke-width", 1)
+      .style("stroke","white")
+      .style("stroke-opacity", 1)
+      .style("fill-opacity", 0.5)
+      .each(function(d,i){
+        var gcolor = d3.select(this);
+        gcolor.append("path")
+         .attr("d", line(d.values))
+         .attr("stroke", axes.colour.scale(d.key))
+         .attr("fill", "none")
          ;
-    }
 
-    g_data.selectAll('circle').data(data).enter().append('circle')
-      .attr('cx', axes.x.transform)
-      .attr('cy', axes.y.transform)
-      .attr('r', 2)
-      .attr('fill', axes.colour.transform)
+        gcolor.selectAll('circle').data(d.values).enter().append('circle')
+          .attr('cx', axes.x.transform)
+          .attr('cy', axes.y.transform)
+          .attr('r', 3)
+          .attr('fill', axes.colour.transform)
+          ;
+      })
+      .call(highlightLine)
       ;
+
   }
 
   return chart;
