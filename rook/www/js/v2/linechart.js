@@ -31,13 +31,15 @@ function Linechart() {
   }
 
   chart.subdraw = function(data, g) {
-    var nesting = d3.nest();
-
+    
     // may be these can be removed
     selection_ = this.selection();
     
-    nesting.key(axes.colour.value());
-    nested_data = nesting.map(data);
+    var groupBy = d3.nest()
+      .key(axes.colour.value())
+      ;
+
+    byColor_data = groupBy.map(data);
 
     //grid
     var grid = g.append("g").attr('class', 'grid');
@@ -59,21 +61,26 @@ function Linechart() {
 
     // the data!!!
     var g_data = g.append("g").attr('class', 'data');
+    
     var line = d3.svg.line()
       .x(axes.x.transform)
       .y(axes.y.transform);
 
-
-    for (d in nested_data) {
-      var colour = axes.colour.transform(nested_data[d][1]);
-      g_data.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
+    for (d in byColor_data) {
+      var colour = axes.colour.transform(byColor_data[d][1]);
+      g_data.append("svg:path")
+         .attr("d", line(byColor_data[d]))
+         .attr('stroke', colour)
+         .attr('fill', 'none')
+         ;
     }
 
     g_data.selectAll('circle').data(data).enter().append('circle')
       .attr('cx', axes.x.transform)
       .attr('cy', axes.y.transform)
       .attr('r', 2)
-      .attr('fill', axes.colour.transform);
+      .attr('fill', axes.colour.transform)
+      ;
   }
 
   return chart;
