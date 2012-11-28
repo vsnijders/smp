@@ -182,7 +182,11 @@ function ColourAxis() {
       return variable_;
     } else {
       variable_ = variable;
-      value_ = function(d) {return d[variable_];};
+      if (variable === undefined || variable.length == 0){
+        value_ = d3.functor("<empty>");
+      } else {
+        value_ = function(d) {return d[variable_];};
+      }
       return this;
     }
   }
@@ -192,7 +196,7 @@ function ColourAxis() {
   }
 
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, value));
+    scale_.domain(d3.map(data, value_));
     return(this);
   }
 

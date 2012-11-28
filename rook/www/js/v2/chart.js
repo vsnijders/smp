@@ -1,9 +1,14 @@
 function Chart() {
   var chart = {};
 
+  var empty_ = function(d) {return "<empty>";};
+
   var data_;
   var selection_;
-  var values_;
+
+  //function to be used for small multiples
+  var row_key_;
+  var column_key_;
 
   var canvas_;
 
@@ -32,19 +37,16 @@ function Chart() {
     } else {
       selection_ = selection;
 
-      values_ = { row: d3.functor("<empty>"),
-                  column: d3.functor("<empty>"),
-                  colour: d3.functor("steelblue")
-                };
+      row_key_ = empty_;
+      column_key_ = empty_;
 
       if (selection.row !== undefined && selection.row.length){
-        var variable = selection.row[0];
-        values_.row = function(d){return d[variable];};
+        row_key_ = function(d) { return d[selection_.row];};
       }
 
       if (selection.column !== undefined && selection.column.length){
-        var variable = selection.column[0];
-        values_.column = function(d){return d[variable];};
+        var column_sel = selection.column[0];
+        column_key_ = function(d) { return d[selection_.column];};
       }
       return this;
     }
@@ -60,16 +62,17 @@ function Chart() {
     }
   }
 
-  chart.is_valid = function(selection) {
-    throw "'is_valid' should be implemented on charts"
-  }
-
   chart.draw = function() {
     console.log("Drawing chart");
 
+    this.initAxes(selection_);
+    this.setDomains(data_);
+
     //initialize axes with data and selection
-    var xheight = axes.x.variable(selection_.x).domain(data_).height();
-    var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
+//    var xheight = axes.x.variable(selection_.x).domain(data_).height();
+//    var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
+    var xheight = axes.x.height();
+    var ywidth  = axes.y.width()
     
     var width   = canvas_.attr('width');
     var height  = canvas_.attr('height');
@@ -79,26 +82,10 @@ function Chart() {
       .attr('transform', 'translate(' + ywidth + ',0)')
       ;
 
-    // Setting of colour domain should probably occur in draw1, as this has 
-    // nothing to do with small multiples. However, we need to calculate the
-    // domain using the full data set. Perhaps we can avoid this if we use the
-    // levels from the meta information on the data.
-    if (selection_.colour !== undefined && selection_.colour.length) {
-      axes.colour.variable(selection_.colour).domain(data_);
-    }
-
-    var nesting = d3.nest();
-
-    if (selection_.row !== undefined && selection_.row.length) {
-      nesting.key(function(d) { return d[selection_.row];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
-    if (selection_.column !== undefined && selection_.column.length) {
-      nesting.key(function(d) { return d[selection_.column];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
+    var nesting = d3.nest()
+      .key(row_key_)
+      .key(column_key_)
+      ;    
     
     //TODO use meta data in stead of nesting the data itself
     var nested_data = nesting.map(data_);
@@ -150,6 +137,21 @@ function Chart() {
       y += gheight + padding;
     }
     return this;
+  };
+
+  ///////////////////////////////////////////////////
+  // virtual methods, to be implemented by subclasses
+  ///////////////////////////////////////////////////
+  chart.is_valid = function(selection) {
+    throw "'is_valid' should be implemented on charts"
+  }
+
+  chart.subdraw = function(selection) {
+    throw "'subdraw' should be implemented on charts"
+  }
+
+  chart.initAxes = function(selection) {
+    throw "'initAxes' should be implemented on charts"
   }
 
   return chart;

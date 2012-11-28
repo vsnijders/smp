@@ -30,8 +30,21 @@ function Linechart() {
     }
   }
 
-  // initializes axes
+  chart.initAxes = function(selection){
+    // may be split creating axes with setting selection on it
+    axes.x = LinearXAxis()
+       .variable(selection.x);
+    axes.y = LinearYAxis()
+       .variable(selection.y);
+    axes.colour = ColourAxis()
+       .variable(selection.colour);
+  }
+
+  //sets the axes to the right domains, 
   chart.setDomains = function(data){
+    axes.x.domain(data);
+    axes.y.domain(data);
+    axes.colour.domain(data);
   }
 
   chart.subdraw = function(data, g) {
