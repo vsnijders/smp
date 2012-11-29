@@ -76,7 +76,7 @@ function Linechart() {
   }
 
 
-  chart.subdraw = function(data, g) {
+  chart.draw_data = function(data, g) {
     
     // may be these can be removed
     selection_ = this.selection();

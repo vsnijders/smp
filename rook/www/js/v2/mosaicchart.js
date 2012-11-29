@@ -40,7 +40,7 @@ function Mosaicchart() {
     axes.colour.domain(data);
   }
 
-  chart.subdraw = function(data, g) {
+  chart.draw_data = function(data, g) {
 
     /*
     grid???

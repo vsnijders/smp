@@ -34,7 +34,7 @@ function Scatterchart() {
     axes.colour.domain(data);
   }
 
-  chart.subdraw = function(data, g) {
+  chart.draw_data = function(data, g) {
     var nesting = d3.nest();
 
     // may be these can be removed

@@ -4,6 +4,8 @@ JS = cntrl.js \
      axis.js \
      chart.js \
      linechart.js \
+     scatterchart.js \
+     mosaicchart.js \
      barchart.js
 
 all: ../smp.js

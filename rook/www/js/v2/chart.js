@@ -1,9 +1,7 @@
-function Chart(axes) {
-  
+function Chart(options) {
   var chart = {};
 
   var empty_ = function(d) {return "<empty>";};
-
   var data_;
   var selection_;
 
@@ -13,12 +11,19 @@ function Chart(axes) {
 
   var canvas_;
 
-  var axes = chart.axes = axes || {
+  /////////////////////
+  // initialize options
+  var options = options || {};
+
+  var axes = chart.axes = options.axes || {
     'x' : LinearXAxis(),
     'y' : LinearYAxis(),
     'colour' : ColourAxis()
   };
 
+  var required_ = options.required || [];
+
+  ////////////////////////
 
   //var empty = chart.empty = function(){return "<empty>";};
 
@@ -121,7 +126,7 @@ function Chart(axes) {
                        .attr('transform', 'translate('+ x + ',' + y + ')')
                        ;
           
-          this.subdraw(nested_data[row][column], g);
+          this.draw_data(nested_data[row][column], g);
 
           if (i == (rows.length - 1)) {
             var g = canvas_.append('g')
@@ -137,15 +142,22 @@ function Chart(axes) {
     return this;
   };
 
+  chart.is_valid = function(selection) {
+    for (var i = 0; i < required_.length; i++){
+      var v = required_[i];
+      if (selection[v] === undefined || selection[v].length == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
-  chart.is_valid = function(selection) {
-    throw "'is_valid' should be implemented on charts"
-  }
 
-  chart.subdraw = function(selection) {
-    throw "'subdraw' should be implemented on charts"
+  chart.draw_data = function(selection) {
+    throw "'draw_data' should be implemented on charts"
   }
 
   chart.initAxes = function(selection) {
