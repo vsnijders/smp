@@ -3,51 +3,30 @@
 function Mosaicchart() {
   
   // use basic functionality
-  var chart = Chart();
+  var chart = Chart({
+    axes: { x: LinearXAxis(),
+            y: LinearYAxis(),
+            colour: ColourAxis(),
+            size : LinearXAxis()
+          },
+    required: ["x", "y", "size"]
+  });
   
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
   var selection_;
 
-  
-  chart.is_valid = function(selection) {
-    return (  selection.x !== undefined && selection.x.length > 0 
-           && selection.y !== undefined && selection.y.length > 0
-           && selection.size !== undefined && selection.size.length > 0
-           );
-  }
-
-  chart.initAxes = function(selection){
-    // may be split creating axes with setting selection on it
-    axes.x = LinearXAxis()
-       .variable(selection.x);
-    axes.y = LinearYAxis()
-       .variable(selection.y);
-
-    // TODO replace next axes with a sensible one
-    axes.size = RadiusAxis()
-       .variable(selection.size);
-
-    axes.colour = ColourAxis()
-       .variable(selection.colour);
-  }
-
-  //sets the axes to the right domains, 
-  chart.setDomains = function(data){
-    axes.x.domain(data);
-    axes.y.domain(data);
-    axes.size.domain(data);
-    axes.colour.domain(data);
-  }
-
   chart.draw_data = function(data, g) {
-
+    //TODO create Mosaic Axes
     /*
     grid???
     */
 
-    var x_scale = d3.scale.linear();
-    var y_scale = d3.scale.linear();
+    var width = axes.x.width();
+    var height = axes.y.height();
+
+    var x_scale = d3.scale.linear().range([0,width]);
+    var y_scale = d3.scale.linear().range([0,height]);
 
     var x_var = axes.x.variable();
 
@@ -78,7 +57,8 @@ function Mosaicchart() {
       .enter().append("svg:g")
         .attr("class", "xfraction")
         .attr("xlink:title", function(d) { return d.key; })
-        .attr("transform", function(d) { return "translate(" + axes.x.scale(d.offset / sum) + ")"; });
+        .attr("transform", function(d) { return "translate(" + x_scale(d.offset / sum) + ")"; });
+//        .attr("transform", function(d) { return "translate(" + axes.x.scale(d.offset / sum) + ")"; });
 
     // Add a rect for each market.
     var yfractions = xfractions.selectAll(".yfraction")
@@ -86,11 +66,13 @@ function Mosaicchart() {
       .enter().append("svg:a")
         .attr("class", "yfraction")
         .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
+//        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
       .append("svg:rect")
-        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
-        .attr("height", function(d) { return axes.y.scale(value(d) / d.parent.sum); })
-        .attr("width", function(d) { return axes.x.scale(d.parent.sum / sum); })
-        .style("fill", axes.colour.transform);
+//        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
+        .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
+        .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
+        .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
+        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));});
     }
 
   return chart;
