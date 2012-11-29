@@ -73,6 +73,23 @@ function Chart(options) {
     }
   }
 
+  //utility function for creating banded ranges
+  function bands(N, extent, padding){
+    var bandWidth = (extent[1] - extent[0] - (N-1)*padding)/N;
+    
+    var ranges = [];
+    var offset = extent[0];
+    for (var i = 0; i < N; i++){
+      ranges.push(offset)
+      offset += bandWidth + padding;
+    }
+
+    return {
+      ranges: ranges,
+      bandWidth: bandWidth
+    }
+  }
+
   chart.draw = function() {
     
     // update domains of the axes
@@ -104,18 +121,20 @@ function Chart(options) {
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    var margin = { top : 0, 
+    var margin = { top : 10, 
                    left : axes.y.width(),
-                   right : 0,
+                   right : 15,
                    bottom : axes.x.height()
                  };
 
+    var bands_y = bands(nrow, [margin.top, height - margin.bottom], 10);
     var y_cell = d3.scale.ordinal()
       .domain(rows)
-      .rangeBands([margin.top, height - margin.bottom], 0.05)
+      .range(bands_y.ranges)
       ;
 
-    axes.y.height(y_cell.rangeBand());
+    axes.y.height(bands_y.bandWidth);
+
     for (var i in rows){
       var row = rows[i];
       var g = canvas_.append('g')
@@ -125,12 +144,13 @@ function Chart(options) {
       axes.y.canvas(g).draw()
     }
     
+    var bands_x = bands(ncolumn, [margin.left, width - margin.right], 10)
     var x_cell = d3.scale.ordinal()
       .domain(columns)
-      .rangeBands([margin.left, width - margin.right], 0.05)
+      .range(bands_x.ranges)
       ;
 
-    axes.x.width(x_cell.rangeBand());
+    axes.x.width(bands_x.bandWidth);
     for (var i in columns){
       var column = columns[i];
       var g = canvas_.append('g')
