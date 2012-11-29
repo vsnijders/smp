@@ -1,37 +1,18 @@
 function Linechart() {
   // use basic functionality
-  var chart = Chart();
+  var chart = Chart({
+    axes: { x: LinearXAxis(),
+            y: LinearYAxis(),
+            colour : ColourAxis()
+          },
+    required: ["x", "y"]
+  });
   
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
   var selection_;
-  var values_;
 
-  
-  chart.is_valid = function(selection) {
-    return (selection.x !== undefined && selection.x.length > 0 &&
-      selection.y !== undefined && selection.y.length > 0);
-  }
-
-  chart.initAxes = function(selection){
-    // may be split creating axes with setting selection on it
-    axes.x = LinearXAxis()
-       .variable(selection.x);
-    axes.y = LinearYAxis()
-       .variable(selection.y);
-    axes.colour = ColourAxis()
-       .variable(selection.colour);
-  }
-
-  //sets the axes to the right domains, 
-  chart.setDomains = function(data){
-    axes.x.domain(data);
-    axes.y.domain(data);
-    axes.colour.domain(data);
-  }
-
-
-    function highlightLine(lines){
+  function highlightLine(lines){
       lines
          .on("mouseover", function(d){
                d3.selectAll("g.color")

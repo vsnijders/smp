@@ -53,6 +53,12 @@ function Chart(options) {
         var column_sel = selection.column[0];
         column_key_ = function(d) { return d[selection_.column];};
       }
+
+      // connect axes with selection
+      for (var v in axes){
+        axes[v].variable(selection[v]);
+      }
+
       return this;
     }
   }
@@ -68,10 +74,11 @@ function Chart(options) {
   }
 
   chart.draw = function() {
-    console.log("Drawing chart");
-
-    this.initAxes(selection_);
-    this.setDomains(data_);
+    
+    // update domains of the axes
+    for (var v in axes){
+      axes[v].domain(data_);
+    }
 
     var xheight = axes.x.height();
     var ywidth  = axes.y.width()
@@ -158,10 +165,6 @@ function Chart(options) {
 
   chart.draw_data = function(selection) {
     throw "'draw_data' should be implemented on charts"
-  }
-
-  chart.initAxes = function(selection) {
-    throw "'initAxes' should be implemented on charts"
   }
 
   return chart;
