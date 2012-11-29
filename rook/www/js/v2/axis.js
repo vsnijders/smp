@@ -305,7 +305,8 @@ function ColourAxis() {
   }
 
   axis.transform = function(d) {
-    return scale_(value_(d));
+    var t = scale_(value_(d));
+    return (isFinite(t)) ? t : 0;
   }
 
   axis.draw = function() {

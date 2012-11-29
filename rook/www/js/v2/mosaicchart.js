@@ -47,8 +47,7 @@ function Mosaicchart() {
       }
       , 0
       );
-    console.log(sum, xfractions);
-
+    
     var n = d3.format(",d");
 
     // Add a group for each xfractions.

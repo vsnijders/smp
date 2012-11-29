@@ -56,13 +56,8 @@ function Linechart() {
       return points;
   }
 
+  function draw_grid(g){
 
-  chart.draw_data = function(data, g) {
-    
-    // may be these can be removed
-    selection_ = this.selection();
-    
-    //grid
     var grid = g.append("g").attr('class', 'grid');
 
     grid.append('rect').attr('width', axes.x.width())
@@ -79,8 +74,7 @@ function Linechart() {
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
 
-
-    // crosshair
+        // crosshair
     var crosshair = g.append("g")
                      .attr('class', 'crosshair')
                      .style("visibility", "hidden")
@@ -104,7 +98,14 @@ function Linechart() {
       .attr("y1", 0)
       .attr("y2", 0)
       ;
+  }
 
+  chart.draw_data = function(data, g) {
+    
+    // may be these can be removed
+    selection_ = this.selection();
+    
+    draw_grid(g);
 
     var groupBy = d3.nest()
       .key(axes.colour.value())
@@ -122,15 +123,20 @@ function Linechart() {
     g_data.selectAll("g.color").data(byColor_data).enter()
       .append("g")
       .attr("class", "color")
-      .style("stroke-width", 1)
+      .style("stroke-width", 1) // put all this in CSS
       .style("stroke","white")
       .style("stroke-opacity", 1)
       .style("fill-opacity", 0.5)
       .each(function(d,i){
-        var gcolor = d3.select(this);
+        var color = axes.colour.scale(d.key);
+
+        var gcolor = d3.select(this)
+          .style("fill", color)
+          ;
+
         gcolor.append("path")
          .attr("d", line(d.values))
-         .attr("stroke", axes.colour.scale(d.key))
+         .attr("stroke", color)
          .attr("fill", "none")
          ;
 
@@ -138,7 +144,6 @@ function Linechart() {
           .attr('cx', axes.x.transform)
           .attr('cy', axes.y.transform)
           .attr('r', 3)
-          .attr('fill', axes.colour.transform)
           .call(show_crosshair)
           ;
       })
