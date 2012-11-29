@@ -98,54 +98,61 @@ function Chart(options) {
     
     //TODO use meta data in stead of nesting the data itself
     var nested_data = nesting.map(data_);
-    
+
     var rows     = d3.keys(nested_data);
     var nrow     = rows.length;
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    // can be replaced with d3.scale.ordinal.rangeBands()
-    var padding  = 5;
-    var gheight = (height - xheight - (nrow-1)*padding) / nrow;
-    var gwidth  = (width - ywidth - (ncolumn-1)*padding) / ncolumn;
-    axes.x.width(gwidth);
-    axes.y.height(gheight);
+    var margin = { top : 0, 
+                   left : axes.y.width(),
+                   right : 0,
+                   bottom : axes.x.height()
+                 };
 
-    var y = 0;
-    for (var i = 0; i < rows.length; ++i) {
+    var y_cell = d3.scale.ordinal()
+      .domain(rows)
+      .rangeBands([margin.top, height - margin.bottom], 0.05)
+      ;
+
+    axes.y.height(y_cell.rangeBand());
+    for (var i in rows){
       var row = rows[i];
-      var x = 0;
-
-      // y axis draw
       var g = canvas_.append('g')
                      .attr('class', 'axis y')
-                     .attr('transform', 'translate(' + x + ',' + y + ')')
+                     .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
                      ;
-
       axes.y.canvas(g).draw()
-      //
+    }
+    
+    var x_cell = d3.scale.ordinal()
+      .domain(columns)
+      .rangeBands([margin.left, width - margin.right], 0.05)
+      ;
 
-      x += ywidth;
-      for (var j = 0; j < columns.length; ++j) {
-          var column = columns[j];
+    axes.x.width(x_cell.rangeBand());
+    for (var i in columns){
+      var column = columns[i];
+      var g = canvas_.append('g')
+                     .attr('class', 'axis x')
+                     .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
+                     ;
+      axes.x.canvas(g).draw()
+    }
+
+    for (var r in rows){
+      var row = rows[r];
+      for (var c in columns){
+        var column = columns[c];
           var g = canvas_.append('g')
                        .attr('class', 'data')
-                       .attr('transform', 'translate('+ x + ',' + y + ')')
+                       .attr('transform', 'translate('+ x_cell(column) + ',' + y_cell(row) + ')')
                        ;
           
-          this.draw_data(nested_data[row][column], g);
-
-          if (i == (rows.length - 1)) {
-            var g = canvas_.append('g')
-                           .attr('class', 'axis x')
-                           .attr('transform', 'translate(' + x + ',' + (y + gheight) + ')')
-                           ;
-            axes.x.canvas(g).draw() 
-        }
-        x += gwidth + padding;
+          this.draw_data(nested_data[row][column], g);        
       }
-      y += gheight + padding;
     }
+
     return this;
   };
 

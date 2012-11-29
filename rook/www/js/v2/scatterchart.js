@@ -82,13 +82,14 @@ function Scatterchart() {
       .style("stroke-opacity", 1)
       .style("fill-opacity", 0.5)
       .each(function(d,i){
-        var gcolor = d3.select(this);
+        var gcolor = d3.select(this)
+          .style("fill", axes.colour.scale(d.key))
+          .attr('fill-opacity', 0.5)
+          ;
         gcolor.selectAll('circle').data(d.values).enter().append('circle')
           .attr('cx', axes.x.transform)
           .attr('cy', axes.y.transform)
           .attr('r', axes.size.transform)
-          .attr('fill', axes.colour.transform)
-          .attr('fill-opacity', 0.5)
           .call(show_crosshair)
       });
   }
