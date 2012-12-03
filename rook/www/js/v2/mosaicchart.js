@@ -9,7 +9,7 @@ function Mosaicchart() {
             colour: ColourAxis(),
             size : LinearXAxis()
           },
-    required: ["x", "y", "size"]
+    required: ["y", "size"]
   });
   
   // hack, there is no such thing as "protected" in javascript 
@@ -71,7 +71,10 @@ function Mosaicchart() {
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
-        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));});
+        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));})
+        .style("stroke-width", 2)
+        .style("stroke", "white")
+        ;
     }
 
   return chart;
