@@ -109,6 +109,8 @@ function Scatterchart() {
 
         d3.selectAll("g.crosshair")
           .style("visibility", "visible");
+
+        //chart.toText(d);
       })
       .on("mouseout", function(d){
         d3.selectAll("g.crosshair")

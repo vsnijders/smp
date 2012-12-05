@@ -12,6 +12,8 @@ function Barchart() {
   var axes = chart.axes;
 
   chart.draw_data = function(data, g) {
+    //grid
+
     g.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
 
@@ -26,6 +28,8 @@ function Barchart() {
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#000000');
 
+    //data
+
     g.selectAll('rect.bar').data(data).enter().append('rect')
       .attr('class', 'bar')
       .attr('y', function(d) {
@@ -38,7 +42,28 @@ function Barchart() {
       .attr('width', function(d) {
         return(axes.x.transform(d) - axes.x.transform_val(0));
       })
-      .attr('fill', 'steelblue');
+      .attr('fill', axes.colour.scale)
+      .call(highlightBar, axes.y.value)
+      ;
+  }
+
+  function highlightBar(bars, scale){
+    bars
+       .on("mouseover", function(d,i){
+             console.log(d,i);
+             d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
+                .style("stroke-opacity", 0.2)
+                .style("fill-opacity", 0.2)
+                ;
+          })
+       .on("mouseout", function(d){
+             d3.selectAll("rect.bar")
+               .style("stroke-opacity", 1)
+               .style("fill-opacity", 1)
+               ;
+         })
+       ;
+    return bars;
   }
 
 
@@ -72,6 +97,10 @@ function CategoricalAxis() {
     }
   }
 
+  axis.value = function(d){
+    return d[variable_];
+  }
+
   truncate_labels = function() {
     var max_width_ = 200;
     labels_ = {};
@@ -90,7 +119,7 @@ function CategoricalAxis() {
 
   axis.domain = function(data) {
     var scale  = d3.scale.ordinal();
-    var values = data.map(function(d) { return d[variable_];});
+    var values = data.map(axis.value);
     scale.domain(values);
     levels_ = scale.domain();
     truncate_labels();
@@ -142,8 +171,8 @@ function CategoricalAxis() {
     return(levels_);
   }
 
-  axis.transform = function(value) {
-    return (axis.transform_val(value[variable_]));
+  axis.transform = function(d) {
+    return (axis.transform_val(axis.value(d)));
   }
 
   axis.draw = function() {
@@ -175,7 +204,7 @@ function LinearXAxis2() {
   var range_  = [undefined, undefined];
   var width_;
   var height_ = 30;
-  var canvas_;
+  var canvas_; 
   var labels_;
   var label_range_;
   var include_origin_ = false;
