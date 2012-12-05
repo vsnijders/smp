@@ -28,6 +28,7 @@ function Barchart() {
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#000000');
 
+
     //data
 
     g.selectAll('rect.bar').data(data).enter().append('rect')
@@ -45,22 +46,49 @@ function Barchart() {
       .attr('fill', axes.colour.scale)
       .call(highlightBar, axes.y.value)
       ;
+
+    // cross hair
+    var crosshair = g.append("g")
+                     .attr('class', 'crosshair')
+                     .attr("pointer-events", "none")
+                     ;
+
+    crosshair.append("line")
+      .attr("class", "vline")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", axes.y.height())
+      ;
+
   }
 
   function highlightBar(bars, scale){
     bars
        .on("mouseover", function(d,i){
-             console.log(d,i);
              d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
                 .style("stroke-opacity", 0.2)
                 .style("fill-opacity", 0.2)
                 ;
+             
+             d3.selectAll("line.vline")
+                .attr("x1", axes.x.transform(d))
+                .attr("x2", axes.x.transform(d))
+                ;
+
+             d3.selectAll("g.crosshair")
+               .style("visibility", "visible");
           })
        .on("mouseout", function(d){
+             
              d3.selectAll("rect.bar")
                .style("stroke-opacity", 1)
                .style("fill-opacity", 1)
                ;
+
+             d3.selectAll("g.crosshair")
+               .style("visibility", "hidden");
+
          })
        ;
     return bars;

@@ -69,8 +69,6 @@ function Mosaicchart() {
         .data(function(d) { return d.values; })
       .enter().append("svg:a")
         .attr("class", "yfraction")
-        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
-//        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
       .append("svg:rect")
         .style("stroke-width", 1.5)
         .style("stroke", "white")

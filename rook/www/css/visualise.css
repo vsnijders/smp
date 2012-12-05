@@ -188,3 +188,11 @@ text.label {
     vertical-align: baseline;
     white-space: nowrap;
 }
+
+g.crosshair {
+  pointer-events: none;
+  stroke: black;
+  stroke-width: 0.5;
+  stroke-dasharray: 3 3;
+  visibility: hidden;
+}
