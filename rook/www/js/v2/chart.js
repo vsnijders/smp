@@ -184,6 +184,16 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
     return true;
   }
 
+  chart.toText = function(d){
+    var text = [];
+    for (var v in selection_){
+      text.push(v + ": " + d[v]);
+    }
+    text = join(text, "\n");
+    console.log(text);
+    return text;
+  }
+
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
