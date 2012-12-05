@@ -349,6 +349,10 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   // default values
   dmin             = Number(dmin);
   dmax             = Number(dmax);
+  if (Math.abs(dmin - dmax) < 1E-10) {
+    dmin = 0.96*dmin;
+    dmax = 1.04*dmax;
+  }
   calc_label_width = calc_label_width || function() { return(0);};
   axis_width       = axis_width || 1;
   Q                = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
