@@ -661,6 +661,50 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
 }
 
 
+// basic axis functionality
+function BaseAxis(options){
+  var axis = {};
+
+  var variable_;
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.width = function(){
+    return 30;
+  }
+
+  axis.height = function(){
+    return 30;
+  }
+
+  axis.transform = function(d) {
+    return this.scale(this.value(d));
+  }
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      this.value = this.setValue(variable);
+      return this;
+    }
+  }
+
+  axis.setValue = function(variable){
+    return function(d){return Number(d[variable]);};
+  }
+
+  return axis;
+};
+
 function LinearYAxis() {
   var axis = {};
   
@@ -722,6 +766,8 @@ function LinearYAxis() {
     return(res);
   }
 
+  axis.scale = axis.transform_val;
+
   axis.transform = function(d) {
     return(axis.transform_val(d[variable_]));
   }
@@ -734,7 +780,9 @@ function LinearYAxis() {
     canvas_.selectAll("line").data(labels_).enter().append("line")
       .attr("x1", width_-5).attr("x2", width_)
       .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
-      .attr("stroke", "#000000");
+      .attr("stroke", "#000000")
+      ;
+
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return (d);});
@@ -742,10 +790,6 @@ function LinearYAxis() {
 
   return axis;
 }
-
-
-
-
 
 function LinearXAxis() {
   var axis = {};
@@ -803,10 +847,13 @@ function LinearXAxis() {
     }
   }
 
-  axis.transform_val = function(value) {
+
+  axis.scale = function(value) {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
   }
+
+  axis.transform_val = axis.scale;
 
   axis.transform = function(value) {
     return (axis.transform_val(value[variable_]));
@@ -830,22 +877,28 @@ function LinearXAxis() {
   return axis;
 }
 
-function ColourAxis() {
+function RadiusAxis() {
   var axis = {};
   
   var variable_;
-  var scale_  = d3.scale.category10();
+  var scale_  = d3.scale.sqrt();
   var width_  = 0;
   var height_ = 0;
   var canvas_;
-  var value_;
+  var value_ = d3.functor(5); // maybe move this into a generic empty function
 
   axis.variable = function(variable) {
     if (!arguments.length) {
       return variable_;
     } else {
       variable_ = variable;
-      value_ = function(d) {return d[variable_];};
+      if (variable === undefined || variable.length == 0){
+        value_ = d3.functor(1);
+        scale_.range([0, 5]);
+      } else {
+        value_ = function(d) {return Number(d[variable_]);};
+        scale_.range([0, 20]);
+      }
       return this;
     }
   }
@@ -855,7 +908,73 @@ function ColourAxis() {
   }
 
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, value));
+    scale_.domain([0, d3.max(data, value_)]);
+    return this;
+  }
+
+  axis.width = function() {
+    return width_;
+  }
+
+  axis.height = function() {
+    return height_;
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.scale = scale_;
+
+  axis.transform = function(d) {
+    //console.log(d, value_(d));
+    return scale_(value_(d));
+  }
+
+  axis.draw = function() {
+  }
+  
+  return axis;
+}
+
+
+function ColourAxis() {
+  var axis = {};
+  
+  var variable_;
+  var scale_  = d3.scale.category10();
+  var width_  = 0;
+  var height_ = 0;
+  var canvas_;
+  var value_ = d3.functor("<empty>"); // maybe move this into a generic empty function
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      if (variable === undefined || variable.length == 0){
+        value_ = d3.functor("<empty>");
+      } else {
+        value_ = function(d) {return d[variable_];};
+      }
+      return this;
+    }
+  }
+
+  axis.scale = scale_;
+
+  axis.value = function(){
+    return value_;
+  }
+
+  axis.domain = function(data) {
+    scale_.domain(d3.map(data, value_));
     return(this);
   }
 
@@ -876,31 +995,41 @@ function ColourAxis() {
     }
   }
 
-  axis.transform = function(value) {
-    if (variable_ === undefined) return ('steelblue');
-    return(scale_(value[variable_]));
+  axis.transform = function(d) {
+    var t = scale_(value_(d));
+    return (isFinite(t)) ? t : 0;
   }
 
   axis.draw = function() {
   }
   
   return axis;
-}function Chart() {
+}function Chart(options) {
   var chart = {};
 
+  var empty_ = function(d) {return "<empty>";};
   var data_;
   var selection_;
-  var values_;
+
+  //function to be used for small multiples
+  var row_key_;
+  var column_key_;
 
   var canvas_;
 
-  // hack 
-  var axes = chart.axes = {
+  /////////////////////
+  // initialize options
+  var options = options || {};
+
+  var axes = chart.axes = options.axes || {
     'x' : LinearXAxis(),
     'y' : LinearYAxis(),
     'colour' : ColourAxis()
   };
 
+  var required_ = options.required || [];
+
+  ////////////////////////
 
   //var empty = chart.empty = function(){return "<empty>";};
 
@@ -919,25 +1048,28 @@ function ColourAxis() {
     } else {
       selection_ = selection;
 
-      values_ = { row: d3.functor("<empty>"),
-                  column: d3.functor("<empty>"),
-                  colour: d3.functor("steelblue")
-                };
+      row_key_ = empty_;
+      column_key_ = empty_;
 
       if (selection.row !== undefined && selection.row.length){
-        var variable = selection.row[0];
-        values_.row = function(d){return d[variable];};
+        row_key_ = function(d) { return d[selection_.row];};
       }
 
       if (selection.column !== undefined && selection.column.length){
-        var variable = selection.column[0];
-        values_.column = function(d){return d[variable];};
+        var column_sel = selection.column[0];
+        column_key_ = function(d) { return d[selection_.column];};
       }
+
+      // connect axes with selection
+      for (var v in axes){
+        axes[v].variable(selection[v]);
+      }
+
       return this;
     }
   }
 
-  //TODO remove, but of overkill
+  //TODO remove, may be overkill
   chart.canvas = function(canvas) {
     if (!arguments.length) {
       return canvas_;
@@ -947,17 +1079,32 @@ function ColourAxis() {
     }
   }
 
-  chart.is_valid = function(selection) {
-    return (selection.x !== undefined && selection.x.length > 0 &&
-      selection.y !== undefined && selection.y.length > 0);
+  //utility function for creating banded ranges
+  function bands(N, extent, padding){
+    var bandWidth = (extent[1] - extent[0] - (N-1)*padding)/N;
+    
+    var ranges = [];
+    var offset = extent[0];
+    for (var i = 0; i < N; i++){
+      ranges.push(offset)
+      offset += bandWidth + padding;
+    }
+
+    return {
+      ranges: ranges,
+      bandWidth: bandWidth
+    }
   }
 
   chart.draw = function() {
-    console.log("Drawing chart");
+    
+    // update domains of the axes
+    for (var v in axes){
+      axes[v].domain(data_);
+    }
 
-    //initialize axes with data and selection
-    var xheight = axes.x.variable(selection_.x).domain(data_).height();
-    var ywidth  = axes.y.variable(selection_.y).domain(data_).width()
+    var xheight = axes.x.height();
+    var ywidth  = axes.y.width()
     
     var width   = canvas_.attr('width');
     var height  = canvas_.attr('height');
@@ -967,160 +1114,448 @@ function ColourAxis() {
       .attr('transform', 'translate(' + ywidth + ',0)')
       ;
 
-    // Setting of colour domain should probably occur in draw1, as this has 
-    // nothing to do with small multiples. However, we need to calculate the
-    // domain using the full data set. Perhaps we can avoid this if we use the
-    // levels from the meta information on the data.
-    if (selection_.colour !== undefined && selection_.colour.length) {
-      axes.colour.variable(selection_.colour).domain(data_);
-    }
-
-    var nesting = d3.nest();
-
-    if (selection_.row !== undefined && selection_.row.length) {
-      nesting.key(function(d) { return d[selection_.row];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
-    if (selection_.column !== undefined && selection_.column.length) {
-      nesting.key(function(d) { return d[selection_.column];})
-    } else {
-      nesting.key(function() { return 'empty'; });
-    }
+    var nesting = d3.nest()
+      .key(row_key_)
+      .key(column_key_)
+      ;    
     
     //TODO use meta data in stead of nesting the data itself
     var nested_data = nesting.map(data_);
+
     var rows     = d3.keys(nested_data);
     var nrow     = rows.length;
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    // can be replaced with d3.scale.ordinal.rangeBands()
-    var padding  = 5;
-    var gheight = (height - xheight - (nrow-1)*padding) / nrow;
-    var gwidth  = (width - ywidth - (ncolumn-1)*padding) / ncolumn;
-    axes.x.width(gwidth);
-    axes.y.height(gheight);
+    var margin = { top : 10, 
+                   left : axes.y.width(),
+                   right : 15,
+                   bottom : axes.x.height()
+                 };
 
-    var y = 0;
-    for (var i = 0; i < rows.length; ++i) {
+    var bands_y = bands(nrow, [margin.top, height - margin.bottom], 10);
+    var y_cell = d3.scale.ordinal()
+      .domain(rows)
+      .range(bands_y.ranges)
+      ;
+
+    axes.y.height(bands_y.bandWidth);
+
+    for (var i in rows){
       var row = rows[i];
-      var x = 0;
-
-      // y axis draw
       var g = canvas_.append('g')
-                     .attr('class', 'chart')
-                     .attr('transform', 'translate(' + x + ',' + y + ')')
+                     .attr('class', 'axis y')
+                     .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
                      ;
-
       axes.y.canvas(g).draw()
-      //
+    }
+    
+    var bands_x = bands(ncolumn, [margin.left, width - margin.right], 10)
+    var x_cell = d3.scale.ordinal()
+      .domain(columns)
+      .range(bands_x.ranges)
+      ;
 
-      x += ywidth;
-      for (var j = 0; j < columns.length; ++j) {
-          var column = columns[j];
+    axes.x.width(bands_x.bandWidth);
+    for (var i in columns){
+      var column = columns[i];
+      var g = canvas_.append('g')
+                     .attr('class', 'axis x')
+                     .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
+                     ;
+      axes.x.canvas(g).draw()
+    }
+
+    for (var r in rows){
+      var row = rows[r];
+      for (var c in columns){
+        var column = columns[c];
           var g = canvas_.append('g')
-                       .attr('class', 'chart')
-                       .attr('transform', 'translate('+ x + ',' + y + ')')
+                       .attr('class', 'data')
+                       .attr('transform', 'translate('+ x_cell(column) + ',' + y_cell(row) + ')')
                        ;
           
-          this.subdraw(nested_data[row][column], g);
-
-          if (i == (rows.length - 1)) {
-            var g = canvas_.append('g')
-                           .attr('class', 'chart')
-                           .attr('transform', 'translate(' + x + ',' + (y + gheight) + ')')
-                           ;
-            axes.x.canvas(g).draw() 
-        }
-        x += gwidth + padding;
+          this.draw_data(nested_data[row][column], g);        
       }
-      y += gheight + padding;
     }
+
     return this;
+  };
+
+  chart.is_valid = function(selection) {
+    for (var i = 0; i < required_.length; i++){
+      var v = required_[i];
+      if (selection[v] === undefined || selection[v].length == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  ///////////////////////////////////////////////////
+  // virtual methods, to be implemented by subclasses
+  ///////////////////////////////////////////////////
+
+  chart.draw_data = function(selection) {
+    throw "'draw_data' should be implemented on charts"
   }
 
   return chart;
 };function Linechart() {
   // use basic functionality
-  var chart = Chart();
+  var chart = Chart({
+    axes: { x: LinearXAxis(),
+            y: LinearYAxis(),
+            colour : ColourAxis()
+          },
+    required: ["x", "y"]
+  });
   
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
   var selection_;
-  var values_;
 
-  
-  chart.is_valid = function(selection) {
-    return (selection.x !== undefined && selection.x.length > 0 &&
-      selection.y !== undefined && selection.y.length > 0);
+  function highlightLine(lines){
+      lines
+         .on("mouseover", function(d){
+               d3.selectAll("g.color")
+                  .style("stroke-width", function(d1) {return (d1.key != d.key)? 1: 2;})
+                  .filter(function(d1) {return (d1.key != d.key)})
+                  .style("stroke-opacity", 0.2)
+                  .style("fill-opacity", 0.2)
+                  ;
+            })
+         .on("mouseout", function(d){
+               d3.select(this).style("stroke-width", 1);
+               d3.selectAll("g.color")
+                  .style("stroke-opacity", 1)
+                  .style("fill-opacity", 0.5)
+                  ;
+           })
+         ;
+      return lines;
   }
 
-  chart.setValues = function(selection, values){
-    selection_ = selection;
-    values_ = values;
-    // assume x and y are correctly set
-    
-    var selx = selection.x[0];
-    values.x = function(d) {return Number(d[selx]);}
+  function show_crosshair(points){
+    points
+      .on("mouseover", function(d){
+        d3.selectAll("line.vline")
+          .attr("x1", axes.x.transform(d))
+          .attr("x2", axes.x.transform(d))
+          ;
 
-    var sely = selection.y[0];
-    values.y = function(d) {return Number(d[sely]);}
+        d3.selectAll("line.hline")
+          .attr("y1", axes.y.transform(d))
+          .attr("y2", axes.y.transform(d))
+          ;
 
-    if (selection.colour !== undefined && selection.colour.length){
-        var selcolour = selection.colour[0];
-        values.colour = function(d){return d[selcolour];};
-    }
+        d3.selectAll("g.crosshair")
+          .style("visibility", "visible");
+      })
+      .on("mouseout", function(d){
+        d3.selectAll("g.crosshair")
+          .style("visibility", "hidden");
+      })
+      return points;
   }
 
-  // initializes axes
-  chart.setDomains = function(data){
-  }
+  function draw_grid(g){
 
-  chart.subdraw = function(data, g) {
-    var nesting = d3.nest();
+    var grid = g.append("g").attr('class', 'grid');
 
-    // may be these can be removed
-    selection_ = this.selection();
-    values_ = this.values();
-    //
-
-    nesting.key(values_.colour);
-    nested_data = nesting.map(data);
-
-    //grid
-
-    g.append('rect').attr('width', axes.x.width())
+    grid.append('rect').attr('width', axes.x.width())
       .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
 
-    g.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
+    grid.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
       .attr('class','hrule')
       .attr('x1', 0).attr('x2', axes.x.width())
       .attr('y1', axes.y.transform_val).attr('y2', axes.y.transform_val)
       .attr('stroke', '#FFFFFF');
-    g.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
+    grid.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
       .attr('class','vrule')
       .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
 
+        // crosshair
+    var crosshair = g.append("g")
+                     .attr('class', 'crosshair')
+                     .style("visibility", "hidden")
+                     .style("stroke-width", 0.5)
+                     .style("stroke", "black")
+                     .style("stroke-dasharray", "3 3")
+                     ;
+
+    crosshair.append("line")
+      .attr("class", "vline")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", axes.y.height())
+      ;
+
+    crosshair.append("line")
+      .attr("class", "hline")
+      .attr("x1", 0)
+      .attr("x2", axes.x.width())
+      .attr("y1", 0)
+      .attr("y2", 0)
+      ;
+  }
+
+  chart.draw_data = function(data, g) {
+    
+    // may be these can be removed
+    selection_ = this.selection();
+    
+    draw_grid(g);
+
+    var groupBy = d3.nest()
+      .key(axes.colour.value())
+      ;
+
+    byColor_data = groupBy.entries(data);
 
     // the data!!!
+    var g_data = g.append("g").attr('class', 'data');
+    
     var line = d3.svg.line()
       .x(axes.x.transform)
       .y(axes.y.transform);
 
-    for (d in nested_data) {
-      var colour = axes.colour.transform(nested_data[d][1]);
-      g.append("svg:path").attr("d", line(nested_data[d])).attr('stroke', colour).attr('fill', 'none');
-    }
+    g_data.selectAll("g.color").data(byColor_data).enter()
+      .append("g")
+      .attr("class", "color")
+      .style("stroke-width", 1) // put all this in CSS
+      .style("stroke","white")
+      .style("stroke-opacity", 1)
+      .style("fill-opacity", 0.5)
+      .each(function(d,i){
+        var color = axes.colour.scale(d.key);
 
-    g.selectAll('circle').data(data).enter().append('circle')
-      .attr('cx', axes.x.transform)
-      .attr('cy', axes.y.transform)
-      .attr('r', 2)
-      .attr('fill', axes.colour.transform);
+        var gcolor = d3.select(this)
+          .style("fill", color)
+          ;
+
+        gcolor.append("path")
+         .attr("d", line(d.values))
+         .attr("stroke", color)
+         .attr("fill", "none")
+         ;
+
+        gcolor.selectAll('circle').data(d.values).enter().append('circle')
+          .attr('cx', axes.x.transform)
+          .attr('cy', axes.y.transform)
+          .attr('r', 3)
+          .call(show_crosshair)
+          ;
+      })
+      .call(highlightLine)
+      ;
+
   }
+
+  return chart;
+};
+function Scatterchart() {
+  
+  // use basic functionality
+  var chart = Chart({
+    axes: { x: LinearXAxis(),
+            y: LinearYAxis(),
+            colour : ColourAxis(),
+            size: RadiusAxis()
+          },
+    required: ["x", "y"]
+  });
+  
+  // hack, there is no such thing as "protected" in javascript 
+  var axes = chart.axes;
+  
+  chart.draw_data = function(data, g) {
+
+    var height = axes.y.height();
+    var width = axes.x.width();
+
+    //grid
+    var grid = g.append("g").attr('class', 'grid');
+
+    grid.append('rect')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('fill', '#F0F0F0')
+      ;
+
+    grid.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
+      .attr('class','hrule')
+      .attr('x1', 0).attr('x2', width)
+      .attr('y1', axes.y.scale).attr('y2', axes.y.scale)
+      .attr('stroke', '#FFFFFF')
+      ;
+
+    grid.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
+      .attr('class','vrule')
+      .attr('x1', axes.x.scale).attr('x2', axes.x.scale)
+      .attr('y1', 0).attr('y2', height)
+      .attr('stroke', '#FFFFFF')
+      ;
+    //
+
+    // crosshair
+    var crosshair = g.append("g")
+                     .attr('class', 'crosshair')
+                     .style("visibility", "hidden")
+                     .style("stroke-width", 0.5)
+                     .style("stroke", "black")
+                     .style("stroke-dasharray", "3 3")
+                     ;
+
+    crosshair.append("line")
+      .attr("class", "vline")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", height)
+      ;
+
+    crosshair.append("line")
+      .attr("class", "hline")
+      .attr("x1", 0)
+      .attr("x2", width)
+      .attr("y1", 0)
+      .attr("y2", 0)
+      ;
+
+   //draw data
+   var groupBy = d3.nest()
+      .key(axes.colour.value());
+
+   var byColor_data = groupBy.entries(data);
+
+   var g_data = g.append("g").attr("class", "data");
+   g_data.selectAll("g.color").data(byColor_data).enter()
+      .append("g")
+      .attr("class", "color")
+      .style("stroke-width", 1)
+      .style("stroke","white")
+      .style("stroke-opacity", 1)
+      .style("fill-opacity", 0.5)
+      .each(function(d,i){
+        var gcolor = d3.select(this)
+          .style("fill", axes.colour.scale(d.key))
+          .attr('fill-opacity', 0.5)
+          ;
+        gcolor.selectAll('circle').data(d.values).enter().append('circle')
+          .attr('cx', axes.x.transform)
+          .attr('cy', axes.y.transform)
+          .attr('r', axes.size.transform)
+          .call(show_crosshair)
+      });
+  }
+
+  function show_crosshair(points){
+    points
+      .on("mouseover", function(d){
+        d3.selectAll("line.vline")
+          .attr("x1", axes.x.transform(d))
+          .attr("x2", axes.x.transform(d))
+          ;
+
+        d3.selectAll("line.hline")
+          .attr("y1", axes.y.transform(d))
+          .attr("y2", axes.y.transform(d))
+          ;
+
+        d3.selectAll("g.crosshair")
+          .style("visibility", "visible");
+      })
+      .on("mouseout", function(d){
+        d3.selectAll("g.crosshair")
+          .style("visibility", "hidden");
+      })
+      return points;
+  }
+
+  return chart;
+};
+// based on marimekko chart gist
+
+function Mosaicchart() {
+  
+  // use basic functionality
+  var chart = Chart({
+    axes: { x: LinearXAxis(),
+            y: LinearYAxis(),
+            colour: ColourAxis(),
+            size : LinearXAxis()
+          },
+    required: ["x", "y", "size"]
+  });
+  
+  // hack, there is no such thing as "protected" in javascript 
+  var axes = chart.axes;
+  var selection_;
+
+  chart.draw_data = function(data, g) {
+    //TODO create Mosaic Axes
+    /*
+    grid???
+    */
+
+    var width = axes.x.width();
+    var height = axes.y.height();
+
+    var x_scale = d3.scale.linear().range([0,width]);
+    var y_scale = d3.scale.linear().range([0,height]);
+
+    var x_var = axes.x.variable();
+    var y_var = axes.y.variable();
+
+    var y_value = function(d){return d[y_var];};
+
+    var xfractions = d3.nest()
+        .key(function(d){return d[x_var]})
+        .entries(data);
+
+    var value = axes.size.value();
+    var sum = xfractions.reduce( 
+      function(v, p) {
+        return (p.offset = v) + (p.sum = p.values.reduceRight(
+          function(v, d) {
+            d.parent = p;
+            return (d.offset = v) + value(d);
+          }
+          , 0
+          ));
+      }
+      , 0
+      );
+    
+    var n = d3.format(",d");
+
+    // Add a group for each xfractions.
+    var xfractions = g.selectAll(".xfraction")
+        .data(xfractions)
+      .enter().append("svg:g")
+        .attr("class", "xfraction")
+        .attr("xlink:title", function(d) { return d.key; })
+        .attr("transform", function(d) { return "translate(" + x_scale(d.offset / sum) + ")"; });
+//        .attr("transform", function(d) { return "translate(" + axes.x.scale(d.offset / sum) + ")"; });
+
+    // Add a rect for each market.
+    var yfractions = xfractions.selectAll(".yfraction")
+        .data(function(d) { return d.values; })
+      .enter().append("svg:a")
+        .attr("class", "yfraction")
+        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
+//        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
+      .append("svg:rect")
+//        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
+        .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
+        .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
+        .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
+        .style("fill", function(d) { return axes.colour.scale(y_value(d));});
+    }
 
   return chart;
 };

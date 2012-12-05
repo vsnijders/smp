@@ -9,7 +9,7 @@ function Mosaicchart() {
             colour: ColourAxis(),
             size : LinearXAxis()
           },
-    required: ["x", "y", "size"]
+    required: ["y", "size"]
   });
   
   // hack, there is no such thing as "protected" in javascript 
@@ -29,12 +29,17 @@ function Mosaicchart() {
     var y_scale = d3.scale.linear().range([0,height]);
 
     var x_var = axes.x.variable();
+    var y_var = axes.y.variable();
+
+    var y_value = function(d){return d[y_var];};
+    var x_value = function(d){return d[x_var];};
+    var value = axes.size.value();
 
     var xfractions = d3.nest()
-        .key(function(d){return d[x_var]})
-        .entries(data);
+        .key(x_value)
+        .entries(data)
+        ;
 
-    var value = axes.size.value();
     var sum = xfractions.reduce( 
       function(v, p) {
         return (p.offset = v) + (p.sum = p.values.reduceRight(
@@ -67,11 +72,13 @@ function Mosaicchart() {
         .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
 //        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
       .append("svg:rect")
+        .style("stroke-width", 1.5)
+        .style("stroke", "white")
 //        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
-        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));});
+        .style("fill", function(d) { return axes.colour.scale(y_value(d));});
     }
 
   return chart;

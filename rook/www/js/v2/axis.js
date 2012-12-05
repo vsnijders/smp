@@ -1,6 +1,8 @@
 // basic axis functionality
-function BaseAxis(){
+function BaseAxis(options){
   var axis = {};
+
+  var variable_;
 
   axis.canvas = function(canvas) {
     if (!arguments.length) {
@@ -9,6 +11,32 @@ function BaseAxis(){
       canvas_ = canvas;
       return this;
     }
+  }
+
+  axis.width = function(){
+    return 30;
+  }
+
+  axis.height = function(){
+    return 30;
+  }
+
+  axis.transform = function(d) {
+    return this.scale(this.value(d));
+  }
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      this.value = this.setValue(variable);
+      return this;
+    }
+  }
+
+  axis.setValue = function(variable){
+    return function(d){return Number(d[variable]);};
   }
 
   return axis;
