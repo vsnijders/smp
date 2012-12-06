@@ -67,8 +67,8 @@ function Barchart() {
     bars
        .on("mouseover", function(d,i){
              d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
-                .style("stroke-opacity", 0.2)
-                .style("fill-opacity", 0.2)
+                .style("stroke-opacity", 0.6)
+                .style("fill-opacity", 0.6)
                 ;
              
              d3.selectAll("line.vline")

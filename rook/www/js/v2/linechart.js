@@ -18,7 +18,7 @@ function Linechart() {
                d3.selectAll("g.color")
                   .style("stroke-width", function(d1) {return (d1.key != d.key)? 1: 2;})
                   .filter(function(d1) {return (d1.key != d.key)})
-                  .style("stroke-opacity", 0.2)
+                  .style("stroke-opacity", 0.8)
                   .style("fill-opacity", 0.2)
                   ;
             })
