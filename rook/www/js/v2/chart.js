@@ -118,7 +118,7 @@ function Chart(options) {
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    var margin = { top : 10, 
+    var margin = { top : 15, 
                    left : axes.y.width(),
                    right : 15,
                    bottom : axes.x.height()
@@ -139,9 +139,32 @@ function Chart(options) {
                      .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
                      ;
       axes.y.canvas(g).draw()
+
+      if (nrow > 1) {
+        var handle = canvas_.append('rect')
+           .attr({ x: width - margin.right
+                 , y: y_cell(row)
+                 , width: 15
+                 , height: y_bands.bandWidth}
+                 )
+           .style({fill: 'silver'})
+
+         var hx = width - margin.right + 5;
+         var hy =  y_cell(row) + y_bands.bandWidth/2;
+
+         canvas_.append('text')
+           .attr({ x: hx
+                 , y: hy
+                 , transform: "rotate(90 "+ hx + " " + hy +")"
+                 })
+           .style('text-anchor','middle')
+           .text(row)
+           ;
+         }
+
     }
     
-var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
+    var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
 
     var x_cell = d3.scale.ordinal()
       .domain(columns)
@@ -156,6 +179,23 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                      .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
                      ;
       axes.x.canvas(g).draw()
+
+      if (ncolumn > 1) {
+        var handle = canvas_.append('rect')
+           .attr({ x: x_cell(column)
+                 , y: margin.top - 15
+                 , width: x_bands.bandWidth
+                 , height: 15}
+                 )
+           .style({fill: 'silver'})
+         canvas_.append('text')
+           .attr({ x: x_cell(column) + x_bands.bandWidth/2
+                 , y: margin.top - 5
+                 })
+           .style('text-anchor','middle')
+           .text(column)
+           ;
+         }
     }
 
     for (var r in rows){
@@ -167,7 +207,7 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                        .attr('transform', 'translate('+ x_cell(column) + ',' + y_cell(row) + ')')
                        ;
           
-          this.draw_data(nested_data[row][column], g);        
+          this.draw_data(nested_data[row][column], g);  
       }
     }
 

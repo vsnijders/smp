@@ -47,7 +47,7 @@ function LinearYAxis() {
   
   var variable_;
   var range_  = [undefined, undefined];
-  var width_  = 30;
+  var width_  = 40;
   var height_;
   var canvas_;
   var labels_;
@@ -74,7 +74,7 @@ function LinearYAxis() {
   }
 
   axis.width = function() {
-    return 30;
+    return 40;
   }
 
   axis.height = function(height) {
@@ -113,7 +113,7 @@ function LinearYAxis() {
     return (labels_);
   }
 
-  axis.draw = function() {
+  axis.draw = function(label) {
     canvas_.selectAll("line").data(labels_).enter().append("line")
       .attr("x1", width_-5).attr("x2", width_)
       .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
@@ -123,6 +123,8 @@ function LinearYAxis() {
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return (d);});
+
+    return this;
   }
 
   return axis;
