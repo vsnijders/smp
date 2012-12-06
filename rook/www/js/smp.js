@@ -193,7 +193,9 @@ function Menu(){
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
         $.each(dat.levels, function(i, lab) {
-          var label = $("<label>").text(lab).appendTo(form);
+          var span = $("<span>").text(lab);
+          var label = $("<label>").appendTo(form);
+          span.appendTo(label);
           $("<input>").attr("type", "checkbox").addClass("filter")
             .attr("name", dim)
             .val(lab)
@@ -630,6 +632,10 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   // default values
   dmin             = Number(dmin);
   dmax             = Number(dmax);
+  if (Math.abs(dmin - dmax) < 1E-10) {
+    dmin = 0.96*dmin;
+    dmax = 1.04*dmax;
+  }
   calc_label_width = calc_label_width || function() { return(0);};
   axis_width       = axis_width || 1;
   Q                = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
@@ -1079,21 +1085,18 @@ function ColourAxis() {
     }
   }
 
-  //utility function for creating banded ranges
+
   function bands(N, extent, padding){
-    var bandWidth = (extent[1] - extent[0] - (N-1)*padding)/N;
-    
-    var ranges = [];
+    var r = extent[1] - extent[0];
+    var bandWidth = (r - (N-1)*padding)/N;
+    var range = [];
     var offset = extent[0];
     for (var i = 0; i < N; i++){
-      ranges.push(offset)
+      range.push(offset);
       offset += bandWidth + padding;
     }
-
-    return {
-      ranges: ranges,
-      bandWidth: bandWidth
-    }
+    bands.range = range;
+    return {range: range, bandWidth: bandWidth};
   }
 
   chart.draw = function() {
@@ -1133,14 +1136,14 @@ function ColourAxis() {
                    bottom : axes.x.height()
                  };
 
-    var bands_y = bands(nrow, [margin.top, height - margin.bottom], 10);
+
+    var y_bands = bands(nrow, [margin.top, height - margin.bottom], 10);
     var y_cell = d3.scale.ordinal()
       .domain(rows)
-      .range(bands_y.ranges)
+      .range(y_bands.range)
       ;
 
-    axes.y.height(bands_y.bandWidth);
-
+    axes.y.height(y_bands.bandWidth);
     for (var i in rows){
       var row = rows[i];
       var g = canvas_.append('g')
@@ -1150,13 +1153,14 @@ function ColourAxis() {
       axes.y.canvas(g).draw()
     }
     
-    var bands_x = bands(ncolumn, [margin.left, width - margin.right], 10)
+var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
+
     var x_cell = d3.scale.ordinal()
       .domain(columns)
-      .range(bands_x.ranges)
+      .range(x_bands.range)
       ;
 
-    axes.x.width(bands_x.bandWidth);
+    axes.x.width(x_bands.bandWidth);
     for (var i in columns){
       var column = columns[i];
       var g = canvas_.append('g')
@@ -1192,6 +1196,16 @@ function ColourAxis() {
     return true;
   }
 
+  chart.toText = function(d){
+    var text = [];
+    for (var v in selection_){
+      text.push(v + ": " + d[v]);
+    }
+    text = join(text, "\n");
+    console.log(text);
+    return text;
+  }
+
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
@@ -1221,7 +1235,7 @@ function ColourAxis() {
                d3.selectAll("g.color")
                   .style("stroke-width", function(d1) {return (d1.key != d.key)? 1: 2;})
                   .filter(function(d1) {return (d1.key != d.key)})
-                  .style("stroke-opacity", 0.2)
+                  .style("stroke-opacity", 0.8)
                   .style("fill-opacity", 0.2)
                   ;
             })
@@ -1468,6 +1482,8 @@ function Scatterchart() {
 
         d3.selectAll("g.crosshair")
           .style("visibility", "visible");
+
+        //chart.toText(d);
       })
       .on("mouseout", function(d){
         d3.selectAll("g.crosshair")
@@ -1489,7 +1505,7 @@ function Mosaicchart() {
             colour: ColourAxis(),
             size : LinearXAxis()
           },
-    required: ["x", "y", "size"]
+    required: ["y", "size"]
   });
   
   // hack, there is no such thing as "protected" in javascript 
@@ -1512,12 +1528,14 @@ function Mosaicchart() {
     var y_var = axes.y.variable();
 
     var y_value = function(d){return d[y_var];};
+    var x_value = function(d){return d[x_var];};
+    var value = axes.size.value();
 
     var xfractions = d3.nest()
-        .key(function(d){return d[x_var]})
-        .entries(data);
+        .key(x_value)
+        .entries(data)
+        ;
 
-    var value = axes.size.value();
     var sum = xfractions.reduce( 
       function(v, p) {
         return (p.offset = v) + (p.sum = p.values.reduceRight(
@@ -1547,45 +1565,194 @@ function Mosaicchart() {
         .data(function(d) { return d.values; })
       .enter().append("svg:a")
         .attr("class", "yfraction")
-        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
-//        .attr("xlink:title", function(d) { return axes.y.value(d) + " " + axes.x.value(d) + ": " + n(value(d)); })
       .append("svg:rect")
+        .style("stroke-width", 1.5)
+        .style("stroke", "white")
 //        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
-        .style("fill", function(d) { return axes.colour.scale(y_value(d));});
+        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));})
+        .style("stroke-width", 2)
+        .style("stroke", "white")
+        ;
     }
 
   return chart;
 };
 
 function Barchart() {
-  var chart = {};
+  // use basic functionality
+  var chart = Chart({
+    axes: { x: LinearXAxis2(),
+            y: CategoricalAxis(),
+            colour : ColourAxis()
+          },
+    required: ["y", "x"]
+  });
 
-  var data_;
-  var selection_;
+  var axes = chart.axes;
+
+  chart.draw_data = function(data, g) {
+    //grid
+
+    g.append('rect').attr('width', axes.x.width())
+      .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
+
+    g.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
+      .attr('class','vrule')
+      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('y1', 0).attr('y2', axes.y.height())
+      .attr('stroke', '#FFFFFF');
+    g.selectAll('line.origin').data([0]).enter().append('line')
+      .attr('class','origin')
+      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('y1', 0).attr('y2', axes.y.height())
+      .attr('stroke', '#000000');
+
+
+    //data
+
+    g.selectAll('rect.bar').data(data).enter().append('rect')
+      .attr('class', 'bar')
+      .attr('y', function(d) {
+        return(axes.y.transform(d) - axes.y.barheight()/2)
+      })
+      .attr('height', axes.y.barheight)
+      .attr('x', function(d) {
+        return(axes.x.transform_val(0));
+      })
+      .attr('width', function(d) {
+        return(axes.x.transform(d) - axes.x.transform_val(0));
+      })
+      .attr('fill', axes.colour.scale)
+      .call(highlightBar, axes.y.value)
+      ;
+
+    // cross hair
+    var crosshair = g.append("g")
+                     .attr('class', 'crosshair')
+                     .attr("pointer-events", "none")
+                     ;
+
+    crosshair.append("line")
+      .attr("class", "vline")
+      .attr("x1", 0)
+      .attr("x2", 0)
+      .attr("y1", 0)
+      .attr("y2", axes.y.height())
+      ;
+
+  }
+
+  function highlightBar(bars, scale){
+    bars
+       .on("mouseover", function(d,i){
+             d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
+                .style("stroke-opacity", 0.6)
+                .style("fill-opacity", 0.6)
+                ;
+             
+             d3.selectAll("line.vline")
+                .attr("x1", axes.x.transform(d))
+                .attr("x2", axes.x.transform(d))
+                ;
+
+             d3.selectAll("g.crosshair")
+               .style("visibility", "visible");
+          })
+       .on("mouseout", function(d){
+             
+             d3.selectAll("rect.bar")
+               .style("stroke-opacity", 1)
+               .style("fill-opacity", 1)
+               ;
+
+             d3.selectAll("g.crosshair")
+               .style("visibility", "hidden");
+
+         })
+       ;
+    return bars;
+  }
+
+
+  return chart;
+};
+
+
+// ============================================================================
+// =======                         AXES                                 =======
+// ============================================================================
+
+function CategoricalAxis() {
+  var axis = {};
+  
+  var variable_;
+  var levels_;
+  var labels_;
+  var width_  = 0;
+  var height_ = 0;
   var canvas_;
 
-  chart.data = function(data) {
+  var space_ = 2;
+
+  axis.variable = function(variable) {
     if (!arguments.length) {
-      return data_;
+      return variable_;
     } else {
-      data_ = data;
+      if (Array.isArray(variable)) variable = variable[0];
+      variable_ = variable;
       return this;
     }
   }
 
-  chart.selection = function(selection) {
+  axis.value = function(d){
+    return d[variable_];
+  }
+
+  truncate_labels = function() {
+    var max_width_ = 200;
+    labels_ = {};
+    width_ = 0;
+    levels_.forEach(function(level) {
+      var truncated_level = level;
+      while (label_width(truncated_level+'...') > max_width_) {
+        // go back to last whitespace
+        truncated_level = truncated_level.replace(/\s\S*$/, '');
+      }
+      if (truncated_level != level) truncated_level += '...';
+      labels_[level] = truncated_level;
+      if (label_width(labels_[level]) > width_) width_ = label_width(labels_[level]);
+    });
+  }
+
+  axis.domain = function(data) {
+    var scale  = d3.scale.ordinal();
+    var values = data.map(axis.value);
+    scale.domain(values);
+    levels_ = scale.domain();
+    truncate_labels();
+    //width_ = d3.max(levels_, function(l) { return(label_width(l));});
+    //width_ = d3.max(labels_, function(l) { return(label_width(l));});
+    width_ = width_ + 5; // add size of tickmark
+    return(this);
+  }
+
+  axis.width = function() {
+    return width_;
+  }
+
+  axis.height = function(height) {
     if (!arguments.length) {
-      return selection_;
+      return height_;
     } else {
-      selection_ = selection;
+      height_ = height;
       return this;
     }
   }
 
-  chart.canvas = function(canvas) {
+  axis.canvas = function(canvas) {
     if (!arguments.length) {
       return canvas_;
     } else {
@@ -1594,16 +1761,135 @@ function Barchart() {
     }
   }
 
-  chart.is_valid = function(selection) {
-    return (selection.y !== undefined && selection.y.length > 0 &&
-      selection.size !== undefined && selection.size.length > 0);
+  axis.barheight = function() {
+    var nlevels = levels_.length;
+    var barheight = (height_ - (nlevels-1)*space_) / nlevels;
+    return(barheight);
   }
 
-  chart.draw = function() {
-    console.log("Drawing bar chart");
+  axis.transform_val = function(value) {
+    var barheight = axis.barheight();
+    var y = barheight / 2.0;
+    for (level in levels_) {
+      if (value == levels_[level]) return(y);
+      y += barheight + space_;
+    }
+    return(undefined);
   }
 
-  return chart;
-};
+  axis.ticks = function() {
+    return(levels_);
+  }
+
+  axis.transform = function(d) {
+    return (axis.transform_val(axis.value(d)));
+  }
+
+  axis.draw = function() {
+    canvas_.selectAll("line").data(levels_).enter().append("line")
+      .attr("x1", function(d) { return(label_width(labels_[d])+2); })
+      .attr("x2", width_)
+      .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
+      .attr("stroke", "#E0E0E0");
+    canvas_.selectAll('text').data(levels_).enter().append('text')
+      .attr('x', 0).attr('y', axis.transform_val).attr('dy', '0.35em')
+      .attr('text-anchor', 'begin').text(function(d) { return (labels_[d]);})
+      .on('mouseover', function(d,i) {
+        d3.select(this).text(d);
+      })
+      .on('mouseout', function(d,i) {
+        d3.select(this).text(function(d) { return (labels_[d]);});
+      });
+  }
+
+  return axis;
+}
+
+
+
+function LinearXAxis2() {
+  var axis = {};
+  
+  var variable_;
+  var range_  = [undefined, undefined];
+  var width_;
+  var height_ = 30;
+  var canvas_; 
+  var labels_;
+  var label_range_;
+  var include_origin_ = false;
+
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
+
+  axis.include_origin = function() {
+    include_origin_ = true;
+    return(this);
+  }
+
+  axis.domain = function(data) {
+    range_ = d3.extent(data, function(d) { return Number(d[variable_]);});
+    if (range_[1] < 0) range_[1] = 0;
+    if (range_[0] > 0) range_[0] = 0;
+    return(this);
+  }
+
+  axis.width = function(width) {
+    if (!arguments.length) {
+      return width_;
+    } else {
+      width_ = width;
+      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      label_range_ = d3.extent(labels_);
+      return this;
+    }
+  }
+
+  axis.height = function() {
+    return height_;
+  }
+
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return this;
+    }
+  }
+
+  axis.transform_val = function(value) {
+    var range = label_range_[1] - label_range_[0];
+    return (width_ * (value - label_range_[0]) / range);
+  }
+
+  axis.transform = function(value) {
+    return (axis.transform_val(value[variable_]));
+  }
+
+  axis.ticks = function() {
+    return (labels_);
+  }
+
+  axis.draw = function() {
+    canvas_.selectAll("line").data(labels_).enter().append("line")
+      .attr("x1", axis.transform_val).attr("x2", axis.transform_val)
+      .attr("y1", 0).attr("y2", 5)
+      .attr("stroke", "#000000");
+    canvas_.selectAll('text').data(labels_).enter().append('text')
+      .attr('x', axis.transform_val)
+      .attr('y', 5).attr('dy', '1.2em')
+      .attr('text-anchor', 'middle').text(function(d) { return (d);});
+  }
+
+
+  return axis;
+}
 
 
