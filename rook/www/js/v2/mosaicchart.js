@@ -76,6 +76,7 @@ function Mosaicchart() {
 
     $("g.data rect")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;

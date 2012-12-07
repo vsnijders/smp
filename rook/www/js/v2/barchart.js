@@ -49,6 +49,7 @@ function Barchart() {
 
     $("rect.bar")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "w")
              })
       ;

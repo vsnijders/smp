@@ -15,6 +15,8 @@
     <!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
 
     <script type="text/javascript" src="js/R.js"></script>
     <!-- styling -->
@@ -29,23 +31,21 @@
         R.list_tables()
           .success(function(data) {
 
-          // Create a new row in the table #tables for each table
-          jQuery.each(data, function(i, d) {
-            var newt = $("<tbody>");
-            $("<tr>").appendTo(newt).html(
-              "<td class=\"select\"><input type=\"checkbox\" name=\"foo\" value=\"" + i + "\"></input></td>" + 
-              "<td class=\"description\"><h3>" + d.name + 
-              ' <a href="table.html?table=' + i + '"><i class="icon-th"></i></a> ' + 
-              ' <a href="visualise.html?table=' + i + '"><i class="icon-eye-open"></i></a>' + 
-              '</h3>' + "<p>" + d.description + "</p></td>"
-            ); 
-            $("#tables").append(newt);
-          })
+          //should be done on the server!!!
+          var tables = [];
+          for (var v in data){ var val = data[v]; val.id = v; tables.push(val)}
+          
+          // load template from actual html, compile it and replace it.
+          var t = $("#tables").html();
+          //console.log(t);
+          var tc = Mustache.compile(t);
+          $("#tables").html(tc({tables:tables}));
 
           // Only show the link to page where tables can be linked when 2 tables 
           // are selected; otherwise hide
           $(".one, .two, .any").addClass("disabled");
-          $("input").change(function() {
+          
+          $("#tables").on("change","input", function() {
             var checked = $(this);
             
             var nselected = $("input:checked").length;
@@ -118,8 +118,25 @@
       <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> Link</button>
     </div>
 
-    <table id="tables">
-    </table>
+    <div >
+      <table id="tables">
+        <tbody>
+        <!--{{#tables}}-->
+         <tr>
+          <td class="select"><input type="checkbox" value="{{id}}"></td>
+          <td class="description">
+          <h3>{{name}}
+            <a href="table.html?table={{id}}"><i class="icon-th"></i></a>
+            <a href="v2.html?table={{id}}"><i class="icon-eye-open"></i></a>
+          </h3>
+            <p>{{description}}</p>
+          </td>
+         </tr>
+        <!--{{/tables}}-->
+        <tbody>
+      </table>
+    </div>
+
   </article>
 
   <footer>

@@ -95,6 +95,7 @@ function Scatterchart() {
 
    $("g.data circle")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
