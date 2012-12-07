@@ -40,6 +40,26 @@ function Cntrl(table, node) {
     return this;
   }
 
+  cntrl.toText = function(d){
+    var d = d3.select(this).datum();
+    // TODO add formatting and the likes...
+    var vars = meta_.variables;
+    var dims = meta_.dimensions;
+    var labels = [];
+    for (var v in d){
+      var name = (vars[v] || dims[v] || {}).name;
+      
+      if (name === undefined) {
+        continue;
+      } 
+      
+      var value = d[v];
+      labels.push(name + ":" + value);
+    }
+    labels = labels.join("\n");
+    return labels;
+  }
+
   cntrl.graph = function(name) {
     if (!arguments.length) {
       return graph_;

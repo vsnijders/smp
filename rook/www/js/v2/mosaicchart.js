@@ -58,21 +58,14 @@ function Mosaicchart() {
     // Add a group for each xfractions.
     var xfractions = g.selectAll(".xfraction")
         .data(xfractions)
-      .enter().append("svg:g")
+      .enter().append("g")
         .attr("class", "xfraction")
-        .attr("xlink:title", function(d) { return d.key; })
         .attr("transform", function(d) { return "translate(" + x_scale(d.offset / sum) + ")"; });
-//        .attr("transform", function(d) { return "translate(" + axes.x.scale(d.offset / sum) + ")"; });
 
-    // Add a rect for each market.
     var yfractions = xfractions.selectAll(".yfraction")
         .data(function(d) { return d.values; })
-      .enter().append("svg:a")
+      .enter().append("rect")
         .attr("class", "yfraction")
-      .append("svg:rect")
-        .style("stroke-width", 1.5)
-        .style("stroke", "white")
-//        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
@@ -80,6 +73,12 @@ function Mosaicchart() {
         .style("stroke-width", 2)
         .style("stroke", "white")
         ;
+
+    $("g.data rect")
+      .tipsy({ title: cntrl.toText,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
     }
 
   return chart;

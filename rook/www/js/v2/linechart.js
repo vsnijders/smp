@@ -150,6 +150,13 @@ function Linechart() {
       .call(highlightLine)
       ;
 
+    $("g.data circle")
+      .tipsy({ title: cntrl.toText,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
+
+
   }
 
   return chart;
