@@ -134,25 +134,31 @@ function Chart(options) {
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
       var row = rows[i];
+      var y = y_cell(row);
       var g = canvas_.append('g')
                      .attr('class', 'axis y')
-                     .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
+                     .attr('transform', 'translate(' + 0 + ',' + y + ')')
                      ;
       axes.y.canvas(g).draw()
 
       if (nrow > 1) {
-        var handle = canvas_.append('rect')
-           .attr({ x: width - margin.right
-                 , y: y_cell(row)
+        var hx = width - margin.right;
+        var hy = y_bands.bandWidth;
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
+           .attr({ x: hx
+                 , y: y
                  , width: 15
-                 , height: y_bands.bandWidth}
-                 )
+                 , height: hy
+                 })
            .style({fill: 'silver'})
 
-         var hx = width - margin.right + 5;
-         var hy =  y_cell(row) + y_bands.bandWidth/2;
+         var hx = hx + 5;
+         var hy =  y + hy/2;
 
-         canvas_.append('text')
+        handle.append('text')
            .attr({ x: hx
                  , y: hy
                  , transform: "rotate(90 "+ hx + " " + hy +")"
@@ -180,15 +186,21 @@ function Chart(options) {
                      ;
       axes.x.canvas(g).draw()
 
+      // handle
       if (ncolumn > 1) {
-        var handle = canvas_.append('rect')
+        var hw = x_bands.bandWidth;
+
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
            .attr({ x: x_cell(column)
                  , y: margin.top - 15
-                 , width: x_bands.bandWidth
+                 , width: hw
                  , height: 15}
                  )
            .style({fill: 'silver'})
-         canvas_.append('text')
+         handle.append('text')
            .attr({ x: x_cell(column) + x_bands.bandWidth/2
                  , y: margin.top - 5
                  })
