@@ -26,7 +26,8 @@
     <script type="text/javascript">
       $(function() {
 
-        R.list_tables().success(function(data) {
+        R.list_tables()
+          .success(function(data) {
 
           // Create a new row in the table #tables for each table
           jQuery.each(data, function(i, d) {
@@ -46,7 +47,6 @@
           $(".one, .two, .any").addClass("disabled");
           $("input").change(function() {
             var checked = $(this);
-            console.log(checked);
             
             var nselected = $("input:checked").length;
             if (nselected > 0) {
