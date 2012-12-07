@@ -213,8 +213,10 @@ function Menu(){
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
         $.each(dat.levels, function(i, lab) {
+          var span_c = $("<span>").attr("class", "color category"+i);
           var span = $("<span>").text(lab);
           var label = $("<label>").appendTo(form);
+          label.append(span_c);
           span.appendTo(label);
           $("<input>").attr("type", "checkbox").addClass("filter")
             .attr("name", dim)
