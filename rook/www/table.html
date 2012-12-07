@@ -11,6 +11,8 @@
     <!-- jQuery includes -->
     <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
+    <script type="text/javascript" src="js/R.js"></script>
 
     <!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -24,16 +26,15 @@
     <!-- scripting -->
     <script type="text/javascript">
       $(function() {
+
         var tablename = $(document).getUrlParam("table");
-        jQuery.getJSON("r/get_table.r", {"table":tablename}, 
-            function(data) {
-          if (data.fail) {
-            $("#table").html("<p>" + data.message + "</p>");
-            return;
-          }
+        R.get_data(tablename).success(function(data){
           var div   = $("#table");
+          
+
           var table = $("<table>");
           var tr    = $("<tr>").appendTo(table);
+          
           jQuery.each(data[1], function(i, d) {
             $("<th>").text(i).appendTo(tr);
           })
@@ -46,6 +47,8 @@
           })
           table.appendTo(div);
         });
+
+
       });
     </script>
 
@@ -64,6 +67,24 @@
 
     <article>
       <div id="table" class="numeric">
+        <table>
+          <thead>
+            <tr>
+              <!-- {{#variables}} -->
+              <th>{{name}}</th>
+              <!-- {{/variables}} -->
+            </tr>
+          </thead>
+          <tbody>
+          <!--{{#rows}}-->
+          <tr>
+            <!-- {{#variables}} -->
+            <td>{{value}}</td>
+            <!-- {{/variables}} -->
+          </tr>
+          <!--{{/rows}}-->
+          </tbody>
+        </table>
       </div>
     </article>
 

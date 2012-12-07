@@ -23,14 +23,14 @@ rook_server$add(name = "statmine", app = Builder$new(
   Static$new(urls = c("/css", "/images", "/js", "/.*\\.html$"), 
     root = "./www"),
   URLMap$new(
-    "^/r/list_tables.r" = app_list_tables,
-    "^/r/get_table.r" = app_get_table,
-    "^/r/get_meta.r" = app_get_meta,
-    "^/r/link.r" = app_link,
-    "^/r/gen_link.r" = app_gen_link,
-    "^/r/fetch.r" = app_fetch,
-    "^/tables" = app_tables,
-    "^/R" = ajaxify(list=c("link_tables","get_table", "gen_link", "list_tables", "get_meta", "fetch")),
+    "^/R" = ajaxify(list=c("link_tables",
+                           "get_table", 
+                           "gen_link", 
+                           "list_tables", 
+                           "get_meta", 
+                           "fetch", 
+                           "get_data"
+                           )),
     ".*" = Redirect$new("/index.html")
   )
 ))

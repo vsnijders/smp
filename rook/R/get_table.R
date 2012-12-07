@@ -30,3 +30,7 @@ get_table <- function(table_name, data=TRUE, meta=TRUE) {
 get_meta <- function(table_name){
   get_table(table_name, data=FALSE, meta=TRUE)$meta
 }
+
+get_data <- function(table_name){
+  get_table(table_name, data=TRUE, meta=FALSE)$data  
+}

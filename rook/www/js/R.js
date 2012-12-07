@@ -60,5 +60,14 @@ var R = window.R = {
 			dataType:'json',
 			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
+		},
+	get_data: function(table_name){
+		var $data = {};
+		$data['table_name'] = JSON.stringify(table_name);
+		return $.ajax({
+			url: './R/get_data',
+			dataType:'json',
+			type:(arguments.length)? 'POST': 'GET',
+			data: $data});
 		} };
 
