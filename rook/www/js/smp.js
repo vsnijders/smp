@@ -1,5 +1,4 @@
 function Cntrl(table, node) {
-
   var table_     = table;
   var node_      = node;
   var graph_;
@@ -40,9 +39,13 @@ function Cntrl(table, node) {
     return this;
   }
 
+  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  
   cntrl.toText = function(d){
     var d = d3.select(this).datum();
+
     // TODO add formatting and the likes...
+
     var vars = meta_.variables;
     var dims = meta_.dimensions;
     var labels = [];
@@ -54,10 +57,10 @@ function Cntrl(table, node) {
       } 
       
       var value = d[v];
-      labels.push(name + ":" + value);
+      labels.push({name:name, value:value});
     }
-    labels = labels.join("\n");
-    return labels;
+    return Mustache.render(toText_template, {variables: labels});
+    //return labels;
   }
 
   cntrl.graph = function(name) {
@@ -1445,6 +1448,7 @@ function ColourAxis() {
 
     $("g.data circle")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
@@ -1551,6 +1555,7 @@ function Scatterchart() {
 
    $("g.data circle")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
@@ -1661,6 +1666,7 @@ function Mosaicchart() {
 
     $("g.data rect")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
@@ -1719,6 +1725,7 @@ function Barchart() {
 
     $("rect.bar")
       .tipsy({ title: cntrl.toText,
+               html: true,
                gravity: $.fn.tipsy.autoBounds(100, "w")
              })
       ;

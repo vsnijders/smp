@@ -39,7 +39,7 @@ function Cntrl(table, node) {
     return this;
   }
 
-  var toText_template = "<table>{{#variables}}<tr><td>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
   
   cntrl.toText = function(d){
     var d = d3.select(this).datum();
@@ -59,10 +59,8 @@ function Cntrl(table, node) {
       var value = d[v];
       labels.push({name:name, value:value});
     }
-
     return Mustache.render(toText_template, {variables: labels});
-    return labels;
-
+    //return labels;
   }
 
   cntrl.graph = function(name) {
