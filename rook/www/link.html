@@ -13,17 +13,22 @@
     <link type="text/css" href="css/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery/jquery-ui-1.9.1.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
-  
-  <!-- backbone includes -->
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
+
+
+    <!-- d3.js includes -->
+    <script type="text/javascript" src="js/d3.v2.min.js"></script>
+
+    <!-- backbone includes -->
     <script type="text/javascript" src="js/backbone/underscore-min.js"></script>
     <script type="text/javascript" src="js/backbone/backbone-min.js"></script>
 
 
-	<!-- bootstrap includes -->
+	  <!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
 
-	  <script type="text/javascript" src="js/link2.js"></script>
+	  <script type="text/javascript" src="js/link.js"></script>
     <script type="text/javascript" src="js/R.js"></script>
 
     <!-- styling -->
@@ -41,7 +46,7 @@
         var table1_name = $(document).getUrlParam("table1");
         var table2_name = $(document).getUrlParam("table2");
 
-        jQuery.getJSON("r/gen_link.r", {"table1":table1_name, "table2": table2_name}, 
+        R.gen_link(table1_name, table2_name).success(
             function(data) {
               $("#linkdump")
                 .text(JSON.stringify(data))
@@ -57,23 +62,19 @@
 
         $("#linkform").submit(function(e) {
           //var json = this.link.value;
-          var json = lv.getData("#link");
-          console.log(json);
-          $.ajax({
-            url: "r/link.r",
-            dataType: 'json',
-            data: {"link":JSON.stringify(json)},
-            type: "POST",
-            success: function(data) {
-              if (data.fail) {
-                $("#linkresult").html("Creation of table failed: '" + 
-                  data.message + "'");
-              } else {
-                $("#linkresult").html("<a href=\"visualise.html?table=" + data + 
-                  "\"><i class='icon-eye-open'></i>Table successfully created</a>");
-              }
-            }
-          });
+          var link = lv.getData("#link");
+          console.log(link);
+          R.link_tables(link).success(
+            function(data) {
+                  $("#linkresult").html("<a href=\"visualize.html?table=" + data + 
+                    "\"><i class='icon-eye-open'></i>Table successfully created</a>");
+              }).error(function(data){
+                if (data.fail) {
+                  $("#linkresult").html("Creation of table failed: '" + 
+                    data.message + "'");
+                }
+              })
+          ;
           return false;
         });
 

@@ -1,6 +1,14 @@
-name: Leefbaarheidsbeoordeling
-description: "Selectie uit StatLine tabel ''"
+name: Overlast (score)
+description: Selectie uit StatLine tabel ''
 dimensions:
+  Soort:
+    name: Soort
+    levels:
+    - Dreiging
+    - Overlast vermogensdelicten
+    - Sociale overlast
+    default: Sociale overlast
+    type: categorical
   Regio:
     name: Regio
     levels:
@@ -43,22 +51,11 @@ dimensions:
     default: 2011
     type: categorical
 variables:
-  Leefbaarheid:
-    name: Leefbaarheid
-    type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Veiligheid:
-    name: Veiligheid
-    type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Woonomgeving:
-    name: Woonomgeving
+  Overlast:
+    name: Overlast
     type: numeric
     unit: score (0-10)
     population: bevolking
 populations:
-  bevolking: 
-defaultgraph: bar
+  bevolking: ~
 

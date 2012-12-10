@@ -1,6 +1,23 @@
-name: Leefbaarheidsbeoordeling
-description: "Selectie uit StatLine tabel ''"
+name: Overlastbeleving (%)
+description: ~
 dimensions:
+  Soort:
+    name: Soort
+    levels:
+    - Bedreiging
+    - Beschadiging aan/ diefstal uit auto's
+    - Diefstal uit auto's
+    - Dronken mensen op straat
+    - Drugsoverlast
+    - Fietsendiefstal
+    - Gewelddelicten
+    - Inbraak in woningen
+    - Jeugdcriminaliteit
+    - Mensen worden op straat lastig gevallen
+    - Overlast van groepen jongeren
+    - Straatroof
+    default: Straatroof
+    type: categorical
   Regio:
     name: Regio
     levels:
@@ -43,22 +60,11 @@ dimensions:
     default: 2011
     type: categorical
 variables:
-  Leefbaarheid:
-    name: Leefbaarheid
+  Overlast:
+    name: Overlast
     type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Veiligheid:
-    name: Veiligheid
-    type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Woonomgeving:
-    name: Woonomgeving
-    type: numeric
-    unit: score (0-10)
+    unit: '% ''komt vaak voor'''
     population: bevolking
 populations:
-  bevolking: 
-defaultgraph: bar
+  bevolking: ~
 

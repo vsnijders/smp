@@ -1,0 +1,90 @@
+name: Geregistreerde misdrijven naar politieregio
+description: Selectie uit StatLine tabel 'Geregistreerde criminaliteit; misdrijven
+  en verdachten naar regio'
+dimensions:
+  Regio:
+    name: Regio
+    levels:
+    - Amsterdam-Amstelland (PO)
+    - Brabant-Noord (PO)
+    - Brabant-Zuidoost (PO)
+    - Drenthe (PO)
+    - Flevoland (PO)
+    - Friesland (PO)
+    - Gelderland-Midden (PO)
+    - Gelderland-Zuid (PO)
+    - Gooi en Vechtstreek (PO)
+    - Groningen (PO)
+    - Haaglanden (PO)
+    - Hollands Midden (PO)
+    - IJsselland (PO)
+    - Kennemerland (PO)
+    - Limburg-Noord (PO)
+    - Limburg-Zuid (PO)
+    - Midden- en West-Brabant (PO)
+    - Nederland
+    - Niet in te delen (PO)
+    - Noord- en Oost-Gelderland (PO)
+    - Noord-Holland-Noord (PO)
+    - Rotterdam-Rijnmond (PO)
+    - Twente (PO)
+    - Utrecht (PO)
+    - Zaanstreek-Waterland (PO)
+    - Zeeland (PO)
+    - Zuid-Holland-Zuid (PO)
+    aggregate: Nederland
+    default: Nederland
+    type: categorical
+  Misdrijf:
+    name: Misdrijf
+    levels:
+    - Vermogensmisdrijven
+    - Vernielingen/misdr.openb.orde
+    - Gewelds- en seksuele misdrijven
+    - Totaal
+    aggregate: Totaal
+    default: Totaal
+    type: categorical
+  Jaar:
+    name: Jaar
+    levels:
+    - 2005
+    - 2006
+    - 2007
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    default: 2011
+    type: categorical
+variables:
+  AantalMisdrijven:
+    name: Aantal misdrijven
+    type: numeric
+    unit: ~
+    population: Geregistreerde misdrijven
+  MisdrijvenPer1000Inwoners:
+    name: Misdrijven per 1000 inwoners
+    type: numeric
+    unit: ~
+    population: Geregistreerde misdrijven
+  OpgehelderdeMisdrijven:
+    name: Opgehelderde misdrijven
+    type: numeric
+    unit: ~
+    population: Geregistreerde misdrijven
+  PercOpgehelderd:
+    name: Perc. opgehelderd
+    type: numeric
+    unit: ~
+    population: Geregistreerde misdrijven
+populations:
+  Geregistreerde misdrijven: Geregistreerde misdrijven
+defaultgraph: line
+defaultgraphs:
+  line:
+    x: Jaar
+    y: PercOpgehelderd
+    colour: Regio
+    column: Misdrijf
+
