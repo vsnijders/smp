@@ -306,7 +306,28 @@ var DimensionView = Backbone.View.extend({
 			lv.render();
 		})
 
+		this.renderCats(par.get(0), dim.toJSON());
+
 		return this;
+	}, 
+
+	renderCats: function(par, dim){
+		console.log(dim.categories);
+		var par = d3.select(par);
+		
+		var cats = par.selectAll("tr.category").data(dim.categories, function(a){ return a.category1});
+		console.log(cats);
+
+		cats.enter().append("tr")
+		   .attr("class", "categories")
+		   .each(function(d,i){
+		   	   console.log(d);
+		   	   var tr = d3.select(this);
+		   	   tr.append("td").append("div");
+		   	   tr.append("td");
+		   	   tr.append("td").append("div");
+		   })
+		   ;
 	}
 });
 

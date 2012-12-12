@@ -23,8 +23,8 @@ function Linechart() {
                   ;
             })
          .on("mouseout", function(d){
-               d3.select(this).style("stroke-width", 1);
                d3.selectAll("g.color")
+                  .style("stroke-width", 1)
                   .style("stroke-opacity", 1)
                   .style("fill-opacity", 0.5)
                   ;

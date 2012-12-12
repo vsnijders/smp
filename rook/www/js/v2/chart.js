@@ -236,16 +236,17 @@ function Chart(options) {
     return true;
   }
 
-  chart.toText = function(d){
-    var text = [];
-    for (var v in selection_){
-      text.push(v + ": " + d[v]);
-    }
-    text = join(text, "\n");
-    console.log(text);
-    return text;
-  }
-
+  // this should auto fill the required plotting variables
+  chart.autofill = function(meta){
+    var vars = [];
+    for (var i = 0; i < required_.length; i++){
+      var pv = required_[i];
+      var v = selection[pv];
+      if (selection[pv] === undefined || selection[pv].length == 0){
+      } else {   
+      }
+    }    
+  }  
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
