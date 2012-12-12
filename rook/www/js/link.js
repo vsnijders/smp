@@ -314,20 +314,45 @@ var DimensionView = Backbone.View.extend({
 	renderCats: function(par, dim){
 		console.log(dim.categories);
 		var par = d3.select(par);
+		var tbody = par.append("tr").attr("class", "categories")
+		   .append("div")
+		   .append("table")
+		   .append("tbody")
+		   ;
 		
-		var cats = par.selectAll("tr.category").data(dim.categories, function(a){ return a.category1});
+		var cats = tbody.selectAll("tr.category").data(dim.categories);
 		console.log(cats);
 
 		cats.enter().append("tr")
-		   .attr("class", "categories")
+		   .attr("class", "category")
 		   .each(function(d,i){
-		   	   console.log(d);
 		   	   var tr = d3.select(this);
-		   	   tr.append("td").append("div");
-		   	   tr.append("td");
-		   	   tr.append("td").append("div");
+
+		   	   tr.append("td")
+		   	   	 .append("div")
+		   	   	 .attr({"data-value": d.category1, 
+		   	   	 	    "data-cat": "category1",
+		   	   	 	    "class" : "category draggable"
+		   	   	 	   })
+		   	   	 .text(d.category1);
+		   	   tr.append("td")
+		   	     .append("a")
+		   	     .append("i")
+		   	     .attr({"class": "icon-resize-horizontal"})
+		   	     ;
+		   	   
+		   	   tr.append("td")
+				 .append("div")
+		   	   	 .attr({"data-value": d.category2, 
+		   	   	 	    "data-cat": "category2",
+		   	   	 	    "class" : "category draggable"
+		   	   	 	   })
+		   	   	 .text(d.category2);
+
 		   })
 		   ;
+
+		cats.exit().remove();
 	}
 });
 
