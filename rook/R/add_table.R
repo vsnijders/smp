@@ -11,6 +11,10 @@ add_table <- function(tablename, data, meta, table_dir = "data/tmp") {
   mname    <- paste0(tablename, "_meta.json")
   filename <- paste0(table_dir, "/", mname)
   write(toJSON(meta), file=filename)
+  
+  if (require(yaml)){
+    write(as.yaml(meta), file=sub("json$", "yml", filename))
+  }
 
   # Add new table to list of tables
   tables <- list()

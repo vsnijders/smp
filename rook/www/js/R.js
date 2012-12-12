@@ -4,61 +4,70 @@
 var R = window.R = {
  	link_tables: function(link){
 		var $data = {};
-		if (link !== undefined) $data['link'] = JSON.stringify(link);
+		$data['link'] = JSON.stringify(link);
 		return $.ajax({
 			url: './R/link_tables',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		},
 	get_table: function(table_name, data, meta){
 		var $data = {};
-		if (table_name !== undefined) $data['table_name'] = JSON.stringify(table_name);
-		if (data !== undefined) $data['data'] = JSON.stringify(data);
-		if (meta !== undefined) $data['meta'] = JSON.stringify(meta);
+		$data['table_name'] = JSON.stringify(table_name);
+		$data['data'] = JSON.stringify(data);
+		$data['meta'] = JSON.stringify(meta);
 		return $.ajax({
 			url: './R/get_table',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		},
 	gen_link: function(table1, table2){
 		var $data = {};
-		if (table1 !== undefined) $data['table1'] = JSON.stringify(table1);
-		if (table2 !== undefined) $data['table2'] = JSON.stringify(table2);
+		$data['table1'] = JSON.stringify(table1);
+		$data['table2'] = JSON.stringify(table2);
 		return $.ajax({
 			url: './R/gen_link',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		},
 	list_tables: function(table_dirs){
 		var $data = {};
-		if (table_dirs !== undefined) $data['table_dirs'] = JSON.stringify(table_dirs);
+		$data['table_dirs'] = JSON.stringify(table_dirs);
 		return $.ajax({
 			url: './R/list_tables',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		},
 	get_meta: function(table_name){
 		var $data = {};
-		if (table_name !== undefined) $data['table_name'] = JSON.stringify(table_name);
+		$data['table_name'] = JSON.stringify(table_name);
 		return $.ajax({
 			url: './R/get_meta',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		},
 	fetch: function(table_name, selection, filter){
 		var $data = {};
-		if (table_name !== undefined) $data['table_name'] = JSON.stringify(table_name);
-		if (selection !== undefined) $data['selection'] = JSON.stringify(selection);
-		if (filter !== undefined) $data['filter'] = JSON.stringify(filter);
+		$data['table_name'] = JSON.stringify(table_name);
+		$data['selection'] = JSON.stringify(selection);
+		$data['filter'] = JSON.stringify(filter);
 		return $.ajax({
 			url: './R/fetch',
 			dataType:'json',
-			type:'POST',
+			type:(arguments.length)? 'POST': 'GET',
+			data: $data});
+		},
+	get_data: function(table_name){
+		var $data = {};
+		$data['table_name'] = JSON.stringify(table_name);
+		return $.ajax({
+			url: './R/get_data',
+			dataType:'json',
+			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
 		} };
 

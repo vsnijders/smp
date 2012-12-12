@@ -118,7 +118,7 @@ function Chart(options) {
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    var margin = { top : 10, 
+    var margin = { top : 15, 
                    left : axes.y.width(),
                    right : 15,
                    bottom : axes.x.height()
@@ -134,14 +134,43 @@ function Chart(options) {
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
       var row = rows[i];
+      var y = y_cell(row);
       var g = canvas_.append('g')
                      .attr('class', 'axis y')
-                     .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
+                     .attr('transform', 'translate(' + 0 + ',' + y + ')')
                      ;
       axes.y.canvas(g).draw()
+
+      if (nrow > 1) {
+        var hx = width - margin.right;
+        var hy = y_bands.bandWidth;
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
+           .attr({ x: hx
+                 , y: y
+                 , width: 15
+                 , height: hy
+                 })
+           .style({fill: 'silver'})
+
+         var hx = hx + 5;
+         var hy =  y + hy/2;
+
+        handle.append('text')
+           .attr({ x: hx
+                 , y: hy
+                 , transform: "rotate(90 "+ hx + " " + hy +")"
+                 })
+           .style('text-anchor','middle')
+           .text(row)
+           ;
+         }
+
     }
     
-var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
+    var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
 
     var x_cell = d3.scale.ordinal()
       .domain(columns)
@@ -156,6 +185,29 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                      .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
                      ;
       axes.x.canvas(g).draw()
+
+      // handle
+      if (ncolumn > 1) {
+        var hw = x_bands.bandWidth;
+
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
+           .attr({ x: x_cell(column)
+                 , y: margin.top - 15
+                 , width: hw
+                 , height: 15}
+                 )
+           .style({fill: 'silver'})
+         handle.append('text')
+           .attr({ x: x_cell(column) + x_bands.bandWidth/2
+                 , y: margin.top - 5
+                 })
+           .style('text-anchor','middle')
+           .text(column)
+           ;
+         }
     }
 
     for (var r in rows){
@@ -167,7 +219,7 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                        .attr('transform', 'translate('+ x_cell(column) + ',' + y_cell(row) + ')')
                        ;
           
-          this.draw_data(nested_data[row][column], g);        
+          this.draw_data(nested_data[row][column], g);  
       }
     }
 

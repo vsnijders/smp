@@ -1,6 +1,20 @@
-name: Leefbaarheidsbeoordeling
-description: "Selectie uit StatLine tabel ''"
+name: Slachtoffers van delicten
+description: Selectie uit 'Slachtofferschap en ondervonden delicten; politieregio
+  (IVM)'. Hierin het percentage van de bevolking dat slachtoffer is van een type delict.
+  NB, de percentages tellen niet op, omdat personen van meerdere delicten slachtoffer
+  kunnen zijn.
 dimensions:
+  Jaar:
+    name: Jaar
+    levels:
+    - 2008
+    - 2009
+    - 2010
+    - 2011
+    default: 2011
+    type:
+    - categorical
+    - int
   Regio:
     name: Regio
     levels:
@@ -33,32 +47,23 @@ dimensions:
     aggregate: Nederland
     default: Nederland
     type: categorical
-  Jaar:
-    name: Jaar
+  Delict:
+    name: Delict
     levels:
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    default: 2011
+    - Geweldsdelicten
+    - Overige delicten
+    - Totaal
+    - Vandalismedelicten
+    - Vermogensdelicten
+    aggregate: Totaal
+    default: Totaal
     type: categorical
 variables:
-  Leefbaarheid:
-    name: Leefbaarheid
+  Slachtofferschap:
+    name: Slachtofferschap
     type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Veiligheid:
-    name: Veiligheid
-    type: numeric
-    unit: score (0-10)
-    population: bevolking
-  Woonomgeving:
-    name: Woonomgeving
-    type: numeric
-    unit: score (0-10)
+    unit: '%'
     population: bevolking
 populations:
-  bevolking: 
-defaultgraph: bar
+  bevolking: bevolking
 

@@ -1,5 +1,4 @@
 function Cntrl(table, node) {
-
   var table_     = table;
   var node_      = node;
   var graph_;
@@ -38,6 +37,30 @@ function Cntrl(table, node) {
      });
     //update stuff?
     return this;
+  }
+
+  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  
+  cntrl.toText = function(d){
+    var d = d3.select(this).datum();
+
+    // TODO add formatting and the likes...
+
+    var vars = meta_.variables;
+    var dims = meta_.dimensions;
+    var labels = [];
+    for (var v in d){
+      var name = (vars[v] || dims[v] || {}).name;
+      
+      if (name === undefined) {
+        continue;
+      } 
+      
+      var value = d[v];
+      labels.push({name:name, value:value});
+    }
+    return Mustache.render(toText_template, {variables: labels});
+    //return labels;
   }
 
   cntrl.graph = function(name) {

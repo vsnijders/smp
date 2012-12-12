@@ -197,26 +197,51 @@ g.crosshair {
   visibility: hidden;
 }
 
-
-/* Color stuff 
-
-*/
-
 span.color {
+  background-color: gray;
   display: none;
+  height: 1em;
+  margin-right: 0.3em;
+  width: 1em;
 }
 
-span.category0{
-  background-color: #1f77b4
+span.category0 {
+ background-color: #1f77b4;
 }
-span.category1{
-  background-color: #ff7f0e
+span.category1 {
+ background-color: #ff7f0e;
 }
-span.category2{
-  background-color: #2ca02c
+span.category2 {
+ background-color: #2ca02c;
 }
-span.category3{
-  background-color: #d62728
+span.category3 {
+ background-color: #d62728;
+}
+span.category4 {
+ background-color: #9467bd;
+}
+span.category5 {
+ background-color: #8c564b;
+}
+span.category6 {
+ background-color: #e377c2;
+}
+span.category7 {
+ background-color: #7f7f7f;
+}
+span.category8 {
+ background-color: #bcbd22;
+}
+span.category9 {
+ background-color: #17becf;
+}
+
+ul.color span.color{
+  display: inline-block;
+}
+
+ul.required {
+  border: 1px silver dashed;
 }
 span.category4{
   background-color: #9467bd

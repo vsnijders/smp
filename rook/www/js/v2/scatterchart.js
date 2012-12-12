@@ -92,6 +92,13 @@ function Scatterchart() {
           .attr('r', axes.size.transform)
           .call(show_crosshair)
       });
+
+   $("g.data circle")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
   }
 
   function show_crosshair(points){

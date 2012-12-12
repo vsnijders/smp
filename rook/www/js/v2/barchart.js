@@ -47,6 +47,14 @@ function Barchart() {
       .call(highlightBar, axes.y.value)
       ;
 
+    $("rect.bar")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "w")
+             })
+      ;
+
+
     // cross hair
     var crosshair = g.append("g")
                      .attr('class', 'crosshair')

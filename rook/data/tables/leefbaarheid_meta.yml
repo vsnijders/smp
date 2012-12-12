@@ -1,5 +1,5 @@
 name: Leefbaarheidsbeoordeling
-description: "Selectie uit StatLine tabel ''"
+description: Selectie uit StatLine tabel ''
 dimensions:
   Regio:
     name: Regio
@@ -59,6 +59,6 @@ variables:
     unit: score (0-10)
     population: bevolking
 populations:
-  bevolking: 
+  bevolking: ~
 defaultgraph: bar
 

@@ -1,5 +1,4 @@
 function Cntrl(table, node) {
-
   var table_     = table;
   var node_      = node;
   var graph_;
@@ -38,6 +37,30 @@ function Cntrl(table, node) {
      });
     //update stuff?
     return this;
+  }
+
+  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  
+  cntrl.toText = function(d){
+    var d = d3.select(this).datum();
+
+    // TODO add formatting and the likes...
+
+    var vars = meta_.variables;
+    var dims = meta_.dimensions;
+    var labels = [];
+    for (var v in d){
+      var name = (vars[v] || dims[v] || {}).name;
+      
+      if (name === undefined) {
+        continue;
+      } 
+      
+      var value = d[v];
+      labels.push({name:name, value:value});
+    }
+    return Mustache.render(toText_template, {variables: labels});
+    //return labels;
   }
 
   cntrl.graph = function(name) {
@@ -193,10 +216,10 @@ function Menu(){
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
         $.each(dat.levels, function(i, lab) {
-          var span_c = $("<span>").attr("class", "color category" + i);
+          var span_c = $("<span>").attr("class", "color category"+i);
           var span = $("<span>").text(lab);
           var label = $("<label>").appendTo(form);
-          span_c.appendTo(label);
+          label.append(span_c);
           span.appendTo(label);
           $("<input>").attr("type", "checkbox").addClass("filter")
             .attr("name", dim)
@@ -718,7 +741,7 @@ function LinearYAxis() {
   
   var variable_;
   var range_  = [undefined, undefined];
-  var width_  = 30;
+  var width_  = 40;
   var height_;
   var canvas_;
   var labels_;
@@ -745,7 +768,7 @@ function LinearYAxis() {
   }
 
   axis.width = function() {
-    return 30;
+    return 40;
   }
 
   axis.height = function(height) {
@@ -784,7 +807,7 @@ function LinearYAxis() {
     return (labels_);
   }
 
-  axis.draw = function() {
+  axis.draw = function(label) {
     canvas_.selectAll("line").data(labels_).enter().append("line")
       .attr("x1", width_-5).attr("x2", width_)
       .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
@@ -794,6 +817,8 @@ function LinearYAxis() {
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return (d);});
+
+    return this;
   }
 
   return axis;
@@ -1132,7 +1157,7 @@ function ColourAxis() {
     var columns  = d3.keys(nested_data[rows[0]]);
     var ncolumn  = columns.length;
 
-    var margin = { top : 10, 
+    var margin = { top : 15, 
                    left : axes.y.width(),
                    right : 15,
                    bottom : axes.x.height()
@@ -1148,14 +1173,43 @@ function ColourAxis() {
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
       var row = rows[i];
+      var y = y_cell(row);
       var g = canvas_.append('g')
                      .attr('class', 'axis y')
-                     .attr('transform', 'translate(' + 0 + ',' + y_cell(row) + ')')
+                     .attr('transform', 'translate(' + 0 + ',' + y + ')')
                      ;
       axes.y.canvas(g).draw()
+
+      if (nrow > 1) {
+        var hx = width - margin.right;
+        var hy = y_bands.bandWidth;
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
+           .attr({ x: hx
+                 , y: y
+                 , width: 15
+                 , height: hy
+                 })
+           .style({fill: 'silver'})
+
+         var hx = hx + 5;
+         var hy =  y + hy/2;
+
+        handle.append('text')
+           .attr({ x: hx
+                 , y: hy
+                 , transform: "rotate(90 "+ hx + " " + hy +")"
+                 })
+           .style('text-anchor','middle')
+           .text(row)
+           ;
+         }
+
     }
     
-var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
+    var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
 
     var x_cell = d3.scale.ordinal()
       .domain(columns)
@@ -1170,6 +1224,29 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                      .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
                      ;
       axes.x.canvas(g).draw()
+
+      // handle
+      if (ncolumn > 1) {
+        var hw = x_bands.bandWidth;
+
+        var handle = canvas_.append('g')
+          .attr("class", "handle")
+        
+        handle.append('rect')
+           .attr({ x: x_cell(column)
+                 , y: margin.top - 15
+                 , width: hw
+                 , height: 15}
+                 )
+           .style({fill: 'silver'})
+         handle.append('text')
+           .attr({ x: x_cell(column) + x_bands.bandWidth/2
+                 , y: margin.top - 5
+                 })
+           .style('text-anchor','middle')
+           .text(column)
+           ;
+         }
     }
 
     for (var r in rows){
@@ -1181,7 +1258,7 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
                        .attr('transform', 'translate('+ x_cell(column) + ',' + y_cell(row) + ')')
                        ;
           
-          this.draw_data(nested_data[row][column], g);        
+          this.draw_data(nested_data[row][column], g);  
       }
     }
 
@@ -1369,6 +1446,14 @@ var x_bands = bands(ncolumn, [margin.left, width - margin.right], 10);
       .call(highlightLine)
       ;
 
+    $("g.data circle")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
+
+
   }
 
   return chart;
@@ -1467,6 +1552,13 @@ function Scatterchart() {
           .attr('r', axes.size.transform)
           .call(show_crosshair)
       });
+
+   $("g.data circle")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
   }
 
   function show_crosshair(points){
@@ -1556,21 +1648,14 @@ function Mosaicchart() {
     // Add a group for each xfractions.
     var xfractions = g.selectAll(".xfraction")
         .data(xfractions)
-      .enter().append("svg:g")
+      .enter().append("g")
         .attr("class", "xfraction")
-        .attr("xlink:title", function(d) { return d.key; })
         .attr("transform", function(d) { return "translate(" + x_scale(d.offset / sum) + ")"; });
-//        .attr("transform", function(d) { return "translate(" + axes.x.scale(d.offset / sum) + ")"; });
 
-    // Add a rect for each market.
     var yfractions = xfractions.selectAll(".yfraction")
         .data(function(d) { return d.values; })
-      .enter().append("svg:a")
+      .enter().append("rect")
         .attr("class", "yfraction")
-      .append("svg:rect")
-        .style("stroke-width", 1.5)
-        .style("stroke", "white")
-//        .attr("y", function(d) { return axes.y.scale(d.offset / d.parent.sum); })
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
@@ -1578,6 +1663,13 @@ function Mosaicchart() {
         .style("stroke-width", 2)
         .style("stroke", "white")
         ;
+
+    $("g.data rect")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "se")
+             })
+      ;
     }
 
   return chart;
@@ -1630,6 +1722,14 @@ function Barchart() {
       .attr('fill', axes.colour.scale)
       .call(highlightBar, axes.y.value)
       ;
+
+    $("rect.bar")
+      .tipsy({ title: cntrl.toText,
+               html: true,
+               gravity: $.fn.tipsy.autoBounds(100, "w")
+             })
+      ;
+
 
     // cross hair
     var crosshair = g.append("g")
