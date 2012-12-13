@@ -156,12 +156,7 @@ function Menu(){
         }
         return $this.hasClass("variables");
       }
-
-
     });
-
   }
-
-  
   return menu;
 };

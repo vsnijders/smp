@@ -26,7 +26,7 @@ rook_server$add(name = "statmine", app = Builder$new(
     "^/R" = ajaxify(list=c("link_tables",
                            "get_table", 
                            "gen_link", 
-                           "list_tables", 
+                           "list_tables",
                            "get_meta", 
                            "fetch", 
                            "get_data"

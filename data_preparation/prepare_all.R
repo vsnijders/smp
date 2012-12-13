@@ -10,4 +10,5 @@ source("veiligheid/prepare_onveiligheid.R", chdir=TRUE)
 source("energie/prepare_energiebalans.R", chdir=TRUE)
 source("energie/prepare_productie.R", chdir=TRUE)
 
+source("diabetes/prepare_bevolking.R", chdir=TRUE)
 

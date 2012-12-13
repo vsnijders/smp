@@ -134,13 +134,17 @@ function Linechart() {
           .style("fill", color)
           ;
 
+        var values = d.values
+          .filter(function(v){ return isFinite(axes.x.transform(v)) && isFinite(axes.y.transform(v))})
+          ;
+
         gcolor.append("path")
-         .attr("d", line(d.values))
+         .attr("d", line(values))
          .attr("stroke", color)
          .attr("fill", "none")
          ;
 
-        gcolor.selectAll('circle').data(d.values).enter().append('circle')
+        gcolor.selectAll('circle').data(values).enter().append('circle')
           .attr('cx', axes.x.transform)
           .attr('cy', axes.y.transform)
           .attr('r', 3)

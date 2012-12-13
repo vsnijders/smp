@@ -59,7 +59,7 @@ function LinearYAxis() {
       return variable_;
     } else {
       variable_ = variable;
-      value_ = function(d) { return Number(d[variable_]);};
+      value_ = function(d) { return parseFloat(d[variable_]);};
       return this;
     }
   }
@@ -106,7 +106,7 @@ function LinearYAxis() {
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return(axis.transform_val(d[variable_]));
+    return axis.scale(value_(d));
   }
 
   axis.ticks = function() {

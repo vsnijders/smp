@@ -37,7 +37,6 @@
           
           // load template from actual html, compile it and replace it.
           var t = $("#tables").html();
-          //console.log(t);
           var tc = Mustache.compile(t);
           $("#tables").html(tc({tables:tables}));
 
@@ -65,6 +64,17 @@
               $(".one").addClass("disabled");
             } 
           });
+
+          $("a.table").each(function(i, a){
+            var id = $(a).attr("data-tableid");
+            $(a).attr("href", "table.html?table=" + id)
+          });
+
+          $("a.visualize").each(function(i, a){
+            var id = $(a).attr("data-tableid");
+            $(a).attr("href", "visualize.html?table=" + id)
+          });
+
         });
 
         // Handle clicks on the link link
@@ -78,6 +88,7 @@
           }
         });
 
+ 
         // Handle clicks on the view link
         $("#view_table").click(function() {
           if (!$(this).hasClass("disabled")) {
@@ -126,8 +137,8 @@
           <td class="select"><input type="checkbox" value="{{id}}"></td>
           <td class="description">
           <h3>{{name}}
-            <a href="table.html?table={{id}}"><i class="icon-th"></i></a>
-            <a href="visualize.html?table={{id}}"><i class="icon-eye-open"></i></a>
+            <a data-tableid="{{id}}" class="table" href="#"><i class="icon-th"></i></a>
+            <a data-tableid="{{id}}" class="visualize" href="#"><i class="icon-eye-open"></i></a>
           </h3>
             <p>{{description}}</p>
           </td>
