@@ -2,7 +2,7 @@ source("../settings.R", chdir=TRUE)
 
 data <- read.csv2("arbeidsmarktparticipatie.csv")
 
-data$geslacht <- factor(data$geslacht, levels=c('man', 'vrouw'))
+data$geslacht <- factor(data$geslacht, levels=c('man', 'vrouw', 'totaal'))
 data$generatie <- factor(data$generatie, levels=c(
   "1906-1910", "1911-1915", "1916-1920", "1921-1925", "1926-1930", "1931-1935", "1936-1940",
   "1941-1945", "1946-1950", "1951-1955", "1956-1960", "1961-1965", "1966-1970", "1971-1975",
@@ -15,6 +15,15 @@ data$variable <- "participatie"
 
 data <- data[ , c("geslacht", "generatie", "leeftijd", "value")]
 names(data)[4] <- "participatie"
+
+# create a total table, assuming that male and female for working population are of equal size...
+library(plyr)
+totaal <- ddply(data, c("generatie", "leeftijd"), function(d){ 
+    val <- transform(d, participatie = sum(d$participatie)/2, geslacht="totaal")
+    val[1,,drop=FALSE]
+})
+
+data <- rbind(data, totaal)
 
 # Create meta
 meta_file <- "arbeidsmarktparticipatie.yaml"
