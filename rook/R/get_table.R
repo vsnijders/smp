@@ -32,5 +32,5 @@ get_meta <- function(table_name){
 }
 
 get_data <- function(table_name){
-  get_table(table_name, data=TRUE, meta=FALSE)$data  
+  get_table(table_name, data=TRUE, meta=FALSE)$data
 }

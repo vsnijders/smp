@@ -66,8 +66,11 @@
           console.log(link);
           R.link_tables(link).success(
             function(data) {
-                  $("#linkresult").html("<a href=\"visualize.html?table=" + data + 
-                    "\"><i class='icon-eye-open'></i>Table successfully created</a>");
+                  var template = "Successfully created table '{{table}}'"+
+                  "<a href='table.html?table={{table}}'> <i class='icon-th'></i></a>" +
+                  "<a href='visualize.html?table={{table}}'><i class='icon-eye-open'></i></a>";
+                  var html = Mustache.render(template, {table:data})
+                  $("#linkresult").html(html);
               }).error(function(data){
                 if (data.fail) {
                   $("#linkresult").html("Creation of table failed: '" + 
@@ -229,9 +232,9 @@
      </tbody>
     </table>
   </div>
-    </div> 
+      </div> 
       <button class="btn btn-primary" type="submit">Create linked table</button>
-      <p id="linkresult"></p>
+      <div class="well"><p id="linkresult"></p></div>
       </div>
       </form>
     </article>

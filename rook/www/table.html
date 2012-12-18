@@ -29,8 +29,8 @@
 
         var tablename = $(document).getUrlParam("table");
         R.get_data(tablename).success(function(data){
+          console.log(data);
           var div   = $("#table");
-          
 
           var table = $("<table>");
           var tr    = $("<tr>").appendTo(table);
