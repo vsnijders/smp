@@ -1,13 +1,15 @@
 name: arbeidsmarktparticipatie
-description: ~
+description: Deze tabel bevat de arbeidsparticipatie naar geslacht van verschillende
+  generaties.
 dimensions:
   geslacht:
     name: geslacht
     levels:
     - man
     - vrouw
-    aggregate: vrouw
-    default: vrouw
+    - totaal
+    aggregate: totaal
+    default: totaal
     type: categorical
   generatie:
     name: generatie
@@ -87,15 +89,15 @@ dimensions:
     - 65
     - 66
     - 67
-    aggregate: 67
-    default: 67
+    default: 50
     type: categorical
 variables:
   participatie:
     name: participatie
     type: numeric
     unit: ~
-    population: arbeidsmarktparticipatie
+    population: beroepsbevolking
 populations:
-  arbeidsmarktparticipatie: No population description availabla
+  beroepsbevolking: De nederlandse bevolking die gerekend kan worden tot de beroepsbevolking
+    (tussen 16 en n)
 

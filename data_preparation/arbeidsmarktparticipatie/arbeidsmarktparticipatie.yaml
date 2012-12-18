@@ -7,8 +7,9 @@ dimensions:
     levels:
     - man
     - vrouw
-    aggregate: vrouw
-    default: vrouw
+    - totaal
+    aggregate: totaal
+    default: totaal
     type: categorical
   generatie:
     name: generatie
@@ -88,8 +89,7 @@ dimensions:
     - 65
     - 66
     - 67
-    aggregate: 67
-    default: 67
+    default: 50
     type: categorical
 variables:
   participatie:
