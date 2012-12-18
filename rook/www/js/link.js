@@ -130,7 +130,7 @@ var LinkView = Backbone.View.extend({
 			view.render($tbody);
 		});
 
-		this.refreshDrop();
+		this.refreshDrop($tbody);
 		return this;
 	},
 
@@ -171,14 +171,13 @@ var LinkView = Backbone.View.extend({
 				var data = $(this).data();
 				cat[data.cat] = data.value;
 				cats.push(cat);
-				console.log(cats);
 			});
 
 		});
 		return link;
 	},
 
-	refreshDrop: function(){
+	refreshDrop: function(tbody){
 
 		var _linkview = this;
 
@@ -193,6 +192,7 @@ var LinkView = Backbone.View.extend({
           .draggable( {axis:"y", revert: "invalid"} )
           ;
 
+        tbody.on("mouseover", "a.unlink i", function(a) {$(a).toggleClass("icon-remove")})
 
         $(".dimension.droppable")
           .droppable({
@@ -213,9 +213,7 @@ var LinkView = Backbone.View.extend({
 	        	var link = _linkview.model = new Link(_linkview.getData("#link"));
 
 
-	        	console.log(link);
 	        	link.dimensions.link(d.index, t.index);
-	        	console.log(link);
 
 	        	// should be triggered by previous statement
 	        	_linkview.render();
@@ -242,12 +240,11 @@ var LinkView = Backbone.View.extend({
         	target.insertBefore(stub);
         	stub.remove();
 
-        	console.log(dragevent, dragged)
         }
 
         $(".category.droppable")
           .droppable({
-            accept: ".category.draggable",
+            accept: function(drop){ return (drop.attr("data-cat") == $(this).attr("data-cat"));},
             activeClass: "droppable_active", 
             hoverClass: "droppable_hover", 
             tolerance : "touch",
@@ -306,13 +303,12 @@ var DimensionView = Backbone.View.extend({
 			lv.render();
 		})
 
-		this.renderCats(par.get(0), dim.toJSON());
+		//this.renderCats(par.get(0), dim.toJSON());
 
 		return this;
 	}, 
 
 	renderCats: function(par, dim){
-		console.log(dim.categories);
 		var par = d3.select(par);
 		var tbody = par.append("tr").attr("class", "categories")
 		   .append("div")
@@ -321,31 +317,32 @@ var DimensionView = Backbone.View.extend({
 		   ;
 		
 		var cats = tbody.selectAll("tr.category").data(dim.categories);
-		console.log(cats);
-
 		cats.enter().append("tr")
 		   .attr("class", "category")
 		   .each(function(d,i){
 		   	   var tr = d3.select(this);
 
 		   	   tr.append("td")
-		   	   	 .append("div")
+		   	     .append("div")
 		   	   	 .attr({"data-value": d.category1, 
 		   	   	 	    "data-cat": "category1",
-		   	   	 	    "class" : "category draggable"
+		   	   	 	    "class" : "category " + ((d.category1)? "draggable" : "droppable")
 		   	   	 	   })
 		   	   	 .text(d.category1);
+
+		   	   var td2 = tr.append("td")
+		   	   if (d.category1  && d.category2){
+			   	   td2.append("a").attr("class", "unlink")
+			   	     .append("i")
+			   	     .attr({"class": "icon-resize-horizontal"})
+			   	     ;
+		   	   }
+
 		   	   tr.append("td")
-		   	     .append("a")
-		   	     .append("i")
-		   	     .attr({"class": "icon-resize-horizontal"})
-		   	     ;
-		   	   
-		   	   tr.append("td")
-				 .append("div")
+		   	     .append("div")
 		   	   	 .attr({"data-value": d.category2, 
 		   	   	 	    "data-cat": "category2",
-		   	   	 	    "class" : "category draggable"
+		   	   	 	    "class" : "category " + ((d.category2)? "draggable" : "droppable")
 		   	   	 	   })
 		   	   	 .text(d.category2);
 

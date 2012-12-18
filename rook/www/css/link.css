@@ -2,8 +2,9 @@
   margin : 0px;
   padding : 0px;
   min-height : 15px;
-  border-top : solid 1px white;
+  /*border-top : solid 1px white;
   border-bottom : solid 1px white;
+  */
 }
 
 .droppable_active {
@@ -30,4 +31,16 @@
 
 select.categories{
   font-size: 90%;
+}
+
+tr.dimension{
+  background-color: gray
+}
+
+tr.categories{
+  background-color: silver  
+}
+
+td.linked {
+  text-align: center;
 }

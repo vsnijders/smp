@@ -204,11 +204,19 @@
 
     <article>
       <h2>Link tables</h2>
-      <p> You have choosen to link to following two tables. Linking two tables will create a new table. So please fill in the name of the new table:</p>
       <form id="linkform">
+      <div class="well">
+        <p>
+          You have choosen to link to following two tables. Linking two tables will create a new table. So please fill in the name of the new table:
+        </p>
       <div id="link">
-      <label>Name of new table: <input name="newtable" id="newtable" value="linked.table"></input></label>
-      <p>Show how to link each variable in the two tables. The variables with identical names have been linked for you, but can be changed.</p>
+        <label>Name of new table: <input name="newtable" id="newtable" value="linked.table"></input></label>
+        <p>Show how to link each variable in the two tables. The variables with identical names have been linked for you, but can be changed.</p>
+
+        You can drag variables to other positions to connect them the way you like.
+      </div>
+      </div>
+      <div class="well">
       <table>
         <thead>
         <tr>
@@ -220,9 +228,11 @@
      <tbody class="link">
      </tbody>
     </table>
+  </div>
     </div> 
-      <button class="btn" type="submit"><i class="icon-resize-horizontal"></i> Create linked table</button>
+      <button class="btn btn-primary" type="submit">Create linked table</button>
       <p id="linkresult"></p>
+      </div>
       </form>
     </article>
 
