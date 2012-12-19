@@ -134,13 +134,16 @@
        <tr class="categories">
        <td>
         <div>
-           <select class="categories">
+           <select class="categories" data-cat="category1">
            <% _.each(categories, function(category){ %>
             <option class="category" val="<%=category.category1%>" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1%></option>
             <%});%>
            </select>
         </div>
        </td>
+       <td></td>
+       <td></td>
+       <td></td>
      </tr>
     </script>
 
@@ -161,13 +164,14 @@
        <td></td>
        <td>
         <div>
-           <select class="categories">
+           <select class="categories" data-cat="category2">
            <% _.each(categories, function(category){ %>
             <option class="category" val="<%=category.category2%>" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2%></option>
             <%});%>
            </select>
         </div>
        </td>
+       <td></td>
      </tr>
     </script>
 
@@ -208,24 +212,24 @@
     <article>
       <h2>Link tables</h2>
       <form id="linkform">
-      <div class="well">
+      <div class="well" id="link">
         <p>
           You have choosen to link to following two tables. Linking two tables will create a new table. So please fill in the name of the new table:
         </p>
-      <div id="link">
+        <div>
         <label>Name of new table: <input name="newtable" id="newtable" value="linked.table"></input></label>
         <p>Show how to link each variable in the two tables. The variables with identical names have been linked for you, but can be changed.</p>
 
         You can drag variables to other positions to connect them the way you like.
-      </div>
+        </div>
       </div>
       <div class="well">
       <table>
         <thead>
         <tr>
-          <th>Table 1: <div id="table1" class="table">Table 1</th>
+          <th>Table 1: <div style="display:inline" id="table1" class="table">Table 1</th>
           <th></th>
-          <th>Table 2: <div id="table2" class="table">Table 2</th>
+          <th>Table 2: <div style="display:inline" id="table2" class="table">Table 2</th>
         </tr>
        </thead>
      <tbody class="link">
@@ -233,7 +237,7 @@
     </table>
   </div>
       </div> 
-      <button class="btn btn-primary" type="submit">Create linked table</button>
+      <button class="btn btn-primary" id="create" type="submit">Create table</button>
       <div class="well"><p id="linkresult"></p></div>
       </div>
       </form>

@@ -32,14 +32,21 @@ link_tables <- function(link) {
   dimensions   <-names(t1_meta$dimensions)
   variables    <- names(t1_meta$variables)
   selected     <- unlist(sapply(link$dimensions, function(d) {if (!is.null(d$dimension2)) d$dimension1}))
-  
+  slice <- sapply(link$dimensions, 
+                  function(d) { 
+                    if (is.null(d$dimension2)){
+                      category=d$categories[[1]]$category1
+                      names(category) <- d$dimension1
+                      category
+                  }
+  })
   not_selected <- dimensions[!(dimensions %in% selected)]
   
   # Remove non-selected dimensions; select the default category for these 
   # dimensions
   sel <- rep(TRUE, nrow(t1))
   for (dim in not_selected) {
-    default <- t1_meta$dimensions[[dim]]$default
+    default <- slice[[dim]] #t1_meta$dimensions[[dim]]$default
     sel <- sel & t1[dim] == default
   }
   

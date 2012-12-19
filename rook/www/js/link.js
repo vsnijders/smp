@@ -145,7 +145,7 @@ var LinkView = Backbone.View.extend({
 		
 		var dims = link.dimensions = [];
 		
-		$("tr.dimension", el).each(function(i){
+		$("tr.dimension").each(function(i){
 			var dim = {};
 			$("div.dimension", this).each(function(){
 				var data = $(this).data();
@@ -154,7 +154,7 @@ var LinkView = Backbone.View.extend({
 			dims.push(dim);
 		})
 		
-		$("tr.categories", el).each(function(i, tr){
+		$("tr.categories").each(function(i, tr){
 			var cats = dims[i].categories = [];
 			
 			$("tr.category", tr).each(function(i){
@@ -166,14 +166,22 @@ var LinkView = Backbone.View.extend({
 				cats.push(cat);
 			});
 
-			$("option.category", tr).each(function(i){
+			$("select.categories", tr).each(function(i){
+				var cat = {};
+				cat[$(this).data("cat")] = $(this).val();
+				cats.push(cat)
+			});
+
+/*			$("option.category", tr).each(function(i){
 			    var cat = {};
 				var data = $(this).data();
 				cat[data.cat] = data.value;
 				cats.push(cat);
 			});
+*/
 
 		});
+		console.log(link);
 		return link;
 	},
 
@@ -196,7 +204,7 @@ var LinkView = Backbone.View.extend({
 
         $(".dimension.droppable")
           .droppable({
-            accept: ".dimension.draggable",
+            accept: function(target){return $(target).hasClass("dimension");},
             activeClass: "droppable_active", 
             hoverClass: "droppable_hover", 
             tolerance : "touch",

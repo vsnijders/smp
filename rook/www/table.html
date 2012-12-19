@@ -29,9 +29,7 @@
 
         var tablename = $(document).getUrlParam("table");
         R.get_data(tablename).success(function(data){
-          console.log(data);
           var div   = $("#table");
-
           var table = $("<table>");
           var tr    = $("<tr>").appendTo(table);
           
@@ -67,24 +65,6 @@
 
     <article>
       <div id="table" class="numeric">
-        <table>
-          <thead>
-            <tr>
-              <!-- {{#variables}} -->
-              <th>{{name}}</th>
-              <!-- {{/variables}} -->
-            </tr>
-          </thead>
-          <tbody>
-          <!--{{#rows}}-->
-          <tr>
-            <!-- {{#variables}} -->
-            <td>{{value}}</td>
-            <!-- {{/variables}} -->
-          </tr>
-          <!--{{/rows}}-->
-          </tbody>
-        </table>
       </div>
     </article>
 
