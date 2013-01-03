@@ -38,19 +38,141 @@
 
     <!-- scripting -->
     <script type="text/javascript">
+      function sliceDimension(dim, d, i, idx){
+          addSelDim(dim, d.dimension1, d.categories, idx);
+          dim.append("a")
+             .append("i")
+             .attr({"class":"icon-empty"})
+          addSelDim(dim, d.dimension2, d.categories, idx);
+      }
+
+      function linkedDimension(dim, d, i){
+          addDim(dim, d.dimension1);
+          dim.append("a")
+             .append("i")
+             .attr({"class":"icon-resize-horizontal"})
+          addDim(dim, d.dimension2);
+
+
+          dim.append("a")
+             .append("i")
+             .attr({"class":"icon-chevron-down"
+                   ,"data-target": "#categories_" + i
+                   ,"data-toggle": "collapse"
+                   })
+
+          var tbody = dim.append("div")
+              .attr({ "class": "categories"
+                    , "id" : "categories_" + i
+                    })
+              .append("table")
+              .append("tbody")
+              ;
+    
+          var cats = tbody.selectAll("tr.category").data(d.categories);
+          cats.enter().append("tr")
+            .attr("class", "category")
+            .each(function(d,i){
+               var tr = d3.select(this);
+
+               tr.append("td")
+                 .append("div")
+                 .attr({"data-value": d.category1, 
+                      "data-cat": "category1",
+                      "class" : "category " + ((d.category1)? "draggable" : "droppable")
+                     })
+                 .text(d.category1);
+
+               var td2 = tr.append("td")
+               if (d.category1  && d.category2){
+                 td2.append("a").attr("class", "unlink")
+                   .append("i")
+                   .attr({"class": "icon-resize-horizontal"})
+                   ;
+               }
+
+               tr.append("td")
+                 .append("div")
+                 .attr({"data-value": d.category2, 
+                      "data-cat": "category2",
+                      "class" : "category " + ((d.category2)? "draggable" : "droppable")
+                     })
+                 .text(d.category2);
+
+            })
+            ;
+
+          cats.exit().remove();
+      }
 
       function render(link, data){
         console.log(link,data)
         var dimensions = data.dimensions;
 
-        var dims = link.selectAll("tr.linkdimension table").data(dimensions);
+        var dims = link.selectAll("div.linkdimension").data(dimensions);
 
-        dims.enter().append("tr")
+        dims.enter().append("div")
           .attr({"class": "linkdimension"})
-          .append("table")
           ;
-      }
-      
+
+        dims.exit().remove();
+
+        dims.each( function(d,i){
+          var dim = d3.select(this);
+          // test is both dimensions are filled
+          if (d.dimension1 && d.dimension2){
+            linkedDimension(dim, d, i);
+          } else {
+            var idx = (d.dimension1)? 1 : 2;
+            sliceDimension(dim, d, i, idx);
+          }
+      });
+    };
+
+      function addDim(parent, name){
+        parent.append("div")
+          .attr({"class":"dimension placeholder"})
+          .filter(function(){return (name)? true : false;})
+          .append("div")
+          .attr({"class": "draggable"})
+          .call(function(sel){
+            sel.append("i")
+               .attr({"class": "icon-list"})
+               ;
+            sel.text(name);
+          })
+      };
+
+      function addSelDim(parent, name, categories, idx){
+        var nonempty = (name)? true : false;
+        parent.append("div")
+          .attr({"class":"dimension placeholder"})
+          .append("div")
+          .attr({"class": (nonempty)? "draggable" : "droppable"})
+          .filter(function(){return nonempty})
+          .call(function(sel){
+            sel.append("i")
+               .attr({"class": "icon-list"})
+               ;
+            sel.text(name);
+            var opts = sel.append("select")
+               .on("change", function(d, i){
+                  categories.forEach(function(c){d.include = (true);})
+               })
+               .selectAll("option").data(categories);
+
+            opts.enter().append("option");
+
+            opts.each(function(d, i){
+              var catn = d["category" + idx];
+              var option = d3.select(this);
+              option.attr({"value":catn, "name":name,"selected": d.include})
+              option.text(catn)
+            });
+          })
+      };
+
+
       var T1 = null;
 
       $(function() {
@@ -62,7 +184,7 @@
          .success(
             function(data) {
                 console.log(data);                
-                render(d3.select("#link"), data);
+                render(d3.select("#dimlink"), data);
         });
 
         $("#linkform").submit(function(e) {
@@ -126,12 +248,39 @@
      <tbody class="link">
      </tbody>
     </table>
+    <div id="dimlink">
+
+    </div>
   </div>
       </div> 
       <button class="btn btn-primary" id="create" type="submit">Create table</button>
       <div class="well"><p id="linkresult"></p></div>
       </div>
       </form>
+      
+      <div class="linkeddimension">
+        <div class="placeholder dimension"><div class="draggable"><i class="icon-list"></i>dim 1</div></div>
+        <a> <i class="   icon-resize-horizontal"></i></a>
+        <div class="placeholder dimension"><div class="draggable"><i class="icon-list"></i>dim 2</div></div>
+        <a data-target="#cats" data-toggle="collapse"> <i class="icon-chevron-down"></i></a>
+        <ul id="cats" class="categories unstyled collapse in">
+          <li>
+            <input type="checkbox" name="dim1" value="cat1" checked="checked"></input>
+            <div class="placeholder"><div class="draggable">Cat 1</div></div>
+            <a> <i class="icon-resize-horizontal"></i></a>
+            <div class="placeholder"><div class="draggable">Cat 2</div></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="">
+        <div class="placeholder"></div>
+        <a> <i class="icon-empty"></i></a>
+        <div class="placeholder dimension"><div class="draggable"><i class="icon-list"></i>dim 2
+          <select class="categories"><option val="bla">Bla<option><select>
+        </div></div>
+      </div>
+
     </article>
 
     <footer>

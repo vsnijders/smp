@@ -37,10 +37,29 @@ tr.dimension{
   background-color: gray
 }
 
-tr.categories{
+div.dimension, li.dimension{
+  background-color: gray  
+}
+
+div.categories, ul.categories{
   background-color: silver  
+}
+
+select.categories {
+  line-height: auto;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
 }
 
 td.linked {
   text-align: center;
+}
+
+div.placeholder{
+  display: inline-block;
+  width: 40%;
+  padding-left: 1ex;
+  padding-right: 1ex;
 }
