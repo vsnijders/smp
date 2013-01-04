@@ -34,7 +34,7 @@ link_tables <- function(link) {
   slice <- unlist(lapply(link$dimensions, 
                   function(d) { 
                     if (is.null(d$dimension2)){
-                      category=d$categories[[1]]$category1
+                      category <- (unlist(lapply(d$categories, function(c){if (c$include) c$category1})))
                       names(category) <- d$dimension1
                       category
                   }
@@ -177,7 +177,7 @@ link_tables <- function(link) {
   }
   o <- do.call(order, t[names(levels)])
   t <- t[o, ]
-
+s
   # ==== Output
   add_table(link$newtable, t, meta)
 
