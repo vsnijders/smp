@@ -157,20 +157,27 @@ var LinkView = Backbone.View.extend({
 		$("tr.categories").each(function(i, tr){
 			var cats = dims[i].categories = [];
 			
-			$("tr.category", tr).each(function(i){
+			$("tr.category", tr).each(function(){
 			    var cat = {};
 				$("div.category",this).each(function(){
 					var data = $(this).data();
 					cat[data.cat] = data.value;
 				});
+
+				cat.include = $("input.include", this).get(0).checked;
 				cats.push(cat);
 			});
 
-			$("select.categories", tr).each(function(i){
-				var cat = {};
-				cat[$(this).data("cat")] = $(this).val();
-				cats.push(cat)
-			});
+			var select = $("select.categories", tr);
+
+			if (select.length){
+				$("option.category", select).each(function(){
+					var cat = {};
+					cat[$(this).data("cat")] = $(this).val();
+					cat.include = $(this).val() == select.val();
+					cats.push(cat)
+				});
+			}
 
 /*			$("option.category", tr).each(function(i){
 			    var cat = {};
@@ -201,6 +208,8 @@ var LinkView = Backbone.View.extend({
           ;
 
         tbody.on("mouseover", "a.unlink i", function(a) {$(a).toggleClass("icon-remove")})
+    	cleanCats();
+
 
         $(".dimension.droppable")
           .droppable({
@@ -234,6 +243,16 @@ var LinkView = Backbone.View.extend({
             }
           });
 
+        function cleanCats(){
+        	// remove empty rows and show linked cats.
+			$("tr.category").each(function(i,tr){
+				   var linked = $("div.draggable", tr).length == 2;
+				   $("a.unlink", this).toggle(linked);
+			    })
+			   .filter( function(i){ return $("div.droppable", this).length==2})
+			   .remove();        	
+        }
+
         function catDrop(e, dragevent){
 
         	var dragged = dragevent.draggable;
@@ -247,7 +266,7 @@ var LinkView = Backbone.View.extend({
 
         	target.insertBefore(stub);
         	stub.remove();
-
+        	cleanCats();
         }
 
         $(".category.droppable")

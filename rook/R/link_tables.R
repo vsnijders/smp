@@ -8,7 +8,6 @@
 #' @export
 #'
 link_tables <- function(link) {
-
   # Read all necessary data
   t1 <- get_table(link$table1)
   t1_meta <- t1$meta
@@ -16,9 +15,8 @@ link_tables <- function(link) {
   t2      <- get_table(link$table2)
   t2_meta <- t2$meta
   t2      <- t2$data
-  
-  save(link, file="link.RData")
 
+  save(link, t1, t1_meta, t2, t2_meta, file="link.RData")
   # Initialise list with meta for dimensions and variables
   meta <- list(
     name = link$newtable,
@@ -32,14 +30,15 @@ link_tables <- function(link) {
   dimensions   <-names(t1_meta$dimensions)
   variables    <- names(t1_meta$variables)
   selected     <- unlist(sapply(link$dimensions, function(d) {if (!is.null(d$dimension2)) d$dimension1}))
-  slice <- sapply(link$dimensions, 
+  
+  slice <- unlist(lapply(link$dimensions, 
                   function(d) { 
                     if (is.null(d$dimension2)){
                       category=d$categories[[1]]$category1
                       names(category) <- d$dimension1
                       category
                   }
-  })
+  }))
   not_selected <- dimensions[!(dimensions %in% selected)]
   
   # Remove non-selected dimensions; select the default category for these 
@@ -64,6 +63,7 @@ link_tables <- function(link) {
     sel_dim <- rep(FALSE, nrow(t1))
 
     for (cat in dim$categories) {
+      if (is.null(cat$include) || cat$include == FALSE) next
       if (is.null(cat$category1) || grepl("^[[:space:]]*$", cat$category1)) next
       sel <- t1[[dim$dimension1]] == cat$category1
       sel_dim[sel] <- TRUE
@@ -184,5 +184,3 @@ link_tables <- function(link) {
   # Return new table name
   return(link$newtable)
 }
-
-

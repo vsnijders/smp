@@ -69,7 +69,7 @@ matchcats <- function(cats1, cats2){
   i2 <- i2[i1]
   
   cats <- c(cats, mapply( function(c1, c2){
-     list(category1=cats1[c1], category2=cats2[c2])
+     list(category1=cats1[c1], category2=cats2[c2], include=TRUE)
   }, i1, i2, SIMPLIFY=FALSE))
   
   cats <- c(cats, lapply(cats1[-i1], function(c1){

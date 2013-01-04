@@ -38,18 +38,6 @@
 
     <!-- scripting -->
     <script type="text/javascript">
-
-      function render(link, data){
-        console.log(link,data)
-        var dimensions = data.dimensions;
-
-        var dims = link.selectAll("tr.linkdimension table").data(dimensions);
-
-        dims.enter().append("tr")
-          .attr({"class": "linkdimension"})
-          .append("table")
-          ;
-      }
       
       var T1 = null;
 
@@ -62,12 +50,16 @@
          .success(
             function(data) {
                 console.log(data);                
-                render(d3.select("#link"), data);
+                window.l = new Link(data);
+                window.lv = new LinkView({model:l});
+                lv.render();
+                //lv.render("#link", data)
         });
 
         $("#linkform").submit(function(e) {
           //var json = this.link.value;
           var link = lv.getData("#link");
+          console.log(link);
           R.link_tables(link).success(
             function(data) {
                   var template = "Successfully created table '{{table}}'"+
@@ -76,9 +68,9 @@
                   var html = Mustache.render(template, {table:data})
                   $("#linkresult").html(html);
               }).error(function(data){
-                if (data.fail) {
+                if (data) {
                   $("#linkresult").html("Creation of table failed: '" + 
-                    data.message + "'");
+                    data + "'");
                 }
               })
           ;
@@ -87,6 +79,123 @@
 
       });
     </script>
+
+    <script type="text/template" id="dimview_linked">
+       <tr class="dimension">
+          <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension1" data-value="<%=dimension1%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension1 %></span></div>
+          </td>
+          <td><a class="unlink" href="#" data-index="<%=i%>"><i class="icon-resize-horizontal"></i></a></td>
+          <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
+                <i class="icon-list"></i>
+               <span class="dim"><%=dimension2 %></span></div>
+          </td>
+          <td> <a href="#" data-toggle="collapse" data-target="#categories_<%=i%>">
+              <i class="icon-chevron-right"></i></a>
+          </td>
+       </tr>
+
+       <tr class="categories">
+       <td colspan="4" >
+        <div class="collapse" id="categories_<%=i%>">
+         <table class="" style="width:100%">
+           <% _.each(categories, function(category){ %>
+            <tr class="category">
+              <td style="width:20px;"><input class="include" type="checkbox" <%= (category.include)?'checked' : '' %>></input></td>
+              <td> 
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+              </td>
+              <td style="text-align:center">
+                 <a class="unlink"> <i class="icon-resize-horizontal"></i> </a>
+              </td>
+
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+            </tr>
+            <%});%>
+          </table>
+        </div>
+       </td>
+      </tr>
+    </script>
+
+    <script type="text/template" id="dimview_unlinked1">
+       <tr class="dimension">
+          <td> <div class="dimension draggable"  data-index="<%=i%>" data-dim="dimension1" data-value="<%=dimension1%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension1 %></span></div>
+          </td>
+          <td></td>
+          <td> <div class="dimension droppable"  data-index="<%=i%>" data-dim="dimension2" data-value="">
+               </div>
+          </td>
+          <td></td>
+       </tr>
+       <tr class="categories">
+       <td>
+        <div>
+           <select class="categories" data-cat="category1">
+           <% _.each(categories, function(category){ %>
+            <option class="category" val="<%=category.category1%>" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1%></option>
+            <%});%>
+           </select>
+        </div>
+       </td>
+       <td></td>
+       <td></td>
+       <td></td>
+     </tr>
+    </script>
+
+    <script type="text/template" id="dimview_unlinked2">
+       <tr class="dimension">
+          <td> <div class="dimension droppable"  data-index="<%=i%>" data-dim="dimension1" data-value="">
+               </div>
+          </td>
+          <td></td>
+          <td> <div class="dimension draggable"  data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
+               <i class="icon-list"></i> 
+               <span class="dim"><%=dimension2 %></span></div>
+          </td>
+          <td></td>
+       </tr>
+       <tr class="categories">
+       <td></td>
+       <td></td>
+       <td>
+        <div>
+           <select class="categories" data-cat="category2">
+           <% _.each(categories, function(category){ %>
+            <option class="category" val="<%=category.category2%>" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2%></option>
+            <%});%>
+           </select>
+        </div>
+       </td>
+       <td></td>
+     </tr>
+    </script>
+
+    <script type="text/template" id="template-linked_categories">
+      <tr class="categories">
+       <td colspan="4" >
+        <div class="collapse" id="categories_<%=i%>">
+         <table class="" style="width:100%">
+           <% _.each(categories, function(category){ %>
+            <tr class="category">
+              <td> 
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+              </td>
+              <td style="align:center"><i class="icon-resize-horizontal"></i></td>
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+            </tr>
+            <%});%>
+          </table>
+        </div>
+       </td>
+      </tr>
+    </script>
+
+
   </head>
 
   <body>
