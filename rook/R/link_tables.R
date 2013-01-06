@@ -25,11 +25,19 @@ link_tables <- function(link) {
     dimensions = list(),
     variables = list(),
     populations = c(t1_meta$populations, t2_meta$populations))
+  
+  link$dimensions <- lapply(link$dimensions, function(d){
+    include <- unlist(sapply(d$categories, `[`, "include"))
+    
+    d$categories <- d$categories[include]
+    d
+  })
 
   # ==== Prepare table 1
   dimensions   <-names(t1_meta$dimensions)
   variables    <- names(t1_meta$variables)
   selected     <- unlist(sapply(link$dimensions, function(d) {if (!is.null(d$dimension2)) d$dimension1}))
+  
   
   slice <- unlist(lapply(link$dimensions, 
                   function(d) { 
@@ -85,7 +93,6 @@ link_tables <- function(link) {
   # ==== Prepare table 2
   dimensions   <- names(t2_meta$dimensions)
   variables    <- names(t2_meta$variables)
-  selected  <- unlist(sapply(link$dimensions, function(d) {if (!is.null(d$dimension1)) d$dimension2}))
   not_selected <- dimensions[!(dimensions %in% selected)]
 
   # Remove non-selected dimensions; select the default category for these 
@@ -177,7 +184,6 @@ link_tables <- function(link) {
   }
   o <- do.call(order, t[names(levels)])
   t <- t[o, ]
-s
   # ==== Output
   add_table(link$newtable, t, meta)
 
