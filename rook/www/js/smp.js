@@ -39,7 +39,7 @@ function Cntrl(table, node) {
     return this;
   }
 
-  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  var toText_template = "<table>{{#variables}}<tr><th style='font-weight:bold;text-align:right'>{{name}}:</th><td>{{value}}</td></tr>{{/variables}}</table>"
   
   cntrl.toText = function(d){
     var d = d3.select(this).datum();
@@ -171,7 +171,7 @@ function Menu(){
         selection[dimension][j] = $(li).attr("data-variable");
       });
     });
-
+    console.log(selection);
     cntrl.selection(selection);
   }
 
@@ -297,13 +297,8 @@ function Menu(){
         }
         return $this.hasClass("variables");
       }
-
-
     });
-
   }
-
-  
   return menu;
 };
 
@@ -753,7 +748,7 @@ function LinearYAxis() {
       return variable_;
     } else {
       variable_ = variable;
-      value_ = function(d) { return Number(d[variable_]);};
+      value_ = function(d) { return parseFloat(d[variable_]);};
       return this;
     }
   }
@@ -800,7 +795,7 @@ function LinearYAxis() {
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return(axis.transform_val(d[variable_]));
+    return axis.scale(value_(d));
   }
 
   axis.ticks = function() {
@@ -1275,16 +1270,17 @@ function ColourAxis() {
     return true;
   }
 
-  chart.toText = function(d){
-    var text = [];
-    for (var v in selection_){
-      text.push(v + ": " + d[v]);
-    }
-    text = join(text, "\n");
-    console.log(text);
-    return text;
-  }
-
+  // this should auto fill the required plotting variables
+  chart.autofill = function(meta){
+    var vars = [];
+    for (var i = 0; i < required_.length; i++){
+      var pv = required_[i];
+      var v = selection[pv];
+      if (selection[pv] === undefined || selection[pv].length == 0){
+      } else {   
+      }
+    }    
+  }  
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
@@ -1319,8 +1315,8 @@ function ColourAxis() {
                   ;
             })
          .on("mouseout", function(d){
-               d3.select(this).style("stroke-width", 1);
                d3.selectAll("g.color")
+                  .style("stroke-width", 1)
                   .style("stroke-opacity", 1)
                   .style("fill-opacity", 0.5)
                   ;
@@ -1430,13 +1426,17 @@ function ColourAxis() {
           .style("fill", color)
           ;
 
+        var values = d.values
+          .filter(function(v){ return isFinite(axes.x.transform(v)) && isFinite(axes.y.transform(v))})
+          ;
+
         gcolor.append("path")
-         .attr("d", line(d.values))
+         .attr("d", line(values))
          .attr("stroke", color)
          .attr("fill", "none")
          ;
 
-        gcolor.selectAll('circle').data(d.values).enter().append('circle')
+        gcolor.selectAll('circle').data(values).enter().append('circle')
           .attr('cx', axes.x.transform)
           .attr('cy', axes.y.transform)
           .attr('r', 3)

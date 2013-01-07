@@ -30,7 +30,6 @@ function Menu(){
         selection[dimension][j] = $(li).attr("data-variable");
       });
     });
-
     cntrl.selection(selection);
   }
 
@@ -48,17 +47,9 @@ function Menu(){
     }
   }
 
-
-  // data is the meta data of the table
-  menu.render = function(data) {
-    meta_ = data;
-
-    // TODO: following code block needs cleanup
-    $(".variables").each(function(i, el) {
-      // add dimensions to page
-      $.each(data.dimensions, function(dim, dat) {
+  function makeCatVar(id, catVar){
         var li = $("<li>").addClass("draggable categorical")
-          .attr("data-variable", dim).text(dat.name)
+          .attr("data-variable", id).text(catVar.name)
           .draggable({
             revert : "invalid",
             axis : "y"
@@ -74,36 +65,72 @@ function Menu(){
 
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
-        $.each(dat.levels, function(i, lab) {
+        $.each(catVar.levels, function(i, lab) {
           var span_c = $("<span>").attr("class", "color category"+i);
           var span = $("<span>").text(lab);
           var label = $("<label>").appendTo(form);
           label.append(span_c);
           span.appendTo(label);
           $("<input>").attr("type", "checkbox").addClass("filter")
-            .attr("name", dim)
+            .attr("name", id)
             .val(lab)
             .click(behave_like_radio) 
             .click(update_filter)
             .click(cntrl.redraw)
             .prependTo(label);
         });
-        $(el).append(li);
-      });
+      return li;
+  }
 
-
-      // add variables to page
-      $.each(data.variables, function(dim, dat) {
+  function makeNumVar(id, numVar){
         var li = $("<li>").addClass("draggable numeric")
-          .attr("data-variable", dim).text(dat.name)
+          .attr("data-variable", id).text(numVar.name)
           .draggable({
             revert : "invalid",
             axis : "y"
           });
+        return li;
+  }
+
+  function autoFill(){
+    var a = ["numeric", "categorical"];
+    
+    $(".tab-pane").each(function(i, tab){
+      $(".required", tab).each(function(j, pv){
+        var vars = $(".variables li", tab);
+        for (var v = 0; v < vars.length; v++){
+          var el = $(vars[v]);
+          for (var c in a){
+            if (el.hasClass(a[c]) && $(pv).hasClass(a[c])){
+              el.appendTo(pv);
+              return;
+            }
+          }
+        }
+      })
+    })
+  }
+
+  // data is the meta data of the table
+  menu.render = function(data) {
+    meta_ = data;
+
+    // TODO: following code block needs cleanup
+    $(".variables").each(function(i, el) {
+      // add dimensions to page
+      $.each(data.dimensions, function(dim, dat) {
+        $(el).append(makeCatVar(dim,dat));
+      });
+  
+      // add variables to page
+      $.each(data.variables, function(dim, dat) {
+        var li = makeNumVar(dim,dat);
         $(el).append(li)
       });
-
     });
+
+    autoFill();
+  
        // Create tabbed pages for each of the graph types
     $("#tabs").tabs();
     // Keep track of which tab = graphtype is selected

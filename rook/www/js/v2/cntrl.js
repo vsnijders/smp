@@ -39,7 +39,7 @@ function Cntrl(table, node) {
     return this;
   }
 
-  var toText_template = "<table>{{#variables}}<tr><td style='text-align:right'>{{name}}</td><td>{{value}}</td></tr>{{/variables}}</table>"
+  var toText_template = "<table>{{#variables}}<tr><th style='font-weight:bold;text-align:right'>{{name}}:</th><td>{{value}}</td></tr>{{/variables}}</table>"
   
   cntrl.toText = function(d){
     var d = d3.select(this).datum();
