@@ -236,17 +236,6 @@ function Chart(options) {
     return true;
   }
 
-  // this should auto fill the required plotting variables
-  chart.autofill = function(meta){
-    var vars = [];
-    for (var i = 0; i < required_.length; i++){
-      var pv = required_[i];
-      var v = selection[pv];
-      if (selection[pv] === undefined || selection[pv].length == 0){
-      } else {   
-      }
-    }    
-  }  
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////

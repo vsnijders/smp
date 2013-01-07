@@ -297,6 +297,7 @@ function ColourAxis() {
       return variable_;
     } else {
       variable_ = variable;
+
       if (variable === undefined || variable.length == 0){
         value_ = d3.functor("<empty>");
       } else {
@@ -313,7 +314,22 @@ function ColourAxis() {
   }
 
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, value_));
+    
+    //HACK!!!!
+    var dims = cntrl.meta().dimensions;
+    var dim;
+    if (dim = dims[variable_]){
+      if (dim.levels.length > 10){
+        axis.scale = scale_ = d3.scale.category20c();
+      } else {
+        axis.scale = scale_ = d3.scale.category10();        
+      }
+      scale_.domain(dim.levels);
+    } else {
+      scale_.domain(d3.map(data, value_));
+    }
+    // END HACK
+
     return(this);
   }
 

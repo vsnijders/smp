@@ -66,7 +66,7 @@ function Menu(){
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
         $.each(catVar.levels, function(i, lab) {
-          var span_c = $("<span>").attr("class", "color category"+i);
+          var span_c = $("<span>").attr({"class":"color", "data-value":lab});
           var span = $("<span>").text(lab);
           var label = $("<label>").appendTo(form);
           label.append(span_c);
