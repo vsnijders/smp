@@ -313,12 +313,22 @@ function ColourAxis() {
     return value_;
   }
 
+  function cols(levels){
+    var o = d3.scale.ordinal().domain(levels).rangePoints([0,360], 1);
+    var cols = o.range().map(function(h) {
+      return d3.hcl(h, 70, 70).toString();
+    })
+    console.log(cols);
+    return cols;
+  }
+
   axis.domain = function(data) {
     
     //HACK!!!!
     var dims = cntrl.meta().dimensions;
     var dim;
     if (dim = dims[variable_]){
+      cols(dim.levels);
       if (dim.levels.length > 10){
         axis.scale = scale_ = d3.scale.category20c();
       } else {

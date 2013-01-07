@@ -5,6 +5,16 @@ data <- read.csv2("productie.csv", dec='.', na.strings=NA_STRINGS, fileEncoding=
 data <- data[c(1,2,4,12)]
 names(data) <- c("Sector", "Jaar", "BrutoToegevoegdeWaardeBasisprijzen", "BrutoToegevoegdeWaardeBasisprijzenIndex")
 
+sector1718 <- data$Sector %in% c("18 Grafische industrie", "17 Papierindustrie")
+data1718 <- data[sector1718, ]
+library(plyr)
+data1718 <- ddply(data1718, c("Jaar"), summarise
+                , Sector = "17-18 Papier- en grafische industrie"
+                , BrutoToegevoegdeWaardeBasisprijzen = sum(BrutoToegevoegdeWaardeBasisprijzen, na.rm=TRUE)
+                , BrutoToegevoegdeWaardeBasisprijzenIndex = mean(BrutoToegevoegdeWaardeBasisprijzenIndex, na.rm=TRUE)
+)
+
+data <- rbind(data, data1718)
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))
 # remove "," 
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))

@@ -10,9 +10,10 @@ data19 <- data[sector19, ]
 library(plyr)
 data19 <- ddply(data19, c("Energiedragers", "Jaar"), summarise
                                                    , Sector = "19"
-                                                   , Energieaanbod = sum(Energieaanbod)
-                                                   , Energieverbruik = sum(Energieverbruik)
+                                                   , Energieaanbod = sum(Energieaanbod, na.rm=TRUE)
+                                                   , Energieverbruik = sum(Energieverbruik, na.rm=TRUE)
                                                    )
+data <- rbind(data, data19)
 
 # remove ","
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))

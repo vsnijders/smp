@@ -1,8 +1,9 @@
-name: Energiebalans; aanbod, omzetting en verbruik
-description: Selectie uit 'Energiebalans; aanbod, omzetting en verbruik'
+name: Energiebalans
+description: ''
 dimensions:
   Energiedragers:
     name: Energiedragers
+    description: ''
     levels:
     - Aardgas
     - Aardgascondensaat
@@ -47,29 +48,32 @@ dimensions:
     type: categorical
   Jaar:
     name: Jaar
+    description: ''
     levels:
-    - 1995
-    - 1996
-    - 1997
-    - 1998
-    - 1999
-    - 2000
-    - 2001
-    - 2002
-    - 2003
-    - 2004
-    - 2005
-    - 2006
-    - 2007
-    - 2008
-    - 2009
-    - 2010
-    - 2011
-    aggregate: 2011
-    default: 2011
-    type: categorical
+    - '1995'
+    - '1996'
+    - '1997'
+    - '1998'
+    - '1999'
+    - '2000'
+    - '2001'
+    - '2002'
+    - '2003'
+    - '2004'
+    - '2005'
+    - '2006'
+    - '2007'
+    - '2008'
+    - '2009'
+    - '2010'
+    - '2011'
+    default: '2011'
+    type:
+    - categorical
+    - time
   Sector:
     name: Sector
+    description: ''
     levels:
     - 06 Winning van aardolie en aardgas
     - 08 Delfstoffenwinning (geen olie en gas)
@@ -90,7 +94,7 @@ dimensions:
     - 35 Energiebedrijven
     - Basischemie zonder 2013-2015
     - Chemische en farmaceutische producten
-    - 191 Cokesfabrieken
+    - Cokesfabrieken
     - E Waterbedrijven en afvalbeheer
     - Energiesector
     - F Bouwnijverheid
@@ -109,25 +113,23 @@ dimensions:
     - Vervoer
     - Visserij
     - Wegverkeer
+    - '19'
     aggregate: Totaal energieafnemers
     default: Totaal energieafnemers
     type: categorical
 variables:
   Energieaanbod:
     name: Energieaanbod
+    description: ''
     type: numeric
-    unit: PJ
+    unit: ''
     population: Bedrijven
   Energieverbruik:
     name: Energieverbruik
+    description: ''
     type: numeric
-    unit: PJ
+    unit: ''
     population: Bedrijven
 populations:
-  Bedrijven: No population description available
-defaultgraph: line
-defaultgraphs:
-  line:
-    x: Jaar
-    y: Energieverbruik
+  Bedrijven: ''
 

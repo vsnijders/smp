@@ -113,13 +113,16 @@ function Cntrl(table, node) {
       R.fetch(table_, selection_, filter_)
        .success(draw)
        .success(function(){
-
         var colScale = graphs_[graph_].axes.colour.scale;
         $("[data-dimension='colour']").each(function(i, colour){
           $("span.color").each(function(_, span){
             $(span).css("background-color", colScale($(span).data("value")));
           })
         })
+
+        console.log(meta_);
+        $("#title").text(meta_.name);
+        $("#graphtitle").text(meta_.variables[selection_.y].name);
        });
     }
     return this;

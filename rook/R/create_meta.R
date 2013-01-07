@@ -1,20 +1,26 @@
 
 create_meta <- function(data, name = "Name missing", description = "", 
         pop_name = name, 
-        pop_description = "No population description availabla") {
+        pop_description = "") {
     dimensions <- names(data)[sapply(data, class) == "factor"]
     variables  <- names(data)[!(names(data) %in% dimensions)]
-    meta <- list(name=name, description="", dimensions = list(), 
+    meta <- list(name=name, description=description, dimensions = list(), 
         variables = list())
     for (dim in dimensions) {
         lvls <- levels(data[[dim]])
-        meta$dimensions[[dim]] = list(name = dim, levels = lvls,
-            aggregate = lvls[length(lvls)], default = lvls[length(lvls)],
-            type = "categorical")
+        d <- list( name = dim, description="", levels = lvls,
+                   aggregate = lvls[length(lvls)], default = lvls[length(lvls)],
+                   type = "categorical"
+                 )
+        if (dim %in% c("jaar","Jaar")){
+          d$aggregate <- NULL
+          d$type=c("categorical", "time")
+        }
+        meta$dimensions[[dim]] = d
     }
     names(meta$dimensions) <- dimensions
     for (var in variables) {
-        meta$variables[[var]] = list(name = var, type = "numeric", unit = "", 
+        meta$variables[[var]] = list(name = var, description="", type = "numeric", unit = "", 
             population = pop_name)
     }
     names(meta$variables) <- variables
