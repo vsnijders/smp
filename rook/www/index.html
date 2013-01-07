@@ -97,6 +97,12 @@
           }
         });
 
+        $("#rm_tmp").on("click", function(){
+          R.rm_tmp().success(function(){
+            window.open("index.html", "_self", false);            
+          });
+        })
+
         // Handle clicks on the browse link
         $("#browse_table").click(function() {
           if (!$(this).hasClass("disabled")) {
@@ -127,6 +133,7 @@
       <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i> View</button>
       <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> Browse</button>
       <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> Link</button>
+      <button id="rm_tmp"  class="btn btn-small"><i class="icon-remove"></i>Remove tmp</button>
     </div>
 
     <div >

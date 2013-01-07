@@ -69,5 +69,14 @@ var R = window.R = {
 			dataType:'json',
 			type:(arguments.length)? 'POST': 'GET',
 			data: $data});
+		},
+	rm_tmp: function(tmp_dir){
+		var $data = {};
+		$data['tmp_dir'] = JSON.stringify(tmp_dir);
+		return $.ajax({
+			url: './R/rm_tmp',
+			dataType:'json',
+			type:(arguments.length)? 'POST': 'GET',
+			data: $data});
 		} };
 

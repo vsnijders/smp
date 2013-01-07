@@ -1,5 +1,4 @@
 list_tables <- function(table_dirs = c("data/tmp", "data/tables")) {
-  cat(table_dirs)
   tables <- list()
   for (dir in table_dirs) {
       try({
