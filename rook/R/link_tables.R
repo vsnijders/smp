@@ -17,6 +17,7 @@ link_tables <- function(link) {
   t2      <- t2$data
 
   save(link, t1, t1_meta, t2, t2_meta, file="link.RData")
+  #load("rook/link.RData")
   # Initialise list with meta for dimensions and variables
   meta <- list(
     name = link$newtable,
@@ -93,6 +94,16 @@ link_tables <- function(link) {
   # ==== Prepare table 2
   dimensions   <- names(t2_meta$dimensions)
   variables    <- names(t2_meta$variables)
+  selected     <- unlist(sapply(link$dimensions, function(d) {if (!is.null(d$dimension1)) d$dimension2}))
+  
+  slice <- unlist(lapply(link$dimensions, 
+                         function(d) { 
+                           if (is.null(d$dimension1)){
+                             category <- (unlist(lapply(d$categories, function(c){if (c$include) c$category2})))
+                             names(category) <- d$dimension2
+                             category
+                           }
+                         }))
   not_selected <- dimensions[!(dimensions %in% selected)]
 
   # Remove non-selected dimensions; select the default category for these 
