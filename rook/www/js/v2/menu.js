@@ -92,6 +92,7 @@ function Menu(){
         return li;
   }
 
+  // fill up required variables with available variables
   function autoFill(){
     var a = ["numeric", "categorical"];
     
