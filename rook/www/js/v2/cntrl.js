@@ -120,9 +120,15 @@ function Cntrl(table, node) {
           })
         })
 
-        console.log(meta_);
         $("#title").text(meta_.name);
-        $("#graphtitle").text(meta_.variables[selection_.y].name);
+
+        var label = "";
+        if (meta_.variables[selection_.y]){
+          label = meta_.variables[selection_.y].name;
+        } else if (meta_.variables[selection_.size]){
+          label = meta_.variables[selection_.size].name;
+        }
+        $("#graphtitle").text(label);
        });
     }
     return this;

@@ -272,3 +272,11 @@ ul.color span.color {
     margin-right: 0.3em;
     width: 1em;  
 }
+
+span.slice {
+  display: none;
+}
+
+ul.variables span.slice {
+  display: inline;
+}

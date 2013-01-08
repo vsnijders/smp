@@ -45,15 +45,31 @@ function Menu(){
       var div = $(this).closest('div.filter');
       $("input:checked", div).not($(this)).attr("checked", false);
     }
+
+    var li = $(this).closest('li');
+    var val = $("input:checked", li).val();
+    if (!val){
+      val = meta_.dimensions[li.data("variable")].default;
+    }
+    $("span.slice", li).text(" [='"+val+"']")
   }
 
   function makeCatVar(id, catVar){
         var li = $("<li>").addClass("draggable categorical")
-          .attr("data-variable", id).text(catVar.name)
+          .attr("data-variable", id)
+          .attr("data-name", catVar.name)
+          .text(catVar.name)
           .draggable({
             revert : "invalid",
             axis : "y"
           });
+
+        var span = $("<span>")
+          .addClass("slice")
+          .text(" [='"+catVar.default+"']")
+          .appendTo(li)
+          ;
+
         var a = $("<a>").attr("href", "#").addClass("togglefilter")
           .html('<i class="icon-chevron-right"></i>').appendTo(li)
           .click(function() {
