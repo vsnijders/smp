@@ -94,7 +94,7 @@ dimensions:
     - 2060
     aggregate: 2060
     default: 2060
-    type: categorical, year, ordinal, integer
+    type: [categorical, year, ordinal]
 variables:
   prognosis:
     name: prognosis

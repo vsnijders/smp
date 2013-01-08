@@ -281,3 +281,8 @@ ul.variables span.slice {
   display: inline;
   font-weight: bold;
 }
+
+a.info {
+    margin-left: 1ex;
+    opacity: 0.5;
+}

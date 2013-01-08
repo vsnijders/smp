@@ -70,6 +70,15 @@ function Menu(){
           .appendTo(li)
           ;
 
+        if (catVar.description){
+          var info = $("<a>")
+            .attr({"href":"#", title: catVar.name, "data-content": catVar.description})
+            .addClass("info")
+            .html('<i class="icon-info-sign"></i>')
+            .popover()
+            .appendTo(li)
+        }
+
         var a = $("<a>").attr("href", "#").addClass("togglefilter")
           .html('<i class="icon-chevron-right"></i>').appendTo(li)
           .click(function() {
@@ -109,6 +118,15 @@ function Menu(){
             revert : "invalid",
             axis : "y"
           });
+
+        if (numVar.description){
+          var info = $("<a>")
+            .attr({"href":"#", title: numVar.name, "data-content": numVar.description})
+            .addClass("info")
+            .html('<i class="icon-info-sign"></i>')
+            .popover()
+            .appendTo(li)
+        }
         return li;
   }
 
