@@ -47,37 +47,37 @@ dimensions:
     type: categorical
 variables:
   suiker:
-    name: Percentage personen met diabetes
+    name: Diabetes
     type: numeric
     unit: '%'
     population: gezo
   suiker1:
-    name: Percentage personen met diabetes type 1
+    name: Diabetes type 1
     type: numeric
     unit: '%'
     population: gezo
   suiker2:
-    name: Percentage personen met diabetes type 2
+    name: Diabetes type 2
     type: numeric
     unit: '%'
     population: gezo
   ondergewicht:
-    name: Percentage personen met ondergewicht
+    name: Ondergewicht
     type: numeric
     unit: '%'
     population: gezo
   normaalgewicht:
-    name: Percentage personen met normaal gewicht
+    name: Normaal gewicht
     type: numeric
     unit: '%'
     population: gezo
   matigovergewicht:
-    name: Percentage personen met matig overgewicht
+    name: Matig overgewicht
     type: numeric
     unit: '%'
     population: gezo
   ernstigovergewicht:
-    name: Percentage personen met ernstig overgewicht
+    name: Ernstig overgewicht
     type: numeric
     unit: '%'
     population: gezo

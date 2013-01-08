@@ -86,3 +86,8 @@ variables:
     population: bevolking
 populations:
   bevolking: bevolking
+defaultGraphs:
+    bar:
+        y: Regio
+        x: Voelt.zich.wel.eens.onveilig
+        column: Jaar

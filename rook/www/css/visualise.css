@@ -279,4 +279,5 @@ span.slice {
 
 ul.variables span.slice {
   display: inline;
+  font-weight: bold;
 }

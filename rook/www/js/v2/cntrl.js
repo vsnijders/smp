@@ -123,10 +123,14 @@ function Cntrl(table, node) {
         $("#title").text(meta_.name);
 
         var label = "";
+        
+        //TODO clean up...
         if (meta_.variables[selection_.y]){
           label = meta_.variables[selection_.y].name;
         } else if (meta_.variables[selection_.size]){
           label = meta_.variables[selection_.size].name;
+        } else if (meta_.variables[selection_.x]){
+          label = meta_.variables[selection_.x].name;
         }
         $("#graphtitle").text(label);
        });

@@ -95,7 +95,7 @@ variables:
   participatie:
     name: participatie
     type: numeric
-    unit: ~
+    unit: '%'
     population: beroepsbevolking
 populations:
   beroepsbevolking: De nederlandse bevolking die gerekend kan worden tot de beroepsbevolking
