@@ -83,8 +83,12 @@ function Menu(){
   }
 
   function makeNumVar(id, numVar){
+        var label = numVar.name;
+        if (numVar.unit){
+          label += " (" + numVar.unit + ")";
+        }
         var li = $("<li>").addClass("draggable numeric")
-          .attr("data-variable", id).text(numVar.name)
+          .attr("data-variable", id).text(label)
           .draggable({
             revert : "invalid",
             axis : "y"
@@ -92,12 +96,30 @@ function Menu(){
         return li;
   }
 
+  // loads the default graph, if available
+  function defaultFill(){
+    
+    $(".tab-pane").each(function(i, tab){
+      var id = tab.id;
+      var sel;
+      if (meta_.defaultgraphs && (sel = meta_.defaultgraphs[id])){
+        $.each(sel, function(d, v){
+          var dsel = "[data-dimension='"+d+"']";
+          var vsel = "[data-variable='"+v+"']";
+          $(vsel, tab).appendTo($(dsel,tab));
+        })
+      }
+    })
+  }
+
   // fill up required variables with available variables
   function autoFill(){
     var a = ["numeric", "categorical"];
     
     $(".tab-pane").each(function(i, tab){
-      $(".required", tab).each(function(j, pv){
+      $(".required", tab)
+      .filter(function(_, ul){return $("li", ul).length==0})
+      .each(function(j, pv){
         var vars = $(".variables li", tab);
         for (var v = 0; v < vars.length; v++){
           var el = $(vars[v]);
@@ -130,6 +152,7 @@ function Menu(){
       });
     });
 
+    defaultFill();
     autoFill();
   
        // Create tabbed pages for each of the graph types
