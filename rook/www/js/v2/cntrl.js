@@ -120,7 +120,13 @@ function Cntrl(table, node) {
           })
         })
 
-        $("#title").text(meta_.name);
+        $("#title")
+           .text(meta_.name)
+           .popover({ content: meta_.description
+                    , trigger: "hover"
+                    , placement: "bottom"
+                   })
+           ;
 
         var label = "";
         

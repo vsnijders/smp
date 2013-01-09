@@ -72,10 +72,13 @@ function Menu(){
 
         if (catVar.description){
           var info = $("<a>")
-            .attr({"href":"#", title: catVar.name, "data-content": catVar.description})
+            .attr({"href":"#"})
             .addClass("info")
             .html('<i class="icon-info-sign"></i>')
-            .popover()
+            .popover({ content: catVar.description
+                     , title: catVar.name
+                     , trigger: "hover"
+                     })
             .appendTo(li)
         }
 
@@ -121,10 +124,13 @@ function Menu(){
 
         if (numVar.description){
           var info = $("<a>")
-            .attr({"href":"#", title: numVar.name, "data-content": numVar.description})
+            .attr({"href":"#"})
             .addClass("info")
             .html('<i class="icon-info-sign"></i>')
-            .popover()
+            .popover({ content: numVar.description
+                     , title: numVar.name
+                     , trigger: "hover"
+                     })
             .appendTo(li)
         }
         return li;

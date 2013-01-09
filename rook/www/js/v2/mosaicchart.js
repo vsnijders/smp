@@ -72,6 +72,7 @@ function Mosaicchart() {
         .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));})
         .style("stroke-width", 2)
         .style("stroke", "white")
+        .call(highlight)
         ;
 
     $("g.data rect")
@@ -80,7 +81,25 @@ function Mosaicchart() {
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
+      function highlight(rects){
+        rects
+          .on("mouseover", function(d){
+              var self = this;
+              d3.selectAll("rect.yfraction")
+                .style("fill-opacity", function(d1){ return (y_value(d1) == y_value(d) 
+                                                          && x_value(d1) == x_value(d))? 1 : 0.5 })
+           })
+          .on("mouseout", function(d){
+              d3.selectAll("rect.yfraction")
+                .style("fill-opacity", 1)
+           })
+          ;
+      return rects;
     }
+  }
+
+  function dim (d, i){
+  }
 
   return chart;
 };

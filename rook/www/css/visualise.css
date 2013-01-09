@@ -48,6 +48,7 @@ div.menu ul {
 div.content {
   margin-left : 265px;
   padding : 5px;
+  overflow: visible;
 }
 div#resizable {
   padding : 5px;
@@ -285,4 +286,12 @@ ul.variables span.slice {
 a.info {
     margin-left: 1ex;
     opacity: 0.5;
+}
+
+.tab-content{
+  overflow: visible;
+}
+
+#title {
+  cursor: info;
 }

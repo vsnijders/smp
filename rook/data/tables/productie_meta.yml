@@ -3,7 +3,7 @@ description: Bbp, productie en bestedingen; productie en inkomens naar bedrijfst
 dimensions:
   Sector:
     name: Sector
-    description: ''
+    description: Gebaseerd op de SBI ...
     levels:
     - 01 Landbouw
     - 02 Bosbouw
@@ -113,14 +113,14 @@ dimensions:
     - time
 variables:
   BrutoToegevoegdeWaardeBasisprijzen:
-    name: BrutoToegevoegdeWaardeBasisprijzen
-    description: ''
+    name: Basisprijzen
+    description: Bruto toegevoegde waarde basisprijzen
     type: numeric
-    unit: ''
+    unit: euro
     population: Bedrijven
   BrutoToegevoegdeWaardeBasisprijzenIndex:
-    name: BrutoToegevoegdeWaardeBasisprijzenIndex
-    description: ''
+    name: Prijsindex
+    description: Bruto toegevoegde waarde basisprijzenindex
     type: numeric
     unit: ''
     population: Bedrijven
