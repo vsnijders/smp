@@ -61,7 +61,8 @@ function Menu(){
           .text(catVar.name)
           .draggable({
             revert : "invalid",
-            axis : "y"
+            axis : "y",
+            stack: "div"
           });
 
         var span = $("<span>")
@@ -119,7 +120,8 @@ function Menu(){
           .attr("data-variable", id).text(label)
           .draggable({
             revert : "invalid",
-            axis : "y"
+            axis : "y",
+            stack: "div"
           });
 
         if (numVar.description){
