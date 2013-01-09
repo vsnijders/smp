@@ -316,7 +316,7 @@ function ColourAxis() {
   function cols(levels){
     var o = d3.scale.ordinal().domain(levels).rangePoints([0,360], 1);
     var cols = o.range().map(function(h) {
-      return d3.hcl(h, 70, 70).toString();
+      return d3.hcl(h, 70, 30).toString();
     })
     console.log(cols);
     return cols;
@@ -330,7 +330,7 @@ function ColourAxis() {
     if (dim = dims[variable_]){
       cols(dim.levels);
       if (dim.levels.length > 10){
-        axis.scale = scale_ = d3.scale.category20c();
+        axis.scale = scale_ = d3.scale.category20();
       } else {
         axis.scale = scale_ = d3.scale.category10();        
       }
