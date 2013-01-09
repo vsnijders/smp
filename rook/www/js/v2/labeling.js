@@ -10,14 +10,15 @@ $(function() {
 });
 
 function label_width(label) {
+  var padding = 5;
   if (label_widths[label]) {
-    return (label_widths[label]);
+    return (label_widths[label] + padding);
   }
   var text  = dummy.append("text").text(label);
   var length = text[0][0].getComputedTextLength();
   text.remove();
   label_widths[label] = length;
-  return (length);
+  return (length + padding);
 }
 
 // ============================================================================
