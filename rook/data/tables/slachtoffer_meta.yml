@@ -14,7 +14,8 @@ dimensions:
     default: 2011
     type:
     - categorical
-    - int
+    - ordered
+    - time
   Regio:
     name: Regio
     levels:

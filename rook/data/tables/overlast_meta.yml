@@ -58,7 +58,10 @@ dimensions:
     - 2010
     - 2011
     default: 2011
-    type: categorical
+    type:
+    - time
+    - ordered
+    - categorical
 variables:
   Overlast:
     name: Overlast

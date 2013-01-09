@@ -41,7 +41,10 @@ dimensions:
     - 2010
     - 2011
     default: 2011
-    type: categorical
+    type:
+    - categorical
+    - time
+    - ordered
 variables:
   Voelt.zich.wel.eens.onveilig:
     name: Voelt zich wel eens onveilig
@@ -90,4 +93,9 @@ variables:
     population: bevolking
 populations:
   bevolking: bevolking
+defaultGraphs:
+  bar:
+    y: Regio
+    x: Voelt.zich.wel.eens.onveilig
+    column: Jaar
 

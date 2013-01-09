@@ -9,7 +9,7 @@ dimensions:
     - 2010
     - 2011
     default: 2011
-    type: [categorical, int]
+    type: [categorical, ordered, time]
   Regio:
     name: Regio
     levels:

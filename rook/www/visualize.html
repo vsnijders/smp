@@ -70,16 +70,19 @@
         cntrl.get_meta(table);
         
         // Make graph container resizable
+        var width = $(".span8").width()-20;
+        cntrl.size(width, 480);
+
         $('#resizable').resizable({
-          minHeight: 300,
+          minHeight: 480,
           minWidth: 300,
           stop: function(event, ui) { 
             var width = $('#graph').width();
             var height = $('#graph').height();
             cntrl.size(width, height);
-            cntrl.redraw(); 
+            cntrl.redraw();
           }
-        }).height(cntrl.size()[1]).width(cntrl.size()[2]);
+        });
 
       });
     </script>
@@ -99,112 +102,114 @@
     </div>
   </header>
 
-  <article>
-    <div class="menu">
-      <ul class="nav nav-tabs">
-        <li><a href="#line" data-toggle="tab">line</a></li>
-        <li><a href="#scatter" data-toggle="tab">scatter</a></li>
-        <li><a href="#bar" data-toggle="tab">bar</a></li>
-        <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
-      </ul>
-      <div class="tab-content">
+  <div class="container-fluid" style="padding-left:0">
+    <div class="row-fluid">
+      <div class="span4 well menu">
+        <ul class="nav nav-tabs">
+          <li><a href="#line" data-toggle="tab">line</a></li>
+          <li><a href="#scatter" data-toggle="tab">scatter</a></li>
+          <li><a href="#bar" data-toggle="tab">bar</a></li>
+          <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
+        </ul>
+        <div class="tab-content">
 
-        <div class="tab-pane" id="line">
-          <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical required"></ul>
+          <div class="tab-pane" id="line">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
           </div>
-          <div class="plotvariable">
-            <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+
+          <div class="tab-pane" id="scatter">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="size" class="droppable numeric"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
           </div>
-          <div class="plotvariable">
-            <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+
+          <div class="tab-pane" id="bar">
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="x" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
           </div>
-          <div class="plotvariable">
-            <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+
+          <div class="tab-pane" id="mosaic">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="size" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
           </div>
-          <div class="plotvariable">
-            <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
-          </div>
-          <h3>variables</h3>
-          <ul class="variables droppable"></ul>
+
+        </div>
+      </div>
+
+
+      <div class="span8">
+        <h2 id="graphtitle"></h2>
+          <div id="resizable" class="ui-widget-content">
+          <div id="graph"></div>
+          <div id="caption"></div>
         </div>
 
-        <div class="tab-pane" id="scatter">
-          <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable numeric categorical required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>size</h3> <ul data-dimension="size" class="droppable numeric"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
-          </div>
-          <h3>variables</h3>
-          <ul class="variables droppable"></ul>
-        </div>
-
-        <div class="tab-pane" id="bar">
-          <div class="plotvariable">
-            <h3>y</h3> <ul data-dimension="y" class="droppable categorical required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>size</h3> <ul data-dimension="x" class="droppable numeric required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
-          </div>
-          <h3>variables</h3>
-          <ul class="variables droppable"></ul>
-        </div>
-
-        <div class="tab-pane" id="mosaic">
-          <div class="plotvariable">
-            <h3>x</h3> <ul data-dimension="x" class="droppable categorical"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>y</h3> <ul data-dimension="y" class="droppable categorical required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>size</h3> <ul data-dimension="size" class="droppable numeric required"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
-          </div>
-          <div class="plotvariable">
-            <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
-          </div>
-          <h3>variables</h3>
-          <ul class="variables droppable"></ul>
-        </div>
-
+        <div id="graphtype"></div>
+        <div id="graphdata"></div>
       </div>
     </div>
 
-
-    <div class="content">
-      <h2 id="graphtitle"></h2>
-        <div id="resizable" class="ui-widget-content">
-        <div id="graph"></div>
-        <div id="caption"></div>
-      </div>
-
-      <div id="graphtype"></div>
-      <div id="graphdata"></div>
-    </div>
-
-  </article>
+  </div>
 
   <footer>
   </footer>

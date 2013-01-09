@@ -55,16 +55,17 @@ dimensions:
     - 2010
     - 2011
     default: 2011
-    type: categorical
+    type: [categorical, time, ordered]
 variables:
   AantalMisdrijven:
-    name: Aantal misdrijven
+    name: Misdrijven
+    description: Aantal geregistreerde misdrijven
     type: numeric
     unit: 
     population: Geregistreerde misdrijven
   MisdrijvenPer1000Inwoners:
     name: Misdrijven per 1000 inwoners
-    type: numeric
+    type: [numeric]
     unit: 
     population: Geregistreerde misdrijven
   OpgehelderdeMisdrijven:
@@ -73,9 +74,9 @@ variables:
     unit: 
     population: Geregistreerde misdrijven
   PercOpgehelderd:
-    name: Perc. opgehelderd
+    name: Opgehelderd
     type: numeric
-    unit: 
+    unit: '%'
     population: Geregistreerde misdrijven
 populations:
   Geregistreerde misdrijven: Geregistreerde misdrijven
@@ -86,4 +87,3 @@ defaultgraphs:
     y: PercOpgehelderd
     colour: Regio
     column: Misdrijf
-

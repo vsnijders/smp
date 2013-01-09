@@ -17,8 +17,8 @@ dimensions:
     default: 2009
     type:
     - numeric
-    - ordinal
-    - year
+    - ordered
+    - time
     - categorical
   geslacht:
     name: Geslacht
@@ -43,11 +43,13 @@ dimensions:
     aggregate: Totaal
     default: Totaal
     type:
-    - ordinal
+    - ordered
     - categorical
 variables:
   aantalpatienten:
-    name: Percentage personen met zorgepisode
+    name: Zorgepisode
+    description: percentage personen met een of meer zorgperiodes gerelateerd aan
+      diabetes
     type: numeric
     unit: '%'
     population: huisartspatienten

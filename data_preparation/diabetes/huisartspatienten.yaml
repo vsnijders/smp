@@ -7,7 +7,7 @@ dimensions:
     name: Jaar
     levels: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009]
     default: 2009
-    type: [numeric, ordinal, year, categorical]
+    type: [numeric, ordered, time, categorical]
   geslacht:
     name: Geslacht
     levels: [Vrouw, Man, Totaal]
@@ -20,10 +20,11 @@ dimensions:
       65 tot 75, 75+, Totaal]
     aggregate: Totaal
     default: Totaal
-    type: [ordinal, categorical]
+    type: [ordered, categorical]
 variables:
   aantalpatienten:
-    name: Percentage personen met zorgepisode
+    name: Zorgepisode
+    description: percentage personen met een of meer zorgperiodes gerelateerd aan diabetes
     type: [numeric]
     unit: "%"
     population: huisartspatienten
