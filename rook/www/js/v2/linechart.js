@@ -3,10 +3,9 @@ function Linechart() {
   var chart = Chart({
     axes: { x: LinearXAxis(),
             y: LinearYAxis(),
-            unit: ColourAxis(), // just a dummy axis...
             colour : ColourAxis()
           },
-    required: ["x", "y", "unit"]
+    required: ["x", "y"]
   });
   
   // hack, there is no such thing as "protected" in javascript 

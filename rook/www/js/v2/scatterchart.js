@@ -4,10 +4,11 @@ function Scatterchart() {
   var chart = Chart({
     axes: { x: LinearXAxis(),
             y: LinearYAxis(),
+            unit: ColourAxis(), // just a dummy axis...
             colour : ColourAxis(),
             size: RadiusAxis()
           },
-    required: ["x", "y"]
+    required: ["x", "y", "unit"]
   });
   
   // hack, there is no such thing as "protected" in javascript 
