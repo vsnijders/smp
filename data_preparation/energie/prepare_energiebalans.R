@@ -9,7 +9,7 @@ sector19 <- data$Sector %in% c("192 Aardolie-industrie", "Cokesfabrieken")
 data19 <- data[sector19, ]
 library(plyr)
 data19 <- ddply(data19, c("Energiedragers", "Jaar"), summarise
-                                                   , Sector = "19"
+                                                   , Sector = "19 Aardolie-industrie"
                                                    , Energieaanbod = sum(Energieaanbod, na.rm=TRUE)
                                                    , Energieverbruik = sum(Energieverbruik, na.rm=TRUE)
                                                    )

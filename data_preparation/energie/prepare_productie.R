@@ -16,8 +16,6 @@ data1718 <- ddply(data1718, c("Jaar"), summarise
 
 data <- rbind(data, data1718)
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))
-# remove "," 
-levels(data$Sector) <- gsub(",", " ", levels(data$Sector))
 
 # Remove the * from Jaar
 levels(data$Jaar) <- gsub("\\**$", "", levels(data$Jaar))
