@@ -235,6 +235,8 @@ var LinkView = Backbone.View.extend({
 	        	// should be triggered by previous statement
 	        	_linkview.render();
 
+	        	$("#linkresult").html("");
+
 	        		//unset?
 	        	//l.dimensions.link(d.index, t.index);
 	        	//l.dimensions.at(d.index).unset(d.dim);
@@ -267,6 +269,7 @@ var LinkView = Backbone.View.extend({
         	target.insertBefore(stub);
         	stub.remove();
         	cleanCats();
+            $("#linkresult").html("");
         }
 
         $(".category.droppable")
