@@ -100,6 +100,17 @@ function Menu(){
           var label = $("<label>").appendTo(form);
           label.append(span_c);
           span.appendTo(label);
+          if (cat.description){
+            var info = $("<a>")
+              .attr({"href":"#"})
+              .addClass("info")
+              .html('<i class="icon-info-sign"></i>')
+              .popover({ content: cat.description
+                       , title: cat.name
+                       , trigger: "hover"
+                       })
+              .appendTo(label)
+          }
           $("<input>").attr("type", "checkbox").addClass("filter")
             .attr("name", id)
             .val(cat.level)
