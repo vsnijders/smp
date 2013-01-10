@@ -8,7 +8,7 @@ function Scatterchart() {
             colour : ColourAxis(),
             size: RadiusAxis()
           },
-    required: ["x", "y", "unit"]
+    required: ["x", "y"]
   });
   
   // hack, there is no such thing as "protected" in javascript 

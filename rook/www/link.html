@@ -49,7 +49,6 @@
         R.gen_link(table1_name, table2_name)
          .success(
             function(data) {
-                console.log(data);                
                 window.l = new Link(data);
                 window.lv = new LinkView({model:l});
                 lv.render();
@@ -75,7 +74,8 @@
               })
           ;
           return false;
-        });
+        })
+        .on("change", function(){$("#linkresult").html("");});
 
       });
     </script>
