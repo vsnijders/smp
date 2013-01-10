@@ -197,7 +197,7 @@ link_tables <- function(link) {
     # Add to meta
     meta$dimensions[[dim]]$levels <- NULL
     #TODO add description
-    meta$dimensions[[dim]]$categories <- lapply(lev, function(l){list(level=l, name=nm[l])})
+    meta$dimensions[[dim]]$categories <- lapply(lev, function(l){list(level=l, name=unname(nm[l]))})
     # Check if aggregate and default present; if not use last level
     if (!is.null(meta$dimensions[[dim]]$default) &&
         !(meta$dimensions[[dim]]$default %in% levels[[dim]])) {
