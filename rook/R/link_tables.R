@@ -8,6 +8,8 @@
 #' @export
 #'
 link_tables <- function(link) {
+  #TODO add meta data for sliced dimension!!!
+  
   # Read all necessary data
   t1 <- get_table(link$table1)
   t1_meta <- t1$meta
@@ -110,13 +112,14 @@ link_tables <- function(link) {
   # dimensions
   sel <- rep(TRUE, nrow(t2))
   for (dim in not_selected) {
-    default <- t2_meta$dimensions[[dim]]$default
+    default <- slice[[dim]]
     sel <- sel & t2[[dim]] == default
   }
   t2 <- t2[sel,]
 
   # Keep track of order of levels
   levels <- list()
+  names <- list()
 
   # Remove non-selected categories in selected dimensions
   # Rename category labels of table 2 to those in table 1
@@ -134,14 +137,16 @@ link_tables <- function(link) {
     # Copy dimensions to meta
     
     if (!is.null(dim$dimension1)){
-      meta$dimensions[[dim$dimension1]] <- t2_meta$dimensions[[dim$dimension2]]
-      meta$dimensions[[dim$dimension1]]$levels <- character(0)
+      # what's this?
+      meta$dimensions[[dim$dimension1]] <- t1_meta$dimensions[[dim$dimension1]]
   
-      levels[[dim$dimension1]] <- character(0)
+      lvls <- character(0)
+      nms <- character(0)
   
       for (cat in dim$categories) {
         if (is.null(cat$category2) || grepl("^[[:space:]]*$", cat$category2)) {
-          levels[[dim$dimension1]] <- c(levels[[dim$dimension1]], cat$category1)
+          lvls <- c(lvls, cat$category1)
+          nms <- c(nms, cat$category1_name)
           next
         }
         if (is.null(cat$category1) || grepl("^[[:space:]]*$", cat$category1)) {
@@ -149,14 +154,18 @@ link_tables <- function(link) {
           sel_dim[sel] <- TRUE
           cat2name = paste(link$table2,cat$category2, sep=":")
           t2[[dim$dimension2]][sel] <- cat2name
-          levels[[dim$dimension1]] <- c(levels[[dim$dimension1]], cat2name)
+          lvls <- c(lvls, cat2name)
+          nms <- c(nms, cat$category2_name)
         } else {
           sel <- old == cat$category2
           t2[[dim$dimension2]][sel] <- cat$category1
           sel_dim[sel] <- TRUE
-          levels[[dim$dimension1]] <- c(levels[[dim$dimension1]], cat$category1)
+          lvls <- c(lvls, cat$category1)
+          nms <- c(nms, cat$category1_name)
         }
       }
+      levels[[dim$dimension1]] <- lvls
+      names[[dim$dimension1]] <- nms
     }
     
     if (!any(sel_dim)){
@@ -179,10 +188,16 @@ link_tables <- function(link) {
   # ==== Assign levels to dimensions and sort table
   for (dim in names(levels)) {
     # Add to table
-    t[[dim]] <- factor(t[[dim]], levels=levels[[dim]])
+    lev <- levels[[dim]]
+    nm <- names[[dim]]
+    names(nm) <- lev
+    # TODO for time variabels the order has to be adjusted!
+    t[[dim]] <- factor(t[[dim]], levels=lev)
 
     # Add to meta
-    meta$dimensions[[dim]]$levels <- levels[[dim]]
+    meta$dimensions[[dim]]$levels <- NULL
+    #TODO add description
+    meta$dimensions[[dim]]$categories <- lapply(lev, function(l){list(level=l, name=nm[l])})
     # Check if aggregate and default present; if not use last level
     if (!is.null(meta$dimensions[[dim]]$default) &&
         !(meta$dimensions[[dim]]$default %in% levels[[dim]])) {

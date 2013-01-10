@@ -68,17 +68,17 @@ matchdims <- function(dims1, dims2){
 matchcats <- function(cats1, cats2){
   cats <- list()
 
-  nms1 <- lapply(cats1, function(c) c$name)
-  nms2 <- lapply(cats2, function(c) c$name)
+  nms1 <- sapply(cats1, function(c) c$name)
+  nms2 <- sapply(cats2, function(c) c$name)
   
   i2 <- match(nms1, nms2, nomatch=0)
   i1 <- which(i2>0)
   i2 <- i2[i1]
   
   cats <- c(cats, mapply( function(c1, c2){
-     list( category1=cats1[c1]$level
+     list( category1=cats1[[c1]]$level
          , category1_name=nms1[c1]
-         , category2=cats2[c2]$level
+         , category2=cats2[[c2]]$level
          , category2_name=nms2[c2]
          , include=TRUE
          )
@@ -97,5 +97,5 @@ matchcats <- function(cats1, cats2){
 # library(rjson)
 # gen_link("slachtoffer", "crimi") -> l
 # link_tables(link=l)
-#l
-#toJSON(l)
+# l
+# toJSON(l)

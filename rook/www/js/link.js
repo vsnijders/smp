@@ -403,7 +403,7 @@ function clearResult(){
 	  .removeClass("text-success text-error")
 	.parent().hide();
 
-	$("#create").removeClass("btn-success btn-error")
+	$("#create").removeClass("btn-success btn-warning")
 }
 /*
 var link = 

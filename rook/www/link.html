@@ -71,10 +71,10 @@
                   $("#create").addClass("btn-success");
               }).error(function(data){
                   $("#linkresult")
-                    .html("Creation of table failed: '" + data + "'")
+                    .html("Creation of table failed: '" + JSON.stringify(data) + "'")
                     .addClass("text-error")
                   .parent().show();
-                  $("#create").addClass("btn-error");
+                  $("#create").addClass("btn-warning");
               })
           ;
           return false;
