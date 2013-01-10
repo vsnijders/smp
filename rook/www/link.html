@@ -108,13 +108,13 @@
             <tr class="category">
               <td style="width:20px;"><input class="include" type="checkbox" <%= (category.include)?'checked' : '' %>></input></td>
               <td> 
-                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1_name%></div>
               </td>
               <td style="text-align:center">
                  <a class="unlinkcat"> <i class="icon-resize-horizontal"></i> </a>
               </td>
 
-              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2_name%></div></td>
             </tr>
             <%});%>
           </table>
@@ -140,7 +140,7 @@
         <div>
            <select class="categories" data-cat="category1">
            <% _.each(categories, function(category){ %>
-            <option class="category" val="<%=category.category1%>" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1%></option>
+            <option class="category" val="<%=category.category1%>" data-cat="category1" data-value="<%=category.category1%>"><%=category.category1_name%></option>
             <%});%>
            </select>
         </div>
@@ -170,7 +170,7 @@
         <div>
            <select class="categories" data-cat="category2">
            <% _.each(categories, function(category){ %>
-            <option class="category" val="<%=category.category2%>" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2%></option>
+            <option class="category" val="<%=category.category2%>" data-cat="category2" data-value="<%=category.category2%>"><%=category.category2_name%></option>
             <%});%>
            </select>
         </div>
@@ -187,10 +187,10 @@
            <% _.each(categories, function(category){ %>
             <tr class="category">
               <td> 
-                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
+                <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1_name%></div>
               </td>
               <td style="align:center"><i class="icon-resize-horizontal"></i></td>
-              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>
+              <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2_name%></div></td>
             </tr>
             <%});%>
           </table>

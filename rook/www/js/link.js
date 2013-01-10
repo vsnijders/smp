@@ -35,17 +35,22 @@ var Dimensions = Backbone.Collection.extend({
 		var cats = dim.categories.toJSON();
 
 		var cats1 =  _.filter(cats, function(c){return c.category1})
-		              .map( function(c){return _.pick(c, "category1")})
+		              .map( function(c){return _.pick(c, "category1", "category1_name")})
 		              ;
 		var cats2 = _.filter(cats, function(c){return c.category2})
-		             .map( function(c){return _.pick(c, "category2")})
+		             .map( function(c){return _.pick(c, "category2", "category2_name")})
 		              ;
 
 //		console.log("cats1", cats1);
 //		console.log("cats2" ,cats2);
-		var dim2 = new Dimension({dimension2:dim.get("dimension2"), categories: cats2});
+		var dim2 = new Dimension({
+			dimension2:dim.get("dimension2"),
+			dimension2_name:dim.get("dimension2_name"), 
+			categories: cats2
+		});
 		this.add(dim2, {at: at+1});
 		dim.unset("dimension2");
+		dim.unset("dimension2_name");
 		dim.categories.reset(cats1);
 	},
 
@@ -62,10 +67,14 @@ var Dimensions = Backbone.Collection.extend({
 		}
 
 		dimto.categories.add(dimfrom.categories.toJSON());
-		if (dimto.has("dimension1"))
+		if (dimto.has("dimension1")){
 			dimto.set("dimension2", dimfrom.get("dimension2"))
-		else 
+			dimto.set("dimension2_name", dimfrom.get("dimension2_name"))
+		}
+		else {
 			dimto.set("dimension1", dimfrom.get("dimension1"))
+			dimto.set("dimension1_name", dimfrom.get("dimension1_name"))
+		}
 		this.remove(dimfrom);
 	}
 });
@@ -131,7 +140,7 @@ var LinkView = Backbone.View.extend({
 			dims.push(dim);
 		})
 		
-		console.log(dims);
+		//console.log(dims);
 
 		$("tr.categories").each(function(i, tr){
 			var cats = dims[i].categories = [];
@@ -141,6 +150,7 @@ var LinkView = Backbone.View.extend({
 				$("div.category",this).each(function(){
 					var data = $(this).data();
 					cat[data.cat] = data.value;
+					cat[data.cat + "_name"] = $(this).text();
 				});
 
 				cat.include = $("input.include", this).get(0).checked;
@@ -152,7 +162,9 @@ var LinkView = Backbone.View.extend({
 			if (select.length){
 				$("option.category", select).each(function(){
 					var cat = {};
-					cat[$(this).data("cat")] = $(this).val();
+					var data = $(this).data();
+					cat[data.cat] = $(this).val();
+					cat[data.cat + "_name"] = $(this).text();
 					cat.include = $(this).val() == select.val();
 					cats.push(cat)
 				});
@@ -266,7 +278,7 @@ var DimensionView = Backbone.View.extend({
 		var dim = this.model;
 
 		var html = "";
-		console.log(dim.toJSON());
+		//console.log(dim.toJSON());
 		if (dim.isLink()){
 			html = this.template(dim.toJSON());
 		} else if (dim.has("dimension1")) {
