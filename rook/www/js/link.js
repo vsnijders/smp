@@ -123,11 +123,16 @@ var LinkView = Backbone.View.extend({
 			var dim = {};
 			$("div.dimension", this).each(function(){
 				var data = $(this).data();
-				if (data.value != "") {dim[data.dim] = data.value};
+				if (data.value != "") {
+					dim[data.dim] = data.value
+					dim[data.dim + "_name"] = $("span.dim",this).text();
+				};
 			});
 			dims.push(dim);
 		})
 		
+		console.log(dims);
+
 		$("tr.categories").each(function(i, tr){
 			var cats = dims[i].categories = [];
 			
@@ -221,7 +226,7 @@ var LinkView = Backbone.View.extend({
         	stub.remove();
 
         	var tr = dragged.closest("tr.category");
-        	console.log(tr);
+
         	$("input.include", tr).attr("checked", true);
         	cleanCats();
         }
@@ -261,7 +266,7 @@ var DimensionView = Backbone.View.extend({
 		var dim = this.model;
 
 		var html = "";
-
+		console.log(dim.toJSON());
 		if (dim.isLink()){
 			html = this.template(dim.toJSON());
 		} else if (dim.has("dimension1")) {

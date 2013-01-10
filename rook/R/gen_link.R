@@ -37,7 +37,9 @@ matchdims <- function(dims1, dims2){
   
   dims <- mapply( function(d1, d2){
             list( dimension1 = names(dims1)[d1]
+                , dimension1_name = nms1[[d1]]
                 , dimension2 = names(dims2)[d2]
+                , dimension2_name = nms2[[d2]]
                 , categories = matchcats(dims1[[d1]]$levels, dims2[[d2]]$levels)
                 ) 
         }
@@ -45,13 +47,15 @@ matchdims <- function(dims1, dims2){
   
   dims1.u <- lapply(names(dims1)[-i1], function(d){
     list( dimension1 = d
+        , dimension1_name = nms1[[d]]
         , categories = lapply(dims1[[d]]$levels, function(c){list(category1=c)})
         )
   })
   
   dims2.u <- lapply(names(dims2)[-i2], function(d){
     list( dimension2 = d
-          , categories = lapply(dims2[[d]]$levels, function(c){list(category2=c)})
+        , dimension2_name = nms2[[d]]
+        , categories = lapply(dims2[[d]]$levels, function(c){list(category2=c)})
     )
   })
   
