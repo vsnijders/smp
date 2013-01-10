@@ -1,60 +1,125 @@
 name: Diabetes en overgewicht uit 'Gezondheid, leefstijl, zorggebruik'
-description: Selectie uit de StatLine tabel 'Gezondheid, leefstijl, zorggebruik'
-  met daarin informatie over voorkomen van diabetes en overgewicht. 
+description: Selectie uit de StatLine tabel 'Gezondheid, leefstijl, zorggebruik' met
+  daarin informatie over voorkomen van diabetes en overgewicht.
 dimensions:
   jaar:
     name: Jaar
-    levels: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009]
     default: 2009
-    type: [numeric, ordered, year, categorical]
+    type:
+    - numeric
+    - ordered
+    - year
+    - categorical
+    categories:
+    - level: 2001
+      name: 2001
+      description: ''
+    - level: 2002
+      name: 2002
+      description: ''
+    - level: 2003
+      name: 2003
+      description: ''
+    - level: 2004
+      name: 2004
+      description: ''
+    - level: 2005
+      name: 2005
+      description: ''
+    - level: 2006
+      name: 2006
+      description: ''
+    - level: 2007
+      name: 2007
+      description: ''
+    - level: 2008
+      name: 2008
+      description: ''
+    - level: 2009
+      name: 2009
+      description: ''
   leeftijd:
     name: Leeftijd
-    levels: [0 tot 25, 25 tot 35, 35 tot 45, 45 tot 55, 55 tot 65, 
-      65 tot 75, 75+, Totaal]
     aggregate: Totaal
     default: Totaal
-    type: [ordinal, categorical]
+    type:
+    - ordinal
+    - categorical
+    categories:
+    - level: 0 tot 25
+      name: 0 tot 25
+      description: ''
+    - level: 25 tot 35
+      name: 25 tot 35
+      description: ''
+    - level: 35 tot 45
+      name: 35 tot 45
+      description: ''
+    - level: 45 tot 55
+      name: 45 tot 55
+      description: ''
+    - level: 55 tot 65
+      name: 55 tot 65
+      description: ''
+    - level: 65 tot 75
+      name: 65 tot 75
+      description: ''
+    - level: 75+
+      name: 75+
+      description: ''
+    - level: Totaal
+      name: Totaal
+      description: ''
   geslacht:
     name: Geslacht
-    levels: [Vrouw, Man, Totaal]
     aggregate: Totaal
     default: Totaal
-    type: [categorical]
+    type: categorical
+    categories:
+    - level: Vrouw
+      name: Vrouw
+      description: ''
+    - level: Man
+      name: Man
+      description: ''
+    - level: Totaal
+      name: Totaal
+      description: ''
 variables:
   suiker:
     name: Diabetes
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   suiker1:
     name: Diabetes type 1
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   suiker2:
     name: Diabetes type 2
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   ondergewicht:
     name: Ondergewicht
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   normaalgewicht:
     name: Normaal gewicht
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   matigovergewicht:
     name: Matig overgewicht
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
   ernstigovergewicht:
     name: Ernstig overgewicht
-    type: [numeric]
-    unit: "%"
+    type: numeric
+    unit: '%'
     population: gezo
 populations:
   gezo: In Nederland ingeschreven personen
@@ -78,3 +143,4 @@ defaultgraphs:
     size: suiker
     column: leeftijd
 defaultgraph: bar
+

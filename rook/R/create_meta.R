@@ -36,16 +36,19 @@ create_meta <- function(data, name = "Name missing", description = "",
 
 # convertmeta <- function(meta){
 #   dimensions <- lapply(meta$dimensions, function(d){
-#     d$categories <- lapply(d$levels, function(l){ list(level=l, name=l, description="")})
+#     if (is.null(d$categories)){
+#       d$categories <- lapply(d$levels, function(l){ list(level=l, name=l, description="")})
+#       d$levels <- NULL
+#     }
+#     d
 #   })
 #   meta$dimensions <- dimensions
 #   meta
 # }
 # 
 # require(yaml)
-# for (m in dir(".", "*.yaml", recursive=T)[1]){
-#   print(m)
+# for (m in dir(".", "*.yaml", recursive=T)){
 #   meta <- yaml.load_file(m)
 #   meta <- convertmeta(meta)
-#   #write(as.yaml(meta), m)
+#   write(as.yaml(meta), m)
 # }

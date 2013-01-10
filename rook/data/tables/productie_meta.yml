@@ -4,113 +4,303 @@ dimensions:
   Sector:
     name: Sector
     description: Gebaseerd op de SBI ...
-    levels:
-    - 01 Landbouw
-    - 02 Bosbouw
-    - 03 Visserij
-    - 10-12 Voedings-  genotmiddelenindustrie
-    - 13-15 Textiel-  kleding-  lederindustrie
-    - 16 Houtindustrie
-    - 17 Papierindustrie
-    - 18 Grafische industrie
-    - 19 Aardolie-industrie
-    - 20 Chemische industrie
-    - 21 Farmaceutische industrie
-    - 22 Rubber- en kunststofproductindustrie
-    - 23 Bouwmaterialenindustrie
-    - 24 Basismetaalindustrie
-    - 25 Metaalproductenindustrie
-    - 26 Elektrotechnische industrie
-    - 27 Elektrische apparatenindustrie
-    - 28 Machine-industrie
-    - 29 Auto- en aanhangwagenindustrie
-    - 30 Overige transportmiddelenindustrie
-    - 31-32 Meubel- en overige industrie
-    - 33 Reparatie en installatie van machines
-    - 35 Energiebedrijven
-    - 36 Waterleidingbedrijven
-    - 37-39 Afvalbeheer
-    - 41 Algemene bouw en projectontwikkeling
-    - 42 Grond-  water-  en wegenbouw
-    - 43 Gespecialiseerde bouw
-    - 45 Autohandel en -reparatie
-    - 46 Groothandel en handelsbemiddeling
-    - 47 Detailhandel (niet in auto's)
-    - 49 Vervoer over land
-    - 50 Vervoer over water
-    - 51 Vervoer door de lucht
-    - 52 Opslag  dienstverlening voor vervoer
-    - 53 Post en koeriers
-    - 58 Uitgeverijen
-    - 59-60 Film radio en t.v.
-    - 61 Telecommunicatie
-    - 62-63 IT- en informatiedienstverlening
-    - 64 Bankwezen
-    - 65 Verzekeraars en pensioenfondsen
-    - 65 Verzekeraars en pensioenfondsen
-    - 68 Verhuur en handel van onroerend goed
-    - 69-70 Managementadvies en holdings
-    - 71 Architecten-  ingenieursbureaus e.d.
-    - 72 Research
-    - 73 Reclamewezen en marktonderzoek
-    - 74-75 Design en veterinaire diensten
-    - 77 Verhuur van roerende goederen
-    - 78 Uitzendbureaus en arbeidsbemiddeling
-    - 79 Reisbureaus  reisorganisatie en -info
-    - 80-82 Beveiliging en ov. zakelijke diens
-    - 84 Openbaar bestuur en overheidsdiensten
-    - 85 Onderwijs
-    - 86 Gezondheidszorg
-    - 87-88 Verzorging en welzijn
-    - 90-92 Kunst  cultuur en loterij
-    - 93 Sport en recreatie
-    - 93 Sport en recreatie
-    - 95 Reparatie van consumentenartikelen
-    - 96 Overige persoonlijke dienstverlening
-    - 97 Huishoudens met personeel
-    - 99 Extraterritoriale organisaties
-    - A-U Alle economische activiteiten
-    - B Delfstoffenwinning
-    - Goederen en diensten n.e.g.
-    - I Horeca
-    - Totaal activiteiten en overige posten
-    - Verschil toegerekende en afgedragen BTW
-    - 17-18 Papier- en grafische industrie
     aggregate: Totaal activiteiten en overige posten
     default: Totaal activiteiten en overige posten
     type: categorical
+    categories:
+    - level: 01 Landbouw
+      name: 01 Landbouw
+      description: ''
+    - level: 02 Bosbouw
+      name: 02 Bosbouw
+      description: ''
+    - level: 03 Visserij
+      name: 03 Visserij
+      description: ''
+    - level: 10-12 Voedings-  genotmiddelenindustrie
+      name: 10-12 Voedings-  genotmiddelenindustrie
+      description: ''
+    - level: 13-15 Textiel-  kleding-  lederindustrie
+      name: 13-15 Textiel-  kleding-  lederindustrie
+      description: ''
+    - level: 16 Houtindustrie
+      name: 16 Houtindustrie
+      description: ''
+    - level: 17 Papierindustrie
+      name: 17 Papierindustrie
+      description: ''
+    - level: 18 Grafische industrie
+      name: 18 Grafische industrie
+      description: ''
+    - level: 19 Aardolie-industrie
+      name: 19 Aardolie-industrie
+      description: ''
+    - level: 20 Chemische industrie
+      name: 20 Chemische industrie
+      description: ''
+    - level: 21 Farmaceutische industrie
+      name: 21 Farmaceutische industrie
+      description: ''
+    - level: 22 Rubber- en kunststofproductindustrie
+      name: 22 Rubber- en kunststofproductindustrie
+      description: ''
+    - level: 23 Bouwmaterialenindustrie
+      name: 23 Bouwmaterialenindustrie
+      description: ''
+    - level: 24 Basismetaalindustrie
+      name: 24 Basismetaalindustrie
+      description: ''
+    - level: 25 Metaalproductenindustrie
+      name: 25 Metaalproductenindustrie
+      description: ''
+    - level: 26 Elektrotechnische industrie
+      name: 26 Elektrotechnische industrie
+      description: ''
+    - level: 27 Elektrische apparatenindustrie
+      name: 27 Elektrische apparatenindustrie
+      description: ''
+    - level: 28 Machine-industrie
+      name: 28 Machine-industrie
+      description: ''
+    - level: 29 Auto- en aanhangwagenindustrie
+      name: 29 Auto- en aanhangwagenindustrie
+      description: ''
+    - level: 30 Overige transportmiddelenindustrie
+      name: 30 Overige transportmiddelenindustrie
+      description: ''
+    - level: 31-32 Meubel- en overige industrie
+      name: 31-32 Meubel- en overige industrie
+      description: ''
+    - level: 33 Reparatie en installatie van machines
+      name: 33 Reparatie en installatie van machines
+      description: ''
+    - level: 35 Energiebedrijven
+      name: 35 Energiebedrijven
+      description: ''
+    - level: 36 Waterleidingbedrijven
+      name: 36 Waterleidingbedrijven
+      description: ''
+    - level: 37-39 Afvalbeheer
+      name: 37-39 Afvalbeheer
+      description: ''
+    - level: 41 Algemene bouw en projectontwikkeling
+      name: 41 Algemene bouw en projectontwikkeling
+      description: ''
+    - level: 42 Grond-  water-  en wegenbouw
+      name: 42 Grond-  water-  en wegenbouw
+      description: ''
+    - level: 43 Gespecialiseerde bouw
+      name: 43 Gespecialiseerde bouw
+      description: ''
+    - level: 45 Autohandel en -reparatie
+      name: 45 Autohandel en -reparatie
+      description: ''
+    - level: 46 Groothandel en handelsbemiddeling
+      name: 46 Groothandel en handelsbemiddeling
+      description: ''
+    - level: 47 Detailhandel (niet in auto's)
+      name: 47 Detailhandel (niet in auto's)
+      description: ''
+    - level: 49 Vervoer over land
+      name: 49 Vervoer over land
+      description: ''
+    - level: 50 Vervoer over water
+      name: 50 Vervoer over water
+      description: ''
+    - level: 51 Vervoer door de lucht
+      name: 51 Vervoer door de lucht
+      description: ''
+    - level: 52 Opslag  dienstverlening voor vervoer
+      name: 52 Opslag  dienstverlening voor vervoer
+      description: ''
+    - level: 53 Post en koeriers
+      name: 53 Post en koeriers
+      description: ''
+    - level: 58 Uitgeverijen
+      name: 58 Uitgeverijen
+      description: ''
+    - level: 59-60 Film radio en t.v.
+      name: 59-60 Film radio en t.v.
+      description: ''
+    - level: 61 Telecommunicatie
+      name: 61 Telecommunicatie
+      description: ''
+    - level: 62-63 IT- en informatiedienstverlening
+      name: 62-63 IT- en informatiedienstverlening
+      description: ''
+    - level: 64 Bankwezen
+      name: 64 Bankwezen
+      description: ''
+    - level: 65 Verzekeraars en pensioenfondsen
+      name: 65 Verzekeraars en pensioenfondsen
+      description: ''
+    - level: 65 Verzekeraars en pensioenfondsen
+      name: 65 Verzekeraars en pensioenfondsen
+      description: ''
+    - level: 68 Verhuur en handel van onroerend goed
+      name: 68 Verhuur en handel van onroerend goed
+      description: ''
+    - level: 69-70 Managementadvies en holdings
+      name: 69-70 Managementadvies en holdings
+      description: ''
+    - level: 71 Architecten-  ingenieursbureaus e.d.
+      name: 71 Architecten-  ingenieursbureaus e.d.
+      description: ''
+    - level: 72 Research
+      name: 72 Research
+      description: ''
+    - level: 73 Reclamewezen en marktonderzoek
+      name: 73 Reclamewezen en marktonderzoek
+      description: ''
+    - level: 74-75 Design en veterinaire diensten
+      name: 74-75 Design en veterinaire diensten
+      description: ''
+    - level: 77 Verhuur van roerende goederen
+      name: 77 Verhuur van roerende goederen
+      description: ''
+    - level: 78 Uitzendbureaus en arbeidsbemiddeling
+      name: 78 Uitzendbureaus en arbeidsbemiddeling
+      description: ''
+    - level: 79 Reisbureaus  reisorganisatie en -info
+      name: 79 Reisbureaus  reisorganisatie en -info
+      description: ''
+    - level: 80-82 Beveiliging en ov. zakelijke diens
+      name: 80-82 Beveiliging en ov. zakelijke diens
+      description: ''
+    - level: 84 Openbaar bestuur en overheidsdiensten
+      name: 84 Openbaar bestuur en overheidsdiensten
+      description: ''
+    - level: 85 Onderwijs
+      name: 85 Onderwijs
+      description: ''
+    - level: 86 Gezondheidszorg
+      name: 86 Gezondheidszorg
+      description: ''
+    - level: 87-88 Verzorging en welzijn
+      name: 87-88 Verzorging en welzijn
+      description: ''
+    - level: 90-92 Kunst  cultuur en loterij
+      name: 90-92 Kunst  cultuur en loterij
+      description: ''
+    - level: 93 Sport en recreatie
+      name: 93 Sport en recreatie
+      description: ''
+    - level: 93 Sport en recreatie
+      name: 93 Sport en recreatie
+      description: ''
+    - level: 95 Reparatie van consumentenartikelen
+      name: 95 Reparatie van consumentenartikelen
+      description: ''
+    - level: 96 Overige persoonlijke dienstverlening
+      name: 96 Overige persoonlijke dienstverlening
+      description: ''
+    - level: 97 Huishoudens met personeel
+      name: 97 Huishoudens met personeel
+      description: ''
+    - level: 99 Extraterritoriale organisaties
+      name: 99 Extraterritoriale organisaties
+      description: ''
+    - level: A-U Alle economische activiteiten
+      name: A-U Alle economische activiteiten
+      description: ''
+    - level: B Delfstoffenwinning
+      name: B Delfstoffenwinning
+      description: ''
+    - level: Goederen en diensten n.e.g.
+      name: Goederen en diensten n.e.g.
+      description: ''
+    - level: I Horeca
+      name: I Horeca
+      description: ''
+    - level: Totaal activiteiten en overige posten
+      name: Totaal activiteiten en overige posten
+      description: ''
+    - level: Verschil toegerekende en afgedragen BTW
+      name: Verschil toegerekende en afgedragen BTW
+      description: ''
+    - level: 17-18 Papier- en grafische industrie
+      name: 17-18 Papier- en grafische industrie
+      description: ''
   Jaar:
     name: Jaar
     description: ''
-    levels:
-    - '1988'
-    - '1989'
-    - '1990'
-    - '1991'
-    - '1992'
-    - '1993'
-    - '1994'
-    - '1995'
-    - '1996'
-    - '1997'
-    - '1998'
-    - '1999'
-    - '2000'
-    - '2001'
-    - '2002'
-    - '2003'
-    - '2004'
-    - '2005'
-    - '2006'
-    - '2007'
-    - '2008'
-    - '2009'
-    - '2010'
-    - '2011'
     default: '2011'
     type:
     - categorical
     - time
+    categories:
+    - level: '1988'
+      name: '1988'
+      description: ''
+    - level: '1989'
+      name: '1989'
+      description: ''
+    - level: '1990'
+      name: '1990'
+      description: ''
+    - level: '1991'
+      name: '1991'
+      description: ''
+    - level: '1992'
+      name: '1992'
+      description: ''
+    - level: '1993'
+      name: '1993'
+      description: ''
+    - level: '1994'
+      name: '1994'
+      description: ''
+    - level: '1995'
+      name: '1995'
+      description: ''
+    - level: '1996'
+      name: '1996'
+      description: ''
+    - level: '1997'
+      name: '1997'
+      description: ''
+    - level: '1998'
+      name: '1998'
+      description: ''
+    - level: '1999'
+      name: '1999'
+      description: ''
+    - level: '2000'
+      name: '2000'
+      description: ''
+    - level: '2001'
+      name: '2001'
+      description: ''
+    - level: '2002'
+      name: '2002'
+      description: ''
+    - level: '2003'
+      name: '2003'
+      description: ''
+    - level: '2004'
+      name: '2004'
+      description: ''
+    - level: '2005'
+      name: '2005'
+      description: ''
+    - level: '2006'
+      name: '2006'
+      description: ''
+    - level: '2007'
+      name: '2007'
+      description: ''
+    - level: '2008'
+      name: '2008'
+      description: ''
+    - level: '2009'
+      name: '2009'
+      description: ''
+    - level: '2010'
+      name: '2010'
+      description: ''
+    - level: '2011'
+      name: '2011'
+      description: ''
 variables:
   BrutoToegevoegdeWaardeBasisprijzen:
     name: Basisprijzen
