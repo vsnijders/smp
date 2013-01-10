@@ -1,2 +1,2 @@
 #!/bin/bash
-R -f prepare_all.R
+R -f prepare.R
