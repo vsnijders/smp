@@ -29,6 +29,10 @@ dimensions:
     aggregate: Nederland
     default: Nederland
     type: categorical
+    description: |
+      PO = Politieregio
+      De indeling in politieregio's is ingevoerd in 1994 en berust op de
+      Politiewet 1993. Nederland telt 25 politieregio's
     categories:
     - level: Amsterdam-Amstelland (PO)
       name: Amsterdam-Amstelland (PO)
@@ -116,7 +120,10 @@ dimensions:
     categories:
     - level: Geweldsdelicten
       name: Geweldsdelicten
-      description: ''
+      description: |
+        - Seksuele delicten;
+        - Mishandeling;
+        - Bedreiging.
     - level: Overige delicten
       name: Overige delicten
       description: ''
@@ -125,13 +132,39 @@ dimensions:
       description: ''
     - level: Vandalismedelicten
       name: Vandalismedelicten
-      description: ''
+      description: 'Beschadiging/diefstal vanaf auto en overige vernielingen'
     - level: Vermogensdelicten
       name: Vermogensdelicten
-      description: ''
+      description: |
+        Vermogensdelicten:
+        - Poging tot inbraak;
+        - Inbraak;
+        - Fietsdiefstal;
+        - Diefstal van en uit de auto;
+        - Zakkenrollerij met geweld;
+        - Zakkenrollerij zonder geweld;
+        - Overige diefstal.
 variables:
   Slachtofferschap:
     name: Slachtofferschap
+    description: |
+      In de IVM is aan alle respondenten gevraagd of zij slachtoffer zijn
+      geweest van een of meer met name genoemde delicten.
+      Het gaat daarbij om geweldsdelicten (seksuele delicten, mishandeling,
+      bedreiging), vermogensdelicten (inbraak of poging daartoe, fietsdiefstal,
+      autodiefstal, diefstal uit de auto, zakkenrollerij met en zonder geweld,
+      overige diefstal), vandalisme (vernieling/diefstal vanaf auto, overige
+      vernielingen), en overige, niet nader gespecificeerde delicten.
+      Per soort delict is daarbij telkens eerst gevraagd of men daarvan in de
+      afgelopen vijf jaar slachtoffer is geweest. Zo ja dan werd gevraagd in
+      welk jaar en in welke maand dit delict de laatste keer en de voorlaatste
+      keer plaatsvond. Vervolgens is gevraagd hoe vaak het delict in totaal
+      gebeurde in een periode van 12 maanden voorafgaande aan de interviewdatum.
+      Slachtoffer is iemand die in een periode van 12 maanden voorafgaande aan
+      de interviewdatum éénmaal of vaker een delict heeft ondervonden, ongeacht
+      het aantal keren dat dit gebeurde.
+      De gegevens hebben betrekking op personen van 15 jaar en ouder,
+      tenzij anders vermeld.
     type: numeric
     unit: '%'
     population: bevolking
