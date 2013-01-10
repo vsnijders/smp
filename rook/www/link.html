@@ -56,7 +56,6 @@
         });
 
         $("#linkform").submit(function(e) {
-          //var json = this.link.value;
           var link = lv.getData("#link");
           console.log(link);
           R.link_tables(link).success(
@@ -65,12 +64,17 @@
                   "<a href='table.html?table={{table}}'> <i class='icon-th'></i></a>" +
                   "<a href='visualize.html?table={{table}}'><i class='icon-eye-open'></i></a>";
                   var html = Mustache.render(template, {table:data})
-                  $("#linkresult").html(html);
+                  $("#linkresult")
+                     .html(html)
+                     .addClass("text-success")
+                  .parent().show();
+                  $("#create").addClass("btn-success");
               }).error(function(data){
-                if (data) {
-                  $("#linkresult").html("Creation of table failed: '" + 
-                    data + "'");
-                }
+                  $("#linkresult")
+                    .html("Creation of table failed: '" + data + "'")
+                    .addClass("text-error")
+                  .parent().show();
+                  $("#create").addClass("btn-error");
               })
           ;
           return false;
@@ -86,7 +90,7 @@
                <i class="icon-list"></i> 
                <span class="dim"><%=dimension1 %></span></div>
           </td>
-          <td><a class="unlink" href="#" data-index="<%=i%>"><i class="icon-resize-horizontal"></i></a></td>
+          <td><a class="unlinkdim" href="#" data-index="<%=i%>"><i class="icon-resize-horizontal"></i></a></td>
           <td> <div class="dimension draggable" data-index="<%=i%>" data-dim="dimension2" data-value="<%=dimension2%>">
                 <i class="icon-list"></i>
                <span class="dim"><%=dimension2 %></span></div>
@@ -100,14 +104,14 @@
        <td colspan="4" >
         <div class="collapse" id="categories_<%=i%>">
          <table class="" style="width:100%">
-           <% _.each(categories, function(category){ %>
+           <% $.each(categories, function(j, category){ %>
             <tr class="category">
               <td style="width:20px;"><input class="include" type="checkbox" <%= (category.include)?'checked' : '' %>></input></td>
               <td> 
                 <div class="category draggable" data-cat="category1" data-value="<%=category.category1%>"> <%=category.category1%></div>
               </td>
               <td style="text-align:center">
-                 <a class="unlink"> <i class="icon-resize-horizontal"></i> </a>
+                 <a class="unlinkcat"> <i class="icon-resize-horizontal"></i> </a>
               </td>
 
               <td> <div class="category draggable" data-cat="category2" data-value="<%=category.category2%>"> <%=category.category2%></div></td>

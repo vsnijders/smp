@@ -207,9 +207,7 @@ var LinkView = Backbone.View.extend({
           .draggable( {axis:"y", revert: "invalid"} )
           ;
 
-        tbody.on("mouseover", "a.unlink i", function(a) {$(a).toggleClass("icon-remove")})
     	cleanCats();
-
 
         $(".dimension.droppable")
           .droppable({
@@ -234,9 +232,7 @@ var LinkView = Backbone.View.extend({
 
 	        	// should be triggered by previous statement
 	        	_linkview.render();
-
-	        	$("#linkresult").html("");
-
+	        	clearResult();
 	        		//unset?
 	        	//l.dimensions.link(d.index, t.index);
 	        	//l.dimensions.at(d.index).unset(d.dim);
@@ -244,16 +240,6 @@ var LinkView = Backbone.View.extend({
 	        	//lv.render();
             }
           });
-
-        function cleanCats(){
-        	// remove empty rows and show linked cats.
-			$("tr.category").each(function(i,tr){
-				   var linked = $("div.draggable", tr).length == 2;
-				   $("a.unlink", this).toggle(linked);
-			    })
-			   .filter( function(i){ return $("div.droppable", this).length==2})
-			   .remove();        	
-        }
 
         function catDrop(e, dragevent){
 
@@ -268,8 +254,11 @@ var LinkView = Backbone.View.extend({
 
         	target.insertBefore(stub);
         	stub.remove();
+
+        	var tr = dragged.closest("tr.category");
+        	console.log(tr);
+        	$("input.include", tr).attr("checked", true);
         	cleanCats();
-            $("#linkresult").html("");
         }
 
         $(".category.droppable")
@@ -282,6 +271,17 @@ var LinkView = Backbone.View.extend({
           });
 	}
 });
+
+function cleanCats(){
+	// remove empty rows and show linked cats.
+	$("tr.category").each(function(i,tr){
+		   var linked = $("div.draggable", tr).length == 2;
+		   $("a.unlinkcat", this).toggle(linked);
+	    })
+	   .filter( function(i){ return $("div.droppable", this).length==2})
+	   .remove();        	
+	clearResult();
+}
 
 var CategoriesView = Backbone.View.extend({
 	initialize: function(options){
@@ -322,16 +322,64 @@ var DimensionView = Backbone.View.extend({
 			html = this.template_ul2(dim.toJSON());
 		}
 		//$el.html(html);
-		$(html).appendTo(par);
+		var $html = $(html);
+		$html.appendTo(par);
 
 		//$el.appendTo(par);
-		$("a.unlink", par).on("click", function(){
+		$("a.unlinkdim", $html)
+		  .on("click", function(){
 			var at = $(this).data("index");
 
 			//ugly!!! replace with event or view!
 			l.dimensions.unlink(at);
 			lv.render();
-		})
+		  })
+		  .on("hover", function(){
+		  	$("i", this)
+		  	  .toggleClass("icon-resize-horizontal")
+		  	  .toggleClass("icon-remove")
+		  	  ;
+		   })
+
+		$("a.unlinkcat", $html).on("click", function(a){
+			var tr = $(this).closest("tr.category");
+
+            // remove check
+			$("input", tr).attr("checked", false);
+			
+			var tr2 = tr.clone();
+			tr.after(tr2);
+
+			$("div.category", tr).eq(1)
+			   .removeClass("draggable")
+			   .addClass("droppable")
+			   .attr("data-value", "")
+			   .html("")
+			   ;
+
+			$("div.category", tr2).eq(0)
+			   .removeClass("draggable")
+			   .addClass("droppable")
+			   .attr("data-value", "")
+			   .html("")
+			   ;
+
+            //HACK
+			lv.refreshDrop();
+			/*var dim = l.dimensions.at(dimidx);
+			dim.categories.unlink(catidx);
+			console.log(dim.toJSON());
+			lv.render();
+			*/
+
+		  })
+		  .on("hover", function(){
+		  	$("i", this)
+		  	  .toggleClass("icon-resize-horizontal")
+		  	  .toggleClass("icon-remove")
+		  	  ;
+		   })
+;
 
 		//this.renderCats(par.get(0), dim.toJSON());
 
@@ -362,7 +410,7 @@ var DimensionView = Backbone.View.extend({
 
 		   	   var td2 = tr.append("td")
 		   	   if (d.category1  && d.category2){
-			   	   td2.append("a").attr("class", "unlink")
+			   	   td2.append("a").attr("class", "unlinkcat")
 			   	     .append("i")
 			   	     .attr({"class": "icon-resize-horizontal"})
 			   	     ;
@@ -389,6 +437,15 @@ var CategoryView = Backbone.View.extend({
 	}
 });
 
+
+function clearResult(){
+	$("#linkresult")
+	  .html("")
+	  .removeClass("text-success text-error")
+	.parent().hide();
+
+	$("#create").removeClass("btn-success btn-error")
+}
 /*
 var link = 
       { table1: "slachtoffer",
