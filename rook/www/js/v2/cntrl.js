@@ -130,7 +130,7 @@ function Cntrl(table, node) {
 
         var label = "";
         
-        //TODO clean up...
+        //TODO clean up and move to chart....
         if (meta_.variables[selection_.y]){
           label = meta_.variables[selection_.y].name;
         } else if (meta_.variables[selection_.size]){

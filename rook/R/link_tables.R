@@ -16,7 +16,7 @@ link_tables <- function(link) {
   t2_meta <- t2$meta
   t2      <- t2$data
 
-  save(link, t1, t1_meta, t2, t2_meta, file="link.RData")
+  #save(link, t1, t1_meta, t2, t2_meta, file="link.RData")
   #load("rook/link.RData")
   # Initialise list with meta for dimensions and variables
   meta <- list(
