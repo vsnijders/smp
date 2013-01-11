@@ -388,7 +388,7 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   }
   // generate label positions
   var labels = [];
-  for (var l = best.lmin; l <= best.lmax; l += best.lstep) {
+  for (var l = best.lmin; (l - best.lmax) <= 1E-10; l += best.lstep) {
     labels.push(l);
   }
   best['labels'] = labels;
