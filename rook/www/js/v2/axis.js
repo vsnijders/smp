@@ -57,7 +57,6 @@ function LinearYAxis() {
 
   format_label = function(label, ndec) {
     var precision = ndec || precision_;
-    console.log("format_label:" + precision_);
     var dec = ',';
     var grp = ' ';
     label = label.toFixed(precision);
@@ -108,7 +107,6 @@ function LinearYAxis() {
       height_ = height;
       labels_ = wilkinson_ii(range_[0], range_[1], 10, calc_label_width, height_);
       precision_ = labels_['ndec'];
-      console.log("height:" + precision_);
       labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return(this);
