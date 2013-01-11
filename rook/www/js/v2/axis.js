@@ -55,25 +55,9 @@ function LinearYAxis() {
   var value_;
   var precision_ = 0;
 
-  format_label = function(label, ndec) {
-    var precision = ndec || precision_;
-    var dec = ',';
-    var grp = ' ';
-    label = label.toFixed(precision);
-    // based on code from http://www.mredkj.com/javascript/numberFormat.html
-    x     = label.split('.');
-    x1    = x[0];
-    x2    = x.length > 1 ? dec + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + grp + '$2');
-    }
-    return(x1 + x2);
-  }
-
   calc_label_width = function(label, ndec) {
     if (ndec == undefined) ndec = precision_;
-    return(label_width(format_label(label, ndec)));
+    return(label_width(format_numeric(label, ndec)));
   }
 
   axis.variable = function(variable) {
@@ -149,7 +133,7 @@ function LinearYAxis() {
 
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.scale).attr('dy', '0.35em')
-      .attr('text-anchor', 'end').text(function(d) { return(format_label(d, precision_));});
+      .attr('text-anchor', 'end').text(function(d) { return(format_numeric(d, precision_));});
 
     return(this);
   }
