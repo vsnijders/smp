@@ -19,33 +19,56 @@ function Barchart() {
 
     g.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
       .attr('class','vrule')
-      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('x1', axes.x.scale).attr('x2', axes.x.scale)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
     g.selectAll('line.origin').data([0]).enter().append('line')
       .attr('class','origin')
-      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('x1', axes.x.scale).attr('x2', axes.x.scale)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#000000');
 
 
     //data
 
-    g.selectAll('rect.bar').data(data).enter().append('rect')
-      .attr('class', 'bar')
-      .attr('y', function(d) {
-        return(axes.y.transform(d) - axes.y.barheight()/2)
-      })
-      .attr('height', axes.y.barheight)
-      .attr('x', function(d) {
-        return(axes.x.transform_val(0));
-      })
-      .attr('width', function(d) {
-        return(axes.x.transform(d) - axes.x.transform_val(0));
-      })
-      .attr('fill', axes.colour.scale)
-      .call(highlightBar, axes.y.value)
+    var groupBy = d3.nest()
+       .key(axes.colour.value())
       ;
+
+    byColor_data = groupBy.entries(data);
+
+    var bands = d3.scale.ordinal()
+      .domain(d3.range(byColor_data.length))
+      .rangeBands([0, axes.y.barheight()])
+      ;
+
+    console.log(byColor_data)
+    var bw = bands.rangeBand();
+
+    g.selectAll("g.color").data(byColor_data).enter()
+      .append("g").attr("class", "color")
+      .each(function(d, i){
+        var color = axes.colour.scale(d.key);
+        var xzero = axes.x.scale(0); 
+
+        var gcolor = d3.select(this);
+        var offset = bands(i);
+
+        gcolor.selectAll('rect.bar').data(d.values).enter().append('rect')
+          .attr('class', 'bar')
+          .attr('y', function(d) {
+            return(offset + axes.y.transform(d) - axes.y.barheight()/2)
+          })
+          .attr('height', bw)
+          .attr('x', xzero)
+          .attr('width', function(d) {
+            return(axes.x.transform(d) - xzero);
+          })
+          .attr('fill', color)
+          .call(highlightBar, axes.y.value)
+          ;
+      })
+
 
     $("rect.bar")
       .tipsy({ title: cntrl.toText,
@@ -295,6 +318,8 @@ function LinearXAxis2() {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
   }
+
+  axis.scale = axis.transform_val;
 
   axis.transform = function(value) {
     return (axis.transform_val(value[variable_]));
