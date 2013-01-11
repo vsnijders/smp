@@ -50,21 +50,22 @@ format_numeric = function(label, ndec, dec, grp) {
 // ====                         WILKINSON ALGORITHM                        ====
 // ============================================================================
 
-// The following routine checks for overlap in the labels. This is used in the 
-// Wilkinson labeling algorithm below to ensure that the labels do not overlap.
-//
-function overlap(lmin, lmax, lstep, calc_label_width, axis_width, ndec) {
-  var width_max = lstep*axis_width/(lmax-lmin);
-  for (var l = lmin; (l - lmax) <= 1E-10; l += lstep) {
-    var w  = calc_label_width(l, ndec);
-    if (w > width_max) return(true);
-  }
-  return(false);
-}
-
 
 function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q, precision, mincoverage) {
   // ============================ SUBROUTINES =================================
+
+  // The following routine checks for overlap in the labels. This is used in the 
+  // Wilkinson labeling algorithm below to ensure that the labels do not overlap.
+  function overlap(lmin, lmax, lstep, calc_label_width, axis_width, ndec) {
+    var width_max = lstep*axis_width/(lmax-lmin);
+    for (var l = lmin; (l - lmax) <= 1E-10; l += lstep) {
+      var w  = calc_label_width(l, ndec);
+      if (w > width_max) return(true);
+    }
+    return(false);
+  }
+
+  // Perform one iteration of the Wilkinson algorithm
   function wilkinson_step(min, max, k, m, Q, mincoverage) {
     // default values
     Q               = Q         || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];

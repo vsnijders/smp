@@ -44,7 +44,15 @@ function BaseAxis(options){
 
 function LinearYAxis() {
   var axis = {};
-  
+
+  // Some constants; probably need to be moved to a settings file
+  var NUMBER_LABELS = 10; // target number of labels of wilkinson algorithm
+  var TICK_LENGTH = 4; 
+  var TICK_COLOUR = "#000000";
+  var PADDING = TICK_LENGTH + 1; // distance of label from graph
+  var LEFT_PADDING = 5;  // extra space left of the label
+
+  // Variables
   var variable_;
   var range_  = [undefined, undefined];
   var width_  = 40;
@@ -80,7 +88,7 @@ function LinearYAxis() {
   }
 
   axis.width = function() {
-    width_ = d3.max(range_, calc_label_width) + 10;
+    width_ = d3.max(range_, calc_label_width) + LEFT_PADDING + PADDING;
     return(width_);
   }
 
@@ -88,11 +96,14 @@ function LinearYAxis() {
     if (!arguments.length) {
       return height_;
     } else {
-      height_ = height;
-      labels_ = wilkinson_ii(range_[0], range_[1], 10, calc_label_width, height_);
-      precision_ = labels_['ndec'];
-      labels_ = labels_['labels'];
-      label_range_ = d3.extent(labels_);
+      // set the height
+      height_      = height;
+      // now that the height is known we can calculate the labels of the axis
+      labels_      = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
+                       calc_label_width, height_);
+      precision_   = labels_['ndec'];
+      label_range_ = [labels_.lmin, labels_.lmax];
+      labels_      = labels_['labels'];
       return(this);
     }
   }
@@ -125,14 +136,14 @@ function LinearYAxis() {
   axis.draw = function(label) {
     canvas_.selectAll("line").data(labels_).enter()
       .append("line")
-      .attr({ x1: width_-5, x2: width_
-            , stroke: "#000000"
+      .attr({ x1: width_-TICK_LENGTH, x2: width_
+            , stroke: TICK_COLOUR
             , y1: axis.scale, y2: axis.scale
             })
       ;
 
     canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', width_-5).attr('y', axis.scale).attr('dy', '0.35em')
+      .attr('x', width_-PADDING).attr('y', axis.scale).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return(format_numeric(d, precision_));});
 
     return(this);
