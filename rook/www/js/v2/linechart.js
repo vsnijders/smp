@@ -58,10 +58,18 @@ function Linechart() {
 
   function draw_grid(g){
 
-    var grid = g.append("g").attr('class', 'grid');
+    var grid = g.selectAll("g.grid").data([0]);
 
-    grid.append('rect').attr('width', axes.x.width())
-      .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
+    grid.enter().append("g")
+      .attr('class', 'grid')
+      .append('rect')
+      .attr('fill', "#F0F0F0")
+      ;
+
+    grid.select('rect')
+     .attr({ 'width' : axes.x.width()
+           , 'height': axes.y.height()
+           })
 
     grid.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
       .attr('class','hrule')
@@ -84,11 +92,10 @@ function Linechart() {
                      ;
 
     crosshair.append("line")
-      .attr("class", "vline")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", axes.y.height())
+      .attr({"class":"vline"
+            , x1: 0, x2: 0
+            , y1: 0, y2: axes.y.height()
+            })
       ;
 
     crosshair.append("line")
@@ -108,7 +115,7 @@ function Linechart() {
     draw_grid(g);
 
     var groupBy = d3.nest()
-      .key(axes.colour.value())
+       .key(axes.colour.value())
       ;
 
     byColor_data = groupBy.entries(data);

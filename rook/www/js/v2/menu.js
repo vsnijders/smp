@@ -76,7 +76,8 @@ function Menu(){
             .attr({"href":"#"})
             .addClass("info")
             .html('<i class="icon-info-sign"></i>')
-            .popover({ content: catVar.description
+            .popover({ content: markdown.toHTML(catVar.description)
+                     , html: true
                      , title: catVar.name
                      , trigger: "hover"
                      })
@@ -105,7 +106,8 @@ function Menu(){
               .attr({"href":"#"})
               .addClass("info")
               .html('<i class="icon-info-sign"></i>')
-              .popover({ content: cat.description
+              .popover({ content: markdown.toHTML(cat.description)
+                       , html: true
                        , title: cat.name
                        , trigger: "hover"
                        })
@@ -140,7 +142,8 @@ function Menu(){
             .attr({"href":"#"})
             .addClass("info")
             .html('<i class="icon-info-sign"></i>')
-            .popover({ content: numVar.description
+            .popover({ content: markdown.toHTML(numVar.description)
+                     , html: true
                      , title: numVar.name
                      , trigger: "hover"
                      })

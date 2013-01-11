@@ -141,14 +141,16 @@ function LinearYAxis() {
   }
 
   axis.draw = function(label) {
-    canvas_.selectAll("line").data(labels_).enter().append("line")
-      .attr("x1", width_-5).attr("x2", width_)
-      .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
-      .attr("stroke", "#000000")
+    canvas_.selectAll("line").data(labels_).enter()
+      .append("line")
+      .attr({ x1: width_-5, x2: width_
+            , stroke: "#000000"
+            , y1: axis.scale, y2: axis.scale
+            })
       ;
 
     canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
+      .attr('x', width_-5).attr('y', axis.scale).attr('dy', '0.35em')
       .attr('text-anchor', 'end').text(function(d) { return(format_label(d, precision_));});
 
     return(this);
@@ -223,7 +225,7 @@ function LinearXAxis() {
   axis.transform_val = axis.scale;
 
   axis.transform = function(value) {
-    return (axis.transform_val(value[variable_]));
+    return (axis.scale(value[variable_]));
   }
 
   axis.ticks = function() {
@@ -232,11 +234,11 @@ function LinearXAxis() {
 
   axis.draw = function() {
     canvas_.selectAll("line").data(labels_).enter().append("line")
-      .attr("x1", axis.transform_val).attr("x2", axis.transform_val)
+      .attr("x1", axis.scale).attr("x2", axis.scale)
       .attr("y1", 0).attr("y2", 5)
       .attr("stroke", "#000000");
     canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', axis.transform_val)
+      .attr('x', axis.scale)
       .attr('y', 5).attr('dy', '1.2em')
       .attr('text-anchor', 'middle').text(function(d) { return (d);});
   }
