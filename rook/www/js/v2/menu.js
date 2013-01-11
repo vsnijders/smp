@@ -94,15 +94,26 @@ function Menu(){
 
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
-        $.each(catVar.levels, function(i, lab) {
-          var span_c = $("<span>").attr({"class":"color", "data-value":lab});
-          var span = $("<span>").text(lab);
+        $.each(catVar.categories, function(i, cat) {
+          var span_c = $("<span>").attr({"class":"color", "data-value": cat.level});
+          var span = $("<span>").text(cat.name);
           var label = $("<label>").appendTo(form);
           label.append(span_c);
           span.appendTo(label);
+          if (cat.description){
+            var info = $("<a>")
+              .attr({"href":"#"})
+              .addClass("info")
+              .html('<i class="icon-info-sign"></i>')
+              .popover({ content: cat.description
+                       , title: cat.name
+                       , trigger: "hover"
+                       })
+              .appendTo(label)
+          }
           $("<input>").attr("type", "checkbox").addClass("filter")
             .attr("name", id)
-            .val(lab)
+            .val(cat.level)
             .click(behave_like_radio) 
             .click(update_filter)
             .click(cntrl.redraw)

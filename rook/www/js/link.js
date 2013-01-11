@@ -1,34 +1,8 @@
 var Category = Backbone.Model.extend({
-	isLink: function(){
-		return this.has("category1") && this.has("category2");
-	},
-	
-	isEmpty: function(){
-		return !this.has("category1") && !this.has("category2");
-	}
-
 });
 
 var Categories = Backbone.Collection.extend({
-	model: Category,
-
-	unlink: function(at){
-		var cat1 = this.at(at);
-		var cat2 = new Category({category2:cat1.get("category2")});
-		this.add(cat2, {at: at});
-		cat1.unset("category2");
-	},
-
-	link: function(from, to){
-		var catfrom = this.at(from);
-		var catto = this.at(to);
-
-		if (catto.has("category1"))
-			catto.set("category2", catfrom.get("category2"))
-		else 
-			catto.set("category1", dimfrom.get("category1"))
-		this.remove(dimfrom);
-	}
+	model: Category
 });
 
 var Dimension = Backbone.Model.extend({
@@ -61,17 +35,22 @@ var Dimensions = Backbone.Collection.extend({
 		var cats = dim.categories.toJSON();
 
 		var cats1 =  _.filter(cats, function(c){return c.category1})
-		              .map( function(c){return _.pick(c, "category1")})
+		              .map( function(c){return _.pick(c, "category1", "category1_name")})
 		              ;
 		var cats2 = _.filter(cats, function(c){return c.category2})
-		             .map( function(c){return _.pick(c, "category2")})
+		             .map( function(c){return _.pick(c, "category2", "category2_name")})
 		              ;
 
 //		console.log("cats1", cats1);
 //		console.log("cats2" ,cats2);
-		var dim2 = new Dimension({dimension2:dim.get("dimension2"), categories: cats2});
+		var dim2 = new Dimension({
+			dimension2:dim.get("dimension2"),
+			dimension2_name:dim.get("dimension2_name"), 
+			categories: cats2
+		});
 		this.add(dim2, {at: at+1});
 		dim.unset("dimension2");
+		dim.unset("dimension2_name");
 		dim.categories.reset(cats1);
 	},
 
@@ -88,10 +67,14 @@ var Dimensions = Backbone.Collection.extend({
 		}
 
 		dimto.categories.add(dimfrom.categories.toJSON());
-		if (dimto.has("dimension1"))
+		if (dimto.has("dimension1")){
 			dimto.set("dimension2", dimfrom.get("dimension2"))
-		else 
+			dimto.set("dimension2_name", dimfrom.get("dimension2_name"))
+		}
+		else {
 			dimto.set("dimension1", dimfrom.get("dimension1"))
+			dimto.set("dimension1_name", dimfrom.get("dimension1_name"))
+		}
 		this.remove(dimfrom);
 	}
 });
@@ -149,11 +132,16 @@ var LinkView = Backbone.View.extend({
 			var dim = {};
 			$("div.dimension", this).each(function(){
 				var data = $(this).data();
-				if (data.value != "") {dim[data.dim] = data.value};
+				if (data.value != "") {
+					dim[data.dim] = data.value
+					dim[data.dim + "_name"] = $("span.dim",this).text();
+				};
 			});
 			dims.push(dim);
 		})
 		
+		//console.log(dims);
+
 		$("tr.categories").each(function(i, tr){
 			var cats = dims[i].categories = [];
 			
@@ -162,6 +150,7 @@ var LinkView = Backbone.View.extend({
 				$("div.category",this).each(function(){
 					var data = $(this).data();
 					cat[data.cat] = data.value;
+					cat[data.cat + "_name"] = $(this).text();
 				});
 
 				cat.include = $("input.include", this).get(0).checked;
@@ -173,20 +162,13 @@ var LinkView = Backbone.View.extend({
 			if (select.length){
 				$("option.category", select).each(function(){
 					var cat = {};
-					cat[$(this).data("cat")] = $(this).val();
+					var data = $(this).data();
+					cat[data.cat] = $(this).val();
+					cat[data.cat + "_name"] = $(this).text();
 					cat.include = $(this).val() == select.val();
 					cats.push(cat)
 				});
 			}
-
-/*			$("option.category", tr).each(function(i){
-			    var cat = {};
-				var data = $(this).data();
-				cat[data.cat] = data.value;
-				cats.push(cat);
-			});
-*/
-
 		});
 		console.log(link);
 		return link;
@@ -256,7 +238,7 @@ var LinkView = Backbone.View.extend({
         	stub.remove();
 
         	var tr = dragged.closest("tr.category");
-        	console.log(tr);
+
         	$("input.include", tr).attr("checked", true);
         	cleanCats();
         }
@@ -283,23 +265,6 @@ function cleanCats(){
 	clearResult();
 }
 
-var CategoriesView = Backbone.View.extend({
-	initialize: function(options){
-		this.linked = options.linked;
-		//this.template = _.template($("#dimview_linked").html());
-		//this.template_ul1 = _.template($("#dimview_unlinked1").html());
-		//this.template_ul2 = _.template($("#dimview_unlinked2").html());
-	},
-
-	render: function(par){
-		var cats = this.collection;
-
-		cats.each(function(cat){
-
-		})	
-	}	
-});
-
 var DimensionView = Backbone.View.extend({
 
 	initialize: function(){
@@ -313,7 +278,7 @@ var DimensionView = Backbone.View.extend({
 		var dim = this.model;
 
 		var html = "";
-
+		//console.log(dim.toJSON());
 		if (dim.isLink()){
 			html = this.template(dim.toJSON());
 		} else if (dim.has("dimension1")) {
@@ -431,12 +396,6 @@ var DimensionView = Backbone.View.extend({
 	}
 });
 
-var CategoryView = Backbone.View.extend({
-	render: function(){	
-		return this;
-	}
-});
-
 
 function clearResult(){
 	$("#linkresult")
@@ -444,7 +403,7 @@ function clearResult(){
 	  .removeClass("text-success text-error")
 	.parent().hide();
 
-	$("#create").removeClass("btn-success btn-error")
+	$("#create").removeClass("btn-success btn-warning")
 }
 /*
 var link = 

@@ -356,13 +356,13 @@ function ColourAxis() {
     var dims = cntrl.meta().dimensions;
     var dim;
     if (dim = dims[variable_]){
-      cols(dim.levels);
-      if (dim.levels.length > 10){
+      //cols(dim.levels);
+      if (dim.categories.length > 10){
         axis.scale = scale_ = d3.scale.category20();
       } else {
         axis.scale = scale_ = d3.scale.category10();        
       }
-      scale_.domain(dim.levels);
+      scale_.domain(dim.categories.map(function(c){return c.level;}));
     } else {
       scale_.domain(d3.map(data, value_));
     }
