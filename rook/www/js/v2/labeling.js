@@ -287,10 +287,11 @@ function extended(dmin, dmax, m, width, label_width, Q, only_loose, w) {
   return(false);
 }*/
 
-function overlap(lmin, lmax, lstep, calc_label_width, axis_width) {
+function overlap(lmin, lmax, lstep, calc_label_width, axis_width, ndec) {
   var width_max = lstep*axis_width/(lmax-lmin);
   for (var l = lmin; l <= lmax; l += lstep) {
-    var w  = calc_label_width(String(l));
+    //var w  = calc_label_width(String(l), ndec);
+    var w  = calc_label_width(l, ndec);
     if (w > width_max) return(true);
   }
   return(false);
@@ -299,11 +300,12 @@ function overlap(lmin, lmax, lstep, calc_label_width, axis_width) {
 }
 
 
-function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q, mincoverage) {
+function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q, precision, mincoverage) {
   // ============================ SUBROUTINES =================================
   function wilkinson_step(min, max, k, m, Q, mincoverage) {
     // default values
-    Q               = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+    Q               = Q         || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+    precision       = precision || [1,  0, 0, 0,  -1, 0, 0,  -1, 0, 0, 0, 0];
     mincoverage     = mincoverage || 0.8;
     m               = m || k;
     // calculate some stats needed in loop
@@ -321,13 +323,15 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
       var tdelta = Q[i] * dbase;
       var tmin   = Math.floor(min/tdelta) * tdelta;
       var tmax   = tmin + intervals * tdelta;
+      // calculate the number of decimals
+      var ndec   = (base + precision[i]) < 0 ? Math.abs(base + precision[i]) : 0;
       // if label positions cover range
       if (tmin <= min && tmax >= max) {
         // calculate roundness and coverage part of score
         var roundness = 1 - (i - (tmin <= 0 && tmax >= 0)) / Q.length
         var coverage  = (max-min)/(tmax-tmin)
         // if coverage high enough
-        if (coverage > mincoverage && !overlap(tmin, tmax, tdelta, calc_label_width, axis_width)) {
+        if (coverage > mincoverage && !overlap(tmin, tmax, tdelta, calc_label_width, axis_width, ndec)) {
           // calculate score
           var tnice = granularity + roundness + coverage
           // if highest score
@@ -336,7 +340,8 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
                 'lmin'  : tmin,
                 'lmax'  : tmax,
                 'lstep' : tdelta,
-                'score' : tnice
+                'score' : tnice,
+                'ndec'  : ndec
               };
           }
         }
@@ -356,7 +361,8 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   }
   calc_label_width = calc_label_width || function() { return(0);};
   axis_width       = axis_width || 1;
-  Q                = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+  Q                = Q         || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+  precision        = precision || [1,  0, 0, 0,  -1, 0, 0,  -1, 0, 0, 0, 0];
   mincoverage      = mincoverage || 0.8;
   mmin             = mmin || 2;
   mmax             = mmax || Math.ceil(6*m);
@@ -365,8 +371,12 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
       'lmin'  : dmin,
       'lmax'  : dmax,
       'lstep' : (dmax - dmin),
-      'score' : -1E8
+      'score' : -1E8,
+      'ndec'  : 0
     };
+  // calculate number of decimal places
+  var x = String(best['lstep']).split('.');
+  best['ndec'] = x.length > 1 ? x[1].length : 0;
   // loop though all possible numbers of labels
   for (var k = mmin; k <= mmax; k++) { 
     // calculate best label position for current number of labels
@@ -381,7 +391,8 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   for (var l = best.lmin; l <= best.lmax; l += best.lstep) {
     labels.push(l);
   }
-  return(labels);
+  best['labels'] = labels;
+  return(best);
 }
 
 

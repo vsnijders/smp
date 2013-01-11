@@ -53,6 +53,29 @@ function LinearYAxis() {
   var labels_;
   var label_range_;
   var value_;
+  var precision_ = 0;
+
+  format_label = function(label, ndec) {
+    var precision = ndec || precision_;
+    console.log("format_label:" + precision_);
+    var dec = ',';
+    var grp = ' ';
+    label = label.toFixed(precision);
+    // based on code from http://www.mredkj.com/javascript/numberFormat.html
+    x     = label.split('.');
+    x1    = x[0];
+    x2    = x.length > 1 ? dec + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + grp + '$2');
+    }
+    return(x1 + x2);
+  }
+
+  calc_label_width = function(label, ndec) {
+    if (ndec == undefined) ndec = precision_;
+    return(label_width(format_label(label, ndec)));
+  }
 
   axis.variable = function(variable) {
     if (!arguments.length) {
@@ -60,12 +83,12 @@ function LinearYAxis() {
     } else {
       variable_ = variable;
       value_ = function(d) { return parseFloat(d[variable_]);};
-      return this;
+      return(this);
     }
   }
 
   axis.value = function(){
-    return value_;
+    return(value_);
   }
 
   axis.domain = function(data) {
@@ -74,7 +97,8 @@ function LinearYAxis() {
   }
 
   axis.width = function() {
-    return 40;
+    width_ = d3.max(range_, calc_label_width) + 10;
+    return(width_);
   }
 
   axis.height = function(height) {
@@ -82,9 +106,12 @@ function LinearYAxis() {
       return height_;
     } else {
       height_ = height;
-      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, height_);
+      labels_ = wilkinson_ii(range_[0], range_[1], 10, calc_label_width, height_);
+      precision_ = labels_['ndec'];
+      console.log("height:" + precision_);
+      labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
-      return this;
+      return(this);
     }
   }
 
@@ -93,7 +120,7 @@ function LinearYAxis() {
       return canvas_;
     } else {
       canvas_ = canvas;
-      return this;
+      return(this);
     }
   }
 
@@ -106,11 +133,11 @@ function LinearYAxis() {
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return axis.scale(value_(d));
+    return(axis.scale(value_(d)));
   }
 
   axis.ticks = function() {
-    return (labels_);
+    return(labels_);
   }
 
   axis.draw = function(label) {
@@ -122,12 +149,12 @@ function LinearYAxis() {
 
     canvas_.selectAll('text').data(labels_).enter().append('text')
       .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
-      .attr('text-anchor', 'end').text(function(d) { return (d);});
+      .attr('text-anchor', 'end').text(function(d) { return(format_label(d, precision_));});
 
-    return this;
+    return(this);
   }
 
-  return axis;
+  return(axis);
 }
 
 function LinearXAxis() {
@@ -168,6 +195,7 @@ function LinearXAxis() {
     } else {
       width_ = width;
       labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return this;
     }

@@ -272,6 +272,7 @@ function LinearXAxis2() {
     } else {
       width_ = width;
       labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return this;
     }
