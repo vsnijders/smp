@@ -228,6 +228,7 @@ dimensions:
     type:
     - categorical
     - time
+    - ordered
     categories:
     - level: '1988'
       name: '1988'

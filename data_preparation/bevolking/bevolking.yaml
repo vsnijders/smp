@@ -15,13 +15,13 @@ dimensions:
       name: Female
       description: ''
     - level: TOTAL
-      name: TOTAL
+      name: Total
       description: ''
   age:
     name: age
     aggregate: TOTAL
     default: TOTAL
-    type: categorical
+    type: [categorical, ordered]
     categories:
     - level: 00-05
       name: 00-05
@@ -92,8 +92,8 @@ dimensions:
     default: 2060
     type:
     - categorical
-    - year
-    - ordinal
+    - time
+    - ordered
     categories:
     - level: 2011
       name: 2011

@@ -55,7 +55,9 @@ function Menu(){
   }
 
   function makeCatVar(id, catVar){
-        var li = $("<li>").addClass("draggable categorical")
+        var type = catVar.type;
+        if (Array.isArray(type)) type = type.join(" ");
+        var li = $("<li>").addClass("draggable " + type)
           .attr("data-variable", id)
           .attr("data-name", catVar.name)
           .text(catVar.name)
@@ -170,7 +172,7 @@ function Menu(){
 
   // fill up required variables with available variables
   function autoFill(){
-    var a = ["numeric", "categorical"];
+    var a = ["time", "categorical", "numeric", "ordered"];
     
     $(".tab-pane").each(function(i, tab){
       $(".required", tab)
@@ -255,7 +257,7 @@ function Menu(){
         var $this = $(this);
         if ($(draggable).parent()[0] == $(this)[0]) return (false);
         
-        var a = ["numeric", "categorical"];
+        var a = ["numeric", "categorical", "ordered", "time"];
         for (var v in a){
           if ($this.hasClass(a[v]) && $draggable.hasClass(a[v])){
             return true;

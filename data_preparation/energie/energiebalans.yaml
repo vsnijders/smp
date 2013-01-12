@@ -129,6 +129,7 @@ dimensions:
     type:
     - categorical
     - time
+    - ordered
     categories:
     - level: '1995'
       name: '1995'

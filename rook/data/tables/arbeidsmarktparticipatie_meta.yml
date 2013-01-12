@@ -3,7 +3,7 @@ description: Deze tabel bevat de arbeidsparticipatie naar geslacht van verschill
   generaties.
 dimensions:
   geslacht:
-    name: geslacht
+    name: Geslacht
     aggregate: totaal
     default: totaal
     type: categorical
@@ -21,7 +21,9 @@ dimensions:
     name: generatie
     aggregate: 1986-1990
     default: 1986-1990
-    type: categorical
+    type:
+    - categorical
+    - ordered
     categories:
     - level: 1906-1910
       name: 1906-1910
@@ -77,7 +79,10 @@ dimensions:
   leeftijd:
     name: leeftijd
     default: 50
-    type: categorical
+    type:
+    - categorical
+    - numeric
+    - ordered
     categories:
     - level: 16
       name: 16

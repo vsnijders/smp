@@ -147,20 +147,20 @@ dimensions:
 variables:
   Slachtofferschap:
     name: Slachtofferschap
-    description: "In de IVM is aan alle respondenten gevraagd of zij slachtoffer zijn
-      geweest van een of meer met name genoemde delicten. Het gaat daarbij om geweldsdelicten
-      (seksuele delicten, mishandeling, bedreiging), vermogensdelicten (inbraak of
-      poging daartoe, fietsdiefstal, autodiefstal, diefstal uit de auto, zakkenrollerij
-      met en zonder geweld, overige diefstal), vandalisme (vernieling/diefstal vanaf
-      auto, overige vernielingen), en overige, niet nader gespecificeerde delicten.
-      Per soort delict is daarbij telkens eerst gevraagd of men daarvan in de afgelopen
-      vijf jaar slachtoffer is geweest. Zo ja dan werd gevraagd in welk jaar en in
-      welke maand dit delict de laatste keer en de voorlaatste keer plaatsvond. Vervolgens
-      is gevraagd hoe vaak het delict in totaal gebeurde in een periode van 12 maanden
-      voorafgaande aan de interviewdatum. Slachtoffer is iemand die in een periode
-      van 12 maanden voorafgaande aan de interviewdatum \xE9\xE9nmaal of vaker een
-      delict heeft ondervonden, ongeacht het aantal keren dat dit gebeurde. De gegevens
-      hebben betrekking op personen van 15 jaar en ouder, tenzij anders vermeld.\n"
+    description: "In de IVM is aan alle respondenten gevraagd of zij slachtoffer zijn\ngeweest
+      van een of meer met name genoemde delicten.\nHet gaat daarbij om geweldsdelicten
+      (seksuele delicten, mishandeling,\nbedreiging), vermogensdelicten (inbraak of
+      poging daartoe, fietsdiefstal,\nautodiefstal, diefstal uit de auto, zakkenrollerij
+      met en zonder geweld,\noverige diefstal), vandalisme (vernieling/diefstal vanaf
+      auto, overige\nvernielingen), en overige, niet nader gespecificeerde delicten.\nPer
+      soort delict is daarbij telkens eerst gevraagd of men daarvan in de\nafgelopen
+      vijf jaar slachtoffer is geweest. Zo ja dan werd gevraagd in\nwelk jaar en in
+      welke maand dit delict de laatste keer en de voorlaatste\nkeer plaatsvond. Vervolgens
+      is gevraagd hoe vaak het delict in totaal\ngebeurde in een periode van 12 maanden
+      voorafgaande aan de interviewdatum.\nSlachtoffer is iemand die in een periode
+      van 12 maanden voorafgaande aan\nde interviewdatum \xE9\xE9nmaal of vaker een
+      delict heeft ondervonden, ongeacht\nhet aantal keren dat dit gebeurde.\nDe gegevens
+      hebben betrekking op personen van 15 jaar en ouder,\ntenzij anders vermeld.\n"
     type: numeric
     unit: '%'
     population: bevolking

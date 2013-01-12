@@ -6,9 +6,8 @@ dimensions:
     name: Jaar
     default: 2009
     type:
-    - numeric
     - ordered
-    - year
+    - time
     - categorical
     categories:
     - level: 2001

@@ -88,7 +88,7 @@ dimensions:
   Jaar:
     name: Jaar
     default: 2011
-    type: categorical
+    type: [categorical, ordered, time]
     categories:
     - level: 2008
       name: 2008

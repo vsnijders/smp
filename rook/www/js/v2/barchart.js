@@ -55,17 +55,18 @@ function Barchart() {
         var offset = bands(i);
 
         gcolor.selectAll('rect.bar').data(d.values).enter().append('rect')
-          .attr('class', 'bar')
-          .attr('y', function(d) {
-            return(offset + axes.y.transform(d) - axes.y.barheight()/2)
-          })
-          .attr('height', bw)
-          .attr('x', xzero)
-          .attr('width', function(d) {
-            return(axes.x.transform(d) - xzero);
-          })
-          .attr('fill', color)
-          .call(highlightBar, axes.y.value)
+          .attr({'class': 'bar'
+                , y: function(d) {
+                       return(offset + axes.y.transform(d) - axes.y.barheight()/2)
+                     }
+                , 'height': bw
+                , x: xzero
+                , width: function(d) {
+                           return(axes.x.transform(d) - xzero);
+                          }
+                , fill: color
+                })
+          .call(highlightBar, axes.y.value, axes.colour.value())
           ;
       })
 
@@ -85,19 +86,20 @@ function Barchart() {
                      ;
 
     crosshair.append("line")
-      .attr("class", "vline")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", axes.y.height())
+      .attr({"class": "vline"
+           , x1: 0, x2: 0
+           , y1: 0, y2: axes.y.height()
+           })
       ;
 
   }
 
-  function highlightBar(bars, scale){
+  function highlightBar(bars, scale, color){
     bars
        .on("mouseover", function(d,i){
-             d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
+             d3.selectAll("rect.bar").filter(function(d1,i1){
+                   return scale(d1) != scale(d) || color(d1) != color(d)
+                }) 
                 .style("stroke-opacity", 0.6)
                 .style("fill-opacity", 0.6)
                 ;
