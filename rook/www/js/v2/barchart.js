@@ -137,7 +137,7 @@ function Barchart() {
 // ============================================================================
 
 function CategoricalAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var levels_;
@@ -259,7 +259,7 @@ function CategoricalAxis() {
 
 
 function LinearXAxis2() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var range_  = [undefined, undefined];
