@@ -3,6 +3,7 @@ function Chart(options) {
 
   var empty_ = function(d) {return "<empty>";};
   var data_;
+  var meta_;
   var selection_;
 
   //function to be used for small multiples
@@ -32,6 +33,15 @@ function Chart(options) {
       return data_;
     } else {
       data_ = data;
+      return this;
+    }
+  }
+
+  chart.meta = function(meta) {
+    if (!arguments.length) {
+      return meta_;
+    } else {
+      meta_ = meta;
       return this;
     }
   }
@@ -91,7 +101,7 @@ function Chart(options) {
     
     // update domains of the axes
     for (var v in axes){
-      axes[v].domain(data_);
+      axes[v].meta(meta_).domain(data_);
     }
 
     var xheight = axes.x.height();

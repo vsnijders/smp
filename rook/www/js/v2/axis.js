@@ -1,49 +1,23 @@
 // basic axis functionality
-function BaseAxis(options){
+function Axis(options){
   var axis = {};
 
-  var variable_;
-
-  axis.canvas = function(canvas) {
+  // Get and set meta 
+  var meta_;
+  axis.meta = function(meta) {
     if (!arguments.length) {
-      return canvas_;
+      return meta_;
     } else {
-      canvas_ = canvas;
+      meta_ = meta;
       return this;
     }
-  }
-
-  axis.width = function(){
-    return 30;
-  }
-
-  axis.height = function(){
-    return 30;
-  }
-
-  axis.transform = function(d) {
-    return this.scale(this.value(d));
-  }
-
-  axis.variable = function(variable) {
-    if (!arguments.length) {
-      return variable_;
-    } else {
-      variable_ = variable;
-      this.value = this.setValue(variable);
-      return this;
-    }
-  }
-
-  axis.setValue = function(variable){
-    return function(d){return Number(d[variable]);};
   }
 
   return axis;
 };
 
 function LinearYAxis() {
-  var axis = {};
+  var axis = Axis();
 
   // Some constants; probably need to be moved to a settings file
   var NUMBER_LABELS = 10; // target number of labels of wilkinson algorithm
@@ -153,7 +127,7 @@ function LinearYAxis() {
 }
 
 function LinearXAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var range_  = [undefined, undefined];
@@ -240,7 +214,7 @@ function LinearXAxis() {
 }
 
 function RadiusAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var scale_  = d3.scale.sqrt();
@@ -306,7 +280,7 @@ function RadiusAxis() {
 
 
 function ColourAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var scale_  = d3.scale.category10();
