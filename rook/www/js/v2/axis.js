@@ -50,9 +50,30 @@ function Axis(options){
       return canvas_;
     } else {
       canvas_ = canvas;
-      return(this);
+      return this;
     }
   }
+
+  // Set and get the title of the graph
+  var title_;
+  axis.title = function() {
+    if (!arguments.length) {
+      if (title_ == undefined) {
+        if (axis.variable_meta() == undefined) return '';
+        var title = axis.variable_meta().name;
+        var unit =  axis.variable_meta().unit || '';
+        var axis_title = title;
+        if (unit.length) axis_title += ' (' + unit + ')';
+        return axis_title;
+      } else return title_;
+      return canvas_;
+    } else {
+      title_ = title;
+      return this;
+    }
+  }
+
+ 
 
 
   return axis;
@@ -135,14 +156,6 @@ function LinearYAxis() {
 
   axis.ticks = function() {
     return(labels_);
-  }
-
-  axis.title = function() {
-    var title = axis.variable_meta().name;
-    var unit =  axis.variable_meta().unit || '';
-    var axis_title = title;
-    if (unit.length) axis_title += ' (' + unit + ')';
-    return axis_title;
   }
 
   axis.draw = function(label) {

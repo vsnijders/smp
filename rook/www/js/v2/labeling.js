@@ -27,6 +27,7 @@ function label_width(label) {
 // - Use the correct decimal separator (dec)
 // - Add a thousands separator (grp)
 format_numeric = function(label, unit, ndec, dec, grp) {
+  if (isNaN(label)) return '';
   var unit = unit || '';
   var dec = dec || ',';
   var grp = grp || ' ';
