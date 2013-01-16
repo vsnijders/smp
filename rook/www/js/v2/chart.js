@@ -141,6 +141,17 @@ function Chart(options) {
       .range(y_bands.range)
       ;
 
+    // TODO: this should probably be in some other location
+    var ycenter = (height - margin.bottom - margin.top)/2 + margin.top;
+    canvas_.append('text').attr({
+        'class'       : 'title',
+        'x'           : '5',
+        'y'           : ycenter,
+        'text-anchor' : 'middle',
+        'dy'          : '0.35em',
+        'transform'   : "rotate(-90 5 " + ycenter + ")"
+      }).text(axes.y.title());
+
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
       var row = rows[i];

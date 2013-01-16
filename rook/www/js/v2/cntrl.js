@@ -103,7 +103,7 @@ function Cntrl(table, node) {
       });
 
     graphs_[graph_]
-       .data(data)
+       .data(data).meta(meta_)
        .selection(selection_)
        .canvas(canvas).draw();
   }

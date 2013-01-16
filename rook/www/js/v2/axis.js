@@ -1,8 +1,29 @@
-// basic axis functionality
+
+// ============================================================================
+// ====                           AXIS BASE CLASS                          ====
+// ============================================================================
+
 function Axis(options){
+
   var axis = {};
 
-  // Get and set meta 
+  // Get and set the column/variable from the data which is shown on the axis
+  var variable_;
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
+
+  // Extract column from data row d
+  axis.value = function(d) {
+      return parseFloat(d[variable_]);
+  }
+
+  // Get and set meta of data set
   var meta_;
   axis.meta = function(meta) {
     if (!arguments.length) {
@@ -13,10 +34,36 @@ function Axis(options){
     }
   }
 
+  // Get meta of axis variable
+  axis.variable_meta = function() {
+    if (variable_ == undefined || meta_ == undefined) return undefined;
+    // first check variables then dimensions
+    var meta = meta_.variables[variable_];
+    if (meta != undefined) return meta;
+    else return meta_.dimensions[variable_];
+  }
+
+  // Set and set the canvas
+  var canvas_;
+  axis.canvas = function(canvas) {
+    if (!arguments.length) {
+      return canvas_;
+    } else {
+      canvas_ = canvas;
+      return(this);
+    }
+  }
+
+
   return axis;
 };
 
+// ============================================================================
+// ====                           LINEAR Y AXIS                            ====
+// ============================================================================
+
 function LinearYAxis() {
+  
   var axis = Axis();
 
   // Some constants; probably need to be moved to a settings file
@@ -24,45 +71,37 @@ function LinearYAxis() {
   var TICK_LENGTH = 4; 
   var TICK_COLOUR = "#000000";
   var PADDING = TICK_LENGTH + 1; // distance of label from graph
-  var LEFT_PADDING = 5;  // extra space left of the label
+  var LEFT_PADDING = 18;  // extra space left of the label
 
   // Variables
-  var variable_;
   var range_  = [undefined, undefined];
   var width_  = 40;
   var height_;
-  var canvas_;
   var labels_;
   var label_range_;
-  var value_;
-  var precision_ = 0;
+  var precision_ = undefined;
 
-  calc_label_width = function(label, ndec) {
+  axis.get_tick_unit = function(unit) {
+    // when unit had length 1 add it to the tick marks otherwise only display
+    // the unit in the axis title
+    var unit = axis.variable_meta().unit || '';
+    if (unit.length != 1) return '';
+    if (unit == '%') return unit;
+    return ' ' + unit;
+  }
+
+  axis.calc_label_width = function(label, ndec) {
     if (ndec == undefined) ndec = precision_;
-    return(label_width(format_numeric(label, ndec)));
-  }
-
-  axis.variable = function(variable) {
-    if (!arguments.length) {
-      return variable_;
-    } else {
-      variable_ = variable;
-      value_ = function(d) { return parseFloat(d[variable_]);};
-      return(this);
-    }
-  }
-
-  axis.value = function(){
-    return(value_);
+    return(label_width(format_numeric(label, axis.get_tick_unit(), ndec)));
   }
 
   axis.domain = function(data) {
-    range_ = d3.extent(data, value_);
+    range_ = d3.extent(data, axis.value);
     return(this);
   }
 
   axis.width = function() {
-    width_ = d3.max(range_, calc_label_width) + LEFT_PADDING + PADDING;
+    width_ = d3.max(range_, axis.calc_label_width) + LEFT_PADDING + PADDING;
     return(width_);
   }
 
@@ -74,19 +113,10 @@ function LinearYAxis() {
       height_      = height;
       // now that the height is known we can calculate the labels of the axis
       labels_      = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
-                       calc_label_width, height_);
+                       axis.calc_label_width, height_);
       precision_   = labels_['ndec'];
       label_range_ = [labels_.lmin, labels_.lmax];
       labels_      = labels_['labels'];
-      return(this);
-    }
-  }
-
-  axis.canvas = function(canvas) {
-    if (!arguments.length) {
-      return canvas_;
-    } else {
-      canvas_ = canvas;
       return(this);
     }
   }
@@ -100,25 +130,55 @@ function LinearYAxis() {
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return(axis.scale(value_(d)));
+    return(axis.scale(axis.value(d)));
   }
 
   axis.ticks = function() {
     return(labels_);
   }
 
-  axis.draw = function(label) {
-    canvas_.selectAll("line").data(labels_).enter()
-      .append("line")
-      .attr({ x1: width_-TICK_LENGTH, x2: width_
-            , stroke: TICK_COLOUR
-            , y1: axis.scale, y2: axis.scale
-            })
-      ;
+  axis.title = function() {
+    var title = axis.variable_meta().name;
+    var unit =  axis.variable_meta().unit || '';
+    var axis_title = title;
+    if (unit.length) axis_title += ' (' + unit + ')';
+    return axis_title;
+  }
 
-    canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', width_-PADDING).attr('y', axis.scale).attr('dy', '0.35em')
-      .attr('text-anchor', 'end').text(function(d) { return(format_numeric(d, precision_));});
+  axis.draw = function(label) {
+    // add ticks
+    axis.canvas().selectAll("line").data(labels_).enter().append("line").attr({ 
+        'x1'    : width_-TICK_LENGTH, 
+        'x2'    : width_,
+        'stroke': TICK_COLOUR,
+        'y1'    : axis.scale,
+        'y2'    : axis.scale
+      });
+    // add labels to ticks
+    axis.canvas().selectAll('text.tickmark').data(labels_).enter().append('text').attr({
+        'class'       : 'tickmark',
+        'x'           : width_-PADDING,
+        'y'           : axis.scale,
+        'dy'          : '0.35em',
+        'text-anchor' : 'end'
+      }).text(function(d) { 
+        return format_numeric(d, axis.get_tick_unit(), precision_);
+      });
+    // add axis title
+    // now we have for each axis a title, while for small multiples you 
+    // probably want one title for all y axes.
+    /*var title = axis.variable_meta()..name;
+    var unit =  axis.variable_meta().unit || '';
+    var axis_title = title;
+    if (unit.length) axis_title += ' (' + unit + ')';
+    axis.canvas().append('text').attr({
+        'class'       : 'title',
+        'x'           : '5',
+        'y'           : height_/2,
+        'text-anchor' : 'middle',
+        'dy'          : '0.35em',
+        'transform'   : "rotate(-90 5 " + height_/2 + ")"
+      }).text(axis_title);*/
 
     return(this);
   }

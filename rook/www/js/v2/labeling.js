@@ -26,9 +26,11 @@ function label_width(label) {
 // - Make sure it is rounded to the correct number of decimals (ndec)
 // - Use the correct decimal separator (dec)
 // - Add a thousands separator (grp)
-format_numeric = function(label, ndec, dec, grp) {
+format_numeric = function(label, unit, ndec, dec, grp) {
+  var unit = unit || '';
   var dec = dec || ',';
   var grp = grp || ' ';
+  // round number
   if (ndec != undefined) {
     label = label.toFixed(ndec);
   }
@@ -41,7 +43,7 @@ format_numeric = function(label, ndec, dec, grp) {
   while (rgx.test(x1)) {
     x1 = x1.replace(rgx, '$1' + grp + '$2');
   }
-  return(x1 + x2);
+  return(x1 + x2 + unit);
 }
 
 
