@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>StatMine</title>
+
+    <!-- webpage icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="images/favicon2.png" type="image/png" />
+
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+
+    <!-- bootstrap includes -->
+    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
+    <script type="text/javascript" src="js/i18next.js"></script>
+
+    <script type="text/javascript" src="js/R.js"></script>
+    <!-- styling -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link type="text/css" href="css/statmine.css" rel="stylesheet" />
+    <link type="text/css" href="css/index.css" rel="stylesheet" />
+
+    <!-- scripting -->
+    <script type="text/javascript">
+      $(function() {
+
+        R.list_tables()
+          .success(function(data) {
+
+          //should be done on the server!!!
+          var tables = [];
+          for (var v in data){ var val = data[v]; val.id = v; tables.push(val)}
+          
+          // load template from actual html, compile it and replace it.
+          var t = $("#tables").html();
+          var tc = Mustache.compile(t);
+          $("#tables").html(tc({tables:tables}));
+
+          // Only show the link to page where tables can be linked when 2 tables 
+          // are selected; otherwise hide
+          $(".one, .two, .any").addClass("disabled");
+          
+          $("#tables").on("change","input", function() {
+            var checked = $(this);
+            
+            var nselected = $("input:checked").length;
+            if (nselected > 0) {
+              $(".any").removeClass("disabled");
+            } else {
+              $(".any").addClass("disabled");
+            }
+            if (nselected == 2) {
+              $(".two").removeClass("disabled");
+            } else {
+              $(".two").addClass("disabled");
+            }
+            if (nselected == 1) {
+              $(".one").removeClass("disabled");
+            } else {
+              $(".one").addClass("disabled");
+            } 
+          });
+
+          $("a.table").each(function(i, a){
+            var id = $(a).attr("data-tableid");
+            $(a).attr("href", "table.html?table=" + id)
+          });
+
+          $("a.visualize").each(function(i, a){
+            var id = $(a).attr("data-tableid");
+            $(a).attr("href", "visualize.html?table=" + id)
+          });
+
+        });
+
+        // Handle clicks on the link link
+        $("#link_tables").click(function() {
+          if (!$(this).hasClass("disabled")) {
+            var tables = {
+              "table1": $($("input:checked")[0]).val(),
+              "table2": $($("input:checked")[1]).val()
+            };
+            window.open("link.html?table1=" + tables.table1 + "&table2=" + tables.table2, "_self", false);
+          }
+        });
+
+ 
+        // Handle clicks on the view link
+        $("#view_table").click(function() {
+          if (!$(this).hasClass("disabled")) {
+            var table = $($("input:checked")[0]).val();
+            window.open("visualise.html?table=" + table, "_self", false);
+          }
+        });
+
+        $("#rm_tmp").on("click", function(){
+          R.rm_tmp().success(function(){
+            window.open("index.html", "_self", false);            
+          });
+        })
+
+        // Handle clicks on the browse link
+        $("#browse_table").click(function() {
+          if (!$(this).hasClass("disabled")) {
+            var table = $($("input:checked")[0]).val();
+            window.open("table.html?table=" + table, "_self", false);
+          }
+        })
+
+        i18n.init({debug:true, context: "index"}, function(t){
+          $("body").i18n();
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+   
+  <header>
+    <div class="navbar navbar-static-top navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand" href="index.html">StatMine</a>
+        <ul class="nav">
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <article>
+    <h2>Available tables</h2>
+
+    <div class="btn-group">
+      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i><span data-i18n="view"></span></button>
+      <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> Browse</button>
+      <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> Link</button>
+      <button id="rm_tmp"  class="btn btn-small"><i class="icon-remove"></i>Remove tmp</button>
+    </div>
+
+    <div >
+      <ul id="tables" class="thumbnails">
+        <!--{{#tables}}-->
+         <li class="span4" data-value="{{id}}">
+          <div class="thumbnail">
+          <h3>{{name}}
+            <a data-tableid="{{id}}" class="table" href="#"><i class="icon-th"></i></a>
+            <a data-tableid="{{id}}" class="visualize" href="#"><i class="icon-eye-open"></i></a>
+          </h3>
+            <p>{{description}}</p>
+          </div>
+         </li>
+        <!--{{/tables}}-->
+      </ul>
+    </div>
+
+  </article>
+
+  <footer>
+  </footer>
+
+  </body>
+</html>
+
+

@@ -1,6 +1,7 @@
 
 library(Rook)
 library(rjson)
+library(yaml)
 
 # Check to see if the rook server is already started. If not, start it; if it is
 # we will only update the rook application without starting the server
@@ -13,6 +14,14 @@ if (init_rook) {
 rfiles <- list.files("R", pattern="\\.[rR]$")
 for (file in rfiles) source(paste0("R/", file))
 
+# convert translation.yml files into json
+languages <- list.files("www/locales", pattern="\\.yml$"
+                      , recursive=TRUE, full.names=TRUE)
+for (lng in languages){
+  l <- yaml.load_file(lng)
+  write(toJSON(l), file=sub("yml","json", lng))
+}
+
 # Construct the rook application
 # - All image, css, html and js files are going to be passed on as is.
 # - All files are located in the www folder
@@ -20,7 +29,7 @@ for (file in rfiles) source(paste0("R/", file))
 #   loaded
 # - The default page is index.html
 rook_server$add(name = "statmine", app = Builder$new(
-  Static$new(urls = c("/css", "/images", "/js", "/.*\\.html$"), 
+  Static$new(urls = c("/css", "/images", "/js", "/locales","/.*\\.html$"), 
     root = "./www"),
   URLMap$new(
     "^/R" = ajaxify(list=c("link_tables",
