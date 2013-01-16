@@ -17,6 +17,7 @@
     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
     
     <script type="text/javascript" src="js/mustache/mustache.js"></script>
+    <script type="text/javascript" src="js/i18next.js"></script>
 
     <script type="text/javascript" src="js/R.js"></script>
     <!-- styling -->
@@ -110,6 +111,10 @@
             window.open("table.html?table=" + table, "_self", false);
           }
         })
+
+        i18n.init({lng:"en-US", debug:true}, function(t){
+          $("body").i18n();
+        });
       });
     </script>
 
@@ -130,7 +135,7 @@
     <h2>Available tables</h2>
 
     <div class="btn-group">
-      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i> View</button>
+      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i><span data-i18n="view"></span></button>
       <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> Browse</button>
       <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> Link</button>
       <button id="rm_tmp"  class="btn btn-small"><i class="icon-remove"></i>Remove tmp</button>
