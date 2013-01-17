@@ -73,9 +73,6 @@ function Axis(options){
     }
   }
 
- 
-
-
   return axis;
 };
 
@@ -177,57 +174,27 @@ function LinearYAxis() {
       }).text(function(d) { 
         return format_numeric(d, axis.get_tick_unit(), precision_);
       });
-    // add axis title
-    // now we have for each axis a title, while for small multiples you 
-    // probably want one title for all y axes.
-    /*var title = axis.variable_meta()..name;
-    var unit =  axis.variable_meta().unit || '';
-    var axis_title = title;
-    if (unit.length) axis_title += ' (' + unit + ')';
-    axis.canvas().append('text').attr({
-        'class'       : 'title',
-        'x'           : '5',
-        'y'           : height_/2,
-        'text-anchor' : 'middle',
-        'dy'          : '0.35em',
-        'transform'   : "rotate(-90 5 " + height_/2 + ")"
-      }).text(axis_title);*/
-
     return(this);
   }
 
   return(axis);
 }
 
+// ============================================================================
+// ====                           LINEAR X AXIS                            ====
+// ============================================================================
+
 function LinearXAxis() {
   var axis = Axis();
   
-  var variable_;
   var range_  = [undefined, undefined];
   var width_;
   var height_ = 30;
-  var canvas_;
   var labels_;
   var label_range_;
 
-  var value_;
-
-  axis.variable = function(variable) {
-    if (!arguments.length) {
-      return variable_;
-    } else {
-      variable_ = variable;
-      value_ = function(d) { return Number(d[variable_]);};
-      return this;
-    }
-  }
-
-  axis.value = function(){
-    return value_;
-  }
-
   axis.domain = function(data) {
-    range_ = d3.extent(data, value_);
+    range_ = d3.extent(data, axis.value);
     return(this);
   }
 
@@ -236,7 +203,20 @@ function LinearXAxis() {
       return width_;
     } else {
       width_ = width;
-      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      // Calculate labels. This depends on the type of variable: for years we
+      // use a different algorithm (we don't want fractional years)
+      var meta = axis.variable_meta();
+      if ($.inArray("time", meta.type) == -1) {
+        // Normal tickmarks
+        labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      } else {
+        // Year tickmarks
+        var nyears = range_[1] - range_[0] + 1;
+        labels_ = wilkinson_ii(range_[0], range_[1], nyears, label_width, 
+            width_, 2, nyears, [10, 1, 5, 2, 4, 3, 6, 8, 7, 9], 
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      }
+      
       labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return this;
@@ -247,16 +227,6 @@ function LinearXAxis() {
     return height_;
   }
 
-  axis.canvas = function(canvas) {
-    if (!arguments.length) {
-      return canvas_;
-    } else {
-      canvas_ = canvas;
-      return this;
-    }
-  }
-
-
   axis.scale = function(value) {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
@@ -264,8 +234,8 @@ function LinearXAxis() {
 
   axis.transform_val = axis.scale;
 
-  axis.transform = function(value) {
-    return (axis.scale(value[variable_]));
+  axis.transform = function(d) {
+    return(axis.scale(axis.value(d)));
   }
 
   axis.ticks = function() {
@@ -273,11 +243,11 @@ function LinearXAxis() {
   }
 
   axis.draw = function() {
-    canvas_.selectAll("line").data(labels_).enter().append("line")
+    axis.canvas().selectAll("line").data(labels_).enter().append("line")
       .attr("x1", axis.scale).attr("x2", axis.scale)
       .attr("y1", 0).attr("y2", 5)
       .attr("stroke", "#000000");
-    canvas_.selectAll('text').data(labels_).enter().append('text')
+    axis.canvas().selectAll('text').data(labels_).enter().append('text')
       .attr('x', axis.scale)
       .attr('y', 5).attr('dy', '1.2em')
       .attr('text-anchor', 'middle').text(function(d) { return (d);});
@@ -285,6 +255,16 @@ function LinearXAxis() {
 
   return axis;
 }
+
+
+
+
+
+
+
+
+
+
 
 function RadiusAxis() {
   var axis = Axis();

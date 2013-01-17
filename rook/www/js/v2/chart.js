@@ -42,6 +42,7 @@ function Chart(options) {
       return meta_;
     } else {
       meta_ = meta;
+      for (axis in axes) axes[axis].meta(meta);
       return this;
     }
   }
