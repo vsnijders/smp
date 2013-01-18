@@ -205,10 +205,10 @@ function LinearAxis(horizontal) {
   axis.draw = function(label) {
     if (horizontal_) {
       // add ticks
-      axis.canvas().selectAll("line").data(labels_).enter().append("line").attr({ 
+      axis.canvas().selectAll("line.tick").data(labels_).enter().append("line").attr({ 
+          'class' : 'tick',
           'x1'    : axis.scale, 
           'x2'    : axis.scale,
-          'stroke': TICK_COLOUR,
           'y1'    : 0,
           'y2'    : TICK_LENGTH
         });
@@ -224,10 +224,10 @@ function LinearAxis(horizontal) {
         });
     } else {
       // add ticks
-      axis.canvas().selectAll("line").data(labels_).enter().append("line").attr({ 
+      axis.canvas().selectAll("line.tick").data(labels_).enter().append("line").attr({ 
+          'class' : 'tick',
           'x1'    : axis.width()-TICK_LENGTH, 
           'x2'    : axis.width(),
-          'stroke': TICK_COLOUR,
           'y1'    : axis.scale,
           'y2'    : axis.scale
         });
@@ -248,202 +248,13 @@ function LinearAxis(horizontal) {
   return axis;
 }
 
-// ============================================================================
-// ====                           LINEAR Y AXIS                            ====
-// ============================================================================
-
 function LinearYAxis() {
-  var axis = LinearAxis(false);
-
-  return axis;
+  return LinearAxis(false);
 }
-
-/*
-function LinearYAxis() {
-  
-  var axis = Axis();
-
-  // Some constants; probably need to be moved to a settings file
-  var NUMBER_LABELS = 10; // target number of labels of wilkinson algorithm
-  var TICK_LENGTH = 4; 
-  var TICK_COLOUR = "#000000";
-  var PADDING = TICK_LENGTH + 1; // distance of label from graph
-  var LEFT_PADDING = 18;  // extra space left of the label
-
-  // Variables
-  var range_  = [undefined, undefined];
-  var width_  = 40;
-  var height_;
-  var labels_;
-  var label_range_;
-  var precision_ = undefined;
-
-  axis.get_tick_unit = function(unit) {
-    // when unit had length 1 add it to the tick marks otherwise only display
-    // the unit in the axis title
-    var unit = axis.variable_meta().unit || '';
-    if (unit.length != 1) return '';
-    if (unit == '%') return unit;
-    return ' ' + unit;
-  }
-
-  axis.calc_label_width = function(label, ndec) {
-    if (ndec == undefined) ndec = precision_;
-    return(label_width(format_numeric(label, axis.get_tick_unit(), ndec)));
-  }
-
-  axis.domain = function(data) {
-    range_ = d3.extent(data, axis.value);
-    return(this);
-  }
-
-  axis.width = function() {
-    width_ = d3.max(range_, axis.calc_label_width) + LEFT_PADDING + PADDING;
-    return(width_);
-  }
-
-  axis.height = function(height) {
-    if (!arguments.length) {
-      return height_;
-    } else {
-      // set the height
-      height_      = height;
-      // now that the height is known we can calculate the labels of the axis
-      labels_      = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
-                       axis.calc_label_width, height_);
-      precision_   = labels_['ndec'];
-      label_range_ = [labels_.lmin, labels_.lmax];
-      labels_      = labels_['labels'];
-      return(this);
-    }
-  }
-
-  axis.transform_val = function(value) {
-    var range = label_range_[1] - label_range_[0];
-    var res = (height_ - height_ * (value - label_range_[0]) / range);
-    return(res);
-  }
-
-  axis.scale = axis.transform_val;
-
-  axis.transform = function(d) {
-    return(axis.scale(axis.value(d)));
-  }
-
-  axis.ticks = function() {
-    return(labels_);
-  }
-
-  axis.draw = function(label) {
-    // add ticks
-    axis.canvas().selectAll("line").data(labels_).enter().append("line").attr({ 
-        'x1'    : width_-TICK_LENGTH, 
-        'x2'    : width_,
-        'stroke': TICK_COLOUR,
-        'y1'    : axis.scale,
-        'y2'    : axis.scale
-      });
-    // add labels to ticks
-    axis.canvas().selectAll('text.tickmark').data(labels_).enter().append('text').attr({
-        'class'       : 'tickmark',
-        'x'           : width_-PADDING,
-        'y'           : axis.scale,
-        'dy'          : '0.35em',
-        'text-anchor' : 'end'
-      }).text(function(d) { 
-        return format_numeric(d, axis.get_tick_unit(), precision_);
-      });
-    return(this);
-  }
-
-  return(axis);
-}*/
-
-// ============================================================================
-// ====                           LINEAR X AXIS                            ====
-// ============================================================================
 
 function LinearXAxis() {
-  var axis = LinearAxis(true);
-
-  return axis;
+  return LinearAxis(true);
 }
-/*function LinearXAxis() {
-  var axis = Axis();
-  
-  var range_  = [undefined, undefined];
-  var width_;
-  var height_ = 30;
-  var labels_;
-  var label_range_;
-
-  axis.domain = function(data) {
-    range_ = d3.extent(data, axis.value);
-    return(this);
-  }
-
-  axis.width = function(width) {
-    if (!arguments.length) {
-      return width_;
-    } else {
-      width_ = width;
-      // Calculate labels. This depends on the type of variable: for years we
-      // use a different algorithm (we don't want fractional years)
-      var meta = axis.variable_meta();
-      if ($.inArray("time", meta.type) == -1) {
-        // Normal tickmarks
-        labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
-      } else {
-        // Year tickmarks
-        var nyears = range_[1] - range_[0] + 1;
-        labels_ = wilkinson_ii(range_[0], range_[1], nyears, label_width, 
-            width_, 2, nyears, [10, 1, 5, 2, 4, 3, 6, 8, 7, 9], 
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-      }
-      
-      labels_ = labels_['labels'];
-      label_range_ = d3.extent(labels_);
-      return this;
-    }
-  }
-
-  axis.height = function() {
-    return height_;
-  }
-
-  axis.scale = function(value) {
-    var range = label_range_[1] - label_range_[0];
-    return (width_ * (value - label_range_[0]) / range);
-  }
-
-  axis.transform_val = axis.scale;
-
-  axis.transform = function(d) {
-    return(axis.scale(axis.value(d)));
-  }
-
-  axis.ticks = function() {
-    return (labels_);
-  }
-
-  axis.draw = function() {
-    axis.canvas().selectAll("line").data(labels_).enter().append("line")
-      .attr({"x1": axis.scale, "x2": axis.scale
-            ,"y1": 0, "y2": 5
-           })
-      .style("stroke", "#000000");
-    axis.canvas().selectAll('text').data(labels_).enter().append('text')
-      .attr('x', axis.scale)
-      .attr('y', 5).attr('dy', '1.2em')
-      .attr('text-anchor', 'middle').text(function(d) { return (d);});
-  }
-
-  return axis;
-}*/
-
-
-
-
 
 
 

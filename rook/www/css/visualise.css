@@ -120,10 +120,6 @@ input[type="checkbox"] {
   shape-rendering: crispEdges;
 }
 
-.x.axis line {
-  stroke: #fff;
-}
-
 .x.axis .minor {
   stroke-opacity: .5;
 }
@@ -295,3 +291,10 @@ a.info {
 #title {
   cursor: info;
 }
+
+
+/* ========================== GRAPH ELEMENTS ========================= */
+line.tick {
+  stroke : #000000;
+}
+
