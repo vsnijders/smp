@@ -217,7 +217,9 @@ function Menu(){
     $("#tabs").tabs();
     // Keep track of which tab = graphtype is selected
     $('a[data-toggle="tab"]').on('shown', function (e) {
-      cntrl.graph($(this).text());
+      // remove hash before type
+      var type = $(this).attr("href").substring(1);
+      cntrl.graph(type);
       update_selection();
       update_filter();
       redraw_graph();
