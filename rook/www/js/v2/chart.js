@@ -142,6 +142,7 @@ function Chart(options) {
       .range(y_bands.range)
       ;
 
+    // Add title of x- and -y axis to chart
     // TODO: this should probably be in some other location
     var ycenter = (height - margin.bottom - margin.top)/2 + margin.top;
     canvas_.append('text').attr({
@@ -152,6 +153,14 @@ function Chart(options) {
         'dy'          : '0.35em',
         'transform'   : "rotate(-90 5 " + ycenter + ")"
       }).text(axes.y.title());
+    var xcenter = (width - margin.left - margin.right)/2 + margin.left;
+    canvas_.append('text').attr({
+        'class'       : 'title',
+        'x'           : xcenter,
+        'y'           : height - 5,
+        'text-anchor' : 'middle',
+      }).text(axes.x.title());
+    
 
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
