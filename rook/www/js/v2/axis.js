@@ -90,6 +90,8 @@ function LinearAxis(horizontal) {
   var TICK_COLOUR = "#000000";
   var PADDING = TICK_LENGTH + 1; // distance of label from graph
   var LEFT_PADDING = 18;  // extra space left of the label
+  var FORMAT_DECIMAL = ',';
+  var FORMAT_GROUPING = ' ';
 
   // Variables
   var horizontal_ = horizontal;
@@ -109,9 +111,25 @@ function LinearAxis(horizontal) {
     return ' ' + unit;
   }
 
+  axis.format = function(value) {
+    // Get variable meta
+    var meta = axis.variable_meta();
+    // Determine if we need a unit after the value
+    // when unit had length 1 add it to the tick marks otherwise only display
+    // the unit in the axis title
+    var unit = unit || '';
+    if (unit.length != 1) unit = '';
+    else if (unit != '%') unit = ' ' + unit;
+    // Determine grouping symbol (no grouping for years)
+    var grp = FORMAT_GROUPING;
+    if ($.inArray("time", meta.type) != -1) grp ='';
+    // Format
+    return format_numeric(value, unit, precision_, FORMAT_DECIMAL, grp);
+  }
+
   axis.calc_label_width = function(label, ndec) {
     if (ndec == undefined) ndec = precision_;
-    return label_width(format_numeric(label, axis.get_tick_unit(), ndec));
+    return label_width(axis.format(label));
   }
 
   axis.domain = function(data) {
@@ -125,10 +143,21 @@ function LinearAxis(horizontal) {
       return length_;
     } else {
       // set the length
-      length_      = length;
-      // now that the height is known we can calculate the labels of the axis
-      labels_      = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
-                       axis.calc_label_width, length_);
+      length_ = length;
+      // Calculate labels. This depends on the type of variable: for years we
+      // use a different algorithm (we don't want fractional years)
+      var meta = axis.variable_meta();
+      if ($.inArray("time", meta.type) == -1) {
+        // Normal tickmarks
+        labels_ = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
+                    axis.calc_label_width, length_);
+      } else {
+        // Year tickmarks
+        var nyears = range_[1] - range_[0] + 1;
+        labels_ = wilkinson_ii(range_[0], range_[1], nyears, label_width, 
+            length_, 2, nyears, [10, 1, 5, 2, 4, 3, 6, 8, 7, 9], 
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      }
       precision_   = labels_['ndec'];
       label_range_ = [labels_.lmin, labels_.lmax];
       labels_      = labels_['labels'];
@@ -157,18 +186,20 @@ function LinearAxis(horizontal) {
 
   axis.transform_val = function(value) {
     var range = label_range_[1] - label_range_[0];
-    var res = (axis.length() - axis.length() * (value - label_range_[0]) / range);
-    return(res);
+    var res = axis.length() * (value - label_range_[0]) / range;
+    // For a vertical axis we want the smallest number at the bottom
+    if (!horizontal_) res = axis.length() - res;
+    return res;
   }
 
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return(axis.scale(axis.value(d)));
+    return axis.scale(axis.value(d));
   }
 
   axis.ticks = function() {
-    return(labels_);
+    return labels_;
   }
 
   axis.draw = function(label) {
@@ -189,7 +220,7 @@ function LinearAxis(horizontal) {
           'dy'          : '1.2em',
           'text-anchor' : 'middle'
         }).text(function(d) { 
-          return format_numeric(d, axis.get_tick_unit(), precision_);
+          return axis.format(d);
         });
     } else {
       // add ticks
@@ -208,7 +239,7 @@ function LinearAxis(horizontal) {
           'dy'          : '0.35em',
           'text-anchor' : 'end'
         }).text(function(d) { 
-          return format_numeric(d, axis.get_tick_unit(), precision_);
+          return axis.format(d);
         });
     }
     return this;

@@ -28,12 +28,14 @@ function label_width(label) {
 // - Add a thousands separator (grp)
 format_numeric = function(label, unit, ndec, dec, grp) {
   if (isNaN(label)) return '';
-  var unit = unit || '';
-  var dec = dec || ',';
-  var grp = grp || ' ';
+  if (unit == undefined) unit = '';
+  if (dec == undefined) dec = ',';
+  if (grp == undefined) grp = ' ';
   // round number
   if (ndec != undefined) {
     label = label.toFixed(ndec);
+  } else {
+    label = label.toString();
   }
   // Following based on code from 
   // http://www.mredkj.com/javascript/numberFormat.html
