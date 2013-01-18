@@ -49,8 +49,10 @@ data <- ddply(data, c("jaar", "geslacht", "leeftijd"), function(d) {
 lvls <- unique(data$jaar)
 data$jaar <- factor(data$jaar, levels=lvls, labels=lvls)
 lvls <- unique(data$leeftijd)
+n <- length(lvls)
+lvls <- c(lvls[n], lvls[-n])
 data$leeftijd <- factor(data$leeftijd, levels=lvls, labels=lvls)
-lvls <- c("Vrouw", "Man", "Totaal")
+lvls <- c("Totaal", "Man", "Vrouw")
 data$geslacht <- factor(data$geslacht, levels=lvls, labels=lvls)
 
 

@@ -41,14 +41,14 @@ dimensions:
     default: Totaal
     type: categorical
     categories:
-    - level: Vrouw
-      name: Vrouw
+    - level: Totaal
+      name: Totaal
       description: ''
     - level: Man
       name: Man
       description: ''
-    - level: Totaal
-      name: Totaal
+    - level: Vrouw
+      name: Vrouw
       description: ''
   leeftijd:
     name: Leeftijd

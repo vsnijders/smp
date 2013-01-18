@@ -2,7 +2,7 @@
 function Barchart() {
   // use basic functionality
   var chart = Chart({
-    axes: { x: LinearXAxis2(),
+    axes: { x: LinearXAxis(),
             y: CategoricalAxis(),
             colour : ColourAxis()
           },

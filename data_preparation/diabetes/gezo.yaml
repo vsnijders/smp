@@ -45,6 +45,9 @@ dimensions:
     - ordinal
     - categorical
     categories:
+    - level: Totaal
+      name: Totaal
+      description: ''
     - level: 0 tot 25
       name: 0 tot 25
       description: ''
@@ -66,23 +69,20 @@ dimensions:
     - level: 75+
       name: 75+
       description: ''
-    - level: Totaal
-      name: Totaal
-      description: ''
   geslacht:
     name: Geslacht
     aggregate: Totaal
     default: Totaal
     type: categorical
     categories:
-    - level: Vrouw
-      name: Vrouw
+    - level: Totaal
+      name: Totaal
       description: ''
     - level: Man
       name: Man
       description: ''
-    - level: Totaal
-      name: Totaal
+    - level: Vrouw
+      name: Vrouw
       description: ''
 variables:
   suiker:
