@@ -8,6 +8,9 @@ dimensions:
     default: Nederland
     type: categorical
     categories:
+    - level: Nederland
+      name: Nederland
+      description: ''
     - level: Amsterdam-Amstelland (PO)
       name: Amsterdam-Amstelland (PO)
       description: ''
@@ -59,9 +62,6 @@ dimensions:
     - level: Midden- en West-Brabant (PO)
       name: Midden- en West-Brabant (PO)
       description: ''
-    - level: Nederland
-      name: Nederland
-      description: ''
     - level: Niet in te delen (PO)
       name: Niet in te delen (PO)
       description: ''
@@ -95,6 +95,9 @@ dimensions:
     default: Totaal
     type: categorical
     categories:
+    - level: Totaal
+      name: Totaal
+      description: ''
     - level: Vermogensmisdrijven
       name: Vermogensmisdrijven
       description: 'Witteboord?'
@@ -103,9 +106,6 @@ dimensions:
       description: ''
     - level: Gewelds- en seksuele misdrijven
       name: Gewelds- en seksuele misdrijven
-      description: ''
-    - level: Totaal
-      name: Totaal
       description: ''
   Jaar:
     name: Jaar

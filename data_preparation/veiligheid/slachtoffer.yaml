@@ -14,16 +14,12 @@ dimensions:
     categories:
     - level: 2008
       name: 2008
-      description: ''
     - level: 2009
       name: 2009
-      description: ''
     - level: 2010
       name: 2010
-      description: ''
     - level: 2011
       name: 2011
-      description: ''
   Regio:
     name: Regio
     aggregate: Nederland
@@ -34,6 +30,9 @@ dimensions:
       De indeling in politieregio's is ingevoerd in 1994 en berust op de
       Politiewet 1993. Nederland telt 25 politieregio's
     categories:
+    - level: Nederland
+      name: Nederland
+      description: ''
     - level: Amsterdam-Amstelland (PO)
       name: Amsterdam-Amstelland (PO)
       description: ''
@@ -84,9 +83,6 @@ dimensions:
       description: ''
     - level: Midden- en West-Brabant (PO)
       name: Midden- en West-Brabant (PO)
-      description: ''
-    - level: Nederland
-      name: Nederland
       description: ''
     - level: Noord- en Oost-Gelderland (PO)
       name: Noord- en Oost-Gelderland (PO)

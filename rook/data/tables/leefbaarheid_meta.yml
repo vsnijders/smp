@@ -7,6 +7,9 @@ dimensions:
     default: Nederland
     type: categorical
     categories:
+    - level: Nederland
+      name: Nederland
+      description: ''
     - level: Amsterdam-Amstelland (PO)
       name: Amsterdam-Amstelland (PO)
       description: ''
@@ -57,9 +60,6 @@ dimensions:
       description: ''
     - level: Midden- en West-Brabant (PO)
       name: Midden- en West-Brabant (PO)
-      description: ''
-    - level: Nederland
-      name: Nederland
       description: ''
     - level: Noord- en Oost-Gelderland (PO)
       name: Noord- en Oost-Gelderland (PO)

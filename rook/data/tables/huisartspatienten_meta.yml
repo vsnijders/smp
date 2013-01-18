@@ -58,6 +58,9 @@ dimensions:
     - ordered
     - categorical
     categories:
+    - level: Totaal
+      name: Totaal
+      description: ''
     - level: 0 tot 25
       name: 0 tot 25
       description: ''
@@ -78,9 +81,6 @@ dimensions:
       description: ''
     - level: 75+
       name: 75+
-      description: ''
-    - level: Totaal
-      name: Totaal
       description: ''
 variables:
   aantalpatienten:
