@@ -127,14 +127,21 @@ function LinearAxis(horizontal) {
     return format_numeric(value, unit, precision_, FORMAT_DECIMAL, grp);
   }
 
-  axis.calc_label_width = function(label, ndec) {
-    if (ndec == undefined) ndec = precision_;
-    return label_width(axis.format(label));
+  axis.label_depth = function(label) {
+    label = axis.format(label);
+    if (horizontal_) return label_height(label)
+    else return label_width(label);
+  }
+
+  axis.label_length = function(label) {
+    label = axis.format(label);
+    if (horizontal_) return label_width(label)
+    else return label_height(label);
   }
 
   axis.domain = function(data) {
     range_ = d3.extent(data, axis.value);
-    depth_ = d3.max(range_, axis.calc_label_width) + LEFT_PADDING + PADDING;
+    depth_ = d3.max(range_, axis.label_depth) + LEFT_PADDING + PADDING;
     return this;
   }
 
@@ -150,11 +157,11 @@ function LinearAxis(horizontal) {
       if ($.inArray("time", meta.type) == -1) {
         // Normal tickmarks
         labels_ = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
-                    axis.calc_label_width, length_);
+                    axis.label_length, length_);
       } else {
         // Year tickmarks
         var nyears = range_[1] - range_[0] + 1;
-        labels_ = wilkinson_ii(range_[0], range_[1], nyears, label_width, 
+        labels_ = wilkinson_ii(range_[0], range_[1], nyears, axis.label_length, 
             length_, 2, nyears, [10, 1, 5, 2, 4, 3, 6, 8, 7, 9], 
             [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
       }

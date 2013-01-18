@@ -2,6 +2,7 @@
 // The following block needs to be rewritten; without global objects etc. 
 // Perhaps function object; svg needs to be invisible
 var label_widths = {};
+var label_height_;
 var dummy;
 $(function() {
   dummy = d3.select("body").append("svg")
@@ -20,6 +21,17 @@ function label_width(label) {
   label_widths[label] = length;
   return (length + padding);
 }
+
+function label_height(label) {
+  var padding = 2;
+  if (label_height_ != undefined) return label_height_ + padding;
+  var text  = dummy.append("text").text(label);
+  var height = text[0][0].getBBox().height;
+  text.remove();
+  label_height_ = height;
+  return height + padding;
+}
+
 
 
 // Format a numeric value:
