@@ -21,7 +21,7 @@ ajaxify <- function(list=NULL){
   }
 
   js <- paste(JSHEAD, paste(jsf, collapse=",\n"), JSEND)
-  
+  cat("**********\n")
   cat("Generating './www/js/R.js...\n'")
   
   writeLines(js, "./www/js/R.js")
