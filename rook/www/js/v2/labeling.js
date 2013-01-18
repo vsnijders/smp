@@ -28,21 +28,25 @@ function label_width(label) {
 // - Add a thousands separator (grp)
 format_numeric = function(label, unit, ndec, dec, grp) {
   if (isNaN(label)) return '';
-  var unit = unit || '';
-  var dec = dec || ',';
-  var grp = grp || ' ';
+  if (unit == undefined) unit = '';
+  if (dec == undefined) dec = ',';
+  if (grp == undefined) grp = ' ';
   // round number
   if (ndec != undefined) {
     label = label.toFixed(ndec);
+  } else {
+    label = label.toString();
   }
   // Following based on code from 
   // http://www.mredkj.com/javascript/numberFormat.html
   x     = label.split('.');
   x1    = x[0];
   x2    = x.length > 1 ? dec + x[1] : '';
-  var rgx = /(\d+)(\d{3})/;
-  while (rgx.test(x1)) {
-    x1 = x1.replace(rgx, '$1' + grp + '$2');
+  if (grp != '') {
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + grp + '$2');
+    }
   }
   return(x1 + x2 + unit);
 }
