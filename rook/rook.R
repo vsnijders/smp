@@ -17,9 +17,13 @@ for (file in rfiles) source(paste0("R/", file))
 # convert translation.yml files into json
 languages <- list.files("www/locales", pattern="\\.yml$"
                       , recursive=TRUE, full.names=TRUE)
+cat("**********\n")
 for (lng in languages){
   l <- yaml.load_file(lng)
-  write(toJSON(l), file=sub("yml","json", lng))
+  file <- sub("yml","json", lng)
+  cat("Writing ", file)
+  write(toJSON(l), file=file)
+  cat(".\n")
 }
 
 # Construct the rook application
@@ -51,4 +55,3 @@ if (init_rook) {
   rook_server$start(quiet=TRUE)
   rook_server$browse("statmine")
 }
-
