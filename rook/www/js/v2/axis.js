@@ -244,9 +244,10 @@ function LinearXAxis() {
 
   axis.draw = function() {
     axis.canvas().selectAll("line").data(labels_).enter().append("line")
-      .attr("x1", axis.scale).attr("x2", axis.scale)
-      .attr("y1", 0).attr("y2", 5)
-      .attr("stroke", "#000000");
+      .attr({"x1": axis.scale, "x2": axis.scale
+            ,"y1": 0, "y2": 5
+           })
+      .style("stroke", "#000000");
     axis.canvas().selectAll('text').data(labels_).enter().append('text')
       .attr('x', axis.scale)
       .attr('y', 5).attr('dy', '1.2em')
