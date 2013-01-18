@@ -29,6 +29,10 @@
     <!-- d3.js includes -->
     <script type="text/javascript" src="js/d3.v2.min.js"></script>
 
+    <!-- localization includes -->
+    <script type="text/javascript" src="js/i18next.js"></script>
+
+
     <!--    <script type="text/javascript" src="js/colorbrewer.js"></script>-->
 
     <!-- styling -->
@@ -85,6 +89,10 @@
           }
         });
 
+        i18n.init({}, function(){
+          $("ul").i18n();
+        });
+
       });
     </script>
 
@@ -107,10 +115,10 @@
     <div class="row-fluid">
       <div class="span4 well menu">
         <ul class="nav nav-tabs">
-          <li><a href="#line" data-toggle="tab">line</a></li>
-          <li><a href="#scatter" data-toggle="tab">scatter</a></li>
-          <li><a href="#bar" data-toggle="tab">bar</a></li>
-          <li><a href="#mosaic" data-toggle="tab">mosaic</a></li>
+          <li><a href="#line" data-toggle="tab" data-i18n="linechart">line</a></li>
+          <li><a href="#scatter" data-toggle="tab" data-i18n="scatterchart">scatter</a></li>
+          <li><a href="#bar" data-toggle="tab" data-i18n="barchart">bar</a></li>
+          <li><a href="#mosaic" data-toggle="tab" data-i18n="mosaicchart">mosaic</a></li>
         </ul>
         <div class="tab-content">
 
@@ -122,15 +130,15 @@
               <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
             </div>
             <div class="plotvariable">
-              <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+              <h3 data-i18n="color">color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
             </div>
             <div class="plotvariable">
-              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+              <h3 data-i18n="toptobottom">top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
             </div>
             <div class="plotvariable">
-              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+              <h3 data-i18n="sidebyside">side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
             </div>
-            <h3>variables</h3>
+            <h3 data-i18n="variables">variables</h3>
             <ul class="variables droppable"></ul>
           </div>
 
