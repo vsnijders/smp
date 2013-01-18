@@ -103,7 +103,7 @@ function Cntrl(table, node) {
       });
 
     graphs_[graph_]
-       .data(data)
+       .data(data).meta(meta_)
        .selection(selection_)
        .canvas(canvas).draw();
   }
@@ -111,7 +111,35 @@ function Cntrl(table, node) {
   cntrl.redraw = function() {
     if (is_valid()) {
       R.fetch(table_, selection_, filter_)
-       .success(draw);
+       .success(draw)
+       .success(function(){
+        var colScale = graphs_[graph_].axes.colour.scale;
+        $("[data-dimension='colour']").each(function(i, colour){
+          $("span.color").each(function(_, span){
+            $(span).css("background-color", colScale($(span).data("value")));
+          })
+        })
+
+        $("#title")
+           .text(meta_.name)
+           .popover({ content: meta_.description
+                    , trigger: "hover"
+                    , placement: "bottom"
+                   })
+           ;
+
+        var label = "";
+        
+        //TODO clean up and move to chart....
+        if (meta_.variables[selection_.y]){
+          label = meta_.variables[selection_.y].name;
+        } else if (meta_.variables[selection_.size]){
+          label = meta_.variables[selection_.size].name;
+        } else if (meta_.variables[selection_.x]){
+          label = meta_.variables[selection_.x].name;
+        }
+        $("#graphtitle").text(label);
+       });
     }
     return this;
   }
@@ -171,7 +199,6 @@ function Menu(){
         selection[dimension][j] = $(li).attr("data-variable");
       });
     });
-    console.log(selection);
     cntrl.selection(selection);
   }
 
@@ -187,23 +214,47 @@ function Menu(){
       var div = $(this).closest('div.filter');
       $("input:checked", div).not($(this)).attr("checked", false);
     }
+
+    var li = $(this).closest('li');
+    var val = $("input:checked", li).val();
+    if (!val){
+      val = meta_.dimensions[li.data("variable")].default;
+    }
+    $("span.slice", li).text(" [='"+val+"']")
   }
 
-
-  // data is the meta data of the table
-  menu.render = function(data) {
-    meta_ = data;
-
-    // TODO: following code block needs cleanup
-    $(".variables").each(function(i, el) {
-      // add dimensions to page
-      $.each(data.dimensions, function(dim, dat) {
-        var li = $("<li>").addClass("draggable categorical")
-          .attr("data-variable", dim).text(dat.name)
+  function makeCatVar(id, catVar){
+        var type = catVar.type;
+        if (Array.isArray(type)) type = type.join(" ");
+        var li = $("<li>").addClass("draggable " + type)
+          .attr("data-variable", id)
+          .attr("data-name", catVar.name)
+          .text(catVar.name)
           .draggable({
             revert : "invalid",
-            axis : "y"
+            axis : "y",
+            stack: "div"
           });
+
+        var span = $("<span>")
+          .addClass("slice")
+          .text(" [='"+catVar.default+"']")
+          .appendTo(li)
+          ;
+
+        if (catVar.description){
+          var info = $("<a>")
+            .attr({"href":"#"})
+            .addClass("info")
+            .html('<i class="icon-info-sign"></i>')
+            .popover({ content: markdown.toHTML(catVar.description)
+                     , html: true
+                     , title: catVar.name
+                     , trigger: "hover"
+                     })
+            .appendTo(li)
+        }
+
         var a = $("<a>").attr("href", "#").addClass("togglefilter")
           .html('<i class="icon-chevron-right"></i>').appendTo(li)
           .click(function() {
@@ -215,36 +266,122 @@ function Menu(){
 
         var div = $("<div>").addClass("filter").appendTo(li).hide();
         var form = $("<form>").appendTo(div);
-        $.each(dat.levels, function(i, lab) {
-          var span_c = $("<span>").attr("class", "color category"+i);
-          var span = $("<span>").text(lab);
+        $.each(catVar.categories, function(i, cat) {
+          var span_c = $("<span>").attr({"class":"color", "data-value": cat.level});
+          var span = $("<span>").text(cat.name);
           var label = $("<label>").appendTo(form);
           label.append(span_c);
           span.appendTo(label);
+          if (cat.description){
+            var info = $("<a>")
+              .attr({"href":"#"})
+              .addClass("info")
+              .html('<i class="icon-info-sign"></i>')
+              .popover({ content: markdown.toHTML(cat.description)
+                       , html: true
+                       , title: cat.name
+                       , trigger: "hover"
+                       })
+              .appendTo(label)
+          }
           $("<input>").attr("type", "checkbox").addClass("filter")
-            .attr("name", dim)
-            .val(lab)
+            .attr("name", id)
+            .val(cat.level)
             .click(behave_like_radio) 
             .click(update_filter)
             .click(cntrl.redraw)
             .prependTo(label);
         });
-        $(el).append(li);
-      });
+      return li;
+  }
 
-
-      // add variables to page
-      $.each(data.variables, function(dim, dat) {
+  function makeNumVar(id, numVar){
+        var label = numVar.name;
+        if (numVar.unit){
+          label += " (" + numVar.unit + ")";
+        }
         var li = $("<li>").addClass("draggable numeric")
-          .attr("data-variable", dim).text(dat.name)
+          .attr("data-variable", id).text(label)
           .draggable({
             revert : "invalid",
-            axis : "y"
+            axis : "y",
+            stack: "div"
           });
+
+        if (numVar.description){
+          var info = $("<a>")
+            .attr({"href":"#"})
+            .addClass("info")
+            .html('<i class="icon-info-sign"></i>')
+            .popover({ content: markdown.toHTML(numVar.description)
+                     , html: true
+                     , title: numVar.name
+                     , trigger: "hover"
+                     })
+            .appendTo(li)
+        }
+        return li;
+  }
+
+  // loads the default graph, if available
+  function defaultFill(){
+    
+    $(".tab-pane").each(function(i, tab){
+      var id = tab.id;
+      var sel;
+      if (meta_.defaultgraphs && (sel = meta_.defaultgraphs[id])){
+        $.each(sel, function(d, v){
+          var dsel = "[data-dimension='"+d+"']";
+          var vsel = "[data-variable='"+v+"']";
+          $(vsel, tab).appendTo($(dsel,tab));
+        })
+      }
+    })
+  }
+
+  // fill up required variables with available variables
+  function autoFill(){
+    var a = ["time", "categorical", "numeric", "ordered"];
+    
+    $(".tab-pane").each(function(i, tab){
+      $(".required", tab)
+      .filter(function(_, ul){return $("li", ul).length==0})
+      .each(function(j, pv){
+        var vars = $(".variables li", tab);
+        for (var v = 0; v < vars.length; v++){
+          var el = $(vars[v]);
+          for (var c in a){
+            if (el.hasClass(a[c]) && $(pv).hasClass(a[c])){
+              el.appendTo(pv);
+              return;
+            }
+          }
+        }
+      })
+    })
+  }
+
+  // data is the meta data of the table
+  menu.render = function(data) {
+    meta_ = data;
+
+    // TODO: following code block needs cleanup
+    $(".variables").each(function(i, el) {
+      // add dimensions to page
+      $.each(data.dimensions, function(dim, dat) {
+        $(el).append(makeCatVar(dim,dat));
+      });
+  
+      // add variables to page
+      $.each(data.variables, function(dim, dat) {
+        var li = makeNumVar(dim,dat);
         $(el).append(li)
       });
-
     });
+
+    defaultFill();
+    autoFill();
+  
        // Create tabbed pages for each of the graph types
     $("#tabs").tabs();
     // Keep track of which tab = graphtype is selected
@@ -289,7 +426,7 @@ function Menu(){
         var $this = $(this);
         if ($(draggable).parent()[0] == $(this)[0]) return (false);
         
-        var a = ["numeric", "categorical"];
+        var a = ["numeric", "categorical", "ordered", "time"];
         for (var v in a){
           if ($this.hasClass(a[v]) && $draggable.hasClass(a[v])){
             return true;
@@ -313,25 +450,69 @@ $(function() {
 });
 
 function label_width(label) {
+  var padding = 5;
   if (label_widths[label]) {
-    return (label_widths[label]);
+    return (label_widths[label] + padding);
   }
   var text  = dummy.append("text").text(label);
   var length = text[0][0].getComputedTextLength();
   text.remove();
   label_widths[label] = length;
-  return (length);
+  return (length + padding);
 }
+
+
+// Format a numeric value:
+// - Make sure it is rounded to the correct number of decimals (ndec)
+// - Use the correct decimal separator (dec)
+// - Add a thousands separator (grp)
+format_numeric = function(label, unit, ndec, dec, grp) {
+  if (isNaN(label)) return '';
+  var unit = unit || '';
+  var dec = dec || ',';
+  var grp = grp || ' ';
+  // round number
+  if (ndec != undefined) {
+    label = label.toFixed(ndec);
+  }
+  // Following based on code from 
+  // http://www.mredkj.com/javascript/numberFormat.html
+  x     = label.split('.');
+  x1    = x[0];
+  x2    = x.length > 1 ? dec + x[1] : '';
+  var rgx = /(\d+)(\d{3})/;
+  while (rgx.test(x1)) {
+    x1 = x1.replace(rgx, '$1' + grp + '$2');
+  }
+  return(x1 + x2 + unit);
+}
+
+
 
 // ============================================================================
 // ====                         WILKINSON ALGORITHM                        ====
 // ============================================================================
 
-function wilkinson(dmin, dmax, m, mmin, mmax, Q, mincoverage) {
+
+function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q, precision, mincoverage) {
   // ============================ SUBROUTINES =================================
+
+  // The following routine checks for overlap in the labels. This is used in the 
+  // Wilkinson labeling algorithm below to ensure that the labels do not overlap.
+  function overlap(lmin, lmax, lstep, calc_label_width, axis_width, ndec) {
+    var width_max = lstep*axis_width/(lmax-lmin);
+    for (var l = lmin; (l - lmax) <= 1E-10; l += lstep) {
+      var w  = calc_label_width(l, ndec);
+      if (w > width_max) return(true);
+    }
+    return(false);
+  }
+
+  // Perform one iteration of the Wilkinson algorithm
   function wilkinson_step(min, max, k, m, Q, mincoverage) {
     // default values
-    Q               = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+    Q               = Q         || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+    precision       = precision || [1,  0, 0, 0,  -1, 0, 0,  -1, 0, 0, 0, 0];
     mincoverage     = mincoverage || 0.8;
     m               = m || k;
     // calculate some stats needed in loop
@@ -349,13 +530,15 @@ function wilkinson(dmin, dmax, m, mmin, mmax, Q, mincoverage) {
       var tdelta = Q[i] * dbase;
       var tmin   = Math.floor(min/tdelta) * tdelta;
       var tmax   = tmin + intervals * tdelta;
+      // calculate the number of decimals
+      var ndec   = (base + precision[i]) < 0 ? Math.abs(base + precision[i]) : 0;
       // if label positions cover range
       if (tmin <= min && tmax >= max) {
         // calculate roundness and coverage part of score
         var roundness = 1 - (i - (tmin <= 0 && tmax >= 0)) / Q.length
         var coverage  = (max-min)/(tmax-tmin)
         // if coverage high enough
-        if (coverage > mincoverage) {
+        if (coverage > mincoverage && !overlap(tmin, tmax, tdelta, calc_label_width, axis_width, ndec)) {
           // calculate score
           var tnice = granularity + roundness + coverage
           // if highest score
@@ -364,281 +547,8 @@ function wilkinson(dmin, dmax, m, mmin, mmax, Q, mincoverage) {
                 'lmin'  : tmin,
                 'lmax'  : tmax,
                 'lstep' : tdelta,
-                'score' : tnice
-              };
-          }
-        }
-      }
-    }
-    // return
-    return (best);
-  }
-
-  // =============================== MAIN =====================================
-  // default values
-  Q               = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
-  mincoverage     = mincoverage || 0.8;
-  mmin            = mmin || Math.max(Math.floor(m/2), 2);
-  mmax            = mmax || Math.ceil(6*m);
-  // initilise end result
-  var best = undefined;
-  // loop though all possible numbers of labels
-  for (var k = mmin; k <= mmax; k++) { 
-    // calculate best label position for current number of labels
-    var result = wilkinson_step(dmin, dmax, k, m, Q, mincoverage)
-    // check if current result has higher score
-    if ((result !== undefined) && ((best === undefined) || (result.score > best.score))) {
-      best = result;
-    }
-  }
-  // generate label positions
-  var labels = [];
-  for (var l = best.lmin; l <= best.lmax; l += best.lstep) {
-    labels.push(l);
-  }
-  return(labels);
-}
-
-
-
-
-// ============================================================================
-// ====                     EXTENDED WILKINSON ALGORITHM                   ====
-// ============================================================================
-
-function extended(dmin, dmax, m, width, label_width, Q, only_loose, w) {
-  // ============================ SUBROUTINES =================================
-  function simplicity_(q, Q, j, lmin, lmax, lstep)
-  {
-    var eps = 1E-12;
-    var n = Q.length;
-    for (var i = 0; i < Q.length; i++) {
-      if (q == Q[i]) break;
-    }
-    var v = ((lmin % lstep) < eps || (lstep - (lmin % lstep)) < eps) 
-      && lmin <= 0 && lmax >=0 ? 1 : 0;
-    return (1 - i/(n-1) - j + v);
-  }
-
-  function simplicity_max_(q, Q, j)
-  {
-    var n = Q.length;
-    for (var i = 0; i < Q.length; i++) {
-      if (q == Q[i]) break;
-    }
-    var v = 1;
-    return(1 - i/(n-1) - j + v);
-  }
-
-  function coverage_(dmin, dmax, lmin, lmax)
-  {
-    var range = dmax-dmin;
-    return(1 - 0.5 * 
-      (Math.pow(dmax-lmax,2)+Math.pow(dmin-lmin,2)) /
-         Math.pow(0.1*range,2));
-  }
-
-  function coverage_max_(dmin, dmax, span)
-  {
-    var range = dmax - dmin;
-    if(span > range) {
-      var half2 = Math.pow((span-range)/2, 2);
-      return (1 - half2 / Math.pow(0.1 * range,2));
-    } else {
-      return (1);
-    }
-  }
-
-  function density_(k, m, dmin, dmax, lmin, lmax)
-  {
-    var r  = (k-1) / (lmax-lmin);
-    var rt = (m-1) / (Math.max(lmax,dmax)-Math.min(dmin,lmin));
-    return(2 - Math.max( r/rt, rt/r ));
-  }
-
-  function density_max_(k, m) {
-    return(k >= m ? 2 - (k-1)/(m-1) : 1);
-  }
-
-  function legibility_(lmin, lmax, lstep, width, label_width) {
-    var width_max = lstep*width/(lmax-lmin);
-    if (width_max < 10) return(-1E10);
-    for (var l = lmin; l <= lmax; l += lstep) {
-      var w  = label_width(String(l));
-      if (w > width_max) return(-1E10);
-    }
-    return(1);
-  }
-
-  function legibility_max_(lmin, lmax, lstep, width) {
-    return(1);
-  }
-
-  // =============================== MAIN =====================================
-  dmin        = Number(dmin);
-  dmax        = Number(dmax);
-  m           = Number(m);
-  kmax        = Math.ceil(6*m);
-  width       = width ||100;
-  label_width = label_width || function(f) { return 0;};
-  Q           = Q || [1, 5, 2, 2.5, 4, 3];
-  only_loose  = only_loose || false;
-  w           = w || [0.25, 0.2, 0.5, 0.05];
-  var eps     = 1E-12;
-	
-  if (dmin > dmax) {
-    var temp = dmin;
-    dmin = dmax;
-    dmax = temp;
-  }
-
-  if(dmax - dmin < eps) {
-    // if the range is near the floating point limit,
-    // generate some equally spaced steps.
-    var step = (dmax - dmin) / m;
-    var labels = [];
-    var label = dmin;
-    for (var i = 0; i < m; ++i) {
-      labels.push(label);
-      label += step;
-    }
-    return(seq(from=dmin, to=dmax, length.out=m))
-  }
-
-  var n = Q.length;
-  var best = {
-      'lmin'  : dmin,
-      'lmax'  : dmax,
-      'lstep' : (dmax - dmin),
-      'score' : -2
-    };
-	
-  var j = 1;
-  while(j < 1E3) {
-    for(var q in Q)
-    {
-      var sm = simplicity_max_(q, Q, j);
-      if((w[0]*sm+w[1]+w[2]+w[3]) < best.score) {
-        j = 1E7;
-        break;
-      }
-      // loop over tick count
-      for (var k = 2; k < kmax; ++k) {
-        var dm = density_max_(k, m);  // C#: double dm = max_density(k/space, density);
-
-        if((w[0]*sm+w[1]+w[2]*dm+w[3]) < best.score) break;
-      
-        delta = (dmax-dmin)/(k+1)/j/q;
-        var z = Math.ceil(Math.log(delta)/Math.log(10));
-
-        while(z < 1E6) {			
-          var step = j * q * Math.pow(10,z);
-
-          var cm = coverage_max_(dmin, dmax, step*(k-1));
-
-          if ((w[0]*sm+w[1]*cm+w[2]*dm+w[3]) < best.score) break;
-          
-          var min_start = Math.floor(dmax/step - (k-1))*j;
-          var max_start = Math.ceil(dmin/step)*j;
-
-          for (var start = min_start; start <= max_start; ++start) {
-            var lmin  = start * (step/j);
-            var lmax  = lmin + step*(k-1);
-
-            var s  = simplicity_(q, Q, j, lmin, lmax, step);
-            var d  = density_(k, m, dmin, dmax, lmin, lmax);
-            var c  = coverage_(dmin, dmax, lmin, lmax);
-
-            if ((w[0]*s+w[1]*c+w[2]*d+w[3]) < best.score) continue;
-
-            var l = legibility_(lmin, lmax, step, width, label_width);
-
-            var score = w[0]*s + w[1]*c + w[2]*d + w[3]*l
-
-            if(score > best.score && (!only_loose || (lmin <= dmin && lmax >= dmax))) {
-              best = {"lmin" : lmin, "lmax" : lmax, "lstep" : step, "score" : score};
-            }
-          }
-          z = z + 1;
-        }
-      }
-    }
-    j = j + 1;
-  }
-
-  // generate label positions
-  var labels = [];
-  for (var l = best.lmin; l <= best.lmax; l += best.lstep) {
-    labels.push(l);
-  }
-  return(labels);
-}
-
-
-// ============================================================================
-// ====                         WILKINSON ALGORITHM                        ====
-// ============================================================================
-
-/*function label_overlap(lmin, lmax, lstep, width, label_width) {
-  var scale = width/(lmax-lmin);
-  var width_label = Math.max(
-      label_width(lmax),
-      label_width(lmin)
-    );
-  if (width_label >= (lstep*scale)) return(true);
-  return(false);
-}*/
-
-function overlap(lmin, lmax, lstep, calc_label_width, axis_width) {
-  var width_max = lstep*axis_width/(lmax-lmin);
-  for (var l = lmin; l <= lmax; l += lstep) {
-    var w  = calc_label_width(String(l));
-    if (w > width_max) return(true);
-  }
-  return(false);
-  /*var label_space = 200/(lmax - lmin)*lstep;
-  return (label_space < 100);*/
-}
-
-
-function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q, mincoverage) {
-  // ============================ SUBROUTINES =================================
-  function wilkinson_step(min, max, k, m, Q, mincoverage) {
-    // default values
-    Q               = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
-    mincoverage     = mincoverage || 0.8;
-    m               = m || k;
-    // calculate some stats needed in loop
-    var intervals   = k - 1;
-    var delta       = (max - min) / intervals;
-    var base        = Math.floor(Math.log(delta)/Math.LN10);
-    var dbase       = Math.pow(10, base);
-    // calculate granularity; one of the terms in score
-    var granularity = 1 - Math.abs(k-m)/m;
-    // initialise end result
-    var best = undefined;
-    // loop through all possible label positions with given k
-    for(var i = 0; i < Q.length; i++) {
-      // calculate label positions
-      var tdelta = Q[i] * dbase;
-      var tmin   = Math.floor(min/tdelta) * tdelta;
-      var tmax   = tmin + intervals * tdelta;
-      // if label positions cover range
-      if (tmin <= min && tmax >= max) {
-        // calculate roundness and coverage part of score
-        var roundness = 1 - (i - (tmin <= 0 && tmax >= 0)) / Q.length
-        var coverage  = (max-min)/(tmax-tmin)
-        // if coverage high enough
-        if (coverage > mincoverage && !overlap(tmin, tmax, tdelta, calc_label_width, axis_width)) {
-          // calculate score
-          var tnice = granularity + roundness + coverage
-          // if highest score
-          if ((best === undefined) || (tnice > best.score)) {
-            best = {
-                'lmin'  : tmin,
-                'lmax'  : tmax,
-                'lstep' : tdelta,
-                'score' : tnice
+                'score' : tnice,
+                'ndec'  : ndec
               };
           }
         }
@@ -658,7 +568,8 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   }
   calc_label_width = calc_label_width || function() { return(0);};
   axis_width       = axis_width || 1;
-  Q                = Q || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+  Q                = Q         || [10, 1, 5, 2, 2.5, 3, 4, 1.5, 7, 6, 8, 9];
+  precision        = precision || [1,  0, 0, 0,  -1, 0, 0,  -1, 0, 0, 0, 0];
   mincoverage      = mincoverage || 0.8;
   mmin             = mmin || 2;
   mmax             = mmax || Math.ceil(6*m);
@@ -667,8 +578,12 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
       'lmin'  : dmin,
       'lmax'  : dmax,
       'lstep' : (dmax - dmin),
-      'score' : -1E8
+      'score' : -1E8,
+      'ndec'  : 0
     };
+  // calculate number of decimal places
+  var x = String(best['lstep']).split('.');
+  best['ndec'] = x.length > 1 ? x[1].length : 0;
   // loop though all possible numbers of labels
   for (var k = mmin; k <= mmax; k++) { 
     // calculate best label position for current number of labels
@@ -680,19 +595,61 @@ function wilkinson_ii(dmin, dmax, m, calc_label_width, axis_width, mmin, mmax, Q
   }
   // generate label positions
   var labels = [];
-  for (var l = best.lmin; l <= best.lmax; l += best.lstep) {
+  for (var l = best.lmin; (l - best.lmax) <= 1E-10; l += best.lstep) {
     labels.push(l);
   }
-  return(labels);
+  best['labels'] = labels;
+  return(best);
 }
 
 
-// basic axis functionality
-function BaseAxis(options){
+
+// ============================================================================
+// ====                           AXIS BASE CLASS                          ====
+// ============================================================================
+
+function Axis(options){
+
   var axis = {};
 
+  // Get and set the column/variable from the data which is shown on the axis
   var variable_;
+  axis.variable = function(variable) {
+    if (!arguments.length) {
+      return variable_;
+    } else {
+      variable_ = variable;
+      return this;
+    }
+  }
 
+  // Extract column from data row d
+  axis.value = function(d) {
+      return parseFloat(d[variable_]);
+  }
+
+  // Get and set meta of data set
+  var meta_;
+  axis.meta = function(meta) {
+    if (!arguments.length) {
+      return meta_;
+    } else {
+      meta_ = meta;
+      return this;
+    }
+  }
+
+  // Get meta of axis variable
+  axis.variable_meta = function() {
+    if (variable_ == undefined || meta_ == undefined) return undefined;
+    // first check variables then dimensions
+    var meta = meta_.variables[variable_];
+    if (meta != undefined) return meta;
+    else return meta_.dimensions[variable_];
+  }
+
+  // Set and set the canvas
+  var canvas_;
   axis.canvas = function(canvas) {
     if (!arguments.length) {
       return canvas_;
@@ -702,87 +659,88 @@ function BaseAxis(options){
     }
   }
 
-  axis.width = function(){
-    return 30;
-  }
-
-  axis.height = function(){
-    return 30;
-  }
-
-  axis.transform = function(d) {
-    return this.scale(this.value(d));
-  }
-
-  axis.variable = function(variable) {
+  // Set and get the title of the graph
+  var title_;
+  axis.title = function() {
     if (!arguments.length) {
-      return variable_;
+      if (title_ == undefined) {
+        if (axis.variable_meta() == undefined) return '';
+        var title = axis.variable_meta().name;
+        var unit =  axis.variable_meta().unit || '';
+        var axis_title = title;
+        if (unit.length) axis_title += ' (' + unit + ')';
+        return axis_title;
+      } else return title_;
+      return canvas_;
     } else {
-      variable_ = variable;
-      this.value = this.setValue(variable);
+      title_ = title;
       return this;
     }
-  }
-
-  axis.setValue = function(variable){
-    return function(d){return Number(d[variable]);};
   }
 
   return axis;
 };
 
+// ============================================================================
+// ====                           LINEAR Y AXIS                            ====
+// ============================================================================
+
 function LinearYAxis() {
-  var axis = {};
   
-  var variable_;
+  var axis = Axis();
+
+  // Some constants; probably need to be moved to a settings file
+  var NUMBER_LABELS = 10; // target number of labels of wilkinson algorithm
+  var TICK_LENGTH = 4; 
+  var TICK_COLOUR = "#000000";
+  var PADDING = TICK_LENGTH + 1; // distance of label from graph
+  var LEFT_PADDING = 18;  // extra space left of the label
+
+  // Variables
   var range_  = [undefined, undefined];
   var width_  = 40;
   var height_;
-  var canvas_;
   var labels_;
   var label_range_;
-  var value_;
+  var precision_ = undefined;
 
-  axis.variable = function(variable) {
-    if (!arguments.length) {
-      return variable_;
-    } else {
-      variable_ = variable;
-      value_ = function(d) { return parseFloat(d[variable_]);};
-      return this;
-    }
+  axis.get_tick_unit = function(unit) {
+    // when unit had length 1 add it to the tick marks otherwise only display
+    // the unit in the axis title
+    var unit = axis.variable_meta().unit || '';
+    if (unit.length != 1) return '';
+    if (unit == '%') return unit;
+    return ' ' + unit;
   }
 
-  axis.value = function(){
-    return value_;
+  axis.calc_label_width = function(label, ndec) {
+    if (ndec == undefined) ndec = precision_;
+    return(label_width(format_numeric(label, axis.get_tick_unit(), ndec)));
   }
 
   axis.domain = function(data) {
-    range_ = d3.extent(data, value_);
+    range_ = d3.extent(data, axis.value);
     return(this);
   }
 
   axis.width = function() {
-    return 40;
+    width_ = d3.max(range_, axis.calc_label_width) + LEFT_PADDING + PADDING;
+    return(width_);
   }
 
   axis.height = function(height) {
     if (!arguments.length) {
       return height_;
     } else {
-      height_ = height;
-      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, height_);
-      label_range_ = d3.extent(labels_);
-      return this;
-    }
-  }
-
-  axis.canvas = function(canvas) {
-    if (!arguments.length) {
-      return canvas_;
-    } else {
-      canvas_ = canvas;
-      return this;
+      // set the height
+      height_      = height;
+      // now that the height is known we can calculate the labels of the axis
+      labels_      = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 
+                       axis.calc_label_width, height_);
+      precision_   = labels_['ndec'];
+      label_range_ = [labels_.lmin, labels_.lmax];
+      labels_      = labels_['labels'];
+      return(this);
     }
   }
 
@@ -795,59 +753,53 @@ function LinearYAxis() {
   axis.scale = axis.transform_val;
 
   axis.transform = function(d) {
-    return axis.scale(value_(d));
+    return(axis.scale(axis.value(d)));
   }
 
   axis.ticks = function() {
-    return (labels_);
+    return(labels_);
   }
 
   axis.draw = function(label) {
-    canvas_.selectAll("line").data(labels_).enter().append("line")
-      .attr("x1", width_-5).attr("x2", width_)
-      .attr("y1", axis.transform_val).attr("y2", axis.transform_val)
-      .attr("stroke", "#000000")
-      ;
-
-    canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', width_-5).attr('y', axis.transform_val).attr('dy', '0.35em')
-      .attr('text-anchor', 'end').text(function(d) { return (d);});
-
-    return this;
+    // add ticks
+    axis.canvas().selectAll("line").data(labels_).enter().append("line").attr({ 
+        'x1'    : width_-TICK_LENGTH, 
+        'x2'    : width_,
+        'stroke': TICK_COLOUR,
+        'y1'    : axis.scale,
+        'y2'    : axis.scale
+      });
+    // add labels to ticks
+    axis.canvas().selectAll('text.tickmark').data(labels_).enter().append('text').attr({
+        'class'       : 'tickmark',
+        'x'           : width_-PADDING,
+        'y'           : axis.scale,
+        'dy'          : '0.35em',
+        'text-anchor' : 'end'
+      }).text(function(d) { 
+        return format_numeric(d, axis.get_tick_unit(), precision_);
+      });
+    return(this);
   }
 
-  return axis;
+  return(axis);
 }
 
+// ============================================================================
+// ====                           LINEAR X AXIS                            ====
+// ============================================================================
+
 function LinearXAxis() {
-  var axis = {};
+  var axis = Axis();
   
-  var variable_;
   var range_  = [undefined, undefined];
   var width_;
   var height_ = 30;
-  var canvas_;
   var labels_;
   var label_range_;
 
-  var value_;
-
-  axis.variable = function(variable) {
-    if (!arguments.length) {
-      return variable_;
-    } else {
-      variable_ = variable;
-      value_ = function(d) { return Number(d[variable_]);};
-      return this;
-    }
-  }
-
-  axis.value = function(){
-    return value_;
-  }
-
   axis.domain = function(data) {
-    range_ = d3.extent(data, value_);
+    range_ = d3.extent(data, axis.value);
     return(this);
   }
 
@@ -856,7 +808,21 @@ function LinearXAxis() {
       return width_;
     } else {
       width_ = width;
-      labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      // Calculate labels. This depends on the type of variable: for years we
+      // use a different algorithm (we don't want fractional years)
+      var meta = axis.variable_meta();
+      if ($.inArray("time", meta.type) == -1) {
+        // Normal tickmarks
+        labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      } else {
+        // Year tickmarks
+        var nyears = range_[1] - range_[0] + 1;
+        labels_ = wilkinson_ii(range_[0], range_[1], nyears, label_width, 
+            width_, 2, nyears, [10, 1, 5, 2, 4, 3, 6, 8, 7, 9], 
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+      }
+      
+      labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return this;
     }
@@ -866,16 +832,6 @@ function LinearXAxis() {
     return height_;
   }
 
-  axis.canvas = function(canvas) {
-    if (!arguments.length) {
-      return canvas_;
-    } else {
-      canvas_ = canvas;
-      return this;
-    }
-  }
-
-
   axis.scale = function(value) {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
@@ -883,8 +839,8 @@ function LinearXAxis() {
 
   axis.transform_val = axis.scale;
 
-  axis.transform = function(value) {
-    return (axis.transform_val(value[variable_]));
+  axis.transform = function(d) {
+    return(axis.scale(axis.value(d)));
   }
 
   axis.ticks = function() {
@@ -892,12 +848,13 @@ function LinearXAxis() {
   }
 
   axis.draw = function() {
-    canvas_.selectAll("line").data(labels_).enter().append("line")
-      .attr("x1", axis.transform_val).attr("x2", axis.transform_val)
-      .attr("y1", 0).attr("y2", 5)
-      .attr("stroke", "#000000");
-    canvas_.selectAll('text').data(labels_).enter().append('text')
-      .attr('x', axis.transform_val)
+    axis.canvas().selectAll("line").data(labels_).enter().append("line")
+      .attr({"x1": axis.scale, "x2": axis.scale
+            ,"y1": 0, "y2": 5
+           })
+      .style("stroke", "#000000");
+    axis.canvas().selectAll('text').data(labels_).enter().append('text')
+      .attr('x', axis.scale)
       .attr('y', 5).attr('dy', '1.2em')
       .attr('text-anchor', 'middle').text(function(d) { return (d);});
   }
@@ -905,8 +862,18 @@ function LinearXAxis() {
   return axis;
 }
 
+
+
+
+
+
+
+
+
+
+
 function RadiusAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var scale_  = d3.scale.sqrt();
@@ -972,7 +939,7 @@ function RadiusAxis() {
 
 
 function ColourAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var scale_  = d3.scale.category10();
@@ -986,6 +953,7 @@ function ColourAxis() {
       return variable_;
     } else {
       variable_ = variable;
+
       if (variable === undefined || variable.length == 0){
         value_ = d3.functor("<empty>");
       } else {
@@ -1001,8 +969,33 @@ function ColourAxis() {
     return value_;
   }
 
+  function cols(levels){
+    var o = d3.scale.ordinal().domain(levels).rangePoints([0,360], 1);
+    var cols = o.range().map(function(h) {
+      return d3.hcl(h, 70, 30).toString();
+    })
+    console.log(cols);
+    return cols;
+  }
+
   axis.domain = function(data) {
-    scale_.domain(d3.map(data, value_));
+    
+    //HACK!!!!
+    var dims = cntrl.meta().dimensions;
+    var dim;
+    if (dim = dims[variable_]){
+      //cols(dim.levels);
+      if (dim.categories.length > 10){
+        axis.scale = scale_ = d3.scale.category20();
+      } else {
+        axis.scale = scale_ = d3.scale.category10();        
+      }
+      scale_.domain(dim.categories.map(function(c){return c.level;}));
+    } else {
+      scale_.domain(d3.map(data, value_));
+    }
+    // END HACK
+
     return(this);
   }
 
@@ -1032,11 +1025,13 @@ function ColourAxis() {
   }
   
   return axis;
-}function Chart(options) {
+}
+function Chart(options) {
   var chart = {};
 
   var empty_ = function(d) {return "<empty>";};
   var data_;
+  var meta_;
   var selection_;
 
   //function to be used for small multiples
@@ -1066,6 +1061,16 @@ function ColourAxis() {
       return data_;
     } else {
       data_ = data;
+      return this;
+    }
+  }
+
+  chart.meta = function(meta) {
+    if (!arguments.length) {
+      return meta_;
+    } else {
+      meta_ = meta;
+      for (axis in axes) axes[axis].meta(meta);
       return this;
     }
   }
@@ -1125,7 +1130,7 @@ function ColourAxis() {
     
     // update domains of the axes
     for (var v in axes){
-      axes[v].domain(data_);
+      axes[v].meta(meta_).domain(data_);
     }
 
     var xheight = axes.x.height();
@@ -1164,6 +1169,17 @@ function ColourAxis() {
       .domain(rows)
       .range(y_bands.range)
       ;
+
+    // TODO: this should probably be in some other location
+    var ycenter = (height - margin.bottom - margin.top)/2 + margin.top;
+    canvas_.append('text').attr({
+        'class'       : 'title',
+        'x'           : '5',
+        'y'           : ycenter,
+        'text-anchor' : 'middle',
+        'dy'          : '0.35em',
+        'transform'   : "rotate(-90 5 " + ycenter + ")"
+      }).text(axes.y.title());
 
     axes.y.height(y_bands.bandWidth);
     for (var i in rows){
@@ -1270,17 +1286,6 @@ function ColourAxis() {
     return true;
   }
 
-  // this should auto fill the required plotting variables
-  chart.autofill = function(meta){
-    var vars = [];
-    for (var i = 0; i < required_.length; i++){
-      var pv = required_[i];
-      var v = selection[pv];
-      if (selection[pv] === undefined || selection[pv].length == 0){
-      } else {   
-      }
-    }    
-  }  
   ///////////////////////////////////////////////////
   // virtual methods, to be implemented by subclasses
   ///////////////////////////////////////////////////
@@ -1290,7 +1295,8 @@ function ColourAxis() {
   }
 
   return chart;
-};function Linechart() {
+};
+function Linechart() {
   // use basic functionality
   var chart = Chart({
     axes: { x: LinearXAxis(),
@@ -1350,10 +1356,18 @@ function ColourAxis() {
 
   function draw_grid(g){
 
-    var grid = g.append("g").attr('class', 'grid');
+    var grid = g.selectAll("g.grid").data([0]);
 
-    grid.append('rect').attr('width', axes.x.width())
-      .attr('height', axes.y.height()).attr('fill', '#F0F0F0');
+    grid.enter().append("g")
+      .attr('class', 'grid')
+      .append('rect')
+      .attr('fill', "#F0F0F0")
+      ;
+
+    grid.select('rect')
+     .attr({ 'width' : axes.x.width()
+           , 'height': axes.y.height()
+           })
 
     grid.selectAll('line.hrule').data(axes.y.ticks).enter().append('line')
       .attr('class','hrule')
@@ -1376,11 +1390,10 @@ function ColourAxis() {
                      ;
 
     crosshair.append("line")
-      .attr("class", "vline")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", axes.y.height())
+      .attr({"class":"vline"
+            , x1: 0, x2: 0
+            , y1: 0, y2: axes.y.height()
+            })
       ;
 
     crosshair.append("line")
@@ -1400,7 +1413,7 @@ function ColourAxis() {
     draw_grid(g);
 
     var groupBy = d3.nest()
-      .key(axes.colour.value())
+       .key(axes.colour.value())
       ;
 
     byColor_data = groupBy.entries(data);
@@ -1464,6 +1477,7 @@ function Scatterchart() {
   var chart = Chart({
     axes: { x: LinearXAxis(),
             y: LinearYAxis(),
+            unit: ColourAxis(), // just a dummy axis...
             colour : ColourAxis(),
             size: RadiusAxis()
           },
@@ -1659,9 +1673,10 @@ function Mosaicchart() {
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
-        .style("fill", function(d) { return axes.colour.scale(axes.y.value()(d));})
+        .style("fill", function(d) { return axes.colour.scale(axes.y.value(d));})
         .style("stroke-width", 2)
         .style("stroke", "white")
+        .call(highlight)
         ;
 
     $("g.data rect")
@@ -1670,7 +1685,25 @@ function Mosaicchart() {
                gravity: $.fn.tipsy.autoBounds(100, "se")
              })
       ;
+      function highlight(rects){
+        rects
+          .on("mouseover", function(d){
+              var self = this;
+              d3.selectAll("rect.yfraction")
+                .style("fill-opacity", function(d1){ return (y_value(d1) == y_value(d) 
+                                                          && x_value(d1) == x_value(d))? 1 : 0.5 })
+           })
+          .on("mouseout", function(d){
+              d3.selectAll("rect.yfraction")
+                .style("fill-opacity", 1)
+           })
+          ;
+      return rects;
     }
+  }
+
+  function dim (d, i){
+  }
 
   return chart;
 };
@@ -1695,33 +1728,57 @@ function Barchart() {
 
     g.selectAll('line.vrule').data(axes.x.ticks).enter().append('line')
       .attr('class','vrule')
-      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('x1', axes.x.scale).attr('x2', axes.x.scale)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#FFFFFF');
     g.selectAll('line.origin').data([0]).enter().append('line')
       .attr('class','origin')
-      .attr('x1', axes.x.transform_val).attr('x2', axes.x.transform_val)
+      .attr('x1', axes.x.scale).attr('x2', axes.x.scale)
       .attr('y1', 0).attr('y2', axes.y.height())
       .attr('stroke', '#000000');
 
 
     //data
 
-    g.selectAll('rect.bar').data(data).enter().append('rect')
-      .attr('class', 'bar')
-      .attr('y', function(d) {
-        return(axes.y.transform(d) - axes.y.barheight()/2)
-      })
-      .attr('height', axes.y.barheight)
-      .attr('x', function(d) {
-        return(axes.x.transform_val(0));
-      })
-      .attr('width', function(d) {
-        return(axes.x.transform(d) - axes.x.transform_val(0));
-      })
-      .attr('fill', axes.colour.scale)
-      .call(highlightBar, axes.y.value)
+    var groupBy = d3.nest()
+       .key(axes.colour.value())
       ;
+
+    byColor_data = groupBy.entries(data);
+
+    var bands = d3.scale.ordinal()
+      .domain(d3.range(byColor_data.length))
+      .rangeBands([0, axes.y.barheight()])
+      ;
+
+    console.log(byColor_data)
+    var bw = bands.rangeBand();
+
+    g.selectAll("g.color").data(byColor_data).enter()
+      .append("g").attr("class", "color")
+      .each(function(d, i){
+        var color = axes.colour.scale(d.key);
+        var xzero = axes.x.scale(0); 
+
+        var gcolor = d3.select(this);
+        var offset = bands(i);
+
+        gcolor.selectAll('rect.bar').data(d.values).enter().append('rect')
+          .attr({'class': 'bar'
+                , y: function(d) {
+                       return(offset + axes.y.transform(d) - axes.y.barheight()/2)
+                     }
+                , 'height': bw
+                , x: xzero
+                , width: function(d) {
+                           return(axes.x.transform(d) - xzero);
+                          }
+                , fill: color
+                })
+          .call(highlightBar, axes.y.value, axes.colour.value())
+          ;
+      })
+
 
     $("rect.bar")
       .tipsy({ title: cntrl.toText,
@@ -1738,19 +1795,20 @@ function Barchart() {
                      ;
 
     crosshair.append("line")
-      .attr("class", "vline")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", axes.y.height())
+      .attr({"class": "vline"
+           , x1: 0, x2: 0
+           , y1: 0, y2: axes.y.height()
+           })
       ;
 
   }
 
-  function highlightBar(bars, scale){
+  function highlightBar(bars, scale, color){
     bars
        .on("mouseover", function(d,i){
-             d3.selectAll("rect.bar").filter(function(d1,i1){ return scale(d1) != scale(d)}) 
+             d3.selectAll("rect.bar").filter(function(d1,i1){
+                   return scale(d1) != scale(d) || color(d1) != color(d)
+                }) 
                 .style("stroke-opacity", 0.6)
                 .style("fill-opacity", 0.6)
                 ;
@@ -1788,7 +1846,7 @@ function Barchart() {
 // ============================================================================
 
 function CategoricalAxis() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var levels_;
@@ -1910,7 +1968,7 @@ function CategoricalAxis() {
 
 
 function LinearXAxis2() {
-  var axis = {};
+  var axis = Axis();
   
   var variable_;
   var range_  = [undefined, undefined];
@@ -1948,6 +2006,7 @@ function LinearXAxis2() {
     } else {
       width_ = width;
       labels_ = wilkinson_ii(range_[0], range_[1], 10, label_width, width_);
+      labels_ = labels_['labels'];
       label_range_ = d3.extent(labels_);
       return this;
     }
@@ -1970,6 +2029,8 @@ function LinearXAxis2() {
     var range = label_range_[1] - label_range_[0];
     return (width_ * (value - label_range_[0]) / range);
   }
+
+  axis.scale = axis.transform_val;
 
   axis.transform = function(value) {
     return (axis.transform_val(value[variable_]));
