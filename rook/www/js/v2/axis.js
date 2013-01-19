@@ -80,7 +80,7 @@ function Axis(options){
 // ====                           LINEAR AXIS                              ====
 // ============================================================================
 
-function LinearAxis(horizontal) {
+function LinearAxis(horizontal, includeOrigin) {
   
   var axis = Axis();
 
@@ -95,6 +95,7 @@ function LinearAxis(horizontal) {
 
   // Variables
   var horizontal_ = horizontal;
+  var include_origin_ = includeOrigin || false;
   var range_  = [undefined, undefined];
   var depth_  = 40;
   var length_;
@@ -141,6 +142,10 @@ function LinearAxis(horizontal) {
 
   axis.domain = function(data) {
     range_ = d3.extent(data, axis.value);
+    if (include_origin_){
+      range_[0] = Math.min(range_[0], 0)
+      range_[1] = Math.max(range_[1], 0)
+    }
     depth_ = d3.max(range_, axis.label_depth) + LEFT_PADDING + PADDING;
     return this;
   }

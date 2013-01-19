@@ -226,7 +226,7 @@ function Menu(){
     });
 
     // Select first tab
-    $('.nav a:first').tab("show");
+    $('.nav-tabs a:first').tab("show");
 
     // Drag-and-drop of variables on graph dimensions
     $(".droppable").droppable({
