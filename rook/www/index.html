@@ -12,6 +12,9 @@
     <!-- jQuery includes -->
     <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
 
+        <!-- localization includes -->
+    <script type="text/javascript" src="js/i18next.js"></script>
+
     <!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
@@ -110,6 +113,11 @@
             window.open("table.html?table=" + table, "_self", false);
           }
         })
+
+        i18n.init({}, function(){
+          $("body").i18n();
+        });
+
       });
     </script>
 
@@ -130,10 +138,10 @@
     <h2>Available tables</h2>
 
     <div class="btn-group">
-      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i> View</button>
-      <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> Browse</button>
-      <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> Link</button>
-      <button id="rm_tmp"  class="btn btn-small"><i class="icon-remove"></i>Remove tmp</button>
+      <button id="view_table"   class="btn btn-small one"><i class="icon-eye-open"></i> <span data-i18n="view">View</span></button>
+      <button id="browse_table" class="btn btn-small one"><i class="icon-th"></i> <span data-i18n="table">Table</span></button>
+      <button id="link_tables"  class="btn btn-small two"><i class="icon-resize-horizontal"></i> <span data-i18n="link">Link</span></button>
+      <button id="rm_tmp"  class="btn btn-small"><i class="icon-remove"></i><span data-i18n="rmtmp"> Remove tmp<span></button>
     </div>
 
     <div >

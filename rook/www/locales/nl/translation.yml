@@ -1,4 +1,7 @@
-view: "View"
+view: "Bekijk"
+table: "Tabel"
+link: "Koppel"
+info: "Info"
 linechart: "Lijn"
 scatterchart: "Punt"
 barchart: "Staaf"
