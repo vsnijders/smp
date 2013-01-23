@@ -229,6 +229,9 @@ function Menu(){
 
     //set checks for categorical variables
     $("li.categorical").each(behave_like_radio);
+    //expand color / legend
+    $("ul.color div.filter").toggle(true)
+
   
        // Create tabbed pages for each of the graph types
     $("#tabs").tabs();
@@ -252,9 +255,11 @@ function Menu(){
       hoverClass: "droppable_hover", 
       tolerance : "touch",
       drop: function(event, ui) {
-        var granpa = $(this).closest(".tab-pane");
+        var ul_target = $(this);
+        var granpa = ul_target.closest(".tab-pane");
+
         // move existing variables to variables section
-        var old = $(".draggable", $(this));
+        var old = $(".draggable", ul_target);
         old.appendTo($(".variables", granpa));
 
         var ul = $(ui.draggable).closest("ul");
@@ -265,13 +270,16 @@ function Menu(){
         }
 
         // append newly dropped variable to the list
-        $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
+        $(ui.draggable).prependTo(ul_target).attr("style", "position:relative");
         // when draggables are moves to the variables section and more than
         // one category is selected; these need to be unselected
-        if ($(this).hasClass('variables')) {
+        if (ul_target.hasClass('variables')) {
           var sel = $("input.filter:checked", $(ui.draggable));
         } else {
           var sel = $("input.filter:checked", old);
+          if (ul_target.hasClass("color")) {
+            $("div.filter", ul_target).toggle(true)
+          }
         }
         if (sel.length > 1) sel.attr("checked", false);
 
