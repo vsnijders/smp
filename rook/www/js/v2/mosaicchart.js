@@ -31,8 +31,14 @@ function Mosaicchart() {
     var x_var = axes.x.variable();
     var y_var = axes.y.variable();
 
+    if (axes.colour.variable() !== y_var){
+      axes.colour.variable(y_var);
+      axes.colour.domain(data);
+    }
+
     var y_value = function(d){return d[y_var];};
     var x_value = function(d){return d[x_var];};
+
     var value = axes.size.value;
 
     var xfractions = d3.nest()
@@ -69,7 +75,7 @@ function Mosaicchart() {
         .attr("y", function(d) { return y_scale(d.offset / d.parent.sum); })
         .attr("height", function(d) { return y_scale(value(d) / d.parent.sum); })
         .attr("width", function(d) { return x_scale(d.parent.sum / sum); })
-        .style("fill", function(d) { return axes.colour.scale(axes.y.value(d));})
+        .style("fill", function(d) { return axes.colour.scale(axes.colour.value()(d));})
         .style("stroke-width", 2)
         .style("stroke", "white")
         .call(highlight)
