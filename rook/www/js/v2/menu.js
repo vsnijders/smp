@@ -40,18 +40,32 @@ function Menu(){
   // Checkboxes in the variables section need to behave like a radiobox. This is handled in the 
   // next bit of code.
   function behave_like_radio() {
-    var ul = $(this).closest('ul.droppable');
-    if (ul.hasClass('variables')) {
-      var div = $(this).closest('div.filter');
-      $("input:checked", div).not($(this)).attr("checked", false);
-    }
 
     var li = $(this).closest('li');
-    var val = $("input:checked", li).val();
-    if (!val){
-      val = meta_.dimensions[li.data("variable")].default;
+    var ul = li.closest('ul.droppable');
+
+    if (ul.hasClass('variables')) {
+      // enable only one check
+      $("input:checked", li).not($(this)).attr("checked", false);
+      var val = $("input:checked", li).val();
+      if (!val){
+        val = meta_.dimensions[li.data("variable")].default;
+        $("input.filter[value='"+val+"']", li).attr("checked", true);
+      }
+      $("span.slice", li).text(" [='"+val+"']")
+    } else {
+      var val = $("input:checked", li).val();
+      if (!val){
+        val = meta_.dimensions[li.data("variable")].aggregate;
+        $("input.filter[value!='"+val+"']", li).attr("checked", true);
+      }
+
+      var n_sel = $("input.filter:checked", li).length;
+      var n = $("input.filter", li).length;
+
+      $("span.slice", li).text(" ("+n_sel+"/"+n+")")
     }
-    $("span.slice", li).text(" [='"+val+"']")
+
   }
 
   function makeCatVar(id, catVar){
@@ -212,6 +226,9 @@ function Menu(){
 
     defaultFill();
     autoFill();
+
+    //set checks for categorical variables
+    $("li.categorical").each(behave_like_radio);
   
        // Create tabbed pages for each of the graph types
     $("#tabs").tabs();
@@ -239,6 +256,14 @@ function Menu(){
         // move existing variables to variables section
         var old = $(".draggable", $(this));
         old.appendTo($(".variables", granpa));
+
+        var ul = $(ui.draggable).closest("ul");
+
+        //remove selection if destination was variables
+        if (ul.hasClass('variables')){
+          $("input.filter:checked", ul).attr("checked", false);
+        }
+
         // append newly dropped variable to the list
         $(ui.draggable).prependTo($(this)).attr("style", "position:relative");
         // when draggables are moves to the variables section and more than
@@ -249,7 +274,9 @@ function Menu(){
           var sel = $("input.filter:checked", old);
         }
         if (sel.length > 1) sel.attr("checked", false);
+
         // update selection
+        $("li.categorical").each(behave_like_radio);
         update_filter();
         update_selection(this);
         redraw_graph();

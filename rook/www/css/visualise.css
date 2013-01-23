@@ -271,7 +271,7 @@ ul.color span.color {
 }
 
 span.slice {
-  display: none;
+  display: inline;
 }
 
 ul.variables span.slice {
