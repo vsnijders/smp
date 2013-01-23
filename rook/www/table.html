@@ -30,22 +30,69 @@
 
     <!-- scripting -->
     <script type="text/javascript">
+     
+     function transpose(dataframe){
+        var init = true;
+        var data = [];
+        $.each(dataframe, function(name, col){
+          if (init){
+            init = false;
+            for (var i = 0; i < col.length+1; i++){
+              data[i] = [];
+            }
+          }
+          //save name
+          data[0].push(name);
+
+          for (var i = 0; i < col.length; i++){
+            data[i+1].push(col[i]);
+          }          
+        });
+        return data;
+     }
+
+     function transpose2(dataframe){
+        var init = true;
+        var data = [];
+        $.each(dataframe, function(name, col){
+          if (init){
+            init = false;
+            for (var i = 0; i < col.length; i++){
+              data[i] = {};
+            }
+          }
+          for (var i = 0; i < col.length; i++){
+            data[i][name] = col[i];
+          }          
+        });
+        return data;
+     }
+
      $(function() {
 
         var tablename = $(document).getUrlParam("table");
-        R.get_data(tablename).success(function(data){
+
+        R.get_table(tablename).success(function(meta_data ){
           var div   = $("#table");
-          console.log(data)
           var table = $("<table>");
           table.appendTo(div);
 
-          var colnames = data[1].map(function(n){return {sTitle: n}});
-          console.log(colnames)
+          var data = transpose(meta_data.data);
+
+          var meta = meta_data.meta;
+          var colnames = data[0].map( function(n){
+            return { sTitle: (meta.dimensions[n] || meta.variables[n] || {name: n}).name
+                   , sType: (meta.variables[n])? "numeric" : "string"}
+          });
+          
+          //remove first row
+          data.shift(0)
+
           table.dataTable({
             aaData: data, 
             aoColumns: colnames,
             bScrollInfinite: true,
-            sScrollY: "400px",
+            sScrollY: "600px",
             bScrollCollapse: true,
             bPaginate: false,
             bDeferRender : true 
@@ -61,6 +108,10 @@
           $("body").i18n();
         });
 
+
+        var test = {size: [2,3], height: [4,5]};
+        var res = transpose(test);
+        console.log(res, transpose2(test));
 
       });
     </script>
@@ -84,7 +135,7 @@
     </header>
     <div class="container-fluid" style="padding-left:0">
       <div class="row-fluid">
-        <div class="span8 offset2">
+        <div class="span8 offset1">
           <div id="table"></div> 
         </div>
       </div>
