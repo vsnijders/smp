@@ -33,7 +33,7 @@ function Mosaicchart() {
 
     var y_value = function(d){return d[y_var];};
     var x_value = function(d){return d[x_var];};
-    var value = axes.size.value();
+    var value = axes.size.value;
 
     var xfractions = d3.nest()
         .key(x_value)
