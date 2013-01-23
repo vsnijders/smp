@@ -8,15 +8,12 @@ dimensions:
     default: totaal
     type: categorical
     categories:
-    - level: man
-      name: man
-      description: ''
-    - level: vrouw
-      name: vrouw
-      description: ''
     - level: totaal
       name: totaal
-      description: ''
+    - level: man
+      name: man
+    - level: vrouw
+      name: vrouw
   generatie:
     name: generatie
     aggregate: 1986-1990
@@ -244,4 +241,11 @@ variables:
 populations:
   beroepsbevolking: De nederlandse bevolking die gerekend kan worden tot de beroepsbevolking
     (tussen 16 en n)
+defaultgraph: line
+defaultgraphs:
+  line:
+    x: leeftijd
+    y: participatie
+    colour: generatie
+
 

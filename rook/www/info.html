@@ -16,6 +16,8 @@
 
     <!-- localization includes -->
     <script type="text/javascript" src="js/i18next.js"></script>
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
+    <script type="text/javascript" src="js/markdown/markdown.js"></script>
 
     <!-- bootstrap includes -->
     <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -28,7 +30,44 @@
 
     <!-- scripting -->
     <script type="text/javascript">
+
       $(function() {
+
+        var table = $(document).getUrlParam("table");
+        R.get_meta(table).success(function(meta){
+          console.log(meta);
+          window.meta= meta;
+
+          var o = { name: meta.name
+                  , description: markdown.toHTML(meta.description)
+                  , terms: []
+                  }
+          
+          var terms = o.terms;
+
+          //collect terms + descriptions of all meta data objects.
+          function addTerm(_, object){
+            if (!object.description) return;
+
+            terms.push({ term: object.name
+                       , description: markdown.toHTML(object.description)
+                       })
+          }
+
+          $.each(meta.variables, addTerm)
+
+          $.each(meta.dimensions, function(_, dim){
+            addTerm(_,dim);
+            $.each(dim.categories, addTerm);
+          })
+
+          var $info = $("#info");
+          var t = $info.html();
+          var tc = Mustache.compile(t);
+
+          $info.html(tc(o));
+
+        });        
 
         $("a.mode").each(function(_, a){
           a.href += window.location.search;
@@ -60,10 +99,23 @@
     </div>
     </header>
 
-    <article>
-      <div id="table" class="numeric">
+   <div class="container-fluid" style="padding-left:0">
+    <div class="row-fluid">
+      <div class="span8 offset1 well" id="info">
+        <h1><span data-i18n="table">Table</span>: '{{name}}'</h1>
+        <h3 data-i18n="description">Description</h3>
+        {{{description}}}
+
+        <h3 data-i18n="terms">Terms</h3>
+        <dl class="dl-horizontal">
+          {{#terms}}
+          <dt>{{term}}</dt>
+          <dd>{{{description}}}</dd>
+          {{/terms}}
+        </dl>
       </div>
-    </article>
+    </div>
+   </div>
 
     <footer>
     </footer>
