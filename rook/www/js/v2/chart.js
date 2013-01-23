@@ -211,11 +211,14 @@ function Chart(options) {
     axes.x.width(x_bands.bandWidth);
     for (var i in columns){
       var column = columns[i];
+
       var g = canvas_.append('g')
-                     .attr('class', 'axis x')
-                     .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')')
-                     ;
-      axes.x.canvas(g).draw()
+          .attr('class', 'axis x')
+          .attr('transform', 'translate(' + x_cell(column) + ',' + (height-margin.bottom) + ')');
+      // Only draw labels for even numbered axes;
+      axes.x.canvas(g).draw_first(i == 0 | ncolumn != 2)
+        .draw_labels(ncolumn == 2 | i % 2 == 0).draw()
+
 
       // handle
       if (ncolumn > 1) {

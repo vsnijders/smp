@@ -214,10 +214,40 @@ function LinearAxis(horizontal, includeOrigin) {
     return labels_;
   }
 
+  // Get and set whether or not the first label should be drawn (can be useful
+  // for small multiples where the last labels of axis i can overlap with the
+  // first label of axis i+1)
+  var draw_first_ = true;
+  axis.draw_first = function(draw) {
+    if (!arguments.length) {
+      return draw_first_;
+    } else {
+      draw_first_ = draw;
+      return this;
+    }
+  }
+
+  // Get and set whether or not labels should be drawn. Tickmarks are still
+  // drawn.
+  var draw_labels_ = true;
+  axis.draw_labels = function(draw) {
+    if (!arguments.length) {
+      return draw_labels_;
+    } else {
+      draw_labels_ = draw;
+      return this;
+    }
+  }
+
+
   axis.draw = function(label) {
+
+    var labels = labels_;
+    if (!draw_first_) labels = labels.slice(1);
+
     if (horizontal_) {
       // add ticks
-      axis.canvas().selectAll("line.tick").data(labels_).enter().append("line").attr({ 
+      axis.canvas().selectAll("line.tick").data(labels).enter().append("line").attr({ 
           'class' : 'tick',
           'x1'    : axis.scale, 
           'x2'    : axis.scale,
@@ -225,18 +255,20 @@ function LinearAxis(horizontal, includeOrigin) {
           'y2'    : TICK_LENGTH
         });
       // add labels to ticks
-      axis.canvas().selectAll('text.tickmark').data(labels_).enter().append('text').attr({
-          'class'       : 'tickmark',
-          'x'           : axis.scale,
-          'y'           : PADDING,
-          'dy'          : '1.2em',
-          'text-anchor' : 'middle'
-        }).text(function(d) { 
-          return axis.format(d);
-        });
+      if (draw_labels_) {
+        axis.canvas().selectAll('text.tickmark').data(labels).enter().append('text').attr({
+            'class'       : 'tickmark',
+            'x'           : axis.scale,
+            'y'           : PADDING,
+            'dy'          : '1.2em',
+            'text-anchor' : 'middle'
+          }).text(function(d) { 
+            return axis.format(d);
+          });
+      }
     } else {
       // add ticks
-      axis.canvas().selectAll("line.tick").data(labels_).enter().append("line").attr({ 
+      axis.canvas().selectAll("line.tick").data(labels).enter().append("line").attr({ 
           'class' : 'tick',
           'x1'    : axis.width()-TICK_LENGTH, 
           'x2'    : axis.width(),
@@ -244,15 +276,17 @@ function LinearAxis(horizontal, includeOrigin) {
           'y2'    : axis.scale
         });
       // add labels to ticks
-      axis.canvas().selectAll('text.tickmark').data(labels_).enter().append('text').attr({
-          'class'       : 'tickmark',
-          'x'           : axis.width()-PADDING,
-          'y'           : axis.scale,
-          'dy'          : '0.35em',
-          'text-anchor' : 'end'
-        }).text(function(d) { 
-          return axis.format(d);
-        });
+      if (draw_labels_) {
+        axis.canvas().selectAll('text.tickmark').data(labels).enter().append('text').attr({
+            'class'       : 'tickmark',
+            'x'           : axis.width()-PADDING,
+            'y'           : axis.scale,
+            'dy'          : '0.35em',
+            'text-anchor' : 'end'
+          }).text(function(d) { 
+            return axis.format(d);
+          });
+      }
     }
     return this;
   }
