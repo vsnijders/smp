@@ -239,7 +239,6 @@ function LinearAxis(horizontal, includeOrigin) {
     }
   }
 
-
   axis.draw = function(label) {
 
     var labels = labels_;
