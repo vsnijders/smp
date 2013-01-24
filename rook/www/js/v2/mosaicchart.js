@@ -4,14 +4,14 @@ function Mosaicchart() {
   
   // use basic functionality
   var chart = Chart({
-    axes: { x: LinearXAxis(),
-            y: LinearYAxis(),
+    axes: { x: LinearXAxis2(),
+            y: LinearYAxis2(),
             colour: ColourAxis(),
             size : LinearXAxis()
           },
     required: ["y", "size"]
   });
-  
+
   // hack, there is no such thing as "protected" in javascript 
   var axes = chart.axes;
   var selection_;
@@ -109,3 +109,18 @@ function Mosaicchart() {
 
   return chart;
 };
+
+
+
+function LinearYAxis2() {
+  var axis = LinearAxis(false);
+  axis.draw = function() { }
+  return(axis);
+}
+
+function LinearXAxis2() {
+  var axis = LinearAxis(true);
+  axis.draw = function() { }
+  return(axis);
+}
+
