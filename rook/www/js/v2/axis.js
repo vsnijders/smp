@@ -118,7 +118,7 @@ function LinearAxis(horizontal, includeOrigin) {
     // Determine if we need a unit after the value
     // when unit had length 1 add it to the tick marks otherwise only display
     // the unit in the axis title
-    var unit = unit || '';
+    var unit = meta.unit || '';
     if (unit.length != 1) unit = '';
     else if (unit != '%') unit = ' ' + unit;
     // Determine grouping symbol (no grouping for years)
