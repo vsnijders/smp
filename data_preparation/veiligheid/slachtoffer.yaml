@@ -158,23 +158,8 @@ dimensions:
     default: Totaal
     type: categorical
     categories:
-    - level: Geweldsdelicten
-      name: Geweldsdelicten
-      description: |
-        - Seksuele delicten;
-        - Mishandeling;
-        - Bedreiging.
-    - level: Overige delicten
-      name: Overige delicten
-      description: ''
     - level: Totaal
       name: Totaal
-      description: ''
-    - level: Vandalismedelicten
-      name: Vandalismedelicten
-      description: |
-        Vandalismedelicten:
-        - Beschadiging/diefstal vanaf auto en overige vernielingen.
     - level: Vermogensdelicten
       name: Vermogensdelicten
       description: |
@@ -186,6 +171,19 @@ dimensions:
         - Zakkenrollerij met geweld;
         - Zakkenrollerij zonder geweld;
         - Overige diefstal.
+    - level: Geweldsdelicten
+      name: Geweldsdelicten
+      description: |
+        - Seksuele delicten;
+        - Mishandeling;
+        - Bedreiging.
+    - level: Vandalismedelicten
+      name: Vandalismedelicten
+      description: |
+        Vandalismedelicten:
+        - Beschadiging/diefstal vanaf auto en overige vernielingen.
+    - level: Overige delicten
+      name: Overige delicten
 variables:
   Slachtofferschap:
     name: Slachtofferschap
