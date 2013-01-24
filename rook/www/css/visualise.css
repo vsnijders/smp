@@ -303,3 +303,7 @@ line.tick {
   max-height: 200px;
   overflow-y: auto;
 }
+
+label.highlight span {
+  font-weight: bold;
+}

@@ -21,6 +21,10 @@ function Linechart() {
                   .style("stroke-opacity", 0.8)
                   .style("fill-opacity", 0.2)
                   ;
+
+               $("ul.color input[value='"+d.key+"']")
+                 .parent()
+                 .toggleClass("highlight", true);
             })
          .on("mouseout", function(d){
                d3.selectAll("g.color")
@@ -28,6 +32,10 @@ function Linechart() {
                   .style("stroke-opacity", 1)
                   .style("fill-opacity", 0.5)
                   ;
+               
+               $("ul.color input[value='"+d.key+"']")
+                 .parent()
+                 .toggleClass("highlight", false);
            })
          ;
       return lines;
