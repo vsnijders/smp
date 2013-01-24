@@ -23,8 +23,12 @@ add_table <- function(tablename, data, meta, table_dir = "data/tmp") {
   if (is.character(tables)) {
       tables <- fromJSON(paste(tables, collapse=""))
   }
-  tables[[tablename]] <- list(data = dname, meta=mname, name=meta$name, 
-      description=meta$description)
+  tables[[tablename]] <- list( data = dname
+                             , meta=mname
+                             , name=meta$name
+                             , summary=meta$summary
+                             , description=meta$description
+                             )
   write(toJSON(tables), file=paste0(table_dir, "/tables.json"))
 }
 

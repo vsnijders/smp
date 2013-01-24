@@ -1,7 +1,24 @@
-name: Selectie uit 'Personen naar door de huisarts geregistreerde diagnose'
-description: Selectie uit de StatLine tabel 'Personen naar door de huisarts geregistreerde
+name: Geregistreerde zorgepisode van suikerpatienten
+summary: |
+  Selectie uit de StatLine tabel 'Personen naar door de huisarts geregistreerde
   diagnose' met daarin informatie over het percentage personen met een of meer zorgperiodes
   gerelateerd aan diabetes.
+description: |
+  Deze tabel toont per diagnose(groep) het aantal personen dat gedurende het verslagjaar een of meer zorgepisodes heeft gehad, geregistreerd door de huisarts waar de persoon staat ingeschreven. De diagnoses zijn gecodeerd volgens de International Classification of Primary Care (ICPC-1). 
+  De aantallen worden uitgedrukt per 1000 personen en uitgesplitst naar leeftijd en geslacht. 
+
+  Gegevens beschikbaar vanaf: 2002
+
+  Status van de cijfers
+  De jaarcijfers tot en met 2009 zijn definitief.
+  De cijfers over 2010 zijn voorlopige cijfers.
+
+  Wijzigingen per
+  5 juli 2012: cijfers over 2010 toegevoegd.
+
+  Wanneer komen er nieuwe cijfers? 
+  Het is nog onbekend wanneer er nieuwe cijfers verschijnen.
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=80193ned&D1=0-175&D2=0&D3=1-17&D4=0&D5=0,l&VW=T
 dimensions:
   jaar:
     name: Jaar

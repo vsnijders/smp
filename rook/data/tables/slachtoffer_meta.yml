@@ -1,8 +1,43 @@
 name: Slachtoffers van delicten
-description: Selectie uit 'Slachtofferschap en ondervonden delicten; politieregio
+summary: |
+  Selectie uit 'Slachtofferschap en ondervonden delicten; politieregio
   (IVM)'. Hierin het percentage van de bevolking dat slachtoffer is van een type delict.
   NB, de percentages tellen niet op, omdat personen van meerdere delicten slachtoffer
   kunnen zijn.
+description: "In deze tabel vindt u een overzicht van slachtofferschap van personen
+  \nop basis van de Integrale VeiligheidsMonitor (IVM). Het gaat over \npersoonsgebonden
+  en objectgebonden slachtofferschap alsmede \nondervonden delicten in de 12 maanden
+  voorafgaand aan het onderzoek.\nHet gaat steeds om gegevens over de bevolking van
+  15 jaar of ouder, \ntenzij anders vermeld. Opgenomen zijn de landelijke cijfers
+  en de \ncijfers per politieregio.\nDoor wijziging in vraagstelling, onderzoeksopzet
+  en/of context zijn \nde IVM-gegevens vanaf 2008 niet vergelijkbaar met gegevens
+  uit andere \nbronnen, zoals de Veiligheidsmonitor Rijk (VMR; 2005-2008) en eerdere
+  \nveiligheids- en/of slachtofferenqu\xEAtes. \nDe enqu\xEAte is uitgevoerd in het
+  laatste kwartaal van het jaar.\nGegevens over een verslagperiode van bijvoorbeeld
+  12 maanden hebben \ndus voor het grootste deel betrekking op het genoemde kalenderjaar
+  \n(bijvoorbeeld 2010) en voor een beperkt deel op enkele daaraan \nvoorafgaande
+  maanden.\n\nGegevens beschikbaar vanaf: 2008\n\nWijziging per 14 mei:\nVoor het
+  verslagjaar 2008 zijn de cijfers herzien voor het onderwerp 'Slachtofferschap van
+  geweldsdelicten' voor de politieregio Flevoland. Verder zijn voor het verslagjaar
+  2008 de cijfers (uitsluitend betrouwbaarheidsmarges) herzien voor het onderwerp
+  'Ondervonden delicten naar pleegplek-in winkel/warenhuis/winkelcentrum'. Voor het
+  verslagjaar 2009 zijn de cijfers (uitsluitend betrouwbaarheidsmarges) herzien voor
+  het onderwerp 'Ondervonden delicten naar pleegplek-op school'. Voor de verslagjaren
+  2010 en 2011 zijn de cijfers (uitsluitend betrouwbaarheidsmarges) herzien voor de
+  onderwerpen 'Ondervonden delicten naar pleegplek-in winkel/warenhuis/winkelcentrum',
+  'Ondervonden delicten naar pleegplek-sportveld/sporthal/kleedruimte', 'Ondervonden
+  delicten naar pleegplek-park/parkeerterrein/strand'.\n\nDe status van alle cijfers
+  is gewijzigd in 'voorlopig'. \n\nWijziging per 1 maart 2012: \nPer 1 maart zijn
+  de gegevens over slachtofferschap en ondervonden delicten \ngeactualiseerd. Door
+  herberekening van de marges kunnen voor de \nverslagjaren 2008 t/m 2010 zeer kleine
+  verschillen optreden met eerdere \nberekeningen hiervan.\n\nStatus van de cijfers:
+  voorlopig.\n\nWijziging per 3 augustus 2011: \nOp basis van nadere analyse van de
+  slachtofferdata zijn de afzonderlijke \ncijfers over de vermogensdelicten 'autodiefstal'
+  en 'diefstal uit auto' \ngecombineerd tot 'diefstal van en uit de auto'; cijfers
+  over de \nafzonderlijke vandalismedelicten 'beschadiging/diefstal vanaf de auto'
+  en \n'overige vernielingen' zijn vervallen. \n\nWanneer komen er nieuwe cijfers?\nNieuwe
+  gegevens verschijnen jaarlijks omstreeks maart. \n"
+url: http://statline.cbs.nl/StatWeb/publication/?VW=T&DM=SLNL&PA=80169NED&D1=0-1,5,15-16&D2=a&D3=0&D4=a&HD=121102-1437&HDR=G2,T&STB=G3,G1
 dimensions:
   Jaar:
     name: Jaar
@@ -128,7 +163,9 @@ dimensions:
       description: ''
     - level: Vandalismedelicten
       name: Vandalismedelicten
-      description: Beschadiging/diefstal vanaf auto en overige vernielingen
+      description: |
+        Vandalismedelicten:
+        - Beschadiging/diefstal vanaf auto en overige vernielingen.
     - level: Vermogensdelicten
       name: Vermogensdelicten
       description: |

@@ -1,6 +1,23 @@
-name: Diabetes en overgewicht uit 'Gezondheid, leefstijl, zorggebruik'
-description: Selectie uit de StatLine tabel 'Gezondheid, leefstijl, zorggebruik' met
+name: Diabetes en overgewicht
+summary: |
+  Selectie uit de StatLine tabel 'Gezondheid, leefstijl, zorggebruik' met
   daarin informatie over voorkomen van diabetes en overgewicht.
+description: "Deze tabel bevat het merendeel van de uitkomsten van de jaarlijkse \nmodule
+  gezondheidsenqu\xEAte uit het Permanent LeefSituatie Onderzoek \n(POLS). \nHet CBS
+  houdt deze enqu\xEAte met het doel een zo volledig mogelijk \noverzicht te geven
+  van ontwikkelingen in de gezondheid, medische \nconsumptie, leefstijl en het preventieve
+  gedrag van de Nederlandse \nbevolking. \nEr worden onder andere vragen gesteld over
+  algemene gezondheid, \nchronische aandoeningen, lichamelijke beperkingen, contacten
+  met \nhuisarts, fysiotherapeut, specialist en tandarts, ziekenhuisopnamen, \nmedicijngebruik,
+  roken, alcoholgebruik, lichamelijke activiteit, \ngriepvaccinatie, cervix uitstrijkjes
+  en mammografie\xEBn.\nIn de tabel zijn de gegevens uit te splitsen naar de volgende
+  \nkenmerken:\n- geslacht\n- leeftijdsklasse (2x)\n- geslacht x leeftijdsklasse (2x)\n-
+  soort ziektekostenverzekering (tot 2006) \n- opleidingsniveau\n- sociaal economische
+  groep \n- samenstelling huishouden\n- stedelijkheid woonplaats\n\nGegevens beschikbaar
+  vanaf: 2000 of 2001 tot en met 2009.\n\nStatus van de cijfers: Definitief\n\nWijzigingen
+  ten opzichte van de vorige versie:\n16 maart 2010\nDe cijfers van het jaar 2009
+  zijn toegevoegd. \n\nWanneer komen er nieuwe cijfers? Tabel is stopgezet.\n"
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=03799&D1=139-141&D2=3-7&D3=0&D4=a&HDR=G2,T,G3&STB=G1&VW=T
 dimensions:
   jaar:
     name: Jaar
@@ -87,16 +104,26 @@ dimensions:
 variables:
   suiker:
     name: Diabetes
+    description: |
+      % personen (0+) met de antwoordcategorie 'ja' op de vraag:
+      Heeft u suikerziekte?
     type: numeric
     unit: '%'
     population: gezo
   suiker1:
     name: Diabetes type 1
     type: numeric
+    description: "% personen (0+) met de antwoordcategorie 'ja' op de vraag:\nHeeft
+      u suikerziekte? En met 'ja' op twee vervolgvragen:\nGebruikt u hiervoor op dit
+      moment insuline \xE9n\nBent u insuline gaan gebruiken binnen 6 maanden nadat
+      bij u suikerziekte\nwas vastgesteld?\n"
     unit: '%'
     population: gezo
   suiker2:
     name: Diabetes type 2
+    description: |
+      % personen (0+) met de antwoordcategorie 'ja' op de vraag:
+      Heeft u suikerziekte? en niet behorend tot de diabetes type1 personen.
     type: numeric
     unit: '%'
     population: gezo

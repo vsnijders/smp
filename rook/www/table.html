@@ -75,6 +75,7 @@
         R.get_table(tablename).success(function(meta_data ){
           var div   = $("#table");
           var table = $("<table>");
+          //table.append("<caption>").text("Hello!");
           table.appendTo(div);
 
           var data = transpose(meta_data.data);
@@ -125,7 +126,7 @@
         <a class="brand" href="index.html">StatMine</a>
         <ul class="nav">
           <li><a class="mode" href="visualize.html"><i class="icon-eye-open icon-white"></i> <span data-i18n="view">View</span></a></li>
-          <li class="active"><a class="mode" href="table.html"><i class="icon-list-th icon-white"></i> <span data-i18n="table">Table</span></a></li>
+          <li class="active"><a class="mode" href="table.html"><i class="icon-th icon-white"></i> <span data-i18n="table">Table</span></a></li>
           <li><a class="mode" href="link.html"><i class="icon-resize-horizontal icon-white"></i> <span data-i18n="link">Link</span></a></li>
           <li><a class="mode" href="info.html"><i class="icon-info-sign icon-white"></i> <span data-i18n="info">Info</span></a></li>
         </ul>

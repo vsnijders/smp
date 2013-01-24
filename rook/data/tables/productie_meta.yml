@@ -1,5 +1,33 @@
 name: Toegevoegde waarde per bedrijfstak
-description: Bbp, productie en bestedingen; productie en inkomens naar bedrijfstak
+summary: Bbp, productie en bestedingen; productie en inkomens naar bedrijfstak
+description: "Deze tabel bevat gegevens over het macro-economische productieproces.\nHier
+  worden van verschillende bedrijfseenheden (bedrijfsklassen) de \nproductie, het
+  verbruik, de toegevoegde waarde en de inkomenscomponenten \nvan de toegevoegde waarde
+  weergegeven.\n\nDe onderwerpen van deze tabel komen overeen met de tabeltitels uit
+  \nhet hoofdstuk productie, verbruik en inkomensvorming van de papieren \npublicatie
+  Nationale rekeningen. De bedrijfsklassen zijn ingedeeld \nvolgens de Standaard Bedrijfsindeling
+  2008 (SBI 2008). De sectoren zijn\ningedeeld volgens het Europese Systeem van rekeningen
+  1995 (ESR 1995). \n\nBij een aantal onderwerpen (transacties) tellen de bedragen
+  van de\nbedrijfsklassen niet op tot het macrototaal. Dit komt omdat bepaalde\nonderdelen
+  van transacties niet naar bedrijfsklassen te verdelen zijn. \nDe niet naar bedrijfsklassen
+  te verdelen transacties zijn:\n- goederen en diensten n.e.g. (niet elders genoemd)\n-
+  verschil toegerekende en afgedragen btw\nDe aansluitingsposten bij de bedrijfstakken
+  zijn opgenomen in een apart \nonderdeel: Overige posten. \n\nDe hierboven genoemde
+  macroeconomische variabelen worden in volgende \ngrootheden weergegeven:\n\n- Waarde
+  in werkelijke prijzen, mln euro\n- Waarde prijsniveau 2005=100, mln euro\n- Percentuele
+  volumeontwikkeling, %\n- Prijsindexcijfers 2005=100\n\nGegevens beschikbaar vanaf:1988\n\nStatus
+  van de cijfers:\nDe cijfers vanaf 1988 zijn definitief. De twee meest recente jaren
+  hebben\nnog een (nader) voorlopig karakter. \n\nMet ingang van juni 2011 wordt de
+  nieuwe standaard \nbedrijfsindeling 2008 (SBI 2008) door de Nationale rekeningen
+  gehanteerd. \nIn deze tabel is gekozen voor een aantal internationaal gedefinieerde
+  \nsamentellingen die gebaseerd zijn op tussenniveaus die passen binnen de \nhi\xEBrarchie
+  van de SBI. \n\nMet ingang van juni 2011 wordt het referentiejaar voor de volume-
+  en \nprijsindexcijfers tijdreeksen verlegd van 2000 naar 2005. Dit als gevolg \nvan
+  een Europese verordening met betrekking tot het referentiejaar van de \ntijdreeksen
+  van de Nationale rekeningen.\n\nWanneer komen er nieuwe cijfers?\n\nNa afloop van
+  het verslagjaar worden na 6, 18 en 30 maanden \nrespectievelijk de voorlopige, nader
+  voorlopige en definitieve \njaarramingen gepubliceerd. \n"
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=81119ned&D1=0-2,5-11&D2=0,2-4,6,12,15-16,18-23,25-26,28-32,34,36,39,41,43-44,46-48,51-53,55-60,65-67,69,72-74,78,80,83-85,87,91-94,100,102,104-105,108-109,111-113,115-116,119-121&D3=a&HDR=T&STB=G1,G2&VW=D
 dimensions:
   Sector:
     name: Sector
