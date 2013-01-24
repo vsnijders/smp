@@ -186,7 +186,7 @@ var LinkView = Backbone.View.extend({
 
         $("div.draggable")
           .css("cursor", "move")
-          .draggable( {axis:"y", revert: "invalid"} )
+          .draggable( {axis:"y", revert: "invalid", stack:"div"} )
           ;
 
     	cleanCats();

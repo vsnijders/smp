@@ -1,6 +1,10 @@
 name: arbeidsmarktparticipatie
-description: Deze tabel bevat de arbeidsparticipatie naar geslacht van verschillende
+summary: Arbeidsparticipatie naar geslacht van verschillende
   generaties.
+description: |
+  Deze tabel bevat de arbeidsparticipatie naar geslacht van verschillende
+  generaties.
+url: 
 dimensions:
   geslacht:
     name: Geslacht
@@ -234,7 +238,9 @@ dimensions:
       description: ''
 variables:
   participatie:
-    name: participatie
+    name: arbeidsparticipatie
+    description: |
+      Het aandeel van de werkzame beroepsbevolking in de potentiële beroepsbevolking.
     type: numeric
     unit: '%'
     population: beroepsbevolking
@@ -245,7 +251,7 @@ defaultgraph: line
 defaultgraphs:
   line:
     x: leeftijd
-    y: participatie
+    y: arbeidsparticipatie
     colour: generatie
 
 

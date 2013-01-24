@@ -1,9 +1,57 @@
 name: Geregistreerde misdrijven naar politieregio
-description: Selectie uit StatLine tabel 'Geregistreerde criminaliteit; misdrijven
+summary: |
+  Selectie uit StatLine tabel 'Geregistreerde criminaliteit; misdrijven
   en verdachten naar regio'
+description: "Deze tabel bevat uitkomsten over misdrijven die door de politie zijn
+  geregistreerd. Behalve de absolute aantallen misdrijven zijn in de tabel ook de
+  aantallen misdrijven per 1000 inwoners in de betreffende gemeente of regio opgenomen.
+  Daarnaast bevat de tabel het aantal misdrijven dat inmiddels is opgehelderd en het
+  aantal verdachten dat bij deze misdrijven is geregistreerd. De cijfers zijn uitgesplitst
+  naar gemeente van plegen, politieregio, soort misdrijf en jaar van melden. \nHet
+  kan voorkomen dat de gemeente van plegen binnen een regio niet bekend is. Onbekende
+  gemeenten binnen de regio worden niet apart vermeld, maar zijn wel meegeteld in
+  het totaal van de regio. \n\nBij het bekijken van de gegevens zijn een aantal punten
+  van belang. De gegevens per gemeente worden voor alle jaren gepresenteerd volgens
+  de gemeentelijke indeling van 1 januari 2012. Als het CBS van mening is dat de cijfers
+  per 1000 inwoners geen verantwoorde conclusie toelaat bij de vergelijking tussen
+  gemeenten of regio's, dan is de betreffende cel leeg gelaten. Het delict komt dan
+  te weinig voor en/of de betreffende gemeente of regio is qua inwoneraantal te klein
+  voor een onderlinge vergelijking.\n\nIn regio Rotterdam-Rijnmond is het aantal geregistreerde
+  vernielingen in 2010 relatief sterker gedaald ten opzichte van 2009 dan in andere
+  regio's. Voor heel Nederland daalt het aantal vernielingen met 16%, voor Rotterdam-Rijnmond
+  met 49%. De daling van vernielingen in 2010 is het gevolg van twee beleidsinitiatieven
+  in de Politieregio Rotterdam-Rijnmond:\n1. Met de gemeenten binnen de regio Rotterdam-Rijnmond
+  zijn voor 2010 nadere afspraken gemaakt over het aangeven vernielingen in het publieke
+  domein. Hierdoor nam het aantal geclusterde aangiften van beschadigingen in het
+  publiek domein toe. Als gevolg hiervan daalde vooral in de gemeenten Spijkenisse
+  en Brielle het aantal geregistreerde vernielingen.\n2. Uit analyse van internetaangiften
+  van vernieling (in totaal 7.900) bleek dat het in 6.700 gevallen ging om baldadigheid.
+  Omdat baldadigheid een overtreding en geen misdrijf is, zijn deze gevallen uit de
+  registratie van aangegeven misdrijven gelaten. Dit is in 2010 gedaan om de opsporingscapaciteit
+  zo effici\xEBnt mogelijk te benutten en te richten op de juiste zaken. Hierdoor
+  daalde ook het aantal geregistreerde vernielingen. In 2011 is overigens volgens
+  landelijk beleid baldadigheid weer geregistreerd onder vernieling. \nDe totale daling
+  van het aantal geregistreerde vernielingen in regio Rotterdam-Rijnmond in 2010 was
+  49%. Het geschatte aandeel hierin als gevolg van de afspraken met het bestuur is
+  10%. De overige 39% is het gevolg van het onder punt 2 vermelde beleidsinitiatief.\n\nDe
+  geregistreerde criminaliteit is in regio Haaglanden in 2010 bijna 17% hoger dan
+  in 2009, terwijl in de andere politieregio's de geregistreerde criminaliteit in
+  2010 is gedaald. Vermoedelijk wordt dit veroorzaakt door de overgang van Haaglanden
+  naar het registratiesysteem BVH in 2010. Samen met het regiokorps Haaglanden gaat
+  het CBS de mogelijkheden na om de cijfers van Haaglanden over de jaren v\xF3\xF3r
+  2010 te herzien.\n\nGegevens beschikbaar vanaf 2005.\n\nStatus van de cijfers\nDe
+  cijfers over de jaren 2005-2010 zijn definitief. De cijfers over 2011 zijn voorlopig.\n\nWijzigingen
+  per 17 december 2012\nGebleken is dat in de politieregistratie het onderscheid tussen
+  mensensmokkel en mensenhandel niet goed te maken is. Daarom zijn de rubrieken '2.4.4
+  Mensensmokkel' en '3.6 Mensenhandel' samengeteld in de rubriek '3.6 Mensenhandel,
+  mensensmokkel'.\n\nWanneer komen er nieuwe cijfers?\nDe definitieve cijfers over
+  2011 verschijnen in januari 2013.\n"
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=80344NED&D1=0,2-4&D2=0-1,18,42&D3=0,417-442&D4=a&HDR=T&STB=G2,G1,G3&VW=T
 dimensions:
   Regio:
     name: Regio
+    description: |
+      Een werkgebied van de Nederlandse Politie. Nederland is ingedeeld in 25 politieregio's.
     aggregate: Nederland
     default: Nederland
     type: categorical
@@ -97,13 +145,18 @@ dimensions:
     categories:
     - level: Totaal
       name: Totaal
-      description: ''
+      description: |
+        Totaalcategorie voor alle soorten misdrijven. Een misdrijf is een strafbaar feit van de zwaarste soort, als zodanig aangeduid in de strafwetten.
     - level: Vermogensmisdrijven
       name: Vermogensmisdrijven
-      description: Witteboord?
+      description: |
+        Hieronder vallen alle vormen van diefstal en inbraak. Daarnaast vallen
+        verduistering, bedrog, valsheidsmisdrijven, afpersing, bankbreuk en
+        witwassen in deze categorie misdrijven.
     - level: Vernielingen/misdr.openb.orde
       name: Vernielingen/misdr.openb.orde
-      description: ''
+      description: |
+        Hieronder vallen brandstichting, alle vormen van vernieling en misdrijven tegen de openbare orde en het openbaar gezag. Voorbeelden van misdrijven tegen de openbare orde en tegen het openbaar gezag zijn opruiing, huis-, computer- en lokaalvredebreuk, deelneming aan een criminele of terroristische organisatie, openlijke geweldpleging, godslastering, discriminatie en het doen van een valse aangifte. Omdat het delict mensenhandel vaak onder dezelfde feitcode geregistreerd wordt als het delict mensensmokkel worden deze twee delicten samengeteld en weergegeven bij de gewelds- en seksuele misdrijven.
     - level: Gewelds- en seksuele misdrijven
       name: Gewelds- en seksuele misdrijven
       description: ''
@@ -145,6 +198,11 @@ variables:
     population: Geregistreerde misdrijven
   MisdrijvenPer1000Inwoners:
     name: Misdrijven per 1000 inwoners
+    description: "Aantal in het verslagjaar geregistreerde misdrijven per 1 000 inwoners.
+      \nAls het CBS van mening is dat het relatieve cijfers geen verantwoorde conclusie
+      \ntoelaat bij de vergelijking tussen gemeenten, dan is de betreffende cel leeg
+      gelaten.\nHet delict komt dan te weinig voor en/of de betreffende gemeente is
+      qua inwoneraantal \nte klein voor een onderlinge vergelijking.\n"
     type: numeric
     unit: ~
     population: Geregistreerde misdrijven
@@ -155,6 +213,12 @@ variables:
     population: Geregistreerde misdrijven
   PercOpgehelderd:
     name: Opgehelderd
+    description: "Aantal in het verslagjaar opgehelderde misdrijven in procenten van
+      het aantal in \nhetzelfde verslagjaar geregistreerde misdrijven. De opgehelderde
+      misdrijven in een verslagjaar kunnen\nmisdrijven zijn die in een eerder jaar
+      zijn geregistreerd.\nDaarom moet met de uitleg van het ophelderingspercentage
+      voorzichtig worden omgegaan.\nIn plaats van het percentage in \xE9\xE9n jaar
+      kan beter de trend van het percentage worden bekeken.\n"
     type: numeric
     unit: '%'
     population: Geregistreerde misdrijven

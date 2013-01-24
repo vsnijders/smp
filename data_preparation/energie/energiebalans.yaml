@@ -1,5 +1,31 @@
 name: Energiebalans
-description: ''
+summary: |
+  Energiedragers in PetaJoules naar verbruik per sector
+description: |
+  Deze tabel geeft het aanbod, de omzetting en het verbruik van energie weer in balansvorm. Energie komt onder andere vrij bij de verbranding van bijvoorbeeld aardgas, aardolie, steenkool en biobrandstoffen. Energie kan ook worden verkregen uit elektriciteit of warmte of worden onttrokken aan de natuur, bijvoorbeeld windkracht of zonne- energie. In de energiestatistiek heten al deze bronnen waaruit energie kan worden gebruikt 'energiedragers'.
+  Aan de aanbodkant van de balans staan de winning van energie, de in- en uitvoer en de voorraadmutatie. Van de energieomzetting geeft de tabel zowel cijfers over de inzet van energiedragers voor omzetting (de hoeveelheid energie die is gebruikt om andere energiedragers van te maken) als over de productie van energie nà de omzetting (de hoeveelheid energie die is gemaakt uit andere energiedragers). De verbruikskant laat zien hoeveel energie is verbruikt bij de omzetting in andere energiedragers of als finaal verbruik.
+  De energiebalans beschrijft de situatie voor de vijf hoofdsectoren, te weten de energiesector, de nijverheid, het vervoer, de huishoudens en de landbouw, visserij en dienstverlening, en voor meerdere subsectoren hiervan. Er is een verschil tussen de energiebalans van Nederland en de energiebalans per sector. Per sector is niet bekend hoe groot invoer en uitvoer zijn. Wel is bekend wat de aanvoer en afleveringen per sector zijn. De energiebalans laat daarom het saldo van aanvoer en aflevering zien. Dit is gelijk aan het saldo van invoer, uitvoer en bunkers.
+  De gegevens hebben betrekking op bedrijven, instellingen, huishoudens en vervoer. Bedrijven en instellingen zijn uitgesplitst naar bedrijfstak op basis van de Standaard Bedrijfs Indeling 2008 (SBI 2008). Sectoren beginnend met een letter of getal zijn bedrijfstakken volgens SBI 2008. 
+
+  Gegevens beschikbaar:
+  Vanaf 1995.
+
+  Status van de cijfers:
+  Alle cijfers tot en met verslagjaar 2011 zijn definitief.
+
+  Wijziging per 16 november 2012:
+  Definitieve cijfers over 2011 zijn toegevoegd.
+
+  Wanneer komen er nieuwe cijfers?
+  --------------------------------
+
+  Jaarcijfers:
+  Nader voorlopige cijfers: juni/juli van het jaar volgend op het verslagjaar.
+  Definitieve cijfers: oktober/november van het jaar volgend op het verslagjaar.
+
+  N.b.
+  Bij de publicatie van nader voorlopige jaarcijfers behouden de onderliggende maandbalansen nog wel hun voorlopige karakter. De maandbalansen van de energiedragers aardgas, steenkool, elektriciteit, aardolieproducten, aardoliegrondstoffen en motorbrandstoffen zijn weergegeven in afzonderlijke StatLinetabellen (zie bij 3. Koppelingen naar relevante tabellen en artikelen). Bij publicatie van de definitieve jaarcijfers worden de maandbalansen ook definitief.
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=70846NED&D1=0-3,8-9,13,24-25,30,34-37&D2=15&D3=0-7,27,32-33&D4=l&VW=T
 dimensions:
   Energiedragers:
     name: Energiedragers

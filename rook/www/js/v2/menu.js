@@ -57,7 +57,14 @@ function Menu(){
       var val = $("input:checked", li).val();
       if (!val){
         val = meta_.dimensions[li.data("variable")].aggregate;
-        $("input.filter[value!='"+val+"']", li).attr("checked", true);
+        var aes = ul.data("dimension");
+        var $input = $("input.filter[value!='"+val+"']", li);
+
+        if (aes !== "x" && aes !== "y"){
+          $input = $input.slice(0,20);      
+        }
+
+        $input.attr("checked", true);
       }
 
       var n_sel = $("input.filter:checked", li).length;
@@ -229,9 +236,10 @@ function Menu(){
 
     //set checks for categorical variables
     $("li.categorical").each(behave_like_radio);
+    
     //expand color / legend
     $("ul.color div.filter").toggle(true)
-
+    $("ul.color a.togglefilter i").toggleClass('icon-chevron-down', true)
   
        // Create tabbed pages for each of the graph types
     $("#tabs").tabs();
@@ -279,6 +287,7 @@ function Menu(){
           var sel = $("input.filter:checked", old);
           if (ul_target.hasClass("color")) {
             $("div.filter", ul_target).toggle(true)
+            $("a.togglefilter i", ul_target).toggleClass('icon-chevron-down', true)
           }
         }
         if (sel.length > 1) sel.attr("checked", false);

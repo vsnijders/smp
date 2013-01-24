@@ -41,6 +41,7 @@
           var o = { name: meta.name
                   , description: markdown.toHTML(meta.description)
                   , terms: []
+                  , url: meta.url
                   }
           
           var terms = o.terms;
@@ -90,7 +91,7 @@
         <a class="brand" href="index.html">StatMine</a>
         <ul class="nav">
           <li><a class="mode" href="visualize.html"><i class="icon-eye-open icon-white"></i> <span data-i18n="view">View</span></a></li>
-          <li><a class="mode" href="table.html"><i class="icon-list-th icon-white"></i> <span data-i18n="table">Table</span></a></li>
+          <li><a class="mode" href="table.html"><i class="icon-th icon-white"></i> <span data-i18n="table">Table</span></a></li>
           <li><a class="mode" href="link.html"><i class="icon-resize-horizontal icon-white"></i> <span data-i18n="link">Link</span></a></li>
           <li class="active"><a class="mode" href="info.html"><i class="icon-info-sign icon-white"></i> <span data-i18n="info">Info</span></a></li>
         </ul>
@@ -102,11 +103,11 @@
    <div class="container-fluid" style="padding-left:0">
     <div class="row-fluid">
       <div class="span8 offset1 well" id="info">
-        <h1><span data-i18n="table">Table</span>: '{{name}}'</h1>
+        <h1><span data-i18n="table">Table</span>: <a href="{{url}}">'{{name}}'</a></h1>
         <h3 data-i18n="description">Description</h3>
         {{{description}}}
 
-        <h3 data-i18n="terms">Terms</h3>
+        <h3 data-i18n="terms">Definitions</h3>
         <dl class="dl-horizontal">
           {{#terms}}
           <dt>{{term}}</dt>

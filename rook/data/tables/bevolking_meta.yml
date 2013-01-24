@@ -1,6 +1,20 @@
 name: Bevolkingsprognoses
-description: Deze tabel bevat prognosecijfers over de bevolking van Nederland op 1
-  januari naar geslacht en leeftijd. In de tabel zijn ook prognose-intervallen opgenomen.
+summary: Deze tabel bevat prognosecijfers over de bevolking van Nederland op 1 januari
+  naar geslacht en leeftijd. In de tabel zijn ook prognose-intervallen opgenomen.
+description: |
+  Deze tabel bevat prognoses (2012-2060) van de bevolking van Nederland op 1 januari naar leeftijd (drie groepen) en de bevolkingsontwikkeling: het aantal levendgeborenen, het aantal overledenen en de buitenlandse migratie. Daarnaast bevat de tabel de demografische druk, het totaal vruchtbaarheidscijfer per vrouw en de levensverwachting bij geboorte en op de 65ste verjaardag naar geslacht. In de tabel zijn ook prognose-intervallen opgenomen.
+
+  Gegevens beschikbaar: 2012-2060
+
+  Status van de cijfers:
+  De cijfers in deze tabel zijn berekende prognosecijfers.
+
+  Wijzigingen per: 13 december 2010.
+  In deze nieuwe tabel is de voorgaande prognose bijgesteld op basis van de meest recente inzichten, de prognoseperiode loopt nu van 2012 tot 2060.
+
+  Wanneer komen er nieuwe cijfers?
+  In december 2014 worden de nieuwe prognose cijfers in een nieuwe tabel gepubliceerd.
+url: http://statline.cbs.nl/StatWeb/publication/?DM=SLNL&PA=81593NED&D1=0,7,10-12,14-15,21&D2=0&D3=0-3,8,13,18,23,28,33,38,43,l&VW=T
 dimensions:
   gender:
     name: gender
