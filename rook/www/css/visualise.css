@@ -279,7 +279,7 @@ ul.variables span.slice {
   font-weight: bold;
 }
 
-a.info {
+a.info {    
     margin-left: 1ex;
     opacity: 0.5;
 }
@@ -298,3 +298,7 @@ line.tick {
   stroke : #000000;
 }
 
+.popover-content {
+  max-height: 200px;
+  overflow-y: auto;
+}

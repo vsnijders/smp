@@ -114,7 +114,7 @@ function LinearAxis(horizontal, includeOrigin) {
 
   axis.format = function(value) {
     // Get variable meta
-    var meta = axis.variable_meta();
+    var meta = axis.variable_meta() || {type:[]};
     // Determine if we need a unit after the value
     // when unit had length 1 add it to the tick marks otherwise only display
     // the unit in the axis title
@@ -158,7 +158,7 @@ function LinearAxis(horizontal, includeOrigin) {
       length_ = length;
       // Calculate labels. This depends on the type of variable: for years we
       // use a different algorithm (we don't want fractional years)
-      var meta = axis.variable_meta();
+      var meta = axis.variable_meta() || {};
       if ($.inArray("time", meta.type) == -1) {
         // Normal tickmarks
         labels_ = wilkinson_ii(range_[0], range_[1], NUMBER_LABELS, 

@@ -95,7 +95,7 @@ function Menu(){
             .popover({ content: markdown.toHTML(catVar.description)
                      , html: true
                      , title: catVar.name
-                     , trigger: "hover"
+                     , trigger: "click"
                      })
             .appendTo(li)
         }
@@ -125,7 +125,7 @@ function Menu(){
               .popover({ content: markdown.toHTML(cat.description)
                        , html: true
                        , title: cat.name
-                       , trigger: "hover"
+                       , trigger: "click"
                        })
               .appendTo(label)
           }
@@ -161,7 +161,7 @@ function Menu(){
             .popover({ content: markdown.toHTML(numVar.description)
                      , html: true
                      , title: numVar.name
-                     , trigger: "hover"
+                     , trigger: "click"
                      })
             .appendTo(li)
         }
