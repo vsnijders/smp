@@ -138,7 +138,7 @@ dimensions:
       name: Zuid-Holland-Zuid (PO)
       description: ''
   Misdrijf:
-    name: Misdrijf
+    name: Soort misdrijf
     aggregate: Totaal
     default: Totaal
     type: categorical

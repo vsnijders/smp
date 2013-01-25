@@ -3,13 +3,14 @@
 div.menu {
 }
 
-div.menu h3 {
+div.plotvariable h3 {
   font-size : 100%;
   font-weight : 400;
   margin-top : 10px;
   margin-bottom : 4px;
   line-height : normal;
 }
+
 div.menu ul {
   margin-top : 0px;
 }
@@ -301,4 +302,25 @@ line.tick {
 .popover-content {
   max-height: 200px;
   overflow-y: auto;
+}
+
+label.highlight span {
+  font-weight: bold;
+}
+
+g.color{
+  stroke-width: 1; 
+  stroke: white;
+  stroke-opacity: 1;
+  fill-opacity: 0.6;
+}
+
+g.highlight {
+  stroke-width: 2;
+  fill-opacity: 1;
+}
+
+g.dim {
+  stroke-opacity: 0.8;
+  fill-opacity: 0.3;  
 }

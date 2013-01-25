@@ -55,7 +55,7 @@ function Cntrl(table, node) {
       if (name === undefined) {
         continue;
       } 
-      
+      //TODO add formatting for values of variables
       var value = d[v];
       labels.push({name:name, value:value});
     }
