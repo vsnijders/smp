@@ -81,9 +81,12 @@
           var data = transpose(meta_data.data);
 
           var meta = meta_data.meta;
-          var colnames = data[0].map( function(n){
+          var columns = data[0].map( function(n){
+            var isdim = (meta.dimensions[n] !== undefined)
             return { sTitle: (meta.dimensions[n] || meta.variables[n] || {name: n}).name
-                   , sType: (meta.variables[n])? "numeric" : "string"}
+                   , sType: isdim? "string" :"numeric" 
+                   , sClass: (isdim)? "dim" : "num"
+                   }
           });
           
           //remove first row
@@ -91,7 +94,8 @@
 
           table.dataTable({
             aaData: data, 
-            aoColumns: colnames,
+            asStripeClasses: [],
+            aoColumns: columns,
             bScrollInfinite: true,
             sScrollY: "600px",
             bScrollCollapse: true,

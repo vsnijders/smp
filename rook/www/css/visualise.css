@@ -241,24 +241,7 @@ ul.color span.color{
 ul.required {
   border: 1px silver dashed;
 }
-span.category4{
-  background-color: #9467bd
-}
-span.category5{
-  background-color: #8c564b
-}
-span.category6{
-  background-color: #e377c2
-}
-span.category7{
-  background-color: #7f7f7f
-}
-span.category8{
-  background-color: #bcbd22
-}
-span.category9{
-  background-color: #17becf
-}
+
 /*
   , "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
   "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"
@@ -313,6 +296,10 @@ g.color{
   stroke: white;
   stroke-opacity: 1;
   fill-opacity: 0.6;
+}
+
+g.color rect{
+  fill-opacity: 1;  
 }
 
 g.highlight {
