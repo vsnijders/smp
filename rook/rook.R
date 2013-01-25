@@ -33,8 +33,8 @@ for (lng in languages){
 #   loaded
 # - The default page is index.html
 rook_server$add(name = "statmine", app = Builder$new(
-  Static$new(urls = c("/css", "/images", "/js", "/locales","/.*\\.html$"), 
-    root = "./www"),
+  Static$new(urls = c("/css", "/images", "/js", "/locales","/maps", 
+    "/.*\\.html$"), root = "./www"),
   URLMap$new(
     "^/R" = ajaxify(list=c("link_tables",
                            "get_table", 

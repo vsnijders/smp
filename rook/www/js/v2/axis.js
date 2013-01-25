@@ -67,7 +67,6 @@ function Axis(options){
         if (unit.length) axis_title += ' (' + unit + ')';
         return axis_title;
       } else return title_;
-      return canvas_;
     } else {
       title_ = title;
       return this;
@@ -240,7 +239,7 @@ function LinearAxis(horizontal, includeOrigin) {
     }
   }
 
-  axis.draw = function(label) {
+  axis.draw = function() {
 
     var labels = labels_;
     if (!draw_first_) labels = labels.slice(1);

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <title>StatMine</title>
+
+    <!-- ======================== INCLUDES ========================== -->
+    <!-- webpage icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="images/favicon2.png" type="image/png" />
+
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="js/jquery/jquery-1.8.2.min.js"></script>
+    <link type="text/css" href="css/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery/jquery-ui-1.9.1.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery.getUrlParam.js"></script>
+    <script type="text/javascript" src="js/mustache/mustache.js"></script>
+    <script type="text/javascript" src="js/markdown/markdown.js"></script>
+
+    <!-- bootstrap includes -->
+    <link type="text/css" href="js/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- tipsy.js -->
+    <script type="text/javascript" src="js/jquery/jquery.tipsy.js"></script>
+    <link href="css/tipsy.css" rel="stylesheet" type="text/css" />
+
+    <!-- d3.js includes -->
+    <script type="text/javascript" src="js/d3/d3.v3.min.js"></script>
+
+    <!-- localization includes -->
+    <script type="text/javascript" src="js/i18next.js"></script>
+
+
+    <!--    <script type="text/javascript" src="js/colorbrewer.js"></script>-->
+
+    <!-- styling -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400' rel='stylesheet' type='text/css'/>
+    <link type="text/css" href="css/statmine.css" rel="stylesheet" />
+    <link type="text/css" href="css/visualise.css" rel="stylesheet" />
+
+    <!-- ======================== SCRIPTING ========================== -->
+    <script type="text/javascript" src="js/R.js"></script>
+
+    <script type="text/javascript" src="js/smp.js"></script>
+    <!-- debugging  smp.js -->
+    <script type="text/javascript" src="js/v2/cntrl.js"></script>
+    <script type="text/javascript" src="js/v2/menu.js"></script>
+    <script type="text/javascript" src="js/v2/axis.js"></script>
+    <script type="text/javascript" src="js/v2/chart.js"></script>
+    <script type="text/javascript" src="js/v2/linechart.js"></script>
+    <script type="text/javascript" src="js/v2/barchart.js"></script>
+    <script type="text/javascript" src="js/v2/scatterchart.js"></script>
+    <script type="text/javascript" src="js/v2/mosaicchart.js"></script>
+    <script type="text/javascript" src="js/v2/map.js"></script>
+    <script type="text/javascript" src="js/v2/labeling.js"></script>
+    <!-- end debugging -->
+
+    <script type="text/javascript">
+      //TODO move to seperate script
+      $(function() {
+        //create a global cntrl
+        var table = $(document).getUrlParam("table");
+        
+        window.cntrl = Cntrl(table, $('#graph'));
+        cntrl.add_graph('line', Linechart());
+        cntrl.add_graph('scatter', Scatterchart());
+        cntrl.add_graph('bar', Barchart());
+        cntrl.add_graph('mosaic', Mosaicchart());
+        cntrl.add_graph('map', Map());
+
+        //cntrl.add_graph('bar',  Barchart());
+
+        // Load meta data
+        // TODO remove parameter table ?
+        cntrl.get_meta(table);
+        
+        // Make graph container resizable
+        var width = $(".span8").width()-20;
+        cntrl.size(width, 480);
+
+        $('#resizable').resizable({
+          minHeight: 480,
+          minWidth: 300,
+          stop: function(event, ui) { 
+            var width = $('#graph').width();
+            var height = $('#graph').height();
+            cntrl.size(width, height);
+            cntrl.redraw();
+          }
+        });
+
+        $("a.mode").each(function(_, a){
+          a.href += window.location.search;
+        })
+
+        i18n.init({}, function(){
+          $("body").i18n();
+        });
+
+      });
+    </script>
+
+    <!-- ======================== PAGE =============================== -->
+  </head>
+  <body>
+   
+  <header>
+    <div class="navbar navbar-static-top navbar-inverse">
+      <div class="navbar-inner">
+        <a class="brand active" href="index.html">StatMine</a>
+        <ul class="nav">
+          <li class="active"><a class="mode" href="visualize.html"><i class="icon-eye-open icon-white"></i> <span data-i18n="view">View</span></a></li>
+          <li><a class="mode" href="table.html"><i class="icon-th icon-white"></i> <span data-i18n="table">Table</span></a></li>
+          <li><a class="mode" href="link.html"><i class="icon-resize-horizontal icon-white"></i> <span data-i18n="link">Link</span></a></li>
+          <li><a class="mode" href="info.html"><i class="icon-info-sign icon-white"></i> <span data-i18n="info">Info</span></a></li>
+        </ul>
+        <span class="brand" id="title"/>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid" style="padding-left:0">
+    <div class="row-fluid">
+      <div class="span4 well menu">
+        <ul class="nav nav-tabs">
+          <li><a href="#line" data-toggle="tab" data-i18n="linechart">line</a></li>
+          <li><a href="#scatter" data-toggle="tab" data-i18n="scatterchart">scatter</a></li>
+          <li><a href="#bar" data-toggle="tab" data-i18n="barchart">bar</a></li>
+          <li><a href="#mosaic" data-toggle="tab" data-i18n="mosaicchart">mosaic</a></li>
+          <li><a href="#map" data-toggle="tab" data-i18n="map">map</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane" id="line">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable time ordered required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3 data-i18n="color">color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3 data-i18n="toptobottom">top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3 data-i18n="sidebyside">side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3 data-i18n="variables">variables</h3>
+            <ul class="variables droppable"></ul>
+          </div>
+
+          <div class="tab-pane" id="scatter">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable numeric ordered required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>unit</h3> <ul data-dimension="unit" class="droppable categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="size" class="droppable numeric"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
+          </div>
+
+          <div class="tab-pane" id="bar">
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="x" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>color</h3> <ul data-dimension="colour" class="droppable categorical color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
+          </div>
+
+          <div class="tab-pane" id="mosaic">
+            <div class="plotvariable">
+              <h3>x</h3> <ul data-dimension="x" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>y</h3> <ul data-dimension="y" class="droppable categorical required color"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>size</h3> <ul data-dimension="size" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
+          </div>
+
+          <div class="tab-pane" id="map">
+            <div class="plotvariable">
+              <h3>region</h3> <ul data-dimension="x" class="droppable categorical required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>color</h3> <ul data-dimension="y" class="droppable numeric required"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>top-to-bottom</h3> <ul data-dimension="row" class="droppable categorical"></ul>
+            </div>
+            <div class="plotvariable">
+              <h3>side-by-side</h3> <ul data-dimension="column" class="droppable categorical"></ul>
+            </div>
+            <h3>variables</h3>
+            <ul class="variables droppable"></ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="span8">
+        <h2 id="graphtitle"></h2>
+          <div id="resizable" class="ui-widget-content">
+          <div id="graph"></div>
+          <div id="caption"></div>
+        </div>
+
+        <div id="graphtype"></div>
+        <div id="graphdata"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+  </footer>
+
+  </body>
+</html>
+
+
+
