@@ -53,19 +53,17 @@ function Scatterchart() {
                      ;
 
     crosshair.append("line")
-      .attr("class", "vline")
-      .attr("x1", 0)
-      .attr("x2", 0)
-      .attr("y1", 0)
-      .attr("y2", height)
+      .attr({"class": "vline",
+              x1: 0, x2: 0,
+              y1: 0, y2: height
+            })
       ;
 
     crosshair.append("line")
-      .attr("class", "hline")
-      .attr("x1", 0)
-      .attr("x2", width)
-      .attr("y1", 0)
-      .attr("y2", 0)
+      .attr({"class": "hline",
+              x1: 0, x2: width,
+              y1: 0, y2: 0
+            })
       ;
 
    //draw data
@@ -78,10 +76,6 @@ function Scatterchart() {
    g_data.selectAll("g.color").data(byColor_data).enter()
       .append("g")
       .attr("class", "color")
-      .style("stroke-width", 1)
-      .style("stroke","white")
-      .style("stroke-opacity", 1)
-      .style("fill-opacity", 0.5)
       .each(function(d,i){
         var gcolor = d3.select(this)
           .style("fill", axes.colour.scale(d.key))
@@ -92,6 +86,8 @@ function Scatterchart() {
           .attr('cy', axes.y.transform)
           .attr('r', axes.size.transform)
           .call(show_crosshair)
+
+        gcolor.call(highlight);
       });
 
    $("g.data circle")
@@ -100,6 +96,23 @@ function Scatterchart() {
                gravity: $.fn.tipsy.autoBounds(150, 'se')
              })
       ;
+  }
+
+  function highlight(gpoints){
+    gpoints
+      .on("mouseover", function(d){
+        d3.selectAll("g.color")
+          .classed("dim", function(g){return g.key != d.key})
+          .classed("highlight", function(g){return g.key == d.key})
+          ;
+      })
+      .on("mouseout", function(d){
+        d3.selectAll("g.color")
+          .classed("dim", false)
+          .classed("highlight", false)
+          ;
+      })
+      return gpoints;
   }
 
   function show_crosshair(points){

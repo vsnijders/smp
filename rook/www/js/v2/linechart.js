@@ -16,10 +16,8 @@ function Linechart() {
       lines
          .on("mouseover", function(d){
                d3.selectAll("g.color")
-                  .style("stroke-width", function(d1) {return (d1.key != d.key)? 1: 2;})
-                  .filter(function(d1) {return (d1.key != d.key)})
-                  .style("stroke-opacity", 0.8)
-                  .style("fill-opacity", 0.2)
+                  .classed("dim", function(d1) {return (d1.key != d.key)})
+                  .classed("highlight", function(d1) {return (d1.key == d.key)})
                   ;
 
                $("ul.color input[value='"+d.key+"']")
@@ -28,9 +26,8 @@ function Linechart() {
             })
          .on("mouseout", function(d){
                d3.selectAll("g.color")
-                  .style("stroke-width", 1)
-                  .style("stroke-opacity", 1)
-                  .style("fill-opacity", 0.5)
+                  .classed("dim", false)
+                  .classed("highlight", false)
                   ;
                
                $("ul.color input[value='"+d.key+"']")
@@ -138,10 +135,6 @@ function Linechart() {
     g_data.selectAll("g.color").data(byColor_data).enter()
       .append("g")
       .attr("class", "color")
-      .style("stroke-width", 1) // put all this in CSS
-      .style("stroke","white")
-      .style("stroke-opacity", 1)
-      .style("fill-opacity", 0.5)
       .each(function(d,i){
         var color = axes.colour.scale(d.key);
 

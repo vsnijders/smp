@@ -42,7 +42,6 @@ function Barchart() {
       .rangeBands([0, axes.y.barheight()])
       ;
 
-    console.log(byColor_data)
     var bw = bands.rangeBand();
 
     g.selectAll("g.color").data(byColor_data).enter()
