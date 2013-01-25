@@ -12,15 +12,20 @@ function Map() {
 
   chart.draw_data = function(data, g) {
     // - map
-    var xmin   =  13565.370;
-    var xmax   = 278018.300;
-    var ymin   = 306838.822;
-    var ymax   = 619305.625;
+    var xmin   =  13565.596;
+    var xmax   = 306846.900;
+    var ymin   = 277992.603;
+    var ymax   = 619305.599;
 
-    chart.axes.x.canvas_width(chart.axes.x.width);
-    chart.axes.x.canvas_height(chart.axes.y.height);
 
-    var height = chart.axes.x.canvas_height;
+    // ogrinfo -al -geom=SUMMARY file.shp
+    //extent: (13565.596851, 306846.900000) - (277992.603149, 619305.598716)
+    
+
+    chart.axes.x.canvas_width(chart.axes.x.width());
+    chart.axes.x.canvas_height(chart.axes.y.height());
+
+    var height = chart.axes.x.canvas_height();
     var scale  = height/(ymax - ymin);
     var width  = Math.ceil(height*(xmax - xmin)/(ymax - ymin));
 
@@ -40,8 +45,7 @@ function Map() {
         })
       .attr("fill", "red")
       .attr("stroke-width", "1")
-      .attr("stroke", "white")
-      .attr("stroke-opacity", "0.9")
+      .attr("stroke", "black");
 
   }
 

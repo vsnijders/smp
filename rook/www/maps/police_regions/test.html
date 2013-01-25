@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="../../js/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../../js/d3/d3.v3.min.js"></script>
+
+  </head>
+  <body>
+    <div id="vis">
+    </div>
+
+    <script>
+      // Settings
+      // - map
+      var xmin   =  13565.400;
+      var xmax   = 306846.900;
+      var ymin   = 277992.800;
+      var ymax   = 619305.599;
+
+      var height = 400;
+      var scale  = height/(ymax - ymin);
+      var width  = Math.ceil(height*(xmax - xmin)/(ymax - ymin));
+
+      projection = function(coordinates) {
+        var x = scale*(coordinates[0]-xmin);
+        var y = height-scale*(coordinates[1]-ymin);
+        return [x,y];
+      }
+      var path = d3.geo.path().projection(projection);
+
+      var vis = d3.select("#vis").append("svg").attr("width", width).attr("height", height)
+
+      var map;
+
+      d3.json("po_2012_foo.json", function(json) {
+          map = json;
+          // create paths
+          vis.selectAll("path").data([json.features[0]]).enter().append("path")
+            .attr("d", path)
+            .attr("fill", "red")
+            .attr("stroke-width", "1")
+            .attr("stroke", "rgb(150,150,150)")
+            .attr("stroke-opacity", "0.9");
+        })
+
+    </script>
+  </body>
+</html>
+
