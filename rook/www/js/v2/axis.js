@@ -5,6 +5,7 @@
 
 function Axis(options){
 
+
   var axis = {};
 
   // Get and set the column/variable from the data which is shown on the axis
@@ -373,6 +374,9 @@ function RadiusAxis() {
 
 
 function ColourAxis() {
+  var COLORS = [ "#0091b1","#0058a9","#a6ce39", "#39b54a"
+               , "#f7941d", "#ab218c", "#ffcb05", "#f15a22"];
+  
   var axis = Axis();
   
   var variable_;
@@ -419,10 +423,11 @@ function ColourAxis() {
     var dim;
     if (dim = dims[variable_]){
       //cols(dim.levels);
-      if (dim.categories.length > 10){
+      if (dim.categories.length > 8){
         axis.scale = scale_ = d3.scale.category20();
       } else {
-        axis.scale = scale_ = d3.scale.category10();        
+        //axis.scale = scale_ = d3.scale.ordinal().range(COLORS);
+        axis.scale = scale_ = d3.scale.category10();
       }
       scale_.domain(dim.categories.map(function(c){return c.level;}));
     } else {
