@@ -83,7 +83,12 @@
           var meta = meta_data.meta;
           var columns = data[0].map( function(n){
             var isdim = (meta.dimensions[n] !== undefined)
-            return { sTitle: (meta.dimensions[n] || meta.variables[n] || {name: n}).name
+            var v = (meta.dimensions[n] || meta.variables[n])
+            var title = v.name;
+            if (v.unit){
+              title += " ("+v.unit+")"
+            }
+            return { sTitle: title
                    , sType: isdim? "string" :"numeric" 
                    , sClass: (isdim)? "dim" : "num"
                    }
@@ -112,11 +117,6 @@
         i18n.init({}, function(){
           $("body").i18n();
         });
-
-
-        var test = {size: [2,3], height: [4,5]};
-        var res = transpose(test);
-        console.log(res, transpose2(test));
 
       });
     </script>

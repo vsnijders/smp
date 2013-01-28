@@ -15,6 +15,8 @@ data19 <- ddply(data19, c("Energiedragers", "Jaar"), summarise
                                                    )
 data <- rbind(data, data19)
 
+data <- subset(data, Energiedragers == "Totaal energiedragers", select=-Energiedragers)
+
 # remove ","
 levels(data$Sector) <- gsub(",", " ", levels(data$Sector))
 

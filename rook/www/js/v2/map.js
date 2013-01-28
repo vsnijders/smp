@@ -17,7 +17,7 @@ function Map() {
     var ymin   = 277992.603;
     var ymax   = 619305.599;
 
-
+    console.log(chart.axes.x.bounds())
     // ogrinfo -al -geom=SUMMARY file.shp
     //extent: (13565.596851, 306846.900000) - (277992.603149, 619305.598716)
     
@@ -31,13 +31,11 @@ function Map() {
 
     projection = function(coordinates) {
       return [
-          scale*(coordinates[0]-xmin), 
-          height-scale*(coordinates[1]-ymin), 
+          Math.round(scale*(coordinates[0]-xmin)), 
+          Math.round(height-scale*(coordinates[1]-ymin)), 
         ];
     }
     var path = d3.geo.path().projection(projection);
-
-    // create paths
     g.selectAll("path").data(data).enter().append("path")
       .attr("d", function(d) {
           var feature = chart.axes.x.transform(d);
@@ -124,6 +122,16 @@ function RegionAxis() {
           map_ = json;
         });
     }
+  }
+
+  axis.bounds = function(){
+    if (map_) {
+      return d3.geo.bounds(map_.features);
+    }
+  }
+
+  axis.map = function(){
+    return map_;
   }
 
   var i = 0; //TEST

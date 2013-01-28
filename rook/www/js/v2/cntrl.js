@@ -30,13 +30,11 @@ function Cntrl(table, node) {
   }
 
   cntrl.get_meta = function(){
-    R.get_meta(table_)
+    return R.get_meta(table_)
      .success(function(meta){
         meta_ = meta;
         menu_.render(meta);
      });
-    //update stuff?
-    return this;
   }
 
   var toText_template = "<table>{{#variables}}<tr><th style='font-weight:bold;text-align:right'>{{name}}:</th><td>{{value}}</td></tr>{{/variables}}</table>"
