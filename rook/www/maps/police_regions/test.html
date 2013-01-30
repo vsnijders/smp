@@ -26,18 +26,21 @@
       projection = function(coordinates) {
         var x = scale*(coordinates[0]-xmin);
         var y = height-scale*(coordinates[1]-ymin);
+        //console.log(coordinates[0] + ", " + coordinates[1] + " -> " + x + ", " + y);
         return [x,y];
       }
-      var path = d3.geo.path().projection(projection);
+      var pro = d3.geo.projection(projection).precision(0);
+      var path = d3.geo.path().projection(pro);
+      
 
       var vis = d3.select("#vis").append("svg").attr("width", width).attr("height", height)
 
       var map;
 
-      d3.json("po_2012_foo.json", function(json) {
+      d3.json("po_2012_simplified.json", function(json) {
           map = json;
           // create paths
-          vis.selectAll("path").data([json.features[0]]).enter().append("path")
+          vis.selectAll("path").data(json.features).enter().append("path")
             .attr("d", path)
             .attr("fill", "red")
             .attr("stroke-width", "1")

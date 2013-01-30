@@ -60,6 +60,7 @@ function RegionAxis() {
 
   var map_loaded_;
   var map_;
+  var index_ = {};
 
   // Axis width
   var width_ = 0;
@@ -115,11 +116,18 @@ function RegionAxis() {
     // regions. 
 
     // For now load police regions map
-    var map_name = "maps/police_regions/po_2012_simplified.json";
+    var map_name = "maps/police_regions/po_2012.json";
     if (map_loaded_ != map_name) {
       d3.json(map_name, function(json) {
           map_loaded_ = map_name;
           map_ = json;
+
+          // Build index mapping region name on features 
+          for (feature in map_.features) {
+            var name = map_.features[feature].properties.PO_NAAM;
+            name = name + ' (PO)';
+            index_[name] = feature;
+          }
         });
     }
   }
@@ -137,18 +145,15 @@ function RegionAxis() {
   var i = 0; //TEST
   axis.scale = function(region) {
     // Here we should return a polygon for the region.
-
-    // For some reason the region names are missing in the police regions map
-    // To test: return a random region
     if (map_) {
-      i = (i + 1) % map_.features.length
-      return map_.features[i];
+      return map_.features[index_[region]];
     }
     return undefined;
   }
 
   axis.transform = function(d) {
-    return axis.scale(axis.value(d));
+    return axis.scale(d[axis.variable()]);
+    //return axis.scale(axis.value(d));
   }
 
   axis.draw_first = function() { return this;}
