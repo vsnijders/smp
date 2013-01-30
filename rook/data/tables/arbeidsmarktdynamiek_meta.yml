@@ -1,0 +1,212 @@
+name: arbeidsmarktdynamiek
+description: Arbeidsmarktdynamiek; veranderingen in arbeidsmarktpositie
+dimensions:
+  quarter:
+    name: quarter
+    description: ''
+    categories:
+    - level: 2003-1
+      name: 2003-1
+      description: ''
+    - level: 2003-2
+      name: 2003-2
+      description: ''
+    - level: 2003-3
+      name: 2003-3
+      description: ''
+    - level: 2003-4
+      name: 2003-4
+      description: ''
+    - level: 2004-1
+      name: 2004-1
+      description: ''
+    - level: 2004-2
+      name: 2004-2
+      description: ''
+    - level: 2004-3
+      name: 2004-3
+      description: ''
+    - level: 2004-4
+      name: 2004-4
+      description: ''
+    - level: 2005-1
+      name: 2005-1
+      description: ''
+    - level: 2005-2
+      name: 2005-2
+      description: ''
+    - level: 2005-3
+      name: 2005-3
+      description: ''
+    - level: 2005-4
+      name: 2005-4
+      description: ''
+    - level: 2006-1
+      name: 2006-1
+      description: ''
+    - level: 2006-2
+      name: 2006-2
+      description: ''
+    - level: 2006-3
+      name: 2006-3
+      description: ''
+    - level: 2006-4
+      name: 2006-4
+      description: ''
+    - level: 2007-1
+      name: 2007-1
+      description: ''
+    - level: 2007-2
+      name: 2007-2
+      description: ''
+    - level: 2007-3
+      name: 2007-3
+      description: ''
+    - level: 2007-4
+      name: 2007-4
+      description: ''
+    - level: 2008-1
+      name: 2008-1
+      description: ''
+    - level: 2008-2
+      name: 2008-2
+      description: ''
+    - level: 2008-3
+      name: 2008-3
+      description: ''
+    - level: 2008-4
+      name: 2008-4
+      description: ''
+    - level: 2009-1
+      name: 2009-1
+      description: ''
+    - level: 2009-2
+      name: 2009-2
+      description: ''
+    - level: 2009-3
+      name: 2009-3
+      description: ''
+    - level: 2009-4
+      name: 2009-4
+      description: ''
+    - level: 2010-1
+      name: 2010-1
+      description: ''
+    - level: 2010-2
+      name: 2010-2
+      description: ''
+    - level: 2010-3
+      name: 2010-3
+      description: ''
+    - level: 2010-4
+      name: 2010-4
+      description: ''
+    - level: 2011-1
+      name: 2011-1
+      description: ''
+    - level: 2011-2
+      name: 2011-2
+      description: ''
+    aggregate: 2011-2
+    default: 2011-2
+    type: categorical
+  personal_characteristics:
+    name: personal_characteristics
+    description: ''
+    categories:
+    - level: 'Job level: elementary'
+      name: 'Job level: elementary'
+      description: ''
+    - level: 'Job level: lower'
+      name: 'Job level: lower'
+      description: ''
+    - level: 'Job level: middle'
+      name: 'Job level: middle'
+      description: ''
+    - level: 'Job level: higher'
+      name: 'Job level: higher'
+      description: ''
+    - level: 'Job level: scientific'
+      name: 'Job level: scientific'
+      description: ''
+    - level: 'Gender: male'
+      name: 'Gender: male'
+      description: ''
+    - level: 'Gender: female'
+      name: 'Gender: female'
+      description: ''
+    - level: 'Age: 15-25 years'
+      name: 'Age: 15-25 years'
+      description: ''
+    - level: 'Age: 25-45 years'
+      name: 'Age: 25-45 years'
+      description: ''
+    - level: 'Age: 45-65 years'
+      name: 'Age: 45-65 years'
+      description: ''
+    - level: 'Education level: lower'
+      name: 'Education level: lower'
+      description: ''
+    - level: 'Education level: middle'
+      name: 'Education level: middle'
+      description: ''
+    - level: 'Education level: higher'
+      name: 'Education level: higher'
+      description: ''
+    - level: 'Education level: unknown'
+      name: 'Education level: unknown'
+      description: ''
+    - level: TOTAL
+      name: TOTAL
+      description: ''
+    aggregate: TOTAL
+    default: TOTAL
+    type: categorical
+  position_begin:
+    name: position_begin
+    description: ''
+    categories:
+    - level: employed
+      name: Werkzaam
+      description: ''
+    - level: unemployed
+      name: unemployed
+      description: ''
+    - level: non labourforce
+      name: non labourforce
+      description: ''
+    - level: TOTAL
+      name: TOTAL
+      description: ''
+    aggregate: TOTAL
+    default: TOTAL
+    type: categorical
+  position_end:
+    name: position_end
+    description: ''
+    categories:
+    - level: employed
+      name: employed
+      description: ''
+    - level: unemployed
+      name: unemployed
+      description: ''
+    - level: non labourforce
+      name: non labourforce
+      description: ''
+    - level: TOTAL
+      name: TOTAL
+      description: ''
+    aggregate: TOTAL
+    default: TOTAL
+    type: categorical
+variables:
+  number_of_persons:
+    name: number_of_persons
+    description: ''
+    type: numeric
+    unit: ''
+    population: arbeidsmarktdynamiek
+populations:
+  arbeidsmarktdynamiek: ''
+
