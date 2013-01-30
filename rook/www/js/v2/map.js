@@ -60,11 +60,30 @@ function Map() {
           var feature = chart.axes.x.transform(d);
           return path(feature);
         })
-      .attr("fill", chart.axes.y.transform)
-      .attr("stroke-width", "1")
-      .attr("stroke-opacity", "0.4")
-      .attr("stroke", "black");
+      .style("fill", chart.axes.y.transform)
+      .style("stroke-width", "1")
+      .style("stroke-opacity", "0.4")
+      .style("stroke", "black")
+      .on("mouseover", function(d,i) {
+          d3.selectAll("path").filter(function(d1, i1) {
+              var variable = chart.axes.x.variable();
+              return d1[variable] != d[variable];
+            })
+            .style("fill-opacity", 0.5)
+            .style("stroke-opacity", 0.1);
+        })
+      .on("mouseout", function(d, i) {
+          d3.selectAll("path")
+            .style("fill-opacity", 1)
+            .style("stroke-opacity", 0.4);
+        });
 
+    // add tooltips to paths
+    $("path").tipsy({
+      title: cntrl.toText,
+      gravity: $.fn.tipsy.autoBounds(150, 'w'),
+      html: true
+    });
   }
 
 
