@@ -216,13 +216,13 @@ variables:
     name: Energieaanbod
     description: ''
     type: numeric
-    unit: ''
+    unit: 'PJ'
     population: Bedrijven
   Energieverbruik:
     name: Energieverbruik
     description: ''
     type: numeric
-    unit: ''
+    unit: 'PJ'
     population: Bedrijven
 populations:
   Bedrijven: ''

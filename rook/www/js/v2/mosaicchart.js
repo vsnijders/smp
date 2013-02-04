@@ -59,7 +59,7 @@ function Mosaicchart() {
       , 0
       );
     
-    var n = d3.format(",d");
+    var n = d3.format(".1%");
 
     // Add a group for each xfractions.
     var xfractions = g.selectAll(".xfraction")
@@ -79,6 +79,20 @@ function Mosaicchart() {
         .style("stroke-width", 2)
         .style("stroke", "white")
         .call(highlight)
+        ;
+
+    var texts = xfractions.selectAll("text")
+        .data(function(d) { return d.values; })
+      .enter().append("text")
+        .attr({x: function(d) { return x_scale(0.5*d.parent.sum / sum); }
+             , y: function(d) { return  y_scale((d.offset + 0.5*value(d)) / d.parent.sum); }
+             })
+        .style({ fill: "white"
+               , "text-anchor": "middle"
+               })
+        .text( function(d) { 
+          return n(value(d) / sum); 
+        })
         ;
 
     $("g.data rect")
